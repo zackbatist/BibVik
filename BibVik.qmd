@@ -1,7 +1,74 @@
 ---
-title: "BibVik"
+title: Bibliometric network analysis of Viking Age research (BibVik)
+# subtitle: xxx
+authors:
+  - name: Julie Lund 
+    id: jl
+    email: julie.lund@iakh.uio.no
+    url: https://www.hf.uio.no/iakh/english/people/aca/archaeology/tenured/julielun/
+    corresponding: true
+    affiliations:
+      - name: University of Oslo
+        department: Archaeology, Conservation and History
+        city: Oslo
+        country: Norway
+  - name: Isak Roalkvam
+    id: ir
+    email: isak.roalkvam@iakh.uio.no
+    url: https://www.hf.uio.no/iakh/english/people/aca/archaeology/temporary/isakro/index.html
+    orcid: 0000-0002-1011-1244
+    affiliations:
+      - name: University of Oslo
+        department: Archaeology, Conservation and History
+        city: Oslo
+        country: Norway
+  - name: Zachary Batist
+    id: zb
+    email: zachary.batist@mcgill.ca
+    url: https://zackbatist.info
+    orcid: 0000-0003-0435-508X
+    affiliations:
+      - name: McGill University
+        department: Epidemiology, Biostatistics and Occupational Health
+        city: Montreal
+        region: Québec
+        country: Canada
+date: today
+abstract: |
+  XXXX
+keywords:
+  - aaa
+  - bbb
+  - ccc
+# funding: xxxx
+# citation:
+#   title: xxx
+#   container-title: xxx
+#   volume: xxx
+#   doi: xxx
+#   url: https://zackbatist.info/BibVik
+
 ---
 
-## Quarto
+```{r setup}
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+```
+
+```{r dependencies}
+
+```
+
+```{r plot-theme}
+
+```
+
+
+{{< include sections/01_introduction.qmd >}}
+{{< include sections/02_background.qmd >}}
+{{< include sections/03_methods-materials.qmd >}}
+{{< include sections/04_findings.qmd >}}
+{{< include sections/05_discussion.qmd >}}
+{{< include sections/06_conclusion.qmd >}}
+{{< include sections/11_references.qmd >}}
+{{< include sections/12_back-matter.qmd >}}
+{{< include sections/13_supplement.qmd >}}
