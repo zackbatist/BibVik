@@ -1,0 +1,185 @@
+---
+title: Research Protocol
+subtitle:  Bibliometric network analysis of Viking Age research (BibVik)
+description: A planning document outlining the project's scope, methods and projected outcomes.
+---
+
+# Overview and Scope
+This project seeks to identify trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age, as initially surmised by @lund2022.
+
+[Why is this important?]
+
+More specifically, we ask:
+
+- How do various perspectives on the origins of the Viking Age manifest in the publication record?
+- Are these distinct perspectives rooted in personal or professional identities and/or relationships?
+- Are these distinct perspectives informed by different kinds of sources to inform their work and/or back their claims?
+
+[What are our predictions? We may not publish them, but it may be good to express our assumptions and expected outcomes at this early point.]
+
+
+# Materials and Methods
+This project is based on a mixed-methods (qualitative-quantitative) analysis.
+The general idea is to qualitatively annotate and describe a corpus of published papers, and then to quantitatively explore the relationships between papers and their properties through exploratory data analysis [following @tukey1977] and network analysis methods.
+This follows a similar approach as @batist2024.
+
+This requires us to collect and enhance information about a corpus of relevant publications, the relationships among them, and the social contexts through which they were produced.
+
+## The corpus of works
+This project is fundamentally rooted on analysis of published papers, reports and proceedings, which we consider representative of a broader discursive phenomenon.
+
+The corpus of works is rooted in @lund2022, which is a review that... [summarize the paper in one or two sentences here].
+See the supplement for information on alternative (and less suitable) methods for producing a corpus that we decided not to pursue.
+
+Aside from its representative content, @lund2022 is a great seed paper due to the circumstances of its creation.
+It is authored by two eminent archaeologists of the Viking Age, who are intimately familiar with the community of which they wrote.
+The authors also acknowledge their adherence to the different fields they identify, which imbues the paper with a balanced perspective.
+Moreover, the paper, which was published in the _Journal of Archaeological Science_, underwent an unusually rigorous peer-review process through which seven anonymous reviewers recommended additional sources and commentary on their respective character.^[I wonder if we could also examine, or perhaps publish, an edited version of the peer reviews.]
+Overall, the seed paper is a summary of a discursive phenomenon led by two extremely experienced archaeologists who represent different yet converging perspectives, which has been supplemented and validated by a jury of seven anonymous peers.
+
+The corpus will emerge from this seed paper through its bibliographic references, which will be identified using [CrossRef](https://www.crossref.org/) or [OpenCitations](https://opencitations.net/).
+Using a genealogical metaphor, the seed paper may be referred to as _P_ (for parental generation), its references as _F1_ (first filial generation), their bibliographic references as _F2_ (second filial generation), and so on.
+These linkages will enable us to ascertain whether the chains of references that each paper relies on follow any identifiable patterns, amalgamate into any discrete clusters, or point toward any "common ancestors" from which new lineages emerged or diverged.
+
+## Annotating papers and references
+This formal genealogical approach will be greatly enhanced through qualitative assessment of each paper and of each reference.
+Ascertaining the qualities of each paper and reference will enable us to understand their respective roles in the corpus rather than their mere presence.
+
+A significant portion of work will therefore involve identifying, characterizing and annotating the series of papers that are referenced in the seed paper.
+This will entail extracting structured information regarding the papers' authors and publication venues, and characterizing each paper by kind (i.e. reports on findings, reviews of prior work, opinion pieces, etc).
+We will then determine the character of each paper, as considered in @lund2022, and through an additional qualitative assessment of each paper following an open coding protocol (methodological details presented below).
+
+We will also characterize the citations themselves to ascertain the nature of each reference.
+We may follow a relatively simple classification scheme, i.e. supporting, contrasting/disputing or mentioning, which can be determined using natural language processing (NLP) (specifically, the [scite zotero plugin](https://scite.ai/blog/introducing-the-scite-plug-in-for-zotero-61189d66120c)^[It's unclear whether this can be accessed via an API, since scite has pivoted to being an AI company and seems to have paywalled some of their services.]).
+Alternatively, we may qualitatively code each reference following a more specialized coding scheme, as per @huvila2022a (see additional notes on this approach below).
+
+I think we may use a combination of manual and computational approaches to qualitatively code papers and references.
+Qualitative coding can be very time-consuming and the quality of outcomes is highly dependent on the skill and experience of the coders.
+We may reasonably expect a research assistant to code, and a supervisor to validate, a corpus of 50-100 papers over a single summer, which limits the project to evaluating a single generation of papers.
+Natural language processing and large language models may help streamline summarization and characterization of large texts, and will enable us to scale our analysis beyond one generation.
+At the very least, we can try both approaches for the first generation and compare the outcomes generated by each to inform our decision on whether to expand our use of NLP and LLM methods.
+
+## Relational and contextual ties
+We will also include additional information to help contexualize each paper as a product of social and situational circumstances.
+This will involve retrieving additional metadata about the papers, including the journals or venues in which they were published, as well as information about their authors, including their affiliations, genders and areas of expertise.^[Note that keywords submitted by authors are not included in this list. This is due to their simplicity and the likelyhood of them being irrelevant to our own objectives. Additionally, some data sources (i.e. anthologies or edited volumes) do not typically use keywords, which will limit our ability to draw comprehensive comparisons.]
+Much of this information may be retrieved from CrossRef.
+
+This information will allow us to ascertain a few key insights regarding publishing and citation practices.
+For instance, we may observe that certain kinds of work tend to be published in edited volumes rather than as standalone papers, to have specific institutional origins, to have authors of a specific gender.
+Aside from documenting the nature of discrete clusters of works, these factors may contribute to greater consideration of citational politics.
+
+Regarding gender, we may use the [`gender`](https://github.com/lmullen/gender) R package, created specifically for this purpose.
+The information assigned through both of these processes will have to be manually verified, but the community is small enough to make this feasible.
+We may consult with community interest groups (e.g. the SAA [Queer Archaeology Interest group](https://queerarchaeology.com/)) to help support or provide critical feedback on "best practices" for identifying gender or other identity-based information.
+
+# Analysis
+A significant component of this work will involve network analysis to identify insular or bridging clusters of published works, the characteristic properties of these clusters, as well as common ancestors from which discrete clusters emerged or diverged.
+
+One relatively simple form of analysis could involve validating the conclusions arrived at by @lund2022.
+Specifically, we may determine whether or not two distinct schools of thought actually exist, or whether there is more overlap or nuance apparent in the data.
+Information about authorship and publication venues may also accompany a more detailed breakdown of the character of each cluster.
+
+Additionally, the directed nature of the relationships will enable us to ascertain pathways through which ideas flowed over time.
+Since each relationship will be tagged as a supporting, contrasting/disputing or mentioning citation, we may be able to determine whether certain papers are loci of agreement or conflict through the proportions atittudes with which papers cite them (and whether those attitudes correspond with certain clusters).
+
+We will sure realize more analytical opportunities as the work progresses, and we will document these insights here as they arise.
+
+# Methodological notes and ideas
+## Qualitative methods
+TBD
+
+## AI tools and resources
+We may apply LLM, NLP or topic-modelling methods to simplify, verify, or compare how it differs from human-led classification of research papers.
+
+MaxQDA has [some guidelines](https://www.maxqda.com/research-guides/ai-for-literature-reviews) on how to use AI to enhance literature reviews.
+However it's unclear whether any effort has been made to specialize the use of AI toward lit reviews specifically.
+I'm sure there are additional services that specialize in AI-assisted literature reviews too.
+
+Topic modelling??
+
+I wonder if we can relate this work to Alex Brandsen's dissertation research [@brandsen2021; @brandsen2022; @brandsen2023].
+
+## Alternative means of assembling the corpus
+There are a few alternative approaches we may take to collect different kinds of datasets.
+
+One approach is to conduct systematic keyword searches to return a subset of the archaeological literature for deeper evaluation, using a tool like [Publish or Perish](https://harzing.com/resources/publish-or-perish) or the various R packages designed to access scholarly reference databases (e.g. [rcrossref](https://github.com/ropensci/rcrossref), [wosr](https://github.com/crew102/wosr), [openalexR](https://github.com/ropensci/openalexR), [citecorp](https://github.com/ropensci/citecorp)).
+This affords a relatively systematic approach to literature review, since the search's scope is pre-established.
+However it is rather inflexible and risks becoming an extremely monumental undertaking.
+From prior experience attempting such a study, keyword searches return an extreme quantity of results, even when limiting the search by specific date ranges and journal titles.
+Moreover, the terminology that archaeologists use may not match the terms we use as scholars of scientific practice.
+Having to account for more terms produces more duplicates and false positives, which must be manually winnowed to a dataset of a viable, yet still realistic size.
+
+Another approach is to examine the contents of all writing produced in a compendium of selected journals or publication venues.
+This requires justification for why the journals are selected and how this aligns with the study's scope.
+This is viable in situations where the study is investigating publication practices (i.e. referencing R scripts, as per @schmidt2020), but is harder to justify when exploring the scientific content of published work.
+
+
+# Outcomes
+- Venues for publishing and presenting this work
+- Workshop
+- Public outreach
+
+# Logistics
+## Workflows
+The is a [quarto](https://quarto.org/)-based project situated in a git repository ([BibVik](https://github.com/zackbatist/BibVik)).
+Zack is the repository's primary maintainer, but Isak has been granted full administrative access, including the ability to make commits directly to the repository without submitting a pull request.
+Zack and Isak will clearly communicate about what they are working on so as to avoid generating conflictng commit histories which would produce a messy merge scenario.
+
+For less technical users, it would be best to annotate automatically-generated PDFs or to work with an un-tracked copy of the markdown files, whose diffs can then be identified and applied by someone who is more familiar with using git.
+
+Here are a few procedural notes and workflows:
+
+- All writing is done in the file pertaining to the specific section, which are compiled into `BibVik.qmd`, which is where the paper's main parameters are specified.
+- References are cited using `@` followed by the citekey, which follows a strict pattern of the first author's surname followed by the year of publication, all lowercase and without spaces, e.g. `@lund2022`.
+- References are stored in `assets/BibVik.bib` which is an automatically-updated export of Zack's Zotero library. If you want to include a reference that is not yet in the library, refer to the DOI and Zack will add it in his revisions.
+- Although we are keeping this as a private repository for now, all of this can be made into a public website. To preview the site locally, use `quarto preview` and navigate to `localhost:7777` in your browser.
+
+Here is an overview of the directory structure:
+
+```
+BibVik/									# Main directory
+	├── BibVik.qmd             			# The paper's config file
+	├── sections/             			# Files corresponding with each of the paper's sections
+  		├── 01_introduction.qmd
+	  	├── 02_background.qmd
+	    ├── etc.qmd
+	├── assets/             			# Files that support quarto rendering
+    	├── BibVik.bib  				# Biblatex file (currently synced with Zack's entire Zotero library)
+    	├── chicago-author-date.csl  	# Citation style language used to generate pretty citations
+		├── title.tex  					# LaTeX include to generate pretty PDFs
+	├── data/             				# Where the data live
+	├── figures/             			# Where figures live
+	├── R/             					# R functions called from the embedded code blocks
+	├── research-protocol.qmd 			# This planning document
+  	├── README							# Project documentation
+	├── _quarto.yml            			# Quarto config file
+  	├── .gitignore						# Git support file
+  	├── .luarc.json						# Ignored quarto support file
+	├── .quarto							# Various quarto support files
+	├── _site							# Where the rendered website files live
+```
+
+## Roles and responsibilities
+**Julie Lund:**
+Project lead and point person for anything related to Viking Age archaeology, and the professional community and interests that this paper is concerned with.
+
+**Isak Roalkvam:**
+Contributes insights about Viking Age archaeology and the professional community.
+Works with Zack to implement methodological decisions and processes in code.
+
+**Zack Batist:**
+Contributes experience doing bibliometric research in the domain of archaeology.
+Works with Isak and Julie to derive sound methodological decisions and ensure that they are implemented in a manner that produces valuable and defensible outcomes.
+
+**Research assistant:**
+Responsible for qualitatively evaluating the content of research papers that form the basis of this study.
+
+## Funding
+The Research Assistant's salary is funded by the Faculty of Humanities here at the University of Oslo.
+
+## Timeline
+TBD
+
+# References
+::: {#refs}
+:::
