@@ -60,3 +60,4 @@ Thumbs.db
 /.quarto/
 _site/
 _extensions/
+notes/*.pdf
