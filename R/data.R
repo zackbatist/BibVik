@@ -6,6 +6,8 @@ library(citecorp)
 library(plyr)
 library(httr)
 library(jsonlite)
+library(bib2df)
+library(citecorp)
 
 # Get list of refs from the OpenCitations API
 response <- GET("https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3")
@@ -29,3 +31,36 @@ seed_refs$year <- substr(seed_refs$date, 1, 4)
 # They are too messy with html tags, and RA will review the PDFs.
 
 # Generate lists of authors, indexed by DOIs
+
+# Filter bib file for items with a DOI
+seed_refs_bib <- bib2df::bib2df(paste("https://opencitations.net/index/api/v2/references/doi:",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))
+
+# Query CrossRef for metadata pertaining to references with a DOI
+f1_cr <- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)
+f1_cr <- f1_cr$data
+
+
+# Query OpenCitations for references pertaining to f1
+f1_oc <- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)
+
+
+
+response <- GET("seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI")
+content <- content(response, "text")
+parsed_data <- fromJSON(content)
+f1_oc <- sub('.*doi:', '', parsed_data$cited)
+f1_oc <- gsub( " .*$", "", f1_oc)
+f1_oc <- data.frame(f1_oc)
+colnames(f1_oc)[1] <- "doi"
+
+## For data cleaning purposes
+## Modify the variables to find articles without DOI, non-articles with DOI, etc
+seed_refs_bib %>%
+  filter(CATEGORY != "ARTICLE",
+    !is.na(DOI)
+  )
+
+seed_refs_bib %>%
+  filter(CATEGORY == "BOOK"
+  )
+
