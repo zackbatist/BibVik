@@ -52,7 +52,7 @@ Friday May 16, 15:15 CEST / 9:15 EST
 	- Distribution of topics by number of co-authors.
 	- Temporal distributions of genders of lead authors.
 	- Gender of lead author by size and genders of their co-authors.
-	
+
 ## Logistics
 - Keep things on GitHub for now.
 - Keep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the [archaeo-social](https://about.archaeo.social/) collective).
@@ -63,13 +63,13 @@ Monday June 2, 15:15 CEST / 9:15 EST
 
 **Zack:**
 
-- Assemble  a series of core variables to be included in a data frame
+- Assemble a series of core variables to be included in a data frame
 - Initiate a script to scrape abstracts and metadata
 - Modify the research protocol with today's notes
 	- Expectations and predictions
 	- Tone down expectations for analysis of references (based on volume of papers, limited time)
 	- Document the controlled vocabulary and coding process
-	
+
 **Julie:**
 
 - Draft controlled vocabulary for article annotation

@@ -15,8 +15,21 @@ More specifically, we ask:
 - Are these distinct perspectives rooted in personal or professional identities and/or relationships?
 - Are these distinct perspectives informed by different kinds of sources to inform their work and/or back their claims?
 
-[What are our predictions? We may not publish them, but it may be good to express our assumptions and expected outcomes at this early point.]
+## Predictions and Expectations
+Here we document some predicted outcomes, which may or may not come to fruition.
+However, it is good to express our assumptions and expectations at this early point, for purposes of reflexivity.
 
+- We are going to find some sub-clusters within clusters, and perhaps also "bridging" clusters.
+- Some sub-clusters will be tight-knit and closed, others will be broad and open.
+- Some clusters will be focused on specific topics.
+- There will be many links across institutions, they are not really that fixed.
+- Some citation chains will emerge that reflect casual observations (just a few examples):
+	- Lots of cross-references within the Mälaren valley community.
+	- Tight-knit cluster among papers that are concerned with ritual.
+	- Major computational cluster at Aarhus.
+- If we had a broader time horizon, we might be able to trace "genealogies of affiliation" by tracing how identities change based on the evolution of their collaborative networks.
+- Clustering of methods by "academic upbringing", which has a localized character.
+- We may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data.
 
 # Materials and Methods
 This project is based on a mixed-methods (qualitative-quantitative) analysis.
@@ -41,23 +54,17 @@ The corpus will emerge from this seed paper through its bibliographic references
 Using a genealogical metaphor, the seed paper may be referred to as _P_ (for parental generation), its references as _F1_ (first filial generation), their bibliographic references as _F2_ (second filial generation), and so on.
 These linkages will enable us to ascertain whether the chains of references that each paper relies on follow any identifiable patterns, amalgamate into any discrete clusters, or point toward any "common ancestors" from which new lineages emerged or diverged.
 
-## Annotating papers and references
-This formal genealogical approach will be greatly enhanced through qualitative assessment of each paper and of each reference.
-Ascertaining the qualities of each paper and reference will enable us to understand their respective roles in the corpus rather than their mere presence.
+## Annotating papers
+This formal genealogical approach will be greatly enhanced through qualitative assessment of each paper.
+Ascertaining the qualities of each paper will enable us to understand their respective roles in the corpus rather than their mere presence.
 
 A significant portion of work will therefore involve identifying, characterizing and annotating the series of papers that are referenced in the seed paper.
 This will entail extracting structured information regarding the papers' authors and publication venues, and characterizing each paper by kind (i.e. reports on findings, reviews of prior work, opinion pieces, etc).
-We will then determine the character of each paper, as considered in @lund2022, and through an additional qualitative assessment of each paper following an open coding protocol (methodological details presented below).
+We will then determine the character of each paper, as considered in @lund2022, and through an additional qualitative assessment of each paper following an _a priori_ coding protocol (methodological details presented below).
 
-We will also characterize the citations themselves to ascertain the nature of each reference.
-We may follow a relatively simple classification scheme, i.e. supporting, contrasting/disputing or mentioning, which can be determined using natural language processing (NLP) (specifically, the [scite zotero plugin](https://scite.ai/blog/introducing-the-scite-plug-in-for-zotero-61189d66120c)^[It's unclear whether this can be accessed via an API, since scite has pivoted to being an AI company and seems to have paywalled some of their services.]).
-Alternatively, we may qualitatively code each reference following a more specialized coding scheme, as per @huvila2022a (see additional notes on this approach below).
-
-I think we may use a combination of manual and computational approaches to qualitatively code papers and references.
-Qualitative coding can be very time-consuming and the quality of outcomes is highly dependent on the skill and experience of the coders.
-We may reasonably expect a research assistant to code, and a supervisor to validate, a corpus of 50-100 papers over a single summer, which limits the project to evaluating a single generation of papers.
-Natural language processing and large language models may help streamline summarization and characterization of large texts, and will enable us to scale our analysis beyond one generation.
-At the very least, we can try both approaches for the first generation and compare the outcomes generated by each to inform our decision on whether to expand our use of NLP and LLM methods.
+It should be noted that we will only be able to annotate papers referenced in the seed paper.
+In other words, our qualitative evaluation is limited to a single generation.
+However, we may sample the _F1_ generation and conduct deeper qualitative analysis based on sampled subsets.
 
 ## Relational and contextual ties
 We will also include additional information to help contexualize each paper as a product of social and situational circumstances.
@@ -71,6 +78,10 @@ Aside from documenting the nature of discrete clusters of works, these factors m
 Regarding gender, we may use the [`gender`](https://github.com/lmullen/gender) R package, created specifically for this purpose.
 The information assigned through both of these processes will have to be manually verified, but the community is small enough to make this feasible.
 We may consult with community interest groups (e.g. the SAA [Queer Archaeology Interest group](https://queerarchaeology.com/)) to help support or provide critical feedback on "best practices" for identifying gender or other identity-based information.
+
+It is important to be clear about our intent, since this influences (a) the ways we go about tryjng to achieve our goals, and (b) the reception of our approach in relation to contemporary discourse on gender diversity in research.
+Out goal is _not_ to identify gender diversity or to assign gendered characteristics to certain clusters or subclusters, and these objectives would not be supported by our methods and supporting data.
+Instead, our intent is to identify citation biases and to critically assess the citational politics of research on the emergence of the Viking Age.
 
 # Analysis
 A significant component of this work will involve network analysis to identify insular or bridging clusters of published works, the characteristic properties of these clusters, as well as common ancestors from which discrete clusters emerged or diverged.
@@ -86,7 +97,49 @@ We will sure realize more analytical opportunities as the work progresses, and w
 
 # Methodological notes and ideas
 ## Qualitative methods
-TBD
+A research assistant will annotate each reference using a series of keywords deriving from a controlled vocabulary.
+The controlled vocabulary has three axes:
+
+- Topics
+  - What is the paper about?
+  - i.e. diaspora, mobility, gender, ritual, etc
+- Methods
+  - What methods were applied in the paper?
+  - i.e. spatial analysis, genetics, stable isotope analysis, finds analysis
+- Kind of contribution
+  - i.e. field report, "standard" scientific paper, review of prior work, opinion, etc
+- Medium
+  - i.e. journal article, book, chapter in an edited volume, etc
+
+The research assistant will identify and record key terms from the controlled vocabulary for each paper, based on their reading of the abstract, introduction, conclusion or other summaritive section.
+Since this does not involve comprehensive or open coding, this can simply be entered into a customized spreadsheet, rather than using some specialized QDA software.
+
+The research assistant will ideally be a more experienced student in the field of Viking Age archaeology, who may also benefit from this as a learning experience.
+Zack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns.
+Julie will then verify the annotations after the research assistant has completed the work.
+
+## Analyzing references
+We may characterize the citations themselves to ascertain the nature of each reference.
+We may follow a relatively simple classification scheme, i.e. supporting, contrasting/disputing or mentioning, which can be determined using natural language processing (NLP) (specifically, the [scite zotero plugin](https://scite.ai/blog/introducing-the-scite-plug-in-for-zotero-61189d66120c)).
+Alternatively, we may qualitatively code each reference following a more specialized coding scheme, as per @huvila2022a (see additional notes on this approach below).
+
+However, upon further reflection, this may not be feasible given the project's timeframe, our material resources, and the reliability of the software solutions at hand.
+Qualitative coding can be very time-consuming, and we are only able to hire an assistant for four weeks of work to analyze over 500 references (in addition to other research tasks).
+Moreover, scite tends to "play it safe" by coding references as neutral mentions when human coders identify a more robust stance [see @bakker2023].
+Additionally, scite's corpus is limited to works put out by partnered publishers.
+There is an open source alternative to scite [see @jurgens2025; <https://jurgens.people.si.umich.edu/citation-function/>] but it requires more knowledge of NLP methods than we are able to implement.
+
+These challenges aside, it may be reasonable to derive a sample based on network statistics, and then qualitatively annotate the references within the sample.
+
+## Statistical analysis
+Keeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.
+
+We'll be able to do some non-network descriptive statistics:
+
+- Distribution of topics by affiliations of authors.
+- Distribution of topics by number of co-authors.
+- Temporal distributions of genders of lead authors.
+- Gender of lead author by size and genders of their co-authors.
 
 ## AI tools and resources
 We may apply LLM, NLP or topic-modelling methods to simplify, verify, or compare how it differs from human-led classification of research papers.
@@ -112,7 +165,6 @@ Having to account for more terms produces more duplicates and false positives, w
 Another approach is to examine the contents of all writing produced in a compendium of selected journals or publication venues.
 This requires justification for why the journals are selected and how this aligns with the study's scope.
 This is viable in situations where the study is investigating publication practices (i.e. referencing R scripts, as per @schmidt2020), but is harder to justify when exploring the scientific content of published work.
-
 
 # Outcomes
 - Venues for publishing and presenting this work
