@@ -127,7 +127,7 @@ However, upon further reflection, this may not be feasible given the project's t
 Qualitative coding can be very time-consuming, and we are only able to hire an assistant for four weeks of work to analyze over 500 references (in addition to other research tasks).
 Moreover, scite tends to "play it safe" by coding references as neutral mentions when human coders identify a more robust stance [see @bakker2023].
 Additionally, scite's corpus is limited to works put out by partnered publishers.
-There is an open source alternative to scite [see @jurgens2025; <https://jurgens.people.si.umich.edu/citation-function/>] but it requires more knowledge of NLP methods than we are able to implement.
+There is an open source alternative to scite (see @jurgens2017; <https://jurgens.people.si.umich.edu/citation-function>) but it requires more knowledge of NLP methods than we are able to implement.
 
 These challenges aside, it may be reasonable to derive a sample based on network statistics, and then qualitatively annotate the references within the sample.
 
