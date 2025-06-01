@@ -2,6 +2,8 @@
 title: Research Protocol
 subtitle:  Bibliometric network analysis of Viking Age research (BibVik)
 description: A planning document outlining the project's scope, methods and projected outcomes.
+date-modified: last-modified
+date-format: long
 ---
 
 # Overview and Scope
