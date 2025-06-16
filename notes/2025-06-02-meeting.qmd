@@ -1,0 +1,25 @@
+Meeting Notes\
+Zack, Julie and Isak\
+Monday June 2, 15:15 CEST / 9:15 EST
+
+# Discussion Topics
+- Developing the code book
+- Discrepancies among bibliographic data sources
+
+# Action Items
+**Next meeting:**
+Monday June 16, 15:15 CEST / 9:15 EST
+
+**Zack:**
+
+- Do research on overlap between citation databases
+- Test the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)
+- Update the research protocol with discussion about sampling strategies
+- Update the research protocol with methods for developing the codebook
+
+**Julie and Isak:**
+
+- Refine the code book, derive code categories
+- Solicit input from Søren
+
+# Links and references
