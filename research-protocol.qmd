@@ -168,6 +168,43 @@ Another approach is to examine the contents of all writing produced in a compend
 This requires justification for why the journals are selected and how this aligns with the study's scope.
 This is viable in situations where the study is investigating publication practices (i.e. referencing R scripts, as per @schmidt2020), but is harder to justify when exploring the scientific content of published work.
 
+## Parsing references from PDFs
+It has become clear that the quality of scholarly metadata is very poor for anything that is not an english peer-reviewed STEM article.
+Through a cursory examination of the major databases (Scopus, Web of Science, OpenAlex, CrossRef, etc), we found that these sources are not useful for our corpus, which includes many monographs and grey literature in languages other than english.
+It may therefore be better to extract references directly from the text of each work, at least for works that are not in those databases, using a tool like [Grobid](https://grobid.readthedocs.io/).
+
+These sources can then be reconciled with the rest of the database through a common citekey format (first author's last name + year of publication, and then double check all duplicates).
+Grobid also has a "[consolidation](https://grobid.readthedocs.io/en/latest/Consolidation/)" service that normalizes references against the CrossRef (or other) database.
+
+This requires us to have good quality PDFs of each work, which Julie does have through her private library and teaching materials.
+Moreover, this also presents us with an opportunity to be more thoughtful in assembling our corpus.
+For instance, we may want to exclude whole books because the disproportionate number of references they contain will surely distort the citation networks (especially when it comes to centrality metrics).
+So, if a book is actually presenting the culmination of a few articles by the same author, it may be more prudent to include those instead of the book.
+Basically, this is an opportunity to transform the bibliography from the seed paper --- which was never intended to be used in this way --- into a functional and purposeful dataset.
+
+So here is a basic protocol for vetting the quality of work that will be put into Grobid.
+Take detailed notes while doing this vetting.
+This involves making decisions, and we need to be transparent and reflexive about how we are developing our corpus.
+
+1. Filter out any journal articles; assume journal articles from the past 10-15 years have proper scholarly metadata.
+2. Flag any books that may be better represented by articles by the same authors based on your own experience and familiarity with the community of practice, or which may not be suitable to include in our analysis (i.e. a museum catalog).
+3. For all books, book chapters, etc:
+    1. Make sure we have the PDF available.
+        - Prioritize native PDFs, not scanned documents.
+        - If scanned, then ensure it is good quality.
+    2. Make sure the PDF is of the appropriate page range.
+        - For book chapters:
+          - Clip any pages before the first page.
+          - Clip any pages after the last page of the bibliography.
+          - If the book assembles all references into a common bibliography, flag the record for manual entry.
+        - For whole books and/or theses:
+          - Ensure the PDF contains the full contents, i.e. not just a preview of the front matter.
+   	1. Make sure the metadata is correct:
+        - Verify that the item is correctly identified as a book, book chapter or journal articles.
+        - For book chapters, make sure that the book title, editors, publisher, place, and page range are correct.
+        - For book chapters, verify that book editors are not listed as authors of the chapters.
+
+
 # Outcomes
 - Venues for publishing and presenting this work
 - Workshop
