@@ -1,0 +1,28 @@
+Meeting Notes\
+Zack, Julie and Isak\
+Monday June 17, 15:15 CEST / 9:15 EST
+
+# Discussion Topics
+- Julie refined the codebook, Zack will make comments before the next meeting.
+- Isak cleaned a significant amount of data, with emphasis on the books and book sections.
+- Zack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.
+  - However, we may not need a full record, just enough to get a unique identifier.
+
+# Action Items
+**Next meeting:**
+Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)
+
+**Zack:**
+
+- Track changes revisions on the codebook.
+- Write a report / blog post about the challenges of getting clean metadata.
+
+**Isak:**
+
+- Continue the bib file, with special focus on books and book sections.
+
+**Julie:**
+
+- Create the initial spreadsheet to support coding.
+
+# Links and references
