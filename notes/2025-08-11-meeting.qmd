@@ -1,0 +1,41 @@
+Meeting Notes\
+Zack, Julie and Isak\
+Monday August 11, 15:15 CEST / 9:15 EST
+
+# Discussion Topics
+- Went over the revised spreadsheet, and tested a sample entry.
+  - Divided it into four sections (kind, authorship, topics, methodology).
+  - Simplified process for annotating gender of authors in multi-authored works.
+  - Methodologies need to be brainstormed.
+    - Although the scopes are quite different, Zack mentioned his [list of tags for open-archaeo](https://github.com/zackbatist/open-archaeo/blob/master/tags.md) as one potential resource to from from.
+- Discussed challenges with the citation networks.
+  - Addressed by [github issue](https://github.com/kermitt2/grobid/issues/1322) with the Grobid maintainers.
+  - Addressed some workarounds:
+    - Doing some topic modelling / NLP / machine learning based on the titles of papers.
+    - Linking up with Alex Brandsen, who has done similar very similar work [@brandsen2023].
+
+# Action Items
+**Next meeting:**
+Thursday August 21, 15:15 CEST / 9:15 EST\
+Focus will be on brainstorming the methodology, as well as general status updates.
+
+**Zack:**
+
+- Invite Alex Brandsen to our next meeting.
+- Inquire about using [md.archaeo.dev](https://md.archaeo.dev) for collaborative brainstorming. about archaeo md
+- Post about the challenges of working with scholarly metadata.
+
+**Isak:**
+
+- Finish collecting the PDFs and cleaning the data pertaining to books and book chapters.
+
+**Julie:**
+
+- Draw up initial list of methodology categories.
+- Follow up with admin re: hiring an RA.
+
+# Links and references
+- <https://md.archaeo.dev>
+- <https://github.com/zackbatist/open-archaeo/blob/master/tags.md>
+- <https://github.com/kermitt2/grobid/issues/1322>
+- <https://doi.org/10.1007/978-3-031-37156-1_11>
