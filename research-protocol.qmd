@@ -199,7 +199,7 @@ This involves making decisions, and we need to be transparent and reflexive abou
           - If the book assembles all references into a common bibliography, flag the record for manual entry.
         - For whole books and/or theses:
           - Ensure the PDF contains the full contents, i.e. not just a preview of the front matter.
-   	1. Make sure the metadata is correct:
+   	3. Make sure the metadata is correct:
         - Verify that the item is correctly identified as a book, book chapter or journal articles.
         - For book chapters, make sure that the book title, editors, publisher, place, and page range are correct.
         - For book chapters, verify that book editors are not listed as authors of the chapters.
