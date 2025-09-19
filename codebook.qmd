@@ -1,0 +1,269 @@
+---
+title: Codebook
+description: Comprehensive list of codes used to characterize works cited in @lund2022, including notes delimited the scope of each code.
+date-modified: today
+date-format: long
+format:
+  html:
+    default
+  docx:
+    default
+  pdf:
+    geometry:
+      - top = 1in
+      - bottom = 1in
+      - left = 1in
+      - right = 1in
+---
+
+## Works
+**Kind of work**\
+Kind of published work, such as article, book, thesis, section in a book.\
+Established during data preparation. 
+
+**Other bibliographic information**\
+Title, year, journal, volume, issue, page range, etc.\
+Established during data preparation. 
+
+## Authorship
+**Last names of all authors**\
+Established during data preparation.\
+Separated by a comma and space.\
+
+**Institutional affiliation of the first author**\
+The full name of the affiliation stated on the paper.\
+Values will be normalized after coding is coding is completed.
+
+**Genders of all authors**\
+Expressed as M or F.\
+Separated by a comma and a space.\
+Based on their first name and coders' knowledge about their peer community.
+
+## Topics
+_Coders will mark an X if the record deals with a stated topic._
+_Coders may also reference additional topics in the "Other" field under the Topics category._
+_Overall comments about any record should be made in overall "Comments" field in the Other category._
+
+**Trade**\
+Trade, economy, silver, weight looms, dirhems, coins.
+
+This topic covers papers working with economic issues, including the organisation of the trade, the use of balance weights and weight looms, the flow of silver, including dirhems and British, Continental and Scandinavian coins.
+
+**Diaspora**\
+Diaspora, migration, mobility.
+
+This topic covers papers dealing with material traces of mobility and migration.
+Further, paper studying the Viking diaspora as a concept and the material traces of it are included in this topic.
+
+**Gender**\
+Gender, Viking women, queer, masculinity.
+
+This topic covers papers on gender and genders, including papers specifically relating to women or men as a category, papers dealing with queer and queer theory, including the discussion of Odinn as queer.
+Further, discussions of hegemonic masculinity and other aspects of masculinity (and femininity, but I have not seen any papers on the issue) are included in this topic.
+
+**Identity**\
+Identity, identities, intersectionality.
+
+This topic covers papers studying various issues of identity, including intersectionality.
+A number of papers will overlap between this topic and the topics Gender and Diaspora.
+Further, lifeways and aspects of economy that deal with occupation such as tradespersons and craftspersons may be included in this topic, if the papers explicitly deal with the identity of tradespersons, including tradesmen and tradeswomen and craftsmen and craftswomen.
+
+**Violence**\
+Violence, warriors, raids, war, piracy, army.
+
+This topic relates to papers working with traces of plunder, piracy, violence, and warfare.
+Further, papers on warriors may overlap with the topic identity and gender.
+Papers working with the material traces of armies, including army camps are also part of this topic.
+Further, the construction of defence systems, earth works, fortresses and ring fortresses are included in this topic.
+
+**Ethnicity**\
+Ethnicity, creolisation, hybridisation, Old Norse and Sámi population.
+
+This topic covers papers relating to discussion of ethnicity as part of social identity studies.
+Papers examining the material aspects of creolisation and hybridisation are included in this topic as is more essentialistic studies of ethnicity.
+Papers working with the differences and similarities between Old Norse/Germanic and Sámi populations are part of this topic as is studies of meetings between Inuit and Old Norse populations in Greenland and between Old Norse and Native Americans as well as Inuit populations in Newfoundland.
+This topic may have overlaps with papers exploring the Viking Diaspora, and with mobility and migration.
+
+**Enslaved**\
+Slaves, trell, enslaved, unfree.
+
+This topic covers papers dealing with the social dynamics between free and enslaved.
+It includes studies of settlements structures with examinations of ‘the room behind the byre’ as well as pit house studies focusing on social differences and unfree and trell (Old Norse for unfree) population members.
+Further, studies of burials with more than one individual as well as graves with few or no grave goods interpreted as unfree are included.
+In addition, a number of stabile isotope studies of food and nutrition with discussion of social differences in foods due to unfree social status are included in this topic.
+
+**Power**\
+Power, chiefs, magnates, kings, anarchistic perspectives, social organisation, central places and power.
+
+This topic deals with analyses of power relations, manifestations of power and social organisation.
+Papers relating to magnates and kings and their social position and manifestations of it are included in this topic.
+Further, analyses building on anarchistic perspectives of power and collective action theory challenging the dominating discourse of power are included in this topic.
+Further, the analyses of settlement and regions with focus on central places and their position for redistribution of goods in a center-periphery model are included.
+
+**World views**\
+Cosmology, world view, ontology, the Viking way, religion, the cognitive landscape, Old Norse and Sámi religion in the Viking Age.
+
+This topic deals with studies of religion, world views, ontology and cosmology.
+Further, studies of what Neil Price has termed ‘The Viking Way’ as a specific cognitive field or approach are included.
+Analyses of actions conducted in the landscape as part of creating, maintaining, and dealing with the cognitive or cosmological landscape are part of this topic.
+
+**Personhood**\
+Personhood, animated objects, human-non human relationship, post-humanism and the Viking Age.
+
+This topic covers studies of the boundaries between humans and the material world, including human-animal relationship, personhood studies of graves and hoards, and papers working with post-humanistic perspectives as part of their approach to studying the Viking Age.
+This topic may have overlaps with studies of world views, the Viking Way and Old Norse religion.
+
+**Environment**\
+Environment, climate, seasonality, resilience.
+
+This topic covers studies of climate changes and adaption to different climates and seasonal variation in the use of the landscape and its resources.
+Studies of resilience in relation to the variations during the Late Iron Age are included, if they also covers the Viking Age and not only "the 536/540 AD event".
+The topic includes studies of settlements and graves, geoarchaeological studies, and analysis of the use of the landscape in economic terms and its relationship to the condition for farming and other activities in the landscape.
+
+**The Viking Ship**\
+Maritime activities, Viking ships.
+
+This topic covers technological analyses of Viking ships, the use of and lack of sail and the symbolic of Viking ships in the Viking Age.
+The papers included studies finds of Viking ships and the construction and production of them, including tools for ship building.
+The topic overlaps with studies of migration and mobility as well as with warfare and piracy.
+Further, this topic may have overlaps with studies of social identity of ship builders based on burial finds.
+
+**Rituals**\
+Mortuary practices, burial actions.
+
+This topic covers all studies of ritual actions, including papers studying ritual actions related to the Old Norse and Sámi religion or world view.
+The performative aspects of burials, their function in society, and the acts of depositions of hoards, tools, and coins may be included in so far as they related to the depositions as rituals.
+
+**Memory**\
+Cultural memory, social memory, the use of the past in the Viking Age.
+
+This topic covers all papers studying cultural, social or collective memory.
+Papers analysing the use and reuse of older structures and antiquities in the Viking Age are included in this topic.
+The papers may be dealing with the commemorative aspects present in settlements, burial rituals and in hoards.
+This topic may have overlaps with studies of ritual actions and world views.
+
+**Craft**\
+Craft, production, spinning, weaving, non-ferrous metal, smithing, comb making, ceramics.
+
+This topic covers papers working with craft and production at urban as well as rural settings.
+Production sites as well as traces of craft and production on the individual objects are included in this topic.
+This topic may have overlap with outfield resources.
+
+**Outfield resources**\
+Living in the outfield, extraction of resources in the outfields, iron production, tar production, soap stone vessel production.
+
+This topic covers outfield economy and lifeway and the extraction of resources in the outfield areas.
+This topic may have overlaps with craft and hunting as well as with studies of ethnicity and intersectionality.
+
+**Hunting**\
+Hunting, hunting pits, hunting pit systems, scaring sticks, arrows, snow patch finds.
+
+This topic covers papers dealing with hunting activities.
+Snow patch finds of scaring sticks and bone and iron arrow heads and arrows are also included in this topic.
+This topic may have overlaps with studies of ethnicity.
+
+**Other**\
+Additional topics identified by the coder.
+
+## Methodology
+### Sources of Evidence
+_The material basis upon which a study depends._
+
+**Graves**\
+Contexts of memorialized human remains, including artefacts, monuments, and the remains themselves.
+
+**Hoards**\
+A collection of valuable objects or artifacts, sometimes purposely buried in the ground.
+
+**Settlements**\
+Places of human habitation.
+
+**Emporia**\
+Trading settlements characterized by their peripheral locations, their lack of infrastructure and their short-lived nature.
+
+**Other structures, sites of production or pit systems**\
+May include quarries, smithies, mines or middens.
+
+**Portable artefacts**\
+Human-made objects that are not fixed in place.
+
+**Human biological remains**\
+Human bones, teeth or soft tissue preserved in the archaeological record.
+
+**Non-anthropogenic materials**\
+Animal or plant remains, geological specimens, features of the natural landscape.
+
+**Stray finds**\
+Metal-detector finds, items from historic museum archives, or other finds that lack complete contextual information.
+
+### Methods
+_The mode of analysis through which materials are examined to derive additional knowledge._
+
+**aDNA**\
+Analysis of DNA from archaeological or anthropological sources, including skeletons of humans, domesticate animal or plants, artefacts, or cave sediments.
+
+**Biological analyses**\
+Osteoarchaeology, analysis of preserved soft tissue.
+
+Concerned with the biological study of bones, teeth and other human biological remains available in the archaeological record.
+
+**Palaeoenvironment reconstruction**\
+Zooarchaeology, archaeobotany, pollen and phytolith analysis.
+
+Concerned with better understanding past environments in which humans lived through analysis of non-human biological remains.
+
+**Stable isotope analyses**\
+Analysis of Strontium, Oxygen and Nitrogen in teeth and bone.
+
+Identification of the relatively abundance of isotopic elements in organic and inorganic compounds, to reconstruct ancient food webs or to reconstruct past environmental and climatic conditions.
+
+**Absolute dating**\
+Radiocarbon dating, dendrochronology, optically stimulated luminescence (OSL).
+
+Determination of absolute dates through scientific means.
+May involve analysis of stable isotopes (C14, Potassium-Argon, Uranium-Lead), measuring doses of ionizing radiation (OSL), or by counting characteristic patterns of annual change in the natural environment (dendrochronology).
+
+**Geophysical analyses**\
+Geoarchaeology, ground penetrating radar, LiDAR.
+
+Application of geology and earth science methods.
+May also include systematic collection and analysis of geophysical signals, such as magnetic and gravitational fields emanating from the earth.
+
+**Geochemical analyses**\
+X-Ray Fluorescence (XRF), Instrumental Neutron activation analysis, Inductively coupled plasma mass spectrometry (ICP-MS).
+
+Techniques for identifying the elemental composition of physical objects.
+
+**Spatial analysis**\
+Regional distributions, viewshed analysis, distributions in relationship to landscape features, GIS.
+
+Identification and analysis of patterns relating to spatial distributions or relationships.
+
+**Artefact analysis**\
+Analysis of pottery, lithics and other portable objects preserved in the archaeological record.
+
+Identification and comparison of artefacts' physical features.
+May also include advanced computer-assisted shape-recognition techniques to automatically classify objects based on input representations of their physical shapes or morphological properties.
+
+**Literary analysis and epigraphy**\
+Analysis of myths, sagas, runes and inscriptions.
+
+Techniques for examining ancient texts and symbols.
+
+**Quantitative or statistical analysis**\
+Multivariate analysis, similarity measurements, multidimensional scaling, principal components analysis, cluster analysis, network analysis, agent-based modelling and simulation.
+
+Identification and analysis of quantitative distributions of object types and features.
+
+**Discourse analysis**\
+Analysis and reflection regarding the ideas and attitudes expressed by the community of practice that investigates the Viking Age.
+
+## Other
+**Region**\
+To be filled in by the coder based on keywords used by the study's authors.\
+May be left blank.
+
+**Comments**\
+Questions or concerns regarding the record and coding procedures.
+
+## References
