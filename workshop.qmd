@@ -47,7 +47,7 @@ The BibVik study aims to discover different threads and tendencies in how differ
 | 11:05 | 11:30 | Talk 6              | Mari Østmo      |
 | 11:30 | 12:30 | Lunch               |                 |
 | 12:30 | 12:55 | Talk 7              | Espen Dalbakk   |
-| 12:55 | 13:20 | Talk 8              | Steiner Solheim |
+| 12:55 | 13:20 | Talk 8              | Steinar Solheim |
 | 13:20 | 14:00 | Group Work          |                 |
 | 14:00 | 14:30 | Coffee              |                 |
 | 14:30 | 15:30 | Plenum / Discussion |                 |
