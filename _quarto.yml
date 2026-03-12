@@ -55,7 +55,7 @@ format:
 filters:
   - quarto
   - assets/include-files.lua
-  - assets/collect-citekeys.lua
+  # - assets/collect-citekeys.lua
 execute:
   echo: false
   message: false
