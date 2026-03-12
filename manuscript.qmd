@@ -1,6 +1,7 @@
 ---
-title: Bibliometric network analysis of Viking Age research (BibVik)
+title: Title TBD
 # subtitle: xxx
+date: today
 authors:
   - name: Julie Lund 
     id: jl
@@ -14,14 +15,14 @@ authors:
         country: Norway
   - name: Isak Roalkvam
     id: ir
-    email: isak.roalkvam@iakh.uio.no
-    url: https://www.hf.uio.no/iakh/english/people/aca/archaeology/temporary/isakro/index.html
-    orcid: 0000-0002-1011-1244
+    email: isak.roalkvam@cas.au.dk
+    url: https://www.au.dk/isak.roalkvam@cas.au.dk/
+    orcid: 0000-0001-6974-1374
     affiliations:
-      - name: University of Oslo
-        department: Archaeology, Conservation and History
-        city: Oslo
-        country: Norway
+      - name: University of Aarhus
+        department: Archeology and Heritage Studies
+        city: Aarhus
+        country: Denmark
   - name: Zachary Batist
     id: zb
     email: zachary.batist@mcgill.ca
@@ -33,7 +34,6 @@ authors:
         city: Montreal
         region: Québec
         country: Canada
-date: today
 abstract: |
   XXXX
 keywords:
@@ -47,7 +47,25 @@ keywords:
 #   volume: xxx
 #   doi: xxx
 #   url: https://zackbatist.info/BibVik
-
+filters: 
+  - assets/count-para.lua
+format:
+  html: default
+  pdf:
+    documentclass: article
+    geometry:
+      - top = 1in
+      - bottom = 1in
+      - left = 1in
+      - right = 1in
+    colorlinks: true
+    toc: false
+    include-in-header:
+      text: |
+        \usepackage{orcidlink}
+        \usepackage{marvosym}
+    template-partials:
+      - assets/title.tex
 ---
 
 ```{r setup}

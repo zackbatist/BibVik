@@ -61,3 +61,4 @@ Thumbs.db
 _site/
 _extensions/
 notes/*.pdf
+**/*.quarto_ipynb

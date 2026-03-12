@@ -2,9 +2,13 @@
 title: Research Protocol
 subtitle:  Bibliometric network analysis of Viking Age research (BibVik)
 description: A planning document outlining the project's scope, methods and projected outcomes.
-date-modified: last-modified
+date-modified: 2025-08-11
 date-format: long
 ---
+
+::: {.callout-note}
+Note that the project has significantly evolved since drafting this protocol, and this document does not reflect our current scope of work. It still has value as a marker of our original intent.
+:::
 
 # Overview and Scope
 This project seeks to identify trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age, as initially surmised by @lund2022.

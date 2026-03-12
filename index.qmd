@@ -1,0 +1,29 @@
+---
+title: Bibliometric network analysis of Viking Age research (BibVik)
+repo-actions: false
+toc: false
+format-links: false
+---
+
+BibVik is a project concerned with identifying trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age.
+
+[More on the project's priorities, values, context, inspiration, reason for being...]
+
+This website hosts our preliminary research protocol, manuscript preprints, and other relevant materials.
+All content is hosted and tracked at [github.com/zackbatist/BibVik](https://github.com/zackbatist/BibVik).
+
+**Manuscript:**
+Preprint of our manuscript (in progress)
+
+**Workshop:**
+Information for the workshop we hosted for the research community
+
+**Scratchpad:**
+Home for our ongoing analysis
+
+**Codebook:**
+A list of codes used to characterize scholarly works
+
+**Research Protocol:**
+Outlines the project's initial overall vision
+
