@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>meeting – BibVik</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-022f8abb03c5f22b0c60f02cc9f484b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../manuscript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Manuscript</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshop</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../scratch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scratchpad</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../codebook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Codebook</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../research-protocol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Protocol</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link active" data-scroll-target="#discussion"><span class="header-section-number">1</span> Discussion</a>
+  <ul class="collapse">
+  <li><a href="#developing-a-controlled-vocabulary" id="toc-developing-a-controlled-vocabulary" class="nav-link" data-scroll-target="#developing-a-controlled-vocabulary"><span class="header-section-number">1.1</span> Developing a controlled vocabulary</a></li>
+  <li><a href="#coding-process" id="toc-coding-process" class="nav-link" data-scroll-target="#coding-process"><span class="header-section-number">1.2</span> Coding process</a></li>
+  <li><a href="#analysis-of-references" id="toc-analysis-of-references" class="nav-link" data-scroll-target="#analysis-of-references"><span class="header-section-number">1.3</span> Analysis of references</a></li>
+  <li><a href="#analysis-of-gender" id="toc-analysis-of-gender" class="nav-link" data-scroll-target="#analysis-of-gender"><span class="header-section-number">1.4</span> Analysis of gender</a></li>
+  <li><a href="#predictions-and-expectations" id="toc-predictions-and-expectations" class="nav-link" data-scroll-target="#predictions-and-expectations"><span class="header-section-number">1.5</span> Predictions and expectations</a></li>
+  <li><a href="#additional-ideas-and-insights" id="toc-additional-ideas-and-insights" class="nav-link" data-scroll-target="#additional-ideas-and-insights"><span class="header-section-number">1.6</span> Additional ideas and insights</a></li>
+  <li><a href="#logistics" id="toc-logistics" class="nav-link" data-scroll-target="#logistics"><span class="header-section-number">1.7</span> Logistics</a></li>
+  </ul></li>
+  <li><a href="#action-items" id="toc-action-items" class="nav-link" data-scroll-target="#action-items"><span class="header-section-number">2</span> Action items</a></li>
+  <li><a href="#links-and-references" id="toc-links-and-references" class="nav-link" data-scroll-target="#links-and-references"><span class="header-section-number">3</span> Links and references</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/notes/2025-05-16-meeting.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<p>Meeting Notes<br>
+Zack, Julie and Isak<br>
+Friday May 16, 15:15 CEST / 9:15 EST</p>
+<section id="discussion" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Discussion</h1>
+<section id="developing-a-controlled-vocabulary" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="developing-a-controlled-vocabulary"><span class="header-section-number">1.1</span> Developing a controlled vocabulary</h2>
+<ul>
+<li>Three axes:
+<ul>
+<li>Topics: What is the paper about? (i.e.&nbsp;diaspora, mobility, gender, ritual, etc)</li>
+<li>Methods: What methods were applied in the paper? (i.e.&nbsp;spatial analysis, genetics, stable isotope analysis, finds analysis)</li>
+<li>Kind of contribution (i.e.&nbsp;field report, “standard” scientific paper, review of prior work, opinion)</li>
+</ul></li>
+<li>The medium (i.e.&nbsp;journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.</li>
+<li>It’s ok to assign multiple terms to each record.</li>
+</ul>
+</section>
+<section id="coding-process" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="coding-process"><span class="header-section-number">1.2</span> Coding process</h2>
+<ul>
+<li>A research assistant will be able to start work in September, and will be able to work for four weeks.</li>
+<li>Limited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.</li>
+<li>Since this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.</li>
+<li>The research assistant will ideally be a more experienced student in the field of Viking Age archaeology.</li>
+<li>Zack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns.</li>
+</ul>
+</section>
+<section id="analysis-of-references" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="analysis-of-references"><span class="header-section-number">1.3</span> Analysis of references</h2>
+<ul>
+<li>We won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.</li>
+<li>NLP using scite is not as useful as initially thought.
+<ul>
+<li>tends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al.&nbsp;2023).</li>
+<li>Its corpus is limited to works put out by partnered publishers.</li>
+</ul></li>
+<li>Potential alternative to scite, but requires greater knowledge of NLP to implement:
+<ul>
+<li>https://github.com/davidjurgens/citation-function</li>
+<li>https://jurgens.people.si.umich.edu/citation-function</li>
+</ul></li>
+<li>We may be able to derive a sample based on network statistics, i.e.&nbsp;the most or least central references.</li>
+</ul>
+</section>
+<section id="analysis-of-gender" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="analysis-of-gender"><span class="header-section-number">1.4</span> Analysis of gender</h2>
+<ul>
+<li>Our intent is to identify citation biases against women.</li>
+<li>The goal is not to identify gender diversity, which is not supported by our method.</li>
+</ul>
+</section>
+<section id="predictions-and-expectations" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="predictions-and-expectations"><span class="header-section-number">1.5</span> Predictions and expectations</h2>
+<ul>
+<li>We’re gonna find sub-clusters within clusters, and bridging clusters.</li>
+<li>Some sub-clusters will be tight-knit and closed, others very broad and open.</li>
+<li>Some will be very focused on specific topics.</li>
+<li>There will be many links across institutions, they are not really that fixed.</li>
+<li>Some citation chains will emerge that reflect casual observations (just a few examples):
+<ul>
+<li>Lots of cross-references within the Mälaren valley community.</li>
+<li>Tight-knit cluster among papers that are concerned with ritual.</li>
+<li>Major computational cluster at Aarhus.</li>
+</ul></li>
+<li>If had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.</li>
+<li>Clustering in methods by “academic upbringing”, which has a localized character</li>
+<li>We may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data.</li>
+</ul>
+</section>
+<section id="additional-ideas-and-insights" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="additional-ideas-and-insights"><span class="header-section-number">1.6</span> Additional ideas and insights</h2>
+<ul>
+<li>Keeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.</li>
+<li>We’ll be able to do some non-network descriptive statistics:
+<ul>
+<li>Distribution of topics by affiliations of authors.</li>
+<li>Distribution of topics by number of co-authors.</li>
+<li>Temporal distributions of genders of lead authors.</li>
+<li>Gender of lead author by size and genders of their co-authors.</li>
+</ul></li>
+</ul>
+</section>
+<section id="logistics" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="logistics"><span class="header-section-number">1.7</span> Logistics</h2>
+<ul>
+<li>Keep things on GitHub for now.</li>
+<li>Keep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the <a href="https://about.archaeo.social/">archaeo-social</a> collective).</li>
+</ul>
+</section>
+</section>
+<section id="action-items" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Action items</h1>
+<p><strong>Next meeting:</strong> Monday June 2, 15:15 CEST / 9:15 EST</p>
+<p><strong>Zack:</strong></p>
+<ul>
+<li>Assemble a series of core variables to be included in a data frame</li>
+<li>Initiate a script to scrape abstracts and metadata</li>
+<li>Modify the research protocol with today’s notes
+<ul>
+<li>Expectations and predictions</li>
+<li>Tone down expectations for analysis of references (based on volume of papers, limited time)</li>
+<li>Document the controlled vocabulary and coding process</li>
+</ul></li>
+</ul>
+<p><strong>Julie:</strong></p>
+<ul>
+<li>Draft controlled vocabulary for article annotation</li>
+</ul>
+<p><strong>Isak:</strong></p>
+<ul>
+<li>Review and modify the R script</li>
+</ul>
+</section>
+<section id="links-and-references" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Links and references</h1>
+<ul>
+<li>Peterson, David, and Aaron Panofsky. 2023. “Metascience as a Scientific Social Movement.” Minerva 61 (2): 147–74. https://doi.org/10.1007/s11024-023-09490-3.</li>
+<li>Bakker, Caitlin, Nicole Theis-Mahon, and Sarah Jane Brown. 2023. “Evaluating the Accuracy of Scite, a Smart Citation Index.” Hypothesis: Research Journal for Health Information Professionals 35 (2). https://doi.org/10.18060/26528.</li>
+<li>Thesis by Julie’s former student, about us/we/them in Viking Age literature.</li>
+<li>Open source alternative to scite:
+<ul>
+<li>https://github.com/davidjurgens/citation-function</li>
+<li>https://jurgens.people.si.umich.edu/citation-function</li>
+</ul></li>
+</ul>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/zackbatist\.info\/BibVik\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/publicdomain/zero/1.0/">
+<p>CC0</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/notes/2025-05-16-meeting.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
