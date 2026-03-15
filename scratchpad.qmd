@@ -1,0 +1,34 @@
+---
+title: Scratchpad
+description: This is where we fiddle around with our data and code.
+---
+<!-- ```{r setup, warning=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+``` -->
+
+## Load packages
+```{r}
+# Load packages
+library(tidyverse)
+library(magrittr)
+library(rcrossref)
+library(citecorp)
+library(plyr)
+library(httr)
+library(jsonlite)
+library(bib2df)
+library(citecorp)
+```
+
+{{< include scratchpad-sections/open-scholarly-metadata.qmd >}}
+{{< include scratchpad-sections/data-cleaning.qmd >}}
+{{< include scratchpad-sections/basic-descriptive-stats.qmd >}}
+
+## Citation networks
+TBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.
+
+## Citation contexts
+TBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.
+
+## Citation clusters
+TBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.

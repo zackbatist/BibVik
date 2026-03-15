@@ -62,3 +62,5 @@ _site/
 _extensions/
 notes/*.pdf
 **/*.quarto_ipynb
+_freeze/
+*.rmarkdown

@@ -34,7 +34,7 @@ website:
         text: Manuscript
       - href: workshop.qmd
         text: Workshop
-      - href: scratch.qmd
+      - href: scratchpad.qmd
         text: Scratchpad
       - href: codebook.qmd
         text: Codebook
@@ -60,3 +60,4 @@ execute:
   echo: false
   message: false
   warning: false
+  freeze: true
