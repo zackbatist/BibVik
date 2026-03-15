@@ -68,7 +68,7 @@ format:
       - assets/title.tex
 ---
 
-```{r setup}
+<!-- ```{r setup}
 
 ```
 
@@ -78,7 +78,7 @@ format:
 
 ```{r plot-theme}
 
-```
+``` -->
 
 
 {{< include sections/01_introduction.qmd >}}
