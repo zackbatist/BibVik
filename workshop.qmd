@@ -4,15 +4,22 @@ title-block-style: plain
 number-sections: false
 ---
 
-**Monday April 13 and Tuesday April 14, 2026**\
+**Monday April 13 -- Tuesday April 14, 2026**\
 **University of Oslo**
 
-The BibVik study aims to discover different threads and tendencies in how different themes within Viking Age archaeological research are pursued. The analysis will be performed using R, an open-source statistical programming language. The purpose of the workshop is twofold:
+BibVik is a bibliometric study that aims to discover different threads and tendencies regarding how Viking Age archaeological research are pursued.
+<!-- More on the inspiration for the study and the workshop. -->
+
+The purpose of the workshop is twofold:
 
 1. To exchange experience about the possibilities and challenges of conducting quantitative bibliometric studies using R
 2. To reflect on broader tendencies and challenges in referencing practices within archaeology and on the more specific aspects of Viking Age archaeology as a research field.
 
-# Guiding Questions
+## Guiding Questions
+Each presentation slot is 25 minutes, which includes time for questions directed to the speakers.
+Time is also reserved for breaking out into focused group discussions and for structured plenary discussion at the end of each day.
+
+**Discussion will focus on the following themes:**
 
 - How can bibliometric, meta-research, and digital approaches in general be leveraged to produce or assist with feminist, anti-colonial, or other forms of reflexive critique within archaeology?
 - What methodological challenges (including those relating to data availability and quality) exist, and how might we overcome them?
@@ -20,34 +27,69 @@ The BibVik study aims to discover different threads and tendencies in how differ
 - What specific considerations should be made when applying these approaches in the context of Viking Age archaeology and in other distinct subdisciplines, domains or areas of interest?
 - How do we establish supportive referential practices in archaeological research, and avoid closed networks, and how may bibliometric studies contribute to this process?
 
-# Program
+## Program
+### Monday April 13
 
-## Monday April 13
+| Start | End   |                     | Speaker                                |
+| ----- | ----- | ------------------- | -------------------------------------- |
+| 12:00 | 13:00 | Lunch               |                                        |
+| 13:00 | 13:30 | Introduction        | Julie Lund, Isak Roalkvam, Zack Batist |
+| 13:15 | 13:40 | **Talk 1**          | Unn Pederson                           |
+| 13:40 | 14:05 | **Talk 2**          | Isto Huvila                            |
+| 14:05 | 14:35 | Coffee              |                                        |
+| 14:35 | 15:00 | **Talk 3**          | Thora Petursdottir                     |
+| 15:00 | 16:00 | Group Work          |                                        |
+| 16:00 | 16:45 | Plenum / Discussion |                                        |
+| 17:30 |       | Drinks + Dinner\*   |                                        |
 
-| Start | End   |                                    | Speaker                                |
-| ----- | ----- | ---------------------------------- | -------------------------------------- |
-| 12:00 | 13:00 | Lunch                              |                                        |
-| 13:00 | 13:30 | Introduction + Preliminary Results | Julie Lund, Isak Roalkvam, Zack Batist |
-| 13:15 | 13:40 | Talk 1                             | Unn Pederson                           |
-| 13:40 | 14:05 | Talk 2                             | Isto Huvila                            |
-| 14:05 | 14:35 | Coffee                             |                                        |
-| 14:35 | 15:00 | Talk 3                             | Thora Petursdottir                     |
-| 15:00 | 16:00 | Group Work\*                       |                                        |
-| 16:00 | 16:45 | Plenum / Discussion                |                                        |
-| 17:30 |       | Drinks + Dinner                    |                                        |
+\* The complementary workshop dinner will be hosted at XXXX.
+<!-- Add the name and location of the restaurant. -->
 
-## Tuesday April 14
+### Tuesday April 14
 
-| Start | End   |                     | Speaker         |
-| ----- | ----- | ------------------- | --------------- |
-| 09:00 | 10:00 | Organizing Meeting  |                 |
-| 10:00 | 10:15 | Coffee              |                 |
-| 10:15 | 10:40 | Talk 4              | Joe Roe         |
-| 10:40 | 11:05 | Talk 5              | Dag Haug        |
-| 11:05 | 11:30 | Talk 6              | Mari Østmo      |
-| 11:30 | 12:30 | Lunch               |                 |
-| 12:30 | 12:55 | Talk 7              | Espen Dalbakk   |
-| 12:55 | 13:20 | Talk 8              | Steinar Solheim |
-| 13:20 | 14:00 | Group Work          |                 |
-| 14:00 | 14:30 | Coffee              |                 |
-| 14:30 | 15:30 | Plenum / Discussion |                 |
+| Start | End   |                     | Speaker                                |
+| ----- | ----- | ------------------- | -------------------------------------- |
+| 09:00 | 10:00 | Organizing Meeting  |                                        |
+| 10:00 | 10:15 | Coffee              |                                        |
+| 10:15 | 10:40 | **Talk 4**          | Joe Roe                                |
+| 10:40 | 11:05 | **Talk 5**          | Dag Haug                               |
+| 11:05 | 11:30 | **Talk 6**          | Mari Østmo                             |
+| 11:30 | 12:30 | Lunch               |                                        |
+| 12:30 | 12:55 | **Talk 7**          | Espen Dalbakk                          |
+| 12:55 | 13:20 | **Talk 8**          | Steinar Solheim                        |
+| 13:20 | 14:00 | Group Work          |                                        |
+| 14:00 | 14:30 | Coffee              |                                        |
+| 14:30 | 15:30 | Plenum / Discussion |                                        |
+
+<!-- 
+## Abstracts
+Titles and abstracts go here when they are available.
+
+### Introductory Remarks + Preliminary Findings
+Julie Lund, Isak Roalkvam, Zack Batist
+
+### Title TBD
+**Unn Pederson**, University of Oslo
+
+### Title TBD
+**Isto Huvila**, University of Uppsala
+
+### Title TBD
+**Thora Petursdottir**, University of Oslo
+
+### Title TBD
+**Joe Roe**, University of Copenhagen
+
+### Title TBD
+**Dag Haug**, University of Oslo
+
+### Title TBD
+**Mari Østmo**, University of Oslo
+
+### Title TBD
+**Espen Dalbakk**, University of Oslo
+
+### Title TBD
+**Steinar Solheim**, University of Oslo
+
+-->
