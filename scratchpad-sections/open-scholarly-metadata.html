@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>methods-materials – BibVik</title>
+<title>open-scholarly-metadata – BibVik</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -142,9 +177,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#methods-and-materials" id="toc-methods-and-materials" class="nav-link active" data-scroll-target="#methods-and-materials"><span class="header-section-number">1</span> Methods and Materials</a></li>
+  <li><a href="#working-with-open-scholarly-metadata" id="toc-working-with-open-scholarly-metadata" class="nav-link active" data-scroll-target="#working-with-open-scholarly-metadata"><span class="header-section-number">1</span> Working with open scholarly metadata</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/sections/03_methods-materials.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/scratchpad-sections/open-scholarly-metadata.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -152,8 +187,53 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="methods-and-materials" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Methods and Materials</h1>
+<section id="working-with-open-scholarly-metadata" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="working-with-open-scholarly-metadata"><span class="header-section-number">1</span> Working with open scholarly metadata</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get list of refs from the OpenCitations API.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get list of refs from the OpenCitations API</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="st">"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> <span class="fu">content</span>(response, <span class="st">"text"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>parsed_data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(content)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>seed_refs <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">'.*doi:'</span>, <span class="st">''</span>, parsed_data<span class="sc">$</span>cited)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>seed_refs <span class="ot">&lt;-</span> <span class="fu">gsub</span>( <span class="st">" .*$"</span>, <span class="st">""</span>, seed_refs)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>seed_refs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(seed_refs)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(seed_refs)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"doi"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve bibliographic metadata for each referenced work from Crossref.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>seed_refs_cr <span class="ot">&lt;-</span> <span class="fu">cr_works</span>(seed_refs<span class="sc">$</span>doi)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>seed_refs_cr <span class="ot">&lt;-</span> seed_refs_cr<span class="sc">$</span>data</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>seed_refs<span class="sc">$</span>title <span class="ot">&lt;-</span> seed_refs_cr<span class="sc">$</span>title[<span class="fu">match</span>(seed_refs<span class="sc">$</span>doi, seed_refs_cr<span class="sc">$</span>doi)]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>seed_refs<span class="sc">$</span>container_title <span class="ot">&lt;-</span> seed_refs_cr<span class="sc">$</span>container.title[<span class="fu">match</span>(seed_refs<span class="sc">$</span>doi, seed_refs_cr<span class="sc">$</span>doi)]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>seed_refs<span class="sc">$</span>type <span class="ot">&lt;-</span> seed_refs_cr<span class="sc">$</span>type[<span class="fu">match</span>(seed_refs<span class="sc">$</span>doi, seed_refs_cr<span class="sc">$</span>doi)]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>seed_refs<span class="sc">$</span>date <span class="ot">&lt;-</span> seed_refs_cr<span class="sc">$</span>created[<span class="fu">match</span>(seed_refs<span class="sc">$</span>doi, seed_refs_cr<span class="sc">$</span>doi)]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>seed_refs<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">substr</span>(seed_refs<span class="sc">$</span>date, <span class="dv">1</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It’s not necessary to retrieve abstracts via API. They are too messy and inconsistent, and it’s a pain to deal with html tags.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate lists of authors, indexed by DOIs.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TBD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>I’m missing a step here, from my previous work several months ago. Need to find the code that generated <code>seed_refs_bib</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter bib file for items with a DOI.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>seed_refs_bib <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(<span class="fu">paste</span>(<span class="st">"https://opencitations.net/index/api/v2/references/doi:"</span>,seed_refs_bib[<span class="sc">!</span><span class="fu">is.na</span>(seed_refs_bib<span class="sc">$</span>DOI),]<span class="sc">$</span>DOI))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Query CrossRef for metadata pertaining to references with a DOI.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>f1_cr <span class="ot">&lt;-</span> <span class="fu">cr_works</span>(seed_refs_bib[<span class="sc">!</span><span class="fu">is.na</span>(seed_refs_bib<span class="sc">$</span>DOI),]<span class="sc">$</span>DOI)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>f1_cr <span class="ot">&lt;-</span> f1_cr<span class="sc">$</span>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Query OpenCitations for references pertaining to f1.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f1_oc <span class="ot">&lt;-</span> <span class="fu">oc_coci_meta</span>(seed_refs_bib[<span class="sc">!</span><span class="fu">is.na</span>(seed_refs_bib<span class="sc">$</span>DOI),]<span class="sc">$</span>DOI)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="st">"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> <span class="fu">content</span>(response, <span class="st">"text"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>parsed_data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(content)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>f1_oc <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">'.*doi:'</span>, <span class="st">''</span>, parsed_data<span class="sc">$</span>cited)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>f1_oc <span class="ot">&lt;-</span> <span class="fu">gsub</span>( <span class="st">" .*$"</span>, <span class="st">""</span>, f1_oc)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>f1_oc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(f1_oc)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f1_oc)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"doi"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For data cleaning purposes.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the variables to find articles without DOI, non-articles with DOI, etc.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>seed_refs_bib <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CATEGORY <span class="sc">!=</span> <span class="st">"ARTICLE"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(DOI)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>seed_refs_bib <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">"BOOK"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -573,7 +653,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/sections/03_methods-materials.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zackbatist/BibVik/blob/main/scratchpad-sections/open-scholarly-metadata.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

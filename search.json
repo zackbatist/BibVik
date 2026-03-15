@@ -10,77 +10,46 @@
     ]
   },
   {
-    "objectID": "notes/2025-07-07-meeting.html",
-    "href": "notes/2025-07-07-meeting.html",
+    "objectID": "notes/2025-08-11-meeting.html",
+    "href": "notes/2025-08-11-meeting.html",
     "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\n2 Action Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\n2 Action Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\n3 Links and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11.\n\nReuseCC0 1.0"
   },
   {
-    "objectID": "notes/2025-05-16-meeting.html",
-    "href": "notes/2025-05-16-meeting.html",
-    "title": "1 Discussion",
+    "objectID": "notes/2025-06-02-meeting.html",
+    "href": "notes/2025-06-02-meeting.html",
+    "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nFriday May 16, 15:15 CEST / 9:15 EST"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\n2 Action Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
   },
   {
-    "objectID": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
-    "href": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
-    "title": "1 Discussion",
-    "section": "1.1 Developing a controlled vocabulary",
-    "text": "1.1 Developing a controlled vocabulary\n\nThree axes:\n\nTopics: What is the paper about? (i.e. diaspora, mobility, gender, ritual, etc)\nMethods: What methods were applied in the paper? (i.e. spatial analysis, genetics, stable isotope analysis, finds analysis)\nKind of contribution (i.e. field report, “standard” scientific paper, review of prior work, opinion)\n\nThe medium (i.e. journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.\nIt’s ok to assign multiple terms to each record."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#coding-process",
-    "href": "notes/2025-05-16-meeting.html#coding-process",
-    "title": "1 Discussion",
-    "section": "1.2 Coding process",
-    "text": "1.2 Coding process\n\nA research assistant will be able to start work in September, and will be able to work for four weeks.\nLimited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.\nSince this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology.\nZack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#analysis-of-references",
-    "href": "notes/2025-05-16-meeting.html#analysis-of-references",
-    "title": "1 Discussion",
-    "section": "1.3 Analysis of references",
-    "text": "1.3 Analysis of references\n\nWe won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.\nNLP using scite is not as useful as initially thought.\n\ntends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al. 2023).\nIts corpus is limited to works put out by partnered publishers.\n\nPotential alternative to scite, but requires greater knowledge of NLP to implement:\n\nhttps://github.com/davidjurgens/citation-function\nhttps://jurgens.people.si.umich.edu/citation-function\n\nWe may be able to derive a sample based on network statistics, i.e. the most or least central references."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#analysis-of-gender",
-    "href": "notes/2025-05-16-meeting.html#analysis-of-gender",
-    "title": "1 Discussion",
-    "section": "1.4 Analysis of gender",
-    "text": "1.4 Analysis of gender\n\nOur intent is to identify citation biases against women.\nThe goal is not to identify gender diversity, which is not supported by our method."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#predictions-and-expectations",
-    "href": "notes/2025-05-16-meeting.html#predictions-and-expectations",
-    "title": "1 Discussion",
-    "section": "1.5 Predictions and expectations",
-    "text": "1.5 Predictions and expectations\n\nWe’re gonna find sub-clusters within clusters, and bridging clusters.\nSome sub-clusters will be tight-knit and closed, others very broad and open.\nSome will be very focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering in methods by “academic upbringing”, which has a localized character\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
-    "href": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
-    "title": "1 Discussion",
-    "section": "1.6 Additional ideas and insights",
-    "text": "1.6 Additional ideas and insights\n\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#logistics",
-    "href": "notes/2025-05-16-meeting.html#logistics",
-    "title": "1 Discussion",
-    "section": "1.7 Logistics",
-    "text": "1.7 Logistics\n\nKeep things on GitHub for now.\nKeep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the archaeo-social collective)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Bibliometric network analysis of Viking Age research (BibVik)",
+    "objectID": "notes/2025-06-16-meeting.html",
+    "href": "notes/2025-06-16-meeting.html",
+    "title": "1 Discussion Topics",
     "section": "",
-    "text": "BibVik is a project concerned with identifying trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age.\n[More on the project’s priorities, values, context, inspiration, reason for being…]\nThis website hosts our preliminary research protocol, manuscript preprints, and other relevant materials. All content is hosted and tracked at github.com/zackbatist/BibVik.\nManuscript: Preprint of our manuscript (in progress)\nWorkshop: Information for the workshop we hosted for the research community\nScratchpad: Home for our ongoing analysis\nCodebook: A list of codes used to characterize scholarly works\nResearch Protocol: Outlines the project’s initial overall vision\n\n\n\nReuseCC0 1.0",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 16, 15:15 CEST / 9:15 EST"
+  },
+  {
+    "objectID": "notes/2025-06-16-meeting.html#developing-the-codebook",
+    "href": "notes/2025-06-16-meeting.html#developing-the-codebook",
+    "title": "1 Discussion Topics",
+    "section": "1.1 Developing the codebook",
+    "text": "1.1 Developing the codebook\nJulie worked on it with another colleague (I don’t recall his name). We discussed means of improving it further. Specifically: develop groupings, and highlighting or boldening terms that stand out as the core concept or heading.\nWe also clarified how this is an iterative process. The codes are not meant to be prescriptive, and should adapt to reflect the contents of the corpus and the realizations we make as coding progresses."
+  },
+  {
+    "objectID": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
+    "href": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
+    "title": "1 Discussion Topics",
+    "section": "1.2 Assessing the quality of scholarly metadata",
+    "text": "1.2 Assessing the quality of scholarly metadata\nZack looked into the quality of scholarly metadata indexes, and found that they are not really suited for non-anglophone monographs and grey literature, which constitutes a significant aspect of our corpus. He proposed an alternative solution: to use Grobid to extract bibliographic references from PDFs using targeted machine learning algorithms.\nThis approach has a few caveats: We need full and clean PDFs of all works in the corpus, which may be particularly challenging for books. Julie has this covered based on her extensive library and teaching materials. For works that are published as part of anthologies and edited volumes, we also need to isolate references for each chapter or book section. Zack will develop a workflow to assist with this vetting, and Isak will test it out.\nThis led to some discussion about the nature and scope of the corpus. We reiterated the sense that we should be led by the questions and the practical analytical challenges, rather than the data contained in the seed paper. For instance, the disproportionate number of references in a book relative to a journal article may affect the constitution of a network and generate misleading findings (especially regarding centrality metrics), and it may be prudent to exclude them, or to replace them with a series of papers by the same author that cover the same ground as the book. Moreover, an excavation report may be more descriptive and engage with the literature to a lesser extent than an “standalone” study (for lack of a better term right now), and we may want to discard those. These considerations make the difference between an “easy” bibliometric analysis and a meaningful one."
+  },
+  {
+    "objectID": "notes/2025-06-16-meeting.html#miscellaneous",
+    "href": "notes/2025-06-16-meeting.html#miscellaneous",
+    "title": "1 Discussion Topics",
+    "section": "1.3 Miscellaneous",
+    "text": "1.3 Miscellaneous\nZack mentioned his brief social media interactions, which pointed to Christian Bergeron’s recent work with the same/similar toolsets, and whose presentation in April coincidentally helped inspire those whole project. Zack is also consulting with Till Grallert, who develops software to convert between TEI and bibtex (among other data formats used to store bibliographic data). It’s great that we’re relying so much on tools developed by the digital humanities!\nWe addressed the general plans for the workshop, which we agreed we should hold in March. This will provide greater opportunity to generate meaningful findings and to invite other interesting participants."
   },
   {
     "objectID": "codebook.html",
@@ -176,16 +145,6 @@
     "title": "1 Discussion",
     "section": "",
     "text": "1 Discussion\n\n\n\n\nReuseCC0 1.0"
-  },
-  {
-    "objectID": "scratch.html",
-    "href": "scratch.html",
-    "title": "BibVik",
-    "section": "",
-    "text": "ReuseCC0 1.0",
-    "crumbs": [
-      "Scratchpad"
-    ]
   },
   {
     "objectID": "sections/06_conclusion.html",
@@ -406,45 +365,150 @@
     ]
   },
   {
-    "objectID": "notes/2025-06-16-meeting.html",
-    "href": "notes/2025-06-16-meeting.html",
+    "objectID": "scratchpad-sections/open-scholarly-metadata.html",
+    "href": "scratchpad-sections/open-scholarly-metadata.html",
+    "title": "BibVik",
+    "section": "",
+    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\nIt’s not necessary to retrieve abstracts via API. They are too messy and inconsistent, and it’s a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+  },
+  {
+    "objectID": "scratchpad-sections/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
+    "href": "scratchpad-sections/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
+    "title": "BibVik",
+    "section": "",
+    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\nIt’s not necessary to retrieve abstracts via API. They are too messy and inconsistent, and it’s a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bibliometric network analysis of Viking Age research (BibVik)",
+    "section": "",
+    "text": "BibVik is a project concerned with identifying trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age.\n[More on the project’s priorities, values, context, inspiration, reason for being…]\nThis website hosts our preliminary research protocol, manuscript preprints, and other relevant materials. All content is hosted and tracked at github.com/zackbatist/BibVik.\nManuscript: Preprint of our manuscript (in progress)\nWorkshop: Information for the workshop we hosted for the research community\nScratchpad: Home for our ongoing analysis\nCodebook: A list of codes used to characterize scholarly works\nResearch Protocol: Outlines the project’s initial overall vision\n\n\n\nReuseCC0 1.0",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html",
+    "href": "notes/2025-05-16-meeting.html",
+    "title": "1 Discussion",
+    "section": "",
+    "text": "Meeting Notes\nZack, Julie and Isak\nFriday May 16, 15:15 CEST / 9:15 EST"
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
+    "href": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
+    "title": "1 Discussion",
+    "section": "1.1 Developing a controlled vocabulary",
+    "text": "1.1 Developing a controlled vocabulary\n\nThree axes:\n\nTopics: What is the paper about? (i.e. diaspora, mobility, gender, ritual, etc)\nMethods: What methods were applied in the paper? (i.e. spatial analysis, genetics, stable isotope analysis, finds analysis)\nKind of contribution (i.e. field report, “standard” scientific paper, review of prior work, opinion)\n\nThe medium (i.e. journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.\nIt’s ok to assign multiple terms to each record."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#coding-process",
+    "href": "notes/2025-05-16-meeting.html#coding-process",
+    "title": "1 Discussion",
+    "section": "1.2 Coding process",
+    "text": "1.2 Coding process\n\nA research assistant will be able to start work in September, and will be able to work for four weeks.\nLimited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.\nSince this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology.\nZack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#analysis-of-references",
+    "href": "notes/2025-05-16-meeting.html#analysis-of-references",
+    "title": "1 Discussion",
+    "section": "1.3 Analysis of references",
+    "text": "1.3 Analysis of references\n\nWe won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.\nNLP using scite is not as useful as initially thought.\n\ntends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al. 2023).\nIts corpus is limited to works put out by partnered publishers.\n\nPotential alternative to scite, but requires greater knowledge of NLP to implement:\n\nhttps://github.com/davidjurgens/citation-function\nhttps://jurgens.people.si.umich.edu/citation-function\n\nWe may be able to derive a sample based on network statistics, i.e. the most or least central references."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#analysis-of-gender",
+    "href": "notes/2025-05-16-meeting.html#analysis-of-gender",
+    "title": "1 Discussion",
+    "section": "1.4 Analysis of gender",
+    "text": "1.4 Analysis of gender\n\nOur intent is to identify citation biases against women.\nThe goal is not to identify gender diversity, which is not supported by our method."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#predictions-and-expectations",
+    "href": "notes/2025-05-16-meeting.html#predictions-and-expectations",
+    "title": "1 Discussion",
+    "section": "1.5 Predictions and expectations",
+    "text": "1.5 Predictions and expectations\n\nWe’re gonna find sub-clusters within clusters, and bridging clusters.\nSome sub-clusters will be tight-knit and closed, others very broad and open.\nSome will be very focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering in methods by “academic upbringing”, which has a localized character\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
+    "href": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
+    "title": "1 Discussion",
+    "section": "1.6 Additional ideas and insights",
+    "text": "1.6 Additional ideas and insights\n\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#logistics",
+    "href": "notes/2025-05-16-meeting.html#logistics",
+    "title": "1 Discussion",
+    "section": "1.7 Logistics",
+    "text": "1.7 Logistics\n\nKeep things on GitHub for now.\nKeep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the archaeo-social collective)."
+  },
+  {
+    "objectID": "notes/2025-07-07-meeting.html",
+    "href": "notes/2025-07-07-meeting.html",
     "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 16, 15:15 CEST / 9:15 EST"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\n2 Action Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
   },
   {
-    "objectID": "notes/2025-06-16-meeting.html#developing-the-codebook",
-    "href": "notes/2025-06-16-meeting.html#developing-the-codebook",
-    "title": "1 Discussion Topics",
-    "section": "1.1 Developing the codebook",
-    "text": "1.1 Developing the codebook\nJulie worked on it with another colleague (I don’t recall his name). We discussed means of improving it further. Specifically: develop groupings, and highlighting or boldening terms that stand out as the core concept or heading.\nWe also clarified how this is an iterative process. The codes are not meant to be prescriptive, and should adapt to reflect the contents of the corpus and the realizations we make as coding progresses."
+    "objectID": "scratchpad.html#working-with-open-scholarly-metadata",
+    "href": "scratchpad.html#working-with-open-scholarly-metadata",
+    "title": "Scratchpad",
+    "section": "2 Working with open scholarly metadata",
+    "text": "2 Working with open scholarly metadata\n# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\nIt’s not necessary to retrieve abstracts via API. They are too messy and inconsistent, and it’s a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )",
+    "crumbs": [
+      "Scratchpad"
+    ]
   },
   {
-    "objectID": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
-    "href": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
-    "title": "1 Discussion Topics",
-    "section": "1.2 Assessing the quality of scholarly metadata",
-    "text": "1.2 Assessing the quality of scholarly metadata\nZack looked into the quality of scholarly metadata indexes, and found that they are not really suited for non-anglophone monographs and grey literature, which constitutes a significant aspect of our corpus. He proposed an alternative solution: to use Grobid to extract bibliographic references from PDFs using targeted machine learning algorithms.\nThis approach has a few caveats: We need full and clean PDFs of all works in the corpus, which may be particularly challenging for books. Julie has this covered based on her extensive library and teaching materials. For works that are published as part of anthologies and edited volumes, we also need to isolate references for each chapter or book section. Zack will develop a workflow to assist with this vetting, and Isak will test it out.\nThis led to some discussion about the nature and scope of the corpus. We reiterated the sense that we should be led by the questions and the practical analytical challenges, rather than the data contained in the seed paper. For instance, the disproportionate number of references in a book relative to a journal article may affect the constitution of a network and generate misleading findings (especially regarding centrality metrics), and it may be prudent to exclude them, or to replace them with a series of papers by the same author that cover the same ground as the book. Moreover, an excavation report may be more descriptive and engage with the literature to a lesser extent than an “standalone” study (for lack of a better term right now), and we may want to discard those. These considerations make the difference between an “easy” bibliometric analysis and a meaningful one."
+    "objectID": "scratchpad.html#cleaning-and-integrating-the-annotations-spreadsheet",
+    "href": "scratchpad.html#cleaning-and-integrating-the-annotations-spreadsheet",
+    "title": "Scratchpad",
+    "section": "3 Cleaning and integrating the annotations spreadsheet",
+    "text": "3 Cleaning and integrating the annotations spreadsheet",
+    "crumbs": [
+      "Scratchpad"
+    ]
   },
   {
-    "objectID": "notes/2025-06-16-meeting.html#miscellaneous",
-    "href": "notes/2025-06-16-meeting.html#miscellaneous",
-    "title": "1 Discussion Topics",
-    "section": "1.3 Miscellaneous",
-    "text": "1.3 Miscellaneous\nZack mentioned his brief social media interactions, which pointed to Christian Bergeron’s recent work with the same/similar toolsets, and whose presentation in April coincidentally helped inspire those whole project. Zack is also consulting with Till Grallert, who develops software to convert between TEI and bibtex (among other data formats used to store bibliographic data). It’s great that we’re relying so much on tools developed by the digital humanities!\nWe addressed the general plans for the workshop, which we agreed we should hold in March. This will provide greater opportunity to generate meaningful findings and to invite other interesting participants."
+    "objectID": "scratchpad.html#basic-descriptive-statistics",
+    "href": "scratchpad.html#basic-descriptive-statistics",
+    "title": "Scratchpad",
+    "section": "4 Basic descriptive statistics",
+    "text": "4 Basic descriptive statistics",
+    "crumbs": [
+      "Scratchpad"
+    ]
   },
   {
-    "objectID": "notes/2025-06-02-meeting.html",
-    "href": "notes/2025-06-02-meeting.html",
-    "title": "1 Discussion Topics",
-    "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\n2 Action Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
+    "objectID": "scratchpad.html#citation-networks",
+    "href": "scratchpad.html#citation-networks",
+    "title": "Scratchpad",
+    "section": "5 Citation networks",
+    "text": "5 Citation networks\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
+    "crumbs": [
+      "Scratchpad"
+    ]
   },
   {
-    "objectID": "notes/2025-08-11-meeting.html",
-    "href": "notes/2025-08-11-meeting.html",
-    "title": "1 Discussion Topics",
-    "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\n2 Action Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\n3 Links and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11.\n\nReuseCC0 1.0"
+    "objectID": "scratchpad.html#citation-contexts",
+    "href": "scratchpad.html#citation-contexts",
+    "title": "Scratchpad",
+    "section": "6 Citation contexts",
+    "text": "6 Citation contexts\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
+    "crumbs": [
+      "Scratchpad"
+    ]
+  },
+  {
+    "objectID": "scratchpad.html#citation-clusters",
+    "href": "scratchpad.html#citation-clusters",
+    "title": "Scratchpad",
+    "section": "7 Citation clusters",
+    "text": "7 Citation clusters\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
+    "crumbs": [
+      "Scratchpad"
+    ]
   }
 ]
