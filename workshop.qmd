@@ -8,6 +8,8 @@ toc-depth: 2
 **Monday April 13 -- Tuesday April 14, 2026**\
 **University of Oslo**
 
+[Poster PDF](BibVik-workshop-poster.pdf) | [Poster HTML](BibVik-workshop-poster.html)
+
 BibVik is a bibliometric study that aims to discover different threads and tendencies regarding how Viking Age archaeological research are pursued.
 It takes a critical, feminist and reflexive stance on research practice and on how research practice can be documented and analyzed.
 

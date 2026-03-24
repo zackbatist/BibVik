@@ -4,6 +4,9 @@ project:
   preview:
     port: 7777
     browser: false
+  resources:
+    - cv.pdf
+    - cv.html
 bibliography: assets/BibVik.bib
 csl: assets/chicago-author-date.csl
 # license: CC0
