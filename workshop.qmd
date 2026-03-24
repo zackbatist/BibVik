@@ -2,24 +2,29 @@
 title: Citational Politics and Practices in Viking Age Archaeology and Beyond
 title-block-style: plain
 number-sections: false
+toc-depth: 2
 ---
 
 **Monday April 13 -- Tuesday April 14, 2026**\
 **University of Oslo**
 
 BibVik is a bibliometric study that aims to discover different threads and tendencies regarding how Viking Age archaeological research are pursued.
-<!-- More on the inspiration for the study and the workshop. -->
+It takes a critical, feminist and reflexive stance on research practice and on how research practice can be documented and analyzed.
+
+We are not alone in this approach.
+Although archaeologists and others in the domain of Nordic cultural heritage are increasingly engaged in research on research practice, the work sometimes feel scattered or tangential to archaeologists' primary research interests.
+This workshop therefore assemble a community of like-minded scholars who have not only done comprehensive and digitally-mediated archaeological meta-research rooted in bibliometric methods, but who have done so from a critical and feminist perspective.
 
 The purpose of the workshop is twofold:
 
-1. To exchange experience about the possibilities and challenges of conducting quantitative bibliometric studies using R
-2. To reflect on broader tendencies and challenges in referencing practices within archaeology and on the more specific aspects of Viking Age archaeology as a research field.
+1. To exchange experience about the possibilities and challenges of conducting quantitative bibliometric studies.
+2. To reflect on broader tendencies and challenges in referencing practices within archaeology, and on Viking Age archaeology specifically.
 
 ## Guiding Questions
 Each presentation slot is 25 minutes, which includes time for questions directed to the speakers.
 Time is also reserved for breaking out into focused group discussions and for structured plenary discussion at the end of each day.
 
-**Discussion will focus on the following themes:**
+**Discussion may focus on the following themes:**
 
 - How can bibliometric, meta-research, and digital approaches in general be leveraged to produce or assist with feminist, anti-colonial, or other forms of reflexive critique within archaeology?
 - What methodological challenges (including those relating to data availability and quality) exist, and how might we overcome them?
@@ -42,7 +47,7 @@ Time is also reserved for breaking out into focused group discussions and for st
 | 16:00 | 16:45 | Plenum / Discussion |                                        |
 | 17:30 |       | Drinks + Dinner\*   |                                        |
 
-\* The complementary workshop dinner will be hosted at XXXX.
+\* The complementary workshop dinner will be hosted at [TBD].
 <!-- Add the name and location of the restaurant. -->
 
 ### Tuesday April 14
@@ -65,7 +70,7 @@ Time is also reserved for breaking out into focused group discussions and for st
 ## Invited Talks
 
 ### Introductory Remarks + Preliminary Findings
-**Julie Lund, Isak Roalkvam, Zack Batist**
+**Julie Lund, Isak Roalkvam & Zachary Batist**
 
 ### Title TBD
 **Unn Pederson**, University of Oslo
