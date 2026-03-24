@@ -6,14 +6,15 @@ project:
     browser: false
 bibliography: assets/BibVik.bib
 csl: assets/chicago-author-date.csl
-license: CC0
+# license: CC0
 website: 
   title: "BibVik" 
   site-url: https://zackbatist.info/BibVik/
   repo-url: https://github.com/zackbatist/BibVik
-  repo-actions: [source]
+  repo-actions: none
   bread-crumbs: true
   page-navigation: false
+  back-to-top-navigation: false
   # favicon: images/favicon.ico
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
@@ -30,8 +31,8 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: manuscript.qmd
-        text: Manuscript
+      # - href: manuscript.qmd
+      #   text: Manuscript
       - href: workshop.qmd
         text: Workshop
       - href: scratchpad.qmd
