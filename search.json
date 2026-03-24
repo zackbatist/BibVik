@@ -4,24 +4,21 @@
     "href": "manuscript.html",
     "title": "Title TBD",
     "section": "",
-    "text": "1 Introduction\n[1] Lund and Sindbæk (2022) \n\n\n2 Background\n\n\n3 Methods and Materials\n\n\n4 Findings\n\n\n5 Discussion\n\n\n6 Conclusion\n\n\n7 References\n\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3.\n\n\n\n\n8 Back Matter\n\n\n\n9 Supplementary Materials\n\n\n\n\nReuseCC0 1.0",
-    "crumbs": [
-      "Manuscript"
-    ]
+    "text": "1 Introduction\n[1] Lund and Sindbæk (2022) \n\n\n2 Background\n\n\n3 Methods and Materials\n\n\n4 Findings\n\n\n5 Discussion\n\n\n6 Conclusion\n\n\n7 References\n\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3.\n\n\n\n\n8 Back Matter\n\n\n\n9 Supplementary Materials"
   },
   {
     "objectID": "notes/2025-08-11-meeting.html",
     "href": "notes/2025-08-11-meeting.html",
     "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\n2 Action Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\n3 Links and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11.\n\nReuseCC0 1.0"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\n2 Action Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\n3 Links and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11."
   },
   {
     "objectID": "notes/2025-06-02-meeting.html",
     "href": "notes/2025-06-02-meeting.html",
     "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\n2 Action Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\n2 Action Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\n3 Links and references"
   },
   {
     "objectID": "notes/2025-06-16-meeting.html",
@@ -116,63 +113,63 @@
     "href": "sections/03_methods-materials.html",
     "title": "1 Methods and Materials",
     "section": "",
-    "text": "1 Methods and Materials\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Methods and Materials"
   },
   {
     "objectID": "sections/11_references.html",
     "href": "sections/11_references.html",
     "title": "1 References",
     "section": "",
-    "text": "1 References\n\n\n\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 References"
   },
   {
     "objectID": "sections/12_back-matter.html",
     "href": "sections/12_back-matter.html",
     "title": "1 Back Matter",
     "section": "",
-    "text": "1 Back Matter\n\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Back Matter"
   },
   {
     "objectID": "sections/02_background.html",
     "href": "sections/02_background.html",
     "title": "1 Background",
     "section": "",
-    "text": "1 Background\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Background"
   },
   {
     "objectID": "sections/05_discussion.html",
     "href": "sections/05_discussion.html",
     "title": "1 Discussion",
     "section": "",
-    "text": "1 Discussion\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Discussion"
   },
   {
     "objectID": "sections/06_conclusion.html",
     "href": "sections/06_conclusion.html",
     "title": "1 Conclusion",
     "section": "",
-    "text": "1 Conclusion\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Conclusion"
   },
   {
     "objectID": "sections/13_supplement.html",
     "href": "sections/13_supplement.html",
     "title": "1 Supplementary Materials",
     "section": "",
-    "text": "1 Supplementary Materials\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Supplementary Materials"
   },
   {
     "objectID": "sections/01_introduction.html",
     "href": "sections/01_introduction.html",
     "title": "1 Introduction",
     "section": "",
-    "text": "1 Introduction\nLund and Sindbæk (2022) \n\n\n\n\n\nReferences\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3.\n\nReuseCC0 1.0"
+    "text": "1 Introduction\nLund and Sindbæk (2022) \n\n\n\n\n\nReferences\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3."
   },
   {
     "objectID": "sections/04_findings.html",
     "href": "sections/04_findings.html",
     "title": "1 Findings",
     "section": "",
-    "text": "1 Findings\n\n\n\n\nReuseCC0 1.0"
+    "text": "1 Findings"
   },
   {
     "objectID": "research-protocol.html",
@@ -339,7 +336,7 @@
     "href": "workshop.html",
     "title": "Citational Politics and Practices in Viking Age Archaeology and Beyond",
     "section": "",
-    "text": "Monday April 13 – Tuesday April 14, 2026\nUniversity of Oslo\nBibVik is a bibliometric study that aims to discover different threads and tendencies regarding how Viking Age archaeological research are pursued.\nThe purpose of the workshop is twofold:",
+    "text": "Monday April 13 – Tuesday April 14, 2026\nUniversity of Oslo\nBibVik is a bibliometric study that aims to discover different threads and tendencies regarding how Viking Age archaeological research are pursued. It takes a critical, feminist and reflexive stance on research practice and on how research practice can be documented and analyzed.\nWe are not alone in this approach. Although archaeologists and others in the domain of Nordic cultural heritage are increasingly engaged in research on research practice, the work sometimes feel scattered or tangential to archaeologists’ primary research interests. This workshop therefore assemble a community of like-minded scholars who have not only done comprehensive and digitally-mediated archaeological meta-research rooted in bibliometric methods, but who have done so from a critical and feminist perspective.\nThe purpose of the workshop is twofold:",
     "crumbs": [
       "Workshop"
     ]
@@ -349,7 +346,7 @@
     "href": "workshop.html#guiding-questions",
     "title": "Citational Politics and Practices in Viking Age Archaeology and Beyond",
     "section": "Guiding Questions",
-    "text": "Guiding Questions\nEach presentation slot is 25 minutes, which includes time for questions directed to the speakers. Time is also reserved for breaking out into focused group discussions and for structured plenary discussion at the end of each day.\nDiscussion will focus on the following themes:\n\nHow can bibliometric, meta-research, and digital approaches in general be leveraged to produce or assist with feminist, anti-colonial, or other forms of reflexive critique within archaeology?\nWhat methodological challenges (including those relating to data availability and quality) exist, and how might we overcome them?\nWhat are the limits of bibliometric approaches, what voices do they exclude, and how might we better account for missing or under-represented perspectives?\nWhat specific considerations should be made when applying these approaches in the context of Viking Age archaeology and in other distinct subdisciplines, domains or areas of interest?\nHow do we establish supportive referential practices in archaeological research, and avoid closed networks, and how may bibliometric studies contribute to this process?",
+    "text": "Guiding Questions\nEach presentation slot is 25 minutes, which includes time for questions directed to the speakers. Time is also reserved for breaking out into focused group discussions and for structured plenary discussion at the end of each day.\nDiscussion may focus on the following themes:\n\nHow can bibliometric, meta-research, and digital approaches in general be leveraged to produce or assist with feminist, anti-colonial, or other forms of reflexive critique within archaeology?\nWhat methodological challenges (including those relating to data availability and quality) exist, and how might we overcome them?\nWhat are the limits of bibliometric approaches, what voices do they exclude, and how might we better account for missing or under-represented perspectives?\nWhat specific considerations should be made when applying these approaches in the context of Viking Age archaeology and in other distinct subdisciplines, domains or areas of interest?\nHow do we establish supportive referential practices in archaeological research, and avoid closed networks, and how may bibliometric studies contribute to this process?",
     "crumbs": [
       "Workshop"
     ]
@@ -359,7 +356,7 @@
     "href": "workshop.html#program",
     "title": "Citational Politics and Practices in Viking Age Archaeology and Beyond",
     "section": "Program",
-    "text": "Program\n\nMonday April 13\n\n\n\n\n\n\n\n\n\nStart\nEnd\n\nSpeaker\n\n\n\n\n12:00\n13:00\nLunch\n\n\n\n13:00\n13:30\nIntroduction\nJulie Lund, Isak Roalkvam, Zack Batist\n\n\n13:15\n13:40\nTalk 1\nIsto Huvila\n\n\n13:40\n14:05\nTalk 2\nThora Petursdottir\n\n\n14:05\n14:35\nCoffee\n\n\n\n14:35\n15:00\nTalk 3\nUnn Pederson\n\n\n15:00\n16:00\nGroup Work\n\n\n\n16:00\n16:45\nPlenum / Discussion\n\n\n\n17:30\n\nDrinks + Dinner*\n\n\n\n\n* The complementary workshop dinner will be hosted at XXXX. \n\n\nTuesday April 14\n\n\n\n\n\n\n\n\n\nStart\nEnd\n\nSpeaker\n\n\n\n\n09:00\n10:00\nOrganizing Meeting\n\n\n\n10:00\n10:15\nCoffee\n\n\n\n10:15\n10:40\nTalk 4\nJoe Roe\n\n\n10:40\n11:05\nTalk 5\nTBD \n\n\n11:05\n11:30\nTalk 6\nMari Østmo\n\n\n11:30\n12:30\nLunch\n\n\n\n12:30\n12:55\nTalk 7\nEspen Dalbakk\n\n\n12:55\n13:20\nTalk 8\nSteinar Solheim\n\n\n13:20\n14:00\nGroup Work\n\n\n\n14:00\n14:30\nCoffee\n\n\n\n14:30\n15:30\nPlenum / Discussion",
+    "text": "Program\n\nMonday April 13\n\n\n\n\n\n\n\n\n\nStart\nEnd\n\nSpeaker\n\n\n\n\n12:00\n13:00\nLunch\n\n\n\n13:00\n13:30\nIntroduction\nJulie Lund, Isak Roalkvam, Zack Batist\n\n\n13:15\n13:40\nTalk 1\nIsto Huvila\n\n\n13:40\n14:05\nTalk 2\nThora Petursdottir\n\n\n14:05\n14:35\nCoffee\n\n\n\n14:35\n15:00\nTalk 3\nUnn Pederson\n\n\n15:00\n16:00\nGroup Work\n\n\n\n16:00\n16:45\nPlenum / Discussion\n\n\n\n17:30\n\nDrinks + Dinner*\n\n\n\n\n* The complementary workshop dinner will be hosted at [TBD]. \n\n\nTuesday April 14\n\n\n\n\n\n\n\n\n\nStart\nEnd\n\nSpeaker\n\n\n\n\n09:00\n10:00\nOrganizing Meeting\n\n\n\n10:00\n10:15\nCoffee\n\n\n\n10:15\n10:40\nTalk 4\nJoe Roe\n\n\n10:40\n11:05\nTalk 5\nTBD \n\n\n11:05\n11:30\nTalk 6\nMari Østmo\n\n\n11:30\n12:30\nLunch\n\n\n\n12:30\n12:55\nTalk 7\nEspen Dalbakk\n\n\n12:55\n13:20\nTalk 8\nSteinar Solheim\n\n\n13:20\n14:00\nGroup Work\n\n\n\n14:00\n14:30\nCoffee\n\n\n\n14:30\n15:30\nPlenum / Discussion",
     "crumbs": [
       "Workshop"
     ]
@@ -369,7 +366,7 @@
     "href": "workshop.html#invited-talks",
     "title": "Citational Politics and Practices in Viking Age Archaeology and Beyond",
     "section": "Invited Talks",
-    "text": "Invited Talks\n\nIntroductory Remarks + Preliminary Findings\nJulie Lund, Isak Roalkvam, Zack Batist\n\n\nTitle TBD\nUnn Pederson, University of Oslo\n\n\nTitle TBD\nIsto Huvila, University of Uppsala\n\n\nTitle TBD\nThora Petursdottir, University of Oslo\n\n\nTitle TBD\nJoe Roe, University of Copenhagen\n\n\n\nTitle TBD\nMari Østmo, University of Oslo\n\n\nTitle TBD\nEspen Dalbakk, University of Oslo\n\n\nTitle TBD\nSteinar Solheim, University of Oslo",
+    "text": "Invited Talks\n\nIntroductory Remarks + Preliminary Findings\nJulie Lund, Isak Roalkvam & Zachary Batist\n\n\nTitle TBD\nUnn Pederson, University of Oslo\n\n\nTitle TBD\nIsto Huvila, University of Uppsala\n\n\nTitle TBD\nThora Petursdottir, University of Oslo\n\n\nTitle TBD\nJoe Roe, University of Copenhagen\n\n\n\nTitle TBD\nMari Østmo, University of Oslo\n\n\nTitle TBD\nEspen Dalbakk, University of Oslo\n\n\nTitle TBD\nSteinar Solheim, University of Oslo",
     "crumbs": [
       "Workshop"
     ]
@@ -393,7 +390,7 @@
     "href": "index.html",
     "title": "Bibliometric network analysis of Viking Age research (BibVik)",
     "section": "",
-    "text": "BibVik is a project concerned with identifying trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age.\n[More on the project’s priorities, values, context, inspiration, reason for being…]\nThis website hosts our preliminary research protocol, manuscript preprints, and other relevant materials. All content is hosted and tracked at github.com/zackbatist/BibVik.\nManuscript: Preprint of our manuscript (in progress)\nWorkshop: Information for the workshop we hosted for the research community\nScratchpad: Home for our ongoing analysis\nCodebook: A list of codes used to characterize scholarly works\nResearch Protocol: Outlines the project’s initial overall vision\n\n\n\nReuseCC0 1.0",
+    "text": "BibVik is a project concerned with identifying trends in the published archaeological literature corresponding with shifting attitudes concerning the origins of the Viking Age. Specifically, we address how research on various topics relating to the origins of the Viking Age manifests in the published record, including associations between various topics, methods and sources of evidence; how these modes of inquiry are related to researchers’ personal or professional identities and relationships; and how citations are used to situate one’s research in relation to prior work.\nWe implement critical approach to bibliometric research methods. We recognize that open scholarly metadata, which is a bedrock of most modern bibliometric research, has intrinsic limitations that make it unsuitable for our analysis, and so we are experimenting with strategies for generating original data tailored for our research questions. In this sense, BibVik is also a response to the limitations of bibliometric research, and presents a vision for doing more meaningful, critical, and explicitly feminist work in this domain.\nThis website hosts our preliminary research protocol, manuscript preprints, and other relevant materials. All content is hosted and tracked at github.com/zackbatist/BibVik.",
     "crumbs": [
       "Home"
     ]
@@ -459,7 +456,7 @@
     "href": "notes/2025-07-07-meeting.html",
     "title": "1 Discussion Topics",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\n2 Action Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\n3 Links and references\n\n\n\n\nReuseCC0 1.0"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\n2 Action Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\n3 Links and references"
   },
   {
     "objectID": "scratchpad.html#working-with-open-scholarly-metadata",
