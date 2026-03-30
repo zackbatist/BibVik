@@ -13,11 +13,15 @@ library(tidyverse)
 library(magrittr)
 library(rcrossref)
 library(citecorp)
-library(plyr)
 library(httr)
 library(jsonlite)
 library(bib2df)
 library(citecorp)
+# Took me some time to realize, but this causes conflicts with dplyr so I've 
+# commented it out for now. If plyr is in use anywhere, maybe we can use the plyr::foo()
+# syntax for that as dplyr sees a lot more use now.
+# library(plyr) 
+
 ```
 
 {{< include scratchpad-sections/open-scholarly-metadata.qmd >}}
