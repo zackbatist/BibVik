@@ -5,6 +5,9 @@ library(tidyverse)
 library(patchwork)
 library(nord)
 library(here)
+library(tidytext)
+library(khroma)
+library(ggh4x)
 ```
 
 Set up some initial color palettes based on the nord package.
@@ -21,7 +24,8 @@ custom_palette2 <- c(nord_palettes$aurora, "#8eaa9c", nord_palettes$baie_mouton)
 topic_col <- nord_palettes$algoma_forest[5]
 method_col <- nord_palettes$victory_bonds[5]
 source_col <- nord_palettes$red_mountain[1]
-
+gender_colors <- c("Woman" = nord_palettes$red_mountain[1], 
+                   "Man" = nord_palettes$algoma_forest[4])
 ```
 
 Read in the data.
@@ -76,7 +80,7 @@ plt1 <-
 ggplot(data = gender_pubyears, aes(x = publication_year, y = n, fill = Authors..Genders..Author.1.)) +
   geom_bar(stat="identity", position = 'dodge') +
   theme_bw() +
-  scale_fill_manual(values = nord_palettes$victory_bonds[c(3,4)]) +
+  scale_fill_manual(values = gender_colors) +
   scale_x_discrete(breaks = seq(2000, 2022, 1), drop = FALSE) +
   labs(x = "", y = "Count", fill = "First author gender", title = paste0("First author gender: Women = ", women_prcnt, "% Men = ", men_prcnt, "%")) +
   theme(legend.position = "bottom")
@@ -162,11 +166,13 @@ primary_count <- topic_count %>%
   filter(count == "Primary") %>% 
   mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) 
 
-ggplot(primary_count, aes(x = topic, y = n)) +
-  geom_bar(stat="identity", fill = topic_col)+
+ggplot(primary_count |> mutate(topic = str_wrap(topic, width = 25)), 
+       aes(x = reorder(topic, n), y = n)) +
+  geom_bar(stat="identity", fill = topic_col) +
   labs(x = "Primary topic", y = "Count") +
   theme_bw() +
-  coord_flip()
+  coord_flip() +
+  force_panelsizes(cols = unit(10, "cm"))
 ```
 
 ### Primary method, in aggregate and over time
@@ -206,11 +212,13 @@ primary_count_method <- method_count %>%
   filter(count == "Primary") %>% 
   mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) 
 
-ggplot(primary_count_method, aes(x = method, y = n)) +
-  geom_bar(stat="identity", fill = method_col)+
+ggplot(primary_count_method |> mutate(method = str_wrap(method, width = 25)), 
+       aes(x = reorder(method, n), y = n)) +
+  geom_bar(stat="identity", fill = method_col) +
   labs(x = "Primary method", y = "Count") +
   theme_bw() +
-  coord_flip()
+  coord_flip() +
+  force_panelsizes(cols = unit(10, "cm"))
 ```
 
 ### Primary sources of evidence, in aggregate and over time
@@ -252,16 +260,18 @@ primary_source_count <- source_count %>%
   filter(count == "Primary") %>% 
   mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " "))
 
-ggplot(primary_source_count, aes(x = source, y = n)) +
-  geom_bar(stat="identity", fill = source_col)+
+ggplot(primary_source_count |> mutate(source = str_wrap(source, width = 25)), 
+       aes(x = reorder(source, n), y = n)) +
+  geom_bar(stat="identity", fill = source_col) +
   labs(x = "Primary source of evidence", y = "Count") +
   theme_bw() +
-  coord_flip()
+  coord_flip() +
+  force_panelsizes(cols = unit(10, "cm"))
 ```
 
 ### Seconday topics by primary topic
 
-```{r}
+```{r fig.height=14, fig.width=10}
 # Select only the topics columns, and strip the "Topics.." from each column name
 topics <- df %>% 
   select(contains("Topics")) %>% 
@@ -293,24 +303,27 @@ coocdf <- data.frame(table(coocurrences)) %>%
   # Separate secondary from primary topics into one column each
   separate_wider_delim(coocurrences, "_", names = c("Secondary", "Primary")) %>% 
   # Clean up names for plotting
-  mutate(Secondary = str_replace_all(Secondary, fixed("."), " ")) %>%
+  mutate(Secondary = str_wrap(str_replace_all(Secondary, fixed("."), " "), width = 20)) %>%
   mutate(Primary = str_replace_all(Primary, fixed("."), " ")) %>% 
   # Find proportion of each secondary topics for each primary topic
   group_by(Primary) %>% 
   mutate(Prop = Freq / sum(Freq))
 
-ggplot(data = coocdf, aes(x = Secondary, y = Prop)) +
+ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop)) +
   geom_bar(stat = "identity", fill = topic_col) +
-  facet_wrap(vars(Primary)) +
+  facet_wrap(vars(Primary), scales = "free_y", ncol = 3) +
+  scale_x_reordered() +
   coord_flip() +
   theme_bw() +
+  theme(axis.text.y = element_text(size = 7),
+        strip.text = element_text(size = 6)) +
   scale_y_continuous(expand = c(0,0)) +
   labs(x = "", y = "", title = "Proportion of secondary topic by primary topic")
 ```
 
 ### Secondary methods by primary method
 
-```{r}
+```{r fig.height=14, fig.width=10}
 # Repeats code from secondary topics above
 methods <- df %>% 
   select(contains("Methods")) %>% 
@@ -329,24 +342,26 @@ for(i in 1:nrow(methods)) {
 coocdf <- data.frame(table(coocurrences)) %>% 
   filter(substr(coocurrences, 1, 1) != "_") %>% 
   separate_wider_delim(coocurrences, "_", names = c("Secondary", "Primary")) %>% 
-  mutate(Secondary = str_replace_all(Secondary, fixed("."), " ")) %>%
+  mutate(Secondary = str_wrap(str_replace_all(Secondary, fixed("."), " "), width = 20)) %>%
   mutate(Primary = str_replace_all(Primary, fixed("."), " ")) %>% 
   group_by(Primary) %>% 
   mutate(Prop = Freq / sum(Freq))
- 
-ggplot(data = coocdf, aes(x = Secondary, y = Prop)) +
+
+ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop)) +
   geom_bar(stat = "identity", fill = method_col) +
-  facet_wrap(vars(Primary)) +
+  facet_wrap(vars(Primary), scales = "free_y", ncol = 3) +
+  scale_x_reordered() +
   coord_flip() +
   theme_bw() +
+  theme(axis.text.y = element_text(size = 7),
+        strip.text = element_text(size = 6)) +
   scale_y_continuous(expand = c(0,0)) +
   labs(x = "", y = "", title = "Proportion of secondary method by primary method")
-
 ```
 
 ### Seconday sources of evidence by primary source of evidence
 
-```{r}
+```{r fig.height=14, fig.width=10}
 # Repeats code from secondary topics and secondary methods above
 sources <- df %>% 
   select(contains("Sources.of.Evidence")) %>% 
@@ -365,16 +380,22 @@ for(i in 1:nrow(sources)) {
 coocdf <- data.frame(table(coocurrences)) %>% 
   filter(substr(coocurrences, 1, 1) != "_") %>% 
   separate_wider_delim(coocurrences, "_", names = c("Secondary", "Primary")) %>% 
-  mutate(Secondary = str_replace_all(Secondary, fixed("."), " ")) %>%
+  mutate(Secondary = str_wrap(str_replace_all(Secondary, fixed("."), " "), width = 20)) %>%
   mutate(Primary = str_replace_all(Primary, fixed("."), " ")) %>% 
   group_by(Primary) %>% 
   mutate(Prop = Freq / sum(Freq))
 
-ggplot(data = coocdf, aes(x = Secondary, y = Prop)) +
+coocdf <- coocdf %>%
+  mutate(Secondary = str_wrap(Secondary, width = 20))
+
+ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop)) +
   geom_bar(stat = "identity", fill = source_col) +
-  facet_wrap(vars(Primary)) +
+  facet_wrap(vars(Primary), scales = "free_y", ncol = 3) +
+  scale_x_reordered() +
   coord_flip() +
   theme_bw() +
+  theme(axis.text.y = element_text(size = 7),
+        strip.text = element_text(size = 6)) +
   scale_y_continuous(expand = c(0,0)) +
   labs(x = "", y = "", title = "Proportion of secondary source of evidence by primary source of evidence")
 ```
@@ -383,7 +404,7 @@ ggplot(data = coocdf, aes(x = Secondary, y = Prop)) +
 
 For the subsequent three plots we could also try normalizing the proportions for each topic against the total proportion men/women in the entire corpus.
 
-```{r}
+```{r fig.width=8}
 # Count topics by occurrence by gender
 topic_count_gender <- df %>% 
   select(Authors..Genders..Author.1., contains("Topics")) %>% 
@@ -409,18 +430,35 @@ primary_topic_gender <- topic_count_gender %>%
 #   labs(x = "Primary topic", y = "Count", fill = "First author gender") +
 #   theme(legend.position = "bottom") +
 #   coord_flip() +
-ggplot(data = primary_topic_gender, aes(x = topic, y = prop_primary, fill = gender_first_author)) +
-  geom_bar(stat = "identity", position = 'dodge') +
+# ggplot(data = primary_topic_gender, aes(x = topic, y = prop_primary, fill = gender_first_author)) +
+#   geom_bar(stat = "identity", position = 'dodge') +
+#   theme_bw() +
+#   scale_fill_manual(values = c(nord_palettes$red_mountain[1], nord_palettes$algoma_forest[4])) +
+#   labs(x = "Primary topic", y = "Proportion", fill = "First author gender") +
+#   theme(legend.position = "bottom") +
+#   coord_flip()
+
+primary_topic_gender |>
+  mutate(topic = str_wrap(topic, width = 25)) |>
+  group_by(topic) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(topic = fct_reorder(topic, ratio)) |>
+  ggplot(aes(x = topic, y = prop_primary, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
   theme_bw() +
-  scale_fill_manual(values = c(nord_palettes$red_mountain[1], nord_palettes$algoma_forest[4])) +
-  labs(x = "Primary topic", y = "Proportion", fill = "First author gender") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL,
+       title = "Primary topic by first author gender")
 ```
 
 ## Primary method by first author gender
 
-```{r}
+```{r fig.width=8}
 method_count_gender <- df %>% 
   select(Authors..Genders..Author.1., contains("Methods")) %>% 
   pivot_longer(!Authors..Genders..Author.1.,
@@ -443,17 +481,34 @@ primary_method_gender <- method_count_gender %>%
 #   labs(x = "Primary method", y = "Count", fill = "First author gender") +
 #   theme(legend.position = "bottom") +
 #   coord_flip() +
-ggplot(data = primary_method_gender, aes(x = method, y = prop_primary, fill = gender_first_author)) +
-  geom_bar(stat = "identity", position = 'dodge') +
+# ggplot(data = primary_method_gender, aes(x = method, y = prop_primary, fill = gender_first_author)) +
+#   geom_bar(stat = "identity", position = 'dodge') +
+#   theme_bw() +
+#   scale_fill_manual(values = nord_palettes$baie_mouton[c(6,1)]) +
+#   labs(x = "Primary method", y = "Proportion", fill = "First author gender") +
+#   theme(legend.position = "bottom") +
+#   coord_flip()
+
+primary_method_gender |>
+  mutate(method = str_wrap(method, width = 25)) |>
+  group_by(method) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(method = fct_reorder(method, ratio)) |>
+  ggplot(aes(x = method, y = prop_primary, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
   theme_bw() +
-  scale_fill_manual(values = nord_palettes$baie_mouton[c(6,1)]) +
-  labs(x = "Primary method", y = "Proportion", fill = "First author gender") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL,
+       title = "Primary method by first author gender")
 ```
 
 ## Primary source of evidence by first author gender
-```{r}
+```{r fig.width=8}
 source_count_gender <- df %>% 
   select(Authors..Genders..Author.1., contains("Sources")) %>% 
   pivot_longer(!Authors..Genders..Author.1.,
@@ -476,12 +531,29 @@ primary_source_gender <- source_count_gender %>%
 #   labs(x = "Primary source", y = "Count", fill = "First author gender") +
 #   theme(legend.position = "bottom") +
 #   coord_flip() +
-ggplot(data = primary_source_gender, aes(x = source, y = prop_primary, fill = gender_first_author)) +
-  geom_bar(stat = "identity", position = 'dodge') +
+# ggplot(data = primary_source_gender, aes(x = source, y = prop_primary, fill = gender_first_author)) +
+#   geom_bar(stat = "identity", position = 'dodge') +
+#   theme_bw() +
+#   scale_fill_manual(values = nord_palettes$halifax_harbor[c(2,4)]) +
+#   labs(x = "Primary source", y = "Proportion", fill = "First author gender") +
+#   theme(legend.position = "bottom") +
+#   coord_flip()
+
+primary_source_gender |>
+  mutate(source = str_wrap(source, width = 25)) |>
+  group_by(source) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(source = fct_reorder(source, ratio)) |>
+  ggplot(aes(x = source, y = prop_primary, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
   theme_bw() +
-  scale_fill_manual(values = nord_palettes$halifax_harbor[c(2,4)]) +
-  labs(x = "Primary source", y = "Proportion", fill = "First author gender") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL,
+       title = "Primary source of evidence by first author gender")
 ```
 
