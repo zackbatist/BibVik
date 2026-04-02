@@ -1,0 +1,26 @@
+# BibVik Citation Analysis — Python Dependencies
+#
+# Install with: pip install -r requirements.txt
+# Requires Python >= 3.10
+
+# HTTP client for GROBID and Ollama API calls
+requests>=2.31.0
+
+# XML parsing for GROBID's TEI-XML output
+lxml>=5.1.0
+
+# YAML config file parsing
+pyyaml>=6.0.1
+
+# Unicode text handling — transliteration for citekey generation
+# (e.g., "Müller" → "muller", "Иванов" → "ivanov")
+unidecode>=1.3.8
+
+# Progress bars for long-running batch operations
+tqdm>=4.66.0
+
+# CLI argument parsing (stdlib, listed for clarity)
+# argparse  # included in Python stdlib
+
+# Logging (stdlib)
+# logging  # included in Python stdlib

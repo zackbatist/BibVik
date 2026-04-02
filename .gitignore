@@ -64,3 +64,25 @@ notes/*.pdf
 **/*.quarto_ipynb
 _freeze/
 *.rmarkdown
+
+# Python #
+###########
+__pycache__/
+*.py[cod]
+*.pyc
+*.egg-info/
+*.egg
+.venv/
+dist/
+build/
+*.tei.xml
+
+# BibVik CitationAnalysis #
+############################
+CitationAnalysis/output/
+CitationAnalysis/.venv/
+CitationAnalysis/bibvik.egg-info/
+CitationAnalysis/bibvik/__pycache__/
+CitationAnalysis/Exported_Items.csv
+
+

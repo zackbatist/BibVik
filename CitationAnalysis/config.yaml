@@ -1,0 +1,112 @@
+# =============================================================================
+# BibVik Citation Analysis — Configuration
+# =============================================================================
+# Edit this file to match your local setup before running the pipeline.
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+
+# Path to the seed paper PDF.
+# This is the paper from which the citation graph originates.
+seed_paper: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/Lund and Sindbæk 2022 - Crossing the Maelstrom New Departures in Viking Archaeology.pdf"
+
+# Directory containing F1 generation PDFs.
+# These are the papers referenced by the seed paper, assembled as PDFs.
+f1_pdf_dir: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/BibVik_seed"
+
+# Output directory for all generated files.
+# Will be created if it does not exist.
+output_dir: "./output"
+
+# Optional: Path to a Zotero CSV export for exact PDF ↔ citekey matching.
+# If provided, this is used to associate F1 PDF filenames with bibliography
+# entries, bypassing fuzzy matching. Export from Zotero via File > Export
+# Library (or a collection) as CSV. Only the Author, Publication Year, Title,
+# and File Attachments columns are used.
+zotero_csv: "./Exported_Items.csv"
+
+# ---------------------------------------------------------------------------
+# Coverage & Open Access
+# ---------------------------------------------------------------------------
+
+# Email address for the Unpaywall API (used by --coverage for OA lookups).
+# Unpaywall uses this for polite rate-limit tracking only — no spam.
+# Can also be provided via --email on the command line.
+email: "zachary.batist@mcgill.ca"
+
+# ---------------------------------------------------------------------------
+# GROBID
+# ---------------------------------------------------------------------------
+grobid:
+  # Base URL where GROBID is running (Docker default).
+  base_url: "http://localhost:8070"
+
+  # Timeout in seconds for a single PDF processing request.
+  # Large PDFs or slow machines may need a higher value.
+  timeout: 120
+
+  # Number of concurrent requests to GROBID.
+  # GROBID's Docker image handles concurrency internally; 1-2 is usually fine.
+  concurrency: 1
+
+  # Whether to request coordinates in GROBID output.
+  # Not needed for our purposes, but can be enabled for layout analysis.
+  include_coordinates: false
+
+# ---------------------------------------------------------------------------
+# Ollama / Local LLM
+# ---------------------------------------------------------------------------
+llm:
+  # Base URL for the Ollama API.
+  base_url: "http://localhost:11434"
+
+  # Model identifier as listed by `ollama list`.
+  # Change this if your local model name differs.
+  model: "qwen3.5:35b"
+
+  # Temperature for LLM generation.
+  # Lower = more deterministic; higher = more creative.
+  # For analytical tasks, 0.3 is a reasonable default.
+  temperature: 0.3
+
+  # Maximum tokens for LLM responses.
+  max_tokens: 2048
+
+  # Timeout in seconds for a single LLM request.
+  # The 35B model can be slow; allow generous timeout.
+  timeout: 300
+
+# ---------------------------------------------------------------------------
+# Citation Context Extraction
+# ---------------------------------------------------------------------------
+context:
+  # Default number of sentences to include around a citation marker
+  # when the enclosing paragraph is very long.
+  sentence_window: 3
+
+  # If a citation appears within this many characters of a paragraph
+  # boundary, extend context into the adjacent paragraph.
+  boundary_threshold: 150
+
+# ---------------------------------------------------------------------------
+# Cluster Analysis
+# ---------------------------------------------------------------------------
+clustering:
+  # Minimum number of co-occurrences for two references to be considered
+  # for clustering.
+  min_cooccurrence: 2
+
+  # Whether to run the content-enriched clustering pass (requires F1 PDFs).
+  run_content_enriched: true
+
+# ---------------------------------------------------------------------------
+# General
+# ---------------------------------------------------------------------------
+
+# Logging level: DEBUG, INFO, WARNING, ERROR
+log_level: "INFO"
+
+# If true, save intermediate TEI-XML files from GROBID alongside outputs.
+# Useful for debugging GROBID parsing issues.
+save_tei_xml: true
