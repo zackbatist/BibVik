@@ -45,6 +45,7 @@ from bibvik.pdf_processor import PDFProcessor
 from bibvik.citation_graph import CitationGraph
 from bibvik.context_extractor import extract_all_contexts
 from bibvik.llm_analyzer import LLMAnalyzer, analyze_all_contexts
+from bibvik.normalize import normalize_titles_in_bibliography, normalize_authors_in_bibliography
 from bibvik.cluster_analyzer import (
     build_cooccurrence_matrix,
     identify_clusters,
@@ -106,6 +107,14 @@ Examples:
              "references with hints for manual recovery. Requires save_tei_xml: true "
              "in config, or must be run together with --extract / --iterate-f1 / --all.",
     )
+    parser.add_argument(
+        "--footnotes", action="store_true",
+        help="Extract bibliographic references from footnotes using the LLM. "
+             "Targets papers that embed references in footnotes rather than a "
+             "separate bibliography (e.g. Abrams 2012). Requires TEI-XML files "
+             "in the output/tei/ directory (run --extract / --iterate-f1 first "
+             "with save_tei_xml: true in config.yaml).",
+    )
 
     # --- Overrides ---
     parser.add_argument(
@@ -152,11 +161,36 @@ Examples:
     args = parser.parse_args()
 
     # If no stage is selected, show help.
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.footnotes]):
         parser.print_help()
         sys.exit(1)
 
     return args
+
+
+def _write_bibliography(
+    bibliography: dict,
+    path: Path,
+    config: dict,
+    log: logging.Logger,
+) -> None:
+    """
+    Normalize and write the bibliography to disk.
+
+    Applies title and author-name normalization before writing, so the
+    output is always consistent regardless of which source produced each entry.
+    """
+    n_titles = normalize_titles_in_bibliography(bibliography)
+    n_authors = normalize_authors_in_bibliography(bibliography)
+    if n_titles or n_authors:
+        log.info(
+            "Normalization: %d titles, %d author given-name forms updated.",
+            n_titles, n_authors,
+        )
+    write_json(
+        {"_metadata": build_bibliography_metadata(config), "entries": bibliography},
+        path,
+    )
 
 
 def main():
@@ -181,6 +215,9 @@ def main():
         config["context_limit"] = args.context_limit
     if args.audit:
         # The audit needs TEI-XML files. Enable saving them automatically.
+        config["save_tei_xml"] = True
+    if args.footnotes:
+        # Footnote extraction also needs TEI-XML files.
         config["save_tei_xml"] = True
 
     # --- Setup logging ---
@@ -207,6 +244,7 @@ def main():
     run_cluster = args.all or args.cluster
     run_coverage = args.all or args.coverage
     run_audit = args.audit  # Not included in --all; must be explicitly requested.
+    run_footnotes = args.footnotes  # Not included in --all; must be explicitly requested.
 
     # =========================================================================
     # Stage 1: Extract references from seed paper
@@ -256,11 +294,8 @@ def main():
             log.error("Failed to process seed paper. Aborting.")
             sys.exit(1)
 
-        # Save intermediate bibliography with metadata.
-        write_json(
-            {"_metadata": build_bibliography_metadata(config), "entries": graph.get_bibliography()},
-            bibliography_path,
-        )
+        # Save intermediate bibliography with normalization and metadata.
+        _write_bibliography(graph.get_bibliography(), bibliography_path, config, log)
         log.info("Bibliography saved: %s (%d entries)", bibliography_path, len(graph.get_bibliography()))
 
         # Save graph state for stage continuity.
@@ -298,11 +333,8 @@ def main():
             limit=config.get("limit"),
         )
 
-        # Update bibliography with metadata.
-        write_json(
-            {"_metadata": build_bibliography_metadata(config), "entries": graph.get_bibliography()},
-            bibliography_path,
-        )
+        # Update bibliography with normalization and metadata.
+        _write_bibliography(graph.get_bibliography(), bibliography_path, config, log)
         log.info("Bibliography updated: %d entries", len(graph.get_bibliography()))
 
         # Save updated graph state.
@@ -386,12 +418,8 @@ def main():
         write_json(contexts_output, contexts_path)
         log.info("Citation contexts saved: %s", contexts_path)
 
-        # Update bibliography with cited_by data and metadata.
-        bib_output = {
-            "_metadata": build_bibliography_metadata(config),
-            "entries": bibliography,
-        }
-        write_json(bib_output, bibliography_path)
+        # Update bibliography with cited_by data, normalization, and metadata.
+        _write_bibliography(bibliography, bibliography_path, config, log)
 
         # Save state.
         _save_graph_state(graph, graph_state_path)
@@ -653,6 +681,105 @@ def main():
         }
 
     # =========================================================================
+    # Footnote Reference Extraction (--footnotes)
+    # =========================================================================
+    if run_footnotes:
+        log.info("=" * 60)
+        log.info("FOOTNOTE EXTRACTION: Extracting references from footnotes")
+        log.info("=" * 60)
+
+        from bibvik.footnote_extractor import extract_footnote_references, load_tei_files
+
+        # --- Load TEI-XML files ---
+        tei_dir = output_dir / "tei"
+        if not tei_dir.exists() or not any(tei_dir.glob("*.tei.xml")):
+            log.error(
+                "No TEI-XML files found in %s. "
+                "Run --extract / --iterate-f1 with save_tei_xml: true in config.yaml first.",
+                tei_dir,
+            )
+        else:
+            tei_files = load_tei_files(tei_dir)
+
+            # --- Load current bibliography ---
+            if bibliography_path.exists():
+                bib_data = read_json(bibliography_path)
+                # Strip the _metadata key; we only want the entry dicts.
+                current_bib = {
+                    k: v for k, v in bib_data.items()
+                    if not k.startswith("_")
+                }
+            else:
+                current_bib = {}
+                log.warning(
+                    "bibliography.json not found at %s. "
+                    "Footnote references will not be deduplicated against existing entries.",
+                    bibliography_path,
+                )
+
+            # --- Set up LLM ---
+            llm_config = config.get("llm", {})
+            fn_analyzer = LLMAnalyzer(
+                base_url=llm_config.get("base_url", "http://localhost:11434"),
+                model=llm_config.get("model", "qwen3:35b"),
+                temperature=llm_config.get("temperature", 0.2),
+                max_tokens=llm_config.get("max_tokens", 2048),
+                timeout=llm_config.get("timeout", 300),
+            )
+
+            if not fn_analyzer.is_available():
+                log.error(
+                    "Ollama is not available or model '%s' is not loaded. "
+                    "Cannot run footnote extraction.",
+                    llm_config.get("model", "qwen3:35b"),
+                )
+            else:
+                footnote_results = extract_footnote_references(
+                    tei_files=tei_files,
+                    bibliography=current_bib,
+                    analyzer=fn_analyzer,
+                )
+
+                # --- Write footnote_references.json ---
+                write_json(footnote_results, output_dir / "footnote_references.json")
+
+                # --- Merge newly discovered entries back into bibliography.json ---
+                if bibliography_path.exists():
+                    bib_data = read_json(bibliography_path)
+                    from bibvik.metadata import build_bibliography_metadata
+                    # current_bib was mutated in-place by extract_footnote_references.
+                    # Any key in current_bib that isn't in the on-disk bib_data is new.
+                    merged_count = 0
+                    for citekey, entry in current_bib.items():
+                        if citekey not in bib_data:
+                            bib_data[citekey] = entry
+                            merged_count += 1
+                    # Refresh _metadata and normalize.
+                    _write_bibliography(bib_data["entries"], bibliography_path, config, log)
+                    log.info(
+                        "Merged %d footnote-extracted entries into bibliography.json.",
+                        merged_count,
+                    )
+
+                summary = footnote_results["summary"]
+                log.info(
+                    "Footnote extraction complete: %d papers, %d footnotes, "
+                    "%d references extracted, %d merged into bibliography.",
+                    summary["papers_processed"],
+                    summary["footnotes_found"],
+                    summary["references_extracted"],
+                    summary["references_merged_into_bibliography"],
+                )
+
+                processing_log["stages"]["footnotes"] = {
+                    "status": "success",
+                    "papers_processed": summary["papers_processed"],
+                    "footnotes_found": summary["footnotes_found"],
+                    "references_extracted": summary["references_extracted"],
+                    "references_merged": summary["references_merged_into_bibliography"],
+                }
+
+    # =========================================================================
     # Save processing log
     # =========================================================================
     processing_log["end_time"] = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -684,6 +811,7 @@ def _save_graph_state(graph: CitationGraph, path: Path) -> None:
     state = {
         "bibliography": graph.bibliography,
         "seed_citekey": graph.seed_citekey,
+        "seed_pdf_name": graph._seed_pdf_name,
         "grobid_map": {f"{k[0]}|||{k[1]}": v for k, v in graph.grobid_map.items()},
         "processed_papers": {},
     }
@@ -731,6 +859,7 @@ def _load_graph_state(path: Path, config: dict) -> CitationGraph | None:
 
     graph.bibliography = state.get("bibliography", {})
     graph.seed_citekey = state.get("seed_citekey")
+    graph._seed_pdf_name = state.get("seed_pdf_name")
     graph.processed_papers = state.get("processed_papers", {})
 
     # Reconstruct grobid_map with tuple keys.
@@ -741,7 +870,75 @@ def _load_graph_state(path: Path, config: dict) -> CitationGraph | None:
         if len(parts) == 2:
             graph.grobid_map[(parts[0], parts[1])] = val
 
+    # --- Repair stale graph state ---
+    # States saved before recent fixes may be missing seed_pdf_name (needed
+    # for the already-claimed guard in _match_f1_to_existing), or may contain
+    # corrupted titles or orphan entries created by the old buggy pipeline.
+    # We repair these on load so --iterate-f1 produces correct output even
+    # when run against a state file written by an older version.
+    _repair_graph_state(graph)
+
     return graph
+
+
+def _repair_graph_state(graph: "CitationGraph") -> None:
+    """
+    Fix known issues in graph states saved by older pipeline versions.
+
+    Problems addressed:
+    1. seed_pdf_name missing — infer it from the seed entry's _source_pdf.
+    2. GROBID title errors — run _validate_titles_against_raw_citations so
+       matching in the F1 stage uses correct titles.
+    3. Orphan entries created by failed F1 matching — any entry whose
+       _source_pdf already points to an F1 PDF (i.e. it was created as a
+       fallback during a prior --iterate-f1 run rather than during --extract)
+       is removed, so the upcoming F1 processing can match cleanly.
+    """
+    from bibvik.citation_graph import CitationGraph
+
+    # 1. Infer seed_pdf_name if missing.
+    if not graph._seed_pdf_name and graph.seed_citekey:
+        seed_entry = graph.bibliography.get(graph.seed_citekey, {})
+        inferred = seed_entry.get("_source_pdf", "")
+        if inferred:
+            graph._seed_pdf_name = inferred
+            logging.getLogger("bibvik").info(
+                "Repaired missing seed_pdf_name: %s", inferred
+            )
+
+    seed_pdf = graph._seed_pdf_name or ""
+
+    # 2. Correct GROBID title errors against _raw_citation.
+    n_corrected = graph._validate_titles_against_raw_citations()
+    if n_corrected:
+        logging.getLogger("bibvik").info(
+            "State repair: corrected %d title errors via _raw_citation.", n_corrected
+        )
+
+    # 3. Remove orphan entries — those whose _source_pdf is an F1 PDF rather
+    # than the seed PDF. These were created by _process_one_f1 when matching
+    # failed in a prior run, and will be re-derived correctly in this run.
+    # We identify them as: generation == F1, _source_pdf != seed_pdf,
+    # and no _raw_citation (they were created from a PDF header, not from
+    # the seed's reference list).
+    orphans = [
+        k for k, v in graph.bibliography.items()
+        if v.get("generation") == "F1"
+        and v.get("_source_pdf", "") != seed_pdf
+        and not v.get("_raw_citation", "")
+        and v.get("_source_pdf", "") != ""
+    ]
+    for k in orphans:
+        logging.getLogger("bibvik").warning(
+            "State repair: removing orphan entry %s (was created by failed F1 matching).",
+            k,
+        )
+        del graph.bibliography[k]
+
+    if orphans:
+        logging.getLogger("bibvik").info(
+            "State repair: removed %d orphan entries: %s", len(orphans), orphans
+        )
 
 
 if __name__ == "__main__":

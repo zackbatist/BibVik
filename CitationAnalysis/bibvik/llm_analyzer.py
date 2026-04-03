@@ -78,7 +78,50 @@ Respond in JSON format with exactly these fields:
 Respond ONLY with the JSON object. No preamble, no markdown fences."""
 
 
-# Content-enriched analysis prompt.
+
+# Footnote bibliographic reference extraction prompt.
+# The LLM receives the raw footnote text and must identify all distinct
+# bibliographic references embedded in it, returning structured metadata.
+FOOTNOTE_EXTRACTION_PROMPT = """You are an expert bibliographer specializing in humanities scholarship. Your task is to extract structured bibliographic references from a footnote in an academic paper.
+
+## Footnote text
+
+---
+{footnote_text}
+---
+
+## Task
+
+Identify every distinct bibliographic reference in this footnote. Footnotes in humanities papers often:
+- Cite multiple works in a single footnote
+- Mix prose commentary with bibliographic details
+- Use abbreviations like "ed.", "eds.", "vol.", "pp.", "ibid.", "op. cit."
+- Cite works in multiple languages (English, Norwegian, Swedish, Danish, German, French)
+- Reference journal articles, edited volumes, book chapters, monographs, or grey literature
+
+For EACH distinct reference you find, extract as many of the following fields as the text provides. Omit fields that are not present in the text — do not guess or fabricate values.
+
+Fields:
+- "title": Title of the article, chapter, or book
+- "author": List of {{"family": "...", "given": "..."}} dicts (use initials for given if that's all that's available)
+- "editor": List of editor name dicts (for edited volumes / book chapters)
+- "date": Publication year (4-digit string, e.g. "2007")
+- "journaltitle": Journal name (for articles)
+- "booktitle": Book or volume title (for chapters in edited volumes)
+- "volume": Volume number
+- "number": Issue number
+- "pages": Page range (e.g. "59-74" or "59--74")
+- "publisher": Publisher name
+- "location": Place of publication
+- "series": Series title
+- "doi": DOI if present
+- "url": URL if present
+- "entry_type": One of "article", "incollection", "book", "misc"
+- "raw_text": The exact portion of the footnote text that describes this reference
+
+Respond ONLY with a JSON array of reference objects. If there are no bibliographic references (the footnote is purely prose commentary), return an empty array [].
+
+No preamble, no markdown fences, no explanation — just the JSON array."""
 # Extends the basic analysis by including information about the cited paper.
 CONTENT_ENRICHED_PROMPT = """You are an expert in academic citation analysis. Your task is to analyze how a cited work is being used in its citing context, and to assess whether the citing author's characterization is faithful to the cited work.
 
@@ -262,7 +305,86 @@ class LLMAnalyzer:
 
         return self._query_llm(prompt)
 
-    def _query_llm(self, prompt: str) -> dict | None:
+    def extract_references_from_footnote(
+        self,
+        footnote_text: str,
+    ) -> list[dict] | None:
+        """
+        Extract structured bibliographic references from a footnote using the LLM.
+
+        This handles the humanities convention where full bibliographic details
+        appear in footnotes rather than a separate bibliography section. GROBID
+        handles this poorly; the LLM is much better suited to reading
+        semi-structured prose and extracting metadata fields from it.
+
+        Args:
+            footnote_text: Raw text content of a single footnote.
+
+        Returns:
+            List of reference dicts (possibly empty if no references found),
+            or None if the LLM call failed entirely.
+        """
+        prompt = FOOTNOTE_EXTRACTION_PROMPT.format(footnote_text=footnote_text)
+        raw_result = self._query_llm_raw(prompt)
+        if raw_result is None:
+            return None
+        return _parse_llm_json_array(raw_result)
+
+    def _query_llm_raw(self, prompt: str) -> str | None:
+        """
+        Send a prompt to Ollama and return the raw response text (after
+        stripping think tags), without attempting JSON parsing.
+
+        Used by methods that need to parse array responses rather than object
+        responses, since _query_llm always tries json.loads() on the result.
+        """
+        import re
+        payload = {
+            "model": self.model,
+            "prompt": prompt,
+            "stream": False,
+            "think": False,
+            "options": {
+                "temperature": self.temperature,
+                "num_predict": self.max_tokens,
+            },
+        }
+
+        try:
+            resp = requests.post(
+                f"{self.base_url}/api/generate",
+                json=payload,
+                timeout=self.timeout,
+            )
+
+            if resp.status_code != 200:
+                logger.error("Ollama returned status %d: %s", resp.status_code, resp.text[:500])
+                return None
+
+            data = resp.json()
+            response_text = data.get("response", "")
+
+            # Strip thinking blocks.
+            response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
+            response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
+
+            if not response_text:
+                logger.warning("LLM response was empty after stripping think tags.")
+                return None
+
+            return response_text
+
+        except requests.Timeout:
+            logger.error("Ollama request timed out after %ds.", self.timeout)
+            return None
+        except requests.ConnectionError:
+            logger.error("Lost connection to Ollama.")
+            return None
+        except Exception as e:
+            logger.error("Unexpected error querying Ollama: %s", e)
+            return None
+
+
         """
         Send a prompt to Ollama and parse the JSON response.
 
@@ -676,3 +798,54 @@ def _parse_llm_json(text: str) -> dict | None:
 
     logger.warning("Could not parse LLM response as JSON: %s", text[:200])
     return None
+
+
+def _parse_llm_json_array(text: str) -> list[dict] | None:
+    """
+    Parse a JSON array from LLM response text.
+
+    Like _parse_llm_json but expects a list at the top level rather than
+    a dict. Used for footnote extraction, where the LLM returns an array
+    of reference objects.
+
+    Returns:
+        List of dicts, or None if parsing failed entirely.
+    """
+    import re
+
+    # Strip markdown fences if present.
+    text = text.strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
+
+    # Strategy 1: direct parse.
+    try:
+        result = json.loads(text)
+        if isinstance(result, list):
+            return result
+        # Sometimes the LLM wraps the array in an object.
+        if isinstance(result, dict):
+            for val in result.values():
+                if isinstance(val, list):
+                    return val
+    except json.JSONDecodeError:
+        pass
+
+    # Strategy 2: find first [...] block.
+    match = re.search(r"\[[\s\S]*\]", text)
+    if match:
+        try:
+            result = json.loads(match.group(0))
+            if isinstance(result, list):
+                return result
+        except json.JSONDecodeError:
+            pass
+
+    logger.warning("Could not parse LLM array response: %s", text[:200])
+    return None
+

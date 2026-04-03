@@ -142,6 +142,67 @@ def parse_tei_body(tei_xml: str) -> list[dict]:
     return paragraphs
 
 
+def parse_tei_footnotes(tei_xml: str) -> list[dict]:
+    """
+    Extract footnote text from GROBID's TEI-XML output.
+
+    GROBID represents footnotes as <note place="foot"> elements in the body.
+    Some papers (particularly older humanities works) embed full bibliographic
+    references in footnotes rather than a separate bibliography section.
+    GROBID's standard bibliography extractor misses these entirely.
+
+    Each returned dict contains:
+    - 'note_id': The xml:id of the <note> element (or a generated id).
+    - 'text': Full text content of the footnote.
+
+    Args:
+        tei_xml: Raw TEI-XML string from GROBID.
+
+    Returns:
+        List of footnote dicts, in document order.
+    """
+    root = _parse_xml(tei_xml)
+    if root is None:
+        return []
+
+    footnotes = []
+    seen_ids = set()
+
+    # GROBID places footnotes as <note place="foot"> in the body.
+    for i, note_elem in enumerate(root.findall(".//tei:note[@place='foot']", NS)):
+        text = _get_text(note_elem).strip()
+        if not text or len(text) < 20:
+            continue
+        note_id = note_elem.get("{http://www.w3.org/XML/1998/namespace}id", f"fn{i}")
+        if note_id in seen_ids:
+            continue
+        seen_ids.add(note_id)
+        footnotes.append({"note_id": note_id, "text": text})
+
+    # Also capture unattributed <note> elements that look like bibliographic
+    # references (contain a year pattern). Some GROBID versions omit place attribute.
+    for i, note_elem in enumerate(root.findall(".//tei:note", NS)):
+        if note_elem.get("place") == "foot":
+            continue  # Already handled above.
+        if note_elem.get("type") == "raw_reference":
+            continue  # Raw citation strings, not footnotes.
+        text = _get_text(note_elem).strip()
+        if not text or len(text) < 30:
+            continue
+        # Heuristic: only treat as a potential bibliographic footnote if it
+        # contains a 4-digit year (most citations do).
+        if not re.search(r'\b(?:19|20)\d{2}\b', text):
+            continue
+        note_id = note_elem.get("{http://www.w3.org/XML/1998/namespace}id", f"fn_misc_{i}")
+        if note_id in seen_ids:
+            continue
+        seen_ids.add(note_id)
+        footnotes.append({"note_id": note_id, "text": text})
+
+    logger.info("Found %d footnotes in TEI-XML.", len(footnotes))
+    return footnotes
+
+
 def parse_tei_header(tei_xml: str) -> dict:
     """
     Parse document header metadata (title, authors, abstract) from TEI-XML.

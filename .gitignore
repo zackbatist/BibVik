@@ -76,6 +76,9 @@ __pycache__/
 dist/
 build/
 *.tei.xml
+*.png
+scratchpad_files/
+scratchpad.html
 
 # BibVik CitationAnalysis #
 ############################

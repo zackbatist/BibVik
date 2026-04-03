@@ -83,6 +83,11 @@ class CitationGraph:
         # The seed paper's own citekey (set after processing).
         self.seed_citekey: str | None = None
 
+        # The seed paper's PDF filename (set after processing).
+        # Used in _match_f1_to_existing to guard against re-matching entries
+        # already claimed by another F1 PDF.
+        self._seed_pdf_name: str | None = None
+
     def process_seed_paper(self, pdf_path: str | Path) -> dict | None:
         """
         Process the seed paper and populate the bibliography with its references.
@@ -104,6 +109,9 @@ class CitationGraph:
 
         # Reset citekey registry for a fresh start.
         reset_citekey_registry()
+
+        # Record the seed PDF filename for use in _match_f1_to_existing.
+        self._seed_pdf_name = pdf_path.name
 
         result = self.processor.process(pdf_path, generation="F1")
         if result is None:
@@ -145,6 +153,12 @@ class CitationGraph:
             else:
                 self.bibliography[citekey] = ref
 
+            # Record that this entry is cited by the seed paper.
+            entry = self.bibliography[citekey]
+            entry.setdefault("cited_by", [])
+            if self.seed_citekey not in entry["cited_by"]:
+                entry["cited_by"].append(self.seed_citekey)
+
             # Record the GROBID ID mapping for this source PDF.
             gid = ref.get("_grobid_id", "")
             if gid:
@@ -152,6 +166,19 @@ class CitationGraph:
 
         # Store processed data for later context extraction.
         self.processed_papers[pdf_path.name] = result
+
+        # --- Validate and correct titles against _raw_citation ---
+        # GROBID sometimes extracts the wrong title (e.g. the edited volume's
+        # name instead of the chapter title, or a nearby heading). The
+        # _raw_citation field always contains the unstructured but correct
+        # citation string. We compare each entry's parsed title against what
+        # we can extract from its _raw_citation, and correct clear errors.
+        n_corrected = self._validate_titles_against_raw_citations()
+        if n_corrected:
+            logger.info(
+                "Corrected %d title errors detected via _raw_citation cross-check.",
+                n_corrected,
+            )
 
         logger.info(
             "Seed paper processed. Bibliography now has %d entries.",
@@ -241,6 +268,13 @@ class CitationGraph:
             if header.get("abstract") and not existing.get("abstract"):
                 existing["abstract"] = header["abstract"]
             existing["_source_pdf"] = pdf_path.name
+            # Ensure the seed paper is in cited_by for this F1 entry.
+            # (The seed cited it by definition; _source_pdf is overwritten here
+            # to point to the F1 paper's own PDF, so we must record the seed
+            # link explicitly rather than relying on _source_pdf inference.)
+            existing.setdefault("cited_by", [])
+            if self.seed_citekey and self.seed_citekey not in existing["cited_by"]:
+                existing["cited_by"].insert(0, self.seed_citekey)
         else:
             # Could not match — this PDF might not be one of the seed's references,
             # or the matching heuristic failed. We still process its references
@@ -264,7 +298,8 @@ class CitationGraph:
                 "date": header.get("date", ""),
                 "year": f1_year or "",
                 "generation": "F1",
-                "cited_by": [],
+                # Even unmatched F1 papers were cited by the seed by definition.
+                "cited_by": [self.seed_citekey] if self.seed_citekey else [],
                 "_source_pdf": pdf_path.name,
             }
 
@@ -280,6 +315,12 @@ class CitationGraph:
             else:
                 self.bibliography[ref_citekey] = ref
 
+            # Record that this entry is cited by the F1 paper.
+            entry = self.bibliography[ref_citekey]
+            entry.setdefault("cited_by", [])
+            if f1_citekey not in entry["cited_by"]:
+                entry["cited_by"].append(f1_citekey)
+
             # Record GROBID mapping.
             gid = ref.get("_grobid_id", "")
             if gid:
@@ -289,6 +330,164 @@ class CitationGraph:
         self.processed_papers[pdf_path.name] = result
 
         return result
+
+    def _validate_titles_against_raw_citations(self) -> int:
+        """
+        Cross-check every bibliography entry's parsed title against its
+        _raw_citation string, correcting clear GROBID extraction errors.
+
+        GROBID sometimes assigns the wrong title to a reference — most commonly
+        picking up the containing edited volume's name rather than the chapter
+        title, or picking up a heading from the next entry. The _raw_citation
+        field is the unstructured original string and is always correct.
+
+        Correction strategy:
+        - Extract the title portion from _raw_citation using the format
+          "Author(s). (YEAR[a-z]?). Title. Venue..." common in author-date styles.
+        - Compute token overlap between the extracted title and the stored title.
+        - If overlap < 0.5 AND the extracted title is plausible (length ≥ 10,
+          doesn't look like a venue/journal name), replace the stored title and
+          log the correction.
+        - Do NOT correct if the difference is only hyphenation, truncation
+          (stored title is a prefix of raw title), or case normalization —
+          these are not errors.
+
+        Returns:
+            Number of titles corrected.
+        """
+        corrected = 0
+        for citekey, entry in self.bibliography.items():
+            raw = entry.get("_raw_citation", "").strip()
+            stored_title = entry.get("title", "").strip()
+            if not raw or not stored_title:
+                continue
+
+            extracted = self._extract_title_from_raw_citation(raw)
+            if not extracted or len(extracted) < 10:
+                continue
+
+            # Normalize both titles for comparison.
+            stored_norm = self._normalize_title(stored_title)
+            extracted_norm = self._normalize_title(extracted)
+
+            # Skip if essentially the same after normalization.
+            if stored_norm == extracted_norm:
+                continue
+
+            # Skip if the difference is only hyphenation artifacts
+            # (PDF line-break hyphens like "Viking- etid" → "Vikingetid").
+            dehyphenated = re.sub(r"-\s+", "", extracted_norm)
+            if stored_norm == self._normalize_title(dehyphenated):
+                continue
+
+            # Skip if stored title is a leading prefix of the extracted title
+            # (stored is truncated but not wrong).
+            if extracted_norm.startswith(stored_norm) and len(stored_norm) >= 15:
+                continue
+
+            # Compute token overlap.
+            stored_tokens = set(stored_norm.split())
+            extracted_tokens = set(extracted_norm.split())
+            if not stored_tokens or not extracted_tokens:
+                continue
+            overlap = len(stored_tokens & extracted_tokens) / max(
+                len(stored_tokens), len(extracted_tokens)
+            )
+
+            if overlap < 0.5:
+                # Plausibility check: extracted title shouldn't look like a
+                # journal name, publisher, or institution (these would indicate
+                # our extraction grabbed the venue rather than the title).
+                venue_signals = re.compile(
+                    r"\b(journal|press|university|proceedings|acta|"
+                    r"verlag|förlag|vol\.|volume|no\.|number)\b",
+                    re.IGNORECASE,
+                )
+                if venue_signals.search(extracted[:40]):
+                    logger.debug(
+                        "Skipping title correction for %s: extracted looks like venue: %s",
+                        citekey, extracted[:60],
+                    )
+                    continue
+
+                logger.warning(
+                    "Title mismatch for %s (overlap=%.2f):\n"
+                    "  stored:    %s\n"
+                    "  corrected: %s",
+                    citekey, overlap, stored_title[:80], extracted[:80],
+                )
+                entry["title"] = extracted
+                entry["_title_corrected_from_raw"] = True
+                corrected += 1
+
+        return corrected
+
+    @staticmethod
+    def _extract_title_from_raw_citation(raw: str) -> str:
+        """
+        Extract the title portion from an author-date raw citation string.
+
+        Handles the dominant format used in the corpus:
+            Smith, J. A. (2020). Title of the Work. Journal Name, 12(3), 45-67.
+            Smith, J. A. (2020a). Title of the Work. In Editor, E. (ed.), Book.
+            Smith, J., and Jones, K. (2020). Title. Publisher, Place.
+
+        The title is the text immediately after "(YEAR[a-z]?). " and before
+        the first venue indicator (". In ", ". Journal", publisher info, etc.)
+        or a bare period followed by an uppercase word.
+
+        Returns the extracted title string, or empty string if not parseable.
+        """
+        if not raw:
+            return ""
+
+        # Step 1: Find the position after the year marker "(YYYY[a-z]?). "
+        year_m = re.search(r"\(\d{4}[a-z]?\)\.\s*", raw)
+        if not year_m:
+            return ""
+
+        after_year = raw[year_m.end():]
+
+        # Step 2: Find the end of the title.
+        # The title ends at the first of:
+        # (a) ". In " — chapter in edited volume
+        # (b) ". " followed by a word that looks like a journal/venue indicator
+        # (c) ", " followed by a volume number or publisher
+        # (d) A bare period at a word boundary followed by an uppercase word
+        #     that isn't clearly part of the title (heuristic)
+
+        # Try (a): ". In "
+        m_in = re.search(r"\.\s+In\s+", after_year)
+
+        # Try (b): period + uppercase word that looks like venue
+        # Journal names, publishers, places
+        venue_pat = re.compile(
+            r"\.\s+(?=[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s*(?:\d|\(ed|\(eds|,\s*\d|Press|Verlag|University|Journal|Proceedings|Acta))"
+        )
+        m_venue = venue_pat.search(after_year)
+
+        # Pick the earliest boundary found.
+        boundaries = [m for m in [m_in, m_venue] if m is not None]
+        if boundaries:
+            end_pos = min(m.start() for m in boundaries)
+            title = after_year[:end_pos].strip()
+        else:
+            # Fallback: take up to 200 chars, stopping at first ". [Upper]"
+            # pattern that looks like a sentence break into venue info.
+            m_period = re.search(r"\.\s+[A-Z]", after_year)
+            if m_period and m_period.start() < 200:
+                title = after_year[:m_period.start()].strip()
+            else:
+                title = after_year[:200].strip()
+
+        # Step 3: Clean up hyphenation artifacts from PDF line breaks.
+        # e.g. "Viking- etid" → "Vikingetid", "Socie- ties" → "Societies"
+        title = re.sub(r"(\w)-\s+(\w)", r"\1\2", title)
+
+        # Strip trailing punctuation.
+        title = title.rstrip(".,;:")
+
+        return title
 
     def _find_duplicate(self, ref: dict) -> str | None:
         """
@@ -300,6 +499,13 @@ class CitationGraph:
         2. Title: Exact normalized string comparison.
         3. Title token overlap + author/year confirmation: Fuzzy title match
            with additional signals to avoid false positives.
+
+        After a candidate match is found via tiers 2 or 3, we apply a
+        _raw_citation cross-check: if both the candidate entry and the new
+        ref have _raw_citation values, and those values identify different
+        first authors or years, the match is rejected. This prevents a
+        bad GROBID title parse on one record from causing a merge with an
+        unrelated entry that happens to have a similar title.
 
         Returns the existing citekey if a match is found, or None.
         """
@@ -320,10 +526,11 @@ class CitationGraph:
             # --- Tier 2: Exact title match ---
             existing_title = self._normalize_title(existing.get("title", ""))
             if ref_title and existing_title and ref_title == existing_title:
-                # Additional check: titles must be at least 20 chars to avoid
-                # false matches on very short/generic titles like "Introduction".
                 if len(ref_title) >= 20:
-                    return key
+                    if self._raw_citation_consistent(ref, existing):
+                        return key
+                    else:
+                        continue  # Title match but raw_citation says different work
 
             # --- Tier 3: Fuzzy title + author AND year confirmation ---
             if ref_title and existing_title:
@@ -341,14 +548,63 @@ class CitationGraph:
                         ref_authors and existing_authors
                         and ref_authors[0].get("family", "").lower() == existing_authors[0].get("family", "").lower()
                     )
-                    # Require at least one confirming signal.
                     if year_match or author_match:
                         combined = score + (0.2 if year_match else 0) + (0.15 if author_match else 0)
                         if combined > best_fuzzy_score and combined >= 0.85:
-                            best_fuzzy_score = combined
-                            best_fuzzy_key = key
+                            if self._raw_citation_consistent(ref, existing):
+                                best_fuzzy_score = combined
+                                best_fuzzy_key = key
 
         return best_fuzzy_key
+
+    @staticmethod
+    def _raw_citation_consistent(ref: dict, existing: dict) -> bool:
+        """
+        Cross-check a potential duplicate match against _raw_citation fields.
+
+        If both records have _raw_citation values, extract the first author
+        surname and year from each and check they agree. If they disagree,
+        the match is almost certainly a false positive caused by a GROBID
+        title-parse error on one of the records.
+
+        Returns True if the match is consistent (or if either record lacks
+        a _raw_citation, in which case we can't check and assume consistent).
+        """
+        raw_ref = ref.get("_raw_citation", "").strip()
+        raw_existing = existing.get("_raw_citation", "").strip()
+
+        # If either record has no raw citation, we can't cross-check — allow match.
+        if not raw_ref or not raw_existing:
+            return True
+
+        def _extract_author_year(raw: str) -> tuple[str, str]:
+            """Extract first author surname and year from a raw citation string."""
+            # Typical formats: "Smith, J. (2020)..." or "Smith 2020..." or
+            # "Smith, J., Jones, K. (2020)..."
+            author_match = re.match(r"([A-ZÀ-Öa-zà-ö][a-zà-ö]+)", raw)
+            author = author_match.group(1).lower() if author_match else ""
+            year_match = re.search(r"\b((?:19|20)\d{2})\b", raw)
+            year = year_match.group(1) if year_match else ""
+            return author, year
+
+        ref_author, ref_year = _extract_author_year(raw_ref)
+        existing_author, existing_year = _extract_author_year(raw_existing)
+
+        # If we can extract both author and year from both, they must agree.
+        if ref_author and existing_author and ref_year and existing_year:
+            author_ok = (
+                ref_author[:4] == existing_author[:4]  # first 4 chars of surname
+            )
+            year_ok = ref_year == existing_year
+            if not author_ok or not year_ok:
+                logger.debug(
+                    "_raw_citation cross-check rejected match: "
+                    "ref=(%s, %s) vs existing=(%s, %s)",
+                    ref_author, ref_year, existing_author, existing_year,
+                )
+                return False
+
+        return True
 
     def _match_f1_to_existing(self, header: dict, pdf_name: str) -> str | None:
         """
@@ -401,6 +657,14 @@ class CitationGraph:
             if existing.get("generation") == "P":
                 continue
 
+            # Skip entries already claimed by another F1 PDF.
+            # Once a bibliography entry's _source_pdf has been overwritten
+            # with an F1 PDF filename (by a prior _process_one_f1 call),
+            # it cannot be re-matched to a different PDF.
+            existing_src = existing.get("_source_pdf", "")
+            if existing_src and existing_src != self._seed_pdf_name:
+                continue
+
             existing_doi = existing.get("doi", "").strip().lower()
             existing_title = self._normalize_title(existing.get("title", ""))
             existing_authors = existing.get("author", [])
@@ -413,6 +677,22 @@ class CitationGraph:
             # --- Tier 2: Title match (exact normalized) ---
             if header_title and existing_title and header_title == existing_title:
                 if len(header_title) >= 20:
+                    # Cross-check against filename author+year if available,
+                    # to reject matches where GROBID parsed the wrong title.
+                    if fn_year and existing_year and fn_year != existing_year:
+                        logger.debug(
+                            "Tier 2 title match rejected: filename year %s ≠ entry year %s (%s)",
+                            fn_year, existing_year, key,
+                        )
+                        continue
+                    if fn_author and existing_authors:
+                        e_fam = existing_authors[0].get("family", "").lower()
+                        if not (fn_author.lower()[:4] == e_fam[:4]):
+                            logger.debug(
+                                "Tier 2 title match rejected: filename author %s ≠ entry author %s (%s)",
+                                fn_author, e_fam, key,
+                            )
+                            continue
                     return key
 
             # --- Tier 3: First author + year from GROBID header ---
@@ -426,6 +706,13 @@ class CitationGraph:
                 h_family = header_authors[0].get("family", "").lower()
                 e_family = existing_authors[0].get("family", "").lower()
                 if h_family and e_family and h_family == e_family:
+                    # Cross-check against filename author if available.
+                    if fn_author and not (fn_author.lower()[:4] == e_family[:4]):
+                        logger.debug(
+                            "Tier 3 author+year match rejected: filename author %s ≠ entry author %s (%s)",
+                            fn_author, e_family, key,
+                        )
+                        continue
                     return key
 
             # --- Tier 4: Title token overlap (fuzzy) ---

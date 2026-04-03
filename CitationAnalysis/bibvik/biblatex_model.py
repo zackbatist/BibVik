@@ -187,12 +187,22 @@ def merge_records(existing: dict, new: dict) -> dict:
         The merged record (modifies existing in place and returns it).
     """
     # --- Merge scalar fields: prefer non-empty ---
+    # Special rule for title: once a title is set, never overwrite it.
+    # GROBID's structured title parse from one PDF may be wrong (e.g. picking
+    # up a nearby heading), while the existing title came from the seed paper's
+    # reference list and is more likely correct. The _raw_citation field is the
+    # ground truth; title discrepancies should be resolved via _raw_citation
+    # validation, not by silently overwriting with a longer string.
     scalar_fields = [
-        "title", "subtitle", "journaltitle", "booktitle", "series",
+        "subtitle", "journaltitle", "booktitle", "series",
         "volume", "number", "pages", "publisher", "location", "eventtitle",
         "doi", "url", "eprint", "eprinttype", "isbn", "issn",
         "langid", "abstract", "note", "date", "year",
     ]
+    # Title: only fill in if empty; never replace an existing title.
+    if not existing.get("title") and new.get("title"):
+        existing["title"] = new["title"]
+
     for field in scalar_fields:
         existing_val = existing.get(field, "")
         new_val = new.get(field, "")
