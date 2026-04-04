@@ -115,6 +115,13 @@ Examples:
              "in the output/tei/ directory (run --extract / --iterate-f1 first "
              "with save_tei_xml: true in config.yaml).",
     )
+    parser.add_argument(
+        "--resolve", action="store_true",
+        help="Attempt to resolve unmatched citations from the reference audit "
+             "using CrossRef API (tier 1) and the local LLM (tier 2 fallback). "
+             "Requires --audit to have been run first. Resolved entries are added "
+             "to bibliography.json with _resolution_method provenance tags.",
+    )
 
     # --- Overrides ---
     parser.add_argument(
@@ -161,7 +168,7 @@ Examples:
     args = parser.parse_args()
 
     # If no stage is selected, show help.
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.footnotes]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.footnotes, args.resolve]):
         parser.print_help()
         sys.exit(1)
 
@@ -175,11 +182,12 @@ def _write_bibliography(
     log: logging.Logger,
 ) -> None:
     """
-    Normalize and write the bibliography to disk.
+    Normalize, score completeness, and write the bibliography to disk.
 
-    Applies title and author-name normalization before writing, so the
-    output is always consistent regardless of which source produced each entry.
+    Applies title and author-name normalization, then completeness scoring,
+    before writing, so the output is always consistent.
     """
+    from bibvik.biblatex_model import add_completeness_scores
     n_titles = normalize_titles_in_bibliography(bibliography)
     n_authors = normalize_authors_in_bibliography(bibliography)
     if n_titles or n_authors:
@@ -187,6 +195,7 @@ def _write_bibliography(
             "Normalization: %d titles, %d author given-name forms updated.",
             n_titles, n_authors,
         )
+    add_completeness_scores(bibliography)
     write_json(
         {"_metadata": build_bibliography_metadata(config), "entries": bibliography},
         path,
@@ -245,6 +254,7 @@ def main():
     run_coverage = args.all or args.coverage
     run_audit = args.audit  # Not included in --all; must be explicitly requested.
     run_footnotes = args.footnotes  # Not included in --all; must be explicitly requested.
+    run_resolve = args.resolve  # Not included in --all; must be explicitly requested.
 
     # =========================================================================
     # Stage 1: Extract references from seed paper
@@ -618,11 +628,24 @@ def main():
 
             refs = paper_data.get("references", [])
             paras = paper_data.get("paragraphs", [])
+
+            # Load the full bibliography for supplementary matching —
+            # entries added by --footnotes or a prior --resolve run will
+            # count as matches even if they weren't in this paper's own
+            # extracted reference list.
+            full_bib: dict[str, dict] = {}
+            if bibliography_path.exists():
+                try:
+                    full_bib = read_json(bibliography_path).get("entries", {})
+                except Exception:
+                    pass
+
             report = audit_references(
                 tei_xml, refs,
                 source_pdf=pdf_name,
                 llm_config=llm_audit_config,
                 paragraphs=paras,
+                full_bibliography=full_bib,
             )
             audit_results[pdf_name] = report
 
@@ -657,6 +680,16 @@ def main():
                 "papers_audited": len(audit_results),
                 "total_in_text_citations_detected": total_detected,
                 "total_matched_to_bibliography": total_matched,
+                "total_matched_per_paper": sum(
+                    1 for r in audit_results.values()
+                    for e in r.get("matched_citations", [])
+                    if e.get("match_source") != "full_bibliography"
+                ),
+                "total_matched_full_bibliography": sum(
+                    1 for r in audit_results.values()
+                    for e in r.get("matched_citations", [])
+                    if e.get("match_source") == "full_bibliography"
+                ),
                 "total_unmatched": total_unmatched,
                 "overall_match_rate": round(total_matched / total_detected, 3) if total_detected else 1.0,
                 "unique_unmatched_references": len(aggregated_unmatched),
@@ -778,6 +811,168 @@ def main():
                     "references_extracted": summary["references_extracted"],
                     "references_merged": summary["references_merged_into_bibliography"],
                 }
+
+    # =========================================================================
+    # Reference Resolution (--resolve)
+    # =========================================================================
+    if run_resolve:
+        log.info("=" * 60)
+        log.info("REFERENCE RESOLUTION: Resolving unmatched citations")
+        log.info("=" * 60)
+
+        from bibvik.reference_resolver import resolve_unmatched_citations
+
+        audit_path = output_dir / "reference_audit.json"
+        if not audit_path.exists():
+            log.error(
+                "reference_audit.json not found at %s. "
+                "Run --audit first to generate the audit report.",
+                audit_path,
+            )
+        else:
+            audit_data = read_json(audit_path)
+
+            # Load current bibliography entries for in-place update.
+            # bibliography.json has structure {"_metadata": ..., "entries": {...}}
+            if bibliography_path.exists():
+                bib_data = read_json(bibliography_path)
+                current_bib = bib_data.get("entries", {})
+            else:
+                bib_data = {"entries": {}}
+                current_bib = {}
+                log.warning(
+                    "bibliography.json not found. Resolved entries will be "
+                    "written without deduplication against existing entries."
+                )
+
+            # LLM config for tier 2 fallback.
+            llm_cfg = config.get("llm", {})
+            resolve_analyzer = LLMAnalyzer(
+                base_url=llm_cfg.get("base_url", "http://localhost:11434"),
+                model=llm_cfg.get("model", "qwen3:35b"),
+                temperature=llm_cfg.get("temperature", 0.2),
+                max_tokens=llm_cfg.get("max_tokens", 1024),
+                timeout=llm_cfg.get("timeout", 300),
+            )
+            llm_available = resolve_analyzer.is_available()
+            if not llm_available:
+                log.warning(
+                    "Ollama not available — resolution will use CrossRef only "
+                    "(no LLM fallback)."
+                )
+
+            resolution_report = resolve_unmatched_citations(
+                audit_report=audit_data,
+                bibliography=current_bib,
+                email=args.email or config.get("email", ""),
+                llm_config=llm_cfg if llm_available else None,
+                min_occurrences=1,
+            )
+
+            # Write resolution report.
+            write_json(resolution_report, output_dir / "resolution_report.json")
+
+            # Merge resolved entries back into bibliography.json.
+            # current_bib was mutated in-place by resolve_unmatched_citations;
+            # any key now present that wasn't in the original entries dict is new.
+            original_keys = set(bib_data.get("entries", {}).keys())
+            new_entries = {
+                k: v for k, v in current_bib.items()
+                if k not in original_keys
+            }
+            if new_entries:
+                log.info(
+                    "Merging %d resolved entries into bibliography.json.",
+                    len(new_entries),
+                )
+                _write_bibliography(current_bib, bibliography_path, config, log)
+
+            # --- Update reference_audit.json to reflect resolved citations ---
+            # Mark each formerly-unmatched citation as resolved if its author+year
+            # now has a corresponding entry in the bibliography, and append a
+            # post_resolution_summary to the audit file.
+            audit_path_for_update = output_dir / "reference_audit.json"
+            if audit_path_for_update.exists() and new_entries:
+                try:
+                    audit_data_update = read_json(audit_path_for_update)
+
+                    # Build a lookup: (author_norm, year) → new citekey
+                    from bibvik.reference_resolver import _norm_title
+                    import re as _re
+                    resolved_lookup: dict[tuple, str] = {}
+                    for ck, entry in new_entries.items():
+                        authors = entry.get("author", [])
+                        if authors:
+                            fam = authors[0].get("family", "").lower()
+                            fam_norm = _re.sub(r"[^a-z]", "", fam)[:6]
+                        else:
+                            fam_norm = ""
+                        yr = entry.get("year", entry.get("date", ""))[:4]
+                        resolved_lookup[(fam_norm, yr)] = ck
+
+                    # Update aggregated_unmatched: tag resolved entries
+                    now_resolved = []
+                    still_unmatched = []
+                    for item in audit_data_update.get("aggregated_unmatched", []):
+                        author_norm = _re.sub(
+                            r"[^a-z]", "",
+                            item.get("first_author", "").lower()
+                        )[:6]
+                        yr = item.get("year", "")
+                        matched_ck = resolved_lookup.get((author_norm, yr))
+                        if matched_ck:
+                            item["resolved"] = True
+                            item["resolved_citekey"] = matched_ck
+                            item["resolved_method"] = new_entries[matched_ck].get(
+                                "_resolution_method", ""
+                            )
+                            now_resolved.append(item)
+                        else:
+                            still_unmatched.append(item)
+
+                    # Add post_resolution_summary
+                    orig_summary = audit_data_update.get("summary", {})
+                    orig_unmatched = orig_summary.get("total_unmatched", 0)
+                    audit_data_update["post_resolution_summary"] = {
+                        "resolved_citations": len(now_resolved),
+                        "still_unmatched": len(still_unmatched),
+                        "post_resolution_match_rate": round(
+                            (orig_summary.get("total_matched_to_bibliography", 0) + len(now_resolved))
+                            / max(orig_summary.get("total_in_text_citations_detected", 1), 1),
+                            3,
+                        ),
+                        "improvement": round(
+                            len(now_resolved)
+                            / max(orig_unmatched, 1),
+                            3,
+                        ),
+                    }
+
+                    write_json(audit_data_update, audit_path_for_update)
+                    log.info(
+                        "Updated reference_audit.json: %d citations now resolved, "
+                        "%d still unmatched.",
+                        len(now_resolved),
+                        len(still_unmatched),
+                    )
+                except Exception as e:
+                    log.warning("Could not update reference_audit.json: %s", e)
+
+            summary = resolution_report["summary"]
+            log.info(
+                "Resolution complete: %d resolved (%d CrossRef, %d LLM), "
+                "%d skipped (duplicate), %d failed.",
+                summary["resolved"],
+                summary["by_method"]["crossref"],
+                summary["by_method"]["llm_from_context"],
+                summary["skipped_duplicates"],
+                summary["failed"],
+            )
+
+            processing_log["stages"]["resolve"] = {
+                "status": "success",
+                **summary,
+            }
 
     # =========================================================================
     # Save processing log

@@ -167,19 +167,29 @@ def audit_references(
     source_pdf: str = "",
     llm_config: dict | None = None,
     paragraphs: list[dict] | None = None,
+    full_bibliography: dict[str, dict] | None = None,
 ) -> dict:
     """
     Detect in-text citations using three layers and reconcile against bibliography.
 
     Args:
-        tei_xml:      Raw TEI-XML string from GROBID.
-        bibliography: List of reference dicts (from tei_parser.parse_tei_references).
-        source_pdf:   Filename of the source PDF (for reporting).
-        llm_config:   Optional dict with 'base_url', 'model', 'temperature', 'timeout'
-                      for Layer 3 LLM detection. If None, Layer 3 is skipped.
-        paragraphs:   Optional list of paragraph dicts (from tei_parser.parse_tei_body).
-                      Used for Layer 3 LLM detection. If None and llm_config is provided,
-                      paragraphs are re-parsed from tei_xml.
+        tei_xml:          Raw TEI-XML string from GROBID.
+        bibliography:     List of reference dicts extracted from this specific PDF
+                          (from tei_parser.parse_tei_references). Used as the
+                          primary matching source.
+        source_pdf:       Filename of the source PDF (for reporting).
+        llm_config:       Optional dict with 'base_url', 'model', 'temperature',
+                          'timeout' for Layer 3 LLM detection. If None, Layer 3
+                          is skipped.
+        paragraphs:       Optional list of paragraph dicts (from
+                          tei_parser.parse_tei_body). Used for Layer 3 LLM
+                          detection. If None and llm_config is provided,
+                          paragraphs are re-parsed from tei_xml.
+        full_bibliography: Optional dict of all bibliography entries (the full
+                           pipeline bibliography, keyed by citekey). When
+                           provided, citation matching checks both the per-paper
+                           extracted refs AND the full bibliography, so entries
+                           added by --footnotes or --resolve count as matches.
 
     Returns:
         Audit report dict.
@@ -231,13 +241,32 @@ def audit_references(
     # --- Build bibliography lookup ---
     bib_lookup = _build_bib_lookup(bibliography)
 
+    # If a full pipeline bibliography is provided, build a supplementary lookup
+    # from entries NOT already in the per-paper list. This catches entries added
+    # by --footnotes, --resolve, or other sources that aren't in this paper's
+    # own extracted reference list.
+    full_bib_lookup: list[dict] = []
+    if full_bibliography:
+        per_paper_citekeys = {e.get("citekey", "") for e in bibliography}
+        supplementary = [
+            v for k, v in full_bibliography.items()
+            if not k.startswith("_") and k not in per_paper_citekeys
+        ]
+        full_bib_lookup = _build_bib_lookup(supplementary)
+
     # --- Reconcile ---
     matched = []
     unmatched = []
 
     for key, info in all_citations.items():
         author, year = key
+        # Try per-paper bibliography first, then full bibliography.
         bib_match = _find_in_bibliography(author, year, bib_lookup)
+        match_source = "per_paper"
+        if not bib_match and full_bib_lookup:
+            bib_match = _find_in_bibliography(author, year, full_bib_lookup)
+            if bib_match:
+                match_source = "full_bibliography"
         entry = {
             "first_author": author,
             "year": year,
@@ -247,6 +276,7 @@ def audit_references(
         }
         if bib_match:
             entry["matched_citekey"] = bib_match
+            entry["match_source"] = match_source
             matched.append(entry)
         else:
             entry["hint"] = _build_hint(author, year, info.get("contexts", []))
