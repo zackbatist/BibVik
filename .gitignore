@@ -87,4 +87,6 @@ CitationAnalysis/.venv/
 CitationAnalysis/bibvik.egg-info/
 CitationAnalysis/bibvik/__pycache__/
 CitationAnalysis/Exported_Items.csv
-CitationAnalysis/dev-docs
+CitationAnalysis/dev-docs/
+scratchpad-sections/basic-descriptive-stats_files/
+scratchpad-sections/basic-descriptive-stats.html
