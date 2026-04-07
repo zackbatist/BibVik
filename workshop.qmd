@@ -35,67 +35,65 @@ Time is also reserved for breaking out into focused group discussions and for st
 - How do we establish supportive referential practices in archaeological research, and avoid closed networks, and how may bibliometric studies contribute to this process?
 
 ## Program
-### Monday April 13
+### Monday, April 13
 
-| Start | End   |                     | Speaker                                |
-| ----- | ----- | ------------------- | -------------------------------------- |
-| 12:00 | 13:00 | Lunch               |                                        |
-| 13:00 | 13:30 | Introduction        | Julie Lund, Isak Roalkvam, Zack Batist |
-| 13:15 | 13:40 | **Talk 1**          | Isto Huvila                            |
-| 13:40 | 14:05 | **Talk 2**          | Thora Petursdottir                     |
-| 14:05 | 14:35 | Coffee              |                                        |
-| 14:35 | 15:00 | **Talk 3**          | Unn Pederson                           |
-| 15:00 | 16:00 | Group Work          |                                        |
-| 16:00 | 16:45 | Plenum / Discussion |                                        |
-| 17:30 |       | Drinks + Dinner\*   |                                        |
+| Start | End | Activity | Speaker |
+| :--- | :--- | :--- | :--- |
+| 12:00 | 12:15 | Introductory Remarks | Julie Lund |
+| 12:15 | 12:30 | Preliminary Findings from the BibVik Project | Isak Roalkvam |
+| 12:30 | 13:30 | Lunch | |
+| 13:30 | 13:55 | **References as paradata: what citations and references tell us about archaeological research practice** | Isto Huvila |
+| 13:55 | 14:20 | **Talk 2** | Unn Pederson |
+| 14:20 | 15:05 | Group Work | |
+| 15:05 | 15:35 | Coffee | |
+| 15:35 | 16:00 | **Talk 3** | Zachary Batist |
+| 16:00 | 16:45 | Plenum / Discussion | |
+| 17:30 | | Drinks + Dinner | |
 
-\* The complementary workshop dinner will be hosted at [TBD].
-<!-- Add the name and location of the restaurant. -->
+### Tuesday, April 14
 
-### Tuesday April 14
-
-| Start | End   |                     | Speaker                                |
-| ----- | ----- | ------------------- | -------------------------------------- |
-| 09:00 | 10:00 | Organizing Meeting  |                                        |
-| 10:00 | 10:15 | Coffee              |                                        |
-| 10:15 | 10:40 | **Talk 4**          | Joe Roe                                |
-| 10:40 | 11:05 | **Talk 5**          | TBD <!-- Dag Haug -->                  |
-| 11:05 | 11:30 | **Talk 6**          | Mari Østmo                             |
-| 11:30 | 12:30 | Lunch               |                                        |
-| 12:30 | 12:55 | **Talk 7**          | Espen Dalbakk                          |
-| 12:55 | 13:20 | **Talk 8**          | Steinar Solheim                        |
-| 13:20 | 14:00 | Group Work          |                                        |
-| 14:00 | 14:30 | Coffee              |                                        |
-| 14:30 | 15:30 | Plenum / Discussion |                                        |
+| Start | End | Activity | Speaker |
+| :--- | :--- | :--- | :--- |
+| 09:00 | 10:00 | Organizing Meeting | |
+| 10:00 | 10:25 | Coffee | |
+| 10:25 | 10:50 | **Mapping collaborative networks in archaeological research software engineering** | Joe Roe |
+| 10:50 | 11:15 | **Encouraging critical reflection in editorial work processes** | Mari Østmo |
+| 11:15 | 12:00 | Group Work | |
+| 12:00 | 13:00 | Lunch | |
+| 13:00 | 13:25 | **A Scandinavian Viking Age?** | Espen Dalbakk |
+| 13:25 | 13:50 | **Are we there yet? Assessing the Development in Open Access Publishing in Norwegian Archaeology** | Steinar Solheim |
+| 13:50 | 14:30 | Group Work | |
+| 14:30 | 15:00 | Coffee | |
+| 15:00 | 16:30 | Plenum / Discussion | |
 
 
 ## Invited Talks
 
-### Introductory Remarks + Preliminary Findings
-**Julie Lund, Isak Roalkvam & Zachary Batist**
+<!-- ### Introductory Remarks
+**Julie Lund**, University of Oslo
+
+### Preliminary Findings from the BibVik Project
+**Isak Roalkvam**, Aarhus University -->
 
 ### Title TBD
 **Unn Pederson**, University of Oslo
 
-### Title TBD
+### References as paradata: what citations and references tell us about archaeological research practice
 **Isto Huvila**, University of Uppsala
 
-### Title TBD
-**Thora Petursdottir**, University of Oslo
+<!-- ### Title TBD
+**Zachary Batist**, McGill University -->
 
-### Title TBD
+### Mapping collaborative networks in archaeological research software engineering
 **Joe Roe**, University of Copenhagen
 
-<!-- ### Title TBD
-**Dag Haug**, University of Oslo -->
-
-### Title TBD
+### Encouraging critical reflection in editorial work processes
 **Mari Østmo**, University of Oslo
 
-### Title TBD
+### A Scandinavian Viking Age?
 **Espen Dalbakk**, University of Oslo
 
-### Title TBD
+### Are we there yet? Assessing the Development in Open Access Publishing in Norwegian Archaeology
 **Steinar Solheim**, University of Oslo
 
 

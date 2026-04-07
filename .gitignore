@@ -90,3 +90,5 @@ CitationAnalysis/Exported_Items.csv
 CitationAnalysis/dev-docs/
 scratchpad-sections/basic-descriptive-stats_files/
 scratchpad-sections/basic-descriptive-stats.html
+workshop_files/*
+workshop.html
