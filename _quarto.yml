@@ -4,10 +4,8 @@ project:
   preview:
     port: 7777
     browser: false
-  resources:
-    - cv.pdf
-    - cv.html
   render:
+    - "*.qmd"
     - "!CitationAnalysis/"
 bibliography: assets/BibVik.bib
 csl: assets/chicago-author-date.csl
