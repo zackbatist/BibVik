@@ -38,12 +38,12 @@ Time is also reserved for breaking out into focused group discussions and for st
 ### Monday, April 13
 
 | Start | End | Activity | Speaker |
-| :--- | :--- | :--- | :--- |
-| 12:00 | 12:15 | Introductory Remarks | Julie Lund |
+| - | - | ----------- | --- |
+| 12:00 | 12:15 | Introducing the BibVik Workshop | Julie Lund |
 | 12:15 | 12:30 | Preliminary Findings from the BibVik Project | Isak Roalkvam |
 | 12:30 | 13:30 | Lunch | |
 | 13:30 | 13:55 | **References as paradata: what citations and references tell us about archaeological research practice** | Isto Huvila |
-| 13:55 | 14:20 | **Talk 2** | Unn Pederson |
+| 13:55 | 14:20 | **An anecdote and some reflections on citation practices in the age of the publication indicator** | Unn Pederson |
 | 14:20 | 15:05 | Group Work | |
 | 15:05 | 15:35 | Coffee | |
 | 15:35 | 16:00 | **Talk 3** | Zachary Batist |
@@ -53,7 +53,7 @@ Time is also reserved for breaking out into focused group discussions and for st
 ### Tuesday, April 14
 
 | Start | End | Activity | Speaker |
-| :--- | :--- | :--- | :--- |
+| - | - | ----------- | --- |
 | 09:00 | 10:00 | Organizing Meeting | |
 | 10:00 | 10:25 | Coffee | |
 | 10:25 | 10:50 | **Mapping collaborative networks in archaeological research software engineering** | Joe Roe |
@@ -69,31 +69,31 @@ Time is also reserved for breaking out into focused group discussions and for st
 
 ## Invited Talks
 
-<!-- ### Introductory Remarks
+<!-- ### Introducing the BibVik Workshop
 **Julie Lund**, University of Oslo
 
 ### Preliminary Findings from the BibVik Project
 **Isak Roalkvam**, Aarhus University -->
 
-### Title TBD
-**Unn Pederson**, University of Oslo
-
-### References as paradata: what citations and references tell us about archaeological research practice
+#### References as paradata: what citations and references tell us about archaeological research practice
 **Isto Huvila**, University of Uppsala
+
+#### An anecdote and some reflections on citation practices in the age of the publication indicator
+**Unn Pederson**, University of Oslo
 
 <!-- ### Title TBD
 **Zachary Batist**, McGill University -->
 
-### Mapping collaborative networks in archaeological research software engineering
+#### Mapping collaborative networks in archaeological research software engineering
 **Joe Roe**, University of Copenhagen
 
-### Encouraging critical reflection in editorial work processes
+#### Encouraging critical reflection in editorial work processes
 **Mari Østmo**, University of Oslo
 
-### A Scandinavian Viking Age?
+#### A Scandinavian Viking Age?
 **Espen Dalbakk**, University of Oslo
 
-### Are we there yet? Assessing the Development in Open Access Publishing in Norwegian Archaeology
+#### Are we there yet? Assessing the Development in Open Access Publishing in Norwegian Archaeology
 **Steinar Solheim**, University of Oslo
 
 
