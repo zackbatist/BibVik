@@ -72,6 +72,7 @@ class CitationGraph:
         reset_citekey_registry()
 
         # GROBID extraction
+        logger.info("  Sending to GROBID (this may take 30–60 seconds)...")
         tei_xml = self.grobid.process_fulltext(pdf_path)
         if tei_xml is None:
             logger.error("GROBID failed on seed paper.")
@@ -83,11 +84,12 @@ class CitationGraph:
         tei_path.write_text(tei_xml, encoding="utf-8")
 
         # Parse
+        logger.info("  Parsing TEI-XML...")
         header = parse_tei_header(tei_xml)
         grobid_refs = parse_tei_references(tei_xml)
         paragraphs = parse_tei_body(tei_xml)
 
-        logger.info("  GROBID: %d bibliography entries, %d paragraphs", len(grobid_refs), len(paragraphs))
+        logger.info("  GROBID found %d bibliography entries, %d paragraphs", len(grobid_refs), len(paragraphs))
 
         # Add seed paper itself
         seed_authors = header.get("author", [])
@@ -131,7 +133,8 @@ class CitationGraph:
             if gid:
                 self.grobid_map[(pdf_path.name, gid)] = citekey
 
-        # Run full detection
+        # Run full detection (all 5 methods)
+        logger.info("  Running 5-method citation detection...")
         detection = detect_all_citations(
             tei_xml=tei_xml,
             source_pdf=pdf_path.name,
@@ -139,6 +142,13 @@ class CitationGraph:
             grobid_refs=grobid_refs,
             paragraphs=paragraphs,
         )
+        mc = detection["method_counts"]
+        logger.info("  Detection complete: %d unique citations found across all methods",
+                     mc["merged_total"])
+        logger.info("    reference list: %d  |  inline markers: %d  |  "
+                     "text patterns: %d  |  LLM (body): %d  |  LLM (footnotes): %d",
+                     mc["reference_list"], mc["inline_markers"],
+                     mc["text_patterns"], mc["llm_body_scan"], mc["llm_footnotes"])
 
         # Integrate detected citations
         unmatched = {}
@@ -150,6 +160,7 @@ class CitationGraph:
                 unmatched[key] = info
 
         # Integrate rich entries from footnotes
+        n_fn = 0
         for rich in detection.get("rich_entries", []):
             if not rich.get("_resolution_method"):
                 continue  # Skip GROBID bib entries (already added)
@@ -166,9 +177,14 @@ class CitationGraph:
             existing = self._find_duplicate(rich)
             if not existing:
                 self.bibliography[citekey] = rich
+                n_fn += 1
+
+        if n_fn:
+            logger.info("  Added %d entries from footnotes", n_fn)
 
         # Resolve remaining unmatched
         if unmatched:
+            logger.info("  Resolving %d unmatched citations (CrossRef + LLM)...", len(unmatched))
             resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
             for record in resolved:
                 if record.get("_resolution_method") == "stub" and not record.get("title"):
@@ -216,36 +232,63 @@ class CitationGraph:
         progress_callback=None,
     ) -> dict[str, bool]:
         """Process F1 PDFs and integrate their citations as F2."""
+        import time as _time
+
         pdfs = collect_pdfs(f1_dir, exclude=seed_pdf_path)
 
         if limit and limit < len(pdfs):
             logger.info("Limiting to %d of %d F1 PDFs.", limit, len(pdfs))
             pdfs = pdfs[:limit]
 
-        logger.info("Processing %d F1 PDFs.", len(pdfs))
-        results = {}
+        # Skip already-processed PDFs (caching)
+        already = [p for p in pdfs if p.name in self.processed_papers]
+        remaining = [p for p in pdfs if p.name not in self.processed_papers]
 
-        for i, pdf_path in enumerate(pdfs):
+        if already:
+            logger.info(
+                "%d of %d PDFs already processed (cached). Processing %d remaining.",
+                len(already), len(pdfs), len(remaining),
+            )
+
+        total = len(pdfs)
+        results = {p.name: True for p in already}
+        times: list[float] = []
+
+        for i, pdf_path in enumerate(remaining):
+            t0 = _time.time()
+            idx = len(already) + i + 1
+
             try:
                 ok = self._process_one_f1(
                     pdf_path, llm_config=llm_config, email=email,
                 )
                 results[pdf_path.name] = ok
+                elapsed = _time.time() - t0
+                times.append(elapsed)
 
                 if progress_callback:
                     paper_data = self.processed_papers.get(pdf_path.name, {})
                     n_refs = len(paper_data.get("references", []))
                     detection = paper_data.get("detection", {})
                     progress_callback(
-                        i + 1, len(pdfs), pdf_path.stem,
+                        idx, total, pdf_path.stem,
                         n_refs, detection.get("merged_total", 0), ok,
                     )
+
+                # Time estimate
+                if times and len(remaining) - (i + 1) > 0:
+                    avg = sum(times) / len(times)
+                    remaining_count = len(remaining) - (i + 1)
+                    eta_min = (avg * remaining_count) / 60
+                    if eta_min >= 1:
+                        logger.info("    ~%.0f min remaining (%d papers × %.0fs avg)",
+                                    eta_min, remaining_count, avg)
 
             except Exception as e:
                 logger.error("Error processing %s: %s", pdf_path.name, e)
                 results[pdf_path.name] = False
                 if progress_callback:
-                    progress_callback(i + 1, len(pdfs), pdf_path.stem, 0, 0, False)
+                    progress_callback(idx, total, pdf_path.stem, 0, 0, False)
 
         succeeded = sum(results.values())
         logger.info(

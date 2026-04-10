@@ -218,21 +218,21 @@ def detect_all_citations(
 
     # ── Method 1: GROBID bibliography ──
     m1_citations, m1_rich = _method_grobid_bibliography(grobid_refs)
-    logger.debug("%s: M1 (GROBID bib): %d entries", stem, len(m1_citations))
+    logger.debug("%s: reference list extraction: %d entries", stem, len(m1_citations))
 
     # ── Method 2: GROBID inline markers ──
     m2_citations = _method_grobid_inline(root) if root is not None else {}
-    logger.debug("%s: M2 (GROBID inline): %d citations", stem, len(m2_citations))
+    logger.debug("%s: inline citation markers: %d citations", stem, len(m2_citations))
 
     # ── Method 3: Regex ──
     m3_citations = _method_regex(raw_text) if raw_text else {}
-    logger.debug("%s: M3 (regex): %d citations", stem, len(m3_citations))
+    logger.debug("%s: text pattern matching: %d citations", stem, len(m3_citations))
 
     # ── Method 4: LLM body scan ──
     m4_citations = {}
     if llm_config and paragraphs:
         m4_citations = _method_llm_body(paragraphs, llm_config)
-        logger.debug("%s: M4 (LLM body): %d citations", stem, len(m4_citations))
+        logger.debug("%s: LLM body scan: %d citations", stem, len(m4_citations))
 
     # ── Method 5: LLM footnote extraction ──
     m5_citations = {}
@@ -240,7 +240,7 @@ def detect_all_citations(
     footnotes = parse_tei_footnotes(tei_xml) if tei_xml else []
     if llm_config and footnotes:
         m5_citations, m5_rich = _method_llm_footnotes(footnotes, llm_config)
-        logger.debug("%s: M5 (LLM footnotes): %d citations, %d rich entries",
+        logger.debug("%s: LLM footnote extraction: %d citations, %d rich entries",
                      stem, len(m5_citations), len(m5_rich))
 
     # ── Merge ──
@@ -255,16 +255,18 @@ def detect_all_citations(
     rich_entries = m1_rich + m5_rich
 
     method_counts = {
-        "grobid_bib": len(m1_citations),
-        "grobid_inline": len(m2_citations),
-        "regex": len(m3_citations),
-        "llm_body": len(m4_citations),
-        "llm_footnote": len(m5_citations),
+        "reference_list": len(m1_citations),
+        "inline_markers": len(m2_citations),
+        "text_patterns": len(m3_citations),
+        "llm_body_scan": len(m4_citations),
+        "llm_footnotes": len(m5_citations),
         "merged_total": len(merged),
     }
 
     logger.info(
-        "%s: %d unique citations (bib:%d, inline:%d, regex:%d, llm_body:%d, fn:%d)",
+        "%s: %d unique citations  "
+        "(reference list: %d, inline markers: %d, text patterns: %d, "
+        "LLM body: %d, LLM footnotes: %d)",
         stem, len(merged),
         len(m1_citations), len(m2_citations), len(m3_citations),
         len(m4_citations), len(m5_citations),
@@ -394,11 +396,15 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
     timeout = llm_config.get("timeout", 120)
 
     substantive = [p for p in paragraphs if len(p.get("text", "")) > 50]
+    n = len(substantive)
 
-    for para in substantive:
+    for idx, para in enumerate(substantive):
         text = re.sub(r"\{\{CITE:\w*\}\}", "", para.get("text", "")).strip()
         if len(text) < 50:
             continue
+
+        if n > 10 and idx % 20 == 0:
+            logger.debug("    LLM body scan: paragraph %d/%d", idx + 1, n)
 
         parsed = _llm_query_array(
             base_url, model, timeout,

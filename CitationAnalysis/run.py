@@ -181,7 +181,8 @@ def main():
             label = stem[:55] + "…" if len(stem) > 55 else stem
             if success:
                 print(f"  [{i:>{len(str(n))}}/{n}] {label}  "
-                      f"({n_refs} bib, {n_detected} total detected)", flush=True)
+                      f"({n_refs} from reference list, {n_detected} total across all methods)",
+                      flush=True)
             else:
                 print(f"  [{i:>{len(str(n))}}/{n}] {label}  (FAILED)", flush=True)
 
