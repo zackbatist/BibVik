@@ -45,7 +45,6 @@ import logging
 from collections import Counter, defaultdict
 from itertools import combinations
 
-from tqdm import tqdm
 
 from .llm_analyzer import LLMAnalyzer, _format_authors, _parse_llm_json
 
@@ -310,10 +309,12 @@ def analyze_clusters(
         - (if content_enriched): content_alignment, content_alignment_explanation
     """
     analyzed = []
+    n_clusters = len(clusters)
 
-    for i, cluster in enumerate(tqdm(clusters, desc="Analyzing clusters")):
+    for i, cluster in enumerate(clusters):
         cluster_id = f"cluster_{str(i + 1).zfill(3)}"
         members = cluster["members"]
+        logger.debug("  Cluster %d/%d (%d members)", i + 1, n_clusters, len(members))
 
         # --- Build reference list for prompt ---
         ref_list_parts = []

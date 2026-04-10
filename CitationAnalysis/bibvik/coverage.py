@@ -31,7 +31,6 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from tqdm import tqdm
 
 from .metadata import build_coverage_metadata
 from .utils import write_json
@@ -273,7 +272,9 @@ def download_oa_papers(
     logger.info("Downloading %d OA PDFs to %s...", len(downloadable), download_dir)
     results = {}
 
-    for citekey, url in tqdm(downloadable, desc="Downloading PDFs"):
+    n_dl = len(downloadable)
+    for dl_idx, (citekey, url) in enumerate(downloadable, 1):
+        logger.info("  Downloading [%d/%d]: %s", dl_idx, n_dl, citekey)
         success = _download_pdf(url, download_dir / f"{citekey}.pdf")
         results[citekey] = success
         # Polite delay between downloads.
@@ -333,7 +334,10 @@ def _check_open_access(
         len(entries_with_doi),
     )
 
-    for citekey, entry in tqdm(entries_with_doi.items(), desc="OA lookup"):
+    n_oa = len(entries_with_doi)
+    for oa_idx, (citekey, entry) in enumerate(entries_with_doi.items(), 1):
+        if oa_idx % max(1, n_oa // 5) == 0 or oa_idx == n_oa:
+            logger.debug("  OA lookup: %d/%d", oa_idx, n_oa)
         doi = entry["doi"]
         oa_info = _unpaywall_lookup(doi, email)
         if oa_info:

@@ -35,7 +35,6 @@ import logging
 import re
 from pathlib import Path
 
-from tqdm import tqdm
 
 from .biblatex_model import merge_records
 from .pdf_processor import PDFProcessor
@@ -175,12 +174,12 @@ class CitationGraph:
         # we can extract from its _raw_citation, and correct clear errors.
         n_corrected = self._validate_titles_against_raw_citations()
         if n_corrected:
-            logger.info(
+            logger.debug(
                 "Corrected %d title errors detected via _raw_citation cross-check.",
                 n_corrected,
             )
 
-        logger.info(
+        logger.debug(
             "Seed paper processed. Bibliography now has %d entries.",
             len(self.bibliography),
         )
@@ -192,6 +191,7 @@ class CitationGraph:
         f1_dir: str | Path,
         seed_pdf_path: str | Path | None = None,
         limit: int | None = None,
+        progress_callback=None,
     ) -> dict[str, bool]:
         """
         Process all F1 PDFs and add their references to the bibliography.
@@ -204,10 +204,12 @@ class CitationGraph:
            are cited by this F1 paper.
 
         Args:
-            f1_dir:        Directory containing F1 PDFs.
-            seed_pdf_path: Path to the seed paper (to exclude from F1 processing).
-            limit:         If set, only process this many F1 PDFs. Useful for
-                           testing with a small subset (e.g., limit=5).
+            f1_dir:            Directory containing F1 PDFs.
+            seed_pdf_path:     Path to the seed paper (to exclude).
+            limit:             If set, only process this many F1 PDFs.
+            progress_callback: Optional callable(i, n, pdf_stem, n_refs, success)
+                               called after each paper. Used by run.py to print
+                               per-paper progress without routing through logging.
 
         Returns:
             Dict mapping PDF filenames to success/failure booleans.
@@ -216,27 +218,45 @@ class CitationGraph:
         pdfs = collect_pdfs(f1_dir, exclude=seed_pdf_path)
 
         if limit is not None and limit < len(pdfs):
-            logger.info(
+            logger.debug(
                 "Limiting to %d of %d F1 PDFs (--limit flag).", limit, len(pdfs)
             )
             pdfs = pdfs[:limit]
 
-        logger.info("Found %d F1 PDFs to process.", len(pdfs))
+        logger.debug("Found %d F1 PDFs to process.", len(pdfs))
         results = {}
+        n = len(pdfs)
 
-        for pdf_path in tqdm(pdfs, desc="Processing F1 papers"):
+        for i, pdf_path in enumerate(pdfs, 1):
             try:
                 result = self._process_one_f1(pdf_path)
                 results[pdf_path.name] = result is not None
+                n_refs = len(result.get("references", [])) if result else 0
+                # Count inline citation markers in body text — this is how many
+                # citations the paper actually makes, regardless of how many
+                # bibliography entries GROBID extracted.
+                n_inline = sum(
+                    len(p.get("citations", []))
+                    for p in (result.get("paragraphs", []) if result else [])
+                )
+                unmatched = any(
+                    v.get("_failed_match") and v.get("_source_pdf") == pdf_path.name
+                    for v in self.bibliography.values()
+                )
+                if progress_callback:
+                    progress_callback(i, n, pdf_path.stem, n_refs, n_inline,
+                                      success=result is not None,
+                                      matched=not unmatched)
             except Exception as e:
                 logger.error("Error processing %s: %s", pdf_path.name, e)
                 results[pdf_path.name] = False
+                if progress_callback:
+                    progress_callback(i, n, pdf_path.stem, 0, 0,
+                                      success=False, matched=False)
 
-        logger.info(
-            "F1 processing complete. %d/%d succeeded. Bibliography has %d entries.",
-            sum(results.values()),
-            len(results),
-            len(self.bibliography),
+        logger.debug(
+            "%d/%d papers processed, %d total bibliography entries",
+            sum(results.values()), len(results), len(self.bibliography),
         )
 
         return results
@@ -261,7 +281,7 @@ class CitationGraph:
         f1_citekey = self._match_f1_to_existing(header, pdf_path.name)
 
         if f1_citekey:
-            logger.info("Matched %s to bibliography entry: %s", pdf_path.name, f1_citekey)
+            logger.debug("Matched %s to bibliography entry: %s", pdf_path.name, f1_citekey)
             # Update the existing record with any additional metadata from the
             # paper's own header (e.g., abstract, if not already present).
             existing = self.bibliography[f1_citekey]
@@ -276,13 +296,10 @@ class CitationGraph:
             if self.seed_citekey and self.seed_citekey not in existing["cited_by"]:
                 existing["cited_by"].insert(0, self.seed_citekey)
         else:
-            # Could not match — this PDF might not be one of the seed's references,
-            # or the matching heuristic failed. We still process its references
-            # but log a warning.
-            logger.warning(
-                "Could not match %s to any existing bibliography entry. "
-                "Its references will still be extracted but cited_by links "
-                "may be incomplete.",
+            # Could not match — log at debug; the progress callback will
+            # signal this to the user as "unmatched" alongside the paper name.
+            logger.debug(
+                "Could not match %s to any existing bibliography entry.",
                 pdf_path.name,
             )
             # Create a minimal entry for this paper.
@@ -301,6 +318,10 @@ class CitationGraph:
                 # Even unmatched F1 papers were cited by the seed by definition.
                 "cited_by": [self.seed_citekey] if self.seed_citekey else [],
                 "_source_pdf": pdf_path.name,
+                # Explicit flag: this entry was created because matching failed,
+                # not from the seed's reference list. Used by _repair_graph_state
+                # to identify orphans on reload without fragile heuristics.
+                "_failed_match": True,
             }
 
         # --- Add F2 references ---
@@ -755,7 +776,7 @@ class CitationGraph:
 
         # Return best fuzzy match if we found one above threshold.
         if best_fuzzy_key and best_fuzzy_score >= 0.8:
-            logger.info(
+            logger.debug(
                 "Fuzzy-matched %s to %s (score: %.2f)",
                 pdf_name, best_fuzzy_key, best_fuzzy_score,
             )

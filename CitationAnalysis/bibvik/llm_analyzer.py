@@ -483,8 +483,6 @@ def analyze_all_contexts(
         The updated contexts dict with LLM analysis results added to each
         context record.
     """
-    from tqdm import tqdm
-
     # --- Build a lookup from citekey → paper content for enriched mode ---
     # For each cited work whose PDF we have processed, extract a substantial
     # content summary from the actual paper text (abstract + intro paragraphs).
@@ -499,17 +497,17 @@ def analyze_all_contexts(
             total_cited_works,
         )
 
-    # Count total contexts for progress bar.
+    # Count total contexts.
     total = sum(len(ctxs) for ctxs in contexts.values())
     effective_total = min(total, limit) if limit else total
     logger.info(
-        "Analyzing %d citation contexts with LLM%s...",
+        "  Analyzing %d citation contexts%s",
         effective_total,
-        f" (limited from {total})" if limit and limit < total else "",
+        f" (of {total} total)" if limit and limit < total else "",
     )
 
-    pbar = tqdm(total=effective_total, desc="LLM analysis")
     analyzed_count = 0
+    log_every = max(1, effective_total // 4)  # log ~4 progress updates
 
     for cited_citekey, ctx_list in contexts.items():
         # Look up the cited work's metadata.
@@ -568,13 +566,13 @@ def analyze_all_contexts(
                 ctx["confidence"] = "none"
 
             analyzed_count += 1
-            pbar.update(1)
+            if analyzed_count % log_every == 0 or analyzed_count == effective_total:
+                logger.info("  %d / %d contexts analyzed", analyzed_count, effective_total)
 
         # Break outer loop if limit reached.
         if limit and analyzed_count >= limit:
             break
 
-    pbar.close()
     return contexts
 
 

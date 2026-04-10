@@ -101,7 +101,7 @@ class GrobidClient:
             logger.error("PDF file not found: %s", pdf_path)
             return None
 
-        logger.info("Sending to GROBID: %s", pdf_path.name)
+        logger.debug("Sending to GROBID: %s", pdf_path.name)
 
         # --- Build the multipart form data ---
         # GROBID expects the PDF as a file upload named 'input'.
@@ -117,7 +117,12 @@ class GrobidClient:
                 #   → Useful as fallback if structured parsing fails
                 data = {
                     "consolidateHeader": "1",
-                    "consolidateCitations": "1",
+                    # consolidateCitations is intentionally disabled.
+                    # It causes GROBID to make a CrossRef API call for every
+                    # reference, which is extremely slow for papers with many
+                    # references and frequently causes timeout-induced truncation.
+                    # Reference enrichment is handled separately via --resolve.
+                    "consolidateCitations": "0",
                     "includeRawCitations": "1",
                 }
 
@@ -133,7 +138,7 @@ class GrobidClient:
                 )
 
             if resp.status_code == 200:
-                logger.info("GROBID processed successfully: %s", pdf_path.name)
+                logger.debug("GROBID processed successfully: %s", pdf_path.name)
                 return resp.text
             elif resp.status_code == 503:
                 logger.warning(
@@ -188,12 +193,12 @@ class GrobidClient:
             logger.error("PDF file not found: %s", pdf_path)
             return None
 
-        logger.info("Sending to GROBID (references only): %s", pdf_path.name)
+        logger.debug("Sending to GROBID (references only): %s", pdf_path.name)
 
         try:
             with open(pdf_path, "rb") as pdf_file:
                 files = {"input": (pdf_path.name, pdf_file, "application/pdf")}
-                data = {"consolidateCitations": "1"}
+                data = {"consolidateCitations": "0", "includeRawCitations": "1"}
 
                 resp = requests.post(
                     f"{self.base_url}/api/processReferences",

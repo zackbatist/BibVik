@@ -83,8 +83,6 @@ def extract_footnote_references(
             }
         }
     """
-    from tqdm import tqdm
-
     total_footnotes = 0
     total_refs_extracted = 0
     total_refs_merged = 0
@@ -99,7 +97,9 @@ def extract_footnote_references(
         if source_pdf:
             pdf_to_citekey[source_pdf] = citekey
 
-    for pdf_name, tei_xml in tqdm(tei_files.items(), desc="Footnote extraction"):
+    n_files = len(tei_files)
+    for file_idx, (pdf_name, tei_xml) in enumerate(tei_files.items(), 1):
+        logger.info("  [%d/%d] %s", file_idx, n_files, pdf_name[:60])
         logger.info("Processing footnotes for: %s", pdf_name)
 
         # --- Step 1: Parse footnotes from TEI-XML ---

@@ -89,10 +89,17 @@ def load_config(config_path: str = "config.yaml") -> dict:
 
 def setup_logging(level: str = "INFO") -> logging.Logger:
     """
-    Configure the root logger for the BibVik toolkit.
+    Configure logging for the BibVik toolkit.
 
-    Uses a simple format with timestamps. All modules in bibvik.* will inherit
-    this configuration.
+    User-facing messages (from the 'bibvik' logger used in run.py) are
+    formatted cleanly without the module name. Internal library messages
+    (from bibvik.* sub-loggers) are suppressed at INFO level and only
+    shown at DEBUG level, keeping the terminal readable during normal runs.
+
+    Format:
+        INFO    →  HH:MM:SS  message
+        WARNING →  HH:MM:SS  ⚠ message
+        ERROR   →  HH:MM:SS  ✗ message
 
     Args:
         level: Logging level string (DEBUG, INFO, WARNING, ERROR).
@@ -102,14 +109,68 @@ def setup_logging(level: str = "INFO") -> logging.Logger:
     """
     numeric_level = getattr(logging, level.upper(), logging.INFO)
 
-    logging.basicConfig(
-        level=numeric_level,
-        format="%(asctime)s [%(levelname)-7s] %(name)s: %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-        handlers=[logging.StreamHandler(sys.stdout)],
-    )
+    class _BibVikFormatter(logging.Formatter):
+        """Clean formatter: timestamp + level tag + message, left-justified."""
 
-    return logging.getLogger("bibvik")
+        def format(self, record: logging.LogRecord) -> str:
+            time_str = self.formatTime(record, "%H:%M:%S")
+            msg = record.getMessage()
+
+            # Section headers embed a leading \n for visual separation.
+            prefix = ""
+            if msg.startswith("\n"):
+                prefix = "\n"
+                msg = msg.lstrip("\n")
+
+            if record.levelno >= logging.ERROR:
+                tag = "ERROR  "
+                return f"{prefix}{time_str}  {tag}{msg}"
+            elif record.levelno >= logging.WARNING:
+                tag = "WARN   "
+                return f"{prefix}{time_str}  {tag}{msg}"
+            else:
+                # Indented lines (continuations/details) suppress the timestamp
+                # so the eye can track structure without repeating clock noise.
+                if msg.startswith("  "):
+                    return f"{prefix}{'':10}{msg}"
+                return f"{prefix}{time_str}  {'':7}{msg}"
+
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(_BibVikFormatter())
+
+    # Root 'bibvik' logger: user-facing, shown at the configured level.
+    bibvik_log = logging.getLogger("bibvik")
+    bibvik_log.setLevel(numeric_level)
+    bibvik_log.addHandler(handler)
+    bibvik_log.propagate = False
+
+    # Sub-module loggers (bibvik.tei_parser, bibvik.citation_graph, etc.):
+    # only shown at DEBUG level so internal detail stays out of normal runs.
+    sub_level = logging.DEBUG if numeric_level <= logging.DEBUG else logging.WARNING
+    for name in [
+        "bibvik.tei_parser",
+        "bibvik.citation_graph",
+        "bibvik.pdf_processor",
+        "bibvik.grobid_client",
+        "bibvik.context_extractor",
+        "bibvik.cluster_analyzer",
+        "bibvik.reference_audit",
+        "bibvik.reference_resolver",
+        "bibvik.footnote_extractor",
+        "bibvik.normalize",
+        "bibvik.coverage",
+        "bibvik.zotero_csv",
+        "bibvik.llm_analyzer",
+    ]:
+        sub = logging.getLogger(name)
+        sub.setLevel(sub_level)
+        if not sub.handlers:
+            sub_handler = logging.StreamHandler(sys.stdout)
+            sub_handler.setFormatter(_BibVikFormatter())
+            sub.addHandler(sub_handler)
+        sub.propagate = False
+
+    return bibvik_log
 
 
 # =============================================================================
