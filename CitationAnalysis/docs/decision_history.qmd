@@ -213,3 +213,48 @@ Added `--footnotes` CLI flag (not included in `--all`; must be explicitly reques
 ### Outstanding items updated
 
 Items 1 (footnote detection) is now implemented. Items 2–4 remain.
+
+## cited_by Reconstruction and Matching Bugs (Session: April 2, 2026)
+
+### 31. cited_by never populated (confirmed bug)
+
+Inspection of `bibliography.json` showed all 778 entries had `cited_by: []`. The code fixes to `citation_graph.py` (§ previous session) were correct but the on-disk output predated them. A reconstruction pass was run directly against the output files using two sources: (a) `_source_pdf` → citing-paper citekey mapping for entries whose source PDF was not their own (pass 1, 774 entries), and (b) `citing_citekey` fields from `citation_contexts.json` for 47 additional cross-citation links (pass 2).
+
+### 32. F1 entries losing seed in cited_by after _source_pdf overwrite
+
+After `_process_one_f1` matches an F1 paper to its bibliography entry, it sets `existing["_source_pdf"] = pdf_path.name`. This overwrites the original `_source_pdf` (the seed PDF) with the F1 paper's own filename. Reconstruction using `_source_pdf` then finds a self-reference and skips it, leaving the entry without `lund2021` in `cited_by`. Fixed in two places: (a) `_process_one_f1` now explicitly appends `self.seed_citekey` to the matched entry's `cited_by` after overwriting `_source_pdf`; (b) unmatched F1 entries are created with `cited_by: [self.seed_citekey]` rather than `[]`. Two entries (`abrams2012`, `aannestadnda`) were fixed in the on-disk data directly.
+
+### 33. aannestadnda — orphan entry from GROBID title error + failed match
+
+`aannestadnda` existed because GROBID extracted the wrong title for the "Charisma, Violence and Weapons: The Broken Swords of the Vikings" entry in the seed's reference list. GROBID assigned the title "Charismatic Objects: From Roman Times to the Middle Ages" (a different Aannestad 2018 paper) to `aannestad2018`. When the Broken Swords PDF was processed as F1, `_match_f1_to_existing` couldn't find it (title mismatch) and created a new entry `aannestadnda` with no year (GROBID also failed to extract a date from the PDF header). The `_raw_citation` field on `aannestad2018` contained the correct title throughout.
+
+**Fixes applied:**
+- `aannestad2018` title corrected to match `_raw_citation`
+- `aannestadnda` deleted; its `cited_by` merged into `aannestad2018`
+- `aannestad2018.year` set to `2018`
+
+### 34. zori2013 false-positive F1 match (Allure of the Foreign)
+
+"Allure of the Foreign" PDF was matched to `zori2013` by `_match_f1_to_existing` via fuzzy title matching. The match was a false positive: `zori2013`'s title field had previously been overwritten with Aannestad's title via `merge_records` during an earlier erroneous merge (the pre-existing Aannestad→Zori false positive noted in decision history §7). This contaminated 73 F2 entries whose `cited_by` was set to `zori2013` instead of the Allure paper.
+
+**Fixes applied:**
+- `aannestad2018a` created as the correct F1 entry for the Allure paper
+- `zori2013._source_pdf` restored to seed PDF; title restored from `_raw_citation` ("Feasting in Viking Age Iceland...")
+- 73 F2 entries from Allure PDF: `cited_by` corrected from `zori2013` → `aannestad2018a`; spurious `aannestad2018` entries also removed
+- 29 F2 entries that had been left with empty `cited_by` (stripped during cleanup) had `aannestad2018a` added
+
+### 35. _match_f1_to_existing can claim already-matched entries
+
+Root cause of §34: when multiple F1 PDFs are processed sequentially, a bibliography entry already matched and adopted by one PDF could theoretically be re-matched by a subsequent PDF (if titles are similar enough). Fixed: `_match_f1_to_existing` now skips any entry whose `_source_pdf` is not the seed PDF filename. `_seed_pdf_name` is stored on the graph object and persisted through `_save_graph_state` / `_load_graph_state`.
+
+### 36. Integrity verification added
+
+A comprehensive integrity check was written and run after all fixes:
+- No self-citations in `cited_by`
+- No dangling `cited_by` references (all citekeys exist)
+- All F1 entries have seed in `cited_by`
+- No F2 entries have seed in `cited_by`
+- `aannestadnda` deleted; `aannestad2018`/`aannestad2018a`/`zori2013` have correct titles and provenance
+- All 73 F2 entries from the Allure PDF cite `aannestad2018a`
+
+Result: 778 entries, 561 F1, 216 F2, 777 citation links, zero errors.

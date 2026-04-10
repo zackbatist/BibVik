@@ -1,0 +1,139 @@
+---
+title: "BibVik Citation Analysis — Architecture"
+subtitle: "How the analytical apparatus works"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    self-contained: true
+  gfm: default
+---
+
+# Overview
+
+The citation analysis apparatus has five core processes, supported by a shared infrastructure of normalization, deduplication, and metadata management. This document explains how each component works and how they interact.
+
+# Module Map
+
+| Module | Responsibility |
+|---|---|
+| `detector.py` | Multi-method citation detection (5 methods applied per paper) |
+| `resolver.py` | Resolves unmatched citations via CrossRef and LLM |
+| `graph.py` | Builds multi-generational citation graph with deduplication |
+| `tei_parser.py` | Parses GROBID's TEI-XML; splits compound references |
+| `grobid_client.py` | HTTP client for GROBID |
+| `normalize.py` | Title and author name normalization |
+| `context_extractor.py` | Extracts verbatim citation contexts |
+| `llm_analyzer.py` | Citation function classification and cluster characterization |
+| `cluster_analyzer.py` | Co-occurrence matrix and cluster detection |
+| `resolver.py` | CrossRef lookup and LLM metadata generation for missing refs |
+| `coverage.py` | OA status checking and F2 planning |
+| `metadata.py` | Controlled vocabularies and output metadata |
+| `zotero_csv.py` | Zotero CSV import for exact PDF↔citekey matching |
+| `biblatex_model.py` | Biblatex data model and completeness scoring |
+| `utils.py` | Config, citekey generation, I/O, signal handling |
+
+# Citation Detection: The Five Methods
+
+For each paper in the corpus, five detection methods are applied independently. Their results are merged and deduplicated into a single set of citations. Each citation is tagged with which methods found it (provenance tracking).
+
+## Method 1: GROBID Bibliography
+
+GROBID's ML models parse the PDF's reference list into structured `<biblStruct>` entries. Our TEI parser post-processes these to split compound references (dash-abbreviated authors) and detect merged entries. This yields the richest metadata (title, journal, volume, pages, DOI) when it works.
+
+**Strengths**: Rich structured metadata. DOIs when available.
+
+**Weaknesses**: Trained on STEM articles. Misses footnote-style references. Fails on non-standard layouts. Under-counts when reference lists use humanities conventions.
+
+## Method 2: GROBID Inline Markers
+
+GROBID annotates `<ref type="bibr">` elements in the body text. We extract (author, year) pairs from the marker text, independently of whether the corresponding bibliography entry was successfully parsed. This catches citations that GROBID linked but whose bibliography entry was malformed.
+
+**Strengths**: ML-detected, handles diverse inline styles.
+
+**Weaknesses**: Only catches citations GROBID recognized as references.
+
+## Method 3: Regex Patterns
+
+Pattern matching for standard citation forms in the raw body text: parenthetical `(Smith 2020)`, narrative `Smith (2020)`, multi-author, et al., semicolon-separated groups. Handles non-English connectors (og, und, och, et).
+
+**Strengths**: Fast. Catches formally styled citations GROBID missed.
+
+**Weaknesses**: Cannot detect discursive references, organizational authors, or numbered citation styles.
+
+## Method 4: LLM Body Scan
+
+Each paragraph is sent to the local LLM (qwen3.5:35b) with a prompt asking it to identify all referenced works. This catches everything: discursive references ("as Smith argued in her 2020 monograph"), organizational authors, informal references.
+
+**Strengths**: Most comprehensive detection. Handles any citation style.
+
+**Weaknesses**: Slowest method. May produce false positives for author-year-like patterns that aren't citations.
+
+## Method 5: LLM Footnote Extraction
+
+Each footnote containing year patterns is sent to the LLM with a structured extraction prompt. The LLM returns full bibliographic metadata — not just (author, year) but title, journal, volume, pages, entry type. Essential for papers using Chicago footnote style where the bibliography is in the notes.
+
+**Strengths**: Extracts rich metadata from footnote prose. Handles multiple references per footnote.
+
+**Weaknesses**: Depends on LLM accuracy for metadata extraction.
+
+## Merging
+
+After all five methods run, results are merged by normalized (author, year) key. When multiple methods detect the same citation, their provenance tags are combined. The merged set represents our best knowledge of every work cited anywhere in the document.
+
+# Resolution
+
+For citations detected in the text but not matched to any existing bibliography entry, the resolver attempts two tiers:
+
+1. **CrossRef API**: Query by author surname + year. Accept if author and year match. Free, no auth needed (polite pool with email).
+
+2. **LLM metadata generation**: Send citation contexts to the LLM and ask it to infer full bibliographic metadata. Particularly useful for non-English works and grey literature.
+
+Resolved entries are tagged with `_resolution_method` (crossref, llm_from_context, llm_from_footnote, stub) and `_resolution_confidence` (high, medium, low).
+
+# Graph Construction
+
+The citation graph is built incrementally:
+
+1. **Seed paper**: Extract all citations (5 methods). Add to bibliography as F1.
+2. **F1 papers**: For each PDF, extract all citations (5 methods). Match the paper to its existing F1 entry. Add its citations as F2.
+3. **Deduplication**: Each new entry is checked against existing entries by DOI, exact title, and author+year+fuzzy title. Duplicates are merged, accumulating cited_by links and preferring the most complete metadata.
+
+Matching an F1 PDF to its bibliography entry uses a tiered strategy: Zotero CSV (if provided) → DOI → exact title → author+year.
+
+# Normalization
+
+Two normalization passes run on the bibliography before output:
+
+- **Title normalization**: Detects ALL-CAPS titles (from PDFs with all-caps headings) and converts to title case using humanities conventions. Non-English titles are detected heuristically and left in their original case.
+
+- **Author name normalization**: Resolves inconsistent given-name forms across entries for the same author (e.g., "H L" vs "Hanne Lovise"). Prefers the most complete form seen across the corpus.
+
+# Completeness Scoring
+
+Each bibliography entry receives a `_completeness` field with a score (0.0–1.0) and a breakdown of which fields are present vs. expected for its entry type. Expected fields vary by type:
+
+- **article**: author, title, journaltitle, volume, pages, year
+- **book**: author, title, publisher, year
+- **incollection**: author, title, booktitle, editor, publisher, year
+- **inproceedings**: author, title, eventtitle, year
+
+# Graceful Cancellation
+
+When the user presses Ctrl-C during a long-running stage, the SIGINT handler writes the current bibliography state to `_partial_bibliography.json` before exiting. This prevents loss of work during multi-hour LLM runs.
+
+# CLI Flags
+
+| Flag | Stage | Description |
+|---|---|---|
+| `--all` | 1-4 | Run full pipeline |
+| `--extract` | 1 | Seed paper only |
+| `--iterate-f1` | 2 | F1 papers → citation graph |
+| `--contexts` | 3 | Citation context analysis |
+| `--cluster` | 4 | Cluster analysis |
+| `--coverage` | — | Coverage report + OA lookup |
+| `--limit N` | 2 | Process only N F1 papers |
+| `--context-limit N` | 3 | Analyze only N contexts with LLM |
+| `--email` | 2,cov | Contact email for CrossRef/Unpaywall |
+| `--verbose` | all | Debug logging |

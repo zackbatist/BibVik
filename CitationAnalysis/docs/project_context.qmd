@@ -1,0 +1,121 @@
+---
+title: "BibVik Citation Analysis — Project Context"
+subtitle: "Summary for continuing development in new sessions"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    self-contained: true
+  gfm: default
+---
+
+# Project Overview
+
+BibVik is a pipeline for analyzing citational practices in Viking Age archaeology. It takes a seed paper (Lund & Sindbæk 2022, "Crossing the Maelstrom"), extracts its references, processes the PDFs of those referenced works (F1 generation), extracts their references in turn (F2 generation), and performs qualitative citation analysis using a local LLM.
+
+The corpus includes diverse publication types — journal articles, edited volumes, monographs, grey literature — in multiple languages (English, Norwegian, Swedish, Danish, German, French) with non-Latin characters throughout. Standard scholarly metadata databases (Scopus, WoS, OpenAlex) have poor coverage of this material, which is why we extract references directly from PDFs.
+
+# Architecture
+
+The `bibvik/` package contains these modules:
+
+- `grobid_client.py` — HTTP client for GROBID (ML-based reference extraction, runs as Docker container)
+- `tei_parser.py` — Parses GROBID's TEI-XML output into structured records. Includes a post-processor that splits compound references (handles the humanities convention where dashes abbreviate repeated authors, e.g., "—1987. Title Two...")
+- `biblatex_model.py` — Data model following biblatex field conventions
+- `pdf_processor.py` — Orchestrates per-PDF extraction through GROBID
+- `citation_graph.py` — Multi-generational graph builder with multi-tier matching (DOI → exact title → author+year → fuzzy title with confirmation → filename parsing). Also supports Zotero CSV import for exact PDF↔citekey matching
+- `zotero_csv.py` — Parses Zotero CSV exports for matching
+- `context_extractor.py` — Extracts verbatim citation contexts with adaptive windowing (paragraph-based, extends at boundaries, trims long paragraphs to ±3 sentences)
+- `llm_analyzer.py` — LLM-based citation function classification via Ollama (qwen3.5:35b). Single unified pass: uses content-enriched prompt when cited paper's PDF is available, context-only prompt otherwise. Each record tagged with `analysis_mode`. Also contains `_build_content_lookup` which extracts abstract + first ~3000 chars of body text from processed PDFs for the enriched analysis
+- `cluster_analyzer.py` — Co-occurrence matrix → connected components → LLM characterization of relationship types
+- `reference_audit.py` — Three-layer reference detection (GROBID markers + regex + LLM) reconciled against extracted bibliography to find missing references
+- `coverage.py` — Reports PDF availability, checks Unpaywall for OA status, F2 planning section
+- `metadata.py` — Controlled vocabularies and scope notes embedded in all output JSON files
+- `utils.py` — Config loading, citekey generation (lastnameyear with a/b/c disambiguation, transliterated for key but Unicode preserved in fields), JSON I/O
+
+`run.py` is the CLI entry point with flags: `--all`, `--extract`, `--iterate-f1`, `--contexts`, `--cluster`, `--coverage`, `--audit`, `--limit N`, `--context-limit N`, `--email`, `--download-oa`, `--verbose`.
+
+`config.yaml` has paths, GROBID settings, LLM settings (model, temperature, timeout), context extraction parameters, clustering thresholds, and optional Zotero CSV path.
+
+# Key Design Decisions
+
+- LLM thinking mode is disabled via `"think": false` in the Ollama API payload (qwen3.5 otherwise spends most of its time in a `<think>` block)
+- The `<think>` tag stripping is also in the JSON parser as a fallback
+- Fuzzy matching thresholds were tightened after false positives (Abrams→Barrett, Aannestad→Zori). Tier 4+ now requires author OR year confirmation with 0.7+ title overlap
+- Enriched and non-enriched citation analysis was unified into a single pass (previously two separate passes that produced near-identical outputs)
+- All output files include `_metadata` with controlled vocabulary definitions, field scope notes, and analysis parameters
+- The compound reference splitter in tei_parser handles both dash-year patterns and author-boundary detection (tested against real data: Jansson 1986/1987/1989 + Wikander 1978 compound entry)
+
+# Outstanding Work Items
+
+1. **Footnote-style citation detection.** Some papers (e.g., Abrams 2012) put full bibliographic information in footnotes instead of a bibliography section. GROBID handles this poorly. Needs: parse GROBID's `<note>` elements and extract structured bibliographic metadata from footnote text. The LLM is well-suited for this: send each footnote to the model and ask it to extract full metadata (author, title, journal, volume, pages, year, DOI), not just author-year pairs. Example footnote from Abrams 2012:
+
+   > Søren Sindbaek, for example, has applied complex network theory to Viking-Age trade and exchange: 'The Small World of the Vikings: Networks in Early Medieval Communication and Exchange', Norwegian Archaeological Review 40 (2007), pp. 59–74.
+
+   Another example with multiple references embedded:
+
+   > In Gripla 20 (2009), pp. 137–62, at p. 139, and 'What Was "Kaupang in Skiringssal?" Comments on Dagfinn Skre (ed.): Kaupang in Skiringssal. Kaupang Excavation Project Publication Series, Vol. 1, Aarhus University Press, Århus (2007)', Norwegian Archaeological Review 41 (2008), pp. 176–94
+
+2. **Reference resolution for unmatched citations.** When a citation is detected in the body text but has no matching bibliography entry (because the PDF was cut off before the bibliography, or GROBID missed it), attempt to resolve it: first try CrossRef API (free, query by author+year+title keywords from context), then fall back to LLM-based metadata generation from the citation context or footnote text.
+
+3. **Completeness scoring.** Each bibliography entry should get a `completeness` field with a score and breakdown of which fields are present vs. expected for its entry type (article needs journaltitle/volume/pages; book needs publisher/location; incollection needs booktitle/editor/publisher). Complete metadata is nice to have but not strictly necessary — the project's purpose is citation analysis, so knowing that a reference exists and whether it matches an existing entry in the dataset is most important.
+
+4. **Updated audit output.** Resolved references should be added to the bibliography with a `_resolution_method` field (crossref, llm_from_footnote, manual) indicating provenance.
+
+# Technical Environment
+
+- Python 3.14 on macOS (ARM), colleagues on Windows and Linux
+- GROBID 0.8.1 via Docker
+- Ollama with qwen3.5:35b (thinking mode disabled)
+- The working directory is tracked in git at `BibVik/CitationAnalysis/`
+- Network access is available for CrossRef API calls
+- The attached Exported_Items.csv is a Zotero export used for PDF↔citekey matching; do not use it for anything other than associating PDFs with citekeys
+
+# Session Transition — April 2, 2026
+
+This section records the state of the project at the point of transitioning to a new conversation context.
+
+## What Has Been Built
+
+The full pipeline is implemented and functional. All modules in `bibvik/` exist and have been iterated on substantially:
+
+- Reference extraction via GROBID, TEI-XML parsing, and compound-reference splitting are complete and tested on real corpus data.
+- The five-tier matching system in `citation_graph.py` (DOI → exact title → author+year → fuzzy+confirmation → filename) is in place with tightened thresholds following false-positive incidents.
+- Zotero CSV integration (`zotero_csv.py`) functions as tier 0 matching.
+- Context extraction with adaptive windowing is complete. The `{{CITE:}}` placeholder leak bug is fixed at both its source (`tei_parser.py`) and as a defensive cleanup pass in `context_extractor.py`.
+- LLM analysis is unified into a single pass (enriched when cited-paper content is available, context-only otherwise), with `analysis_mode` tagged per record.
+- Cluster analysis, coverage reporting with Unpaywall integration, and reference auditing (three-layer: GROBID markers + regex + LLM) are all implemented.
+- All JSON outputs include `_metadata` branches with controlled vocabulary definitions.
+- The CLI (`run.py`) supports `--all`, `--extract`, `--iterate-f1`, `--contexts`, `--cluster`, `--coverage`, `--audit`, `--limit N`, `--context-limit N`, `--email`, `--download-oa`, `--verbose`.
+- A Quarto report and Reveal.js presentation were generated for the "Citational Politics and Practices in Viking Age Archaeology and Beyond" workshop at University of Oslo (April 2026).
+
+## Output Files Present
+
+The `output/` directory contains results from a real pipeline run:
+
+- `bibliography.json` — Full citation graph with biblatex-style entries
+- `citation_contexts.json` — Verbatim contexts with LLM-assigned citation functions
+- `clusters_content_enriched.json` and `clusters_context_only.json` — Cluster analysis outputs
+- `coverage_report.json` — PDF availability and OA status
+- `reference_audit.json` — Three-layer reference detection reconciled against bibliography
+- `processing_log.json` — Per-PDF processing log
+- `_graph_state.json` — Serialized graph state
+- `tei/` — GROBID TEI-XML output for ~40 F1 papers
+
+## What Remains To Be Done
+
+The four outstanding work items from the **Outstanding Work Items** section above are not yet implemented. In priority order:
+
+1. **Footnote-style citation detection** (item 1 / decision history §22) — parse GROBID `<note>` elements and send to LLM for structured metadata extraction. This is the highest priority because Abrams 2012 is a known affected paper and the unmatched citations from it inflate the audit's unresolved list.
+2. **Reference resolution for unmatched citations** (item 2 / §23) — CrossRef API lookup by author+year+title keywords, falling back to LLM-generated metadata from context/footnote text. Depends partly on item 1 for footnote cases.
+3. **Completeness scoring** (item 3 / §24) — per-entry `completeness` field scoring which expected fields are present for the entry type.
+4. **Updated audit output** (item 4 / §25) — resolved references get a `_resolution_method` field (crossref, llm_from_footnote, manual).
+
+## Notes for Continuing Development
+
+- Do not modify `Exported_Items.csv` — it is a read-only Zotero export.
+- GROBID must be running as a Docker container on `localhost:8070` before running any extraction steps.
+- Ollama must be running with `qwen3.5:35b` (or the model name set in `config.yaml`) before running any LLM steps.
+- The `decision_history.qmd` file documents the rationale behind every non-obvious design choice — consult it before changing matching thresholds, LLM prompts, or output structure.
+- Python 3.14 is in use; the regex compatibility workaround in `reference_audit.py` (pre-built pattern strings, Unicode escapes for dashes) must be preserved.
