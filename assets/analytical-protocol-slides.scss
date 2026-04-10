@@ -1,0 +1,67 @@
+/*-- scss:defaults --*/
+
+$font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$presentation-heading-font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$presentation-font-size-root: 36px;
+$presentation-heading-color: #2c3e50;
+$body-color: #333333;
+$link-color: #1a6b5a;
+
+/*-- scss:rules --*/
+
+.reveal .slide-background-content {
+  background-color: #fafafa;
+}
+
+.reveal h1, .reveal h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.reveal h2 {
+  border-bottom: 2px solid #2c3e50;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+.reveal .callout {
+  font-size: 0.85em;
+}
+
+.reveal table {
+  font-size: 0.75em;
+}
+
+.reveal pre code {
+  font-size: 0.65em;
+  max-height: 400px;
+}
+
+.reveal blockquote {
+  border-left: 3px solid #5a7a8a;
+  padding-left: 1em;
+  font-style: italic;
+  color: #555;
+  font-size: 0.6em;
+}
+
+.reveal .footer {
+  font-size: 0.45em;
+  color: #999;
+}
+
+section.has-dark-background h1,
+section.has-dark-background h2,
+section.has-dark-background p,
+section.has-dark-background li,
+section.has-dark-background .r-fit-text {
+  color: #ecf0f1;
+}
+
+section.has-dark-background h2 {
+  border-bottom-color: #ecf0f1;
+}
+
+.small-text {
+  font-size: 0.6em;
+}

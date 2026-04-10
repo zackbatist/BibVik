@@ -1,0 +1,548 @@
+---
+title: A Protocol for Analyzing Citational Practice in Viking Age Archaeology
+subtitle: Citational Politics and Practices in Viking Age Archaeology and Beyond
+author:
+  - name: Zachary Batist
+    id: zb
+    email: zachary.batist@mcgill.ca
+    url: https://zackbatist.info
+    orcid: 0000-0003-0435-508X
+    corresponding: true
+    affiliations:
+      - name: McGill University
+        department: Epidemiology, Biostatistics and Occupational Health
+        city: Montreal
+        region: Québec
+        country: Canada
+  - name: Isak Roalkvam
+    id: ir
+    email: isak.roalkvam@cas.au.dk
+    url: https://www.au.dk/isak.roalkvam@cas.au.dk/
+    orcid: 0000-0001-6974-1374
+    affiliations:
+      - name: University of Aarhus
+        department: Archeology and Heritage Studies
+        city: Aarhus
+        country: Denmark
+  - name: Julie Lund 
+    id: jl
+    email: julie.lund@iakh.uio.no
+    url: https://www.hf.uio.no/iakh/english/people/aca/archaeology/tenured/julielun/
+    corresponding: true
+    affiliations:
+      - name: University of Oslo
+        department: Archaeology, Conservation and History
+        city: Oslo
+        country: Norway
+license: CC0
+lang: en-CA
+date: 2026-04-13
+date-format: "MMMM DD, YYYY"
+format:
+  revealjs:
+    theme: [default, assets/analytical-protocol-slides.scss]
+    slide-number: true
+    transition: fade
+    width: 1280
+    height: 720
+    fig-align: center
+    code-fold: true
+    self-contained: true
+    toc: false
+    number-sections: false
+---
+
+#
+
+::: {.r-fit-text}
+How do archaeologists use citations,\
+and can we study this at scale\
+without losing the nuance?
+:::
+
+::: {.notes}
+Bibliometric methods allow us to investigate research trends at scale, but they typically reduce citations to a count or a link.
+
+At the same time, we want to preserve the qualitative dimension — why a reference is cited, how it is characterized, and what company it keeps.
+
+This talk is about that tension, and our attempt to resolve it.
+:::
+
+## The problem with counting citations
+
+Citations are not neutral. They are rhetorical acts.
+
+A citation can:
+
+- Provide evidence for a claim
+- Establish a methodological lineage
+- Set up a contrast or foil
+- Signal membership in a scholarly community
+- Exclude or render invisible
+
+Standard bibliometric tools count **that** something is cited.\
+They cannot tell us **why** or **how**.
+
+::: {.notes}
+This connects to the workshop's theme of citational politics.
+
+Counting who cites whom captures network structure but not the work that citations perform.
+
+A citation count tells you nothing about whether a reference is being invoked as evidence, as a foil, or as a gesture of acknowledgment.
+:::
+
+## What BibVik asks
+
+1. How do various perspectives on the origins of the Viking Age manifest in the citation record?
+2. Are these perspectives rooted in personal or professional identities and relationships?
+3. How are citations used to situate one's research in relation to prior work?
+
+::: {.notes}
+All of these questions posed by the BibVik project require something standard bibliometric tools don't provide.
+
+You can map citation networks, but you can't tell from a network what a cluster represents intellectually, or whether a citation is being used as a support or as a foil.
+:::
+
+## The seed paper
+
+::: {.columns}
+::: {.column width="60%"}
+Lund & Sindbæk (2022), "Crossing the Maelstrom: New Departures in Viking Archaeology"
+
+- Review of shifting paradigms in Viking Age research
+- 574 bibliographic references
+- Authored by scholars representing different, yet converging, research traditions
+- Supplemented by seven anonymous peer reviewers who recommended additional sources
+:::
+::: {.column width="40%"}
+**Generational model:**
+
+| Generation | What it contains |
+|---|---|
+| **P** | Seed paper |
+| **F1** | Papers cited by P |
+| **F2** | Papers cited by F1 |
+| **F3+** | ... and so on |
+:::
+:::
+
+::: {.notes}
+How do we build a dataset that can address these questions?
+
+We can't survey the entire field — we need a principled entry point and a strategy for expanding outward.
+
+Lund and Sindbæk's review works because of how it was produced.
+
+The two authors come from different research traditions, so the bibliography isn't skewed toward one perspective.
+
+And seven peer reviewers actively recommended additional references and challenged the authors' characterizations.
+
+So this isn't just two people's view of the literature — it's been vetted by a panel of specialists.
+
+From there we expand generationally.
+
+The seed paper's references are the first filial generation, their references are the second, and so on.
+:::
+
+## Why not use open scholarly metadata?
+
+- **These data were never intended to be used for bibliometric analysis**
+- Analysis tends to follow the variables readily at hand, rather than being driven by research questions
+
+[]()
+
+- Scopus, Web of Science, OpenAlex, CrossRef — all tested, all insufficient
+- Poor coverage of monographs, edited volumes, grey literature, non-English sources — Viking Age archaeology is *all of these*
+
+[]()
+
+- **We need to generate data tailored for our questions**, originating straight from their sources of origin, i.e. the publications themselves
+
+::: {.notes}
+But why not just use open scholarly databases such as Crossref, like everyone else?
+
+The short answer is that these databases were never designed to be analysed.
+
+They're publisher registries and DOI assignment systems.
+
+Studies end up analysing the handful of variables they provide because they're available, not because they answer the research question.
+
+Sampling and quality assurance are surprisingly uncommon in bibliometric work.
+
+For our corpus, the coverage problem alone is especially troubling — monographs, edited volumes, and grey literature in Scandinavian languages are exactly what these databases handle worst.
+
+But even with perfect coverage, the variables on offer wouldn't enable us to answer our questions.
+
+So we decided to generate our own dataset, and build the analytical structure around what we actually need.
+:::
+
+## Our analytical protocol
+
+- **Creating a citation graph** — structuring who cites whom, across generations
+- **Extracting citation contexts** — capturing the actual words around each reference
+- **Interpreting citation functions** — classifying the rhetorical work each citation performs
+- **Detecting relationships between sources** — characterizing how co-cited references relate
+- **Identifying gaps and assessing coverage** — measuring what we can't see
+
+::: {.notes}
+Our protocol currently has five interdependent components, and I'll go over each of these briefly.
+:::
+
+## Creating a citation graph
+
+**Which works are cited, and by whom?**
+
+- Extract structured references directly from PDFs
+- Cycles through a few methods: regex, GROBID and LLM
+- Explicitly account for humanities citation conventions that standard tools miss
+  - Citations in footnotes, citations embedded in prose, etc
+- Remove duplicates and redundancies
+
+::: {.notes}
+Rather than relying on any single extraction method, we apply five different detection methods to every paper and merge the results.
+
+GROBID is a machine learning system trained on scientific journal articles that gives us easy access to structured bibliographic data.
+
+However it is trained on a limited dataset that excludes much of what constitutes our corpus.
+
+So we supplement this by also scanning the body text independently with regular expression patterns for standard citation forms, and with a local LLM for discursive references that do not fit a standard pattern.
+
+This is especially useful for extracting references from footnotes or from contexts where they are embedded in prose.
+
+All five methods run on every paper.
+
+The results are merged and deduplicated — the same work cited across multiple papers with slightly different metadata resolves to one entry.
+
+In practice, the additional methods catch 10 to 40 percent more citations than the reference list alone, and for some papers where GROBID fails entirely, they're the only source of data.
+:::
+
+## Creating a citation graph
+
+::: {.columns}
+::: {.column width="42%"}
+- Extract bibliographic metadata into a flat data file, using BibLaTeX elements
+- Each work appears once, assigned a unique `citekey`
+- Names, titles and other values are normalized, even when different papers use slightly different spelling or formatting
+- Each contains a record of every paper that cites it
+:::
+::: {.column width="58%"}
+```{.json}
+{
+  "citekey": "sindbaek2007",
+  "entry_type": "article",
+  "title": "The Small World of the Vikings",
+  "author": [
+    {"family": "Sindbæk", "given": "Søren M."}
+  ],
+  "journaltitle": "Norwegian Archaeological Review",
+  "volume": "40", "pages": "59--74",
+  "date": "2007",
+  "generation": "F1",
+  "cited_by": ["lund2022", "aannestad2018"]
+}
+```
+:::
+:::
+
+::: {.notes}
+Here's what a record looks like in our citation graph.
+
+It uses common variables from the _de facto_ BibLaTeX standard, each entry has its own unique citekey, and names and titles are normalized across the dataset.
+
+What makes this different from just another bib file is the `cited_by` variable, which tracks every paper that references this work and makes this a relational dataset.
+:::
+
+## Extracting citation contexts
+
+**Where and how is each reference is invoked?**
+
+With the graph in place, we can locate where each reference is invoked — and capture what the citing author actually says.
+
+```{.json}
+{
+  "context_id": "ctx_lund2022_sindbaek2007_001",
+  "verbatim_text": "Recent studies have drawn on network theory to
+    reframe Viking-period exchange as polycentric rather than
+    hub-driven (Sindbæk 2007; Barrett 2010). This shift has
+    implications for how we understand the relationship between
+    centres like Birka and Hedeby and their wider hinterlands.",
+  "citing_citekey": "lund2022",
+  "cited_citekey": "sindbaek2007",
+  "co_occurring_citekeys": ["barrett2010"]
+}
+```
+
+Extracts the **verbatim text** — not a summary.\
+And the **co-occurring references** — what company each citation keeps.
+
+::: {.notes}
+For every citation marker in every paper, we extract the surrounding text — the actual sentences the author wrote when they invoked that reference.
+
+The window adapts: usually a paragraph, but it extends across boundaries when needed, for instance when a reference is at the _end_ of a paragraph it might capture the beginning of the next paragraph too.
+
+We also record which other references appear in the same passage.
+
+Sindbæk and Barrett appear together here — that co-occurrence, grounded in a specific passage, is what feeds the relationship detection later on.
+:::
+
+## Interpreting citation functions
+
+**Why is each reference cited, and how is it characterized?**
+
+```{.json}
+{
+  "context_id": "ctx_lund2022_sindbaek2007_001",
+  "citation_function": "theoretical_framing",
+  "citation_function_explanation":
+    "The citing authors invoke Sindbæk's network model as the
+     conceptual framework that reoriented the field away from
+     centre-periphery models of Viking-period exchange. The
+     citation positions this work as a paradigm shift rather
+     than an incremental contribution.",
+  "confidence": "high",
+  "analysis_mode": "content_enriched",
+  "characterization_assessment": "selective",
+  "characterization_explanation":
+    "Sindbæk's paper also addresses small-world network
+     properties and their implications for information flow,
+     which the citing authors do not engage with. The citation
+     foregrounds the exchange dimension to serve the chapter's
+     focus on material culture circulation."
+}
+```
+
+::: {.notes}
+This is the core analytical contribution.
+
+A local language model reads each citation context and classifies the rhetorical work the citation performs.
+
+The explanation matters more than the label — it's grounded in the specific language of the passage.
+
+For instance, here Sindbæk 2007 is classified as theoretical framing: invoked as a paradigm shift, not just a finding.
+
+And we're still experimenting with this, but when we have the full text of the cited work, the analysis can go deeper by comparing the citing passage against what Sindbæk actually wrote.
+
+In this case, the model found that the citation of Sindbæk 2007 was somewhat selective because his paper also addresses information flow and small-world properties, but the citing authors foreground only the exchange dimension.
+
+That gap between how a work is cited and what it actually says is exactly the kind of citational practice this project aims to make visible.
+:::
+
+## Interpreting citation functions: the prompt
+
+> You are an expert in academic citation analysis. Your task is to analyze how a cited work is being used in its citing context.
+> 
+> Context:
+> The following is a passage from an academic paper. The citation of interest is marked with [target citation]. Other cited works may appear in the same passage.
+>
+> {context_text}
+>
+> The target citation refers to: "{cited_title}" by {cited_authors} ({cited_year}).
+> 
+> Task:
+> Analyze the function of this citation. Consider these common citation functions as a starting point, but do not limit yourself to them:
+>
+> [controlled vocab and definitions]
+>
+> Respond in JSON format with exactly these fields:
+> 
+> [JSON template]
+
+::: {.notes}
+I want to be explicit about what the model receives.
+
+It gets the text, some metadata about the cited work, a set of preliminary categories, and an instruction to return structured output.
+
+It does not connect to the internet or any other database, and each run is independent of prior runs, so the model retains no memory of previous contexts.
+:::
+
+## Detecting relationships between sources
+
+**How do authors situate prior work in conversation?**
+
+```{.json}
+{
+  "cluster_id": "cluster_007",
+  "members": ["barrett2010", "sindbaek2007", "ashby2015", "skre2007"],
+  "relationship_type": "theoretical_conversation",
+  "relationship_name":
+    "Competing models of Viking-period network formation",
+  "rationale":
+    "Barrett and Sindbæk are cited together to propose
+     network-based models emphasizing polycentric exchange.
+     Skre represents an older centralized-hub model that
+     the citing author positions as a foil. Ashby provides
+     the empirical data from comb production used to
+     adjudicate between these frameworks.",
+  "directionality":
+    "Barrett and Sindbæk build on each other; both contrast
+     with Skre; Ashby provides evidence for evaluation.",
+  "strength": "strong"
+}
+```
+
+::: {.small-text}
+Two references co-occur when they appear in the same citation context.\
+Repeated co-occurrence (≥2 contexts) suggests the citing author sees a relationship.
+:::
+
+::: {.notes}
+Co-citation analysis typically stops at frequency.
+
+We go further by asking what kind of relationship the co-citation encodes.
+
+The LLM names the specific character of these relationships — not simply that these are similar.
+
+For example, Barrett and Sindbæk propose network models, Skre is positioned as a foil, Ashby provides the evidence.
+
+This is grounded in the actual passages, not inferred from counts alone.
+
+And like with our other experimental method, when we have the full text of each cited paper, we can ask whether the citing author's grouping reflect how these works actually relate.
+
+Citations don't just reflect intellectual relationships — they construct them.
+:::
+
+## Detecting relationships between sources: the prompt
+
+> You are an expert in academic citation analysis and bibliometrics. Your task is to analyze a group of references that frequently appear together in academic citations, and characterize the nature of their relationship.
+> 
+> Co-cited references:
+> The following references frequently appear together in citation contexts:
+> {reference_list}
+> 
+> Citation contexts where they co-occur:
+> {contexts_text}
+> 
+> Citation function data:
+> {function_data}
+> 
+> Task:
+> Analyze the relationship between these co-cited references.
+> 
+> Consider:
+> 
+> 1. Are they doing similar work (parallel findings)?
+> 2. Is one building on another (methodological or theoretical lineage)?
+> 3. Are they being used as contrasts or foils for each other?
+> 4. Do they address complementary aspects of a problem?
+> 5. Are they part of a theoretical conversation or debate?
+> 6. Is there another type of relationship?
+> 
+> Respond in JSON format with exactly these fields:
+> [JSON template]
+
+::: {.notes}
+Again, here's the prompt for characterizing relationships among co-cited sources.
+
+The model sees the actual references, the actual passages where they co-occur, and the citation functions identifying during the previous stage.
+
+Like with the controlled vocabulary in the previous prompt, the six relationship types specified here are prompts for consideration, not a closed taxonomy.
+:::
+
+## Coverage and corpus assembly
+
+**How complete is our corpus?**
+
+This module:
+
+- Identifies success rates for each detection method applied to all records
+- Attempts recovery of missing references through online queries (Crossref, OpenAlex)
+- For F2, download open access content via the Unpaywall API, and estimate how much manual effort is required to complete the corpus
+
+::: {.notes}
+The final component closes the loop.
+
+Reference extraction is imperfect, and if we don't measure what's missing, those gaps propagate silently throughout the rest of the pipeline.
+
+Aggregating what works and does not work throughout the corpus may also tell us which methods work best for which kinds of documents, and help us streamline the process as we move forward.
+
+For references that are detected in the text but missing from the bibliography, we attempt to "fill in" those records by tapping the CrossRef and OpenAlex APIs.
+
+And for extending this to another F2 generation, we check open access availability via the Unpaywall API to estimate how much of that next layer we can acquire automatically.
+:::
+
+## Why use an LLM at all?
+
+The BibVik protocol considered several options:
+
+| Approach | Limitation |
+|----|-----|
+| Manual coding | thousands of references across hundreds of documents |
+| Scite Zotero plugin | Biased toward "neutral mention", limited corpus |
+| Jurgens (2018)^[Jurgens, David, Srijan Kumar, Raine Hoover, Dan McFarland, and Dan Jurafsky. 2018. "Measuring the Evolution of a Scientific Field through Citation Frames." Transactions of the Association for Computational Linguistics 6: 391–406.] ^[https://github.com/davidjurgens/citation-function.] open-source NLP | Requires NLP expertise to implement |
+| **Local LLM (this toolkit)** | Focused on specific tasks, auditable, all data stays local |
+
+The LLM is not replacing human judgment.\
+It provides a systematic annotation that surfaces patterns for human review.
+
+::: {.notes}
+So now it's time to address the elephant in the room:
+
+Why are we using an LLM at all?
+
+We first considered several alternatives.
+
+Manual coding would be great in theory, we this is simply unrealistic given our extremely large corpus.
+
+Scite is a product made by some data science firm and uses machine learning to do some _very simple_ sentiment analysis, trained on recent STEM journal articles.
+
+Aside from its mis-matched scope, Scite tends to play it safe by over-identifying neutral mentions.
+
+A few researchers have developed tools to do similar work, but, personally, I can't make heads or tails of any of it due to my own inexperience with NLP methods.
+
+The local LLM gives us a way of generating targeted classifications, in way that's relatively accessible, auditable, and secure.
+:::
+
+## Limitations of LLMs
+
+- No domain-specific training in citation analysis
+- No calibrated confidence (high/medium/low is a heuristic, not a probability score)
+- Cannot detect implicit or distributed citation functions
+- Each context is classified independently — no cross-context reasoning
+- LLMs are slow, especially when using non-specialized hardware
+- At temperature 0.3, results are *mostly* reproducible, not guaranteed
+
+::: {.notes}
+At the same time, of course there are some limitations.
+
+The model has no domain-specific training — it's applying general reading comprehension to a specialized task.
+
+The confidence labels are self-assessments, not calibrated probabilities.
+
+Each context is classified in isolation, so the model can't track how the same source is used across different parts of a paper - which may actually be a benefit, depending on what you're trying to do.
+
+LLM are very slow, especially when using older or off-the-shelf hardware.
+
+And there are some limits on reproducibility, but overall trends in such a large corpus will probably remain relatively consistent across runs.
+:::
+
+## Next steps
+
+1. Full run on the complete F1 corpus (many hours on a decent laptop)
+2. Human review of a stratified sample of LLM classifications
+3. Integration with the qualitative annotation protocol
+4. Exploratory statistical and network analyses of the LLM classifications
+5. Extend to F2 generation as coverage permits
+
+::: {.notes}
+After we refine the protocol based on a small subset, we will run it on the full F1 corpus.
+
+This can be very slow - generating the citation graph alone for only 50 papers took about five hours, so the complete run will take a few days using my three year old laptop.
+
+After that, we will do a human review of a stratified sample, integrate with the qualitative annotation protocol presented earlier, and dive into a network analysis to uncover systemic behaviours.
+
+If time, resources and data availability permit, we may even extend this to another generation of works.
+:::
+
+# Thank you!
+
+All code, prompts, and controlled vocabularies:
+[github.com/zackbatist/BibVik](https://github.com/zackbatist/BibVik)
+
+These slides are available at:
+[zackbatist.info/BibVik/analytical-protocol-slides](https://zackbatist.info/BibVik/analytical-protocol-slides.html)
+
+::: {.notes}
+Everything is on GitHub, including these slides.
+
+Happy to take questions!
+:::
