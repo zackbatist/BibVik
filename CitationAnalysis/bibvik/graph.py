@@ -19,7 +19,7 @@ from unidecode import unidecode
 
 from .utils import generate_citekey, reset_citekey_registry, collect_pdfs, write_json
 from .grobid_client import GrobidClient
-from .tei_parser import parse_tei_references, parse_tei_body, parse_tei_header, parse_tei_footnotes
+from .tei_parser import parse_tei_references, parse_tei_body, parse_tei_header, parse_tei_footnotes, detect_language
 from .detector import detect_all_citations
 from .resolver import resolve_citations
 from .normalize import normalize_entry
@@ -208,6 +208,7 @@ class CitationGraph:
             "references": grobid_refs,
             "paragraphs": paragraphs,
             "source_pdf": pdf_path.name,
+            "language": detect_language(paragraphs),
             "grobid_id_to_citekey": {
                 gid: ck for (pdf, gid), ck in self.grobid_map.items()
                 if pdf == pdf_path.name
@@ -461,6 +462,7 @@ class CitationGraph:
             "references": grobid_refs,
             "paragraphs": paragraphs,
             "source_pdf": pdf_path.name,
+            "language": detect_language(paragraphs),
             "grobid_id_to_citekey": {
                 gid: ck for (pdf, gid), ck in self.grobid_map.items()
                 if pdf == pdf_path.name

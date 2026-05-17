@@ -388,6 +388,7 @@ def _save_graph_state(graph: CitationGraph, path: Path) -> None:
             "header": data.get("header", {}),
             "paragraphs": data.get("paragraphs", []),
             "source_pdf": data.get("source_pdf", ""),
+            "language": data.get("language", "unknown"),
             "grobid_id_to_citekey": data.get("grobid_id_to_citekey", {}),
             "references": data.get("references", []),
             "detection": data.get("detection", {}),

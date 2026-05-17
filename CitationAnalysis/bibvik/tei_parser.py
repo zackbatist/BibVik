@@ -99,6 +99,76 @@ def parse_tei_references(tei_xml: str) -> list[dict]:
     return expanded
 
 
+def detect_language(paragraphs: list[dict]) -> str:
+    """
+    Detect the primary language of a paper from its body paragraphs.
+
+    Uses the lingua library with a restricted set of languages known to
+    appear in the BibVik corpus. Restricting to a subset improves both
+    accuracy and speed compared to running against all supported languages.
+
+    The first ~2000 characters of body text are used. This is sufficient
+    for reliable detection on full paragraphs; shorter samples increase
+    the risk of misclassification between closely related Scandinavian
+    languages.
+
+    Returns an ISO 639-1 language code (e.g. "en", "no", "da", "sv",
+    "de", "fr"), or "unknown" if detection fails or lingua is not
+    installed.
+
+    Note: GROBID's own xml:lang attribute on the <text> element is not
+    used because inspection of the TEI output found it to be unreliable
+    — non-English papers were frequently tagged "en" when abstracts or
+    keywords were in English.
+    """
+    try:
+        from lingua import Language, LanguageDetectorBuilder
+    except ImportError:
+        logger.warning(
+            "lingua not installed — language detection unavailable. "
+            "Install with: pip install lingua-language-detector"
+        )
+        return "unknown"
+
+    # Restrict to languages expected in the corpus. This improves accuracy
+    # for closely related languages (Norwegian/Danish/Swedish) and reduces
+    # load time compared to building a detector for all 75 supported languages.
+    detector = LanguageDetectorBuilder.from_languages(
+        Language.ENGLISH,
+        Language.BOKMAL,
+        Language.DANISH,
+        Language.SWEDISH,
+        Language.GERMAN,
+        Language.FRENCH,
+    ).build()
+
+    # Concatenate paragraph text until we have ~2000 characters.
+    sample_text = ""
+    for para in paragraphs:
+        sample_text += para.get("text", "") + " "
+        if len(sample_text) >= 2000:
+            break
+    sample_text = sample_text.strip()
+
+    if not sample_text:
+        return "unknown"
+
+    detected = detector.detect_language_of(sample_text)
+    if detected is None:
+        return "unknown"
+
+    # Map lingua Language enum to ISO 639-1 codes.
+    iso_map = {
+        Language.ENGLISH: "en",
+        Language.BOKMAL: "no",
+        Language.DANISH: "da",
+        Language.SWEDISH: "sv",
+        Language.GERMAN: "de",
+        Language.FRENCH: "fr",
+    }
+    return iso_map.get(detected, detected.iso_code_639_1.name.lower())
+
+
 def parse_tei_body(tei_xml: str) -> list[dict]:
     """
     Parse the body text from GROBID's TEI-XML, preserving citation markers.
@@ -106,6 +176,10 @@ def parse_tei_body(tei_xml: str) -> list[dict]:
     Returns a list of "paragraph" dicts, each containing:
     - 'text': The full paragraph text with citation markers replaced by
               placeholder tokens like {{CITE:b42}}.
+    - 'paragraph_index': 1-based sequential index within the paper body.
+    - 'section_heading': The heading of the section this paragraph belongs to,
+              as a breadcrumb string (e.g. "Results > Typological Analysis").
+              Empty string if no heading is found.
     - 'citations': List of dicts, each with:
         - 'grobid_id': The target ID (e.g., "b42")
         - 'marker_text': The original citation marker text (e.g., "(Smith 2020)")
@@ -129,17 +203,61 @@ def parse_tei_body(tei_xml: str) -> list[dict]:
         logger.warning("No <body> element found in TEI-XML.")
         return []
 
-    paragraphs = []
+    # Build a map from each element to its ancestor heading breadcrumb.
+    # We walk the body's <div> tree once rather than re-walking for each paragraph.
+    heading_map = _build_heading_map(body)
 
-    # GROBID structures the body as <div> sections containing <p> elements.
-    # We iterate over all <p> elements regardless of nesting depth.
+    paragraphs = []
+    para_index = 0
+
     for p_elem in body.iter(f"{{{TEI_NS}}}p"):
         para = _parse_paragraph(p_elem)
         if para and para["text"].strip():
+            para_index += 1
+            para["paragraph_index"] = para_index
+            para["section_heading"] = heading_map.get(id(p_elem), "")
             paragraphs.append(para)
 
     logger.info("Parsed %d paragraphs from body text.", len(paragraphs))
     return paragraphs
+
+
+def _build_heading_map(body_elem) -> dict[int, str]:
+    """
+    Build a map from paragraph element id() to section heading breadcrumb.
+
+    Walks the <div> tree once, tracking the current heading path as we
+    descend. Each <p> element is mapped to the heading breadcrumb of its
+    nearest ancestor <div> that has a <head> child.
+
+    Returns:
+        Dict mapping id(p_element) → heading breadcrumb string.
+    """
+    heading_map: dict[int, str] = {}
+
+    def walk(elem, ancestor_heads: list[str]) -> None:
+        tag = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
+
+        if tag == "div":
+            head = elem.find(f"{{{TEI_NS}}}head")
+            if head is not None:
+                head_text = (head.text or "").strip()
+                current_heads = ancestor_heads + ([head_text] if head_text else [])
+            else:
+                current_heads = ancestor_heads
+
+            for child in elem:
+                walk(child, current_heads)
+
+        elif tag == "p":
+            heading_map[id(elem)] = " > ".join(ancestor_heads)
+
+        else:
+            for child in elem:
+                walk(child, ancestor_heads)
+
+    walk(body_elem, [])
+    return heading_map
 
 
 def parse_tei_footnotes(tei_xml: str) -> list[dict]:
@@ -234,13 +352,16 @@ def parse_tei_header(tei_xml: str) -> dict:
         title_elem = header.find(".//tei:titleStmt/tei:title", NS)
     result["title"] = _get_text(title_elem) if title_elem is not None else ""
 
-    # --- Authors ---
+    # --- Authors and affiliations ---
     result["author"] = []
     for author_elem in header.findall(
         ".//tei:fileDesc/tei:sourceDesc//tei:author", NS
     ):
         name = _parse_persname(author_elem.find("tei:persName", NS))
         if name:
+            affiliation = _parse_affiliation(author_elem.find("tei:affiliation", NS))
+            if affiliation:
+                name["affiliation"] = affiliation
             result["author"].append(name)
 
     # --- Date ---
@@ -275,6 +396,39 @@ def parse_tei_header(tei_xml: str) -> dict:
 # =============================================================================
 # Internal helpers
 # =============================================================================
+
+def _parse_affiliation(aff_elem) -> dict | None:
+    """
+    Parse a TEI <affiliation> element into a structured dict.
+
+    GROBID extracts affiliation data from the paper header when present.
+    Quality is inconsistent — some papers have well-structured institutional
+    affiliations; others have the author name in the institution field, or
+    no affiliation at all. The raw data is stored as-is; reconciliation
+    against a controlled vocabulary (ROR, GRID) is deferred.
+
+    Returns a dict with any of: institution, department, address, country.
+    Returns None if the element is absent or contains no usable data.
+    """
+    if aff_elem is None:
+        return None
+
+    result: dict[str, str] = {}
+
+    for org in aff_elem.findall("tei:orgName", NS):
+        org_type = org.get("type", "")
+        text = (org.text or "").strip()
+        if text and org_type:
+            result[org_type] = text
+
+    addr = aff_elem.find("tei:address", NS)
+    if addr is not None:
+        for field_tag in ("settlement", "region", "country", "postCode"):
+            el = addr.find(f"tei:{field_tag}", NS)
+            if el is not None and el.text:
+                result[field_tag] = el.text.strip()
+
+    return result if result else None
 
 def _parse_xml(tei_xml: str) -> etree._Element | None:
     """
