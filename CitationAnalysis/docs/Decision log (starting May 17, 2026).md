@@ -33,3 +33,48 @@ _run_ocr writes ocrmypdf output to a .ocr_tmp.pdf temp file, then moves the orig
 
 ---
 
+### 2026-05-17 — OCR fallback for scanned PDFs
+
+Some PDFs in the corpus are scanned images with no embedded text layer.
+GROBID returns HTTP 500 with `[NO_BLOCKS]` in the response body for these,
+rather than the expected TEI-XML. Previously the pipeline logged an error
+and skipped the paper entirely.
+
+`_submit_to_grobid` now treats a 500 response containing `[NO_BLOCKS]` the
+same as a 200, passing the body through to `process_fulltext` so the OCR
+path can be triggered. `process_fulltext` detects `[NO_BLOCKS]` via
+`_is_no_blocks()` and calls `_run_ocr()`.
+
+`_run_ocr` writes ocrmypdf output to a `.ocr_tmp.pdf` temp file, moves the
+original to `output/ocr/originals/<filename>`, then moves the temp file into
+the original's place. The original path is never empty for more than the
+duration of two filesystem operations. The OCR'd version replaces the
+original under the same name, so Zotero (which uses linked files) opens it
+transparently. On subsequent runs, presence of the backup in
+`output/ocr/originals/` signals that OCR has already been applied and the
+file at the original path is used directly.
+
+`GrobidClient.__init__` takes a new `ocr_dir` parameter (default
+`output/ocr`). Both `GrobidClient` construction sites in `run.py` pass
+`output_dir / "ocr"`.
+
+Flags passed to ocrmypdf: `--skip-text` (handles mixed PDFs with partial
+text layers), `--rotate-pages`, `--deskew`, `--output-type pdf`.
+
+Commit message not implemented due to redundancy:
+
+```
+Add OCR fallback for scanned PDFs
+
+When GROBID returns [NO_BLOCKS] (HTTP 500), automatically run ocrmypdf,
+replace the original PDF in place, and back up the original to
+output/ocr/originals/. Uses a temp file during write to avoid leaving
+the original path empty on interruption. Backup presence is the cache
+signal on subsequent runs.
+
+GrobidClient takes a new ocr_dir parameter; run.py passes output_dir/ocr
+at both construction sites.
+```
+
+---
+
