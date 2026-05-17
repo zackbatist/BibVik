@@ -286,3 +286,15 @@ no longer called after `coverage.py` was simplified to produce Markdown
 output rather than structured JSON.
 
 **Unused import:** `import time` removed from `run.py`.
+
+### 2026-05-17 — Remove unused import and dead config keys
+
+`graph.py`: `unidecode` import removed. It was used directly in `_norm_author`
+which now delegates to `utils.norm_author` — the import became unused after
+the previous cleanup commit.
+
+`config.yaml`: two keys commented out. `concurrency` under `grobid` was
+never read by any code — parallel GROBID requests were planned but not
+implemented. `save_tei_xml` was also never read — TEI-XML is always saved
+to `output/tei/` unconditionally. Both are retained as comments with
+explanatory notes rather than deleted, in case they become relevant later.

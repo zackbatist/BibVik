@@ -15,7 +15,6 @@ import re
 from pathlib import Path
 
 from tqdm import tqdm
-from unidecode import unidecode
 
 from .utils import generate_citekey, reset_citekey_registry, collect_pdfs, write_json, extract_year, norm_author
 from .grobid_client import GrobidClient

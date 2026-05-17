@@ -13,7 +13,7 @@ seed_paper: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/Lund and Sind
 
 # Directory containing F1 generation PDFs.
 # These are the papers referenced by the seed paper, assembled as PDFs.
-f1_pdf_dir: "/Users/zackbatist/Desktop/test1"
+f1_pdf_dir: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/BibVik_seed"
 
 # Output directory for all generated files.
 # Will be created if it does not exist.
@@ -46,9 +46,8 @@ grobid:
   # Large PDFs or slow machines may need a higher value.
   timeout: 120
 
-  # Number of concurrent requests to GROBID.
-  # GROBID's Docker image handles concurrency internally; 1-2 is usually fine.
-  concurrency: 1
+  # Parallel GROBID requests — not yet implemented.
+  # concurrency: 1
 
   # Whether to request coordinates in GROBID output.
   # Not needed for our purposes, but can be enabled for layout analysis.
@@ -117,6 +116,6 @@ clustering:
 # Logging level: DEBUG, INFO, WARNING, ERROR
 log_level: "INFO"
 
-# If true, save intermediate TEI-XML files from GROBID alongside outputs.
-# Useful for debugging GROBID parsing issues.
-save_tei_xml: true
+# TEI-XML files from GROBID are always saved to output/tei/ — this key
+# is not currently read by the pipeline.
+# save_tei_xml: true
