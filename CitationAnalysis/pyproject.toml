@@ -15,5 +15,13 @@ dependencies = [
     "tqdm>=4.66.0",
 ]
 
+[project.optional-dependencies]
+# OCR support for scanned PDFs that GROBID cannot read.
+# Also requires Tesseract to be installed at the system level:
+#   macOS:  brew install tesseract
+#   Ubuntu: apt install tesseract-ocr
+# Install this extra with: pip install -e ".[ocr]"
+ocr = ["ocrmypdf>=16.0.0"]
+
 [tool.setuptools.packages.find]
 include = ["bibvik*"]
