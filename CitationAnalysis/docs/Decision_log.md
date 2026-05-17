@@ -139,3 +139,13 @@ omitted as non-decision-relevant. `architecture.qmd` updated: module
 map now includes `audit.py`, marks tabled modules, reflects
 grobid_client OCR fallback and updated CLI flags. Both summary files
 and the old `decision_history.qmd` can now be deleted.
+
+### 2026-05-17 — coverage.py simplified
+
+Removed structured JSON report-building, `_metadata` branch, F2
+planning section, and `_entry_summary` helper. Output is now
+`coverage.md` — a plain Markdown file with two lists (missing PDFs,
+OA-available papers). The `download_oa_papers` function signature
+simplified to take bibliography directly rather than a coverage report
+dict. `run.py` updated accordingly. Unpaywall item H flagged in both
+module docstring and report output.

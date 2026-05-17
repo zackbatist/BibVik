@@ -331,8 +331,11 @@ def main():
 
         if args.download_oa and args.email:
             from bibvik.coverage import download_oa_papers
-            report = read_json(output_dir / "coverage_report.json")
-            download_oa_papers(report, Path(config["f1_pdf_dir"]) / "oa_downloads")
+            download_oa_papers(
+                bibliography = graph.get_bibliography(),
+                download_dir = Path(config["f1_pdf_dir"]) / "oa_downloads",
+                email        = args.email,
+            )
 
     # =========================================================================
     if run_audit:
