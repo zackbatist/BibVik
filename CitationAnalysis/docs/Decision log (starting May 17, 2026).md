@@ -95,3 +95,29 @@ unavoidable if the two directories are on different volumes.
 
 ---
 
+### 2026-05-17 — Stratified audit sampling tool
+
+Added `bibvik/audit.py` and `--audit` flag to `run.py`. Draws a
+stratified random sample from the citation graph and writes
+`output/audit_sample.md` for human review and annotation.
+
+Strata: CrossRef-resolved entries (check that matches are correct, not
+merely plausible), unresolved entries (check raw citation parsing),
+minimal-completeness entries (check for extraction failures), suspected
+duplicate pairs (exhaustive above title similarity threshold — not
+sampled), OCR-source entries (check for character errors from OCR), and
+non-English source papers per language (stubbed — requires language
+detection from item C). Where a stratum has fewer entries than n, all
+are included and the shortfall noted.
+
+Fixed random seed (default 42) ensures the same sample is drawn on
+every run against the same graph state. All parameters overridable:
+`--audit-n`, `--audit-seed`, `--audit-threshold`.
+
+Smoke test against the current graph state immediately revealed
+real CrossRef mismatches — entries resolved with high confidence to
+wrong papers in unrelated fields (psychology, pedagogy). This is a
+known failure mode of CrossRef DOI matching on short or ambiguous
+reference strings and needs to be addressed in the resolver.
+
+Methodological documentation in `docs/audit-sampling-method.md`.

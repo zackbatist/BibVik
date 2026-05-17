@@ -53,6 +53,10 @@ Examples:
     parser.add_argument("--contexts", action="store_true", help="Stage 3: Citation context analysis.")
     parser.add_argument("--cluster", action="store_true", help="Stage 4: Cluster analysis.")
     parser.add_argument("--coverage", action="store_true", help="Coverage report + OA lookup.")
+    parser.add_argument("--audit", action="store_true", help="Draw stratified audit sample from graph state.")
+    parser.add_argument("--audit-n", type=int, default=10, help="Entries per audit stratum (default: 10).")
+    parser.add_argument("--audit-seed", type=int, default=42, help="Random seed for audit sampling (default: 42).")
+    parser.add_argument("--audit-threshold", type=float, default=0.85, help="Title similarity threshold for duplicate detection (default: 0.85).")
     parser.add_argument("--config", type=str, default="config.yaml")
     parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--seed", type=str, default=None)
@@ -64,7 +68,7 @@ Examples:
     parser.add_argument("--download-oa", action="store_true")
 
     args = parser.parse_args()
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit]):
         parser.print_help()
         sys.exit(1)
     return args
@@ -104,6 +108,7 @@ def main():
     run_contexts = args.all or args.contexts
     run_cluster = args.all or args.cluster
     run_coverage = args.coverage
+    run_audit    = args.audit
 
     bibliography_path = output_dir / "bibliography.json"
     graph_state_path = output_dir / "_graph_state.json"
@@ -328,6 +333,28 @@ def main():
             from bibvik.coverage import download_oa_papers
             report = read_json(output_dir / "coverage_report.json")
             download_oa_papers(report, Path(config["f1_pdf_dir"]) / "oa_downloads")
+
+    # =========================================================================
+    if run_audit:
+        log.info("━━ AUDIT: Drawing stratified sample")
+
+        if not (run_extract or run_f1 or run_contexts or run_cluster or run_coverage):
+            graph = _load_graph_state(graph_state_path, config)
+            if graph is None:
+                log.error("No graph state found. Run --iterate-f1 first.")
+                sys.exit(1)
+
+        from bibvik.audit import run_audit as _run_audit
+
+        sample_path = _run_audit(
+            bibliography     = graph.get_bibliography(),
+            processed_papers = graph.get_processed_papers(),
+            output_dir       = output_dir,
+            n                = args.audit_n,
+            seed             = args.audit_seed,
+            threshold        = args.audit_threshold,
+        )
+        log.info("Audit sample → %s", sample_path)
 
     # =========================================================================
     log.info("Done. Output → %s", output_dir)
