@@ -169,6 +169,36 @@ def detect_language(paragraphs: list[dict]) -> str:
     return iso_map.get(detected, detected.iso_code_639_1.name.lower())
 
 
+def parse_tei_xml(tei_xml: str):
+    """
+    Parse a TEI-XML string and return the root element.
+
+    Public wrapper around _parse_xml for use by modules that need to
+    traverse the element tree directly (e.g. for inline ref extraction).
+    Returns None if parsing fails.
+    """
+    return _parse_xml(tei_xml)
+
+
+TEI_NAMESPACE = TEI_NS  # Public alias for the TEI namespace URI.
+
+
+def get_body_text(tei_xml: str) -> str:
+    """
+    Extract the full raw text of the body element from TEI-XML.
+
+    Used by detector.py for regex-based citation detection, which needs
+    the raw text string rather than the structured paragraph list.
+
+    Returns empty string if the body element is absent or parsing fails.
+    """
+    root = _parse_xml(tei_xml)
+    if root is None:
+        return ""
+    body = root.find(f".//{{{TEI_NS}}}body")
+    return _get_text(body) if body is not None else ""
+
+
 def parse_tei_body(tei_xml: str) -> list[dict]:
     """
     Parse the body text from GROBID's TEI-XML, preserving citation markers.

@@ -17,7 +17,7 @@ from pathlib import Path
 from tqdm import tqdm
 from unidecode import unidecode
 
-from .utils import generate_citekey, reset_citekey_registry, collect_pdfs, write_json
+from .utils import generate_citekey, reset_citekey_registry, collect_pdfs, write_json, extract_year, norm_author
 from .grobid_client import GrobidClient
 from .tei_parser import parse_tei_references, parse_tei_body, parse_tei_header, parse_tei_footnotes, detect_language
 from .detector import detect_all_citations
@@ -623,8 +623,8 @@ class CitationGraph:
 # =============================================================================
 
 def _extract_year(date_str: str) -> str:
-    m = re.search(r"\b((?:19|20)\d{2})\b", str(date_str))
-    return m.group(1) if m else ""
+    """Delegates to utils.extract_year."""
+    return extract_year(date_str)
 
 
 def _norm_title(title: str) -> str:
@@ -637,7 +637,8 @@ def _norm_title(title: str) -> str:
 
 
 def _norm_author(name: str) -> str:
-    return re.sub(r"[^a-z]", "", unidecode(name).lower()) if name else ""
+    """Delegates to utils.norm_author."""
+    return norm_author(name) if name else ""
 
 
 def _token_overlap(a: str, b: str) -> float:

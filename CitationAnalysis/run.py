@@ -15,7 +15,6 @@ Usage:
 import argparse
 import logging
 import sys
-import time
 from pathlib import Path
 
 _project_root = Path(__file__).resolve().parent

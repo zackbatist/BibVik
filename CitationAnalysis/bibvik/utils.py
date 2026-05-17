@@ -187,3 +187,31 @@ def _sigint_handler(signum, frame):
 def install_signal_handler():
     """Install the SIGINT handler for graceful cancellation."""
     signal.signal(signal.SIGINT, _sigint_handler)
+
+
+# =============================================================================
+# Shared bibliographic helpers
+# =============================================================================
+
+def extract_year(date_str: str) -> str:
+    """Extract a 4-digit year from a date string. Returns empty string if none found."""
+    import re
+    m = re.search(r"\b((?:19|20)\d{2})\b", str(date_str))
+    return m.group(1) if m else ""
+
+
+def norm_author(name: str) -> str:
+    """
+    Normalise an author surname for deduplication.
+
+    Applies unidecode transliteration then strips all non-alphabetic characters
+    and lowercases. Used consistently across detector, resolver, graph, and
+    zotero_csv for author-key matching.
+
+    Examples:
+        "Sindbæk"  → "sindbaek"
+        "de Vries" → "devries"
+        "Müller"   → "muller"
+    """
+    import re
+    return re.sub(r"[^a-z]", "", unidecode(name).lower())

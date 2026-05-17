@@ -56,15 +56,15 @@ from typing import Any
 import requests
 from unidecode import unidecode
 
+from .utils import extract_year, norm_author
 from .tei_parser import (
     parse_tei_references,
     parse_tei_body,
     parse_tei_header,
     parse_tei_footnotes,
-    _parse_xml,
-    _get_text,
-    TEI_NS,
-    NS,
+    get_body_text,
+    parse_tei_xml,
+    TEI_NAMESPACE,
 )
 
 logger = logging.getLogger(__name__)
@@ -213,8 +213,8 @@ def detect_all_citations(
     if paragraphs is None:
         paragraphs = parse_tei_body(tei_xml)
 
-    root = _parse_xml(tei_xml)
-    raw_text = _get_text(root.find(f".//{{{TEI_NS}}}body")) if root is not None else ""
+    root = parse_tei_xml(tei_xml)
+    raw_text = get_body_text(tei_xml)
 
     # ── Method 1: GROBID bibliography ──
     m1_citations, m1_rich = _method_grobid_bibliography(grobid_refs)
@@ -319,11 +319,11 @@ def _method_grobid_bibliography(refs: list[dict]) -> tuple[dict, list[dict]]:
 def _method_grobid_inline(root) -> dict:
     """Extract (author, year) pairs from GROBID's <ref type="bibr"> markers."""
     citations = {}
-    body = root.find(f".//{{{TEI_NS}}}body")
+    body = root.find(f".//{{{TEI_NAMESPACE}}}body")
     if body is None:
         return citations
 
-    for ref in body.iter(f"{{{TEI_NS}}}ref"):
+    for ref in body.iter(f"{{{TEI_NAMESPACE}}}ref"):
         if ref.get("type") != "bibr":
             continue
         marker = "".join(ref.itertext()).strip()
@@ -607,14 +607,13 @@ def _merge_all(*method_results: tuple[str, dict]) -> dict:
 # =============================================================================
 
 def _norm(author: str) -> str:
-    """Normalize author surname for deduplication: ASCII lowercase, alpha only."""
-    return re.sub(r"[^a-z]", "", unidecode(author).lower())
+    """Normalise author surname — delegates to utils.norm_author."""
+    return norm_author(author)
 
 
 def _extract_year(date_str: str) -> str:
-    """Extract 4-digit year from a date string."""
-    m = re.search(r"\b((?:19|20)\d{2})\b", str(date_str))
-    return m.group(1) if m else ""
+    """Extract 4-digit year — delegates to utils.extract_year."""
+    return extract_year(date_str)
 
 
 def _extract_author_year(text: str) -> list[tuple[str, str]]:

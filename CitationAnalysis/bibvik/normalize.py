@@ -43,6 +43,8 @@ import logging
 import re
 from typing import Any
 
+from unidecode import unidecode
+
 logger = logging.getLogger(__name__)
 
 
@@ -289,8 +291,6 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
     # --- Pass 1: Build a registry of best known given-name forms per family name ---
     # Key: normalized family name (lowercase, unaccented)
     # Value: dict mapping normalized-given prefix → best given string seen
-    from unidecode import unidecode
-
     def _norm_family(s: str) -> str:
         return unidecode(s).lower().strip()
 

@@ -28,6 +28,8 @@ from typing import Any
 import requests
 from unidecode import unidecode
 
+from .utils import extract_year, norm_author
+
 logger = logging.getLogger(__name__)
 
 CROSSREF_BASE = "https://api.crossref.org/works"
@@ -349,7 +351,8 @@ def _try_llm(
 # =============================================================================
 
 def _norm(s: str) -> str:
-    return re.sub(r"[^a-z]", "", unidecode(s).lower())
+    """Normalise author surname — delegates to utils.norm_author."""
+    return norm_author(s)
 
 
 # Common English stopwords — excluded from title/context overlap check.

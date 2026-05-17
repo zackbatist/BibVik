@@ -260,3 +260,29 @@ the domain gap between GROBID's published benchmarks (biomedical
 English) and the BibVik corpus. Cross-references OCR fallback,
 resolver, audit sampling, and data capture docs rather than
 duplicating content.
+
+### 2026-05-17 — Codebase audit: shared helpers, private API leakage, dead code
+
+**Shared helpers in `utils.py`:** `extract_year()` and `norm_author()` added.
+Previously defined independently in `biblatex_model.py`, `detector.py`, and
+`graph.py` (`_extract_year`) and in `detector.py`, `resolver.py`, and
+`llm_analyzer.py` (`_norm`). Local versions retained as thin delegation
+wrappers to avoid touching every call site.
+
+**Private API leakage in `detector.py`:** Was importing `_parse_xml`,
+`_get_text`, `TEI_NS`, and `NS` directly from `tei_parser.py` — all
+underscore-prefixed private symbols. Three public functions added to
+`tei_parser.py`: `parse_tei_xml()` (parses TEI string, returns root
+element), `get_body_text()` (extracts raw body text string), and
+`TEI_NAMESPACE` (public alias for the namespace URI). `detector.py`
+updated to use these.
+
+**Inconsistent `unidecode` imports:** `normalize.py` and `llm_analyzer.py`
+were importing `unidecode` lazily inside function bodies. Moved to
+module top level, consistent with all other modules.
+
+**Dead code:** `build_coverage_metadata()` in `metadata.py` removed —
+no longer called after `coverage.py` was simplified to produce Markdown
+output rather than structured JSON.
+
+**Unused import:** `import time` removed from `run.py`.

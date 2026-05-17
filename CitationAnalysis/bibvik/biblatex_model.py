@@ -31,6 +31,8 @@ Why not just use dicts?
 import logging
 from typing import Any
 
+from .utils import extract_year as _extract_year_util
+
 logger = logging.getLogger(__name__)
 
 
@@ -265,17 +267,8 @@ def _clean_names(names: list) -> list[dict]:
 
 
 def _extract_year(date_str: str) -> str:
-    """
-    Extract a 4-digit year from a date string.
-
-    Handles ISO dates ("2020-06-15"), year-only ("2020"), and various
-    natural-language date formats.
-    """
-    import re
-    if not date_str:
-        return ""
-    match = re.search(r"\b(\d{4})\b", date_str)
-    return match.group(1) if match else ""
+    """Extract a 4-digit year — delegates to utils.extract_year."""
+    return _extract_year_util(date_str)
 
 
 def _normalize_pages(pages: Any) -> str:
