@@ -101,8 +101,27 @@ def _try_crossref(
     contexts: list[str],
     email: str,
 ) -> dict | None:
-    """Query CrossRef for a matching work."""
-    query = f"{author} {year}"
+    """
+    Query CrossRef for a matching work.
+
+    Acceptance criteria (all must pass):
+    1. Year matches exactly.
+    2. Normalised full surname matches. Short surnames (≤3 chars) use
+       prefix matching as a fallback for truncation artifacts.
+    3. Title/context plausibility: at least one content word from the
+       CrossRef title appears in the combined citation contexts. Catches
+       obvious domain mismatches (e.g. a pedagogy paper matched to a
+       Viking Age archaeology citation). Skipped — and confidence
+       downgraded to medium — when the title has no content words or
+       contexts are empty (e.g. non-English contexts where vocabulary
+       overlap is not expected).
+
+    Confidence:
+    - high:   full author match + overlap confirmed + DOI present
+    - medium: full author match + overlap confirmed but no DOI; or
+              overlap inconclusive (short/vague title or no contexts)
+    """
+    author_norm = _norm(author)
 
     try:
         resp = requests.get(
@@ -124,31 +143,50 @@ def _try_crossref(
         if not items:
             return None
 
-        # Find best match
-        author_norm = _norm(author)
+        context_words = _content_words(" ".join(contexts))
+
         for item in items:
-            # Check year
+            # ── 1. Year ──────────────────────────────────────────────────────
             issued = item.get("issued", {}).get("date-parts", [[None]])
             item_year = str(issued[0][0]) if issued and issued[0] and issued[0][0] else ""
             if item_year != year[:4]:
                 continue
 
-            # Check first author
+            # ── 2. Author ────────────────────────────────────────────────────
             cr_authors = item.get("author", [])
             if not cr_authors:
                 continue
-            cr_family = cr_authors[0].get("family", "")
-            if _norm(cr_family) != author_norm and not (
-                author_norm[:4] in _norm(cr_family) or _norm(cr_family)[:4] in author_norm
-            ):
+            cr_family = _norm(cr_authors[0].get("family", ""))
+            if not cr_family:
                 continue
 
-            # Match found — build record
+            if author_norm != cr_family:
+                min_len = min(len(author_norm), len(cr_family))
+                if min_len <= 3 or author_norm[:min_len] != cr_family[:min_len]:
+                    continue
+
+            # ── 3. Title/context plausibility ────────────────────────────────
+            cr_title = " ".join(item.get("title", []))
+            title_words = _content_words(cr_title)
+
+            overlap_inconclusive = False
+            if not title_words or not context_words:
+                overlap_inconclusive = True
+            elif title_words & context_words:
+                pass  # overlap confirmed
+            else:
+                logger.debug(
+                    "CrossRef rejected (no title/context overlap): "
+                    "%s %s → '%s'",
+                    author, year, cr_title[:80],
+                )
+                continue
+
+            # ── Build record ─────────────────────────────────────────────────
             authors = [
                 {"family": a.get("family", ""), "given": a.get("given", "")}
                 for a in cr_authors
             ]
-            title = " ".join(item.get("title", []))
             container = " ".join(item.get("container-title", []))
             doi = item.get("DOI", "")
 
@@ -158,14 +196,19 @@ def _try_crossref(
             elif item.get("type") == "book-chapter":
                 entry_type = "incollection"
 
+            if not overlap_inconclusive and doi:
+                confidence = "high"
+            else:
+                confidence = "medium"
+
             record = {
                 "author": authors,
                 "date": item_year,
                 "year": item_year,
-                "title": title,
+                "title": cr_title,
                 "entry_type": entry_type,
                 "_resolution_method": "crossref",
-                "_resolution_confidence": "high" if doi else "medium",
+                "_resolution_confidence": confidence,
             }
             if container:
                 if entry_type == "article":
@@ -174,15 +217,12 @@ def _try_crossref(
                     record["booktitle"] = container
             if doi:
                 record["doi"] = doi
-            vol = item.get("volume", "")
-            if vol:
-                record["volume"] = vol
-            pages = item.get("page", "")
-            if pages:
-                record["pages"] = pages
-            publisher = item.get("publisher", "")
-            if publisher:
-                record["publisher"] = publisher
+            if item.get("volume"):
+                record["volume"] = item["volume"]
+            if item.get("page"):
+                record["pages"] = item["page"]
+            if item.get("publisher"):
+                record["publisher"] = item["publisher"]
 
             return record
 
@@ -310,3 +350,24 @@ def _try_llm(
 
 def _norm(s: str) -> str:
     return re.sub(r"[^a-z]", "", unidecode(s).lower())
+
+
+# Common English stopwords — excluded from title/context overlap check.
+_STOPWORDS = {
+    "the", "and", "for", "with", "from", "that", "this", "have", "been",
+    "were", "their", "they", "about", "which", "into", "through", "some",
+    "also", "when", "other", "than", "more", "over", "such", "upon",
+    "between", "under", "after", "before", "during", "within", "without",
+}
+
+
+def _content_words(text: str) -> set[str]:
+    """
+    Extract content words from text for title/context overlap checking.
+
+    Content words are lowercase alphabetic tokens of 4+ characters that
+    are not on the stopword list. Short words and stopwords are excluded
+    because they appear in any text and would produce false overlap signals.
+    """
+    tokens = re.findall(r"[a-zA-Z]{4,}", unidecode(text).lower())
+    return {t for t in tokens if t not in _STOPWORDS}

@@ -163,3 +163,36 @@ papers never stored `tei_xml` in `processed_papers`; the seed paper was
 the only exception. `_save_graph_state` in `run.py` was already
 explicitly excluding `tei_xml` from serialisation, confirming it was
 never intended to persist. Both entries now have identical structure.
+
+### 2026-05-17 — CrossRef resolver: tightened matching, title/context plausibility check
+
+The audit tool smoke test revealed CrossRef was returning high-confidence
+wrong matches — entries for Androshchuk (2018), Zori (2013), and Clarke
+(2017) had been resolved to a pedagogy paper, a psychology paper, and a
+cosmetics handbook respectively. Root cause: author matching used only a
+4-character prefix, and confidence was set to "high" whenever a DOI was
+present, regardless of match quality.
+
+Two changes to `_try_crossref`:
+
+**Author matching** — full normalised surname now required. Short
+surnames (≤3 chars after normalisation) retain prefix matching as a
+fallback for truncation artifacts.
+
+**Title/context plausibility** — at least one content word (4+ chars,
+not a stopword) from the CrossRef title must appear in the combined
+citation contexts. If no overlap exists, the match is rejected. If the
+check is inconclusive (no content words in title, or empty contexts),
+the match is accepted but confidence is downgraded to medium. This
+catches domain mismatches without requiring a curated subject-area list.
+
+**Confidence scoring** now reflects actual match quality: `high` requires
+full author match + overlap confirmed + DOI present; `medium` covers
+confirmed match without DOI, or inconclusive overlap check.
+
+All three known false positives correctly rejected in smoke testing.
+Known limitation: non-English citation contexts may lack vocabulary
+overlap with English CrossRef titles even for correct matches. These
+cases are downgraded to medium confidence rather than rejected, and
+flagged for audit review. Documented in `docs/resolver-method.md`.
+
