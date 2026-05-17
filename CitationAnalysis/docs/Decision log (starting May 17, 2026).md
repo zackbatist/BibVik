@@ -17,3 +17,12 @@ Flag rationale: `--skip-text` handles mixed PDFs (scanned body with a text-layer
 The existing `pyproject.toml` and `requirements.txt` were in sync and complete for the core pipeline (`requests`, `lxml`, `pyyaml`, `unidecode`, `tqdm`). The OCR fallback introduced the first system-level dependency: `ocrmypdf` wraps Tesseract, which must be installed at the OS level and cannot be expressed in pip metadata alone.
 
 `ocrmypdf` is declared as an optional extra rather than a core dependency because the pipeline degrades gracefully without it. `pyproject.toml`: added `[project.optional-dependencies]` with `ocr = ["ocrmypdf>=16.0.0"]`. `requirements.txt`: `ocrmypdf` added as a commented-out entry in a labelled optional section. Both files note that Tesseract must be installed at the system level. All third-party imports across `bibvik/*.py` were audited before editing; the core dependency set was confirmed complete.
+
+---
+
+### 2026-05-17 — Fix: [NO_BLOCKS] arrives as HTTP 500, not 200
+
+Initial testing revealed that GROBID 0.8.1 returns HTTP 500 (not 200) when a PDF has no text layer, with [NO_BLOCKS] in the response body. The original implementation only checked for [NO_BLOCKS] in 200 responses, so _submit_to_grobid was returning None on the 500 and the OCR fallback never fired. Fixed by adding an explicit branch in _submit_to_grobid: a 500 response whose body contains [NO_BLOCKS] is passed through to the caller rather than treated as a generic error, allowing process_fulltext to detect it and trigger OCR normally.
+
+---
+

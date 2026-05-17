@@ -209,6 +209,10 @@ class GrobidClient:
 
             if resp.status_code == 200:
                 return resp.text
+            elif resp.status_code == 500 and _NO_BLOCKS_MARKER in resp.text:
+                # GROBID found no text layer — return the body so process_fulltext
+                # can detect [NO_BLOCKS] and trigger the OCR fallback.
+                return resp.text
             elif resp.status_code == 503:
                 logger.warning(
                     "GROBID is busy (503). The service may be overloaded. "

@@ -13,7 +13,7 @@ seed_paper: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/Lund and Sind
 
 # Directory containing F1 generation PDFs.
 # These are the papers referenced by the seed paper, assembled as PDFs.
-f1_pdf_dir: "/Users/zackbatist/Library/CloudStorage/Dropbox/zotero/BibVik_seed"
+f1_pdf_dir: "/Users/zackbatist/Desktop/test1"
 
 # Output directory for all generated files.
 # Will be created if it does not exist.
