@@ -259,4 +259,4 @@ issues: container instability on ARM emulation under long runs, and
 the domain gap between GROBID's published benchmarks (biomedical
 English) and the BibVik corpus. Cross-references OCR fallback,
 resolver, audit sampling, and data capture docs rather than
-du
+duplicating content.
