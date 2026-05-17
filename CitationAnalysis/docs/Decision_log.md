@@ -1,0 +1,141 @@
+# Decision Log
+
+*Starting from initial build (March 2026). Entries from March and April–May 2026 were reconstructed from session summaries and the previous decision_history.qmd. Entries from May 17, 2026 onward are recorded in real time.*
+
+---
+
+## March 2026 — Initial Build
+
+### 2026-03 — Module structure and distribution
+
+Project built as an installable Python package (`bibvik/`) with a CLI entry point (`run.py`) and YAML configuration. Initial version lacked a `sys.path` fix in `run.py`, causing `ModuleNotFoundError` when the package directory wasn't on the path. Fixed by adding `sys.path.insert(0, project_root)`. Distribution switched to zip to preserve directory structure. `pyproject.toml` had an incorrect `build-backend` string (`setuptools.backends._legacy:_Backend`); corrected to `setuptools.build_meta`.
+
+### 2026-03 — LLM thinking mode
+
+Qwen3.5 defaults to emitting a `<think>...</think>` reasoning block before the response. This caused the JSON parser to fail (response buried after the think block) and inflated inference time from ~12 seconds to ~4 minutes. Appending `/no_think` to the prompt had no effect. Fixed by passing `"think": false` as a top-level parameter in the Ollama API payload. `<think>` tag stripping added to the JSON parser as a defensive fallback.
+
+### 2026-03 — Unified enriched/non-enriched analysis
+
+Original design ran two separate LLM passes — context-only and content-enriched — producing near-identical outputs because almost no entries had abstracts (GROBID often fails to extract them). Fixed by adding `_build_content_lookup` which extracts abstract + first ~3000 chars of body text from processed PDFs. Redesigned to a single unified pass: enriched prompt when cited paper content is available, context-only otherwise. Each record tagged with `analysis_mode`. Halved LLM calls.
+
+### 2026-03 — F1 PDF matching tiers
+
+Original matching logic (DOI, exact title, author+year) failed for many papers because GROBID parses titles differently from different source PDFs. PDF filenames contain structured metadata (e.g., "Androshchuk 2010 - The Gift to Men..."), so filename-based matching added as a fallback tier. Five tiers established: DOI → exact title → author+year → fuzzy title with confirmation → filename parsing.
+
+### 2026-03 — Fuzzy matching thresholds
+
+Fuzzy matching was too loose: "Abrams 2012" was matching "Barrett 2010" (score 0.75), and the Zotero CSV matcher was matching "Aannestad 2018 - Allure of the Foreign" to `zori2013`. Fixed by raising thresholds (0.6 → 0.7 for title overlap, 0.6 → 0.8 for final acceptance), requiring both author AND year confirmation for fuzzy tiers, and tightening the Zotero matcher to only accept exact base citekey or base+single-letter suffix with 0.7+ title overlap.
+
+### 2026-03 — Zotero CSV as tier 0
+
+Added `bibvik/zotero_csv.py` to parse Zotero exports for exact PDF↔citekey matching. Added as tier 0 (tried before all other matching methods). The CSV provides author, year, title, DOI, and file attachment paths. Disambiguation suffixes (a/b/c) may not align between Zotero and GROBID extraction order, so the Zotero matcher uses title overlap for disambiguated entries rather than relying on exact citekey match.
+
+### 2026-03 — Compound reference splitting
+
+GROBID returned far fewer bibliography entries than expected for many humanities publications. Two causes: (a) the dash convention for repeated authors (—1987, —1989) where GROBID collapses multiple references into one `biblStruct`, and (b) GROBID's training bias toward STEM journal articles. Added a compound reference splitter in `tei_parser.py` that detects dash-year patterns and splits into individual entries, preserving the original author. Also detects author-boundary merges. Tested: Jansson b9 entry correctly splits into Jansson 1986, 1987, 1989, and Wikander 1978.
+
+### 2026-03 — GROBID consolidation disabled
+
+`consolidateCitations` set to `0` in all GROBID API calls. Enabling it causes GROBID to make a CrossRef API call for every reference, which is extremely slow for papers with many references and frequently causes timeout-induced truncation. Reference enrichment handled separately via `--resolve`.
+
+### 2026-03 — Prompts as published methodology
+
+All LLM prompts defined as readable string constants in source code so they can be inspected and cited in the methods section of the eventual paper.
+
+### 2026-03 — Coverage reporting: _source_pdf bug
+
+Coverage module had a bug where every F1 entry was classified as "has PDF" because `_source_pdf` pointed to the seed paper (the PDF the reference was extracted FROM, not the reference's own PDF). Fixed by excluding the seed paper filename from the "has PDF" check.
+
+### 2026-03 — DOI cleaning
+
+Unpaywall lookups were failing for some valid DOIs because GROBID extracted them with trailing punctuation or URL prefixes. Added robust DOI cleaning: strip URL prefixes, `doi:` prefixes, trailing punctuation, and unbalanced parentheses.
+
+---
+
+## April 2026 — Overhaul and Footnote Extraction
+
+### 2026-04 — Major architectural overhaul
+
+Replaced the sequential GROBID-first architecture with a unified five-method detection model. Previous architecture had 17 modules with detection as sequential "fixes." New architecture has three core modules: `detector.py` (all 5 methods applied to every paper), `resolver.py` (CrossRef + LLM resolution), `graph.py` (multi-generational graph builder). Removed: `citation_collector.py`, `footnote_extractor.py`, `reference_resolver.py`, `reference_audit.py`, `pdf_processor.py`, `citation_graph.py`. Key principle: no single source (including GROBID) is treated as authoritative; goal is maximal completeness across all sources.
+
+### 2026-04 — Graceful Ctrl-C cancellation
+
+SIGINT handler added that writes partial bibliography to `_partial_bibliography.json` before exiting. Prevents loss of work during multi-hour LLM runs.
+
+### 2026-04 — LLM response caching
+
+MD5 hash of paragraph text used as cache key. Only caches successful results. Prevents re-processing already-seen paragraphs across runs.
+
+### 2026-04 — Paragraph batching attempted and reverted
+
+Combining multiple paragraphs per LLM prompt was attempted to reduce inference calls. Broke response parsing — the model returned results the JSON parser couldn't handle. Reverted to per-paragraph calls with caching.
+
+### 2026-04 — Footnote scope discovery
+
+Corpus-wide scanning found footnote-embedded bibliographic references across 10 papers (not just Abrams 2012 as originally assumed). Made footnote extraction a first-class pipeline method rather than an edge case.
+
+### 2026-04 — Footnote extraction implementation
+
+Added `parse_tei_footnotes()` in `tei_parser.py` (finds `<note place="foot">` elements and unattributed notes with year patterns). Added `FOOTNOTE_EXTRACTION_PROMPT` and `extract_references_from_footnote()` in `llm_analyzer.py` (returns JSON array — not dict — so a new `_parse_llm_json_array()` helper was required). Prose-only footnotes filtered at the `extract_footnote_references` level using `min_footnote_length=40` and a year-pattern check, not inside the parser. `--footnotes` flag added; not included in `--all` (supplementary recovery step, not core pipeline).
+
+### 2026-04 — cited_by never populated (confirmed bug)
+
+Inspection of `bibliography.json` showed all 778 entries had `cited_by: []`. Fixes applied to `citation_graph.py` were correct but the on-disk output predated them. Reconstruction pass run against output files. `_process_one_f1` now explicitly appends `self.seed_citekey` to matched entry's `cited_by` after overwriting `_source_pdf`. Unmatched F1 entries created with `cited_by: [self.seed_citekey]` rather than `[]`.
+
+### 2026-04 — F1 matching can claim already-matched entries
+
+Root cause of zori2013 false-positive: when multiple F1 PDFs are processed sequentially, a bibliography entry already matched by one PDF could be re-matched by a subsequent PDF. Fixed: `_match_f1_to_existing` now skips any entry whose `_source_pdf` is not the seed PDF filename.
+
+### 2026-04 — Integrity verification added
+
+Comprehensive integrity check written and run after matching fixes: no self-citations, no dangling `cited_by` references, all F1 entries have seed in `cited_by`, no F2 entries have seed in `cited_by`. Result after fixes: 778 entries, 561 F1, 216 F2, 777 citation links, zero errors.
+
+---
+
+## May 17, 2026
+
+### 2026-05-17 — OCR fallback for scanned PDFs
+
+Some PDFs in the corpus are scanned images with no embedded text layer. GROBID returns HTTP 500 with `[NO_BLOCKS]` in the response body for these, rather than the expected TEI-XML. Previously the pipeline logged an error and skipped the paper.
+
+`_submit_to_grobid(pdf_path, include_coordinates)` extracted as a private method containing the raw HTTP call to `processFulltextDocument`, eliminating duplication between the initial attempt and the OCR retry. `process_fulltext()` calls `_submit_to_grobid`, checks for `[NO_BLOCKS]` via `_is_no_blocks()`, and if found calls `_run_ocr()` and retries.
+
+`_run_ocr` writes ocrmypdf output to a `.ocr_tmp.pdf` temp file, moves the original to `output/ocr/originals/<filename>`, then moves the temp file into the original's place. The original path is never empty for more than two filesystem operations. Since Zotero uses linked files, replacing the file under the same name is transparent — Zotero opens the new version on next access with no metadata changes needed. On subsequent runs, presence of the backup in `output/ocr/originals/` signals OCR has already been applied and the file is used directly.
+
+`_submit_to_grobid` treats a 500 response containing `[NO_BLOCKS]` the same as a 200, passing the body through to `process_fulltext`. (Initial assumption that `[NO_BLOCKS]` would arrive as HTTP 200 was wrong — GROBID 0.8.1 returns HTTP 500.)
+
+`GrobidClient.__init__` takes a new `ocr_dir` parameter (default `output/ocr`). Both construction sites in `run.py` pass `output_dir / "ocr"`.
+
+Flags passed to ocrmypdf: `--skip-text` (handles mixed PDFs with partial text layers), `--rotate-pages`, `--deskew`, `--output-type pdf`.
+
+### 2026-05-17 — Atomic rename for OCR file operations
+
+`shutil.move` replaced with `Path.rename()` for the two filesystem operations in `_run_ocr`. On POSIX, `rename()` is atomic when source and destination are on the same filesystem, closing the window where `pdf_path` could be left empty if the process is interrupted between the backup and replace steps. The temp→original move is always same-filesystem (both in the Zotero directory) and is unconditionally atomic. The original→backup move crosses from the Zotero directory to `output/ocr/originals/`; `rename()` is attempted first with a `shutil.move` fallback for the cross-device case.
+
+### 2026-05-17 — `ocrmypdf` declared as optional dependency
+
+`pyproject.toml`: added `[project.optional-dependencies]` with `ocr = ["ocrmypdf>=16.0.0"]`. `requirements.txt`: `ocrmypdf` added as a commented-out entry in a labelled optional section. Both files note that Tesseract must be installed at the system level. The pipeline degrades gracefully without ocrmypdf — scanned PDFs are skipped with a clear error message rather than crashing. All third-party imports across `bibvik/*.py` audited; core dependency set confirmed complete.
+
+### 2026-05-17 — Stratified audit sampling tool
+
+Added `bibvik/audit.py` and `--audit` flag to `run.py`. Draws a stratified random sample from the citation graph and writes `output/audit_sample.md` for human review and annotation.
+
+Strata: CrossRef-resolved entries (check that matches are correct, not merely plausible), unresolved entries (check raw citation parsing), minimal-completeness entries (check for extraction failures), suspected duplicate pairs (exhaustive above title similarity threshold — not sampled), OCR-source entries (check for character errors from OCR), and non-English source papers per language (stubbed — requires language detection from item C). Where a stratum has fewer entries than n, all are included and the shortfall noted.
+
+Fixed random seed (default 42) ensures the same sample is drawn on every run against the same graph state. All parameters overridable: `--audit-n`, `--audit-seed`, `--audit-threshold`.
+
+Smoke test against the current graph state immediately revealed real CrossRef mismatches — entries resolved with high confidence to wrong papers in unrelated fields (psychology, pedagogy). This is a known failure mode of CrossRef DOI matching on short or ambiguous reference strings and needs to be addressed in the resolver.
+
+Methodological documentation in `docs/audit-sampling-method.md`.
+
+---
+
+### 2026-05-17 — Documentation consolidation
+
+Merged `decision_history.qmd` and both Claude session summary files
+(March 2026, April–May 2026) into the running decision log. Session
+summary narrative content (presentation revisions, visualization work)
+omitted as non-decision-relevant. `architecture.qmd` updated: module
+map now includes `audit.py`, marks tabled modules, reflects
+grobid_client OCR fallback and updated CLI flags. Both summary files
+and the old `decision_history.qmd` can now be deleted.

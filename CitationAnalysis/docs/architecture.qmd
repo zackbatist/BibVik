@@ -22,13 +22,13 @@ The citation analysis apparatus has five core processes, supported by a shared i
 | `resolver.py` | Resolves unmatched citations via CrossRef and LLM |
 | `graph.py` | Builds multi-generational citation graph with deduplication |
 | `tei_parser.py` | Parses GROBID's TEI-XML; splits compound references |
-| `grobid_client.py` | HTTP client for GROBID |
+| `grobid_client.py` | HTTP client for GROBID; OCR fallback for scanned PDFs |
 | `normalize.py` | Title and author name normalization |
-| `context_extractor.py` | Extracts verbatim citation contexts |
-| `llm_analyzer.py` | Citation function classification and cluster characterization |
-| `cluster_analyzer.py` | Co-occurrence matrix and cluster detection |
-| `resolver.py` | CrossRef lookup and LLM metadata generation for missing refs |
-| `coverage.py` | OA status checking and F2 planning |
+| `audit.py` | Stratified random sampling for manual graph validation |
+| `context_extractor.py` | Extracts verbatim citation contexts *(tabled)* |
+| `llm_analyzer.py` | Citation function classification and cluster characterization *(tabled)* |
+| `cluster_analyzer.py` | Co-occurrence matrix and cluster detection *(tabled)* |
+| `coverage.py` | PDF coverage reporting and OA acquisition planning |
 | `metadata.py` | Controlled vocabularies and output metadata |
 | `zotero_csv.py` | Zotero CSV import for exact PDF↔citekey matching |
 | `biblatex_model.py` | Biblatex data model and completeness scoring |
@@ -82,6 +82,10 @@ Each footnote containing year patterns is sent to the LLM with a structured extr
 
 After all five methods run, results are merged by normalized (author, year) key. When multiple methods detect the same citation, their provenance tags are combined. The merged set represents our best knowledge of every work cited anywhere in the document.
 
+# OCR Fallback
+
+Some PDFs in the corpus are scanned images with no embedded text layer. GROBID returns HTTP 500 with `[NO_BLOCKS]` in the response body for these. `grobid_client.py` detects this signal, runs `ocrmypdf` to add a text layer, replaces the original PDF in place, backs up the original to `output/ocr/originals/`, and retries GROBID. The backup's presence is the cache signal on subsequent runs. Requires `ocrmypdf` and Tesseract — installed as an optional dependency (`pip install -e ".[ocr]"`).
+
 # Resolution
 
 For citations detected in the text but not matched to any existing bibliography entry, the resolver attempts two tiers:
@@ -119,6 +123,10 @@ Each bibliography entry receives a `_completeness` field with a score (0.0–1.0
 - **incollection**: author, title, booktitle, editor, publisher, year
 - **inproceedings**: author, title, eventtitle, year
 
+# Audit Sampling
+
+`audit.py` draws a stratified random sample from the citation graph for manual validation. Strata: CrossRef-resolved entries, unresolved entries, minimal-completeness entries, suspected duplicate pairs, OCR-source entries, and non-English source papers per language (pending language detection). Output is `output/audit_sample.md`, designed for direct annotation. See `docs/audit-sampling-method.md` for full methodological documentation.
+
 # Graceful Cancellation
 
 When the user presses Ctrl-C during a long-running stage, the SIGINT handler writes the current bibliography state to `_partial_bibliography.json` before exiting. This prevents loss of work during multi-hour LLM runs.
@@ -130,9 +138,13 @@ When the user presses Ctrl-C during a long-running stage, the SIGINT handler wri
 | `--all` | 1-4 | Run full pipeline |
 | `--extract` | 1 | Seed paper only |
 | `--iterate-f1` | 2 | F1 papers → citation graph |
-| `--contexts` | 3 | Citation context analysis |
-| `--cluster` | 4 | Cluster analysis |
-| `--coverage` | — | Coverage report + OA lookup |
+| `--contexts` | 3 | Citation context analysis *(tabled)* |
+| `--cluster` | 4 | Cluster analysis *(tabled)* |
+| `--coverage` | — | PDF coverage report + OA lookup |
+| `--audit` | — | Draw stratified audit sample |
+| `--audit-n N` | — | Entries per audit stratum (default: 10) |
+| `--audit-seed N` | — | Random seed for audit sampling (default: 42) |
+| `--audit-threshold F` | — | Duplicate similarity threshold (default: 0.85) |
 | `--limit N` | 2 | Process only N F1 papers |
 | `--context-limit N` | 3 | Analyze only N contexts with LLM |
 | `--email` | 2,cov | Contact email for CrossRef/Unpaywall |
