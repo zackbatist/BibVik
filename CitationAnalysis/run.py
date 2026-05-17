@@ -133,6 +133,7 @@ def main():
         grobid = GrobidClient(
             base_url=config["grobid"]["base_url"],
             timeout=config["grobid"]["timeout"],
+            ocr_dir=output_dir / "ocr",
         )
         if not grobid.is_alive():
             log.error("GROBID is not available.")
@@ -367,6 +368,7 @@ def _load_graph_state(path: Path, config: dict) -> CitationGraph | None:
     grobid = GrobidClient(
         base_url=config["grobid"]["base_url"],
         timeout=config["grobid"]["timeout"],
+        ocr_dir=Path(config["output_dir"]) / "ocr",
     )
 
     zotero_map = None

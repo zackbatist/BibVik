@@ -26,3 +26,10 @@ Initial testing revealed that GROBID 0.8.1 returns HTTP 500 (not 200) when a PDF
 
 ---
 
+### 2026-05-17 — OCR replaces files in place, originals backed up
+
+Rather than writing OCR'd copies to a separate directory, the OCR'd version replaces the original at its path and the original is backed up. Since Zotero uses linked files (not attached), replacing the file under the same name is transparent — Zotero opens the new version on next access with no metadata changes needed.
+_run_ocr writes ocrmypdf output to a .ocr_tmp.pdf temp file, then moves the original to output/ocr/originals/<filename>, then moves the temp file into the original's place. The ocr_dir parameter on GrobidClient sets the backup directory root, and run.py passes output_dir / "ocr". Cache detection on subsequent runs: presence of output/ocr/originals/<filename> signals OCR has already been applied, so the file at the original path is used directly.
+
+---
+

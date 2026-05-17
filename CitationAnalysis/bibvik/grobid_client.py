@@ -27,11 +27,15 @@ the marker [NO_BLOCKS], meaning it found no text to process.
 
 When this happens, process_fulltext() automatically:
   1. Detects the [NO_BLOCKS] marker in the response.
-  2. Runs ocrmypdf on the original PDF to produce a new PDF with a text layer.
-     The OCR'd copy is written to <original_stem>_ocr.pdf alongside the
-     original, so the original is never modified.
-  3. Retries the GROBID request with the OCR'd PDF.
-  4. Reports the outcome (success or persistent failure) at INFO level.
+  2. Runs ocrmypdf on the original PDF, writing output to a temporary file.
+  3. Moves the original to output/ocr/originals/<filename> as a backup.
+  4. Moves the OCR'd version into the original's place under the original name.
+  5. Retries the GROBID request with the now-replaced file.
+  6. Reports the outcome (success or persistent failure) at INFO level.
+
+The original is never lost — it is preserved in output/ocr/originals/. On
+subsequent runs, the presence of a backup file signals that OCR has already
+been applied and the current file is used directly without re-running OCR.
 
 This requires ocrmypdf to be installed and available on PATH:
     pip install ocrmypdf
@@ -64,15 +68,25 @@ class GrobidClient:
             tei_xml = client.process_fulltext("/path/to/paper.pdf")
     """
 
-    def __init__(self, base_url: str = "http://localhost:8070", timeout: int = 120):
+    def __init__(
+        self,
+        base_url: str = "http://localhost:8070",
+        timeout: int = 120,
+        ocr_dir: str | Path | None = None,
+    ):
         """
         Args:
             base_url: Root URL of the GROBID service (no trailing slash).
             timeout:  Request timeout in seconds. Large or complex PDFs may
                       need 120-300s depending on hardware.
+            ocr_dir:  Directory for OCR'd PDF copies. Defaults to output/ocr/
+                      relative to the current working directory. Kept separate
+                      from the source PDF directory so Zotero-managed folders
+                      are not polluted with pipeline artefacts.
         """
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        self.ocr_dir = Path(ocr_dir) if ocr_dir else Path("output/ocr")
 
     def is_alive(self) -> bool:
         """
@@ -143,7 +157,7 @@ class GrobidClient:
         # ── OCR fallback ──
         # GROBID found no text — this PDF has no text layer (scanned image).
         # Run ocrmypdf to add a text layer, then retry with GROBID.
-        ocr_pdf = self._run_ocr(pdf_path)
+        ocr_pdf = self._run_ocr(pdf_path, self.ocr_dir)
         if ocr_pdf is None:
             logger.error("OCR failed for %s — skipping this paper.", pdf_path.name)
             return None
@@ -255,22 +269,25 @@ class GrobidClient:
         return _NO_BLOCKS_MARKER in tei_xml
 
     @staticmethod
-    def _run_ocr(pdf_path: Path) -> "Path | None":
+    def _run_ocr(pdf_path: Path, ocr_dir: Path) -> "Path | None":
         """
-        Run ocrmypdf on pdf_path to produce a text-layer PDF.
+        Run ocrmypdf on pdf_path and write the result back to the original path.
 
-        The OCR'd copy is written to <stem>_ocr.pdf in the same directory as
-        the original. If that file already exists (from a previous run), it is
-        reused directly without re-running OCR.
+        The original is moved to ocr_dir/originals/<filename> before being
+        replaced, so it can be recovered if needed. If a backup already exists
+        (from a previous run), the original is assumed to have already been
+        replaced and the current file at pdf_path is used directly.
 
-        Returns the path to the OCR'd PDF, or None if ocrmypdf failed or is
-        not installed.
+        Returns pdf_path on success (now pointing to the OCR'd version), or
+        None if ocrmypdf failed or is not installed.
         """
-        ocr_path = pdf_path.with_name(pdf_path.stem + "_ocr.pdf")
+        backup_dir = ocr_dir / "originals"
+        backup_path = backup_dir / pdf_path.name
 
-        if ocr_path.exists():
-            logger.debug("OCR copy already exists, reusing: %s", ocr_path.name)
-            return ocr_path
+        if backup_path.exists():
+            # Already processed on a previous run — pdf_path is already OCR'd.
+            logger.debug("OCR backup already exists, reusing current file: %s", pdf_path.name)
+            return pdf_path
 
         if not shutil.which("ocrmypdf"):
             logger.error(
@@ -286,6 +303,10 @@ class GrobidClient:
             pdf_path.name,
         )
 
+        # Write OCR output to a temporary file first so we never leave
+        # pdf_path in a half-written state if something goes wrong.
+        tmp_path = pdf_path.with_suffix(".ocr_tmp.pdf")
+
         # --skip-text: don't fail on pages that already have some text
         #   (some PDFs are mixed: scanned body with a text-layer title page)
         # --rotate-pages: auto-correct page orientation, common in scanned PDFs
@@ -300,7 +321,7 @@ class GrobidClient:
             "--output-type", "pdf",
             "--quiet",
             str(pdf_path),
-            str(ocr_path),
+            str(tmp_path),
         ]
 
         try:
@@ -308,36 +329,40 @@ class GrobidClient:
                 cmd,
                 capture_output=True,
                 text=True,
-                timeout=300,  # OCR on a long scanned PDF can take a few minutes
+                timeout=300,
             )
         except subprocess.TimeoutExpired:
             logger.error("ocrmypdf timed out after 300s for %s.", pdf_path.name)
+            tmp_path.unlink(missing_ok=True)
             return None
         except FileNotFoundError:
             logger.error("ocrmypdf not found on PATH for %s.", pdf_path.name)
             return None
 
-        if result.returncode != 0:
-            # ocrmypdf exit codes: 0 = success, 1 = bad args, 2 = input error,
-            # 3 = missing dependency, 4 = invalid output PDF, 5 = already OCR'd
-            # (exit 5 shouldn't happen since we checked ocr_path.exists() above,
-            # but handle gracefully)
-            if result.returncode == 5:
-                # "Input file already appears to have OCR" — treat as success
-                # by falling through; the output file was still written.
-                if ocr_path.exists():
-                    logger.debug("ocrmypdf: file already had OCR, output written anyway.")
-                    return ocr_path
+        if result.returncode not in (0, 5):
             logger.error(
                 "ocrmypdf failed (exit %d) for %s:\n%s",
                 result.returncode,
                 pdf_path.name,
                 (result.stderr or result.stdout or "(no output)").strip()[:500],
             )
+            tmp_path.unlink(missing_ok=True)
             return None
 
-        logger.info("OCR complete: %s → %s", pdf_path.name, ocr_path.name)
-        return ocr_path
+        if not tmp_path.exists():
+            logger.error("ocrmypdf produced no output for %s.", pdf_path.name)
+            return None
+
+        # Back up the original, then replace it with the OCR'd version.
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(pdf_path), str(backup_path))
+        shutil.move(str(tmp_path), str(pdf_path))
+
+        logger.info(
+            "OCR complete: %s (original backed up to output/ocr/originals/)",
+            pdf_path.name,
+        )
+        return pdf_path
 
     # =========================================================================
     # Reference-only processing
