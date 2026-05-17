@@ -239,3 +239,24 @@ entries.
 correct constant for Norwegian Bokmål in this version is
 `Language.BOKMAL` (not `Language.NORWEGIAN_BOKMAL`). Documented in
 `docs/additional-data-capture.md`.
+
+### 2026-05-17 — Methods documentation: citation detection and GROBID configuration
+
+`docs/methods/citation-detection.md`: Documents the five-method detection
+design and its rationale. Covers the principle that no single source is
+treated as authoritative, per-method description (strengths, weaknesses,
+implementation location), merging and deduplication logic, and known
+limitations. Cites Tkaczyk et al. (2018) as precedent for ensemble
+approaches to reference parsing. Notes that LLM prompt analysis is
+deferred to a separate document pending full corpus run.
+
+`docs/methods/grobid-configuration.md`: Documents GROBID 0.8.1
+configuration decisions. Key entries: `consolidateCitations: 0`
+(per-reference CrossRef calls cause timeout-induced truncation),
+`includeRawCitations: 1` (used by compound splitter and audit review),
+coordinates not requested (overhead not justified). Documents known
+issues: container instability on ARM emulation under long runs, and
+the domain gap between GROBID's published benchmarks (biomedical
+English) and the BibVik corpus. Cross-references OCR fallback,
+resolver, audit sampling, and data capture docs rather than
+du
