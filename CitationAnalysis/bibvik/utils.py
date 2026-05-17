@@ -51,6 +51,8 @@ def load_config(config_path: str = "config.yaml") -> dict:
     llm = config.setdefault("llm", {})
     llm.setdefault("base_url", "http://localhost:11434")
     llm.setdefault("model", "qwen3.5:35b")
+    llm.setdefault("detection_model", "")  # If empty, uses main model
+    llm.setdefault("detection_batch_size", 4)  # Paragraphs per LLM call for body scan
     llm.setdefault("temperature", 0.3)
     llm.setdefault("max_tokens", 2048)
     llm.setdefault("timeout", 300)

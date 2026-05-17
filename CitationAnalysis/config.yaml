@@ -63,7 +63,17 @@ llm:
 
   # Model identifier as listed by `ollama list`.
   # Change this if your local model name differs.
-  model: "qwen3.5:35b"
+  model: "qwen3.5:8b"
+
+  # Optional: a smaller/faster model for citation detection (Method 4 body scan).
+  # The body scan only extracts author-year pairs, so a smaller model works well.
+  # Leave empty to use the main model for everything.
+  # Example: "qwen3:8b" runs ~3-5x faster with acceptable accuracy for detection.
+  detection_model: ""
+
+  # Number of paragraphs to batch per LLM call for the body scan.
+  # Higher = fewer requests but longer per-request. 3-5 is a good range.
+  detection_batch_size: 1
 
   # Temperature for LLM generation.
   # Lower = more deterministic; higher = more creative.

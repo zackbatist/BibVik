@@ -254,13 +254,40 @@ class CitationGraph:
         results = {p.name: True for p in already}
         times: list[float] = []
 
+        # Pre-fetch GROBID results in a background thread
+        from concurrent.futures import ThreadPoolExecutor, Future
+
+        def _grobid_fetch(pdf_path: Path) -> str | None:
+            """Send a PDF to GROBID (can run in background)."""
+            tei = self.grobid.process_fulltext(pdf_path)
+            if tei is None:
+                tei = self.grobid.process_references_only(pdf_path)
+            return tei
+
+        executor = ThreadPoolExecutor(max_workers=1)
+        prefetch_future: Future | None = None
+
         for i, pdf_path in enumerate(remaining):
             t0 = _time.time()
             idx = len(already) + i + 1
 
+            # Use pre-fetched GROBID result if available, otherwise fetch now
+            tei_xml = None
+            if prefetch_future is not None:
+                try:
+                    tei_xml = prefetch_future.result(timeout=300)
+                except Exception:
+                    tei_xml = None
+                prefetch_future = None
+
+            # Start pre-fetching the NEXT paper's GROBID result
+            if i + 1 < len(remaining):
+                prefetch_future = executor.submit(_grobid_fetch, remaining[i + 1])
+
             try:
                 ok = self._process_one_f1(
                     pdf_path, llm_config=llm_config, email=email,
+                    prefetched_tei=tei_xml,
                 )
                 results[pdf_path.name] = ok
                 elapsed = _time.time() - t0
@@ -290,6 +317,8 @@ class CitationGraph:
                 if progress_callback:
                     progress_callback(idx, total, pdf_path.stem, 0, 0, False)
 
+        executor.shutdown(wait=False)
+
         succeeded = sum(results.values())
         logger.info(
             "F1 complete. %d/%d succeeded. Bibliography: %d entries.",
@@ -302,14 +331,19 @@ class CitationGraph:
         pdf_path: Path,
         llm_config: dict | None = None,
         email: str = "",
+        prefetched_tei: str | None = None,
     ) -> bool:
         """Process one F1 paper."""
-        # GROBID
-        tei_xml = self.grobid.process_fulltext(pdf_path)
-        if tei_xml is None:
-            tei_xml = self.grobid.process_references_only(pdf_path)
+        # GROBID — use pre-fetched result if available
+        if prefetched_tei is not None:
+            tei_xml = prefetched_tei
+        else:
+            tei_xml = self.grobid.process_fulltext(pdf_path)
             if tei_xml is None:
-                return False
+                tei_xml = self.grobid.process_references_only(pdf_path)
+
+        if not tei_xml:
+            return False
 
         # Save TEI
         self.tei_dir.mkdir(parents=True, exist_ok=True)

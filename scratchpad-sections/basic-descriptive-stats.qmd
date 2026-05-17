@@ -149,13 +149,23 @@ primary_count_year <- topic_count %>%
   group_by(publication_year) %>% 
   mutate(prop_primary = n / sum(n))
 
+primary_count <- topic_count %>%
+  group_by(topic) %>% 
+  count(count) %>% 
+  filter(count == "Primary") %>% 
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  ungroup() %>%
+  mutate(pct = n / sum(n))
+
 ggplot(primary_count_year, aes(x = publication_year, y = n, fill = topic)) +
   geom_bar(stat="identity")+
   labs(x = "", y = "Count", fill = "Primary topic") +
   scale_fill_manual(values = custom_palette) +
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 6))
+ggsave("topics_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 
 ggplot(primary_count_year, aes(x = publication_year, y = prop_primary, fill = topic)) +
   geom_bar(stat="identity")+
@@ -166,15 +176,9 @@ ggplot(primary_count_year, aes(x = publication_year, y = prop_primary, fill = to
   scale_fill_manual(values = custom_palette) +
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   theme_bw() +
-  theme(legend.position = "bottom")
-
-primary_count <- topic_count %>%
-  group_by(topic) %>% 
-  count(count) %>% 
-  filter(count == "Primary") %>% 
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  ungroup() %>%
-  mutate(pct = n / sum(n))
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 6))
+ggsave("topics_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 
 ggplot(primary_count |> mutate(topic = str_wrap(topic, width = 25)),
        aes(x = reorder(topic, n), y = n)) +
@@ -186,6 +190,7 @@ ggplot(primary_count |> mutate(topic = str_wrap(topic, width = 25)),
   theme_bw() +
   coord_flip() +
   force_panelsizes(cols = unit(10, "cm"))
+ggsave("topics_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 ```
 
 ### Primary method, in aggregate and over time
@@ -205,25 +210,6 @@ primary_method_year <- method_count %>%
   group_by(publication_year) %>% 
   mutate(prop_primary = n / sum(n))
 
-ggplot(primary_method_year, aes(x = publication_year, y = n, fill = method)) +
-  geom_bar(stat="identity")+
-  labs(x = "", y = "Count", fill = "Primary method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-
-ggplot(primary_method_year, aes(x = publication_year, y = prop_primary, fill = method)) +
-  geom_bar(stat="identity")+
-  geom_text(data = totals_by_year,
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion by year", fill = "Primary method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-
 primary_count_method <- method_count %>%
   group_by(method) %>% 
   count(count) %>% 
@@ -232,23 +218,53 @@ primary_count_method <- method_count %>%
   ungroup() %>%
   mutate(pct = n / sum(n))
 
+ggplot(primary_method_year, aes(x = publication_year, y = n, fill = method)) +
+  geom_bar(stat="identity") +
+  labs(x = "", y = "Count", fill = "Primary method") +
+  scale_fill_manual(values = custom_palette2) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("methods_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+
+ggplot(primary_method_year, aes(x = publication_year, y = prop_primary, fill = method)) +
+  geom_bar(stat="identity") +
+  geom_text(data = totals_by_year,
+            aes(x = publication_year, y = 1.05, label = total),
+            inherit.aes = FALSE, size = 3) +
+  labs(x = "", y = "Proportion by year", fill = "Primary method") +
+  scale_fill_manual(values = custom_palette2) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("methods_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+
 ggplot(primary_count_method |> mutate(method = str_wrap(method, width = 25)),
        aes(x = reorder(method, n), y = n)) +
   geom_bar(stat="identity", fill = method_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)), 
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
             hjust = -0.2, size = 3) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
   labs(x = "Primary method", y = "Count") +
   theme_bw() +
   coord_flip() +
   force_panelsizes(cols = unit(10, "cm"))
+ggsave("methods_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 ```
 
 ### Primary sources of evidence, in aggregate and over time
 
 ```{r}
+totals_by_year <- df %>% 
+  count(publication_year) %>% 
+  rename(total = n) %>%
+  mutate(publication_year = factor(publication_year, levels = sort(unique(as.numeric(as.character(publication_year))))))
+
 source_count <- df %>% 
-  select(publication_year, contains("Sources.of.Evidence")) %>% 
+  select(publication_year, contains("Sources.of.Evidence")) %>%
+  mutate(publication_year = factor(publication_year, levels = levels(totals_by_year$publication_year))) %>%
   pivot_longer(!publication_year,
                names_to = "source",
                values_to = "count")
@@ -263,13 +279,23 @@ primary_source_year <- source_count %>%
   ungroup() %>%
   mutate(publication_year = droplevels(publication_year))
 
+primary_source_count <- source_count %>%
+  group_by(source) %>% 
+  count(count) %>% 
+  filter(count == "Primary") %>% 
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  ungroup() %>%
+  mutate(pct = n / sum(n))
+
 ggplot(primary_source_year, aes(x = publication_year, y = n, fill = source)) +
   geom_bar(stat="identity")+
   labs(x = "", y = "Count", fill = "Primary source of evidence") +
   scale_fill_manual(values = custom_palette) +
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
+ggsave("sources_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 
 ggplot(primary_source_year, aes(x = publication_year, y = prop_primary, fill = source)) +
   geom_bar(stat="identity")+
@@ -280,15 +306,9 @@ ggplot(primary_source_year, aes(x = publication_year, y = prop_primary, fill = s
   scale_fill_manual(values = custom_palette) +
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   theme_bw() +
-  theme(legend.position = "bottom")
-
-primary_source_count <- source_count %>%
-  group_by(source) %>% 
-  count(count) %>% 
-  filter(count == "Primary") %>% 
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  ungroup() %>%
-  mutate(pct = n / sum(n))
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("sources_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 
 ggplot(primary_source_count |> mutate(source = str_wrap(source, width = 25)),
        aes(x = reorder(source, n), y = n)) +
@@ -300,6 +320,7 @@ ggplot(primary_source_count |> mutate(source = str_wrap(source, width = 25)),
   theme_bw() +
   coord_flip() +
   force_panelsizes(cols = unit(10, "cm"))
+ggsave("sources_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 ```
 
 ### Seconday topics by primary topic

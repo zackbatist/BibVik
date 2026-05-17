@@ -388,47 +388,97 @@ def _method_regex(text: str) -> dict:
 # Method 4: LLM body scan
 # =============================================================================
 
+# In-memory cache: hash(paragraph_text) → list of (author, year) pairs
+_llm_cache: dict[str, list[tuple[str, str]]] = {}
+
+
 def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
-    """Send each paragraph to the LLM for comprehensive citation detection."""
+    """Send paragraphs to the LLM for citation detection, with batching and caching."""
     citations = {}
     base_url = llm_config.get("base_url", "http://localhost:11434")
-    model = llm_config.get("model", "qwen3.5:35b")
+    det_model = llm_config.get("detection_model", "")
+    model = det_model if det_model else llm_config.get("model", "qwen3.5:35b")
     timeout = llm_config.get("timeout", 120)
+    batch_size = max(1, llm_config.get("detection_batch_size", 4))
 
-    substantive = [p for p in paragraphs if len(p.get("text", "")) > 50]
-    n = len(substantive)
+    # Clean and filter paragraphs
+    substantive = []
+    for p in paragraphs:
+        text = re.sub(r"\{\{CITE:\w*\}\}", "", p.get("text", "")).strip()
+        if len(text) > 50:
+            substantive.append(text)
 
-    for idx, para in enumerate(substantive):
-        text = re.sub(r"\{\{CITE:\w*\}\}", "", para.get("text", "")).strip()
-        if len(text) < 50:
-            continue
+    if not substantive:
+        return citations
 
-        if n > 10 and idx % 20 == 0:
-            logger.debug("    LLM body scan: paragraph %d/%d", idx + 1, n)
+    # Split into batches
+    batches = [substantive[i:i + batch_size] for i in range(0, len(substantive), batch_size)]
+    cache_hits = 0
+    llm_calls = 0
 
-        parsed = _llm_query_array(
-            base_url, model, timeout,
-            _LLM_BODY_DETECT.format(text=text),
-        )
-        if not parsed:
-            continue
+    logger.debug("    LLM body scan: %d paragraphs in %d batches (model: %s)",
+                 len(substantive), len(batches), model)
 
-        for item in parsed:
-            author = str(item.get("first_author", "")).strip()
-            year = str(item.get("year", "")).strip()
-            if not author or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
+    for batch_idx, batch in enumerate(batches):
+        if len(batches) > 10 and batch_idx % 10 == 0:
+            logger.debug("    LLM body scan: batch %d/%d (%d cache hits so far)",
+                         batch_idx + 1, len(batches), cache_hits)
+
+        for text in batch:
+            text_hash = _hash_text(text)
+
+            # Check cache
+            if text_hash in _llm_cache:
+                cache_hits += 1
+                for author, year in _llm_cache[text_hash]:
+                    key = (_norm(author), year)
+                    if key not in citations:
+                        citations[key] = {
+                            "author": author, "year": year,
+                            "methods": ["llm_body"], "occurrences": 0, "contexts": [],
+                        }
+                    citations[key]["occurrences"] += 1
+                    if len(citations[key]["contexts"]) < 3:
+                        citations[key]["contexts"].append(text[:200])
                 continue
-            key = (_norm(author), year)
-            if key not in citations:
-                citations[key] = {
-                    "author": author, "year": year,
-                    "methods": ["llm_body"], "occurrences": 0, "contexts": [],
-                }
-            citations[key]["occurrences"] += 1
-            if len(citations[key]["contexts"]) < 3:
-                citations[key]["contexts"].append(text[:200])
+
+            # Send to LLM
+            llm_calls += 1
+            prompt = _LLM_BODY_DETECT.format(text=text)
+            parsed = _llm_query_array(base_url, model, timeout, prompt)
+
+            pairs = []
+            if parsed:
+                for item in parsed:
+                    author = str(item.get("first_author", "")).strip()
+                    year = str(item.get("year", "")).strip()
+                    if not author or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
+                        continue
+                    pairs.append((author, year))
+                    key = (_norm(author), year)
+                    if key not in citations:
+                        citations[key] = {
+                            "author": author, "year": year,
+                            "methods": ["llm_body"], "occurrences": 0, "contexts": [],
+                        }
+                    citations[key]["occurrences"] += 1
+                    if len(citations[key]["contexts"]) < 3:
+                        citations[key]["contexts"].append(text[:200])
+
+            # Only cache non-empty results — don't poison cache with failures
+            if pairs:
+                _llm_cache[text_hash] = pairs
+
+    if cache_hits:
+        logger.debug("    LLM body scan: %d LLM calls, %d cache hits", llm_calls, cache_hits)
 
     return citations
+
+
+def _hash_text(text: str) -> str:
+    """Hash paragraph text for caching."""
+    import hashlib
+    return hashlib.md5(text.encode("utf-8")).hexdigest()
 
 
 # =============================================================================
