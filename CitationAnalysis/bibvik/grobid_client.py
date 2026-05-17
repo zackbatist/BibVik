@@ -354,9 +354,19 @@ class GrobidClient:
             return None
 
         # Back up the original, then replace it with the OCR'd version.
+        # Use Path.rename() rather than shutil.move() — on POSIX, rename() is
+        # atomic when source and destination are on the same filesystem, closing
+        # the window where pdf_path could be empty if the process is interrupted
+        # between the two operations. shutil.move() is used as a fallback for
+        # the backup step only, in case the Zotero directory and output/ are on
+        # different volumes (cross-device rename raises OSError).
         backup_dir.mkdir(parents=True, exist_ok=True)
-        shutil.move(str(pdf_path), str(backup_path))
-        shutil.move(str(tmp_path), str(pdf_path))
+        try:
+            pdf_path.rename(backup_path)
+        except OSError:
+            # Cross-device move — not atomic, but unavoidable in this case.
+            shutil.move(str(pdf_path), str(backup_path))
+        tmp_path.rename(pdf_path)  # same directory, always atomic
 
         logger.info(
             "OCR complete: %s (original backed up to output/ocr/originals/)",

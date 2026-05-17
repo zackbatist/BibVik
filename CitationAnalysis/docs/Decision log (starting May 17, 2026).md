@@ -78,3 +78,20 @@ at both construction sites.
 
 ---
 
+### 2026-05-17 — Atomic rename for OCR file operations
+
+`shutil.move` was replaced with `Path.rename()` for the two filesystem
+operations in `_run_ocr`. On POSIX, `rename()` is atomic when source and
+destination are on the same filesystem, closing the window where `pdf_path`
+could be left empty if the process is interrupted between the backup and
+replace steps.
+
+The temp→original move (`tmp_path.rename(pdf_path)`) is always
+same-filesystem since both paths are in the Zotero directory, so it is
+unconditionally atomic. The original→backup move crosses from the Zotero
+directory to `output/ocr/originals/`; `rename()` is attempted first with a
+`shutil.move` fallback for the cross-device case, which is not atomic but
+unavoidable if the two directories are on different volumes.
+
+---
+
