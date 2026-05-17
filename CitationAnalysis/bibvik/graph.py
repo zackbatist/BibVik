@@ -201,12 +201,12 @@ class CitationGraph:
                 if not existing:
                     self.bibliography[citekey] = record
 
-        # Store processed data
+        # Store processed data. TEI-XML is saved to disk at output/tei/;
+        # it is not stored in memory or serialised into the graph state.
         self.processed_papers[pdf_path.name] = {
             "header": header,
             "references": grobid_refs,
             "paragraphs": paragraphs,
-            "tei_xml": tei_xml,
             "source_pdf": pdf_path.name,
             "grobid_id_to_citekey": {
                 gid: ck for (pdf, gid), ck in self.grobid_map.items()

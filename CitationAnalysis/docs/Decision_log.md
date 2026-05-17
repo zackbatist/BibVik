@@ -128,8 +128,6 @@ Smoke test against the current graph state immediately revealed real CrossRef mi
 
 Methodological documentation in `docs/audit-sampling-method.md`.
 
----
-
 ### 2026-05-17 — Documentation consolidation
 
 Merged `decision_history.qmd` and both Claude session summary files
@@ -149,3 +147,19 @@ OA-available papers). The `download_oa_papers` function signature
 simplified to take bibliography directly rather than a coverage report
 dict. `run.py` updated accordingly. Unpaywall item H flagged in both
 module docstring and report output.
+
+### 2026-05-17 — Lazy imports for tabled modules; tei_xml inconsistency fixed
+
+`context_extractor`, `llm_analyzer` (Stage 3), and `cluster_analyzer`
+(Stage 4) moved from top-level imports in `run.py` to lazy imports
+inside their respective stage blocks. They no longer load during normal
+`--extract` and `--iterate-f1` runs, removing startup overhead and
+eliminating import failures if their dependencies aren't installed.
+
+Removed `tei_xml` from the seed paper's `processed_papers` entry in
+`graph.py`. The TEI-XML is written to disk at `output/tei/` immediately
+after GROBID processing and does not need to be held in memory. F1
+papers never stored `tei_xml` in `processed_papers`; the seed paper was
+the only exception. `_save_graph_state` in `run.py` was already
+explicitly excluding `tei_xml` from serialisation, confirming it was
+never intended to persist. Both entries now have identical structure.

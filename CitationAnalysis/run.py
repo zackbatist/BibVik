@@ -28,10 +28,7 @@ from bibvik.utils import (
 )
 from bibvik.grobid_client import GrobidClient
 from bibvik.graph import CitationGraph
-from bibvik.context_extractor import extract_all_contexts
-from bibvik.llm_analyzer import LLMAnalyzer, analyze_all_contexts
 from bibvik.normalize import normalize_titles_in_bibliography, normalize_authors_in_bibliography
-from bibvik.cluster_analyzer import build_cooccurrence_matrix, identify_clusters, analyze_clusters
 from bibvik.metadata import build_bibliography_metadata, build_contexts_metadata, build_clusters_metadata
 
 
@@ -222,6 +219,10 @@ def main():
         bibliography = graph.get_bibliography()
         processed_papers = graph.get_processed_papers()
 
+        # Tabled modules — imported lazily so they don't load during normal runs.
+        from bibvik.context_extractor import extract_all_contexts
+        from bibvik.llm_analyzer import LLMAnalyzer, analyze_all_contexts
+
         contexts = extract_all_contexts(
             processed_papers=processed_papers,
             grobid_map=graph.get_grobid_map(),
@@ -272,6 +273,11 @@ def main():
                 sys.exit(1)
 
         bibliography = graph.get_bibliography()
+
+        # Tabled modules — imported lazily so they don't load during normal runs.
+        from bibvik.cluster_analyzer import build_cooccurrence_matrix, identify_clusters, analyze_clusters
+        from bibvik.llm_analyzer import LLMAnalyzer
+
         cooccurrence = build_cooccurrence_matrix(
             contexts, min_cooccurrence=config["clustering"]["min_cooccurrence"],
         )
