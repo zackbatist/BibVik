@@ -57,11 +57,18 @@ grobid:
 # Ollama / Local LLM
 # ---------------------------------------------------------------------------
 llm:
-  # Base URL for the Ollama API.
+  # Base URL for the LLM API.
   base_url: "http://localhost:11434"
 
-  # Model identifier as listed by `ollama list`.
-  # Change this if your local model name differs.
+  # Backend to use for LLM inference.
+  # "ollama": Ollama API (default, for local development)
+  # "llama_server": llama.cpp server OpenAI-compatible API (preferred for GPU cluster)
+  backend: "ollama"
+
+  # Model identifier.
+  # For ollama: as listed by `ollama list`
+  # For llama_server: the model name passed at server startup (or leave as-is,
+  # llama-server ignores the model field and uses whatever model it was started with)
   model: "qwen3.5:8b"
 
   # Optional: a smaller/faster model for citation detection (Method 4 body scan).

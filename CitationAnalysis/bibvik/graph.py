@@ -230,6 +230,7 @@ class CitationGraph:
         llm_config: dict | None = None,
         email: str = "",
         progress_callback=None,
+        start_callback=None,
     ) -> dict[str, bool]:
         """Process F1 PDFs and integrate their citations as F2."""
         import time as _time
@@ -266,16 +267,20 @@ class CitationGraph:
 
         executor = ThreadPoolExecutor(max_workers=1)
         prefetch_future: Future | None = None
+        grobid_timeout = self.grobid.timeout  # use configured timeout, not hardcoded 300s
 
         for i, pdf_path in enumerate(remaining):
             t0 = _time.time()
             idx = len(already) + i + 1
 
+            if start_callback:
+                start_callback(index=idx, total=total, stem=pdf_path.stem)
+
             # Use pre-fetched GROBID result if available, otherwise fetch now
             tei_xml = None
             if prefetch_future is not None:
                 try:
-                    tei_xml = prefetch_future.result(timeout=300)
+                    tei_xml = prefetch_future.result(timeout=grobid_timeout + 30)
                 except Exception:
                     tei_xml = None
                 prefetch_future = None

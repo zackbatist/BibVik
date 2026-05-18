@@ -330,3 +330,26 @@ detector on every call — one per paper. Added `_lingua_detector` as a
 module-level singleton: built once on first call, reused thereafter.
 Added `_lingua_warned` flag so the "lingua not installed" warning
 prints once per run rather than once per paper.
+
+### 2026-05-18 — UI improvements, llama-server backend, audit and summary fixes
+
+**Progress reporting:** `start_callback` added to `process_f1_papers` —
+prints paper header and "Sending to GROBID..." immediately when processing
+starts, so hangs are visible. `_process_one_f1` now returns `(bool, str)`
+tuple so failure reasons surface inline rather than as "unknown error".
+Prefetch timeout reduced from hardcoded 300s to `grobid.timeout + 30s`.
+
+**Stage 2 summary:** Resolution counts (CrossRef, LLM, stub, unresolved)
+now reflect only entries added in the current run. Existing citekeys
+snapshotted before the F1 loop; set difference identifies new entries.
+
+**llama-server backend:** `LLMAnalyzer` and `_llm_query_array` support
+`backend="llama_server"`, using `/v1/chat/completions` with standard
+`temperature`/`max_tokens` parameters. Health check uses `/health`.
+Both Methods 4 and 5 pass `backend` from `llm_config`. Configured via
+`llm.backend` in `config.yaml` (default `"ollama"`). To switch:
+set `backend: "llama_server"` and update `base_url`. No code changes needed.
+
+**Audit duplicate detection:** `_stratum_duplicates` now samples up to
+500 entries before pairwise comparison, reducing from O(n²) on the full
+bibliography to ~125k comparisons. Noted in rendered output.

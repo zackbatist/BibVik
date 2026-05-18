@@ -400,6 +400,7 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
     model = det_model if det_model else llm_config.get("model", "qwen3.5:35b")
     timeout = llm_config.get("timeout", 120)
     batch_size = max(1, llm_config.get("detection_batch_size", 4))
+    backend = llm_config.get("backend", "ollama")
 
     # Clean and filter paragraphs
     substantive = []
@@ -445,7 +446,7 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
             # Send to LLM
             llm_calls += 1
             prompt = _LLM_BODY_DETECT.format(text=text)
-            parsed = _llm_query_array(base_url, model, timeout, prompt)
+            parsed = _llm_query_array(base_url, model, timeout, prompt, backend=backend)
 
             pairs = []
             if parsed:
@@ -495,18 +496,19 @@ def _method_llm_footnotes(
     base_url = llm_config.get("base_url", "http://localhost:11434")
     model = llm_config.get("model", "qwen3.5:35b")
     timeout = llm_config.get("timeout", 120)
+    backend = llm_config.get("backend", "ollama")
 
     for fn in footnotes:
         text = fn.get("text", "")
         if len(text) < 40:
             continue
-        # Only process footnotes that look like they might contain references
         if not re.search(r"\b(19|20)\d{2}\b", text):
             continue
 
         parsed = _llm_query_array(
             base_url, model, timeout,
             _LLM_FOOTNOTE_EXTRACT.format(text=text),
+            backend=backend,
         )
         if not parsed:
             continue
@@ -639,24 +641,44 @@ def _context(text: str, start: int, end: int, window: int = 100) -> str:
     return ctx
 
 
-def _llm_query_array(base_url: str, model: str, timeout: int, prompt: str) -> list | None:
-    """Send a prompt to Ollama and parse a JSON array response."""
+def _llm_query_array(
+    base_url: str, model: str, timeout: int, prompt: str,
+    backend: str = "ollama",
+) -> list | None:
+    """Send a prompt to the LLM and parse a JSON array response."""
     try:
-        resp = requests.post(
-            f"{base_url}/api/generate",
-            json={
-                "model": model,
-                "prompt": prompt,
-                "stream": False,
-                "think": False,
-                "options": {"temperature": 0.2, "num_predict": 1024},
-            },
-            timeout=timeout,
-        )
-        if resp.status_code != 200:
-            return None
+        if backend == "llama_server":
+            resp = requests.post(
+                f"{base_url}/v1/chat/completions",
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                    "temperature": 0.2,
+                    "max_tokens": 1024,
+                },
+                timeout=timeout,
+            )
+            if resp.status_code != 200:
+                return None
+            choices = resp.json().get("choices", [])
+            raw = choices[0].get("message", {}).get("content", "").strip() if choices else ""
+        else:
+            resp = requests.post(
+                f"{base_url}/api/generate",
+                json={
+                    "model": model,
+                    "prompt": prompt,
+                    "stream": False,
+                    "think": False,
+                    "options": {"temperature": 0.2, "num_predict": 1024},
+                },
+                timeout=timeout,
+            )
+            if resp.status_code != 200:
+                return None
+            raw = resp.json().get("response", "").strip()
 
-        raw = resp.json().get("response", "").strip()
         raw = re.sub(r"<think>[\s\S]*?</think>", "", raw).strip()
         raw = re.sub(r"<think>[\s\S]*$", "", raw).strip()
 

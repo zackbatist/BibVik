@@ -28,6 +28,7 @@ import json
 import logging
 
 import requests
+from unidecode import unidecode
 
 logger = logging.getLogger(__name__)
 
@@ -172,7 +173,14 @@ Respond ONLY with the JSON object. No preamble, no markdown fences."""
 
 class LLMAnalyzer:
     """
-    Interface to the local LLM via Ollama for citation analysis.
+    Interface to a local LLM for citation analysis.
+
+    Supports two backends:
+    - "ollama": Ollama API at /api/generate (default, for local development)
+    - "llama_server": llama.cpp server OpenAI-compatible API at /v1/chat/completions
+      (preferred for performance; use on GPU cluster)
+
+    Set backend in config.yaml under llm.backend.
 
     Usage:
         analyzer = LLMAnalyzer(base_url="http://localhost:11434", model="qwen3:35b")
@@ -187,25 +195,33 @@ class LLMAnalyzer:
         temperature: float = 0.3,
         max_tokens: int = 2048,
         timeout: int = 300,
+        backend: str = "ollama",
     ):
         """
         Args:
-            base_url:    Ollama API base URL.
-            model:       Model name as listed by `ollama list`.
+            base_url:    LLM API base URL.
+            model:       Model name.
             temperature: Sampling temperature. Lower = more deterministic.
             max_tokens:  Maximum response tokens.
-            timeout:     Request timeout in seconds. The 35B model can be slow.
+            timeout:     Request timeout in seconds.
+            backend:     "ollama" or "llama_server".
         """
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.timeout = timeout
+        self.backend = backend.lower()
+        if self.backend not in ("ollama", "llama_server"):
+            raise ValueError(f"Unknown LLM backend: {backend!r}. Use 'ollama' or 'llama_server'.")
 
     def is_available(self) -> bool:
-        """
-        Check whether Ollama is running and the specified model is available.
-        """
+        """Check whether the LLM backend is running and accessible."""
+        if self.backend == "llama_server":
+            return self._is_available_llama_server()
+        return self._is_available_ollama()
+
+    def _is_available_ollama(self) -> bool:
         try:
             resp = requests.get(f"{self.base_url}/api/tags", timeout=10)
             if resp.status_code != 200:
@@ -215,8 +231,6 @@ class LLMAnalyzer:
             models = resp.json().get("models", [])
             model_names = [m.get("name", "") for m in models]
 
-            # Check for exact match or prefix match (ollama may list as "qwen3:35b"
-            # or "qwen3:35b-instruct" etc.)
             for name in model_names:
                 if name.startswith(self.model) or self.model.startswith(name.split(":")[0]):
                     return True
@@ -233,6 +247,20 @@ class LLMAnalyzer:
         except requests.ConnectionError:
             logger.error(
                 "Cannot connect to Ollama at %s. Is it running? Try: ollama serve",
+                self.base_url,
+            )
+            return False
+
+    def _is_available_llama_server(self) -> bool:
+        try:
+            resp = requests.get(f"{self.base_url}/health", timeout=10)
+            if resp.status_code == 200:
+                return True
+            logger.error("llama-server health check returned status %d.", resp.status_code)
+            return False
+        except requests.ConnectionError:
+            logger.error(
+                "Cannot connect to llama-server at %s. Is it running?",
                 self.base_url,
             )
             return False
@@ -332,13 +360,20 @@ class LLMAnalyzer:
 
     def _query_llm_raw(self, prompt: str) -> str | None:
         """
-        Send a prompt to Ollama and return the raw response text (after
+        Send a prompt to the LLM and return the raw response text (after
         stripping think tags), without attempting JSON parsing.
 
-        Used by methods that need to parse array responses rather than object
-        responses, since _query_llm always tries json.loads() on the result.
+        Routes to Ollama's /api/generate or llama-server's
+        /v1/chat/completions depending on self.backend.
         """
         import re
+
+        if self.backend == "llama_server":
+            return self._query_llama_server(prompt, re)
+        return self._query_ollama(prompt, re)
+
+    def _query_ollama(self, prompt: str, re) -> str | None:
+        """Query via Ollama /api/generate."""
         payload = {
             "model": self.model,
             "prompt": prompt,
@@ -364,7 +399,6 @@ class LLMAnalyzer:
             data = resp.json()
             response_text = data.get("response", "")
 
-            # Strip thinking blocks.
             response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
             response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
 
@@ -382,6 +416,62 @@ class LLMAnalyzer:
             return None
         except Exception as e:
             logger.error("Unexpected error querying Ollama: %s", e)
+            return None
+
+    def _query_llama_server(self, prompt: str, re) -> str | None:
+        """
+        Query via llama-server's OpenAI-compatible /v1/chat/completions.
+
+        llama-server uses the OpenAI chat completions format rather than
+        Ollama's /api/generate format. The prompt is sent as a user message.
+        Temperature and max_tokens map directly to OpenAI parameter names.
+        """
+        payload = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "stream": False,
+            "temperature": self.temperature,
+            "max_tokens": self.max_tokens,
+        }
+
+        try:
+            resp = requests.post(
+                f"{self.base_url}/v1/chat/completions",
+                json=payload,
+                timeout=self.timeout,
+            )
+
+            if resp.status_code != 200:
+                logger.error("llama-server returned status %d: %s", resp.status_code, resp.text[:500])
+                return None
+
+            data = resp.json()
+            choices = data.get("choices", [])
+            if not choices:
+                logger.warning("llama-server returned no choices.")
+                return None
+
+            response_text = choices[0].get("message", {}).get("content", "")
+
+            # Strip thinking blocks — some models emit <think>...</think> regardless
+            # of backend.
+            response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
+            response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
+
+            if not response_text:
+                logger.warning("llama-server response was empty after stripping think tags.")
+                return None
+
+            return response_text
+
+        except requests.Timeout:
+            logger.error("llama-server request timed out after %ds.", self.timeout)
+            return None
+        except requests.ConnectionError:
+            logger.error("Lost connection to llama-server at %s.", self.base_url)
+            return None
+        except Exception as e:
+            logger.error("Unexpected error querying llama-server: %s", e)
             return None
 
 
@@ -683,7 +773,6 @@ def _build_content_lookup(
     #
     # Build a title→content map from what we already have, then check each
     # bibliography entry that lacks content.
-    from unidecode import unidecode
 
     def _norm(s):
         """Normalize a title for fuzzy comparison."""
@@ -846,4 +935,3 @@ def _parse_llm_json_array(text: str) -> list[dict] | None:
 
     logger.warning("Could not parse LLM array response: %s", text[:200])
     return None
-

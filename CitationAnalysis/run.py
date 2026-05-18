@@ -91,14 +91,26 @@ def _fmt_time(seconds: float) -> str:
 def _llm_status(llm_cfg: dict) -> str:
     """Return a short string describing LLM availability."""
     import socket
-    host = llm_cfg.get("host", "localhost")
-    port = llm_cfg.get("port", 11434)
+    backend = llm_cfg.get("backend", "ollama")
+    base_url = llm_cfg.get("base_url", "http://localhost:11434")
+    model = llm_cfg.get("model", "unknown")
+
+    # Parse host and port from base_url
+    try:
+        from urllib.parse import urlparse
+        parsed = urlparse(base_url)
+        host = parsed.hostname or "localhost"
+        port = parsed.port or (11434 if backend == "ollama" else 8080)
+    except Exception:
+        host, port = "localhost", 11434
+
     try:
         socket.create_connection((host, port), timeout=1).close()
-        model = llm_cfg.get("model", "unknown")
-        return f"LLM available ({model})"
+        backend_label = "llama-server" if backend == "llama_server" else "Ollama"
+        return f"LLM available ({backend_label} · {model})"
     except OSError:
-        return "LLM unavailable (Ollama not running)"
+        backend_label = "llama-server" if backend == "llama_server" else "Ollama"
+        return f"LLM unavailable ({backend_label} not running)"
 
 
 def main():
@@ -232,6 +244,7 @@ def main():
         import time as _time
         _stage2_times: list[float] = []
         _stage2_bib_before = len(graph.get_bibliography())
+        _stage2_existing_keys = set(graph.get_bibliography().keys())
         _t_stage2_start = _time.time()
 
         def _progress(
@@ -240,14 +253,16 @@ def main():
             detection, n_crossref, n_unresolved,
             language, ocr_applied, failure_reason,
         ):
-            w = len(str(total))
-            label = stem[:60] + "…" if len(stem) > 60 else stem
             lang_tag = f" [{language}]" if language and language != "en" else ""
-            print(f"[{index:>{w}}/{total}] {label}{lang_tag}", flush=True)
+            if lang_tag:
+                print(lang_tag, flush=True)
+            else:
+                print(flush=True)  # end the "Sending to GROBID... " line
 
             if not success:
                 reason = failure_reason or "unknown error"
-                print(f"         ✗ Failed: {reason}", flush=True)
+                print(f"         ✗ Failed: {reason[:120]}", flush=True)
+                print(flush=True)
                 return
 
             if ocr_applied:
@@ -309,6 +324,12 @@ def main():
                 print(f"         ✓ {_fmt_time(elapsed)}", flush=True)
             print(flush=True)
 
+        def _start(index, total, stem):
+            w = len(str(total))
+            label = stem[:60] + "…" if len(stem) > 60 else stem
+            print(f"[{index:>{w}}/{total}] {label}", flush=True)
+            print(f"         Sending to GROBID...", end=" ", flush=True)
+
         f1_results = graph.process_f1_papers(
             f1_dir=config["f1_pdf_dir"],
             seed_pdf_path=config["seed_paper"],
@@ -316,28 +337,36 @@ def main():
             llm_config=llm_cfg,
             email=email,
             progress_callback=_progress,
+            start_callback=_start,
         )
 
         # ── Stage 2 summary ───────────────────────────────────────────────────
         bib = graph.get_bibliography()
-        succeeded  = sum(f1_results.values())
-        failed     = len(f1_results) - succeeded
-        new_entries = len(bib) - _stage2_bib_before
+        succeeded    = sum(f1_results.values())
+        failed       = len(f1_results) - succeeded
+        new_entries  = len(bib) - _stage2_bib_before
         elapsed_total = _fmt_time(_time.time() - _t_stage2_start)
 
+        # Count resolution methods only for entries added in this run
+        new_citekeys = set(bib.keys()) - _stage2_existing_keys
         crossref_total = sum(
-            1 for e in bib.values() if e.get("_resolution_method") == "crossref"
+            1 for ck, e in bib.items()
+            if ck in new_citekeys and e.get("_resolution_method") == "crossref"
         )
         llm_total = sum(
-            1 for e in bib.values()
-            if e.get("_resolution_method") in ("llm_from_context", "llm_from_footnote")
+            1 for ck, e in bib.items()
+            if ck in new_citekeys
+            and e.get("_resolution_method") in ("llm_from_context", "llm_from_footnote")
         )
         stub_total = sum(
-            1 for e in bib.values() if e.get("_resolution_method") == "stub"
+            1 for ck, e in bib.items()
+            if ck in new_citekeys and e.get("_resolution_method") == "stub"
         )
         unresolved_total = sum(
-            1 for e in bib.values()
-            if not e.get("_resolution_method") and e.get("generation") != "P"
+            1 for ck, e in bib.items()
+            if ck in new_citekeys
+            and not e.get("_resolution_method")
+            and e.get("generation") != "P"
         )
 
         print(f"━━ Stage 2 complete  ·  {elapsed_total}", flush=True)
@@ -382,7 +411,7 @@ def main():
         analyzer = LLMAnalyzer(
             base_url=llm_cfg["base_url"], model=llm_cfg["model"],
             temperature=llm_cfg["temperature"], max_tokens=llm_cfg["max_tokens"],
-            timeout=llm_cfg["timeout"],
+            timeout=llm_cfg["timeout"], backend=llm_cfg.get("backend", "ollama"),
         )
 
         if analyzer.is_available():
@@ -438,7 +467,7 @@ def main():
             analyzer = LLMAnalyzer(
                 base_url=llm_cfg["base_url"], model=llm_cfg["model"],
                 temperature=llm_cfg["temperature"], max_tokens=llm_cfg["max_tokens"],
-                timeout=llm_cfg["timeout"],
+                timeout=llm_cfg["timeout"], backend=llm_cfg.get("backend", "ollama"),
             )
 
             if analyzer.is_available():

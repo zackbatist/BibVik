@@ -89,7 +89,7 @@ def run_audit(
     crossref   = _stratum_crossref(bibliography)
     unresolved = _stratum_unresolved(bibliography)
     minimal    = _stratum_minimal(bibliography)
-    duplicates = _stratum_duplicates(bibliography, threshold)
+    duplicates = _stratum_duplicates(bibliography, threshold, rng=rng)
     ocr        = _stratum_ocr(bibliography, ocr_originals_dir)
     by_lang    = _stratum_by_language(bibliography, processed_papers)
 
@@ -170,23 +170,33 @@ def _stratum_minimal(bibliography: dict[str, dict]) -> list[str]:
 def _stratum_duplicates(
     bibliography: dict[str, dict],
     threshold: float,
+    max_sample: int = 500,
+    rng: "random.Random | None" = None,
 ) -> list[tuple[str, str, float]]:
     """
     All pairs of entries with title similarity above threshold.
 
-    Returns a list of (citekey_a, citekey_b, similarity_score) tuples,
-    sorted by descending similarity. Exhaustive — not sampled.
+    To avoid O(n²) comparison on large bibliographies, a random sample
+    of up to max_sample entries is drawn before comparison. At max_sample=500
+    this is ~125k pair comparisons rather than millions. The sample is noted
+    in the rendered output.
 
-    Uses difflib.SequenceMatcher on normalised title strings. This is a
-    simplified application of record linkage (Fellegi & Sunter, 1969): a
-    single string similarity score is used to flag candidates for human
-    review rather than making automated merge decisions.
+    Returns a list of (citekey_a, citekey_b, similarity_score) tuples,
+    sorted by descending similarity.
     """
-    entries = [
+    import random as _random
+    all_entries = [
         (ck, _normalise_title(e.get("title", "")))
         for ck, e in bibliography.items()
         if e.get("title")
     ]
+
+    # Sample if bibliography is large
+    if len(all_entries) > max_sample:
+        r = rng or _random.Random(42)
+        entries = r.sample(all_entries, max_sample)
+    else:
+        entries = all_entries
 
     pairs = []
     for i in range(len(entries)):
@@ -365,7 +375,7 @@ def _render(
         "",
         (
             f"Pairs of entries with title similarity ≥ {threshold} "
-            f"(computed using `difflib.SequenceMatcher`). "
+            f"(computed using `difflib.SequenceMatcher` on a sample of up to 500 entries). "
             "These may represent the same work that escaped deduplication, "
             "or genuinely distinct works with similar titles. "
             "Check whether each pair should be merged."
