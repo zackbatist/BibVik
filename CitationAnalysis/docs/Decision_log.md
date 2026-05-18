@@ -353,3 +353,38 @@ set `backend: "llama_server"` and update `base_url`. No code changes needed.
 **Audit duplicate detection:** `_stratum_duplicates` now samples up to
 500 entries before pairwise comparison, reducing from O(n²) on the full
 bibliography to ~125k comparisons. Noted in rendered output.
+
+### 2026-05-18 — Resolution/enrichment split; CrossRef removed from identification
+
+Audit results (May 2026) showed ~70-80% false positive rate in
+CrossRef-resolved entries. Root cause: CrossRef author+year queries are
+too weak — CrossRef always returns a result regardless of whether the
+work is in its database, and the BibVik corpus is systematically
+underrepresented in CrossRef (Scandinavian monographs, museum
+publications, grey literature). Title/context overlap filtering was
+insufficient when contexts were empty or short.
+
+**`resolver.py`** rewritten: CrossRef identification removed entirely.
+`resolve_citations()` now uses only the LLM for context-based metadata
+inference. Entries with no contexts become stubs immediately. The `email`
+parameter is retained for API compatibility but unused. `_try_llm` is
+now backend-aware (ollama/llama_server). Unused helpers removed.
+
+**`enricher.py`** (new module): CrossRef is used strictly for enrichment
+of already-identified entries — never for identification. Two strategies:
+(1) DOI lookup: reliable, fills volume/pages/given names/publisher;
+(2) title query at ≥0.85 similarity threshold: precise, fills DOI and
+missing metadata. Both are additive only — no existing fields overwritten,
+no graph structure changed. OpenAlex author enrichment fills full given
+names, ORCID, OpenAlex ID, and institutional affiliation (ROR) for
+paper header authors. OpenAlex integrates ORCID as a data source so no
+separate ORCID query is needed.
+
+**`run.py`**: `--enrich` flag added, with `--enrich-bib-only` and
+`--enrich-auth-only` for selective passes. `--enrich-threshold` controls
+title similarity threshold (default 0.85).
+
+**`docs/methods/resolver-method.md`** fully rewritten documenting the
+design rationale, approaches considered and rejected (restricted CrossRef,
+deferred CrossRef), and enrichment design. Previous resolver-method.md
+content archived in this log entry for reference.

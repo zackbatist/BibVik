@@ -1,160 +1,193 @@
-# Reference Resolution Method
+# Reference Resolution and Enrichment Method
 
 > **Note:** This document was drafted with the assistance of Claude (Anthropic,
 > claude-sonnet-4-6, May 2026) and reviewed by the project author. All cited
 > sources were independently verified to exist before inclusion. No sources have
 > been inferred or hallucinated.
 
-## Purpose
+## Overview
 
-When the citation detection pipeline finds a citation — an (author, year) pair
-in the body text or footnotes — that does not match any entry in the
-bibliography extracted by GROBID, the resolver attempts to construct a
-bibliographic record for it. This document describes the resolution strategy,
-its known limitations, and how those limitations are addressed through manual
-audit.
+The BibVik pipeline separates two distinct operations that were initially
+conflated:
 
-## Resolution tiers
+1. **Resolution** (`bibvik/resolver.py`): building a bibliographic record for
+   an unmatched citation during graph construction. Runs inline during
+   `--iterate-f1`. Only the LLM is used; CrossRef is not.
 
-Resolution proceeds through two tiers in order, falling back to a minimal stub
-if both fail.
+2. **Enrichment** (`bibvik/enricher.py`): filling in missing metadata fields
+   on already-identified bibliography entries. Runs as a separate pass after
+   graph construction, via `--enrich`. Uses CrossRef (for bibliography entries)
+   and OpenAlex (for paper authors).
 
-### Tier 1: CrossRef API
+This separation reflects a fundamental design decision: CrossRef is an
+enrichment tool, not an identification tool. The reasons are documented in
+detail below.
 
-The CrossRef REST API is queried with the author surname and year. CrossRef
-covers a large proportion of scholarly literature with DOIs, making it the
-most reliable automated source for journal articles and book chapters published
-after approximately 1990.
+---
 
-**Query strategy.** The query uses `query.author` (surname) and
-`query.bibliographic` (year), returning the top 3 results. The first result
-passing all acceptance criteria is used.
+## Resolution
 
-**Acceptance criteria.** A CrossRef result is accepted only if all of the
-following hold:
+### What resolution does
 
-1. **Year match.** The publication year in the CrossRef record matches the
-   detected citation year exactly.
+During F1 paper processing, the detector finds citations in the body text —
+(author, year) pairs — that do not match any existing bibliography entry.
+These are "unmatched" citations: we know a work was cited but don't have a
+record for it.
 
-2. **Author match.** The normalised first author surname in the CrossRef
-   record matches the normalised detected author surname. Normalisation uses
-   `unidecode` transliteration and strips non-alphabetic characters, handling
-   diacritics in Scandinavian, German, and French names. A full surname match
-   is required; the earlier 4-character prefix match was too permissive and
-   produced false positives (see Known Limitations below).
+The resolver attempts to build a bibliographic record using the LLM. It passes
+the citation contexts (the sentences in which the citation appears) to the LLM
+and asks it to infer full metadata: title, journal, entry type, co-authors.
 
-3. **Title/context plausibility.** At least one content word from the CrossRef
-   title must appear somewhere in the combined citation contexts for that
-   entry. This check is designed to catch the most obvious domain mismatches —
-   a pedagogy or psychology paper matched to a Viking Age archaeology citation
-   will have no vocabulary overlap with the contexts in which the citation
-   appears. Content words are defined as words of 4+ characters not on a
-   stopword list.
+Entries resolved by LLM are tagged:
+- `_resolution_method`: `"llm_from_context"` or `"llm_from_footnote"`
+- `_resolution_confidence`: `"medium"` (if title inferred) or `"low"`
 
-**Confidence scoring.** Resolved entries are tagged with
-`_resolution_confidence`:
+Entries that cannot be resolved (LLM unavailable, or no contexts) become stubs:
+- `_resolution_method`: `"stub"`
+- `_resolution_confidence`: `"low"`
 
-- `high`: full author match, title/context overlap confirmed, DOI present
-- `medium`: full author match, title/context overlap confirmed, no DOI; or
-  author match only (overlap check inconclusive due to short/vague title or
-  non-English contexts)
-- `low`: author match only, no overlap evidence
+Stubs preserve the citation relationship (that the work was cited) even without
+metadata. Many stubs are resolved naturally as the corpus grows: a work cited
+only in passing in one paper may appear as a complete GROBID bibliography entry
+in another paper processed later in the run. The `_merge_into` logic in
+`graph.py` handles this consolidation automatically.
 
-### Tier 2: LLM metadata inference
+### Why CrossRef is not used for resolution
 
-For citations that CrossRef cannot resolve — typically non-English works, grey
-literature, older publications without DOIs, and Scandinavian/German/French
-scholarship not well covered by CrossRef — the LLM is asked to infer full
-bibliographic metadata from the citation contexts. The LLM has access to the
-sentences in which the work was cited, which often contain enough information
-to identify the title, journal, and publisher.
+The earlier implementation used CrossRef as the primary resolution tier,
+querying by author surname and year. This was found to produce a high rate of
+false positives during audit review (May 2026): approximately 70–80% of
+CrossRef-resolved entries in the audit sample were matched to wrong papers —
+a field marshal's memoirs, a hepatic stellate cell study, a Norwegian film
+policy paper, and similar domain mismatches.
 
-Entries resolved by LLM are tagged `_resolution_method: llm_from_context` and
-`_resolution_confidence: medium` (if a title was inferred) or `low` (if not).
+The root cause is structural. CrossRef's API always returns a result — it does
+not indicate when a work is absent from its database. Querying by surname and
+year is a very weak signal: many authors share a surname, and CrossRef returns
+whatever scores highest against the query regardless of subject domain. The
+BibVik corpus includes a large proportion of Viking Age archaeology literature
+(Scandinavian monographs, edited volumes, museum publications, conference
+proceedings) that is systematically underrepresented in CrossRef, meaning the
+false positive rate is structurally high for this specific corpus.
 
-### Stub
+A title/context overlap check was implemented to filter false positives, but
+proved insufficient: when contexts are empty or short (as they often are for
+citations detected only by GROBID inline markers), the overlap check falls back
+to "inconclusive" and accepts the match at medium confidence. The fundamental
+problem — that CrossRef has nothing reliable to match against — cannot be fixed
+by filtering alone.
 
-If neither tier succeeds, a minimal stub record is created containing only
-author and year, tagged `_resolution_method: stub` and
-`_resolution_confidence: low`. Stubs are preserved in the bibliography because
-the citation relationship (that this work was cited) is still valid even when
-full metadata cannot be recovered.
+**Approaches considered and not adopted:**
 
-## Known limitations
+*Restricting CrossRef to entries with raw citation strings.* Entries extracted
+from the bibliography section by GROBID have raw citation strings that could be
+used to validate CrossRef matches. This was considered but rejected: those
+entries already have structured metadata from GROBID; they are the ones that
+least need CrossRef resolution. The entries that most need resolution (bare
+body-text detections) are exactly the ones with no raw string and therefore the
+weakest CrossRef queries.
 
-### CrossRef false positives
+*Deferred CrossRef resolution (end-of-run pass).* Running CrossRef after all
+F1 papers have been processed, when many entries have been built up through
+natural graph accumulation, would give CrossRef more to work with. This remains
+true, but the fundamental problem persists: CrossRef still returns wrong matches
+for entries not in its database, and a larger bibliography just means more
+false positives in absolute terms. Enrichment-mode CrossRef (see below) avoids
+this by requiring a confirmed title match before accepting any result.
 
-CrossRef matching on author surname and year alone is vulnerable to false
-positives when multiple authors share a surname and published in the same year.
-This was observed during initial testing: entries for Androshchuk (2018) and
-Clarke (2017) were matched to a pedagogy paper and a cosmetics handbook
-respectively — both wrong matches returned with high confidence because a DOI
-was present.
+---
 
-The title/context plausibility check introduced in May 2026 eliminates the
-most obvious domain mismatches. Subtler false positives — where the CrossRef
-title happens to share vocabulary with the contexts — remain possible and are
-addressed through manual audit (see below).
+## Enrichment
 
-### Non-English contexts
+### Bibliography enrichment (CrossRef)
 
-The title/context overlap check may fail to validate correct matches when the
-citation contexts are in a non-English language. A correct match for a
-Norwegian or Danish paper may have an English CrossRef title with no word
-overlap with the Norwegian contexts. In this case the confidence is downgraded
-to `medium` rather than rejecting the match. Language-aware validation is
-deferred to when language detection is implemented (item C in the project todo).
+Enrichment runs after `--iterate-f1` via `--enrich` or `--enrich-bib-only`.
+It uses CrossRef strictly to fill in missing metadata fields on entries whose
+identity is already established — never to determine what an entry is.
 
-### CrossRef corpus coverage
+**Two enrichment strategies:**
 
-CrossRef coverage is strongest for journal articles with DOIs, weaker for
-books and edited volumes, and largely absent for grey literature, theses,
-conference proceedings without DOIs, and pre-1990 scholarship. Viking Age
-archaeology literature includes a significant proportion of material in these
-underserved categories. These entries are expected to fall through to the LLM
-tier or remain stubs.
+*DOI lookup.* For entries with a DOI (extracted by GROBID from the bibliography
+section), the CrossRef API is queried by DOI directly. This is fully reliable:
+a DOI is a unique identifier, and CrossRef's DOI endpoint returns the canonical
+record. Fields filled in: volume, issue, pages, canonical journal name, full
+author given names, publisher.
+
+*Title query.* For entries with a title but no DOI, CrossRef is queried by
+title + author. A result is accepted only if the title similarity (computed by
+`difflib.SequenceMatcher`) is ≥ 0.85. This threshold is high enough to reject
+near-misses while accepting genuine matches. On acceptance, the DOI and missing
+metadata fields are filled in. The threshold is configurable via
+`--enrich-threshold`.
+
+In both cases, enrichment is additive only — existing fields are never
+overwritten. The entry's identity (citekey, generation, cited_by) is never
+changed.
+
+**CrossRef as enrichment, not identification:** This is the correct role for
+CrossRef in this corpus. CrossRef is excellent at returning metadata for a work
+you have already identified (given a DOI or a precise title). It is poor at
+identifying a work from a weak query (author surname + year). The enrichment
+design exploits CrossRef's strength while avoiding its weakness.
+
+**Coverage limitations:** CrossRef enrichment will succeed for entries from
+journals and book publishers with DOI infrastructure. A significant portion of
+the BibVik bibliography — older Scandinavian publications, museum reports, grey
+literature — will not be in CrossRef and will remain unenriched. This is
+expected and acceptable; it does not affect the correctness of the citation
+graph, only the completeness of individual records.
+
+### Author enrichment (OpenAlex)
+
+Author enrichment runs via `--enrich` or `--enrich-auth-only`. It operates on
+the paper header data stored in `processed_papers` — the authors of the F1
+papers themselves, not the authors of cited works.
+
+GROBID frequently extracts author given names as initials only (e.g. "J. H."
+rather than "James H."). It also extracts affiliations inconsistently — some
+papers have structured affiliation data, many do not.
+
+OpenAlex is queried by author name to find canonical author profiles. OpenAlex
+integrates ORCID as a primary data source for author disambiguation (since July
+2023), so a single OpenAlex query provides access to ORCID-verified profiles
+without a separate ORCID API query:
+
+> OpenAlex documentation: "Our information about authors comes from MAG,
+> Crossref, PubMed, ORCID, and publisher websites, among other sources."
+> https://docs.openalex.org/api-entities/authors
+
+Fields enriched per author:
+- Full given name (if GROBID extracted only initials)
+- ORCID identifier
+- OpenAlex author ID
+- Current institutional affiliation (name, ROR identifier, country)
+
+**Approach considered and not adopted:** Querying ORCID directly. OpenAlex
+already integrates ORCID and provides a unified interface with additional
+disambiguation. Querying both would add complexity without adding coverage.
+
+**Coverage limitations:** OpenAlex coverage is strongest for researchers with
+significant publication records in indexed journals. Early-career researchers,
+authors who publish primarily in regional or non-English venues, and authors
+without ORCID profiles may not be found. The enrichment is additive — authors
+not found in OpenAlex retain whatever GROBID extracted.
+
+**Author affiliation data quality note:** GROBID's affiliation extraction is
+inconsistent across the corpus (see `docs/methods/data-capture.md`). OpenAlex
+enrichment supplements but does not replace the raw affiliation data. All
+affiliation data — whether from GROBID or OpenAlex — should be treated as
+unvalidated until reconciled against ROR identifiers.
+
+---
 
 ## Relationship to manual audit
 
-The resolver's known limitations are addressed through the stratified audit
-sampling process documented in `docs/audit-sampling-method.md`. The
-CrossRef-resolved stratum of the audit sample specifically targets resolved
-entries for human review, checking that each CrossRef match is actually correct
-rather than merely plausible. Entries tagged `_resolution_confidence: medium`
-or `low` warrant closer scrutiny than `high` entries during audit review.
+The audit tool (`--audit`) samples bibliography entries for human review,
+including a CrossRef-resolved stratum. With CrossRef no longer used for
+resolution, the CrossRef-resolved entries in the bibliography are those enriched
+via `--enrich`, where matches are held to a higher standard (DOI lookup or
+≥0.85 title similarity). The audit stratum label `_resolution_method: crossref`
+now indicates enrichment-mode CrossRef, not identification-mode CrossRef.
 
-This combination — automated resolution with known limitations, documented
-confidence scoring, and systematic manual verification — is the approach
-described for automated reference parsing pipelines in:
-
-> Tkaczyk, D., Collins, A., Sheridan, P., & Beel, J. (2018). Machine Learning
-> vs. Rules and Out-of-the-Box vs. Retrained: An Evaluation of Open-Source
-> Bibliographic Reference and Citation Parsers. In *Proceedings of the 18th
-> ACM/IEEE Joint Conference on Digital Libraries (JCDL '18)*, Fort Worth, TX,
-> pp. 99–108. DOI: 10.1145/3197026.3197048.
-
-## Approaches considered and not adopted
-
-**Restricting CrossRef to entries with raw citation strings.** Entries without
-a `_raw_citation` field (i.e., citations detected only in the body text, not
-extracted from a bibliography section) have no raw string to validate the
-CrossRef match against. Restricting CrossRef resolution to entries with raw
-strings would make every resolved entry more trustworthy, but would
-substantially reduce resolution coverage. Given that the manual audit provides
-a validation layer, this restriction was judged too conservative. The
-title/context overlap check provides adequate automated filtering for the
-no-raw-citation case.
-
-**Subject/journal domain filtering.** Checking whether the CrossRef result's
-journal or publisher falls within a plausible subject domain for Viking Age
-archaeology was considered. This was not implemented because maintaining a
-domain allowlist or blocklist is brittle and requires ongoing curation. The
-title/context overlap check achieves similar filtering without requiring a
-manually curated list.
-
-**Title query to CrossRef.** When a `_raw_citation` string is available, the
-CrossRef title query parameter could be used directly for more precise
-matching. This would improve precision substantially for the ~570 entries that
-have raw citation strings. Deferred for future implementation — the current
-author+year query strategy is simpler and the audit provides a validation
-backstop.
+Enrichment should be run before the audit for the most meaningful CrossRef
+stratum sample.

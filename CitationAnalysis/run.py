@@ -53,6 +53,10 @@ Examples:
     parser.add_argument("--audit-n", type=int, default=10, help="Entries per audit stratum (default: 10).")
     parser.add_argument("--audit-seed", type=int, default=42, help="Random seed for audit sampling (default: 42).")
     parser.add_argument("--audit-threshold", type=float, default=0.85, help="Title similarity threshold for duplicate detection (default: 0.85).")
+    parser.add_argument("--enrich", action="store_true", help="Enrich bibliography and authors from CrossRef and OpenAlex.")
+    parser.add_argument("--enrich-bib-only", action="store_true", help="Bibliography enrichment only (skip author enrichment).")
+    parser.add_argument("--enrich-auth-only", action="store_true", help="Author enrichment only (skip bibliography enrichment).")
+    parser.add_argument("--enrich-threshold", type=float, default=0.85, help="Title similarity threshold for CrossRef title enrichment (default: 0.85).")
     parser.add_argument("--config", type=str, default="config.yaml")
     parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--seed", type=str, default=None)
@@ -64,7 +68,7 @@ Examples:
     parser.add_argument("--download-oa", action="store_true")
 
     args = parser.parse_args()
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only]):
         parser.print_help()
         sys.exit(1)
     return args
@@ -139,6 +143,9 @@ def main():
     run_cluster  = args.all or args.cluster
     run_coverage = args.coverage
     run_audit    = args.audit
+    run_enrich   = args.enrich or args.enrich_bib_only or args.enrich_auth_only
+    do_bib_enrich  = args.enrich or args.enrich_bib_only
+    do_auth_enrich = args.enrich or args.enrich_auth_only
 
     bibliography_path = output_dir / "bibliography.json"
     graph_state_path  = output_dir / "_graph_state.json"
@@ -523,6 +530,49 @@ def main():
                 download_dir = Path(config["f1_pdf_dir"]) / "oa_downloads",
                 email        = args.email,
             )
+
+    # =========================================================================
+    if run_enrich:
+        print(f"\n━━ Enrichment", flush=True)
+
+        if not (run_extract or run_f1 or run_contexts or run_cluster or run_coverage):
+            graph = _load_graph_state(graph_state_path, config)
+            if graph is None:
+                print("ERROR: No graph state found. Run --iterate-f1 first.", flush=True)
+                sys.exit(1)
+
+        from bibvik.enricher import enrich_bibliography, enrich_authors
+
+        if do_bib_enrich:
+            print("   Bibliography enrichment (CrossRef)...", flush=True)
+            counts = enrich_bibliography(
+                bibliography     = graph.get_bibliography(),
+                email            = email,
+                title_threshold  = args.enrich_threshold,
+            )
+            print(
+                f"   DOI lookups: {counts['doi_enriched']}  ·  "
+                f"Title matches: {counts['title_enriched']}  ·  "
+                f"Skipped: {counts['skipped']}",
+                flush=True,
+            )
+
+        if do_auth_enrich:
+            print("   Author enrichment (OpenAlex)...", flush=True)
+            counts = enrich_authors(
+                processed_papers = graph.get_processed_papers(),
+                email            = email,
+            )
+            print(
+                f"   Enriched: {counts['authors_enriched']}  ·  "
+                f"Not found: {counts['not_found']}  ·  "
+                f"Skipped: {counts['skipped']}",
+                flush=True,
+            )
+
+        _save_bibliography(graph.get_bibliography(), bibliography_path, config, log)
+        _save_graph_state(graph, graph_state_path)
+        print(f"   Output → {output_dir}", flush=True)
 
     # =========================================================================
     if run_audit:
