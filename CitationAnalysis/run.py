@@ -81,6 +81,26 @@ def _save_bibliography(bibliography: dict, path: Path, config: dict, log: loggin
     write_json({"_metadata": build_bibliography_metadata(config), "entries": bibliography}, path)
 
 
+def _fmt_time(seconds: float) -> str:
+    """Format elapsed seconds as '4m 32s' or '45s'."""
+    if seconds >= 60:
+        return f"{int(seconds // 60)}m {int(seconds % 60)}s"
+    return f"{int(seconds)}s"
+
+
+def _llm_status(llm_cfg: dict) -> str:
+    """Return a short string describing LLM availability."""
+    import socket
+    host = llm_cfg.get("host", "localhost")
+    port = llm_cfg.get("port", 11434)
+    try:
+        socket.create_connection((host, port), timeout=1).close()
+        model = llm_cfg.get("model", "unknown")
+        return f"LLM available ({model})"
+    except OSError:
+        return "LLM unavailable (Ollama not running)"
+
+
 def main():
     args = parse_args()
     install_signal_handler()
@@ -93,35 +113,35 @@ def main():
     if args.limit is not None: config["limit"] = args.limit
     if args.context_limit is not None: config["context_limit"] = args.context_limit
 
-    log = setup_logging(config["log_level"])
-    log.info("BibVik — seed: %s", Path(config["seed_paper"]).name)
-
     output_dir = Path(config["output_dir"])
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    run_extract = args.all or args.extract
-    run_f1 = args.all or args.iterate_f1
+    log = setup_logging(
+        config["log_level"],
+        log_file=output_dir / "bibvik.log",
+    )
+
+    run_extract  = args.all or args.extract
+    run_f1       = args.all or args.iterate_f1
     run_contexts = args.all or args.contexts
-    run_cluster = args.all or args.cluster
+    run_cluster  = args.all or args.cluster
     run_coverage = args.coverage
     run_audit    = args.audit
 
     bibliography_path = output_dir / "bibliography.json"
-    graph_state_path = output_dir / "_graph_state.json"
-    contexts_path = output_dir / "citation_contexts.json"
+    graph_state_path  = output_dir / "_graph_state.json"
+    contexts_path     = output_dir / "citation_contexts.json"
 
     llm_cfg = config.get("llm", {})
-    email = args.email or config.get("email", "")
+    email   = args.email or config.get("email", "")
 
-    # ── Register cancel callback to save partial state ──
-    # This gets updated as we progress through stages.
-    partial_bib = [None]  # Mutable container for closure
+    partial_bib = [None]
 
     def _save_partial():
         if partial_bib[0] is not None:
             partial_path = output_dir / "_partial_bibliography.json"
             write_json(partial_bib[0], partial_path)
-            print(f"  Saved partial bibliography → {partial_path}", flush=True)
+            print(f"\n  Cancelled — partial bibliography saved → {partial_path}", flush=True)
 
     register_cancel_callback(_save_partial)
 
@@ -129,7 +149,7 @@ def main():
     # Stage 1: Seed paper
     # =========================================================================
     if run_extract:
-        log.info("━━ STAGE 1: Seed paper extraction")
+        print(f"\n━━ Stage 1: Seed paper", flush=True)
 
         grobid = GrobidClient(
             base_url=config["grobid"]["base_url"],
@@ -137,8 +157,8 @@ def main():
             ocr_dir=output_dir / "ocr",
         )
         if not grobid.is_alive():
-            log.error("GROBID is not available.")
-            log.error("  docker run --rm -d -p 8070:8070 --name grobid lfoppiano/grobid:0.8.1")
+            print("ERROR: GROBID is not available.", flush=True)
+            print("  docker run --rm -d -p 8070:8070 --name grobid lfoppiano/grobid:0.8.1", flush=True)
             sys.exit(1)
 
         zotero_map = None
@@ -154,39 +174,140 @@ def main():
 
         seed_path = Path(config["seed_paper"])
         if not seed_path.exists():
-            log.error("Seed paper not found: %s", seed_path)
+            print(f"ERROR: Seed paper not found: {seed_path}", flush=True)
             sys.exit(1)
+
+        print(f"   {seed_path.name}", flush=True)
+        print(f"   Sending to GROBID...", end=" ", flush=True)
 
         result = graph.process_seed_paper(seed_path, llm_config=llm_cfg, email=email)
         if result is None:
-            log.error("Failed to process seed paper.")
+            print("FAILED", flush=True)
             sys.exit(1)
 
-        partial_bib[0] = graph.get_bibliography()
-        _save_bibliography(graph.get_bibliography(), bibliography_path, config, log)
-        log.info("  %d entries → bibliography.json", len(graph.get_bibliography()))
+        bib = graph.get_bibliography()
+        detection = result.get("detection", {})
+        mc = detection
+        print(f"done", flush=True)
+        print(f"   GROBID: {len(result.get('references', []))} bibliography entries, "
+              f"{len(result.get('paragraphs', []))} paragraphs", flush=True)
+        print(f"   Citations detected — "
+              f"bibliography: {mc.get('reference_list', 0)}  "
+              f"body: {mc.get('inline_markers', 0)} (GROBID), {mc.get('text_patterns', 0)} (regex)"
+              + (f", {mc.get('llm_body_scan', 0)} (LLM)" if mc.get('llm_body_scan') else "  LLM unavailable"),
+              flush=True)
+        print(f"   {len(bib)} entries in bibliography", flush=True)
+
+        partial_bib[0] = bib
+        _save_bibliography(bib, bibliography_path, config, log)
         _save_graph_state(graph, graph_state_path)
 
     # =========================================================================
     # Stage 2: F1 papers → citation graph
     # =========================================================================
     if run_f1:
-        log.info("━━ STAGE 2: F1 papers → citation graph")
-
         if not run_extract:
             graph = _load_graph_state(graph_state_path, config)
             if graph is None:
-                log.error("Run --extract first.")
+                print("ERROR: Run --extract first.", flush=True)
                 sys.exit(1)
 
-        def _progress(i, n, stem, n_refs, n_detected, success):
-            label = stem[:55] + "…" if len(stem) > 55 else stem
-            if success:
-                print(f"  [{i:>{len(str(n))}}/{n}] {label}  "
-                      f"({n_refs} from reference list, {n_detected} total across all methods)",
-                      flush=True)
+        # ── Startup summary ───────────────────────────────────────────────────
+        from bibvik.utils import collect_pdfs
+        all_pdfs = collect_pdfs(config["f1_pdf_dir"], exclude=config.get("seed_paper"))
+        limit = config.get("limit")
+        n_total = min(len(all_pdfs), limit) if limit else len(all_pdfs)
+        n_cached = sum(1 for p in all_pdfs[:n_total] if p.name in graph.get_processed_papers())
+
+        print(f"\n━━ Stage 2: F1 papers → citation graph", flush=True)
+        print(f"   {n_total} papers", end="", flush=True)
+        if n_cached:
+            print(f"  ·  {n_cached} cached", end="", flush=True)
+        print(f"  ·  {_llm_status(llm_cfg)}", flush=True)
+        if config.get("zotero_csv"):
+            print(f"   Zotero CSV loaded", flush=True)
+        print(flush=True)
+
+        # ── Per-paper progress ────────────────────────────────────────────────
+        import time as _time
+        _stage2_times: list[float] = []
+        _stage2_bib_before = len(graph.get_bibliography())
+        _t_stage2_start = _time.time()
+
+        def _progress(
+            index, total, stem, success, elapsed,
+            n_bib, n_paragraphs, n_footnotes,
+            detection, n_crossref, n_unresolved,
+            language, ocr_applied, failure_reason,
+        ):
+            w = len(str(total))
+            label = stem[:60] + "…" if len(stem) > 60 else stem
+            lang_tag = f" [{language}]" if language and language != "en" else ""
+            print(f"[{index:>{w}}/{total}] {label}{lang_tag}", flush=True)
+
+            if not success:
+                reason = failure_reason or "unknown error"
+                print(f"         ✗ Failed: {reason}", flush=True)
+                return
+
+            if ocr_applied:
+                print(f"         No text layer detected — OCR applied", flush=True)
+
+            mc = detection or {}
+            llm_available = mc.get("llm_body_scan") is not None
+
+            print(
+                f"         GROBID: {n_bib} bibliography entries, "
+                f"{n_paragraphs} paragraphs",
+                flush=True,
+            )
+
+            body_parts = [f"{mc.get('inline_markers', 0)} (GROBID)"]
+            if mc.get("text_patterns"):
+                body_parts.append(f"{mc.get('text_patterns', 0)} (regex)")
+            if llm_available and mc.get("llm_body_scan", 0) > 0:
+                body_parts.append(f"{mc.get('llm_body_scan', 0)} (LLM)")
+            body_str = ", ".join(body_parts)
+            if not llm_available:
+                body_str += "  ·  LLM unavailable"
+            print(f"         Citations in body: {body_str}", flush=True)
+
+            if mc.get("llm_footnotes", 0) > 0:
+                print(f"         Citations in footnotes: {mc.get('llm_footnotes', 0)} (LLM)", flush=True)
+            elif llm_available:
+                pass  # No footnote citations — don't clutter output
+
+            # Discrepancies
+            total_body = mc.get("merged_total", 0)
+            if total_body > n_bib:
+                print(
+                    f"         {total_body - n_bib} citations in body/footnotes "
+                    f"not in bibliography",
+                    flush=True,
+                )
+            elif n_bib > total_body and n_bib > 0:
+                print(
+                    f"         {n_bib - total_body} bibliography entries "
+                    f"not cited in body or footnotes",
+                    flush=True,
+                )
+
+            if n_crossref or n_unresolved:
+                print(
+                    f"         Resolved: {n_crossref} via CrossRef  ·  "
+                    f"{n_unresolved} unresolved",
+                    flush=True,
+                )
+
+            _stage2_times.append(elapsed)
+            remaining = total - index
+            if remaining > 0 and _stage2_times:
+                avg = sum(_stage2_times) / len(_stage2_times)
+                eta = _fmt_time(avg * remaining)
+                print(f"         ✓ {_fmt_time(elapsed)}  ·  ~{eta} remaining", flush=True)
             else:
-                print(f"  [{i:>{len(str(n))}}/{n}] {label}  (FAILED)", flush=True)
+                print(f"         ✓ {_fmt_time(elapsed)}", flush=True)
+            print(flush=True)
 
         f1_results = graph.process_f1_papers(
             f1_dir=config["f1_pdf_dir"],
@@ -196,23 +317,51 @@ def main():
             email=email,
             progress_callback=_progress,
         )
-        print("", flush=True)
 
-        partial_bib[0] = graph.get_bibliography()
-        _save_bibliography(graph.get_bibliography(), bibliography_path, config, log)
-        log.info("  %d total entries in bibliography", len(graph.get_bibliography()))
+        # ── Stage 2 summary ───────────────────────────────────────────────────
+        bib = graph.get_bibliography()
+        succeeded  = sum(f1_results.values())
+        failed     = len(f1_results) - succeeded
+        new_entries = len(bib) - _stage2_bib_before
+        elapsed_total = _fmt_time(_time.time() - _t_stage2_start)
+
+        crossref_total = sum(
+            1 for e in bib.values() if e.get("_resolution_method") == "crossref"
+        )
+        llm_total = sum(
+            1 for e in bib.values()
+            if e.get("_resolution_method") in ("llm_from_context", "llm_from_footnote")
+        )
+        stub_total = sum(
+            1 for e in bib.values() if e.get("_resolution_method") == "stub"
+        )
+        unresolved_total = sum(
+            1 for e in bib.values()
+            if not e.get("_resolution_method") and e.get("generation") != "P"
+        )
+
+        print(f"━━ Stage 2 complete  ·  {elapsed_total}", flush=True)
+        print(f"   {succeeded}/{len(f1_results)} papers succeeded"
+              + (f"  ·  {failed} failed" if failed else ""), flush=True)
+        print(f"   {new_entries} new bibliography entries  ·  {len(bib)} total", flush=True)
+        print(f"   Resolved: {crossref_total} CrossRef  ·  {llm_total} LLM  ·  "
+              f"{stub_total} stub  ·  {unresolved_total} unresolved", flush=True)
+        print(f"   Output → {output_dir}", flush=True)
+
+        partial_bib[0] = bib
+        _save_bibliography(bib, bibliography_path, config, log)
         _save_graph_state(graph, graph_state_path)
 
     # =========================================================================
     # Stage 3: Citation contexts
     # =========================================================================
     if run_contexts:
-        log.info("━━ STAGE 3: Citation context analysis")
+        print(f"\n━━ Stage 3: Citation context analysis", flush=True)
 
         if not (run_extract or run_f1):
             graph = _load_graph_state(graph_state_path, config)
             if graph is None:
-                log.error("Run earlier stages first.")
+                print("ERROR: Run earlier stages first.", flush=True)
                 sys.exit(1)
 
         bibliography = graph.get_bibliography()
@@ -237,17 +386,17 @@ def main():
         )
 
         if analyzer.is_available():
-            log.info("  Analyzing with LLM...")
+            print(f"   Analyzing {len(contexts)} contexts with LLM...", flush=True)
             contexts = analyze_all_contexts(
                 contexts=contexts, bibliography=bibliography, analyzer=analyzer,
                 content_enriched=True, limit=config.get("context_limit"),
                 processed_papers=processed_papers,
             )
         else:
-            log.warning("  Ollama unavailable — saving without LLM classification")
+            print("   LLM unavailable — saving contexts without classification", flush=True)
 
         write_json({"_metadata": build_contexts_metadata(config), "contexts": contexts}, contexts_path)
-        log.info("  %d cited works, contexts saved", len(contexts))
+        print(f"   {len(contexts)} cited works → citation_contexts.json", flush=True)
 
         _save_bibliography(bibliography, bibliography_path, config, log)
         _save_graph_state(graph, graph_state_path)
@@ -256,11 +405,11 @@ def main():
     # Stage 4: Cluster analysis
     # =========================================================================
     if run_cluster:
-        log.info("━━ STAGE 4: Cluster analysis")
+        print(f"\n━━ Stage 4: Cluster analysis", flush=True)
 
         if not run_contexts:
             if not contexts_path.exists():
-                log.error("Run --contexts first.")
+                print("ERROR: Run --contexts first.", flush=True)
                 sys.exit(1)
             raw = read_json(contexts_path)
             contexts = raw.get("contexts", raw)
@@ -268,7 +417,7 @@ def main():
         if not (run_extract or run_f1 or run_contexts):
             graph = _load_graph_state(graph_state_path, config)
             if graph is None:
-                log.error("Run earlier stages first.")
+                print("ERROR: Run earlier stages first.", flush=True)
                 sys.exit(1)
 
         bibliography = graph.get_bibliography()
@@ -282,7 +431,7 @@ def main():
         )
 
         if not cooccurrence:
-            log.warning("  No co-occurrence pairs above threshold.")
+            print("   No co-occurrence pairs above threshold.", flush=True)
         else:
             clusters = identify_clusters(cooccurrence, contexts)
 
@@ -293,7 +442,7 @@ def main():
             )
 
             if analyzer.is_available():
-                log.info("  Characterizing %d clusters with LLM...", len(clusters))
+                print(f"   Characterizing {len(clusters)} clusters with LLM...", flush=True)
                 analyzed = analyze_clusters(clusters, contexts, bibliography, analyzer, content_enriched=False)
                 write_json(
                     {"_metadata": build_clusters_metadata(config, enriched=False), "clusters": analyzed},
@@ -306,7 +455,7 @@ def main():
                         output_dir / "clusters_content_enriched.json",
                     )
             else:
-                log.warning("  Ollama unavailable — saving clusters without characterization")
+                print("   LLM unavailable — saving clusters without characterization", flush=True)
                 write_json(
                     {"_metadata": build_clusters_metadata(config, enriched=False), "clusters": clusters},
                     output_dir / "clusters_context_only.json",
@@ -316,23 +465,27 @@ def main():
     # Coverage
     # =========================================================================
     if run_coverage:
-        log.info("━━ STAGE 5: Coverage report")
+        print(f"\n━━ Coverage report", flush=True)
 
         if not (run_extract or run_f1 or run_contexts or run_cluster):
             graph = _load_graph_state(graph_state_path, config)
             if graph is None:
-                log.error("Run earlier stages first.")
+                print("ERROR: Run earlier stages first.", flush=True)
                 sys.exit(1)
 
         from bibvik.coverage import generate_coverage_report, download_oa_papers
 
-        generate_coverage_report(
+        summary = generate_coverage_report(
             bibliography=graph.get_bibliography(),
             processed_papers=graph.get_processed_papers(),
             f1_pdf_dir=config["f1_pdf_dir"],
             config=config, output_dir=output_dir,
             email=args.email, check_oa=bool(args.email),
         )
+        print(f"   {summary['f1_with_pdf']}/{summary['f1_total']} F1 papers have PDFs "
+              f"({summary['f1_coverage_pct']}%)", flush=True)
+        if summary.get("oa_available"):
+            print(f"   {summary['oa_available']} available open access → coverage.md", flush=True)
 
         if args.download_oa and args.email:
             from bibvik.coverage import download_oa_papers
@@ -344,12 +497,12 @@ def main():
 
     # =========================================================================
     if run_audit:
-        log.info("━━ AUDIT: Drawing stratified sample")
+        print(f"\n━━ Audit sample", flush=True)
 
         if not (run_extract or run_f1 or run_contexts or run_cluster or run_coverage):
             graph = _load_graph_state(graph_state_path, config)
             if graph is None:
-                log.error("No graph state found. Run --iterate-f1 first.")
+                print("ERROR: No graph state found. Run --iterate-f1 first.", flush=True)
                 sys.exit(1)
 
         from bibvik.audit import run_audit as _run_audit
@@ -362,10 +515,10 @@ def main():
             seed             = args.audit_seed,
             threshold        = args.audit_threshold,
         )
-        log.info("Audit sample → %s", sample_path)
+        print(f"   Audit sample → {sample_path}", flush=True)
 
     # =========================================================================
-    log.info("Done. Output → %s", output_dir)
+    print(f"\nDone. Output → {output_dir}", flush=True)
     clear_cancel_callbacks()
 
 

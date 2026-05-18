@@ -72,15 +72,48 @@ def load_config(config_path: str = "config.yaml") -> dict:
 # Logging
 # =============================================================================
 
-def setup_logging(level: str = "INFO") -> logging.Logger:
-    """Configure the root logger."""
-    numeric = getattr(logging, level.upper(), logging.INFO)
-    logging.basicConfig(
-        level=numeric,
-        format="%(asctime)s [%(levelname)-7s] %(name)s: %(message)s",
-        datefmt="%H:%M:%S",
-        handlers=[logging.StreamHandler(sys.stdout)],
-    )
+# =============================================================================
+# Logging
+# =============================================================================
+
+def setup_logging(level: str = "INFO", log_file: Path | None = None) -> logging.Logger:
+    """
+    Configure logging with two handlers:
+
+    - File handler (DEBUG): full detail, timestamps, module names.
+      Written to log_file if provided (default: output/bibvik.log).
+      This is the complete record for post-run inspection.
+
+    - Stream handler (WARNING+): only warnings and errors to stdout.
+      Clean terminal output during runs comes from explicit print() calls,
+      not from INFO log messages. This avoids the noisy timestamp+module
+      prefix on every line of terminal output.
+    """
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG)
+
+    # Remove any existing handlers (e.g. from basicConfig calls)
+    root.handlers.clear()
+
+    # ── File handler: full detail ─────────────────────────────────────────────
+    if log_file is not None:
+        log_file = Path(log_file)
+        log_file.parent.mkdir(parents=True, exist_ok=True)
+        fh = logging.FileHandler(log_file, encoding="utf-8")
+        fh.setLevel(logging.DEBUG)
+        fh.setFormatter(logging.Formatter(
+            "%(asctime)s [%(levelname)-7s] %(name)s: %(message)s",
+            datefmt="%H:%M:%S",
+        ))
+        root.addHandler(fh)
+
+    # ── Stream handler: warnings and errors only ──────────────────────────────
+    # INFO and DEBUG go to the log file only; terminal output is via print().
+    sh = logging.StreamHandler(sys.stdout)
+    sh.setLevel(logging.WARNING)
+    sh.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
+    root.addHandler(sh)
+
     return logging.getLogger("bibvik")
 
 

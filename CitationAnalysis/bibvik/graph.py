@@ -295,11 +295,45 @@ class CitationGraph:
 
                 if progress_callback:
                     paper_data = self.processed_papers.get(pdf_path.name, {})
-                    n_refs = len(paper_data.get("references", []))
                     detection = paper_data.get("detection", {})
+                    header = paper_data.get("header", {})
+                    n_bib_entries = len(paper_data.get("references", []))
+                    n_paragraphs = len(paper_data.get("paragraphs", []))
+                    n_footnotes = len([
+                        r for r in paper_data.get("references", [])
+                        if r.get("_from_footnote")
+                    ])
+
+                    # Count resolution outcomes for this paper's citations
+                    n_crossref = sum(
+                        1 for e in self.bibliography.values()
+                        if e.get("_source_pdf") == pdf_path.name
+                        and e.get("_resolution_method") == "crossref"
+                    )
+                    n_unresolved = sum(
+                        1 for e in self.bibliography.values()
+                        if e.get("_source_pdf") == pdf_path.name
+                        and not e.get("_resolution_method")
+                        and e.get("generation") != "P"
+                    )
+
                     progress_callback(
-                        idx, total, pdf_path.stem,
-                        n_refs, detection.get("merged_total", 0), ok,
+                        index        = idx,
+                        total        = total,
+                        stem         = pdf_path.stem,
+                        success      = ok,
+                        elapsed      = elapsed,
+                        n_bib        = n_bib_entries,
+                        n_paragraphs = n_paragraphs,
+                        n_footnotes  = header and len(paper_data.get("references", [])),
+                        detection    = detection,
+                        n_crossref   = n_crossref,
+                        n_unresolved = n_unresolved,
+                        language     = paper_data.get("language", ""),
+                        ocr_applied  = (
+                            self.grobid.ocr_dir / "originals" / pdf_path.name
+                        ).exists() if hasattr(self.grobid, "ocr_dir") else False,
+                        failure_reason = None,
                     )
 
                 # Time estimate
@@ -315,7 +349,14 @@ class CitationGraph:
                 logger.error("Error processing %s: %s", pdf_path.name, e)
                 results[pdf_path.name] = False
                 if progress_callback:
-                    progress_callback(idx, total, pdf_path.stem, 0, 0, False)
+                    progress_callback(
+                        index=idx, total=total, stem=pdf_path.stem,
+                        success=False, elapsed=0,
+                        n_bib=0, n_paragraphs=0, n_footnotes=0,
+                        detection={}, n_crossref=0, n_unresolved=0,
+                        language="", ocr_applied=False,
+                        failure_reason=str(e),
+                    )
 
         executor.shutdown(wait=False)
 

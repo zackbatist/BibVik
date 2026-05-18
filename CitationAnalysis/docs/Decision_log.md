@@ -298,3 +298,27 @@ never read by any code — parallel GROBID requests were planned but not
 implemented. `save_tei_xml` was also never read — TEI-XML is always saved
 to `output/tei/` unconditionally. Both are retained as comments with
 explanatory notes rather than deleted, in case they become relevant later.
+
+### 2026-05-17 — CLI output redesign
+
+`utils.py`: `setup_logging()` rewritten with two handlers. File handler
+(DEBUG) writes full detail with timestamps and module names to
+`output/bibvik.log`. Stream handler (WARNING+) shows only warnings and
+errors on stdout. Terminal output during runs now comes from explicit
+`print()` calls, eliminating the noisy timestamp+module prefix on every
+line.
+
+`run.py`: Stage 1 and 2 replaced with structured `print()` output.
+Stage 2 per-paper block shows: GROBID bibliography and paragraph
+counts, per-method citation counts with source labels, discrepancy
+between bibliography and body citations, CrossRef/unresolved resolution
+counts, language tag for non-English papers, OCR notice when applied,
+elapsed time, and ETA. Stage 2 summary shows total time, success/fail
+counts, new entries added, and full resolution breakdown. Startup
+summary shows corpus size, cached count, LLM availability, and Zotero
+CSV status. Stages 3, 4, coverage, and audit updated to the same
+plain-print style.
+
+`graph.py`: `progress_callback` signature changed to keyword arguments
+carrying the full per-paper data: `detection`, `n_crossref`,
+`n_unresolved`, `language`, `ocr_applied`, `failure_reason`, `elapsed`.
