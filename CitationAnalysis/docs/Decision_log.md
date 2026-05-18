@@ -322,3 +322,11 @@ plain-print style.
 `graph.py`: `progress_callback` signature changed to keyword arguments
 carrying the full per-paper data: `detection`, `n_crossref`,
 `n_unresolved`, `language`, `ocr_applied`, `failure_reason`, `elapsed`.
+
+### 2026-05-18 — lingua: warn once, cache detector
+
+`detect_language()` in `tei_parser.py` was rebuilding the lingua
+detector on every call — one per paper. Added `_lingua_detector` as a
+module-level singleton: built once on first call, reused thereafter.
+Added `_lingua_warned` flag so the "lingua not installed" warning
+prints once per run rather than once per paper.

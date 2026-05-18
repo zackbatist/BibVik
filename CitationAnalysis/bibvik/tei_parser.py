@@ -99,6 +99,10 @@ def parse_tei_references(tei_xml: str) -> list[dict]:
     return expanded
 
 
+_lingua_warned = False
+_lingua_detector = None
+
+
 def detect_language(paragraphs: list[dict]) -> str:
     """
     Detect the primary language of a paper from its body paragraphs.
@@ -121,26 +125,29 @@ def detect_language(paragraphs: list[dict]) -> str:
     — non-English papers were frequently tagged "en" when abstracts or
     keywords were in English.
     """
-    try:
-        from lingua import Language, LanguageDetectorBuilder
-    except ImportError:
-        logger.warning(
-            "lingua not installed — language detection unavailable. "
-            "Install with: pip install lingua-language-detector"
-        )
-        return "unknown"
+    global _lingua_detector
+    if _lingua_detector is None:
+        try:
+            from lingua import Language, LanguageDetectorBuilder
+            _lingua_detector = LanguageDetectorBuilder.from_languages(
+                Language.ENGLISH,
+                Language.BOKMAL,
+                Language.DANISH,
+                Language.SWEDISH,
+                Language.GERMAN,
+                Language.FRENCH,
+            ).build()
+        except ImportError:
+            global _lingua_warned
+            if not _lingua_warned:
+                logger.warning(
+                    "lingua not installed — language detection unavailable. "
+                    "Install with: pip install lingua-language-detector"
+                )
+                _lingua_warned = True
+            return "unknown"
 
-    # Restrict to languages expected in the corpus. This improves accuracy
-    # for closely related languages (Norwegian/Danish/Swedish) and reduces
-    # load time compared to building a detector for all 75 supported languages.
-    detector = LanguageDetectorBuilder.from_languages(
-        Language.ENGLISH,
-        Language.BOKMAL,
-        Language.DANISH,
-        Language.SWEDISH,
-        Language.GERMAN,
-        Language.FRENCH,
-    ).build()
+    detector = _lingua_detector
 
     # Concatenate paragraph text until we have ~2000 characters.
     sample_text = ""
@@ -157,16 +164,7 @@ def detect_language(paragraphs: list[dict]) -> str:
     if detected is None:
         return "unknown"
 
-    # Map lingua Language enum to ISO 639-1 codes.
-    iso_map = {
-        Language.ENGLISH: "en",
-        Language.BOKMAL: "no",
-        Language.DANISH: "da",
-        Language.SWEDISH: "sv",
-        Language.GERMAN: "de",
-        Language.FRENCH: "fr",
-    }
-    return iso_map.get(detected, detected.iso_code_639_1.name.lower())
+    return detected.iso_code_639_1.name.lower()
 
 
 def parse_tei_xml(tei_xml: str):
