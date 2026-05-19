@@ -410,3 +410,19 @@ identifier, and the author's identity is derived from the specific work
 they wrote. Coverage depends on DOI availability and publisher metadata
 submission practices; older and non-English publications will have lower
 coverage, which is acceptable.
+
+### 2026-05-18 — NOAUTHOR citekeys; noise filter for bibliography entries
+
+**Citekey generation:** Entries with no author now receive sequential
+`NOAUTHOR1`, `NOAUTHOR2`, etc. citekeys rather than `unknownyear` or
+`unknownndt`. The previous pattern was opaque and produced meaningless
+keys like `unknown2022a`. The new pattern is explicit and searchable.
+Year is excluded from NOAUTHOR keys since it adds no disambiguating
+value for anonymous works.
+
+**Noise filter:** `parse_tei_references()` now rejects entries where
+both author and title are empty after parsing. GROBID occasionally
+extracts footnote numbers, running headers, or other non-reference
+content as bibliography entries (e.g. "3 Journal of Archaeological
+Research (2022) 30:169-229" with no author or title). These are not
+valid references and would generate meaningless citekeys.

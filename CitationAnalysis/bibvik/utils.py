@@ -133,26 +133,34 @@ def reset_citekey_registry():
 
 def generate_citekey(authors: list[dict], year: str | None) -> str:
     """
-    Generate a biblatex-style citekey: lastnameyear with a/b/c disambiguation.
+    Generate a biblatex-style citekey with disambiguation.
+
+    Normal case (author present): lastnameyear with a/b/c suffix
+      e.g. sindbæk2022 → sindbaek2022, sindbaek2022a, sindbaek2022b
+
+    No author: NOAUTHOR with sequential number
+      e.g. NOAUTHOR1, NOAUTHOR2, NOAUTHOR3
 
     Non-ASCII is transliterated for the key but preserved in the record.
     """
     if authors and authors[0].get("family"):
         family = unidecode(authors[0]["family"]).lower()
         family = re.sub(r"[^a-z]", "", family)
-    else:
-        family = "unknown"
+        year_str = str(year).strip()[:4] if year else "nd"
+        base = f"{family}{year_str}"
 
-    year_str = str(year).strip()[:4] if year else "nd"
-    base = f"{family}{year_str}"
-
-    if base not in _citekey_registry:
-        _citekey_registry[base] = 1
-        return base
+        if base not in _citekey_registry:
+            _citekey_registry[base] = 1
+            return base
+        else:
+            count = _citekey_registry[base]
+            _citekey_registry[base] = count + 1
+            return f"{base}{chr(ord('a') + count - 1)}"
     else:
-        count = _citekey_registry[base]
-        _citekey_registry[base] = count + 1
-        return f"{base}{chr(ord('a') + count - 1)}"
+        # No author — sequential NOAUTHOR key
+        n = _citekey_registry.get("__noauthor__", 0) + 1
+        _citekey_registry["__noauthor__"] = n
+        return f"NOAUTHOR{n}"
 
 
 # =============================================================================

@@ -76,6 +76,19 @@ def parse_tei_references(tei_xml: str) -> list[dict]:
     for bs in bibl_structs:
         ref = _parse_biblstruct(bs)
         if ref:
+            # Filter noise entries: GROBID sometimes extracts footnote numbers,
+            # running headers, or other non-reference content as bibliography
+            # entries. These typically have no author AND no title — they are
+            # not valid bibliographic references and would generate meaningless
+            # NOAUTHOR citekeys.
+            has_author = bool(ref.get("author"))
+            has_title  = bool((ref.get("title") or "").strip())
+            if not has_author and not has_title:
+                logger.debug(
+                    "Skipping noise entry (no author, no title): %s",
+                    (ref.get("_raw_citation") or "")[:80],
+                )
+                continue
             references.append(ref)
 
     # --- Post-processing: split compound references ---
