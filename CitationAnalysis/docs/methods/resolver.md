@@ -137,46 +137,58 @@ literature — will not be in CrossRef and will remain unenriched. This is
 expected and acceptable; it does not affect the correctness of the citation
 graph, only the completeness of individual records.
 
-### Author enrichment (OpenAlex)
+### Author enrichment (CrossRef DOI lookup)
 
 Author enrichment runs via `--enrich` or `--enrich-auth-only`. It operates on
 the paper header data stored in `processed_papers` — the authors of the F1
 papers themselves, not the authors of cited works.
 
 GROBID frequently extracts author given names as initials only (e.g. "J. H."
-rather than "James H."). It also extracts affiliations inconsistently — some
-papers have structured affiliation data, many do not.
+rather than "James H."). Publishers increasingly submit full author metadata
+including ORCID identifiers to CrossRef, making the paper's own DOI record the
+most reliable source for this information.
 
-OpenAlex is queried by author name to find canonical author profiles. OpenAlex
-integrates ORCID as a primary data source for author disambiguation (since July
-2023), so a single OpenAlex query provides access to ORCID-verified profiles
-without a separate ORCID API query:
+For each paper with a DOI in its header, the CrossRef record is fetched and its
+author list is matched to GROBID's author list by normalised family name.
+Matched authors receive:
+- Full given name (when CrossRef has the full form and GROBID has initials only)
+- ORCID identifier (when the publisher submitted it to CrossRef)
 
-> OpenAlex documentation: "Our information about authors comes from MAG,
-> Crossref, PubMed, ORCID, and publisher websites, among other sources."
-> https://docs.openalex.org/api-entities/authors
+**Design principle:** The author's identity is derived from the work they wrote.
+The paper's own DOI record is unambiguous — no disambiguation is needed because
+we are looking up a specific known work, not searching for a person by name.
+This avoids the false-match problem that affected the earlier OpenAlex
+name-search approach, where common Scandinavian surnames (Lund, Hansen,
+Andersson) matched wrong people.
 
-Fields enriched per author:
-- Full given name (if GROBID extracted only initials)
-- ORCID identifier
-- OpenAlex author ID
-- Current institutional affiliation (name, ROR identifier, country)
+**Conservative by design:** If a paper has no DOI, CrossRef has no record for
+it, or an author cannot be matched by family name, nothing is changed for that
+author. No match is better than a wrong match.
 
-**Approach considered and not adopted:** Querying ORCID directly. OpenAlex
-already integrates ORCID and provides a unified interface with additional
-disambiguation. Querying both would add complexity without adding coverage.
+**Coverage limitations:** Coverage depends on whether papers have DOIs and
+whether publishers submitted full author metadata to CrossRef. Older papers,
+Scandinavian monographs, and grey literature are less likely to have DOIs or
+full CrossRef author records. Affiliation data is not extracted via this method
+— CrossRef author records contain ORCID and given names but not structured
+institutional affiliation in the form needed for ROR linking.
 
-**Coverage limitations:** OpenAlex coverage is strongest for researchers with
-significant publication records in indexed journals. Early-career researchers,
-authors who publish primarily in regional or non-English venues, and authors
-without ORCID profiles may not be found. The enrichment is additive — authors
-not found in OpenAlex retain whatever GROBID extracted.
+**Approaches considered and not adopted:**
 
-**Author affiliation data quality note:** GROBID's affiliation extraction is
-inconsistent across the corpus (see `docs/methods/data-capture.md`). OpenAlex
-enrichment supplements but does not replace the raw affiliation data. All
-affiliation data — whether from GROBID or OpenAlex — should be treated as
-unvalidated until reconciled against ROR identifiers.
+*OpenAlex name-search.* Initially implemented but found to produce wrong matches
+on common Scandinavian surnames (Lund → wrong Lund, Hansen → pharmaceutical
+researcher, Andersson → wrong Andersson). OpenAlex always returns a result
+regardless of whether the person is in its database, replicating the same
+fundamental problem as CrossRef identification-mode queries. Replaced by the
+DOI-based approach.
+
+*ORCID API directly.* Would require separate API credentials and a name-search
+step with the same disambiguation problems. CrossRef's DOI lookup provides
+ORCID identifiers when available without a separate API call.
+
+*Manual curation.* The most reliable approach for the core set of frequently-
+appearing Viking Age archaeology researchers (~50-100 people). Deferred but
+remains available as a future option if author profile analysis becomes a
+primary output of the project.
 
 ---
 

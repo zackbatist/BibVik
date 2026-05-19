@@ -558,15 +558,16 @@ def main():
             )
 
         if do_auth_enrich:
-            print("   Author enrichment (OpenAlex)...", flush=True)
+            print("   Author enrichment (CrossRef DOI)...", flush=True)
             counts = enrich_authors(
                 processed_papers = graph.get_processed_papers(),
                 email            = email,
             )
             print(
-                f"   Enriched: {counts['authors_enriched']}  ·  "
-                f"Not found: {counts['not_found']}  ·  "
-                f"Skipped: {counts['skipped']}",
+                f"   Papers found: {counts['papers_found']}  ·  "
+                f"Authors enriched: {counts['authors_enriched']}  ·  "
+                f"No DOI: {counts['papers_no_doi']}  ·  "
+                f"Not in CrossRef: {counts['papers_not_found']}",
                 flush=True,
             )
 

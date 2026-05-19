@@ -30,22 +30,20 @@ CrossRef is used strictly for enrichment — not identification. Two strategies:
      title similarity (≥0.85 by default). On acceptance, fill in missing
      fields including DOI. Does not overwrite existing fields.
 
-Author enrichment (OpenAlex)
-------------------------------
-OpenAlex is used to enrich author records extracted from paper headers:
+Author enrichment (CrossRef DOI lookup)
+----------------------------------------
+Author enrichment uses the paper's own DOI record from CrossRef. For each
+F1 paper with a header DOI, the CrossRef record is fetched and its author
+list is matched to GROBID's author list by normalised family name. Matched
+authors receive: expanded given names (when CrossRef has full names vs
+GROBID's initials) and ORCID identifiers (when the publisher submitted them
+to CrossRef).
 
-  - Expand initials to full given names (CrossRef also helps here)
-  - Retrieve canonical institution names and ROR identifiers
-  - Retrieve ORCID identifiers when available
-
-OpenAlex integrates ORCID as a data source for its author disambiguation
-(since July 2023), so querying OpenAlex gives access to ORCID-verified
-author profiles without needing a separate ORCID API query. See:
-  https://help.openalex.org/hc/en-us/articles/24347048891543-Author-disambiguation
-
-Author enrichment is run as a separate pass over processed_papers headers,
-not over bibliography entries. Affiliations are properties of the paper's
-authors (the citing authors), not of cited works.
+This approach requires no disambiguation — the paper's DOI is a unique
+identifier, and the author's identity is derived from the work they wrote
+rather than from a name search. If a paper has no DOI, CrossRef has no
+record for it, or an author cannot be matched by family name, nothing is
+changed. No match is better than a wrong match.
 
 Usage
 -----
@@ -67,11 +65,9 @@ from .utils import norm_author
 
 logger = logging.getLogger(__name__)
 
-CROSSREF_BASE   = "https://api.crossref.org/works"
-OPENALEX_BASE   = "https://api.openalex.org"
-CROSSREF_DELAY  = 0.15   # Polite delay between CrossRef requests
-OPENALEX_DELAY  = 0.10   # Polite delay between OpenAlex requests
-TITLE_SIM_THRESHOLD = 0.85  # Minimum title similarity for CrossRef title queries
+CROSSREF_BASE       = "https://api.crossref.org/works"
+CROSSREF_DELAY      = 0.15   # Polite delay between CrossRef requests
+TITLE_SIM_THRESHOLD = 0.85   # Minimum title similarity for CrossRef title queries
 
 
 # =============================================================================
@@ -309,7 +305,7 @@ def _expand_author_given_names(
 
 
 # =============================================================================
-# Author enrichment (OpenAlex)
+# Author enrichment (CrossRef DOI lookup)
 # =============================================================================
 
 def enrich_authors(
@@ -317,147 +313,105 @@ def enrich_authors(
     email: str = "",
 ) -> dict[str, int]:
     """
-    Enrich author records in processed_papers headers using OpenAlex.
+    Enrich author records in processed_papers headers using CrossRef.
 
-    For each paper's authors, queries OpenAlex to find the canonical
-    author profile: full name, ORCID, and current institution (ROR).
+    For each paper with a DOI in its header, fetches the CrossRef record
+    for that DOI and uses the author list to expand initials to full given
+    names and add ORCID identifiers when present.
 
-    OpenAlex integrates ORCID as a data source for author disambiguation,
-    so this provides access to ORCID-verified profiles without a separate
-    ORCID API query.
+    The author's identity is derived from the work they wrote — the paper's
+    own DOI record is the most reliable source, requiring no disambiguation.
+    If a paper has no DOI, CrossRef has no record for it, or an author cannot
+    be matched by normalised family name, nothing is changed for that author.
 
     Args:
         processed_papers: Processed paper data dict (modified in place).
-        email:            Email for OpenAlex polite pool.
+        email:            Email for CrossRef polite pool.
 
     Returns:
-        Dict with counts: authors_enriched, not_found, skipped.
+        Dict with counts: papers_found, authors_enriched,
+        papers_no_doi, papers_not_found.
     """
-    counts = {"authors_enriched": 0, "not_found": 0, "skipped": 0}
-    headers = {"User-Agent": f"BibVik/0.1 (mailto:{email})" if email else "BibVik/0.1"}
+    counts = {
+        "papers_found":     0,
+        "authors_enriched": 0,
+        "papers_no_doi":    0,
+        "papers_not_found": 0,
+    }
 
     for pdf_name, data in processed_papers.items():
         header = data.get("header", {})
-        authors = header.get("author", [])
+        doi    = (header.get("doi") or "").strip()
 
-        for author in authors:
-            family = author.get("family", "")
-            given  = author.get("given", "")
+        if not doi:
+            counts["papers_no_doi"] += 1
+            logger.debug("No DOI in header for %s — skipping author enrichment", pdf_name)
+            continue
 
-            if not family:
-                counts["skipped"] += 1
+        cr_record = _crossref_by_doi(doi, email)
+        if not cr_record:
+            counts["papers_not_found"] += 1
+            logger.debug("CrossRef found no record for DOI %s (%s)", doi, pdf_name)
+            time.sleep(CROSSREF_DELAY)
+            continue
+
+        counts["papers_found"] += 1
+        cr_authors    = cr_record.get("author", [])
+        entry_authors = header.get("author", [])
+
+        if not cr_authors or not entry_authors:
+            time.sleep(CROSSREF_DELAY)
+            continue
+
+        enriched_this_paper = 0
+        for author in entry_authors:
+            family_norm = norm_author(author.get("family", ""))
+            if not family_norm:
                 continue
 
-            # Skip if already enriched
-            if author.get("openalex_id") or author.get("orcid"):
-                counts["skipped"] += 1
+            # Find matching CrossRef author by normalised family name.
+            # If multiple authors share the same family name, take the first —
+            # CrossRef and GROBID should list authors in the same order.
+            cr_match = next(
+                (a for a in cr_authors if norm_author(a.get("family", "")) == family_norm),
+                None,
+            )
+            if not cr_match:
                 continue
 
-            profile = _openalex_author_lookup(family, given, headers)
-            if profile:
-                _apply_author_enrichment(author, profile)
-                counts["authors_enriched"] += 1
-                logger.debug("OpenAlex-enriched: %s, %s", family, given)
-            else:
-                counts["not_found"] += 1
+            changed = False
 
-            time.sleep(OPENALEX_DELAY)
+            # Expand initials to full given name
+            given    = author.get("given", "")
+            cr_given = cr_match.get("given", "")
+            is_initial = not given or len(given.replace(".", "").replace(" ", "")) <= 2
+            if is_initial and cr_given and len(cr_given) > len(given):
+                author["given"] = cr_given
+                changed = True
+
+            # Add ORCID if present in CrossRef record and not already set
+            cr_orcid = cr_match.get("ORCID", "")
+            if cr_orcid and not author.get("orcid"):
+                author["orcid"] = cr_orcid
+                changed = True
+
+            if changed:
+                enriched_this_paper += 1
+
+        counts["authors_enriched"] += enriched_this_paper
+        logger.debug(
+            "%s: enriched %d author(s) from CrossRef DOI %s",
+            pdf_name, enriched_this_paper, doi,
+        )
+        time.sleep(CROSSREF_DELAY)
 
     logger.info(
-        "Author enrichment complete: %d enriched, %d not found, %d skipped.",
-        counts["authors_enriched"], counts["not_found"], counts["skipped"],
+        "Author enrichment complete: %d papers found in CrossRef, "
+        "%d authors enriched, %d papers had no DOI, %d not found.",
+        counts["papers_found"], counts["authors_enriched"],
+        counts["papers_no_doi"], counts["papers_not_found"],
     )
     return counts
-
-
-def _openalex_author_lookup(
-    family: str,
-    given: str,
-    headers: dict,
-) -> dict | None:
-    """
-    Query OpenAlex for an author by name.
-
-    Returns the best-matching author profile dict, or None if no confident
-    match is found.
-    """
-    name = f"{given} {family}".strip() if given else family
-
-    try:
-        resp = requests.get(
-            f"{OPENALEX_BASE}/authors",
-            params={
-                "search": name,
-                "per_page": 3,
-            },
-            headers=headers,
-            timeout=15,
-        )
-        if resp.status_code != 200:
-            return None
-
-        results = resp.json().get("results", [])
-        if not results:
-            return None
-
-        # Take the first result if the display name is a plausible match
-        best = results[0]
-        display = best.get("display_name", "")
-
-        # Verify family name appears in the display name
-        if norm_author(family) not in norm_author(display):
-            return None
-
-        return best
-
-    except (requests.Timeout, requests.ConnectionError) as e:
-        logger.debug("OpenAlex lookup failed for %s: %s", name, e)
-        return None
-
-
-def _apply_author_enrichment(author: dict, profile: dict) -> None:
-    """
-    Apply OpenAlex profile data to an author dict.
-
-    Fills in: full given name (if currently initials), ORCID, OpenAlex ID,
-    and last known institution name and ROR ID.
-    """
-    # Full name
-    display_name = profile.get("display_name", "")
-    if display_name:
-        parts = display_name.strip().split()
-        if len(parts) >= 2:
-            cr_given = " ".join(parts[:-1])
-            given = author.get("given", "")
-            is_initial = not given or len(given.replace(".", "").replace(" ", "")) <= 2
-            if is_initial and cr_given:
-                author["given"] = cr_given
-
-    # ORCID
-    orcid = profile.get("orcid", "")
-    if orcid and not author.get("orcid"):
-        author["orcid"] = orcid
-
-    # OpenAlex ID
-    openalex_id = profile.get("id", "")
-    if openalex_id and not author.get("openalex_id"):
-        author["openalex_id"] = openalex_id
-
-    # Last known institution
-    affiliations = profile.get("affiliations", [])
-    if affiliations:
-        # affiliations is sorted by relevance/recency in OpenAlex
-        inst = affiliations[0].get("institution", {})
-        if inst:
-            if not author.get("affiliation"):
-                author["affiliation"] = {}
-            aff = author["affiliation"]
-            if not aff.get("institution") and inst.get("display_name"):
-                aff["institution"] = inst["display_name"]
-            if not aff.get("ror") and inst.get("ror"):
-                aff["ror"] = inst["ror"]
-            if not aff.get("country") and inst.get("country_code"):
-                aff["country"] = inst["country_code"]
 
 
 # =============================================================================

@@ -388,3 +388,25 @@ title similarity threshold (default 0.85).
 design rationale, approaches considered and rejected (restricted CrossRef,
 deferred CrossRef), and enrichment design. Previous resolver-method.md
 content archived in this log entry for reference.
+
+### 2026-05-18 — Replace OpenAlex author enrichment with CrossRef DOI lookup
+
+OpenAlex name-search produced wrong matches on common Scandinavian
+surnames — Lund matched a wrong Lund, Hansen matched a pharmaceutical
+researcher, Andersson matched a US academic. OpenAlex always returns a
+result regardless of whether the person is in its database, replicating
+the same fundamental problem as CrossRef identification-mode queries.
+
+Replaced with CrossRef DOI-based author enrichment. For each F1 paper
+with a DOI in its header, the CrossRef record is fetched and its author
+list is matched to GROBID's author list by normalised family name.
+Matched authors receive full given names (when CrossRef has full forms
+vs GROBID's initials) and ORCID identifiers (when submitted by the
+publisher). If no DOI, no CrossRef record, or no family name match:
+nothing is changed. No match is better than a wrong match.
+
+This approach requires no disambiguation — the paper's DOI is a unique
+identifier, and the author's identity is derived from the specific work
+they wrote. Coverage depends on DOI availability and publisher metadata
+submission practices; older and non-English publications will have lower
+coverage, which is acceptable.
