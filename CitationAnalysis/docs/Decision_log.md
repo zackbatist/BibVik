@@ -456,3 +456,15 @@ a live `N/total · ~Xm remaining` line during enrichment.
 reference list" in per-paper output. "bibliography" → "bibliography.json"
 in Stage 1 summary. Removed "Resolved: 0 via CrossRef" line from
 per-paper output — meaningless since CrossRef identification was removed.
+
+### 2026-05-18 — Remove resolution counts from Stage 2 summary
+
+Stage 2 summary was showing "Resolved: 0 CrossRef · 0 LLM · 0 stub ·
+686 unresolved" — meaningless since CrossRef identification was removed
+from the resolver. The counts and associated variables (`crossref_total`,
+`llm_total`, `stub_total`, `unresolved_total`, `_stage2_existing_keys`)
+were removed. Stage 2 summary now shows only papers succeeded/failed
+and new entries in bibliography.json.
+
+Per-paper output terminology: "bibliography entries" → "entries in
+reference list", "bibliography" → "bibliography.json".

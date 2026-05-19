@@ -251,7 +251,6 @@ def main():
         import time as _time
         _stage2_times: list[float] = []
         _stage2_bib_before = len(graph.get_bibliography())
-        _stage2_existing_keys = set(graph.get_bibliography().keys())
         _t_stage2_start = _time.time()
 
         def _progress(
@@ -345,34 +344,10 @@ def main():
         new_entries  = len(bib) - _stage2_bib_before
         elapsed_total = _fmt_time(_time.time() - _t_stage2_start)
 
-        # Count resolution methods only for entries added in this run
-        new_citekeys = set(bib.keys()) - _stage2_existing_keys
-        crossref_total = sum(
-            1 for ck, e in bib.items()
-            if ck in new_citekeys and e.get("_resolution_method") == "crossref"
-        )
-        llm_total = sum(
-            1 for ck, e in bib.items()
-            if ck in new_citekeys
-            and e.get("_resolution_method") in ("llm_from_context", "llm_from_footnote")
-        )
-        stub_total = sum(
-            1 for ck, e in bib.items()
-            if ck in new_citekeys and e.get("_resolution_method") == "stub"
-        )
-        unresolved_total = sum(
-            1 for ck, e in bib.items()
-            if ck in new_citekeys
-            and not e.get("_resolution_method")
-            and e.get("generation") != "P"
-        )
-
         print(f"━━ Stage 2 complete  ·  {elapsed_total}", flush=True)
         print(f"   {succeeded}/{len(f1_results)} papers succeeded"
               + (f"  ·  {failed} failed" if failed else ""), flush=True)
-        print(f"   {new_entries} new bibliography entries  ·  {len(bib)} total", flush=True)
-        print(f"   Resolved: {crossref_total} CrossRef  ·  {llm_total} LLM  ·  "
-              f"{stub_total} stub  ·  {unresolved_total} unresolved", flush=True)
+        print(f"   {new_entries} new entries in bibliography.json  ·  {len(bib)} total", flush=True)
         print(f"   Output → {output_dir}", flush=True)
 
         partial_bib[0] = bib
