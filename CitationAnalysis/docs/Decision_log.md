@@ -426,3 +426,33 @@ extracts footnote numbers, running headers, or other non-reference
 content as bibliography entries (e.g. "3 Journal of Archaeological
 Research (2022) 30:169-229" with no author or title). These are not
 valid references and would generate meaningless citekeys.
+
+### 2026-05-18 — Citekeys, noise filter, affiliation filter, name correction, UI
+
+**NOAUTHOR citekeys** (`utils.py`): Anonymous entries now receive
+`NOAUTHOR1`, `NOAUTHOR2`, etc. instead of `unknownyear`. Year excluded
+from NOAUTHOR keys.
+
+**Noise filter** (`tei_parser.py`): `parse_tei_references()` rejects
+entries with no author AND no title — GROBID extraction artifacts
+(footnote numbers, running headers). Confirmed fix for `unknown2022a`.
+
+**Publisher affiliation filter** (`tei_parser.py`): `_parse_affiliation()`
+now discards institution fields containing known publisher names
+(Blackwell, Wiley, Routledge, Oxfam, etc.). GROBID sometimes extracts
+publisher addresses from PDF headers as author affiliations.
+
+**Transposed name correction** (`enricher.py`): Author enrichment now
+detects when GROBID swapped family and given name (e.g. Andersson Strand
+parsed as family="Eva", given="Andersson"). When CrossRef DOI author
+list has no match by family name but matches by given name, the parse
+is corrected using CrossRef's version as canonical.
+
+**ETA for enrichment** (`enricher.py`, `run.py`): `enrich_bibliography()`
+accepts a `progress_callback(done, total)`. `run.py` uses it to show
+a live `N/total · ~Xm remaining` line during enrichment.
+
+**UI terminology** (`run.py`): "bibliography entries" → "entries in
+reference list" in per-paper output. "bibliography" → "bibliography.json"
+in Stage 1 summary. Removed "Resolved: 0 via CrossRef" line from
+per-paper output — meaningless since CrossRef identification was removed.

@@ -448,6 +448,10 @@ def _parse_affiliation(aff_elem) -> dict | None:
     no affiliation at all. The raw data is stored as-is; reconciliation
     against a controlled vocabulary (ROR, GRID) is deferred.
 
+    Publisher names in the institution field are discarded — GROBID sometimes
+    extracts publisher addresses (Blackwell, Wiley, Routledge, etc.) from the
+    PDF header instead of the author's institutional affiliation.
+
     Returns a dict with any of: institution, department, address, country.
     Returns None if the element is absent or contains no usable data.
     """
@@ -469,7 +473,35 @@ def _parse_affiliation(aff_elem) -> dict | None:
             if el is not None and el.text:
                 result[field_tag] = el.text.strip()
 
-    return result if result else None
+    if not result:
+        return None
+
+    # Filter out publisher addresses misidentified as institutional affiliations.
+    # These are typically extracted from publisher boilerplate in the PDF header
+    # rather than the author's actual institution.
+    institution = result.get("institution", "").lower()
+    if institution and any(pub in institution for pub in _KNOWN_PUBLISHERS):
+        logger.debug(
+            "Discarding publisher affiliation: '%s'",
+            result.get("institution"),
+        )
+        return None
+
+    return result
+
+
+# Known publisher names that should not appear as author affiliations.
+# GROBID sometimes extracts publisher boilerplate addresses from PDF headers.
+_KNOWN_PUBLISHERS = {
+    "blackwell", "wiley", "routledge", "elsevier", "springer", "taylor",
+    "francis", "sage", "oxford university press", "cambridge university press",
+    "brill", "de gruyter", "walter de gruyter", "oxbow", "archaeopress",
+    "altamira", "rowman", "littlefield", "university of chicago press",
+    "johns hopkins", "princeton university press", "yale university press",
+    "harvard university press", "stanford university press", "mit press",
+    "duke university press", "university of california press", "oxfam",
+    "informa", "tandf", "taylor & francis",
+}
 
 def _parse_xml(tei_xml: str) -> etree._Element | None:
     """

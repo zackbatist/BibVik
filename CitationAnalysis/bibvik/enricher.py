@@ -78,18 +78,16 @@ def enrich_bibliography(
     bibliography: dict[str, dict],
     email: str = "",
     title_threshold: float = TITLE_SIM_THRESHOLD,
+    progress_callback=None,
 ) -> dict[str, int]:
     """
     Enrich bibliography entries with metadata from CrossRef.
 
-    Runs two passes:
-      1. DOI lookup: entries with DOIs but missing metadata fields.
-      2. Title query: entries with titles but no DOIs.
-
     Args:
-        bibliography:     Full bibliography dict (modified in place).
-        email:            Email for CrossRef polite pool.
-        title_threshold:  Minimum title similarity for title-based matching.
+        bibliography:      Full bibliography dict (modified in place).
+        email:             Email for CrossRef polite pool.
+        title_threshold:   Minimum title similarity for title-based matching.
+        progress_callback: Optional callable(done, total) for progress reporting.
 
     Returns:
         Dict with counts: doi_enriched, title_enriched, skipped.
@@ -102,12 +100,14 @@ def enrich_bibliography(
             "Pass --email to use the polite pool."
         )
 
+    total = len(bibliography)
+    done  = 0
+
     for ck, entry in bibliography.items():
         doi   = (entry.get("doi") or "").strip()
         title = (entry.get("title") or "").strip()
 
         if doi:
-            # Pass 1: enrich by DOI — most reliable
             enriched = _crossref_by_doi(doi, email)
             if enriched:
                 _apply_enrichment(entry, enriched)
@@ -116,7 +116,6 @@ def enrich_bibliography(
             time.sleep(CROSSREF_DELAY)
 
         elif title:
-            # Pass 2: enrich by title — requires high similarity confirmation
             author = ""
             authors = entry.get("author", [])
             if authors:
@@ -132,6 +131,10 @@ def enrich_bibliography(
 
         else:
             counts["skipped"] += 1
+
+        done += 1
+        if progress_callback:
+            progress_callback(done, total)
 
     logger.info(
         "Bibliography enrichment complete: %d DOI lookups, %d title matches, %d skipped.",
@@ -364,18 +367,40 @@ def enrich_authors(
             continue
 
         enriched_this_paper = 0
+
+        # Build a CrossRef author lookup by normalised family name
+        cr_by_family = {
+            norm_author(a.get("family", "")): a
+            for a in cr_authors
+            if a.get("family")
+        }
+
         for author in entry_authors:
             family_norm = norm_author(author.get("family", ""))
-            if not family_norm:
-                continue
+            given_norm  = norm_author(author.get("given", ""))
 
-            # Find matching CrossRef author by normalised family name.
-            # If multiple authors share the same family name, take the first —
-            # CrossRef and GROBID should list authors in the same order.
-            cr_match = next(
-                (a for a in cr_authors if norm_author(a.get("family", "")) == family_norm),
-                None,
-            )
+            # Detect transposed name (GROBID put given in family field):
+            # if the family field normalises to a known given name and the
+            # given field normalises to a known family name in CrossRef,
+            # swap them before matching.
+            cr_match = cr_by_family.get(family_norm)
+
+            if cr_match is None and given_norm:
+                # Try matching by what GROBID put in the given field
+                cr_match = cr_by_family.get(given_norm)
+                if cr_match is not None:
+                    # Transposed name detected — correct it
+                    logger.debug(
+                        "Correcting transposed name: family=%r given=%r → "
+                        "family=%r given=%r",
+                        author.get("family"), author.get("given"),
+                        cr_match.get("family"), cr_match.get("given"),
+                    )
+                    author["family"] = cr_match.get("family", author["family"])
+                    author["given"]  = cr_match.get("given", author.get("given", ""))
+                    enriched_this_paper += 1
+                    continue
+
             if not cr_match:
                 continue
 

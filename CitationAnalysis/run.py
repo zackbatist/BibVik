@@ -208,14 +208,14 @@ def main():
         detection = result.get("detection", {})
         mc = detection
         print(f"done", flush=True)
-        print(f"   GROBID: {len(result.get('references', []))} bibliography entries, "
+        print(f"   GROBID: {len(result.get('references', []))} entries in reference list, "
               f"{len(result.get('paragraphs', []))} paragraphs", flush=True)
         print(f"   Citations detected — "
-              f"bibliography: {mc.get('reference_list', 0)}  "
+              f"reference list: {mc.get('reference_list', 0)}  "
               f"body: {mc.get('inline_markers', 0)} (GROBID), {mc.get('text_patterns', 0)} (regex)"
               + (f", {mc.get('llm_body_scan', 0)} (LLM)" if mc.get('llm_body_scan') else "  LLM unavailable"),
               flush=True)
-        print(f"   {len(bib)} entries in bibliography", flush=True)
+        print(f"   {len(bib)} entries in bibliography.json", flush=True)
 
         partial_bib[0] = bib
         _save_bibliography(bib, bibliography_path, config, log)
@@ -279,7 +279,7 @@ def main():
             llm_available = mc.get("llm_body_scan") is not None
 
             print(
-                f"         GROBID: {n_bib} bibliography entries, "
+                f"         GROBID: {n_bib} entries in reference list, "
                 f"{n_paragraphs} paragraphs",
                 flush=True,
             )
@@ -296,28 +296,19 @@ def main():
 
             if mc.get("llm_footnotes", 0) > 0:
                 print(f"         Citations in footnotes: {mc.get('llm_footnotes', 0)} (LLM)", flush=True)
-            elif llm_available:
-                pass  # No footnote citations — don't clutter output
 
-            # Discrepancies
+            # Discrepancies between reference list and body citations
             total_body = mc.get("merged_total", 0)
             if total_body > n_bib:
                 print(
                     f"         {total_body - n_bib} citations in body/footnotes "
-                    f"not in bibliography",
+                    f"not in reference list",
                     flush=True,
                 )
             elif n_bib > total_body and n_bib > 0:
                 print(
-                    f"         {n_bib - total_body} bibliography entries "
+                    f"         {n_bib - total_body} reference list entries "
                     f"not cited in body or footnotes",
-                    flush=True,
-                )
-
-            if n_crossref or n_unresolved:
-                print(
-                    f"         Resolved: {n_crossref} via CrossRef  ·  "
-                    f"{n_unresolved} unresolved",
                     flush=True,
                 )
 
@@ -544,16 +535,40 @@ def main():
         from bibvik.enricher import enrich_bibliography, enrich_authors
 
         if do_bib_enrich:
-            print("   Bibliography enrichment (CrossRef)...", flush=True)
+            import time as _time
+            _enrich_start = _time.time()
+            _enrich_times: list[float] = []
+            _enrich_last = [_enrich_start]
+
+            def _bib_progress(done, total):
+                now = _time.time()
+                elapsed = now - _enrich_last[0]
+                _enrich_last[0] = now
+                if elapsed > 0:
+                    _enrich_times.append(elapsed)
+                remaining = total - done
+                if remaining > 0 and _enrich_times:
+                    avg = sum(_enrich_times) / len(_enrich_times)
+                    eta = _fmt_time(avg * remaining)
+                    print(
+                        f"\r   Bibliography enrichment (CrossRef)... "
+                        f"{done}/{total}  ·  ~{eta} remaining   ",
+                        end="", flush=True,
+                    )
+
+            print("   Bibliography enrichment (CrossRef)...", end="", flush=True)
             counts = enrich_bibliography(
                 bibliography     = graph.get_bibliography(),
                 email            = email,
                 title_threshold  = args.enrich_threshold,
+                progress_callback = _bib_progress,
             )
             print(
-                f"   DOI lookups: {counts['doi_enriched']}  ·  "
-                f"Title matches: {counts['title_enriched']}  ·  "
-                f"Skipped: {counts['skipped']}",
+                f"\r   Bibliography enrichment (CrossRef): "
+                f"{counts['doi_enriched']} DOI lookups  ·  "
+                f"{counts['title_enriched']} title matches  ·  "
+                f"{counts['skipped']} skipped  ·  "
+                f"{_fmt_time(_time.time() - _enrich_start)}",
                 flush=True,
             )
 
