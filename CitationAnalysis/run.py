@@ -229,10 +229,20 @@ def main():
         print(f"   {seed_path.name}", flush=True)
         print(f"   Sending to GROBID...", end=" ", flush=True)
 
-        result = graph.process_seed_paper(seed_path, llm_config=llm_cfg, email=email)
+        def _seed_phase(phase, n_paragraphs):
+            if phase == "llm":
+                print(f"done", flush=True)
+                print(f"   Scanning {n_paragraphs} paragraphs with LLM...", end=" ", flush=True)
+
+        result = graph.process_seed_paper(
+            seed_path, llm_config=llm_cfg, email=email,
+            phase_callback=_seed_phase,
+        )
         if result is None:
             print("FAILED", flush=True)
             sys.exit(1)
+
+        print(f"done", flush=True)
 
         bib = graph.get_bibliography()
         detection = result.get("detection", {})
@@ -293,7 +303,7 @@ def main():
             if lang_tag:
                 print(lang_tag, flush=True)
             else:
-                print(flush=True)  # end the "Sending to GROBID... " line
+                print(flush=True)  # close whichever line was open (GROBID or LLM scan)
 
             if not success:
                 reason = failure_reason or "unknown error"
@@ -357,6 +367,11 @@ def main():
             print(f"[{index:>{w}}/{total}] {label}", flush=True)
             print(f"         Sending to GROBID...", end=" ", flush=True)
 
+        def _phase(phase, n_paragraphs):
+            if phase == "llm":
+                print(f"done", flush=True)
+                print(f"         Scanning {n_paragraphs} paragraphs with LLM...", end=" ", flush=True)
+
         f1_results = graph.process_f1_papers(
             f1_dir=config["f1_pdf_dir"],
             seed_pdf_path=config["seed_paper"],
@@ -365,6 +380,7 @@ def main():
             email=email,
             progress_callback=_progress,
             start_callback=_start,
+            phase_callback=_phase,
         )
 
         # ── Stage 2 summary ───────────────────────────────────────────────────

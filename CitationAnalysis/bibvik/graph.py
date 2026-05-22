@@ -59,6 +59,7 @@ class CitationGraph:
         pdf_path: str | Path,
         llm_config: dict | None = None,
         email: str = "",
+        phase_callback=None,
     ) -> dict | None:
         """
         Process the seed paper: extract references, detect citations,
@@ -134,6 +135,8 @@ class CitationGraph:
 
         # Run full detection (all 5 methods)
         logger.info("  Running 5-method citation detection...")
+        if phase_callback and llm_config:
+            phase_callback("llm", len(paragraphs))
         detection = detect_all_citations(
             tei_xml=tei_xml,
             source_pdf=pdf_path.name,
@@ -231,6 +234,7 @@ class CitationGraph:
         email: str = "",
         progress_callback=None,
         start_callback=None,
+        phase_callback=None,
     ) -> dict[str, bool]:
         """Process F1 PDFs and integrate their citations as F2."""
         import time as _time
@@ -290,9 +294,10 @@ class CitationGraph:
                 prefetch_future = executor.submit(_grobid_fetch, remaining[i + 1])
 
             try:
-                ok = self._process_one_f1(
+                ok, fail_reason = self._process_one_f1(
                     pdf_path, llm_config=llm_config, email=email,
                     prefetched_tei=tei_xml,
+                    phase_callback=phase_callback,
                 )
                 results[pdf_path.name] = ok
                 elapsed = _time.time() - t0
@@ -338,7 +343,7 @@ class CitationGraph:
                         ocr_applied  = (
                             self.grobid.ocr_dir / "originals" / pdf_path.name
                         ).exists() if hasattr(self.grobid, "ocr_dir") else False,
-                        failure_reason = None,
+                        failure_reason = fail_reason,
                     )
 
                 # Time estimate
@@ -378,8 +383,9 @@ class CitationGraph:
         llm_config: dict | None = None,
         email: str = "",
         prefetched_tei: str | None = None,
-    ) -> bool:
-        """Process one F1 paper."""
+        phase_callback=None,
+    ) -> tuple[bool, str]:
+        """Process one F1 paper. Returns (success, failure_reason)."""
         # GROBID — use pre-fetched result if available
         if prefetched_tei is not None:
             tei_xml = prefetched_tei
@@ -389,7 +395,7 @@ class CitationGraph:
                 tei_xml = self.grobid.process_references_only(pdf_path)
 
         if not tei_xml:
-            return False
+            return False, "GROBID returned no output"
 
         # Save TEI
         self.tei_dir.mkdir(parents=True, exist_ok=True)
@@ -448,6 +454,8 @@ class CitationGraph:
                 self.grobid_map[(pdf_path.name, gid)] = citekey
 
         # Full detection
+        if phase_callback and llm_config:
+            phase_callback("llm", len(paragraphs))
         detection = detect_all_citations(
             tei_xml=tei_xml,
             source_pdf=pdf_path.name,
@@ -515,7 +523,7 @@ class CitationGraph:
             "detection": detection["method_counts"],
         }
 
-        return True
+        return True, ""
 
     # =========================================================================
     # Matching and deduplication
