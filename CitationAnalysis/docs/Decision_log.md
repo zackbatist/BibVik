@@ -490,3 +490,33 @@ Both `GrobidClient` construction sites in `run.py` pass `container_name`.
 The restart mechanism requires the container to have been started with
 `--name grobid-server` (or whatever name is configured). The standard
 startup command in the documentation already uses this name.
+
+### 2026-05-18 — Remote LLM support, CLI flags, cluster launch script, gitignore
+
+**CLI flags** (`run.py`): Three new flags. `--remote` switches the LLM
+base_url, backend, and model to the cluster configuration
+(`llm.remote_url`, `llm.remote_backend`, `llm.remote_model` in
+config.yaml). `--model` overrides the model from config at runtime.
+`--no-think` sets a flag in llm_cfg (prompts already include `/no_think`
+suffix for Qwen3, but flag available for future use). `_llm_status()`
+now shows local/remote indicator in Stage 2 header.
+
+**config.yaml** now gitignored. `llm` section updated — `base_url` and
+`backend` now point to LM Studio (localhost:1234, llama_server).
+Remote cluster keys added: `remote_url: http://localhost:11435` (via
+SSH tunnel), `remote_backend: ollama`, `remote_model: qwen2.5:7b`.
+
+**config.example.yaml** (new): public template with all sensitive values
+(paths, email, cluster URL) replaced by placeholders. Documents the
+SSH tunnel setup for --remote. Copy to config.yaml and fill in locally.
+
+**launch_bibvik_llm.sh** (new, gitignored): cluster LLM launch script
+replacing the admin's prototype `launch_ollama.sh`. Supports `--gpu N`,
+`--model`, `--backend` (ollama or llama_server), `--port`, `--no-think`.
+Port 11435 and container names `ollama_bibvik`/`llama_bibvik` to avoid
+conflict with `launch_ollama.sh` (other project). Models at
+`/home/zack/models` (SSHFS → NAS, 3.8T free). SSH tunnel:
+`ssh -L 11435:localhost:11435 zack@132.216.183.78`.
+
+**.gitignore** (new): excludes config.yaml, launch_bibvik_llm.sh,
+output/, PDFs, Exported_Items.csv, Python artifacts, editor files.

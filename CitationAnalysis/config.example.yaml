@@ -1,0 +1,110 @@
+# =============================================================================
+# BibVik Citation Analysis — Configuration Example
+# =============================================================================
+# Copy this file to config.yaml and edit to match your local setup.
+# config.yaml is gitignored — never commit it.
+#
+#   cp config.example.yaml config.yaml
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+
+# Path to the seed paper PDF.
+seed_paper: "/path/to/your/seed-paper.pdf"
+
+# Directory containing F1 generation PDFs.
+f1_pdf_dir: "/path/to/your/f1-pdfs"
+
+# Output directory for all generated files.
+output_dir: "./output"
+
+# Optional: Path to a Zotero CSV export for exact PDF ↔ citekey matching.
+# Export from Zotero via File > Export Library as CSV.
+zotero_csv: "./Exported_Items.csv"
+
+# ---------------------------------------------------------------------------
+# Coverage & Open Access
+# ---------------------------------------------------------------------------
+
+# Email address for the Unpaywall and CrossRef APIs (polite pool).
+# Can also be provided via --email on the command line.
+email: "your@email.com"
+
+# ---------------------------------------------------------------------------
+# GROBID
+# ---------------------------------------------------------------------------
+grobid:
+  # Base URL where GROBID is running (Docker default).
+  base_url: "http://localhost:8070"
+
+  # Timeout in seconds for a single PDF processing request.
+  timeout: 120
+
+  # Docker container name for automatic restart on crash.
+  # Must match the --name used when starting the container.
+  # Set to empty string to disable automatic restart.
+  container_name: "grobid-server"
+
+  # Parallel GROBID requests — not yet implemented.
+  # concurrency: 1
+
+  # Whether to request coordinates in GROBID output.
+  include_coordinates: false
+
+# ---------------------------------------------------------------------------
+# Local LLM
+# ---------------------------------------------------------------------------
+llm:
+  # Base URL for the local LLM API.
+  # LM Studio default: http://localhost:1234
+  # Ollama default:    http://localhost:11434
+  base_url: "http://localhost:1234"
+
+  # Backend: "ollama" or "llama_server" (LM Studio / llama.cpp)
+  backend: "llama_server"
+
+  # Model identifier.
+  model: "your-model-name"
+
+  # Remote cluster LLM — used when --remote flag is passed.
+  # Set up an SSH tunnel first:
+  #   ssh -L REMOTE_PORT:localhost:REMOTE_PORT user@cluster-host
+  remote_url: "http://localhost:11435"
+  remote_backend: "ollama"
+  remote_model: "your-cluster-model"
+
+  # Optional: smaller/faster model for citation detection (Method 4).
+  # Leave empty to use the main model for everything.
+  detection_model: ""
+
+  # Paragraphs per LLM call for body scan (1 = one at a time).
+  detection_batch_size: 1
+
+  # Sampling temperature (lower = more deterministic).
+  temperature: 0.3
+
+  # Maximum response tokens.
+  max_tokens: 2048
+
+  # Request timeout in seconds.
+  timeout: 300
+
+# ---------------------------------------------------------------------------
+# Citation Context Extraction
+# ---------------------------------------------------------------------------
+context:
+  sentence_window: 3
+  boundary_threshold: 150
+
+# ---------------------------------------------------------------------------
+# Cluster Analysis
+# ---------------------------------------------------------------------------
+clustering:
+  min_cooccurrence: 2
+  run_content_enriched: true
+
+# ---------------------------------------------------------------------------
+# General
+# ---------------------------------------------------------------------------
+log_level: "INFO"

@@ -66,6 +66,14 @@ Examples:
     parser.add_argument("--context-limit", type=int, default=None, help="Limit LLM context analysis.")
     parser.add_argument("--email", type=str, default=None, help="Email for Unpaywall/CrossRef.")
     parser.add_argument("--download-oa", action="store_true")
+    parser.add_argument("--remote", action="store_true",
+                        help="Use remote cluster LLM instead of local. "
+                             "Reads llm.remote_url from config.yaml.")
+    parser.add_argument("--no-think", action="store_true",
+                        help="Append /no_think to all LLM prompts (Qwen3 only). "
+                             "Has no effect if already in prompts.")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Override LLM model from config.yaml.")
 
     args = parser.parse_args()
     if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only]):
@@ -95,11 +103,12 @@ def _fmt_time(seconds: float) -> str:
 def _llm_status(llm_cfg: dict) -> str:
     """Return a short string describing LLM availability."""
     import socket
-    backend = llm_cfg.get("backend", "ollama")
-    base_url = llm_cfg.get("base_url", "http://localhost:11434")
-    model = llm_cfg.get("model", "unknown")
+    backend    = llm_cfg.get("backend", "ollama")
+    base_url   = llm_cfg.get("base_url", "http://localhost:11434")
+    model      = llm_cfg.get("model", "unknown")
+    is_remote  = llm_cfg.get("base_url") == llm_cfg.get("remote_url") and llm_cfg.get("remote_url")
+    location   = "remote" if is_remote else "local"
 
-    # Parse host and port from base_url
     try:
         from urllib.parse import urlparse
         parsed = urlparse(base_url)
@@ -111,7 +120,7 @@ def _llm_status(llm_cfg: dict) -> str:
     try:
         socket.create_connection((host, port), timeout=1).close()
         backend_label = "llama-server" if backend == "llama_server" else "Ollama"
-        return f"LLM available ({backend_label} · {model})"
+        return f"LLM available ({backend_label} · {model} · {location})"
     except OSError:
         backend_label = "llama-server" if backend == "llama_server" else "Ollama"
         return f"LLM unavailable ({backend_label} not running)"
@@ -136,6 +145,26 @@ def main():
         config["log_level"],
         log_file=output_dir / "bibvik.log",
     )
+
+    # ── Apply CLI overrides to LLM config ────────────────────────────────────
+    llm_cfg = config.get("llm", {})
+
+    if args.remote:
+        remote_url = llm_cfg.get("remote_url", "")
+        if not remote_url:
+            print("ERROR: --remote requires llm.remote_url in config.yaml.", flush=True)
+            sys.exit(1)
+        llm_cfg["base_url"] = remote_url
+        llm_cfg["backend"] = llm_cfg.get("remote_backend", "ollama")
+        if llm_cfg.get("remote_model"):
+            llm_cfg["model"] = llm_cfg["remote_model"]
+        print(f"   Using remote LLM at {remote_url}", flush=True)
+
+    if args.model:
+        llm_cfg["model"] = args.model
+
+    if args.no_think:
+        llm_cfg["no_think"] = True
 
     run_extract  = args.all or args.extract
     run_f1       = args.all or args.iterate_f1
