@@ -154,6 +154,17 @@ Respond ONLY with a JSON array. If none: []
 /no_think"""
 
 
+
+
+_LLM_BODY_DETECT_BATCH = """You are an expert at identifying bibliographic references in academic text. Find ALL works cited or referenced in each passage below.
+
+{passages}
+
+For each work found across ALL passages: {{"first_author": "<family name>", "year": "<4 digits>"}}
+Respond ONLY with a single flat JSON array containing all citations found. If none: []
+/no_think"""
+
+
 _LLM_FOOTNOTE_EXTRACT = """You are an expert at extracting bibliographic references from academic footnotes. This footnote may contain one or more references to published works embedded in prose.
 
 ## Footnote text
@@ -401,7 +412,7 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
     det_model = llm_config.get("detection_model", "")
     model = det_model if det_model else llm_config.get("model", "qwen3.5:35b")
     timeout = llm_config.get("timeout", 120)
-    batch_size = max(1, llm_config.get("detection_batch_size", 4))
+    batch_size = max(1, llm_config.get("detection_batch_size", 1))
     backend = llm_config.get("backend", "ollama")
 
     # Clean and filter paragraphs
@@ -417,68 +428,112 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
     # Split into batches
     batches = [substantive[i:i + batch_size] for i in range(0, len(substantive), batch_size)]
     cache_hits = 0
-    llm_calls = 0
+    llm_calls  = 0
 
-    logger.debug("    LLM body scan: %d paragraphs in %d batches (model: %s)",
-                 len(substantive), len(batches), model)
+    logger.debug("LLM body scan: %d paragraphs in %d batches of up to %d (model: %s)",
+                 len(substantive), len(batches), batch_size, model)
 
     for batch_idx, batch in enumerate(batches):
         if len(batches) > 10 and batch_idx % 10 == 0:
-            logger.debug("    LLM body scan: batch %d/%d (%d cache hits so far)",
+            logger.debug("LLM body scan: batch %d/%d (%d cache hits so far)",
                          batch_idx + 1, len(batches), cache_hits)
 
-        for text in batch:
-            text_hash = _hash_text(text)
+        hashes = [_hash_text(t) for t in batch]
 
-            # Check cache
-            if text_hash in _llm_cache:
+        if batch_size == 1:
+            # ── Single paragraph — check cache, send individually ─────────
+            text = batch[0]
+            h    = hashes[0]
+
+            if h in _llm_cache:
                 cache_hits += 1
-                for author, year in _llm_cache[text_hash]:
-                    key = (_norm(author), year)
-                    if key not in citations:
-                        citations[key] = {
-                            "author": author, "year": year,
-                            "methods": ["llm_body"], "occurrences": 0, "contexts": [],
-                        }
-                    citations[key]["occurrences"] += 1
-                    if len(citations[key]["contexts"]) < 3:
-                        citations[key]["contexts"].append(text[:200])
+                for author, year in _llm_cache[h]:
+                    _add_citation(citations, author, year, text)
                 continue
 
-            # Send to LLM
             llm_calls += 1
-            prompt = _LLM_BODY_DETECT.format(text=text)
-            parsed = _llm_query_array(base_url, model, timeout, prompt, backend=backend)
-
-            pairs = []
-            if parsed:
-                for item in parsed:
-                    if not isinstance(item, dict):
-                        logger.debug("Skipping non-dict LLM response item: %r", item)
-                        continue
-                    author = str(item.get("first_author", "")).strip()
-                    year = str(item.get("year", "")).strip()
-                    if not author or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
-                        continue
-                    pairs.append((author, year))
-                    key = (_norm(author), year)
-                    if key not in citations:
-                        citations[key] = {
-                            "author": author, "year": year,
-                            "methods": ["llm_body"], "occurrences": 0, "contexts": [],
-                        }
-                    citations[key]["occurrences"] += 1
-                    if len(citations[key]["contexts"]) < 3:
-                        citations[key]["contexts"].append(text[:200])
-
-            # Only cache non-empty results — don't poison cache with failures
+            parsed = _llm_query_array(
+                base_url, model, timeout,
+                _LLM_BODY_DETECT.format(text=text),
+                backend=backend,
+            )
+            pairs = _extract_pairs(parsed, citations, text)
             if pairs:
-                _llm_cache[text_hash] = pairs
+                _llm_cache[h] = pairs
+
+        else:
+            # ── Multi-paragraph batch — check if all cached ───────────────
+            all_cached = all(h in _llm_cache for h in hashes)
+            if all_cached:
+                for text, h in zip(batch, hashes):
+                    cache_hits += 1
+                    for author, year in _llm_cache[h]:
+                        _add_citation(citations, author, year, text)
+                continue
+
+            # Send all paragraphs in one prompt
+            llm_calls += 1
+            passages = "\n\n".join(
+                f"## Passage {i+1}\n---\n{t}\n---"
+                for i, t in enumerate(batch)
+            )
+            parsed = _llm_query_array(
+                base_url, model, timeout,
+                _LLM_BODY_DETECT_BATCH.format(passages=passages),
+                backend=backend,
+            )
+            # Use first paragraph as context text; cache result for all
+            pairs = _extract_pairs(parsed, citations, batch[0])
+            if pairs:
+                for h in hashes:
+                    if h not in _llm_cache:
+                        _llm_cache[h] = pairs
 
     if cache_hits:
-        logger.debug("    LLM body scan: %d LLM calls, %d cache hits", llm_calls, cache_hits)
+        logger.debug("LLM body scan: %d LLM calls, %d cache hits", llm_calls, cache_hits)
 
     return citations
+
+
+def _add_citation(
+    citations: dict,
+    author: str,
+    year: str,
+    context_text: str,
+    method: str = "llm_body",
+) -> None:
+    """Add a detected citation to the citations dict."""
+    key = (_norm(author), year)
+    if key not in citations:
+        citations[key] = {
+            "author": author, "year": year,
+            "methods": [method], "occurrences": 0, "contexts": [],
+        }
+    citations[key]["occurrences"] += 1
+    if len(citations[key]["contexts"]) < 3:
+        citations[key]["contexts"].append(context_text[:200])
+
+
+def _extract_pairs(
+    parsed: list | None,
+    citations: dict,
+    context_text: str,
+) -> list[tuple[str, str]]:
+    """Parse LLM response array, add valid citations, return (author, year) pairs."""
+    pairs = []
+    if not parsed:
+        return pairs
+    for item in parsed:
+        if not isinstance(item, dict):
+            logger.debug("Skipping non-dict LLM response item: %r", item)
+            continue
+        author = str(item.get("first_author", "")).strip()
+        year   = str(item.get("year", "")).strip()
+        if not author or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
+            continue
+        pairs.append((author, year))
+        _add_citation(citations, author, year, context_text)
+    return pairs
 
 
 def _hash_text(text: str) -> str:
