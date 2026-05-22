@@ -687,11 +687,14 @@ def _parse_biblstruct(bs: etree._Element) -> dict | None:
 # Signals:
 #   Kat.-Nr. / Kat.Nr.  — German catalogue number notation
 #   Taf. N              — German Tafel (plate) reference followed by digits
-#   XX NNNN             — uppercase abbreviation + digits (museum accession)
+#   XX NNNN             — uppercase abbreviation + 4+ digits (museum accession)
+#                         Requires 2+ uppercase letters to avoid matching "AD 100"
 _CATALOGUE_RE = re.compile(
-    r"Kat\.[-\s]?Nr\."           # German catalogue number
-    r"|Taf\.\s*[A-Z]*\s*\d"      # Plate reference
-    r"|\b[A-Z]{1,5}\s+\d{3,}"   # Museum accession (e.g. SHM 3217, C5821)
+    r"Kat\.[-\s]?Nr\."            # German catalogue number
+    r"|Taf\.\s*[A-Z]*\s*\d"       # Plate reference
+    r"|\b[A-Z]{2,5}\s+\d{4,}"    # Museum accession (e.g. SHM 3217, LUHM 13078)
+                                  # Requires 2+ letters and 4+ digits to avoid
+                                  # false positives like "AD 100" or "AY17"
 )
 
 
