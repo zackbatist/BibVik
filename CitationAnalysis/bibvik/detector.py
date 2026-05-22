@@ -453,6 +453,9 @@ def _method_llm_body(paragraphs: list[dict], llm_config: dict) -> dict:
             pairs = []
             if parsed:
                 for item in parsed:
+                    if not isinstance(item, dict):
+                        logger.debug("Skipping non-dict LLM response item: %r", item)
+                        continue
                     author = str(item.get("first_author", "")).strip()
                     year = str(item.get("year", "")).strip()
                     if not author or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
