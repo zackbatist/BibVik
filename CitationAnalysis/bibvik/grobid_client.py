@@ -73,20 +73,22 @@ class GrobidClient:
         base_url: str = "http://localhost:8070",
         timeout: int = 120,
         ocr_dir: str | Path | None = None,
+        container_name: str = "grobid-server",
     ):
         """
         Args:
-            base_url: Root URL of the GROBID service (no trailing slash).
-            timeout:  Request timeout in seconds. Large or complex PDFs may
-                      need 120-300s depending on hardware.
-            ocr_dir:  Directory for OCR'd PDF copies. Defaults to output/ocr/
-                      relative to the current working directory. Kept separate
-                      from the source PDF directory so Zotero-managed folders
-                      are not polluted with pipeline artefacts.
+            base_url:       Root URL of the GROBID service (no trailing slash).
+            timeout:        Request timeout in seconds. Large or complex PDFs may
+                            need 120-300s depending on hardware.
+            ocr_dir:        Directory for OCR'd PDF copies. Defaults to output/ocr/
+                            relative to the current working directory.
+            container_name: Docker container name for automatic restart on crash.
+                            Set to empty string to disable automatic restart.
         """
-        self.base_url = base_url.rstrip("/")
-        self.timeout = timeout
-        self.ocr_dir = Path(ocr_dir) if ocr_dir else Path("output/ocr")
+        self.base_url       = base_url.rstrip("/")
+        self.timeout        = timeout
+        self.ocr_dir        = Path(ocr_dir) if ocr_dir else Path("output/ocr")
+        self.container_name = container_name
 
     def is_alive(self) -> bool:
         """
@@ -111,6 +113,79 @@ class GrobidClient:
         except requests.Timeout:
             logger.error("GROBID health check timed out.")
             return False
+
+    def restart_if_down(self, wait_seconds: int = 120) -> bool:
+        """
+        Attempt to restart the GROBID Docker container and wait for it to
+        come back up.
+
+        Called automatically when a ConnectionError is detected during
+        processing. Requires Docker to be installed and the container name
+        to be configured.
+
+        Args:
+            wait_seconds: Maximum seconds to wait for GROBID to become
+                          available after restart.
+
+        Returns:
+            True if GROBID is back up, False if restart failed or timed out.
+        """
+        import time
+
+        if not self.container_name:
+            logger.warning(
+                "GROBID container name not configured — cannot attempt restart. "
+                "Set grobid.container_name in config.yaml."
+            )
+            return False
+
+        logger.warning(
+            "GROBID appears to be down. Attempting to restart Docker container '%s'...",
+            self.container_name,
+        )
+
+        try:
+            result = subprocess.run(
+                ["docker", "restart", self.container_name],
+                capture_output=True, text=True, timeout=30,
+            )
+            if result.returncode != 0:
+                logger.error(
+                    "docker restart failed: %s", result.stderr.strip()
+                )
+                return False
+        except FileNotFoundError:
+            logger.error(
+                "docker command not found — cannot restart GROBID container."
+            )
+            return False
+        except subprocess.TimeoutExpired:
+            logger.error("docker restart timed out.")
+            return False
+
+        # Wait for GROBID to load its models and become available.
+        # Models take ~60-90 seconds to load on first startup.
+        logger.warning(
+            "Waiting up to %ds for GROBID to restart...", wait_seconds
+        )
+        interval = 5
+        elapsed  = 0
+        while elapsed < wait_seconds:
+            time.sleep(interval)
+            elapsed += interval
+            if self.is_alive():
+                logger.warning(
+                    "GROBID is back up after %ds. Resuming processing.", elapsed
+                )
+                return True
+            logger.debug("GROBID not yet available (%ds elapsed)...", elapsed)
+
+        logger.error(
+            "GROBID did not come back up within %ds. "
+            "Check container logs: docker logs %s",
+            wait_seconds, self.container_name,
+        )
+        return False
 
     def process_fulltext(
         self,
@@ -257,6 +332,10 @@ class GrobidClient:
                 "Is the Docker container still running?",
                 pdf_path.name,
             )
+            # Attempt automatic restart and retry once.
+            if self.restart_if_down():
+                logger.warning("Retrying %s after GROBID restart...", pdf_path.name)
+                return self._submit_to_grobid(pdf_path, include_coordinates)
             return None
 
     # =========================================================================

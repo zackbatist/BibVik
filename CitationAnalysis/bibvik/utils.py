@@ -47,6 +47,7 @@ def load_config(config_path: str = "config.yaml") -> dict:
     g = config.setdefault("grobid", {})
     g.setdefault("base_url", "http://localhost:8070")
     g.setdefault("timeout", 120)
+    g.setdefault("container_name", "grobid-server")
 
     llm = config.setdefault("llm", {})
     llm.setdefault("base_url", "http://localhost:11434")

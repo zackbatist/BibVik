@@ -46,6 +46,12 @@ grobid:
   # Large PDFs or slow machines may need a higher value.
   timeout: 120
 
+  # Docker container name for automatic restart on crash.
+  # Set to empty string to disable automatic restart.
+  # The container must have been started with --name matching this value.
+  # Standard startup: docker run --name grobid-server ...
+  container_name: "grobid-server"
+
   # Parallel GROBID requests — not yet implemented.
   # concurrency: 1
 

@@ -468,3 +468,25 @@ and new entries in bibliography.json.
 
 Per-paper output terminology: "bibliography entries" → "entries in
 reference list", "bibliography" → "bibliography.json".
+
+### 2026-05-18 — GROBID health monitoring and automatic restart
+
+GROBID crashed twice during testing (Anchukaitis 2017), requiring
+manual container restart before processing could continue. For the full
+382-paper run this would be unacceptable.
+
+`grobid_client.py`: `GrobidClient` takes a new `container_name`
+parameter (default `"grobid-server"`). New `restart_if_down()` method
+runs `docker restart <container_name>` and polls `is_alive()` at 5s
+intervals for up to 120s. `_submit_to_grobid()` now calls
+`restart_if_down()` on `ConnectionError` and retries the request once
+if the restart succeeds. If GROBID doesn't come back up within 120s or
+docker is not available, the paper is skipped as before.
+
+`config.yaml`: `grobid.container_name` added. Set to empty string to
+disable automatic restart. `utils.py`: default added to `load_config`.
+Both `GrobidClient` construction sites in `run.py` pass `container_name`.
+
+The restart mechanism requires the container to have been started with
+`--name grobid-server` (or whatever name is configured). The standard
+startup command in the documentation already uses this name.
