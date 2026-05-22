@@ -662,7 +662,37 @@ def _parse_biblstruct(bs: etree._Element) -> dict | None:
         logger.debug("Skipping empty biblStruct: %s", grobid_id)
         return None
 
+    # --- Strip leading footnote numbers from title -------------------------
+    # GROBID sometimes absorbs footnote reference numbers (e.g. "58 Fanning,
+    # Viking-Age Ringed Pins") into the title field. Strip leading digits
+    # followed by a word character.
+    if result.get("title"):
+        result["title"] = re.sub(r"^\d+\s+", "", result["title"]).strip()
+
+    # --- Catalogue candidate detection ---
+    # Some papers include artefact catalogues whose entries GROBID parses as
+    # bibliography entries. These are not scholarly references but museum
+    # accession records or catalogue cross-references. They are tagged for
+    # human review in the audit tool rather than filtered out automatically.
+    raw = result.get("_raw_citation", "")
+    if raw and _CATALOGUE_RE.search(raw):
+        result["_catalogue_candidate"] = True
+        logger.debug("Catalogue candidate flagged: %s", raw[:80])
+
     return result
+
+
+# Patterns that suggest a bibliography entry is an artefact catalogue entry
+# rather than a scholarly reference. Detected in the raw citation string.
+# Signals:
+#   Kat.-Nr. / Kat.Nr.  — German catalogue number notation
+#   Taf. N              — German Tafel (plate) reference followed by digits
+#   XX NNNN             — uppercase abbreviation + digits (museum accession)
+_CATALOGUE_RE = re.compile(
+    r"Kat\.[-\s]?Nr\."           # German catalogue number
+    r"|Taf\.\s*[A-Z]*\s*\d"      # Plate reference
+    r"|\b[A-Z]{1,5}\s+\d{3,}"   # Museum accession (e.g. SHM 3217, C5821)
+)
 
 
 def _parse_persname(elem: etree._Element | None) -> dict | None:

@@ -92,24 +92,27 @@ def run_audit(
     duplicates = _stratum_duplicates(bibliography, threshold, rng=rng)
     ocr        = _stratum_ocr(bibliography, ocr_originals_dir)
     by_lang    = _stratum_by_language(bibliography, processed_papers)
+    catalogue  = _stratum_catalogue(bibliography)
 
     # ── Sample ────────────────────────────────────────────────────────────────
     s_crossref   = _sample(crossref,   n, rng)
     s_unresolved = _sample(unresolved, n, rng)
     s_minimal    = _sample(minimal,    n, rng)
     s_ocr        = _sample(ocr,        n, rng)
+    s_catalogue  = _sample(catalogue,  n, rng)
     s_by_lang    = {lang: _sample(entries, n, rng) for lang, entries in by_lang.items()}
 
     # Log stratum sizes
-    logger.info("  CrossRef-resolved:  %d entries (sampling %d)", len(crossref),   len(s_crossref))
-    logger.info("  Unresolved:         %d entries (sampling %d)", len(unresolved), len(s_unresolved))
-    logger.info("  Minimal:            %d entries (sampling %d)", len(minimal),    len(s_minimal))
-    logger.info("  Duplicate pairs:    %d pairs (all included)",  len(duplicates))
-    logger.info("  OCR source:         %d entries (sampling %d)", len(ocr),        len(s_ocr))
+    logger.info("  CrossRef-resolved:    %d entries (sampling %d)", len(crossref),   len(s_crossref))
+    logger.info("  Unresolved:           %d entries (sampling %d)", len(unresolved), len(s_unresolved))
+    logger.info("  Minimal:              %d entries (sampling %d)", len(minimal),    len(s_minimal))
+    logger.info("  Duplicate pairs:      %d pairs (all included)",  len(duplicates))
+    logger.info("  OCR source:           %d entries (sampling %d)", len(ocr),        len(s_ocr))
+    logger.info("  Catalogue candidates: %d entries (sampling %d)", len(catalogue),  len(s_catalogue))
     for lang, entries in by_lang.items():
         logger.info("  Language %-10s %d entries (sampling %d)", lang + ":", len(entries), len(s_by_lang[lang]))
     if not by_lang:
-        logger.info("  Language strata:    unavailable (language detection not yet implemented)")
+        logger.info("  Language strata:    none (lingua not installed or no non-English papers detected)")
 
     # ── Render ────────────────────────────────────────────────────────────────
     output_path = output_dir / "audit_sample.md"
@@ -120,6 +123,7 @@ def run_audit(
         minimal      = s_minimal,
         duplicates   = duplicates,
         ocr          = s_ocr,
+        catalogue    = s_catalogue,
         by_lang      = s_by_lang,
         bibliography = bibliography,
         pool_sizes   = {
@@ -127,6 +131,7 @@ def run_audit(
             "unresolved": len(unresolved),
             "minimal":    len(minimal),
             "ocr":        len(ocr),
+            "catalogue":  len(catalogue),
             "by_lang":    {lang: len(entries) for lang, entries in by_lang.items()},
         },
         n         = n,
@@ -211,6 +216,14 @@ def _stratum_duplicates(
     return pairs
 
 
+def _stratum_catalogue(bibliography: dict[str, dict]) -> list[str]:
+    """Entries flagged as possible artefact catalogue references."""
+    return [
+        ck for ck, e in bibliography.items()
+        if e.get("_catalogue_candidate")
+    ]
+
+
 def _stratum_ocr(
     bibliography: dict[str, dict],
     ocr_originals_dir: Path,
@@ -242,8 +255,8 @@ def _stratum_by_language(
     Entries from non-English source papers, grouped by language.
 
     Requires language to be stored under processed_papers[pdf_name]['language'].
-    Returns an empty dict if no language data is available — language detection
-    is not yet implemented (item C in the project todo).
+    Returns an empty dict if lingua is not installed or no non-English papers
+    were detected. Install lingua with: pip install lingua-language-detector
     """
     lang_map: dict[str, str] = {}
     for pdf_name, paper_data in processed_papers.items():
@@ -290,6 +303,7 @@ def _render(
     minimal: list[str],
     duplicates: list[tuple[str, str, float]],
     ocr: list[str],
+    catalogue: list[str],
     by_lang: dict[str, list[str]],
     bibliography: dict[str, dict],
     pool_sizes: dict,
@@ -411,6 +425,27 @@ def _render(
         for i, ck in enumerate(ocr, 1):
             lines += _render_entry(ck, bibliography[ck], i, len(ocr))
 
+    # ── Catalogue candidates ──────────────────────────────────────────────────
+    lines += _render_stratum_header(
+        title     = "Possible artefact catalogue entries",
+        sample    = catalogue,
+        pool_size = pool_sizes["catalogue"],
+        n         = n,
+        guidance  = (
+            "These entries were flagged as possible artefact catalogue references "
+            "rather than scholarly citations. Patterns detected in the raw citation "
+            "string: `Kat.-Nr.` (German catalogue number), `Taf.` + number (plate "
+            "reference), or museum accession number format (e.g. SHM 3217, C5821). "
+            "Check whether each entry is a genuine bibliographic reference or a "
+            "catalogue/findspot record that should be excluded from citation analysis."
+        ),
+    )
+    if not catalogue and pool_sizes["catalogue"] == 0:
+        lines += ["*No catalogue candidate entries in the current graph state.*", ""]
+    else:
+        for i, ck in enumerate(catalogue, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(catalogue))
+
     # ── Non-English source papers ─────────────────────────────────────────────
     if not by_lang:
         lines += [
@@ -419,9 +454,9 @@ def _render(
             "## Non-English source papers",
             "",
             (
-                "*Language detection has not yet been implemented in the pipeline "
-                "(item C in the project todo). These strata will be populated once "
-                "language is stored as a structured field in the graph state.*"
+                "*No non-English papers detected in the current graph state. "
+                "Install lingua-language-detector for language detection: "
+                "`pip install lingua-language-detector`*"
             ),
             "",
         ]

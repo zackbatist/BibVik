@@ -520,3 +520,17 @@ conflict with `launch_ollama.sh` (other project). Models at
 
 **.gitignore** (new): excludes config.yaml, launch_bibvik_llm.sh,
 output/, PDFs, Exported_Items.csv, Python artifacts, editor files.
+
+### 2026-05-22 — Footnote number filter; language stratum message fix
+
+`tei_parser.py`: Added post-processing step in `_parse_biblstruct` to
+strip leading footnote numbers from titles. GROBID occasionally absorbs
+footnote reference numbers ("58 Fanning..." or "61 Abrams...") into the
+title field when parsing footnote-style citations. Pattern: leading
+digits followed by whitespace are stripped.
+
+`audit.py`: Removed stale "language detection not yet implemented"
+messages in docstring, log output, and rendered audit report. Language
+detection is implemented via lingua — the stratum is empty when lingua
+is not installed or no non-English papers are in the current graph state.
+Messages updated to reflect the actual situation.
