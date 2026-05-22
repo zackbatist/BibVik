@@ -102,7 +102,8 @@ _LLM_RESOLVE_PROMPT = """You are an expert in academic bibliography. Based on th
 Based on these contexts, infer as much bibliographic metadata as you can for this specific work. If you can identify the title, journal/book, and other details from the context, include them. If not, provide what you can.
 
 Respond ONLY with a JSON object:
-{{"first_author_family": "...", "first_author_given": "...", "additional_authors": [], "year": "...", "title": "...", "container_title": "...", "volume": "", "pages": "", "entry_type": "article|book|incollection|misc"}}"""
+{{"first_author_family": "...", "first_author_given": "...", "additional_authors": [], "year": "...", "title": "...", "container_title": "...", "volume": "", "pages": "", "entry_type": "article|book|incollection|misc"}}
+/no_think"""
 
 
 def _try_llm(

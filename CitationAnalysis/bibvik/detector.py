@@ -150,7 +150,8 @@ _LLM_BODY_DETECT = """You are an expert at identifying bibliographic references 
 Include: formal citations (Smith 2020), narrative (Smith (2020) argued...), discursive ("as Smith argued in her 2020 monograph"), organizational authors (UNESCO 2019), non-English styles.
 
 For each work: {{"first_author": "<family name>", "year": "<4 digits>"}}
-Respond ONLY with a JSON array. If none: []"""
+Respond ONLY with a JSON array. If none: []
+/no_think"""
 
 
 _LLM_FOOTNOTE_EXTRACT = """You are an expert at extracting bibliographic references from academic footnotes. This footnote may contain one or more references to published works embedded in prose.
@@ -173,7 +174,8 @@ For EACH distinct published work referenced, extract as much metadata as you can
 - entry_type: one of "article", "book", "incollection", "inproceedings", "thesis", "misc"
 
 Respond ONLY with a JSON array. If no references: []
-Example: [{{"first_author_family": "Sindbæk", "first_author_given": "Søren M.", "additional_authors": [], "year": "2007", "title": "The Small World of the Vikings", "container_title": "Norwegian Archaeological Review", "volume": "40", "pages": "59-74", "doi": "", "entry_type": "article"}}]"""
+Example: [{{"first_author_family": "Sindbæk", "first_author_given": "Søren M.", "additional_authors": [], "year": "2007", "title": "The Small World of the Vikings", "container_title": "Norwegian Archaeological Review", "volume": "40", "pages": "59-74", "doi": "", "entry_type": "article"}}]
+/no_think"""
 
 
 # =============================================================================
