@@ -534,3 +534,36 @@ messages in docstring, log output, and rendered audit report. Language
 detection is implemented via lingua — the stratum is empty when lingua
 is not installed or no non-English papers are in the current graph state.
 Messages updated to reflect the actual situation.
+
+### 2026-05-24 — Multi-GPU parallel LLM processing
+
+**Problem:** Processing 382 papers sequentially with one LLM endpoint
+would take ~9 hours on a single GPU. The cluster has 10 GPUs available.
+
+**Solution:** `process_f1_papers()` now supports distributing papers
+across multiple LLM endpoints in parallel. When `llm.extra_urls` is
+set in config, papers are assigned round-robin across all endpoints
+using a thread pool. GROBID processing remains sequential (single
+GROBID instance). Shared bibliography and processed_papers state is
+protected by a threading.Lock.
+
+Single-endpoint path is unchanged — no behaviour change when
+`extra_urls` is empty.
+
+`launch_bibvik_llm.sh` updated to support multi-instance launch:
+`--gpus 5,6,7` launches one Ollama container per GPU on ports
+11440, 11441, 11442. `--tensor N` for llama-server tensor
+parallelism (single model across N GPUs). `--stop` kills all
+BibVik containers. Container names include GPU ID to avoid conflicts.
+
+**Expected throughput:** 3 parallel instances → ~3x speedup → full
+382-paper run in ~3 hours instead of ~9 hours.
+
+**Config:**
+```yaml
+llm:
+  base_url: "http://localhost:11440"
+  extra_urls:
+    - "http://localhost:11441"
+    - "http://localhost:11442"
+```

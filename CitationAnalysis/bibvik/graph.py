@@ -236,8 +236,14 @@ class CitationGraph:
         start_callback=None,
         phase_callback=None,
     ) -> dict[str, bool]:
-        """Process F1 PDFs and integrate their citations as F2."""
+        """Process F1 PDFs and integrate their citations as F2.
+
+        When llm_config contains extra_urls, papers are distributed across
+        multiple LLM endpoints in parallel — one worker thread per endpoint.
+        GROBID processing is always sequential (single GROBID instance).
+        """
         import time as _time
+        import threading
 
         pdfs = collect_pdfs(f1_dir, exclude=seed_pdf_path)
 
@@ -259,8 +265,20 @@ class CitationGraph:
         results = {p.name: True for p in already}
         times: list[float] = []
 
+        # Build list of LLM endpoints for round-robin distribution
+        llm_urls: list[str] = []
+        if llm_config:
+            llm_urls.append(llm_config.get("base_url", ""))
+            for url in llm_config.get("extra_urls", []):
+                if url:
+                    llm_urls.append(url)
+        n_workers = max(1, len(llm_urls))
+
+        # Lock for shared state mutations (bibliography, processed_papers)
+        _lock = threading.Lock()
+
         # Pre-fetch GROBID results in a background thread
-        from concurrent.futures import ThreadPoolExecutor, Future
+        from concurrent.futures import ThreadPoolExecutor, Future, as_completed
 
         def _grobid_fetch(pdf_path: Path) -> str | None:
             """Send a PDF to GROBID (can run in background)."""
@@ -269,36 +287,64 @@ class CitationGraph:
                 tei = self.grobid.process_references_only(pdf_path)
             return tei
 
-        executor = ThreadPoolExecutor(max_workers=1)
-        prefetch_future: Future | None = None
-        grobid_timeout = self.grobid.timeout  # use configured timeout, not hardcoded 300s
-
-        for i, pdf_path in enumerate(remaining):
+        def _process_with_url(pdf_path: Path, tei_xml: str | None,
+                               llm_url: str | None, idx: int) -> tuple[bool, str, float]:
+            """Process one paper using a specific LLM URL."""
             t0 = _time.time()
-            idx = len(already) + i + 1
 
-            if start_callback:
-                start_callback(index=idx, total=total, stem=pdf_path.stem)
+            # Build per-paper llm_config with the assigned URL
+            paper_llm_cfg = None
+            if llm_config and llm_url:
+                paper_llm_cfg = {**llm_config, "base_url": llm_url}
+            elif llm_config:
+                paper_llm_cfg = llm_config
 
-            # Use pre-fetched GROBID result if available, otherwise fetch now
-            tei_xml = None
-            if prefetch_future is not None:
-                try:
-                    tei_xml = prefetch_future.result(timeout=grobid_timeout + 30)
-                except Exception:
-                    tei_xml = None
-                prefetch_future = None
-
-            # Start pre-fetching the NEXT paper's GROBID result
-            if i + 1 < len(remaining):
-                prefetch_future = executor.submit(_grobid_fetch, remaining[i + 1])
-
-            try:
+            with _lock:
                 ok, fail_reason = self._process_one_f1(
-                    pdf_path, llm_config=llm_config, email=email,
+                    pdf_path, llm_config=paper_llm_cfg, email=email,
                     prefetched_tei=tei_xml,
                     phase_callback=phase_callback,
                 )
+
+            elapsed = _time.time() - t0
+            return ok, fail_reason, elapsed
+
+        if n_workers == 1:
+            # ── Sequential path (single LLM or no LLM) ───────────────────────
+            grobid_executor = ThreadPoolExecutor(max_workers=1)
+            prefetch_future: Future | None = None
+            grobid_timeout = self.grobid.timeout
+
+            for i, pdf_path in enumerate(remaining):
+                t0 = _time.time()
+                idx = len(already) + i + 1
+
+                if start_callback:
+                    start_callback(index=idx, total=total, stem=pdf_path.stem)
+
+                tei_xml = None
+                if prefetch_future is not None:
+                    try:
+                        tei_xml = prefetch_future.result(timeout=grobid_timeout + 30)
+                    except Exception:
+                        tei_xml = None
+                    prefetch_future = None
+
+                if i + 1 < len(remaining):
+                    prefetch_future = grobid_executor.submit(_grobid_fetch, remaining[i + 1])
+
+                try:
+                    ok, fail_reason = self._process_one_f1(
+                        pdf_path, llm_config=llm_config, email=email,
+                        prefetched_tei=tei_xml,
+                        phase_callback=phase_callback,
+                    )
+                except KeyboardInterrupt:
+                    raise
+                except Exception as exc:
+                    logger.error("Unexpected error processing %s: %s", pdf_path.name, exc)
+                    ok, fail_reason = False, str(exc)
+
                 results[pdf_path.name] = ok
                 elapsed = _time.time() - t0
                 times.append(elapsed)
@@ -306,27 +352,17 @@ class CitationGraph:
                 if progress_callback:
                     paper_data = self.processed_papers.get(pdf_path.name, {})
                     detection = paper_data.get("detection", {})
-                    header = paper_data.get("header", {})
-                    n_bib_entries = len(paper_data.get("references", []))
-                    n_paragraphs = len(paper_data.get("paragraphs", []))
-                    n_footnotes = len([
-                        r for r in paper_data.get("references", [])
-                        if r.get("_from_footnote")
-                    ])
-
-                    # Count resolution outcomes for this paper's citations
-                    n_crossref = sum(
-                        1 for e in self.bibliography.values()
-                        if e.get("_source_pdf") == pdf_path.name
-                        and e.get("_resolution_method") == "crossref"
-                    )
-                    n_unresolved = sum(
-                        1 for e in self.bibliography.values()
-                        if e.get("_source_pdf") == pdf_path.name
-                        and not e.get("_resolution_method")
-                        and e.get("generation") != "P"
-                    )
-
+                    mc = detection.get("method_counts", {}) if detection else {}
+                    n_bib_entries   = len(paper_data.get("references", []))
+                    n_paragraphs    = len(paper_data.get("paragraphs", []))
+                    n_crossref      = sum(1 for e in self.bibliography.values()
+                                          if e.get("_source_pdf") == pdf_path.name
+                                          and e.get("_resolution_method") == "crossref")
+                    n_unresolved    = sum(1 for e in self.bibliography.values()
+                                          if e.get("_source_pdf") == pdf_path.name
+                                          and not e.get("_resolution_method")
+                                          and e.get("generation") != "P")
+                    eta = (sum(times) / len(times)) * (len(remaining) - i - 1) if times else 0
                     progress_callback(
                         index        = idx,
                         total        = total,
@@ -335,46 +371,93 @@ class CitationGraph:
                         elapsed      = elapsed,
                         n_bib        = n_bib_entries,
                         n_paragraphs = n_paragraphs,
-                        n_footnotes  = header and len(paper_data.get("references", [])),
-                        detection    = detection,
+                        n_footnotes  = None,
+                        detection    = mc,
                         n_crossref   = n_crossref,
                         n_unresolved = n_unresolved,
                         language     = paper_data.get("language", ""),
-                        ocr_applied  = (
-                            self.grobid.ocr_dir / "originals" / pdf_path.name
-                        ).exists() if hasattr(self.grobid, "ocr_dir") else False,
-                        failure_reason = fail_reason,
+                        ocr_applied  = paper_data.get("ocr_applied", False),
+                        failure_reason = fail_reason if not ok else "",
+                        eta          = eta,
                     )
 
-                # Time estimate
-                if times and len(remaining) - (i + 1) > 0:
-                    avg = sum(times) / len(times)
-                    remaining_count = len(remaining) - (i + 1)
-                    eta_min = (avg * remaining_count) / 60
-                    if eta_min >= 1:
-                        logger.info("    ~%.0f min remaining (%d papers × %.0fs avg)",
-                                    eta_min, remaining_count, avg)
+            grobid_executor.shutdown(wait=False)
 
-            except Exception as e:
-                logger.error("Error processing %s: %s", pdf_path.name, e)
-                results[pdf_path.name] = False
-                if progress_callback:
-                    progress_callback(
-                        index=idx, total=total, stem=pdf_path.stem,
-                        success=False, elapsed=0,
-                        n_bib=0, n_paragraphs=0, n_footnotes=0,
-                        detection={}, n_crossref=0, n_unresolved=0,
-                        language="", ocr_applied=False,
-                        failure_reason=str(e),
+        else:
+            # ── Parallel path (multiple LLM endpoints) ────────────────────────
+            # GROBID runs sequentially; LLM processing runs in parallel workers.
+            # Strategy: GROBID-fetch each paper first (sequential), then submit
+            # to a thread pool for LLM processing, round-robining across URLs.
+            logger.info(
+                "Multi-GPU mode: distributing %d papers across %d LLM endpoints.",
+                len(remaining), n_workers,
+            )
+
+            # Phase 1: GROBID all papers sequentially, collect TEI XML
+            tei_cache: dict[str, str | None] = {}
+            for i, pdf_path in enumerate(remaining):
+                idx = len(already) + i + 1
+                if start_callback:
+                    start_callback(index=idx, total=total, stem=pdf_path.stem)
+                tei_cache[pdf_path.name] = _grobid_fetch(pdf_path)
+
+            # Phase 2: Submit LLM processing in parallel
+            with ThreadPoolExecutor(max_workers=n_workers) as llm_executor:
+                futures = {}
+                for i, pdf_path in enumerate(remaining):
+                    url = llm_urls[i % n_workers]
+                    idx = len(already) + i + 1
+                    tei_xml = tei_cache.get(pdf_path.name)
+                    future = llm_executor.submit(
+                        _process_with_url, pdf_path, tei_xml, url, idx
                     )
+                    futures[future] = (pdf_path, idx)
 
-        executor.shutdown(wait=False)
+                for future in as_completed(futures):
+                    pdf_path, idx = futures[future]
+                    try:
+                        ok, fail_reason, elapsed = future.result()
+                    except Exception as exc:
+                        logger.error("Error processing %s: %s", pdf_path.name, exc)
+                        ok, fail_reason, elapsed = False, str(exc), 0.0
 
-        succeeded = sum(results.values())
-        logger.info(
-            "F1 complete. %d/%d succeeded. Bibliography: %d entries.",
-            succeeded, len(results), len(self.bibliography),
-        )
+                    results[pdf_path.name] = ok
+                    times.append(elapsed)
+
+                    if progress_callback:
+                        paper_data = self.processed_papers.get(pdf_path.name, {})
+                        detection = paper_data.get("detection", {})
+                        mc = detection.get("method_counts", {}) if detection else {}
+                        n_bib_entries   = len(paper_data.get("references", []))
+                        n_paragraphs    = len(paper_data.get("paragraphs", []))
+                        n_crossref      = sum(1 for e in self.bibliography.values()
+                                              if e.get("_source_pdf") == pdf_path.name
+                                              and e.get("_resolution_method") == "crossref")
+                        n_unresolved    = sum(1 for e in self.bibliography.values()
+                                              if e.get("_source_pdf") == pdf_path.name
+                                              and not e.get("_resolution_method")
+                                              and e.get("generation") != "P")
+                        eta = (sum(times) / len(times)) * max(0, len(remaining) - len(times))
+                        progress_callback(
+                            index        = idx,
+                            total        = total,
+                            stem         = pdf_path.stem,
+                            success      = ok,
+                            elapsed      = elapsed,
+                            n_bib        = n_bib_entries,
+                            n_paragraphs = n_paragraphs,
+                            n_footnotes  = None,
+                            detection    = mc,
+                            n_crossref   = n_crossref,
+                            n_unresolved = n_unresolved,
+                            language     = paper_data.get("language", ""),
+                            ocr_applied  = paper_data.get("ocr_applied", False),
+                            failure_reason = fail_reason if not ok else "",
+                            eta          = eta,
+                        )
+
+        return results
+
         return results
 
     def _process_one_f1(

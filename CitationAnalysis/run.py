@@ -106,24 +106,33 @@ def _llm_status(llm_cfg: dict) -> str:
     backend    = llm_cfg.get("backend", "ollama")
     base_url   = llm_cfg.get("base_url", "http://localhost:11434")
     model      = llm_cfg.get("model", "unknown")
+    extra_urls = llm_cfg.get("extra_urls", [])
     is_remote  = llm_cfg.get("base_url") == llm_cfg.get("remote_url") and llm_cfg.get("remote_url")
     location   = "remote" if is_remote else "local"
+    all_urls   = [base_url] + [u for u in extra_urls if u]
 
-    try:
-        from urllib.parse import urlparse
-        parsed = urlparse(base_url)
-        host = parsed.hostname or "localhost"
-        port = parsed.port or (11434 if backend == "ollama" else 8080)
-    except Exception:
-        host, port = "localhost", 11434
+    def _reachable(url: str) -> bool:
+        try:
+            from urllib.parse import urlparse
+            parsed = urlparse(url)
+            host = parsed.hostname or "localhost"
+            port = parsed.port or (11434 if backend == "ollama" else 8080)
+            socket.create_connection((host, port), timeout=1).close()
+            return True
+        except OSError:
+            return False
 
-    try:
-        socket.create_connection((host, port), timeout=1).close()
-        backend_label = "llama-server" if backend == "llama_server" else "Ollama"
-        return f"LLM available ({backend_label} · {model} · {location})"
-    except OSError:
-        backend_label = "llama-server" if backend == "llama_server" else "Ollama"
+    backend_label = "llama-server" if backend == "llama_server" else "Ollama"
+    reachable = [u for u in all_urls if _reachable(u)]
+    n_total = len(all_urls)
+
+    if not reachable:
         return f"LLM unavailable ({backend_label} not running)"
+    elif n_total == 1:
+        return f"LLM available ({backend_label} · {model} · {location})"
+    else:
+        return (f"LLM available ({backend_label} · {model} · {location} · "
+                f"{len(reachable)}/{n_total} endpoints)")
 
 
 def main():

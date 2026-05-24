@@ -53,11 +53,12 @@ def load_config(config_path: str = "config.yaml") -> dict:
     llm.setdefault("base_url", "http://localhost:11434")
     llm.setdefault("backend", "ollama")
     llm.setdefault("model", "qwen3.5:35b")
-    llm.setdefault("detection_model", "")  # If empty, uses main model
-    llm.setdefault("detection_batch_size", 4)  # Paragraphs per LLM call for body scan
+    llm.setdefault("detection_model", "")
+    llm.setdefault("detection_batch_size", 4)
     llm.setdefault("temperature", 0.3)
     llm.setdefault("max_tokens", 2048)
     llm.setdefault("timeout", 300)
+    llm.setdefault("extra_urls", [])  # Additional LLM endpoints for multi-GPU
 
     ctx = config.setdefault("context", {})
     ctx.setdefault("sentence_window", 3)
