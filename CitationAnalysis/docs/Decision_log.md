@@ -567,3 +567,18 @@ llm:
     - "http://localhost:11441"
     - "http://localhost:11442"
 ```
+
+### 2026-05-24 — Fix multi-GPU parallel processing
+
+The initial multi-GPU implementation used a two-phase approach: GROBID
+all papers sequentially, then submit all LLM jobs in parallel. In
+practice this meant all LLM work was queued before any worker started,
+and the round-robin assignment sent most work to the first worker before
+the others were ready. All requests were going to port 11440 (GPU 4).
+
+Fixed with a producer-consumer pipeline. A GROBID producer thread feeds
+a bounded queue (capacity: 2 × n_workers). N LLM worker threads each
+pull from the queue and process on their assigned endpoint. GROBID and
+LLM now overlap — as soon as paper N's GROBID result is ready it goes
+into the queue and whichever worker is free picks it up. With 4 workers,
+4 papers are in LLM simultaneously while GROBID processes the next one.

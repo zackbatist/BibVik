@@ -385,76 +385,111 @@ class CitationGraph:
 
         else:
             # ── Parallel path (multiple LLM endpoints) ────────────────────────
-            # GROBID runs sequentially; LLM processing runs in parallel workers.
-            # Strategy: GROBID-fetch each paper first (sequential), then submit
-            # to a thread pool for LLM processing, round-robining across URLs.
+            # Pipeline: GROBID feeds a queue; N LLM workers consume from it.
+            # GROBID and LLM overlap — as soon as a paper's GROBID result is
+            # ready it is submitted to whichever LLM worker is free.
+            import queue as _queue
+
             logger.info(
-                "Multi-GPU mode: distributing %d papers across %d LLM endpoints.",
+                "Multi-GPU mode: %d papers across %d LLM endpoints.",
                 len(remaining), n_workers,
             )
 
-            # Phase 1: GROBID all papers sequentially, collect TEI XML
-            tei_cache: dict[str, str | None] = {}
-            for i, pdf_path in enumerate(remaining):
-                idx = len(already) + i + 1
-                if start_callback:
-                    start_callback(index=idx, total=total, stem=pdf_path.stem)
-                tei_cache[pdf_path.name] = _grobid_fetch(pdf_path)
+            work_queue: _queue.Queue = _queue.Queue(maxsize=n_workers * 2)
+            _DONE = object()  # sentinel
 
-            # Phase 2: Submit LLM processing in parallel
-            with ThreadPoolExecutor(max_workers=n_workers) as llm_executor:
-                futures = {}
+            def _grobid_producer():
+                """Feed (pdf_path, idx, tei_xml) tuples into the work queue."""
                 for i, pdf_path in enumerate(remaining):
-                    url = llm_urls[i % n_workers]
                     idx = len(already) + i + 1
-                    tei_xml = tei_cache.get(pdf_path.name)
-                    future = llm_executor.submit(
-                        _process_with_url, pdf_path, tei_xml, url, idx
-                    )
-                    futures[future] = (pdf_path, idx)
+                    if start_callback:
+                        start_callback(index=idx, total=total, stem=pdf_path.stem)
+                    tei_xml = _grobid_fetch(pdf_path)
+                    work_queue.put((pdf_path, idx, tei_xml))
+                # Send one sentinel per worker
+                for _ in range(n_workers):
+                    work_queue.put(_DONE)
 
-                for future in as_completed(futures):
-                    pdf_path, idx = futures[future]
+            def _llm_worker(url: str):
+                """Pull papers from queue and process LLM on a specific endpoint."""
+                worker_llm_cfg = {**llm_config, "base_url": url} if llm_config else None
+                while True:
+                    item = work_queue.get()
+                    if item is _DONE:
+                        work_queue.task_done()
+                        return
+                    pdf_path, idx, tei_xml = item
                     try:
-                        ok, fail_reason, elapsed = future.result()
+                        t0 = _time.time()
+                        with _lock:
+                            ok, fail_reason = self._process_one_f1(
+                                pdf_path, llm_config=worker_llm_cfg, email=email,
+                                prefetched_tei=tei_xml,
+                                phase_callback=phase_callback,
+                            )
+                        elapsed = _time.time() - t0
+
+                        with _lock:
+                            results[pdf_path.name] = ok
+                            times.append(elapsed)
+
+                            if progress_callback:
+                                paper_data = self.processed_papers.get(pdf_path.name, {})
+                                detection  = paper_data.get("detection", {})
+                                mc         = detection.get("method_counts", {}) if detection else {}
+                                n_bib      = len(paper_data.get("references", []))
+                                n_para     = len(paper_data.get("paragraphs", []))
+                                n_crossref = sum(
+                                    1 for e in self.bibliography.values()
+                                    if e.get("_source_pdf") == pdf_path.name
+                                    and e.get("_resolution_method") == "crossref"
+                                )
+                                n_unres = sum(
+                                    1 for e in self.bibliography.values()
+                                    if e.get("_source_pdf") == pdf_path.name
+                                    and not e.get("_resolution_method")
+                                    and e.get("generation") != "P"
+                                )
+                                eta = (sum(times) / len(times)) * max(0, len(remaining) - len(times))
+                                progress_callback(
+                                    index          = idx,
+                                    total          = total,
+                                    stem           = pdf_path.stem,
+                                    success        = ok,
+                                    elapsed        = elapsed,
+                                    n_bib          = n_bib,
+                                    n_paragraphs   = n_para,
+                                    n_footnotes    = None,
+                                    detection      = mc,
+                                    n_crossref     = n_crossref,
+                                    n_unresolved   = n_unres,
+                                    language       = paper_data.get("language", ""),
+                                    ocr_applied    = paper_data.get("ocr_applied", False),
+                                    failure_reason = fail_reason if not ok else "",
+                                    eta            = eta,
+                                )
                     except Exception as exc:
                         logger.error("Error processing %s: %s", pdf_path.name, exc)
-                        ok, fail_reason, elapsed = False, str(exc), 0.0
+                        with _lock:
+                            results[pdf_path.name] = False
+                    finally:
+                        work_queue.task_done()
 
-                    results[pdf_path.name] = ok
-                    times.append(elapsed)
+            # Start GROBID producer thread + N LLM worker threads
+            import threading as _threading
+            producer = _threading.Thread(target=_grobid_producer, daemon=True)
+            workers  = [
+                _threading.Thread(target=_llm_worker, args=(llm_urls[i % n_workers],), daemon=True)
+                for i in range(n_workers)
+            ]
 
-                    if progress_callback:
-                        paper_data = self.processed_papers.get(pdf_path.name, {})
-                        detection = paper_data.get("detection", {})
-                        mc = detection.get("method_counts", {}) if detection else {}
-                        n_bib_entries   = len(paper_data.get("references", []))
-                        n_paragraphs    = len(paper_data.get("paragraphs", []))
-                        n_crossref      = sum(1 for e in self.bibliography.values()
-                                              if e.get("_source_pdf") == pdf_path.name
-                                              and e.get("_resolution_method") == "crossref")
-                        n_unresolved    = sum(1 for e in self.bibliography.values()
-                                              if e.get("_source_pdf") == pdf_path.name
-                                              and not e.get("_resolution_method")
-                                              and e.get("generation") != "P")
-                        eta = (sum(times) / len(times)) * max(0, len(remaining) - len(times))
-                        progress_callback(
-                            index        = idx,
-                            total        = total,
-                            stem         = pdf_path.stem,
-                            success      = ok,
-                            elapsed      = elapsed,
-                            n_bib        = n_bib_entries,
-                            n_paragraphs = n_paragraphs,
-                            n_footnotes  = None,
-                            detection    = mc,
-                            n_crossref   = n_crossref,
-                            n_unresolved = n_unresolved,
-                            language     = paper_data.get("language", ""),
-                            ocr_applied  = paper_data.get("ocr_applied", False),
-                            failure_reason = fail_reason if not ok else "",
-                            eta          = eta,
-                        )
+            producer.start()
+            for w in workers:
+                w.start()
+
+            producer.join()
+            for w in workers:
+                w.join()
 
         return results
 
