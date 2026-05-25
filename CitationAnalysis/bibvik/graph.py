@@ -385,52 +385,36 @@ class CitationGraph:
 
         else:
             # ── Parallel path (multiple LLM endpoints) ────────────────────────
-            # Pipeline: GROBID feeds a queue; N LLM workers consume from it.
-            # GROBID and LLM overlap — as soon as a paper's GROBID result is
-            # ready it is submitted to whichever LLM worker is free.
-            import queue as _queue
+            # Divide papers across workers round-robin. Each worker processes
+            # its own batch sequentially: GROBID then LLM per paper.
+            # No shared queue — workers are fully independent.
+            import threading as _threading
 
             logger.info(
                 "Multi-GPU mode: %d papers across %d LLM endpoints.",
                 len(remaining), n_workers,
             )
 
-            work_queue: _queue.Queue = _queue.Queue(maxsize=n_workers * 2)
-            _DONE = object()  # sentinel
+            # Divide papers across workers
+            batches: list[list[Path]] = [[] for _ in range(n_workers)]
+            for i, pdf_path in enumerate(remaining):
+                batches[i % n_workers].append(pdf_path)
 
-            def _grobid_producer():
-                """Feed (pdf_path, idx, tei_xml) tuples into the work queue."""
-                for i, pdf_path in enumerate(remaining):
-                    idx = len(already) + i + 1
+            def _worker(batch: list[Path], url: str, start_idx: int):
+                worker_llm_cfg = {**llm_config, "base_url": url} if llm_config else None
+                for j, pdf_path in enumerate(batch):
+                    idx = start_idx + j
                     if start_callback:
                         start_callback(index=idx, total=total, stem=pdf_path.stem)
-                    tei_xml = _grobid_fetch(pdf_path)
-                    work_queue.put((pdf_path, idx, tei_xml))
-                # Send one sentinel per worker
-                for _ in range(n_workers):
-                    work_queue.put(_DONE)
-
-            def _llm_worker(url: str):
-                """Pull papers from queue and process LLM on a specific endpoint."""
-                worker_llm_cfg = {**llm_config, "base_url": url} if llm_config else None
-                while True:
-                    item = work_queue.get()
-                    if item is _DONE:
-                        work_queue.task_done()
-                        return
-                    pdf_path, idx, tei_xml = item
                     try:
                         t0 = _time.time()
-                        # LLM processing runs without lock — true parallelism
                         ok, fail_reason = self._process_one_f1(
                             pdf_path, llm_config=worker_llm_cfg, email=email,
-                            prefetched_tei=tei_xml,
                             phase_callback=phase_callback,
                             state_lock=_lock,
                         )
                         elapsed = _time.time() - t0
 
-                        # Only lock for shared state writes
                         with _lock:
                             results[pdf_path.name] = ok
                             times.append(elapsed)
@@ -474,26 +458,27 @@ class CitationGraph:
                         logger.error("Error processing %s: %s", pdf_path.name, exc)
                         with _lock:
                             results[pdf_path.name] = False
-                    finally:
-                        work_queue.task_done()
 
-            # Start GROBID producer thread + N LLM worker threads
-            import threading as _threading
-            producer = _threading.Thread(target=_grobid_producer, daemon=True)
-            workers  = [
-                _threading.Thread(target=_llm_worker, args=(llm_urls[i % n_workers],), daemon=True)
+            # Assign start indices for progress reporting
+            start_indices = []
+            idx = len(already) + 1
+            for i in range(n_workers):
+                start_indices.append(idx)
+                idx += len(batches[i])
+
+            threads = [
+                _threading.Thread(
+                    target=_worker,
+                    args=(batches[i], llm_urls[i % n_workers], start_indices[i]),
+                    daemon=True,
+                )
                 for i in range(n_workers)
             ]
 
-            producer.start()
-            for w in workers:
-                w.start()
-
-            producer.join()
-            for w in workers:
-                w.join()
-
-        return results
+            for t in threads:
+                t.start()
+            for t in threads:
+                t.join()
 
         return results
 

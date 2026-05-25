@@ -385,38 +385,53 @@ class LLMAnalyzer:
             },
         }
 
-        try:
-            resp = requests.post(
-                f"{self.base_url}/api/generate",
-                json=payload,
-                timeout=self.timeout,
-            )
+        import time as _time
 
-            if resp.status_code != 200:
-                logger.error("Ollama returned status %d: %s", resp.status_code, resp.text[:500])
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(
+                    f"{self.base_url}/api/generate",
+                    json=payload,
+                    timeout=self.timeout,
+                )
+
+                if resp.status_code != 200:
+                    logger.error("Ollama returned status %d: %s", resp.status_code, resp.text[:500])
+                    if attempt < max_retries - 1:
+                        _time.sleep(5 * (attempt + 1))
+                        continue
+                    return None
+
+                data = resp.json()
+                response_text = data.get("response", "")
+
+                response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
+                response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
+
+                if not response_text:
+                    logger.warning("LLM response was empty after stripping think tags.")
+                    return None
+
+                return response_text
+
+            except requests.Timeout:
+                logger.warning("Ollama request timed out (attempt %d/%d).", attempt + 1, max_retries)
+                if attempt < max_retries - 1:
+                    _time.sleep(10 * (attempt + 1))
+                    continue
+                return None
+            except requests.ConnectionError:
+                logger.warning("Lost connection to Ollama (attempt %d/%d).", attempt + 1, max_retries)
+                if attempt < max_retries - 1:
+                    _time.sleep(10 * (attempt + 1))
+                    continue
+                return None
+            except Exception as e:
+                logger.error("Unexpected error querying Ollama: %s", e)
                 return None
 
-            data = resp.json()
-            response_text = data.get("response", "")
-
-            response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
-            response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
-
-            if not response_text:
-                logger.warning("LLM response was empty after stripping think tags.")
-                return None
-
-            return response_text
-
-        except requests.Timeout:
-            logger.error("Ollama request timed out after %ds.", self.timeout)
-            return None
-        except requests.ConnectionError:
-            logger.error("Lost connection to Ollama.")
-            return None
-        except Exception as e:
-            logger.error("Unexpected error querying Ollama: %s", e)
-            return None
+        return None
 
     def _query_llama_server(self, prompt: str, re) -> str | None:
         """
@@ -434,45 +449,58 @@ class LLMAnalyzer:
             "max_tokens": self.max_tokens,
         }
 
-        try:
-            resp = requests.post(
-                f"{self.base_url}/v1/chat/completions",
-                json=payload,
-                timeout=self.timeout,
-            )
+        import time as _time
 
-            if resp.status_code != 200:
-                logger.error("llama-server returned status %d: %s", resp.status_code, resp.text[:500])
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(
+                    f"{self.base_url}/v1/chat/completions",
+                    json=payload,
+                    timeout=self.timeout,
+                )
+
+                if resp.status_code != 200:
+                    logger.error("llama-server returned status %d: %s", resp.status_code, resp.text[:500])
+                    if attempt < max_retries - 1:
+                        _time.sleep(5 * (attempt + 1))
+                        continue
+                    return None
+
+                data = resp.json()
+                choices = data.get("choices", [])
+                if not choices:
+                    logger.warning("llama-server returned no choices.")
+                    return None
+
+                response_text = choices[0].get("message", {}).get("content", "")
+
+                response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
+                response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
+
+                if not response_text:
+                    logger.warning("llama-server response was empty after stripping think tags.")
+                    return None
+
+                return response_text
+
+            except requests.Timeout:
+                logger.warning("llama-server request timed out (attempt %d/%d).", attempt + 1, max_retries)
+                if attempt < max_retries - 1:
+                    _time.sleep(10 * (attempt + 1))
+                    continue
+                return None
+            except requests.ConnectionError:
+                logger.warning("Lost connection to llama-server (attempt %d/%d).", attempt + 1, max_retries)
+                if attempt < max_retries - 1:
+                    _time.sleep(10 * (attempt + 1))
+                    continue
+                return None
+            except Exception as e:
+                logger.error("Unexpected error querying llama-server: %s", e)
                 return None
 
-            data = resp.json()
-            choices = data.get("choices", [])
-            if not choices:
-                logger.warning("llama-server returned no choices.")
-                return None
-
-            response_text = choices[0].get("message", {}).get("content", "")
-
-            # Strip thinking blocks — some models emit <think>...</think> regardless
-            # of backend.
-            response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text).strip()
-            response_text = re.sub(r"<think>[\s\S]*$", "", response_text).strip()
-
-            if not response_text:
-                logger.warning("llama-server response was empty after stripping think tags.")
-                return None
-
-            return response_text
-
-        except requests.Timeout:
-            logger.error("llama-server request timed out after %ds.", self.timeout)
-            return None
-        except requests.ConnectionError:
-            logger.error("Lost connection to llama-server at %s.", self.base_url)
-            return None
-        except Exception as e:
-            logger.error("Unexpected error querying llama-server: %s", e)
-            return None
+        return None
 
 
         """
