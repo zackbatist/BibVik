@@ -73,7 +73,12 @@ class CitationGraph:
 
         # GROBID extraction
         logger.info("  Sending to GROBID (this may take 30–60 seconds)...")
+        if phase_callback:
+            phase_callback(event="grobid_start", citekey=pdf_path.stem[:20])
+        _t0 = __import__('time').time()
         tei_xml = self.grobid.process_fulltext(pdf_path)
+        if phase_callback:
+            phase_callback(event="grobid_done", citekey=pdf_path.stem[:20], elapsed=__import__('time').time() - _t0)
         if tei_xml is None:
             logger.error("GROBID failed on seed paper.")
             return None
@@ -135,8 +140,9 @@ class CitationGraph:
 
         # Run full detection (all 5 methods)
         logger.info("  Running 5-method citation detection...")
-        if phase_callback and llm_config:
-            phase_callback("llm", len(paragraphs))
+        if phase_callback:
+            phase_callback(event="llm_body_start", citekey=self.seed_citekey)
+        _t0 = __import__('time').time()
         detection = detect_all_citations(
             tei_xml=tei_xml,
             source_pdf=pdf_path.name,
@@ -144,6 +150,8 @@ class CitationGraph:
             grobid_refs=grobid_refs,
             paragraphs=paragraphs,
         )
+        if phase_callback:
+            phase_callback(event="llm_body_done", citekey=self.seed_citekey, elapsed=__import__('time').time() - _t0)
         mc = detection["method_counts"]
         logger.info("  Detection complete: %d unique citations found across all methods",
                      mc["merged_total"])
@@ -187,7 +195,12 @@ class CitationGraph:
         # Resolve remaining unmatched
         if unmatched:
             logger.info("  Resolving %d unmatched citations (CrossRef + LLM)...", len(unmatched))
+            if phase_callback:
+                phase_callback(event="resolve_start", citekey=self.seed_citekey)
+            _t0 = __import__('time').time()
             resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
+            if phase_callback:
+                phase_callback(event="resolve_done", citekey=self.seed_citekey, elapsed=__import__('time').time() - _t0)
             for record in resolved:
                 if record.get("_resolution_method") == "stub" and not record.get("title"):
                     continue  # Skip empty stubs
@@ -490,11 +503,45 @@ class CitationGraph:
         state_lock=None,
     ) -> tuple[bool, str]:
         """Process one F1 paper. Returns (success, failure_reason)."""
-        # GROBID — use pre-fetched result if available
+        import time as _t
+        _cb = phase_callback  # shorthand
+
+        def _fire(event: str, elapsed: float | None = None):
+            if _cb:
+                try:
+                    _cb(event=event, citekey=_citekey[0], elapsed=elapsed)
+                except Exception:
+                    pass
+
+        # citekey is determined after GROBID — use filename stub until then
+        _citekey = [pdf_path.stem[:20]]
+
+        # ── GROBID ──────────────────────────────────────────────────────────
         if prefetched_tei is not None:
             tei_xml = prefetched_tei
         else:
+            _fire("grobid_start")
+            _t0 = _t.time()
             tei_xml = self.grobid.process_fulltext(pdf_path)
+
+            # ── OCR fallback ─────────────────────────────────────────────────
+            if tei_xml and "[NO_BLOCKS]" in tei_xml:
+                _fire("grobid_done", _t.time() - _t0)
+                _fire("ocr_start")
+                _t0 = _t.time()
+                ocr_pdf = self.grobid._run_ocr(pdf_path)
+                _fire("ocr_done", _t.time() - _t0)
+                if ocr_pdf:
+                    _fire("grobid_start")
+                    _t0 = _t.time()
+                    tei_xml = self.grobid.process_fulltext(ocr_pdf)
+                    _fire("grobid_done", _t.time() - _t0)
+                else:
+                    tei_xml = None
+            else:
+                if not prefetched_tei:
+                    _fire("grobid_done", _t.time() - _t0)
+
             if tei_xml is None:
                 tei_xml = self.grobid.process_references_only(pdf_path)
 
@@ -537,6 +584,9 @@ class CitationGraph:
                     "_source_pdf": pdf_path.name,
                 })
 
+            # Update citekey now that we know it
+            _citekey[0] = f1_citekey
+
             # Add GROBID refs as F2
             for ref in grobid_refs:
                 authors = ref.get("author", [])
@@ -559,9 +609,9 @@ class CitationGraph:
                 if gid:
                     self.grobid_map[(pdf_path.name, gid)] = citekey
 
-        # Full detection
-        if phase_callback and llm_config:
-            phase_callback("llm", len(paragraphs))
+        # ── Detection ────────────────────────────────────────────────────────
+        _fire("llm_body_start")
+        _t0 = _t.time()
         detection = detect_all_citations(
             tei_xml=tei_xml,
             source_pdf=pdf_path.name,
@@ -569,8 +619,9 @@ class CitationGraph:
             grobid_refs=grobid_refs,
             paragraphs=paragraphs,
         )
+        _fire("llm_body_done", _t.time() - _t0)
 
-        # Integrate detections — lock shared state for all writes
+        # ── Integrate detections ──────────────────────────────────────────────
         with _lock_ctx:
             unmatched = {}
             for key, info in detection["citations"].items():
@@ -598,9 +649,12 @@ class CitationGraph:
                 if not existing:
                     self.bibliography[citekey] = rich
 
-            # Resolve
+            # ── Resolve ───────────────────────────────────────────────────────
             if unmatched:
+                _fire("resolve_start")
+                _t0 = _t.time()
                 resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
+                _fire("resolve_done", _t.time() - _t0)
                 for record in resolved:
                     if record.get("_resolution_method") == "stub" and not record.get("title"):
                         continue

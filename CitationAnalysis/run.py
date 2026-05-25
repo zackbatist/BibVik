@@ -238,25 +238,40 @@ def main():
         print(f"   {seed_path.name}", flush=True)
         print(f"   Sending to GROBID...", end=" ", flush=True)
 
-        def _seed_phase(phase, n_paragraphs):
-            if phase == "llm":
-                print(f"done", flush=True)
-                print(f"   Scanning {n_paragraphs} paragraphs with LLM...", end=" ", flush=True)
+        import threading as _threading
+        _seed_print_lock = _threading.Lock()
+
+        def _seed_event(event: str, citekey: str, elapsed: float | None = None):
+            _EVENT_LABELS = {
+                "grobid_start": "→ GROBID",
+                "grobid_done":  "✓ GROBID",
+                "ocr_start":    "→ OCR",
+                "ocr_done":     "✓ OCR",
+                "llm_body_start": "→ LLM",
+                "llm_body_done":  "✓ LLM",
+                "resolve_start":  "→ resolve",
+                "resolve_done":   "✓ resolve",
+            }
+            import time as _t
+            label = _EVENT_LABELS.get(event)
+            if not label:
+                return
+            ts = _t.strftime("%H:%M:%S")
+            elapsed_str = f"  ·  {_fmt_time(elapsed)}" if elapsed is not None else ""
+            with _seed_print_lock:
+                print(f"{ts}  {citekey}  {label}{elapsed_str}", flush=True)
 
         result = graph.process_seed_paper(
             seed_path, llm_config=llm_cfg, email=email,
-            phase_callback=_seed_phase,
+            phase_callback=_seed_event,
         )
         if result is None:
-            print("FAILED", flush=True)
+            print("ERROR: Seed paper processing failed.", flush=True)
             sys.exit(1)
-
-        print(f"done", flush=True)
 
         bib = graph.get_bibliography()
         detection = result.get("detection", {})
         mc = detection
-        print(f"done", flush=True)
         print(f"   GROBID: {len(result.get('references', []))} entries in reference list, "
               f"{len(result.get('paragraphs', []))} paragraphs", flush=True)
         print(f"   Citations detected — "
@@ -298,9 +313,31 @@ def main():
 
         # ── Per-paper progress ────────────────────────────────────────────────
         import time as _time
+        import threading as _threading
         _stage2_times: list[float] = []
         _stage2_bib_before = len(graph.get_bibliography())
         _t_stage2_start = _time.time()
+        _print_lock = _threading.Lock()
+
+        _EVENT_LABELS = {
+            "grobid_start":       "→ GROBID",
+            "grobid_done":        "✓ GROBID",
+            "ocr_start":          "→ OCR",
+            "ocr_done":           "✓ OCR",
+            "llm_body_start":     "→ LLM",
+            "llm_body_done":      "✓ LLM",
+            "resolve_start":      "→ resolve",
+            "resolve_done":       "✓ resolve",
+        }
+
+        def _event(event: str, citekey: str, elapsed: float | None = None):
+            label = _EVENT_LABELS.get(event)
+            if not label:
+                return
+            ts = _time.strftime("%H:%M:%S")
+            elapsed_str = f"  ·  {_fmt_time(elapsed)}" if elapsed is not None else ""
+            with _print_lock:
+                print(f"{ts}  {citekey}  {label}{elapsed_str}", flush=True)
 
         def _progress(
             index, total, stem, success, elapsed,
@@ -309,77 +346,23 @@ def main():
             language, ocr_applied, failure_reason,
             eta=None,
         ):
-            lang_tag = f" [{language}]" if language and language != "en" else ""
-            if lang_tag:
-                print(lang_tag, flush=True)
-            else:
-                print(flush=True)
-
-            if not success:
-                reason = failure_reason or "unknown error"
-                print(f"         ✗ Failed: {reason[:120]}", flush=True)
-                print(flush=True)
-                return
-
-            if ocr_applied:
-                print(f"         No text layer detected — OCR applied", flush=True)
-
+            ts = _time.strftime("%H:%M:%S")
             mc = detection or {}
-            llm_available = mc.get("llm_body_scan") is not None
-
-            print(
-                f"         GROBID: {n_bib} entries in reference list, "
-                f"{n_paragraphs} paragraphs",
-                flush=True,
-            )
-
-            body_parts = [f"{mc.get('inline_markers', 0)} (GROBID)"]
-            if mc.get("text_patterns"):
-                body_parts.append(f"{mc.get('text_patterns', 0)} (regex)")
-            if llm_available and mc.get("llm_body_scan", 0) > 0:
-                body_parts.append(f"{mc.get('llm_body_scan', 0)} (LLM)")
-            body_str = ", ".join(body_parts)
-            if not llm_available:
-                body_str += "  ·  LLM unavailable"
-            print(f"         Citations in body: {body_str}", flush=True)
-
-            if mc.get("llm_footnotes", 0) > 0:
-                print(f"         Citations in footnotes: {mc.get('llm_footnotes', 0)} (LLM)", flush=True)
-
-            total_body = mc.get("merged_total", 0)
-            if total_body > n_bib:
-                print(
-                    f"         {total_body - n_bib} citations in body/footnotes "
-                    f"not in reference list",
-                    flush=True,
-                )
-            elif n_bib > total_body and n_bib > 0:
-                print(
-                    f"         {n_bib - total_body} reference list entries "
-                    f"not cited in body or footnotes",
-                    flush=True,
-                )
-
-            _stage2_times.append(elapsed)
-            remaining = total - index
-            if remaining > 0 and _stage2_times:
-                avg = sum(_stage2_times) / len(_stage2_times)
-                eta = _fmt_time(avg * remaining)
-                print(f"         ✓ {_fmt_time(elapsed)}  ·  ~{eta} remaining", flush=True)
-            else:
-                print(f"         ✓ {_fmt_time(elapsed)}", flush=True)
-            print(flush=True)
+            lang_tag = f" [{language}]" if language and language != "en" else ""
+            eta_str = f"  ·  ~{_fmt_time(eta)} remaining" if eta else ""
+            with _print_lock:
+                if success:
+                    print(f"{ts}  {stem[:50]}  ✓  {_fmt_time(elapsed)}{eta_str}{lang_tag}", flush=True)
+                else:
+                    reason = failure_reason or "unknown error"
+                    print(f"{ts}  {stem[:50]}  ✗  {reason[:80]}", flush=True)
+                _stage2_times.append(elapsed)
 
         def _start(index, total, stem):
-            w = len(str(total))
-            label = stem[:60] + "…" if len(stem) > 60 else stem
-            print(f"[{index:>{w}}/{total}] {label}", flush=True)
-            print(f"         Sending to GROBID...", end=" ", flush=True)
+            pass  # events handle per-paper output now
 
-        def _phase(phase, n_paragraphs):
-            if phase == "llm":
-                print(f"done", flush=True)
-                print(f"         Scanning {n_paragraphs} paragraphs with LLM...", end=" ", flush=True)
+        def _phase(phase, n_paragraphs=None, **kwargs):
+            pass  # replaced by _event callbacks
 
         f1_results = graph.process_f1_papers(
             f1_dir=config["f1_pdf_dir"],
@@ -389,7 +372,7 @@ def main():
             email=email,
             progress_callback=_progress,
             start_callback=_start,
-            phase_callback=_phase,
+            phase_callback=_event,
         )
 
         # ── Stage 2 summary ───────────────────────────────────────────────────

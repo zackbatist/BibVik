@@ -604,3 +604,12 @@ the progress callback caused all papers to appear as LLM unavailable,
 which caused an earlier version of the script to incorrectly delete
 all cached papers. Fixed version reads detection directly from
 processed_papers rather than looking for a nested method_counts key.
+
+### 2026-05-25 — Chronological event-based TUI
+
+Replaced per-paper start/phase/progress output with a chronological
+event stream. Each processing stage (GROBID, OCR, LLM body, resolve)
+emits a timestamped start and done line with citekey and elapsed time.
+A threading.Lock ensures atomic output from parallel workers so lines
+from different papers don't interleave. Only run.py and graph.py
+changed.
