@@ -351,8 +351,7 @@ class CitationGraph:
 
                 if progress_callback:
                     paper_data = self.processed_papers.get(pdf_path.name, {})
-                    detection = paper_data.get("detection", {})
-                    mc = detection.get("method_counts", {}) if detection else {}
+                    mc = paper_data.get("detection", {}) or {}
                     n_bib_entries   = len(paper_data.get("references", []))
                     n_paragraphs    = len(paper_data.get("paragraphs", []))
                     n_crossref      = sum(1 for e in self.bibliography.values()
@@ -421,8 +420,7 @@ class CitationGraph:
 
                             if progress_callback:
                                 paper_data = self.processed_papers.get(pdf_path.name, {})
-                                detection  = paper_data.get("detection", {})
-                                mc         = detection.get("method_counts", {}) if detection else {}
+                                mc         = paper_data.get("detection", {}) or {}
                                 n_bib      = len(paper_data.get("references", []))
                                 n_para     = len(paper_data.get("paragraphs", []))
                                 n_crossref = sum(
