@@ -114,7 +114,7 @@ def _try_llm(
 ) -> dict | None:
     """Ask the LLM to infer bibliographic metadata from citation contexts."""
     base_url = llm_config.get("base_url", "http://localhost:11434")
-    model    = llm_config.get("model", "qwen3.5:35b")
+    model    = llm_config.get("model", "qwen2.5:7b")
     timeout  = llm_config.get("timeout", 120)
     backend  = llm_config.get("backend", "ollama")
 

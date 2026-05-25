@@ -621,3 +621,15 @@ A VPN drop after an hour of processing lost all cached results.
 Fixed by saving graph state inside the _progress callback after each
 paper completes. Only the paper currently being processed at the
 moment of interruption is lost on an unclean exit.
+
+### 2026-05-25 — Move resolve outside state lock
+
+LLM resolve was running inside the state lock, serialising all workers
+during resolution. Moved resolve_citations() call outside _lock_ctx so
+all 5 workers can resolve simultaneously, each using their own GPU
+endpoint. Only the write-back of resolved records into the bibliography
+is locked. Each worker already owns its endpoint for the full paper
+lifecycle (GROBID, body scan, resolve) via worker_llm_cfg — the lock
+change makes this parallelism real.
+
+Also fixed resolver.py default model from qwen3.5:35b to qwen2.5:7b.

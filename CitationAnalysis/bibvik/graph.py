@@ -649,12 +649,14 @@ class CitationGraph:
                 if not existing:
                     self.bibliography[citekey] = rich
 
-            # ── Resolve ───────────────────────────────────────────────────────
-            if unmatched:
-                _fire("resolve_start")
-                _t0 = _t.time()
-                resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
-                _fire("resolve_done", _t.time() - _t0)
+        # ── Resolve (outside lock — LLM inference runs in parallel) ──────────
+        if unmatched:
+            _fire("resolve_start")
+            _t0 = _t.time()
+            resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
+            _fire("resolve_done", _t.time() - _t0)
+
+            with _lock_ctx:
                 for record in resolved:
                     if record.get("_resolution_method") == "stub" and not record.get("title"):
                         continue
@@ -670,7 +672,8 @@ class CitationGraph:
                     if not existing:
                         self.bibliography[citekey] = record
 
-            # Store processed paper
+        # ── Store processed paper ─────────────────────────────────────────────
+        with _lock_ctx:
             self.processed_papers[pdf_path.name] = {
                 "header": header,
                 "references": grobid_refs,
