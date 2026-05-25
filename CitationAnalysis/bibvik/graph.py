@@ -421,14 +421,16 @@ class CitationGraph:
                     pdf_path, idx, tei_xml = item
                     try:
                         t0 = _time.time()
-                        with _lock:
-                            ok, fail_reason = self._process_one_f1(
-                                pdf_path, llm_config=worker_llm_cfg, email=email,
-                                prefetched_tei=tei_xml,
-                                phase_callback=phase_callback,
-                            )
+                        # LLM processing runs without lock — true parallelism
+                        ok, fail_reason = self._process_one_f1(
+                            pdf_path, llm_config=worker_llm_cfg, email=email,
+                            prefetched_tei=tei_xml,
+                            phase_callback=phase_callback,
+                            state_lock=_lock,
+                        )
                         elapsed = _time.time() - t0
 
+                        # Only lock for shared state writes
                         with _lock:
                             results[pdf_path.name] = ok
                             times.append(elapsed)
@@ -502,6 +504,7 @@ class CitationGraph:
         email: str = "",
         prefetched_tei: str | None = None,
         phase_callback=None,
+        state_lock=None,
     ) -> tuple[bool, str]:
         """Process one F1 paper. Returns (success, failure_reason)."""
         # GROBID — use pre-fetched result if available
@@ -525,51 +528,53 @@ class CitationGraph:
         paragraphs = parse_tei_body(tei_xml)
 
         # Match this paper to existing bibliography entry
-        f1_citekey = self._match_to_existing(header, pdf_path.name)
+        _lock_ctx = state_lock if state_lock else __import__('contextlib').nullcontext()
 
-        if f1_citekey:
-            existing = self.bibliography[f1_citekey]
-            if header.get("abstract") and not existing.get("abstract"):
-                existing["abstract"] = header["abstract"]
-            existing["_source_pdf"] = pdf_path.name
-        else:
-            # Create new entry
-            f1_authors = header.get("author", [])
-            f1_year = _extract_year(header.get("date", ""))
-            f1_citekey = generate_citekey(f1_authors, f1_year)
-            self.bibliography[f1_citekey] = normalize_entry({
-                "citekey": f1_citekey,
-                "entry_type": "article",
-                "title": header.get("title", ""),
-                "author": f1_authors,
-                "date": header.get("date", ""),
-                "year": f1_year,
-                "generation": "F1",
-                "cited_by": [],
-                "_source_pdf": pdf_path.name,
-            })
+        with _lock_ctx:
+            f1_citekey = self._match_to_existing(header, pdf_path.name)
 
-        # Add GROBID refs as F2
-        for ref in grobid_refs:
-            authors = ref.get("author", [])
-            year = _extract_year(ref.get("date", ""))
-            citekey = generate_citekey(authors, year)
-
-            ref["citekey"] = citekey
-            ref["generation"] = "F2"
-            ref["cited_by"] = [f1_citekey]
-            ref["_source_pdf"] = pdf_path.name
-            ref = normalize_entry(ref)
-
-            existing = self._find_duplicate(ref)
-            if existing:
-                self._merge_into(existing, ref)
+            if f1_citekey:
+                existing = self.bibliography[f1_citekey]
+                if header.get("abstract") and not existing.get("abstract"):
+                    existing["abstract"] = header["abstract"]
+                existing["_source_pdf"] = pdf_path.name
             else:
-                self.bibliography[citekey] = ref
+                f1_authors = header.get("author", [])
+                f1_year = _extract_year(header.get("date", ""))
+                f1_citekey = generate_citekey(f1_authors, f1_year)
+                self.bibliography[f1_citekey] = normalize_entry({
+                    "citekey": f1_citekey,
+                    "entry_type": "article",
+                    "title": header.get("title", ""),
+                    "author": f1_authors,
+                    "date": header.get("date", ""),
+                    "year": f1_year,
+                    "generation": "F1",
+                    "cited_by": [],
+                    "_source_pdf": pdf_path.name,
+                })
 
-            gid = ref.get("_grobid_id", "")
-            if gid:
-                self.grobid_map[(pdf_path.name, gid)] = citekey
+            # Add GROBID refs as F2
+            for ref in grobid_refs:
+                authors = ref.get("author", [])
+                year = _extract_year(ref.get("date", ""))
+                citekey = generate_citekey(authors, year)
+
+                ref["citekey"] = citekey
+                ref["generation"] = "F2"
+                ref["cited_by"] = [f1_citekey]
+                ref["_source_pdf"] = pdf_path.name
+                ref = normalize_entry(ref)
+
+                existing = self._find_duplicate(ref)
+                if existing:
+                    self._merge_into(existing, ref)
+                else:
+                    self.bibliography[citekey] = ref
+
+                gid = ref.get("_grobid_id", "")
+                if gid:
+                    self.grobid_map[(pdf_path.name, gid)] = citekey
 
         # Full detection
         if phase_callback and llm_config:
@@ -582,64 +587,65 @@ class CitationGraph:
             paragraphs=paragraphs,
         )
 
-        # Integrate detections
-        unmatched = {}
-        for key, info in detection["citations"].items():
-            existing_ck = self._find_by_author_year(key[0], key[1])
-            if existing_ck:
-                self._add_cited_by(existing_ck, f1_citekey)
-            else:
-                unmatched[key] = info
+        # Integrate detections — lock shared state for all writes
+        with _lock_ctx:
+            unmatched = {}
+            for key, info in detection["citations"].items():
+                existing_ck = self._find_by_author_year(key[0], key[1])
+                if existing_ck:
+                    self._add_cited_by(existing_ck, f1_citekey)
+                else:
+                    unmatched[key] = info
 
-        # Rich footnote entries
-        for rich in detection.get("rich_entries", []):
-            if not rich.get("_resolution_method"):
-                continue
-            authors = rich.get("author", [])
-            year = _extract_year(rich.get("date", ""))
-            if not authors or not year:
-                continue
-            citekey = generate_citekey(authors, year)
-            rich["citekey"] = citekey
-            rich["generation"] = "F2"
-            rich["cited_by"] = [f1_citekey]
-            rich["_source_pdf"] = pdf_path.name
-            rich = normalize_entry(rich)
-            existing = self._find_duplicate(rich)
-            if not existing:
-                self.bibliography[citekey] = rich
-
-        # Resolve
-        if unmatched:
-            resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
-            for record in resolved:
-                if record.get("_resolution_method") == "stub" and not record.get("title"):
+            # Rich footnote entries
+            for rich in detection.get("rich_entries", []):
+                if not rich.get("_resolution_method"):
                     continue
-                authors = record.get("author", [])
-                year = _extract_year(record.get("date", ""))
+                authors = rich.get("author", [])
+                year = _extract_year(rich.get("date", ""))
+                if not authors or not year:
+                    continue
                 citekey = generate_citekey(authors, year)
-                record["citekey"] = citekey
-                record["generation"] = "F2"
-                record["cited_by"] = [f1_citekey]
-                record["_source_pdf"] = pdf_path.name
-                record = normalize_entry(record)
-                existing = self._find_duplicate(record)
+                rich["citekey"] = citekey
+                rich["generation"] = "F2"
+                rich["cited_by"] = [f1_citekey]
+                rich["_source_pdf"] = pdf_path.name
+                rich = normalize_entry(rich)
+                existing = self._find_duplicate(rich)
                 if not existing:
-                    self.bibliography[citekey] = record
+                    self.bibliography[citekey] = rich
 
-        # Store
-        self.processed_papers[pdf_path.name] = {
-            "header": header,
-            "references": grobid_refs,
-            "paragraphs": paragraphs,
-            "source_pdf": pdf_path.name,
-            "language": detect_language(paragraphs),
-            "grobid_id_to_citekey": {
-                gid: ck for (pdf, gid), ck in self.grobid_map.items()
-                if pdf == pdf_path.name
-            },
-            "detection": detection["method_counts"],
-        }
+            # Resolve
+            if unmatched:
+                resolved = resolve_citations(unmatched, email=email, llm_config=llm_config)
+                for record in resolved:
+                    if record.get("_resolution_method") == "stub" and not record.get("title"):
+                        continue
+                    authors = record.get("author", [])
+                    year = _extract_year(record.get("date", ""))
+                    citekey = generate_citekey(authors, year)
+                    record["citekey"] = citekey
+                    record["generation"] = "F2"
+                    record["cited_by"] = [f1_citekey]
+                    record["_source_pdf"] = pdf_path.name
+                    record = normalize_entry(record)
+                    existing = self._find_duplicate(record)
+                    if not existing:
+                        self.bibliography[citekey] = record
+
+            # Store processed paper
+            self.processed_papers[pdf_path.name] = {
+                "header": header,
+                "references": grobid_refs,
+                "paragraphs": paragraphs,
+                "source_pdf": pdf_path.name,
+                "language": detect_language(paragraphs),
+                "grobid_id_to_citekey": {
+                    gid: ck for (pdf, gid), ck in self.grobid_map.items()
+                    if pdf == pdf_path.name
+                },
+                "detection": detection["method_counts"],
+            }
 
         return True, ""
 
