@@ -613,3 +613,11 @@ emits a timestamped start and done line with citekey and elapsed time.
 A threading.Lock ensures atomic output from parallel workers so lines
 from different papers don't interleave. Only run.py and graph.py
 changed.
+
+### 2026-05-25 — Incremental graph state saving
+
+Graph state was previously only saved at the end of a complete run.
+A VPN drop after an hour of processing lost all cached results.
+Fixed by saving graph state inside the _progress callback after each
+paper completes. Only the paper currently being processed at the
+moment of interruption is lost on an unclean exit.

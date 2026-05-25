@@ -357,6 +357,8 @@ def main():
                     reason = failure_reason or "unknown error"
                     print(f"{ts}  {stem[:50]}  ✗  {reason[:80]}", flush=True)
                 _stage2_times.append(elapsed)
+                # Save graph state after every paper so interruptions lose minimal work
+                _save_graph_state(graph, graph_state_path)
 
         def _start(index, total, stem):
             pass  # events handle per-paper output now
