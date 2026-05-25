@@ -307,12 +307,13 @@ def main():
             n_bib, n_paragraphs, n_footnotes,
             detection, n_crossref, n_unresolved,
             language, ocr_applied, failure_reason,
+            eta=None,
         ):
             lang_tag = f" [{language}]" if language and language != "en" else ""
             if lang_tag:
                 print(lang_tag, flush=True)
             else:
-                print(flush=True)  # close whichever line was open (GROBID or LLM scan)
+                print(flush=True)
 
             if not success:
                 reason = failure_reason or "unknown error"
@@ -345,7 +346,6 @@ def main():
             if mc.get("llm_footnotes", 0) > 0:
                 print(f"         Citations in footnotes: {mc.get('llm_footnotes', 0)} (LLM)", flush=True)
 
-            # Discrepancies between reference list and body citations
             total_body = mc.get("merged_total", 0)
             if total_body > n_bib:
                 print(
