@@ -110,7 +110,7 @@ bash launch_bibvik_llm.sh
 bash launch_bibvik_llm.sh --gpu 7
 
 # Multiple GPUs — one instance per GPU, parallel paper processing
-bash launch_bibvik_llm.sh --gpus 4,5,6,7
+bash launch_bibvik_llm.sh --gpus 5,6,7,8,9
 
 # llama-server with tensor parallelism (one large model across 2 GPUs)
 bash launch_bibvik_llm.sh --gpu 6 --tensor 2 --backend llama_server
@@ -120,7 +120,11 @@ bash launch_bibvik_llm.sh --stop
 ```
 
 The script assigns ports sequentially starting from the base port (default 11440).
-Four instances on GPUs 4, 5, 6, 7 use ports 11440, 11441, 11442, 11443.
+Five instances on GPUs 5, 6, 7, 8, 9 use ports 11440–11444.
+
+The script pulls the model and runs a warm-up inference on each container before
+returning, so the model is loaded into VRAM and ready to serve requests immediately.
+`OLLAMA_KEEP_ALIVE=-1` is set so the model stays loaded indefinitely.
 
 After launching, update `config.yaml` with the assigned ports (see below).
 
@@ -203,20 +207,29 @@ scp user@cluster:/path/to/output/audit_sample.md ~/Desktop/
 When `extra_urls` is set in `config.yaml`, the pipeline distributes papers
 across all LLM endpoints in parallel:
 
-1. GROBID processes all papers sequentially (one GROBID instance)
-2. LLM processing runs in parallel — one worker thread per endpoint
-3. Papers are assigned round-robin across endpoints
+1. Papers are divided round-robin across workers before processing starts
+2. Each worker processes its own batch independently: GROBID then LLM per paper
+3. Workers are fully independent — no shared queue, no coordination overhead
 
-With 4 GPUs and ~90 seconds per paper, throughput is approximately 4×:
+With 5 GPUs and ~90 seconds per paper, throughput is approximately 5×:
 
 | GPUs | Papers | Estimated time |
 |------|--------|----------------|
 | 1    | 382    | ~9 hours       |
-| 2    | 382    | ~4.5 hours     |
-| 4    | 382    | ~2.5 hours     |
+| 3    | 382    | ~3 hours       |
+| 5    | 382    | ~1.75 hours    |
 
 These estimates assume qwen2.5:7b and `detection_batch_size: 5`. Larger models
 or batch size 1 will be slower.
+
+**GPU access requirement:** Docker containers need GPU access via the nvidia
+container runtime. Your user must be in the `video` group:
+
+```bash
+groups  # should include "video"
+# If not, ask admin: sudo usermod -aG video <username>
+# Then log out and back in for the change to take effect
+```
 
 ## Remote Access from Laptop
 
@@ -254,10 +267,10 @@ docker rm -f <container-name>
 
 **LLM running on CPU instead of GPU**
 ```bash
-docker inspect <container-name> | grep -i runtime
-# Should show "nvidia", not "runc"
-# If "runc": the container lacks GPU access — restart with --gpus flag
+docker exec bibvik_llm_ollama_gpu7 ollama ps
+# PROCESSOR column should show "100% GPU", not "100% CPU"
 ```
+If CPU: your user may not be in the `video` group. See Multi-GPU section above.
 
 **Out of GPU memory**
 ```bash

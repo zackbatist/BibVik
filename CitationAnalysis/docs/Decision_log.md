@@ -582,3 +582,15 @@ pull from the queue and process on their assigned endpoint. GROBID and
 LLM now overlap — as soon as paper N's GROBID result is ready it goes
 into the queue and whichever worker is free picks it up. With 4 workers,
 4 papers are in LLM simultaneously while GROBID processes the next one.
+
+### 2026-05-25 — Multi-GPU parallel processing
+
+Implemented parallel paper processing across multiple LLM endpoints. Papers are divided round-robin across worker threads before processing starts, each worker owning its batch and processing independently (GROBID then LLM per paper). Shared state is protected by a threading.Lock passed to `_process_one_f1`; LLM inference runs without the lock.
+
+GPU access on the shared cluster required membership in the `video` group. Containers were starting CPU-only despite `--gpus` because the nvidia container runtime needs `/dev/nvidia*` access, gated by that group. Fixed by `sudo usermod -aG video <username>`.
+
+`OLLAMA_KEEP_ALIVE=-1` set in all containers to prevent model eviction between papers. Launch script now runs a warm-up inference after pull so the model is in VRAM before the pipeline starts.
+
+A bug in the progress callbacks caused "LLM unavailable" for every paper regardless of actual results. `processed_papers["detection"]` is already the method_counts dict, but callbacks called `.get("method_counts")` on it — always returning None. `fix_cache.py` had the same bug and deleted all cached papers when run. Both fixed by reading `paper_data.get("detection", {})` directly.
+
+LLM query methods now retry up to 3 times with backoff on timeout or connection error.
