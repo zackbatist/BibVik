@@ -594,3 +594,13 @@ GPU access on the shared cluster required membership in the `video` group. Conta
 A bug in the progress callbacks caused "LLM unavailable" for every paper regardless of actual results. `processed_papers["detection"]` is already the method_counts dict, but callbacks called `.get("method_counts")` on it — always returning None. `fix_cache.py` had the same bug and deleted all cached papers when run. Both fixed by reading `paper_data.get("detection", {})` directly.
 
 LLM query methods now retry up to 3 times with backoff on timeout or connection error.
+
+### 2026-05-25 — fix_cache.py utility
+
+Added CitationAnalysis/fix_cache.py. Scans _graph_state.json for
+papers where llm_body_scan is None and removes them from the cache
+so they are reprocessed. Required after discovering that a bug in
+the progress callback caused all papers to appear as LLM unavailable,
+which caused an earlier version of the script to incorrectly delete
+all cached papers. Fixed version reads detection directly from
+processed_papers rather than looking for a nested method_counts key.
