@@ -513,8 +513,15 @@ class CitationGraph:
                 except Exception:
                     pass
 
-        # citekey is determined after GROBID — use filename stub until then
-        _citekey = [pdf_path.stem[:20]]
+        # Derive a provisional citekey from Zotero map (filename lookup) so
+        # all events use a consistent identifier from the start.
+        _provisional = pdf_path.stem[:22]
+        if self.zotero_map:
+            from .zotero_csv import match_pdf_to_bibliography
+            _z = match_pdf_to_bibliography(pdf_path.name, self.zotero_map, self.bibliography)
+            if _z:
+                _provisional = _z
+        _citekey = [_provisional]
 
         # ── GROBID ──────────────────────────────────────────────────────────
         if prefetched_tei is not None:

@@ -257,9 +257,9 @@ def main():
             if not label:
                 return
             ts = _t.strftime("%H:%M:%S")
-            elapsed_str = f"  ·  {_fmt_time(elapsed)}" if elapsed is not None else ""
+            elapsed_str = f"{_fmt_time(elapsed):>6}" if elapsed is not None else ""
             with _seed_print_lock:
-                print(f"{ts}  {citekey}  {label}{elapsed_str}", flush=True)
+                print(f"{ts}  {citekey:<22}  {label:<16}{elapsed_str}", flush=True)
 
         result = graph.process_seed_paper(
             seed_path, llm_config=llm_cfg, email=email,
@@ -335,9 +335,9 @@ def main():
             if not label:
                 return
             ts = _time.strftime("%H:%M:%S")
-            elapsed_str = f"  ·  {_fmt_time(elapsed)}" if elapsed is not None else ""
+            elapsed_str = f"{_fmt_time(elapsed):>6}" if elapsed is not None else ""
             with _print_lock:
-                print(f"{ts}  {citekey}  {label}{elapsed_str}", flush=True)
+                print(f"{ts}  {citekey:<22}  {label:<16}{elapsed_str}", flush=True)
 
         def _progress(
             index, total, stem, success, elapsed,
@@ -347,15 +347,14 @@ def main():
             eta=None,
         ):
             ts = _time.strftime("%H:%M:%S")
-            mc = detection or {}
             lang_tag = f" [{language}]" if language and language != "en" else ""
             eta_str = f"  ·  ~{_fmt_time(eta)} remaining" if eta else ""
             with _print_lock:
                 if success:
-                    print(f"{ts}  {stem[:50]}  ✓  {_fmt_time(elapsed)}{eta_str}{lang_tag}", flush=True)
+                    print(f"{ts}  {stem[:22]:<22}  {'✓':<16}{_fmt_time(elapsed):>6}{lang_tag}", flush=True)
                 else:
                     reason = failure_reason or "unknown error"
-                    print(f"{ts}  {stem[:50]}  ✗  {reason[:80]}", flush=True)
+                    print(f"{ts}  {stem[:22]:<22}  {'✗':<16}{reason[:60]}", flush=True)
                 _stage2_times.append(elapsed)
                 # Save graph state after every paper so interruptions lose minimal work
                 _save_graph_state(graph, graph_state_path)

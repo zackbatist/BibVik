@@ -633,3 +633,13 @@ lifecycle (GROBID, body scan, resolve) via worker_llm_cfg — the lock
 change makes this parallelism real.
 
 Also fixed resolver.py default model from qwen3.5:35b to qwen2.5:7b.
+
+### 2026-05-25 — Tabular TUI with consistent citekeys
+
+run.py: Fixed-width tabular columns — timestamp (8), citekey (22),
+event (16), elapsed (6). Removed ETA from completion lines. Applied
+to _event, _progress, and _seed_event.
+
+graph.py: Provisional citekey derived from Zotero map before GROBID
+so all events use a consistent identifier from the start rather than
+a filename stub.
