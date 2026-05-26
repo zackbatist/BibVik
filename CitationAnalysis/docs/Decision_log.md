@@ -674,3 +674,16 @@ entry type reclassification, compound citation flagging, cross-script
 duplicate detection via transliteration, orphaned cited_by detection,
 missing given names flagging, and editor/author confusion flagging.
 Wired into run.py as --postprocess.
+
+### 2026-05-25 — Add post-processing pipeline
+
+Added bibvik/postprocess.py with 19 cleaning passes based on patterns
+identified in the audit sample. Fixes: letter prefix artifacts, hyphenated
+line-break titles, oversized titles, DOI/date/page normalization, volume
+extraction from pages, ALL CAPS normalization, LLM placeholder title
+removal, entry type reclassification. Flags: citekey suffix collisions,
+compound citations, cross-script duplicates via Cyrillic transliteration,
+citing papers not in corpus (corpus coverage signal), titles containing
+publisher/location strings, near-duplicate entries by token overlap,
+missing given names, editor/author confusion, unprocessed source PDFs.
+Wired into run.py as --postprocess.

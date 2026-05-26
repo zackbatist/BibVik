@@ -7,7 +7,7 @@ it modified. Fixes are applied in order; later passes may depend on
 earlier ones (e.g. type correction before field validation).
 
 Usage:
-    python3 postprocess.py [--dry-run] [--input PATH] [--output PATH]
+    python3 -m bibvik.postprocess [--dry-run] [--input PATH] [--output PATH]
 
 Passes (in order):
     1.  Strip letter prefix from titles        "a: Title" → "Title"
@@ -16,21 +16,26 @@ Passes (in order):
     4.  Normalize DOI format                    "https://doi.org/10.x" → "10.x"
     5.  Normalize date to year                  "2016-01" → "2016"
     6.  Fix page range artifacts                "157--e168" → "157--168"
-    7.  Strip location/publisher from title     Leaked raw string artifacts
-    8.  Fix ALL CAPS titles                     Already handled in normalize.py but check
+    7.  Extract volume from pages field         "87, pp. 6-30" → pages: 6-30, volume: 87
+    8.  Fix ALL CAPS titles                     Slipped through normalize.py
     9.  Remove LLM placeholder titles           "Article by X", "Статья В. И. X"
-    10. Fix entry type for articles/books       Heuristic re-classification
-    11. Flag compound citations                 Raw strings containing multiple works
-    12. Flag cross-script duplicates            Cyrillic + romanised same work
-    13. Flag orphaned cited_by                  cited_by citekeys not in bibliography
-    14. Flag missing given names                author given: ""
+    10. Reclassify entry types                  Heuristic re-classification
+    11. Flag citekey suffix collisions          Same work with different suffix
+    12. Flag compound citations                 Raw strings containing multiple works
+    13. Flag cross-script duplicates            Cyrillic + romanised same work
+    14. Flag citing paper not in corpus         cited_by citekeys not in bibliography
+    15. Flag title contains publisher/location  Leaked raw string artifacts
+    16. Flag near-duplicate entries             Same author+year, similar title
+    17. Flag missing given names                author given: ""
+    18. Flag editor/author confusion            "(ed.)" in author name field
+    19. Flag unprocessed source PDFs            _source_pdf not in processed papers
 """
 
 import argparse
 import json
 import logging
 import re
-import sys
+from collections import defaultdict
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -40,7 +45,7 @@ logger = logging.getLogger(__name__)
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _report(pass_name: str, count: int, total: int):
-    logger.info("%-45s  %4d / %d modified", pass_name, count, total)
+    logger.info("%-50s  %4d / %d", pass_name, count, total)
 
 
 # ── Pass 1: Strip letter prefix from titles ───────────────────────────────────
@@ -60,13 +65,11 @@ def fix_letter_prefix(bib: dict) -> int:
 # ── Pass 2: Join hyphenated line-break titles ─────────────────────────────────
 
 def fix_hyphenated_titles(bib: dict) -> int:
-    """'Conti-\nnuity' → 'Continuity'; 'Conti-' (truncated) → flag"""
+    """'Conti-\nnuity' → 'Continuity'; trailing hyphen → strip"""
     count = 0
     for entry in bib.values():
         title = entry.get("title", "")
-        # Join hyphenated line breaks
         fixed = re.sub(r"-\s*\n\s*", "", title)
-        # Also catch trailing hyphen (truncated extraction)
         fixed = re.sub(r"-\s*$", "", fixed).strip()
         if fixed != title:
             entry["title"] = fixed
@@ -84,8 +87,8 @@ def fix_oversized_titles(bib: dict) -> int:
     for entry in bib.values():
         title = entry.get("title", "")
         if len(title) > MAX_TITLE_LENGTH:
+            entry["_title_too_long"] = title[:200]
             entry["title"] = ""
-            entry["_title_too_long"] = title[:200]  # preserve for inspection
             count += 1
     return count
 
@@ -93,7 +96,7 @@ def fix_oversized_titles(bib: dict) -> int:
 # ── Pass 4: Normalize DOI format ─────────────────────────────────────────────
 
 def fix_doi_format(bib: dict) -> int:
-    """'https://doi.org/10.x' or 'http://dx.doi.org/10.x' → '10.x'"""
+    """'https://doi.org/10.x' → '10.x'"""
     count = 0
     for entry in bib.values():
         doi = entry.get("doi", "")
@@ -131,15 +134,50 @@ def fix_page_ranges(bib: dict) -> int:
         pages = entry.get("pages", "")
         if not pages:
             continue
-        fixed = re.sub(r"e(\d)", r"\1", pages)   # remove spurious 'e'
-        fixed = re.sub(r"(?<!-)-(?!-)", "--", fixed)  # normalize single dash
+        fixed = re.sub(r"e(\d)", r"\1", pages)
+        fixed = re.sub(r"(?<!-)-(?!-)", "--", fixed)
         if fixed != pages:
             entry["pages"] = fixed
             count += 1
     return count
 
 
-# ── Pass 7: Remove LLM placeholder titles ────────────────────────────────────
+# ── Pass 7: Extract volume from pages field ───────────────────────────────────
+
+def fix_volume_in_pages(bib: dict) -> int:
+    """'87, pp. 6-30' → pages: '6--30', volume: '87'"""
+    count = 0
+    for entry in bib.values():
+        pages = entry.get("pages", "")
+        if not pages:
+            continue
+        m = re.match(r"^(\d+)\s*[,:]?\s*(?:pp?\.)?\s*(\d+\s*[-–]\s*\d+)$", pages)
+        if m:
+            vol, pg = m.group(1), m.group(2)
+            if not entry.get("volume"):
+                entry["volume"] = vol
+            entry["pages"] = re.sub(r"(?<!-)-(?!-)", "--", pg).strip()
+            count += 1
+    return count
+
+
+# ── Pass 8: Fix ALL CAPS titles ──────────────────────────────────────────────
+
+def fix_allcaps_titles(bib: dict) -> int:
+    """Title-case titles that are entirely uppercase."""
+    count = 0
+    for entry in bib.values():
+        title = entry.get("title", "")
+        if not title:
+            continue
+        alpha = [c for c in title if c.isalpha()]
+        if alpha and all(c.isupper() for c in alpha):
+            entry["title"] = title.title()
+            count += 1
+    return count
+
+
+# ── Pass 9: Remove LLM placeholder titles ────────────────────────────────────
 
 LLM_PLACEHOLDER_PATTERNS = [
     r"^(article|статья|стаття)\s+(by|в\.?\s*и\.?|від)\b",
@@ -149,7 +187,7 @@ LLM_PLACEHOLDER_PATTERNS = [
 ]
 
 def fix_llm_placeholder_titles(bib: dict) -> int:
-    """Remove titles that are LLM-generated placeholders rather than real titles."""
+    """Remove LLM-generated placeholder titles."""
     count = 0
     patterns = [re.compile(p, re.IGNORECASE) for p in LLM_PLACEHOLDER_PATTERNS]
     for entry in bib.values():
@@ -161,171 +199,13 @@ def fix_llm_placeholder_titles(bib: dict) -> int:
     return count
 
 
-# ── Pass 8: Flag compound citations ──────────────────────────────────────────
-
-def flag_compound_citations(bib: dict) -> int:
-    """Flag entries where raw citation string appears to contain multiple works."""
-    count = 0
-    for entry in bib.values():
-        raw = entry.get("_raw_citation", "")
-        if not raw:
-            continue
-        # Heuristic: multiple year occurrences suggest compound citation
-        years = re.findall(r"\b(1[89]\d{2}|20[012]\d)\b", raw)
-        if len(set(years)) >= 3:
-            entry["_possibly_compound"] = True
-            count += 1
-    return count
-
-
-# ── Pass 9: Flag cross-script duplicates ─────────────────────────────────────
-
-# ── Pass 9: Flag cross-script duplicates ─────────────────────────────────────
-
-# Cyrillic → Latin transliteration table (covers Russian, Ukrainian, Bulgarian)
-_CYRILLIC_TO_LATIN = str.maketrans({
-    'а': 'a',  'б': 'b',  'в': 'v',  'г': 'g',  'д': 'd',
-    'е': 'e',  'ё': 'yo', 'ж': 'zh', 'з': 'z',  'и': 'i',
-    'й': 'y',  'к': 'k',  'л': 'l',  'м': 'm',  'н': 'n',
-    'о': 'o',  'п': 'p',  'р': 'r',  'с': 's',  'т': 't',
-    'у': 'u',  'ф': 'f',  'х': 'kh', 'ц': 'ts', 'ч': 'ch',
-    'ш': 'sh', 'щ': 'shch','ъ': '',  'ы': 'y',  'ь': '',
-    'э': 'e',  'ю': 'yu', 'я': 'ya',
-    # Ukrainian
-    'є': 'ye', 'і': 'i',  'ї': 'yi', 'ґ': 'g',
-})
-
-def _transliterate(s: str) -> str:
-    return s.lower().translate(_CYRILLIC_TO_LATIN)
-
-def _is_cyrillic(s: str) -> bool:
-    return bool(re.search(r'[\u0400-\u04FF]', s))
-
-def _author_key(authors: list) -> str:
-    """First author family name, transliterated and lowercased."""
-    if not authors:
-        return ""
-    return _transliterate(authors[0].get("family", "").lower())
-
-def flag_cross_script_duplicates(bib: dict) -> int:
-    """
-    Flag entries that are likely the same work in Cyrillic and Latin script.
-    Groups by (year, first_author_transliterated) and flags pairs where one
-    entry has a Cyrillic title/author and the other has a Latin equivalent.
-    """
-    from collections import defaultdict
-
-    # Build index: (year, author_key) → list of citekeys
-    index: dict[tuple, list] = defaultdict(list)
-    for ck, entry in bib.items():
-        year = entry.get("date", "")[:4]
-        ak   = _author_key(entry.get("author", []))
-        if year and ak:
-            index[(year, ak)].append(ck)
-
-    count = 0
-    for (year, ak), citekeys in index.items():
-        if len(citekeys) < 2:
-            continue
-        # Check if any pair has one Cyrillic and one Latin title
-        entries = [(ck, bib[ck]) for ck in citekeys]
-        cyrillic = [(ck, e) for ck, e in entries if _is_cyrillic(e.get("title", "") + e.get("author", [{}])[0].get("family", ""))]
-        latin    = [(ck, e) for ck, e in entries if not _is_cyrillic(e.get("title", "") + e.get("author", [{}])[0].get("family", ""))]
-        if cyrillic and latin:
-            for ck, e in cyrillic + latin:
-                if "_cross_script_duplicate_of" not in e:
-                    other_cks = [k for k, _ in (latin if (ck, e) in cyrillic else cyrillic)]
-                    e["_cross_script_duplicate_candidate"] = other_cks
-                    count += 1
-
-    return count
-
-
-# ── Pass 10: Flag orphaned cited_by ──────────────────────────────────────────
-
-def flag_orphaned_cited_by(bib: dict) -> int:
-    """Flag entries whose cited_by citekeys don't exist in the bibliography."""
-    count = 0
-    all_keys = set(bib.keys())
-    for entry in bib.values():
-        orphaned = [ck for ck in entry.get("cited_by", []) if ck not in all_keys]
-        if orphaned:
-            entry["_orphaned_cited_by"] = orphaned
-            count += 1
-    return count
-
-
-# ── Pass 11: Extract volume/issue from pages field ───────────────────────────
-
-def fix_volume_in_pages(bib: dict) -> int:
-    """
-    '87, pp. 6-30' in pages → pages: '6--30', volume: '87'
-    Handles patterns like '87, 6-30' or 'vol. 87: 6-30'
-    """
-    count = 0
-    for entry in bib.values():
-        pages = entry.get("pages", "")
-        if not pages:
-            continue
-        # Pattern: leading number followed by comma then page range
-        m = re.match(r"^(\d+)\s*[,:]?\s*(?:pp?\.)?\s*(\d+\s*[-–]\s*\d+)$", pages)
-        if m:
-            vol, pg = m.group(1), m.group(2)
-            if not entry.get("volume"):
-                entry["volume"] = vol
-            entry["pages"] = re.sub(r"(?<!-)-(?!-)", "--", pg).strip()
-            count += 1
-    return count
-
-
-# ── Pass 12: Flag missing given names ────────────────────────────────────────
-
-def flag_missing_given_names(bib: dict) -> int:
-    """Flag entries where any author has an empty given name."""
-    count = 0
-    for entry in bib.values():
-        authors = entry.get("author", [])
-        if any(not a.get("given", "").strip() for a in authors if a.get("family", "").strip()):
-            entry["_missing_given_names"] = True
-            count += 1
-    return count
-
-
-# ── Pass 13: Flag likely editor/author confusion ──────────────────────────────
-
-def flag_editor_author_confusion(bib: dict) -> int:
-    """
-    Flag entries where authors look like editors — heuristic: author name
-    contains '(ed' or '(hrsg' or entry has no editor field but booktitle
-    suggests an edited volume.
-    """
-    count = 0
-    ed_patterns = re.compile(r"\(\s*(?:ed|hrsg|red|dir)[\.\)]", re.IGNORECASE)
-    for entry in bib.values():
-        authors = entry.get("author", [])
-        for a in authors:
-            name = f"{a.get('family', '')} {a.get('given', '')}"
-            if ed_patterns.search(name):
-                entry["_possible_editor_as_author"] = True
-                count += 1
-                break
-    return count
-
-
-# ── Pass 14: Reclassify entry types ──────────────────────────────────────────
+# ── Pass 10: Reclassify entry types ──────────────────────────────────────────
 
 def fix_entry_types(bib: dict) -> int:
-    """
-    Heuristic entry type reclassification:
-    - Has journal → article
-    - Has booktitle and editors → incollection
-    - Has booktitle, no editors, no journal → inbook
-    - Has ISBN, no journal → book
-    - Has pages but no journal/booktitle → misc
-    """
+    """Heuristic entry type reclassification based on available fields."""
     count = 0
     for entry in bib.values():
-        old_type = entry.get("entry_type", "")
+        old_type  = entry.get("entry_type", "")
         journal   = entry.get("journaltitle", "").strip()
         booktitle = entry.get("booktitle", "").strip()
         editors   = entry.get("editor", [])
@@ -349,32 +229,265 @@ def fix_entry_types(bib: dict) -> int:
     return count
 
 
+# ── Pass 11: Flag citekey suffix collisions ───────────────────────────────────
+
+def flag_citekey_suffix_collisions(bib: dict) -> int:
+    """
+    Flag entries where the base citekey (without a/b/c suffix) matches another
+    entry — e.g. 'bill2016' and 'bill2016a' may be the same work cited differently.
+    """
+    count = 0
+    base_to_citekeys: dict[str, list] = defaultdict(list)
+    for ck in bib:
+        base = re.sub(r"[a-z]$", "", ck)  # strip trailing letter suffix
+        base_to_citekeys[base].append(ck)
+
+    for base, citekeys in base_to_citekeys.items():
+        if len(citekeys) < 2:
+            continue
+        for ck in citekeys:
+            if "_citekey_collision" not in bib[ck]:
+                bib[ck]["_citekey_collision"] = [k for k in citekeys if k != ck]
+                count += 1
+    return count
+
+
+# ── Pass 12: Flag compound citations ──────────────────────────────────────────
+
+def flag_compound_citations(bib: dict) -> int:
+    """Flag entries where raw citation contains multiple distinct works."""
+    count = 0
+    for entry in bib.values():
+        raw = entry.get("_raw_citation", "")
+        if not raw:
+            continue
+        years = re.findall(r"\b(1[89]\d{2}|20[012]\d)\b", raw)
+        if len(set(years)) >= 3:
+            entry["_possibly_compound"] = True
+            count += 1
+    return count
+
+
+# ── Pass 13: Flag cross-script duplicates ────────────────────────────────────
+
+_CYRILLIC_TO_LATIN = str.maketrans({
+    'а': 'a',  'б': 'b',  'в': 'v',  'г': 'g',  'д': 'd',
+    'е': 'e',  'ё': 'yo', 'ж': 'zh', 'з': 'z',  'и': 'i',
+    'й': 'y',  'к': 'k',  'л': 'l',  'м': 'm',  'н': 'n',
+    'о': 'o',  'п': 'p',  'р': 'r',  'с': 's',  'т': 't',
+    'у': 'u',  'ф': 'f',  'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+    'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y',  'ь': '',
+    'э': 'e',  'ю': 'yu', 'я': 'ya',
+    'є': 'ye', 'і': 'i',  'ї': 'yi', 'ґ': 'g',
+})
+
+def _transliterate(s: str) -> str:
+    return s.lower().translate(_CYRILLIC_TO_LATIN)
+
+def _is_cyrillic(s: str) -> bool:
+    return bool(re.search(r'[\u0400-\u04FF]', s))
+
+def _author_key(authors: list) -> str:
+    if not authors:
+        return ""
+    return _transliterate(authors[0].get("family", "").lower())
+
+def flag_cross_script_duplicates(bib: dict) -> int:
+    """
+    Flag entries that are likely the same work in Cyrillic and Latin script.
+    Groups by (year, transliterated first author) and flags pairs where one
+    entry is Cyrillic and the other Latin.
+    """
+    index: dict[tuple, list] = defaultdict(list)
+    for ck, entry in bib.items():
+        year = entry.get("date", "")[:4]
+        ak   = _author_key(entry.get("author", []))
+        if year and ak:
+            index[(year, ak)].append(ck)
+
+    count = 0
+    for citekeys in index.values():
+        if len(citekeys) < 2:
+            continue
+        entries  = [(ck, bib[ck]) for ck in citekeys]
+        cyrillic = [(ck, e) for ck, e in entries
+                    if _is_cyrillic(e.get("title", "") + (e.get("author") or [{}])[0].get("family", ""))]
+        latin    = [(ck, e) for ck, e in entries
+                    if not _is_cyrillic(e.get("title", "") + (e.get("author") or [{}])[0].get("family", ""))]
+        if cyrillic and latin:
+            for ck, e in cyrillic + latin:
+                if "_cross_script_duplicate_candidate" not in e:
+                    other = [k for k, _ in (latin if (ck, e) in cyrillic else cyrillic)]
+                    e["_cross_script_duplicate_candidate"] = other
+                    count += 1
+    return count
+
+
+# ── Pass 14: Flag citing paper not in corpus ─────────────────────────────────
+
+def flag_citing_paper_not_in_corpus(bib: dict) -> int:
+    """
+    Flag entries whose cited_by citekeys don't exist in the bibliography.
+    This signals that the citing paper was detected but not processed —
+    a gap in corpus coverage rather than a data error.
+    """
+    count = 0
+    all_keys = set(bib.keys())
+    for entry in bib.values():
+        missing = [ck for ck in entry.get("cited_by", []) if ck not in all_keys]
+        if missing:
+            entry["_citing_paper_not_in_corpus"] = missing
+            count += 1
+    return count
+
+
+# ── Pass 15: Flag title contains publisher/location ──────────────────────────
+
+# Common publisher/location strings that leak into titles from raw citation parsing
+_PUBLISHER_PATTERNS = re.compile(
+    r"\b(Ashgate|Routledge|Brill|Springer|Cambridge University Press|Oxford University Press"
+    r"|De Gruyter|Wiley|Blackwell|MIT Press|University of Chicago Press"
+    r"|Stockholm|Copenhagen|Oslo|Uppsala|Aarhus|Helsinki|London|Oxford|Cambridge"
+    r"|New York|Amsterdam|Berlin|Paris)\b",
+    re.IGNORECASE,
+)
+
+def flag_title_contains_publisher(bib: dict) -> int:
+    """Flag entries where the title appears to contain publisher or location names."""
+    count = 0
+    for entry in bib.values():
+        title = entry.get("title", "")
+        if title and _PUBLISHER_PATTERNS.search(title):
+            entry["_title_may_contain_publisher"] = True
+            count += 1
+    return count
+
+
+# ── Pass 16: Flag near-duplicate entries ─────────────────────────────────────
+
+def flag_near_duplicates(bib: dict) -> int:
+    """
+    Flag entries with the same year and first author that have similar titles.
+    Uses simple token overlap as a fast similarity proxy.
+    """
+    count = 0
+
+    def _title_tokens(title: str) -> set:
+        return set(re.findall(r"\b\w{4,}\b", title.lower()))
+
+    # Group by (year, author_key)
+    index: dict[tuple, list] = defaultdict(list)
+    for ck, entry in bib.items():
+        year = entry.get("date", "")[:4]
+        ak   = _author_key(entry.get("author", []))
+        if year and ak:
+            index[(year, ak)].append(ck)
+
+    for citekeys in index.values():
+        if len(citekeys) < 2:
+            continue
+        pairs = [(citekeys[i], citekeys[j])
+                 for i in range(len(citekeys))
+                 for j in range(i + 1, len(citekeys))]
+        for ck_a, ck_b in pairs:
+            ta = _title_tokens(bib[ck_a].get("title", ""))
+            tb = _title_tokens(bib[ck_b].get("title", ""))
+            if not ta or not tb:
+                continue
+            overlap = len(ta & tb) / min(len(ta), len(tb))
+            if overlap >= 0.7:
+                bib[ck_a].setdefault("_near_duplicate_candidate", [])
+                if ck_b not in bib[ck_a]["_near_duplicate_candidate"]:
+                    bib[ck_a]["_near_duplicate_candidate"].append(ck_b)
+                    count += 1
+                bib[ck_b].setdefault("_near_duplicate_candidate", [])
+                if ck_a not in bib[ck_b]["_near_duplicate_candidate"]:
+                    bib[ck_b]["_near_duplicate_candidate"].append(ck_a)
+    return count
+
+
+# ── Pass 17: Flag missing given names ────────────────────────────────────────
+
+def flag_missing_given_names(bib: dict) -> int:
+    """Flag entries where any author has an empty given name."""
+    count = 0
+    for entry in bib.values():
+        authors = entry.get("author", [])
+        if any(not a.get("given", "").strip() for a in authors if a.get("family", "").strip()):
+            entry["_missing_given_names"] = True
+            count += 1
+    return count
+
+
+# ── Pass 18: Flag editor/author confusion ────────────────────────────────────
+
+def flag_editor_author_confusion(bib: dict) -> int:
+    """Flag entries where an author name contains editor indicators like '(ed.)'"""
+    count = 0
+    ed_pattern = re.compile(r"\(\s*(?:ed|hrsg|red|dir)[\.\)]", re.IGNORECASE)
+    for entry in bib.values():
+        for a in entry.get("author", []):
+            name = f"{a.get('family', '')} {a.get('given', '')}"
+            if ed_pattern.search(name):
+                entry["_possible_editor_as_author"] = True
+                count += 1
+                break
+    return count
+
+
+# ── Pass 19: Flag unprocessed source PDFs ────────────────────────────────────
+
+def flag_unprocessed_source_pdfs(bib: dict, processed_pdfs: set | None = None) -> int:
+    """
+    Flag entries whose _source_pdf was not successfully processed.
+    If processed_pdfs is not provided, this pass is skipped.
+    """
+    if processed_pdfs is None:
+        return 0
+    count = 0
+    for entry in bib.values():
+        src = entry.get("_source_pdf", "")
+        if src and src not in processed_pdfs:
+            entry["_source_pdf_not_processed"] = True
+            count += 1
+    return count
+
+
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 PASSES = [
-    ("Strip letter prefix from titles",      fix_letter_prefix),
-    ("Join hyphenated line-break titles",    fix_hyphenated_titles),
-    ("Truncate oversized titles",            fix_oversized_titles),
-    ("Normalize DOI format",                fix_doi_format),
-    ("Normalize date to year",              fix_date_format),
-    ("Fix page range artifacts",            fix_page_ranges),
-    ("Extract volume from pages field",     fix_volume_in_pages),
-    ("Remove LLM placeholder titles",       fix_llm_placeholder_titles),
-    ("Reclassify entry types",              fix_entry_types),
-    ("Flag compound citations",             flag_compound_citations),
-    ("Flag cross-script duplicates",        flag_cross_script_duplicates),
-    ("Flag orphaned cited_by",              flag_orphaned_cited_by),
-    ("Flag missing given names",            flag_missing_given_names),
-    ("Flag editor/author confusion",        flag_editor_author_confusion),
+    ("Strip letter prefix from titles",           fix_letter_prefix),
+    ("Join hyphenated line-break titles",         fix_hyphenated_titles),
+    ("Truncate oversized titles",                 fix_oversized_titles),
+    ("Normalize DOI format",                      fix_doi_format),
+    ("Normalize date to year",                    fix_date_format),
+    ("Fix page range artifacts",                  fix_page_ranges),
+    ("Extract volume from pages field",           fix_volume_in_pages),
+    ("Fix ALL CAPS titles",                       fix_allcaps_titles),
+    ("Remove LLM placeholder titles",             fix_llm_placeholder_titles),
+    ("Reclassify entry types",                    fix_entry_types),
+    ("Flag citekey suffix collisions",            flag_citekey_suffix_collisions),
+    ("Flag compound citations",                   flag_compound_citations),
+    ("Flag cross-script duplicates",              flag_cross_script_duplicates),
+    ("Flag citing paper not in corpus",           flag_citing_paper_not_in_corpus),
+    ("Flag title contains publisher/location",    flag_title_contains_publisher),
+    ("Flag near-duplicate entries",               flag_near_duplicates),
+    ("Flag missing given names",                  flag_missing_given_names),
+    ("Flag editor/author confusion",              flag_editor_author_confusion),
+    ("Flag unprocessed source PDFs",              lambda bib: flag_unprocessed_source_pdfs(bib, None)),
 ]
 
 
-def run_postprocess(input_path: Path, output_path: Path | None = None) -> dict:
+def run_postprocess(
+    input_path: Path,
+    output_path: Path | None = None,
+    processed_pdfs: set | None = None,
+) -> dict:
     """
     Run all post-processing passes on bibliography.json.
     Returns dict of {pass_name: count_modified}.
     """
-    input_path = Path(input_path)
+    input_path  = Path(input_path)
     output_path = Path(output_path) if output_path else input_path
 
     logger.info("Loading %s ...", input_path)
@@ -384,7 +497,10 @@ def run_postprocess(input_path: Path, output_path: Path | None = None) -> dict:
 
     results = {}
     for name, fn in PASSES:
-        count = fn(bib)
+        if fn is PASSES[-1][1]:  # unprocessed source PDFs needs extra arg
+            count = flag_unprocessed_source_pdfs(bib, processed_pdfs)
+        else:
+            count = fn(bib)
         _report(name, count, total)
         results[name] = count
 
