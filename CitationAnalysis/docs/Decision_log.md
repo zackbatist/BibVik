@@ -663,3 +663,14 @@ DOI/date/page normalization, LLM placeholder title removal, compound
 citation flagging, cross-script duplicate detection (Cyrillic/Latin
 pairs via transliteration table), and orphaned cited_by detection.
 Wired into run.py as --postprocess.
+
+### 2026-05-25 — Add post-processing pipeline
+
+Added bibvik/postprocess.py with 14 cleaning passes based on patterns
+identified in the audit sample: letter prefix artifacts, hyphenated
+line-break titles, oversized titles, DOI/date/page normalization,
+volume extraction from pages field, LLM placeholder title removal,
+entry type reclassification, compound citation flagging, cross-script
+duplicate detection via transliteration, orphaned cited_by detection,
+missing given names flagging, and editor/author confusion flagging.
+Wired into run.py as --postprocess.

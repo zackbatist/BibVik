@@ -255,19 +255,117 @@ def flag_orphaned_cited_by(bib: dict) -> int:
     return count
 
 
+# ── Pass 11: Extract volume/issue from pages field ───────────────────────────
+
+def fix_volume_in_pages(bib: dict) -> int:
+    """
+    '87, pp. 6-30' in pages → pages: '6--30', volume: '87'
+    Handles patterns like '87, 6-30' or 'vol. 87: 6-30'
+    """
+    count = 0
+    for entry in bib.values():
+        pages = entry.get("pages", "")
+        if not pages:
+            continue
+        # Pattern: leading number followed by comma then page range
+        m = re.match(r"^(\d+)\s*[,:]?\s*(?:pp?\.)?\s*(\d+\s*[-–]\s*\d+)$", pages)
+        if m:
+            vol, pg = m.group(1), m.group(2)
+            if not entry.get("volume"):
+                entry["volume"] = vol
+            entry["pages"] = re.sub(r"(?<!-)-(?!-)", "--", pg).strip()
+            count += 1
+    return count
+
+
+# ── Pass 12: Flag missing given names ────────────────────────────────────────
+
+def flag_missing_given_names(bib: dict) -> int:
+    """Flag entries where any author has an empty given name."""
+    count = 0
+    for entry in bib.values():
+        authors = entry.get("author", [])
+        if any(not a.get("given", "").strip() for a in authors if a.get("family", "").strip()):
+            entry["_missing_given_names"] = True
+            count += 1
+    return count
+
+
+# ── Pass 13: Flag likely editor/author confusion ──────────────────────────────
+
+def flag_editor_author_confusion(bib: dict) -> int:
+    """
+    Flag entries where authors look like editors — heuristic: author name
+    contains '(ed' or '(hrsg' or entry has no editor field but booktitle
+    suggests an edited volume.
+    """
+    count = 0
+    ed_patterns = re.compile(r"\(\s*(?:ed|hrsg|red|dir)[\.\)]", re.IGNORECASE)
+    for entry in bib.values():
+        authors = entry.get("author", [])
+        for a in authors:
+            name = f"{a.get('family', '')} {a.get('given', '')}"
+            if ed_patterns.search(name):
+                entry["_possible_editor_as_author"] = True
+                count += 1
+                break
+    return count
+
+
+# ── Pass 14: Reclassify entry types ──────────────────────────────────────────
+
+def fix_entry_types(bib: dict) -> int:
+    """
+    Heuristic entry type reclassification:
+    - Has journal → article
+    - Has booktitle and editors → incollection
+    - Has booktitle, no editors, no journal → inbook
+    - Has ISBN, no journal → book
+    - Has pages but no journal/booktitle → misc
+    """
+    count = 0
+    for entry in bib.values():
+        old_type = entry.get("entry_type", "")
+        journal   = entry.get("journaltitle", "").strip()
+        booktitle = entry.get("booktitle", "").strip()
+        editors   = entry.get("editor", [])
+        isbn      = entry.get("isbn", "").strip()
+
+        if journal:
+            new_type = "article"
+        elif booktitle and editors:
+            new_type = "incollection"
+        elif booktitle and not editors:
+            new_type = "inbook"
+        elif isbn and not journal:
+            new_type = "book"
+        else:
+            continue
+
+        if new_type != old_type:
+            entry["entry_type"] = new_type
+            entry["_entry_type_original"] = old_type
+            count += 1
+    return count
+
+
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 PASSES = [
-    ("Strip letter prefix from titles",     fix_letter_prefix),
-    ("Join hyphenated line-break titles",   fix_hyphenated_titles),
-    ("Truncate oversized titles",           fix_oversized_titles),
-    ("Normalize DOI format",               fix_doi_format),
-    ("Normalize date to year",             fix_date_format),
-    ("Fix page range artifacts",           fix_page_ranges),
-    ("Remove LLM placeholder titles",      fix_llm_placeholder_titles),
-    ("Flag compound citations",            flag_compound_citations),
-    ("Flag cross-script duplicates",       flag_cross_script_duplicates),
-    ("Flag orphaned cited_by",             flag_orphaned_cited_by),
+    ("Strip letter prefix from titles",      fix_letter_prefix),
+    ("Join hyphenated line-break titles",    fix_hyphenated_titles),
+    ("Truncate oversized titles",            fix_oversized_titles),
+    ("Normalize DOI format",                fix_doi_format),
+    ("Normalize date to year",              fix_date_format),
+    ("Fix page range artifacts",            fix_page_ranges),
+    ("Extract volume from pages field",     fix_volume_in_pages),
+    ("Remove LLM placeholder titles",       fix_llm_placeholder_titles),
+    ("Reclassify entry types",              fix_entry_types),
+    ("Flag compound citations",             flag_compound_citations),
+    ("Flag cross-script duplicates",        flag_cross_script_duplicates),
+    ("Flag orphaned cited_by",              flag_orphaned_cited_by),
+    ("Flag missing given names",            flag_missing_given_names),
+    ("Flag editor/author confusion",        flag_editor_author_confusion),
 ]
 
 
