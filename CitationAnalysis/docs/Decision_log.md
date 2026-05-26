@@ -653,3 +653,13 @@ from compound citation blowout, DOI/date/page normalization, LLM
 placeholder title removal, compound citation flagging, and orphaned
 cited_by detection. Wired into run.py as --postprocess. Cross-script
 duplicate detection is a placeholder for future implementation.
+
+### 2026-05-25 — Add post-processing pipeline
+
+Added bibvik/postprocess.py with 10 cleaning passes based on patterns
+identified in the audit sample: letter prefix artifacts, hyphenated
+line-break titles, oversized titles from compound citation blowout,
+DOI/date/page normalization, LLM placeholder title removal, compound
+citation flagging, cross-script duplicate detection (Cyrillic/Latin
+pairs via transliteration table), and orphaned cited_by detection.
+Wired into run.py as --postprocess.

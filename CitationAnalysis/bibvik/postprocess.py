@@ -180,15 +180,65 @@ def flag_compound_citations(bib: dict) -> int:
 
 # ── Pass 9: Flag cross-script duplicates ─────────────────────────────────────
 
+# ── Pass 9: Flag cross-script duplicates ─────────────────────────────────────
+
+# Cyrillic → Latin transliteration table (covers Russian, Ukrainian, Bulgarian)
+_CYRILLIC_TO_LATIN = str.maketrans({
+    'а': 'a',  'б': 'b',  'в': 'v',  'г': 'g',  'д': 'd',
+    'е': 'e',  'ё': 'yo', 'ж': 'zh', 'з': 'z',  'и': 'i',
+    'й': 'y',  'к': 'k',  'л': 'l',  'м': 'm',  'н': 'n',
+    'о': 'o',  'п': 'p',  'р': 'r',  'с': 's',  'т': 't',
+    'у': 'u',  'ф': 'f',  'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+    'ш': 'sh', 'щ': 'shch','ъ': '',  'ы': 'y',  'ь': '',
+    'э': 'e',  'ю': 'yu', 'я': 'ya',
+    # Ukrainian
+    'є': 'ye', 'і': 'i',  'ї': 'yi', 'ґ': 'g',
+})
+
+def _transliterate(s: str) -> str:
+    return s.lower().translate(_CYRILLIC_TO_LATIN)
+
+def _is_cyrillic(s: str) -> bool:
+    return bool(re.search(r'[\u0400-\u04FF]', s))
+
+def _author_key(authors: list) -> str:
+    """First author family name, transliterated and lowercased."""
+    if not authors:
+        return ""
+    return _transliterate(authors[0].get("family", "").lower())
+
 def flag_cross_script_duplicates(bib: dict) -> int:
     """
-    Flag entries that are likely duplicates of another entry in a different script.
-    Heuristic: same year, same first author initial, one title in Cyrillic and
-    one in Latin script.
-    TODO: implement properly — requires transliteration or fuzzy matching.
+    Flag entries that are likely the same work in Cyrillic and Latin script.
+    Groups by (year, first_author_transliterated) and flags pairs where one
+    entry has a Cyrillic title/author and the other has a Latin equivalent.
     """
-    # Placeholder — to be implemented
-    return 0
+    from collections import defaultdict
+
+    # Build index: (year, author_key) → list of citekeys
+    index: dict[tuple, list] = defaultdict(list)
+    for ck, entry in bib.items():
+        year = entry.get("date", "")[:4]
+        ak   = _author_key(entry.get("author", []))
+        if year and ak:
+            index[(year, ak)].append(ck)
+
+    count = 0
+    for (year, ak), citekeys in index.items():
+        if len(citekeys) < 2:
+            continue
+        # Check if any pair has one Cyrillic and one Latin title
+        entries = [(ck, bib[ck]) for ck in citekeys]
+        cyrillic = [(ck, e) for ck, e in entries if _is_cyrillic(e.get("title", "") + e.get("author", [{}])[0].get("family", ""))]
+        latin    = [(ck, e) for ck, e in entries if not _is_cyrillic(e.get("title", "") + e.get("author", [{}])[0].get("family", ""))]
+        if cyrillic and latin:
+            for ck, e in cyrillic + latin:
+                if "_cross_script_duplicate_of" not in e:
+                    other_cks = [k for k, _ in (latin if (ck, e) in cyrillic else cyrillic)]
+                    e["_cross_script_duplicate_candidate"] = other_cks
+                    count += 1
+
+    return count
 
 
 # ── Pass 10: Flag orphaned cited_by ──────────────────────────────────────────
