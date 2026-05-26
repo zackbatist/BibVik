@@ -643,3 +643,13 @@ to _event, _progress, and _seed_event.
 graph.py: Provisional citekey derived from Zotero map before GROBID
 so all events use a consistent identifier from the start rather than
 a filename stub.
+
+### 2026-05-25 — Add post-processing pipeline
+
+Added bibvik/postprocess.py with 10 cleaning passes based on patterns
+identified in the audit sample: letter prefix artifacts from GROBID
+year+suffix parsing, hyphenated line-break titles, oversized titles
+from compound citation blowout, DOI/date/page normalization, LLM
+placeholder title removal, compound citation flagging, and orphaned
+cited_by detection. Wired into run.py as --postprocess. Cross-script
+duplicate detection is a placeholder for future implementation.

@@ -57,6 +57,7 @@ Examples:
     parser.add_argument("--enrich-bib-only", action="store_true", help="Bibliography enrichment only (skip author enrichment).")
     parser.add_argument("--enrich-auth-only", action="store_true", help="Author enrichment only (skip bibliography enrichment).")
     parser.add_argument("--enrich-threshold", type=float, default=0.85, help="Title similarity threshold for CrossRef title enrichment (default: 0.85).")
+    parser.add_argument("--postprocess", action="store_true", help="Post-process bibliography to fix known data quality artifacts.")
     parser.add_argument("--config", type=str, default="config.yaml")
     parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--seed", type=str, default=None)
@@ -76,7 +77,7 @@ Examples:
                         help="Override LLM model from config.yaml.")
 
     args = parser.parse_args()
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only, args.postprocess]):
         parser.print_help()
         sys.exit(1)
     return args
@@ -184,6 +185,7 @@ def main():
     run_enrich   = args.enrich or args.enrich_bib_only or args.enrich_auth_only
     do_bib_enrich  = args.enrich or args.enrich_bib_only
     do_auth_enrich = args.enrich or args.enrich_auth_only
+    run_postprocess = args.postprocess
 
     bibliography_path = output_dir / "bibliography.json"
     graph_state_path  = output_dir / "_graph_state.json"
@@ -625,6 +627,17 @@ def main():
             threshold        = args.audit_threshold,
         )
         print(f"   Audit sample → {sample_path}", flush=True)
+
+    # ── Stage: Post-process ───────────────────────────────────────────────────
+    if run_postprocess:
+        print("\n━━ Post-processing bibliography", flush=True)
+
+        from bibvik.postprocess import run_postprocess as _run_postprocess
+
+        bib_path = output_dir / "bibliography.json"
+        counts = _run_postprocess(bib_path, bib_path)
+        for name, count in counts.items():
+            print(f"   {name:<45}  {count}", flush=True)
 
     # =========================================================================
     print(f"\nDone. Output → {output_dir}", flush=True)
