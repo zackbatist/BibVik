@@ -1,0 +1,323 @@
+---
+title: "BibVik Citation Graph Analysis"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+---
+
+## Setup
+
+```{r}
+#| label: install
+#| eval: false
+install.packages(c("igraph", "tidyverse", "ggraph", "tidygraph", "rgexf", "jsonlite"))
+```
+
+```{r}
+#| label: libraries
+library(igraph)
+library(tidyverse)
+library(ggraph)
+library(tidygraph)
+```
+
+```{r}
+#| label: load-graph
+library(rgexf)
+library(jsonlite)
+
+gexf_obj <- read.gexf("citation_graph.gexf")
+g <- gexf.to.igraph(gexf_obj)
+g <- as.directed(g, mode = "arbitrary")
+
+bib <- fromJSON("bibliography.json", simplifyDataFrame = FALSE)
+
+node_attrs <- tibble(
+  name       = names(bib),
+  title      = map_chr(bib, ~ if (!is.null(.x$title)) .x$title else ""),
+  year       = map_chr(bib, ~ if (!is.null(.x$date)) .x$date else if (!is.null(.x$year)) .x$year else ""),
+  generation = map_chr(bib, ~ if (!is.null(.x$generation)) .x$generation else ""),
+  entry_type = map_chr(bib, ~ if (!is.null(.x$entry_type)) .x$entry_type else ""),
+)
+
+cat("Nodes:", vcount(g), "\n")
+cat("Edges:", ecount(g), "\n")
+cat("Directed:", is_directed(g), "\n")
+```
+
+## Degree
+
+```{r}
+#| label: degree
+V(g)$degree_in  <- degree(g, mode = "in")
+V(g)$degree_out <- degree(g, mode = "out")
+V(g)$degree_all <- degree(g, mode = "all")
+
+degree_df <- tibble(
+  name       = V(g)$name,
+  in_degree  = V(g)$degree_in,
+  out_degree = V(g)$degree_out,
+  degree     = V(g)$degree_all,
+) |> left_join(node_attrs, by = "name")
+```
+
+### Most cited
+
+```{r}
+degree_df |> arrange(desc(in_degree)) |> head(20) |>
+  select(name, title, year, generation, in_degree) |>
+  knitr::kable()
+```
+
+### Most citing
+
+```{r}
+degree_df |> arrange(desc(out_degree)) |> head(20) |>
+  select(name, title, year, generation, out_degree) |>
+  knitr::kable()
+```
+
+### Degree distribution
+
+```{r}
+#| label: degree-dist
+#| fig-width: 8
+#| fig-height: 5
+ggplot(degree_df, aes(x = in_degree)) +
+  geom_histogram(bins = 50, fill = "steelblue") +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(
+    title = "In-degree distribution (log-log)",
+    x = "In-degree (times cited)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+## Centrality
+
+```{r}
+#| label: centrality
+V(g)$betweenness  <- betweenness(g, directed = TRUE, normalized = TRUE)
+V(g)$closeness_in <- closeness(g, mode = "in", normalized = TRUE)
+V(g)$pagerank     <- page_rank(g, directed = TRUE)$vector
+V(g)$hub          <- hub_score(g)$vector
+V(g)$authority    <- authority_score(g)$vector
+
+centrality_df <- tibble(
+  name        = V(g)$name,
+  betweenness = V(g)$betweenness,
+  closeness   = V(g)$closeness_in,
+  pagerank    = V(g)$pagerank,
+  hub         = V(g)$hub,
+  authority   = V(g)$authority,
+  in_degree   = V(g)$degree_in,
+) |> left_join(node_attrs, by = "name")
+```
+
+### Top by betweenness
+
+```{r}
+centrality_df |> arrange(desc(betweenness)) |> head(20) |>
+  select(name, title, year, betweenness) |>
+  knitr::kable(digits = 4)
+```
+
+### Top by PageRank
+
+```{r}
+centrality_df |> arrange(desc(pagerank)) |> head(20) |>
+  select(name, title, year, pagerank) |>
+  knitr::kable(digits = 6)
+```
+
+### Top by authority score
+
+```{r}
+centrality_df |> arrange(desc(authority)) |> head(20) |>
+  select(name, title, year, authority) |>
+  knitr::kable(digits = 4)
+```
+
+### PageRank by generation
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+centrality_df |>
+  filter(!is.na(generation), generation != "") |>
+  ggplot(aes(x = generation, y = pagerank, fill = generation)) +
+  geom_violin(alpha = 0.7) +
+  geom_boxplot(width = 0.1, alpha = 0.5) +
+  scale_y_log10() +
+  labs(
+    title = "PageRank by generation",
+    x = "Generation",
+    y = "PageRank (log scale)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Connected Components
+
+```{r}
+#| label: components
+wcc <- components(g, mode = "weak")
+scc <- components(g, mode = "strong")
+
+cat("Weakly connected components:", wcc$no, "\n")
+cat("Largest WCC size:", max(wcc$csize), "\n")
+cat("\nStrongly connected components:", scc$no, "\n")
+cat("Largest SCC size:", max(scc$csize), "\n")
+
+V(g)$component_weak   <- wcc$membership
+V(g)$component_strong <- scc$membership
+```
+
+### WCC size distribution
+
+```{r}
+tibble(size = wcc$csize) |>
+  count(size) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+## Community Detection
+
+```{r}
+#| label: undirected
+g_undirected <- as.undirected(g, mode = "collapse")
+```
+
+### Girvan-Newman
+
+```{r}
+#| label: girvan-newman
+#| cache: true
+# Note: slow on large graphs — may take several minutes
+gn <- cluster_edge_betweenness(g_undirected)
+cat("Communities:", length(gn), "\n")
+cat("Modularity:", modularity(gn), "\n")
+V(g)$community_gn <- membership(gn)
+
+tibble(size = sizes(gn)) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+### Louvain
+
+```{r}
+#| label: louvain
+louvain <- cluster_louvain(g_undirected)
+cat("Communities:", length(louvain), "\n")
+cat("Modularity:", modularity(louvain), "\n")
+V(g)$community_louvain <- membership(louvain)
+
+tibble(size = sizes(louvain)) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: louvain-viz
+#| fig-width: 12
+#| fig-height: 12
+#| cache: true
+
+tg <- as_tbl_graph(g) |>
+  activate(nodes) |>
+  mutate(community = as.factor(V(g)$community_louvain))
+
+ggraph(tg, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey60") +
+  geom_node_point(aes(colour = community), size = 0.3, alpha = 0.7) +
+  scale_colour_viridis_d(guide = "none") +
+  theme_graph() +
+  labs(title = "Citation graph — Louvain communities")
+
+ggsave("bibvik_louvain.png", width = 16, height = 16, dpi = 300)
+ggsave("bibvik_louvain.pdf", width = 16, height = 16)
+```
+
+### Leiden
+
+```{r}
+#| label: leiden
+leiden <- cluster_leiden(g_undirected, objective_function = "modularity")
+cat("Communities:", length(leiden), "\n")
+V(g)$community_leiden <- membership(leiden)
+
+tibble(size = sizes(leiden)) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+## K-Means Clustering
+
+```{r}
+#| label: kmeans
+features <- centrality_df |>
+  select(betweenness, closeness, pagerank, hub, authority, in_degree) |>
+  mutate(across(everything(), ~ replace_na(., 0))) |>
+  mutate(across(everything(), ~ scale(.)[,1]))
+
+set.seed(42)
+k <- 6
+km <- kmeans(features, centers = k, nstart = 25)
+centrality_df$cluster_kmeans <- km$cluster
+V(g)$cluster_kmeans <- km$cluster
+
+cat("Cluster sizes:\n")
+table(km$cluster) |> print()
+```
+
+### Cluster profiles
+
+```{r}
+centrality_df |>
+  group_by(cluster_kmeans) |>
+  summarise(
+    n          = n(),
+    mean_pagerank    = mean(pagerank, na.rm = TRUE),
+    mean_betweenness = mean(betweenness, na.rm = TRUE),
+    mean_authority   = mean(authority, na.rm = TRUE),
+    mean_in_degree   = mean(in_degree, na.rm = TRUE),
+  ) |>
+  knitr::kable(digits = 5)
+```
+
+## Export
+
+```{r}
+#| label: export
+node_table <- centrality_df |>
+  left_join(
+    tibble(
+      name              = V(g)$name,
+      component_weak    = V(g)$component_weak,
+      component_strong  = V(g)$component_strong,
+      community_gn      = V(g)$community_gn,
+      community_louvain = V(g)$community_louvain,
+      community_leiden  = V(g)$community_leiden,
+      cluster_kmeans    = V(g)$cluster_kmeans,
+    ),
+    by = "name"
+  )
+
+write_csv(node_table, "bibvik_node_table.csv")
+cat("Written bibvik_node_table.csv\n")
+```
