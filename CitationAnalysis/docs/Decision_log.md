@@ -710,3 +710,11 @@ Removed loose substring containment checks from author matching during
 citation resolution. Now requires exact normalized family name match,
 or prefix match only when the shared prefix is ≥5 chars. Prevents
 false positives like "Lee" → "Leech" or "Li" → "Lindqvist".
+
+### 2026-05-25 — Fix race condition in progress callback
+
+The sequential path progress callback iterated self.bibliography.values()
+to count crossref-resolved and unresolved entries without holding the
+shared lock. Parallel workers writing to bibliography simultaneously
+caused "dictionary changed size during iteration" on Holst 2010 and
+Myrberg 2008. Fixed by wrapping the iteration in _lock.

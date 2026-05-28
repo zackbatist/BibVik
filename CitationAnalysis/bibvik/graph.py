@@ -367,10 +367,11 @@ class CitationGraph:
                     mc = paper_data.get("detection", {}) or {}
                     n_bib_entries   = len(paper_data.get("references", []))
                     n_paragraphs    = len(paper_data.get("paragraphs", []))
-                    n_crossref      = sum(1 for e in self.bibliography.values()
+                    with _lock:
+                        n_crossref  = sum(1 for e in self.bibliography.values()
                                           if e.get("_source_pdf") == pdf_path.name
                                           and e.get("_resolution_method") == "crossref")
-                    n_unresolved    = sum(1 for e in self.bibliography.values()
+                        n_unresolved = sum(1 for e in self.bibliography.values()
                                           if e.get("_source_pdf") == pdf_path.name
                                           and not e.get("_resolution_method")
                                           and e.get("generation") != "P")
