@@ -58,6 +58,7 @@ Examples:
     parser.add_argument("--enrich-auth-only", action="store_true", help="Author enrichment only (skip bibliography enrichment).")
     parser.add_argument("--enrich-threshold", type=float, default=0.85, help="Title similarity threshold for CrossRef title enrichment (default: 0.85).")
     parser.add_argument("--postprocess", action="store_true", help="Post-process bibliography to fix known data quality artifacts.")
+    parser.add_argument("--export", action="store_true", help="Export citation graph to GraphML, GEXF, and CSV formats.")
     parser.add_argument("--config", type=str, default="config.yaml")
     parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--seed", type=str, default=None)
@@ -77,7 +78,7 @@ Examples:
                         help="Override LLM model from config.yaml.")
 
     args = parser.parse_args()
-    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only, args.postprocess]):
+    if not any([args.all, args.extract, args.iterate_f1, args.contexts, args.cluster, args.coverage, args.audit, args.enrich, args.enrich_bib_only, args.enrich_auth_only, args.postprocess, args.export]):
         parser.print_help()
         sys.exit(1)
     return args
@@ -638,6 +639,20 @@ def main():
         counts = _run_postprocess(bib_path, bib_path)
         for name, count in counts.items():
             print(f"   {name:<45}  {count}", flush=True)
+
+    # ── Stage: Export ─────────────────────────────────────────────────────────
+    if args.export:
+        print("\n━━ Exporting citation graph", flush=True)
+
+        from bibvik.exporter import run_export as _run_export
+
+        bib_path = output_dir / "bibliography.json"
+        bib = json.loads(bib_path.read_text(encoding="utf-8"))
+        results = _run_export(bib, output_dir)
+
+        for fmt, counts in results.items():
+            parts = "  ·  ".join(f"{v} {k}" for k, v in counts.items())
+            print(f"   {fmt:<12}  {parts}", flush=True)
 
     # =========================================================================
     print(f"\nDone. Output → {output_dir}", flush=True)

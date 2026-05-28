@@ -687,3 +687,12 @@ citing papers not in corpus (corpus coverage signal), titles containing
 publisher/location strings, near-duplicate entries by token overlap,
 missing given names, editor/author confusion, unprocessed source PDFs.
 Wired into run.py as --postprocess.
+
+### 2026-05-25 — Add graph export module
+
+Added bibvik/exporter.py with four export formats: GraphML (for
+R/igraph — reads natively, direction preserved), GEXF (for Gephi),
+CSV edgelist (source/target pairs), and CSV node table (title, year,
+generation, entry_type, first_author, doi, completeness, in/out
+degree). Wired into run.py as --export. GraphML is the recommended
+format for analysis; GEXF for visualization.
