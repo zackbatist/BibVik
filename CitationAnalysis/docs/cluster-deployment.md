@@ -179,26 +179,40 @@ llm:
 
 ## Running the Pipeline
 
+Always run inside a `screen` session so VPN drops don't interrupt the run:
+
 ```bash
+screen -S bibvik
 source .venv/bin/activate
 
 # Full pipeline: extract + build citation graph
 python3 run.py --extract --iterate-f1
 
 # Limit to N papers (testing)
-python3 run.py --extract --iterate-f1 --limit 10
+python3 run.py --iterate-f1 --limit 10
 
 # Resume interrupted run (cached papers skipped automatically)
 python3 run.py --iterate-f1
 
 # Enrich bibliography via CrossRef
-python3 run.py --enrich --email your@email.com
+python3 run.py --enrich
+
+# Post-process bibliography (fix data quality artifacts)
+python3 run.py --postprocess
+
+# Export citation graph (GraphML, GEXF, CSV)
+python3 run.py --export
 
 # Generate audit sample
 python3 run.py --audit
+```
 
-# Copy audit to local machine for review
-# (run from laptop)
+Detach from screen with Ctrl-A D. Reattach with `screen -r bibvik`.
+
+```bash
+# Copy outputs to local machine (run from laptop)
+scp user@cluster:/path/to/output/bibliography.json ~/Desktop/
+scp user@cluster:/path/to/output/citation_graph.graphml ~/Desktop/
 scp user@cluster:/path/to/output/audit_sample.md ~/Desktop/
 ```
 
@@ -211,16 +225,15 @@ across all LLM endpoints in parallel:
 2. Each worker processes its own batch independently: GROBID then LLM per paper
 3. Workers are fully independent — no shared queue, no coordination overhead
 
-With 5 GPUs and ~90 seconds per paper, throughput is approximately 5×:
+With 5 GPUs and ~4 minutes per paper per worker, throughput is approximately 5×:
 
 | GPUs | Papers | Estimated time |
 |------|--------|----------------|
-| 1    | 382    | ~9 hours       |
-| 3    | 382    | ~3 hours       |
-| 5    | 382    | ~1.75 hours    |
+| 1    | 382    | ~25 hours      |
+| 3    | 382    | ~8 hours       |
+| 5    | 382    | ~5 hours       |
 
-These estimates assume qwen2.5:7b and `detection_batch_size: 5`. Larger models
-or batch size 1 will be slower.
+These estimates are based on actual runs with qwen2.5:7b and `detection_batch_size: 5`. Per-paper time varies significantly with paragraph count — short papers (20–30 paragraphs) take ~1 minute, long papers (100+ paragraphs) take 10+ minutes.
 
 **GPU access requirement:** Docker containers need GPU access via the nvidia
 container runtime. Your user must be in the `video` group:
@@ -249,6 +262,27 @@ python3 run.py --iterate-f1 --limit 10 --remote
 
 Set `llm.remote_url` in your local `config.yaml` to `http://localhost:11440`
 and `llm.remote_backend` to `ollama`.
+
+## Maintenance
+
+**Clearing bad cache entries**
+
+If a run was interrupted or containers failed during model loading, some cached papers may have no LLM results. Use `fix_cache.py` to identify and remove them so they are reprocessed:
+
+```bash
+python3 fix_cache.py
+```
+
+This reads `_graph_state.json` and removes entries where `llm_body_scan` is None. The full bibliography in `_graph_state.json` is always preserved — `bibliography.json` can be restored from it:
+
+```bash
+python3 -c "
+import json
+state = json.load(open('/path/to/output/_graph_state.json'))
+json.dump(state['bibliography'], open('/path/to/output/bibliography.json', 'w'), ensure_ascii=False, indent=2)
+print(f'Restored {len(state[\"bibliography\"])} entries')
+"
+```
 
 ## Troubleshooting
 
