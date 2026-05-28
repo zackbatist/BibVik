@@ -28,7 +28,7 @@ from bibvik.utils import (
 from bibvik.grobid_client import GrobidClient
 from bibvik.graph import CitationGraph
 from bibvik.normalize import normalize_titles_in_bibliography, normalize_authors_in_bibliography
-from bibvik.metadata import build_bibliography_metadata, build_contexts_metadata, build_clusters_metadata
+from bibvik.metadata import build_contexts_metadata, build_clusters_metadata
 
 
 def parse_args() -> argparse.Namespace:
