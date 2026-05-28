@@ -85,14 +85,14 @@ Examples:
 
 
 def _save_bibliography(bibliography: dict, path: Path, config: dict, log: logging.Logger) -> None:
-    """Normalize and save bibliography with metadata."""
+    """Normalize and save bibliography as flat citekey→entry dict."""
     from bibvik.biblatex_model import add_completeness_scores
     n_t = normalize_titles_in_bibliography(bibliography)
     n_a = normalize_authors_in_bibliography(bibliography)
     if n_t or n_a:
         log.debug("Normalization: %d titles, %d author forms updated.", n_t, n_a)
     add_completeness_scores(bibliography)
-    write_json({"_metadata": build_bibliography_metadata(config), "entries": bibliography}, path)
+    write_json(bibliography, path)
 
 
 def _fmt_time(seconds: float) -> str:

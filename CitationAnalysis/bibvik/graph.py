@@ -735,22 +735,30 @@ class CitationGraph:
         return None
 
     def _find_by_author_year(self, author_norm: str, year: str) -> str | None:
-        """Find a bibliography entry by normalized author + year."""
+        """Find a bibliography entry by normalized author + year.
+
+        Matching rules (in order of strictness):
+        1. Exact match on normalized family name
+        2. One name is a prefix of the other, but only if the prefix is ≥5 chars
+           (handles "Sindbaek" vs "Sindbæk" after normalization, but not "Lee" vs "Leech")
+        """
         year4 = year[:4]
         for ck, entry in self.bibliography.items():
             ex_year = entry.get("year", "")
             if ex_year != year4:
                 continue
             ex_authors = entry.get("author", [])
-            if ex_authors:
-                ex_norm = _norm_author(ex_authors[0].get("family", ""))
-                if ex_norm and (
-                    author_norm == ex_norm
-                    or author_norm[:4] == ex_norm[:4]
-                    or author_norm in ex_norm
-                    or ex_norm in author_norm
-                ):
-                    return ck
+            if not ex_authors:
+                continue
+            ex_norm = _norm_author(ex_authors[0].get("family", ""))
+            if not ex_norm:
+                continue
+            if author_norm == ex_norm:
+                return ck
+            # Prefix match only if the shared prefix is meaningful (≥5 chars)
+            min_len = min(len(author_norm), len(ex_norm))
+            if min_len >= 5 and author_norm[:min_len] == ex_norm[:min_len]:
+                return ck
         return None
 
     def _match_to_existing(self, header: dict, pdf_name: str) -> str | None:

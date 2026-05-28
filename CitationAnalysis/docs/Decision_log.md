@@ -696,3 +696,17 @@ CSV edgelist (source/target pairs), and CSV node table (title, year,
 generation, entry_type, first_author, doi, completeness, in/out
 degree). Wired into run.py as --export. GraphML is the recommended
 format for analysis; GEXF for visualization.
+
+### 2026-05-25 — Fix bibliography.json save format
+
+_save_bibliography was wrapping the bibliography in {"_metadata": ...,
+"entries": ...} before writing. Everything reading bibliography.json
+expected a flat citekey→entry dict, so --enrich always produced a
+2-entry file. Fixed to write the flat dict directly.
+
+### 2026-05-25 — Tighten _find_by_author_year matching (item N)
+
+Removed loose substring containment checks from author matching during
+citation resolution. Now requires exact normalized family name match,
+or prefix match only when the shared prefix is ≥5 chars. Prevents
+false positives like "Lee" → "Leech" or "Li" → "Lindqvist".
