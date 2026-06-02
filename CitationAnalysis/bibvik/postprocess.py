@@ -12,7 +12,7 @@ Usage:
 Passes (in order):
     1.  Strip letter prefix from titles        "a: Title" → "Title"
     2.  Join hyphenated line-break titles       "Conti-\nnuity" → "Continuity"
-    3.  Truncate oversized titles               Titles > N chars are likely garbage
+    3.  Flag oversized titles               Titles > N chars flagged as _title_too_long
     4.  Normalize DOI format                    "https://doi.org/10.x" → "10.x"
     5.  Normalize date to year                  "2016-01" → "2016"
     6.  Fix page range artifacts                "157--e168" → "157--168"
@@ -82,13 +82,12 @@ def fix_hyphenated_titles(bib: dict) -> int:
 MAX_TITLE_LENGTH = 300
 
 def fix_oversized_titles(bib: dict) -> int:
-    """Titles longer than MAX_TITLE_LENGTH chars are likely raw citation blowout."""
+    """Flag titles longer than MAX_TITLE_LENGTH chars — likely raw citation blowout."""
     count = 0
     for entry in bib.values():
         title = entry.get("title", "")
         if len(title) > MAX_TITLE_LENGTH:
-            entry["_title_too_long"] = title[:200]
-            entry["title"] = ""
+            entry["_title_too_long"] = True
             count += 1
     return count
 
@@ -458,7 +457,7 @@ def flag_unprocessed_source_pdfs(bib: dict, processed_pdfs: set | None = None) -
 PASSES = [
     ("Strip letter prefix from titles",           fix_letter_prefix),
     ("Join hyphenated line-break titles",         fix_hyphenated_titles),
-    ("Truncate oversized titles",                 fix_oversized_titles),
+    ("Flag oversized titles",                     fix_oversized_titles),
     ("Normalize DOI format",                      fix_doi_format),
     ("Normalize date to year",                    fix_date_format),
     ("Fix page range artifacts",                  fix_page_ranges),

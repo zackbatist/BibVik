@@ -723,3 +723,11 @@ Myrberg 2008. Fixed by wrapping the iteration in _lock.
 
 Added import json to top-level imports. The --export block used
 json.loads without importing json, causing a NameError at runtime.
+
+### 2026-06-01 — Fix postprocess pass 3 — oversized titles
+
+Pass 3 was clearing titles over 300 chars to empty and storing the
+first 200 chars in _title_too_long. This was destructive — even
+compound citation blowout entries may contain a real title. Changed
+to flag only: _title_too_long: True is added but the title field is
+preserved unchanged.
