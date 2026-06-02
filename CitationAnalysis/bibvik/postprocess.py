@@ -231,6 +231,12 @@ def fix_entry_types(bib: dict) -> int:
         else:
             continue
 
+        # Don't downgrade incollection to inbook — missing editor data
+        # should not change the entry type since the booktitle structure
+        # implies an edited volume
+        if old_type == "incollection" and new_type == "inbook":
+            continue
+
         if new_type != old_type:
             entry["entry_type"] = new_type
             entry["_entry_type_original"] = old_type

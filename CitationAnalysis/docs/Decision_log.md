@@ -739,3 +739,11 @@ including publisher and series names inserted by CrossRef enrichment.
 Fixed to require volume, issue, or pages alongside journaltitle before
 reclassifying as article. Reverted bad book→article reclassifications
 from the first postprocess run.
+
+### 2026-06-01 — Prevent incollection→inbook reclassification in pass 10
+
+1594 incollection entries were being reclassified to inbook when the
+editor field was missing. Missing editor data should not change the
+entry type — the booktitle structure implies an edited volume. Added
+explicit guard to skip incollection→inbook reclassification. Reverted
+all 1594 affected entries.
