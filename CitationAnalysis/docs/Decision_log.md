@@ -718,3 +718,8 @@ to count crossref-resolved and unresolved entries without holding the
 shared lock. Parallel workers writing to bibliography simultaneously
 caused "dictionary changed size during iteration" on Holst 2010 and
 Myrberg 2008. Fixed by wrapping the iteration in _lock.
+
+### 2026-06-01 — Fix missing json import in run.py
+
+Added import json to top-level imports. The --export block used
+json.loads without importing json, causing a NameError at runtime.
