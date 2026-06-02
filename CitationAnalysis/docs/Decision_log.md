@@ -731,3 +731,11 @@ first 200 chars in _title_too_long. This was destructive — even
 compound citation blowout entries may contain a real title. Changed
 to flag only: _title_too_long: True is added but the title field is
 preserved unchanged.
+
+### 2026-06-01 — Fix postprocess pass 10 — entry type reclassification
+
+Article reclassification was triggering on any non-empty journaltitle,
+including publisher and series names inserted by CrossRef enrichment.
+Fixed to require volume, issue, or pages alongside journaltitle before
+reclassifying as article. Reverted bad book→article reclassifications
+from the first postprocess run.

@@ -201,7 +201,11 @@ def fix_llm_placeholder_titles(bib: dict) -> int:
 # ── Pass 10: Reclassify entry types ──────────────────────────────────────────
 
 def fix_entry_types(bib: dict) -> int:
-    """Heuristic entry type reclassification based on available fields."""
+    """Heuristic entry type reclassification based on available fields.
+
+    Article reclassification requires volume OR pages in addition to journaltitle,
+    to avoid publisher/series names in journaltitle triggering false article classification.
+    """
     count = 0
     for entry in bib.values():
         old_type  = entry.get("entry_type", "")
@@ -209,8 +213,14 @@ def fix_entry_types(bib: dict) -> int:
         booktitle = entry.get("booktitle", "").strip()
         editors   = entry.get("editor", [])
         isbn      = entry.get("isbn", "").strip()
+        volume    = entry.get("volume", "").strip()
+        pages     = entry.get("pages", "").strip()
+        number    = entry.get("number", "").strip()
 
-        if journal:
+        # Only reclassify to article if journaltitle is accompanied by
+        # volume, issue, or pages — publisher/series names in journaltitle
+        # should not trigger article classification
+        if journal and (volume or pages or number):
             new_type = "article"
         elif booktitle and editors:
             new_type = "incollection"
