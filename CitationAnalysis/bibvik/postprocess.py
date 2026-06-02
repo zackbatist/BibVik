@@ -219,8 +219,11 @@ def fix_entry_types(bib: dict) -> int:
 
         # Only reclassify to article if journaltitle is accompanied by
         # volume, issue, or pages — publisher/series names in journaltitle
-        # should not trigger article classification
-        if journal and (volume or pages or number):
+        # should not trigger article classification.
+        # Pages must be a range (e.g. 6--30) not a single number, to
+        # distinguish journal articles from monograph series volumes.
+        pages_is_range = bool(re.search(r"\d+\s*[-–]+\s*\d+", pages))
+        if journal and (volume or number or pages_is_range):
             new_type = "article"
         elif booktitle and editors:
             new_type = "incollection"

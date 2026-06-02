@@ -754,3 +754,11 @@ Some book entries had booktitles matching their own title (series names,
 self-referential) causing false reclassification to inbook/incollection.
 Added title/booktitle similarity check — entries where the normalized
 title and booktitle overlap are kept as book.
+
+### 2026-06-01 — Require page range for article reclassification
+
+Monograph series (AUN, Acta Archaeologica Lundensia, etc.) were being
+misidentified as journals because they have volume numbers and are
+stored in journaltitle. Added requirement that pages must be a range
+(not a single number) for article reclassification. Reverted affected
+book→article entries.
