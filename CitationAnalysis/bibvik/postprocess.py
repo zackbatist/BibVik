@@ -237,6 +237,18 @@ def fix_entry_types(bib: dict) -> int:
         if old_type == "incollection" and new_type == "inbook":
             continue
 
+        # Don't reclassify book→inbook when booktitle matches title
+        # (the entry IS the book) or when booktitle looks like a series name
+        if old_type == "book" and new_type in ("inbook", "incollection"):
+            title_norm    = re.sub(r"\W", "", entry.get("title", "").lower())
+            booktitle_norm = re.sub(r"\W", "", booktitle.lower())
+            if title_norm and booktitle_norm and (
+                title_norm == booktitle_norm
+                or title_norm in booktitle_norm
+                or booktitle_norm in title_norm
+            ):
+                continue
+
         if new_type != old_type:
             entry["entry_type"] = new_type
             entry["_entry_type_original"] = old_type

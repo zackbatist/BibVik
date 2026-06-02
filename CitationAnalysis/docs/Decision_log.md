@@ -747,3 +747,10 @@ editor field was missing. Missing editor data should not change the
 entry type — the booktitle structure implies an edited volume. Added
 explicit guard to skip incollection→inbook reclassification. Reverted
 all 1594 affected entries.
+
+### 2026-06-01 — Guard book→inbook false reclassification in pass 10
+
+Some book entries had booktitles matching their own title (series names,
+self-referential) causing false reclassification to inbook/incollection.
+Added title/booktitle similarity check — entries where the normalized
+title and booktitle overlap are kept as book.
