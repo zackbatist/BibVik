@@ -22,11 +22,43 @@ from .tei_parser import parse_tei_references, parse_tei_body, parse_tei_header, 
 from .detector import detect_all_citations
 from .resolver import resolve_citations
 from .normalize import normalize_entry
+from .enricher import enrich_entry as _enrich_entry
 
 logger = logging.getLogger(__name__)
 
 
-class CitationGraph:
+# =============================================================================
+# Module-level helpers
+# =============================================================================
+
+# Cyrillic → Latin transliteration table (ALA-LC standard, covers Russian,
+# Ukrainian, Bulgarian). Used for cross-script duplicate detection in
+# _find_duplicate() — cached transliterations keyed by raw family name.
+_CYRILLIC_TO_LATIN = str.maketrans({
+    'а': 'a',  'б': 'b',  'в': 'v',  'г': 'g',  'д': 'd',
+    'е': 'e',  'ё': 'yo', 'ж': 'zh', 'з': 'z',  'и': 'i',
+    'й': 'i',  'к': 'k',  'л': 'l',  'м': 'm',  'н': 'n',
+    'о': 'o',  'п': 'p',  'р': 'r',  'с': 's',  'т': 't',
+    'у': 'u',  'ф': 'f',  'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+    'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y',  'ь': '',
+    'э': 'e',  'ю': 'iu', 'я': 'ia',
+    # Ukrainian
+    'є': 'ie', 'і': 'i',  'ї': 'i',  'ґ': 'g',
+})
+_TRANSLIT_CACHE: dict[str, str] = {}
+
+
+def _transliterate_author(name: str) -> str:
+    """Transliterate a family name to Latin script for cross-script comparison."""
+    if not name:
+        return ""
+    if name in _TRANSLIT_CACHE:
+        return _TRANSLIT_CACHE[name]
+    result = name.lower().translate(_CYRILLIC_TO_LATIN)
+    # Strip non-alpha after transliteration and normalize
+    result = re.sub(r"[^a-z]", "", result)
+    _TRANSLIT_CACHE[name] = result
+    return result
     """
     Build and manage a multi-generational citation graph.
 
@@ -612,6 +644,10 @@ class CitationGraph:
                     self._merge_into(existing, ref)
                 else:
                     self.bibliography[citekey] = ref
+                    # Per-paper enrichment: enrich immediately so title is
+                    # available for deduplication of subsequent papers
+                    if llm_config and llm_config.get("_email"):
+                        _enrich_entry(ref, email=llm_config["_email"])
 
                 gid = ref.get("_grobid_id", "")
                 if gid:
@@ -702,24 +738,35 @@ class CitationGraph:
     # =========================================================================
 
     def _find_duplicate(self, ref: dict) -> str | None:
-        """Check if a reference already exists. Returns existing citekey or None."""
+        """Check if a reference already exists. Returns existing citekey or None.
+
+        Matching strategies applied in order:
+        1. DOI match
+        2. Exact title match (≥20 chars)
+        3. Author + year + fuzzy title (≥60% token overlap)
+        4. Cross-script: transliterated author + year match (Cyrillic ↔ Latin)
+        """
         ref_doi = (ref.get("doi") or "").strip().lower()
         ref_title = _norm_title(ref.get("title", ""))
         ref_authors = ref.get("author", [])
         ref_year = _extract_year(ref.get("date", "") or ref.get("year", ""))
 
+        # Transliterate ref's first author for cross-script comparison
+        ref_fam_raw = ref_authors[0].get("family", "") if ref_authors else ""
+        ref_fam_translit = _transliterate_author(ref_fam_raw)
+
         for ck, existing in self.bibliography.items():
-            # DOI match
+            # 1. DOI match
             ex_doi = (existing.get("doi") or "").strip().lower()
             if ref_doi and ex_doi and ref_doi == ex_doi:
                 return ck
 
-            # Exact title match (long titles only)
+            # 2. Exact title match (long titles only)
             ex_title = _norm_title(existing.get("title", ""))
             if ref_title and ex_title and ref_title == ex_title and len(ref_title) >= 20:
                 return ck
 
-            # Author + year + fuzzy title
+            # 3. Author + year + fuzzy title
             ex_year = existing.get("year", "")
             ex_authors = existing.get("author", [])
             if ref_year and ex_year and ref_year == ex_year:
@@ -730,8 +777,24 @@ class CitationGraph:
                         if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.6:
                             return ck
                         elif not ref_title or not ex_title:
-                            # Author + year match without title — accept if both have authors
                             return ck
+
+                    # 4. Cross-script: transliterate both sides and compare
+                    if ref_fam_translit:
+                        ex_fam_raw = ex_authors[0].get("family", "")
+                        ex_fam_translit = _transliterate_author(ex_fam_raw)
+                        if ex_fam_translit and ref_fam_translit == ex_fam_translit:
+                            # Same transliterated author + year: flag as cross-script candidate
+                            # and merge if titles also match or both lack titles
+                            if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.5:
+                                return ck
+                            elif not ref_title and not ex_title:
+                                return ck
+                            else:
+                                # Flag for audit but don't auto-merge — titles differ
+                                existing.setdefault("_cross_script_duplicate_candidate", [])
+                                if ref.get("citekey") and ref["citekey"] not in existing["_cross_script_duplicate_candidate"]:
+                                    existing["_cross_script_duplicate_candidate"].append(ref.get("citekey", ""))
 
         return None
 

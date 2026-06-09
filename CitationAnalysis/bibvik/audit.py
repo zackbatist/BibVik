@@ -86,29 +86,42 @@ def run_audit(
     logger.info("Drawing audit sample (n=%d per stratum, seed=%d)...", n, seed)
 
     # ── Build strata ──────────────────────────────────────────────────────────
-    crossref   = _stratum_crossref(bibliography)
-    unresolved = _stratum_unresolved(bibliography)
-    minimal    = _stratum_minimal(bibliography)
-    duplicates = _stratum_duplicates(bibliography, threshold, rng=rng)
-    ocr        = _stratum_ocr(bibliography, ocr_originals_dir)
-    by_lang    = _stratum_by_language(bibliography, processed_papers)
-    catalogue  = _stratum_catalogue(bibliography)
+    crossref       = _stratum_crossref(bibliography)
+    unresolved     = _stratum_unresolved(bibliography)
+    minimal        = _stratum_minimal(bibliography)
+    duplicates     = _stratum_duplicates(bibliography, threshold, rng=rng)
+    ocr            = _stratum_ocr(bibliography, ocr_originals_dir)
+    by_lang        = _stratum_by_language(bibliography, processed_papers)
+    catalogue      = _stratum_catalogue(bibliography)
+    # New flag strata
+    citekey_collisions  = _stratum_citekey_collisions(bibliography)
+    oversized_titles    = _stratum_oversized_titles(bibliography)
+    missing_given       = _stratum_missing_given_names(bibliography)
+    near_dup_flagged    = _stratum_near_duplicate_flagged(bibliography)
 
     # ── Sample ────────────────────────────────────────────────────────────────
-    s_crossref   = _sample(crossref,   n, rng)
-    s_unresolved = _sample(unresolved, n, rng)
-    s_minimal    = _sample(minimal,    n, rng)
-    s_ocr        = _sample(ocr,        n, rng)
-    s_catalogue  = _sample(catalogue,  n, rng)
-    s_by_lang    = {lang: _sample(entries, n, rng) for lang, entries in by_lang.items()}
+    s_crossref         = _sample(crossref,          n, rng)
+    s_unresolved       = _sample(unresolved,        n, rng)
+    s_minimal          = _sample(minimal,           n, rng)
+    s_ocr              = _sample(ocr,               n, rng)
+    s_catalogue        = _sample(catalogue,         n, rng)
+    s_citekey          = _sample(citekey_collisions, n, rng)
+    s_oversized        = _sample(oversized_titles,  n, rng)
+    s_missing_given    = _sample(missing_given,     n, rng)
+    s_near_dup         = _sample(near_dup_flagged,  n, rng)
+    s_by_lang          = {lang: _sample(entries, n, rng) for lang, entries in by_lang.items()}
 
     # Log stratum sizes
-    logger.info("  CrossRef-resolved:    %d entries (sampling %d)", len(crossref),   len(s_crossref))
-    logger.info("  Unresolved:           %d entries (sampling %d)", len(unresolved), len(s_unresolved))
-    logger.info("  Minimal:              %d entries (sampling %d)", len(minimal),    len(s_minimal))
+    logger.info("  CrossRef-resolved:    %d entries (sampling %d)", len(crossref),          len(s_crossref))
+    logger.info("  Unresolved:           %d entries (sampling %d)", len(unresolved),        len(s_unresolved))
+    logger.info("  Minimal:              %d entries (sampling %d)", len(minimal),           len(s_minimal))
     logger.info("  Duplicate pairs:      %d pairs (all included)",  len(duplicates))
-    logger.info("  OCR source:           %d entries (sampling %d)", len(ocr),        len(s_ocr))
-    logger.info("  Catalogue candidates: %d entries (sampling %d)", len(catalogue),  len(s_catalogue))
+    logger.info("  OCR source:           %d entries (sampling %d)", len(ocr),               len(s_ocr))
+    logger.info("  Catalogue candidates: %d entries (sampling %d)", len(catalogue),         len(s_catalogue))
+    logger.info("  Citekey collisions:   %d entries (sampling %d)", len(citekey_collisions), len(s_citekey))
+    logger.info("  Oversized titles:     %d entries (sampling %d)", len(oversized_titles),  len(s_oversized))
+    logger.info("  Missing given names:  %d entries (sampling %d)", len(missing_given),     len(s_missing_given))
+    logger.info("  Near-dup flagged:     %d entries (sampling %d)", len(near_dup_flagged),  len(s_near_dup))
     for lang, entries in by_lang.items():
         logger.info("  Language %-10s %d entries (sampling %d)", lang + ":", len(entries), len(s_by_lang[lang]))
     if not by_lang:
@@ -127,16 +140,24 @@ def run_audit(
         by_lang      = s_by_lang,
         bibliography = bibliography,
         pool_sizes   = {
-            "crossref":   len(crossref),
-            "unresolved": len(unresolved),
-            "minimal":    len(minimal),
-            "ocr":        len(ocr),
-            "catalogue":  len(catalogue),
-            "by_lang":    {lang: len(entries) for lang, entries in by_lang.items()},
+            "crossref":          len(crossref),
+            "unresolved":        len(unresolved),
+            "minimal":           len(minimal),
+            "ocr":               len(ocr),
+            "catalogue":         len(catalogue),
+            "citekey_collisions": len(citekey_collisions),
+            "oversized_titles":  len(oversized_titles),
+            "missing_given":     len(missing_given),
+            "near_dup_flagged":  len(near_dup_flagged),
+            "by_lang":           {lang: len(entries) for lang, entries in by_lang.items()},
         },
         n         = n,
         seed      = seed,
         threshold = threshold,
+        citekey_collisions = s_citekey,
+        oversized          = s_oversized,
+        missing_given      = s_missing_given,
+        near_dup           = s_near_dup,
     )
 
     logger.info("Audit sample written: %s", output_path)
@@ -222,6 +243,45 @@ def _stratum_catalogue(bibliography: dict[str, dict]) -> list[str]:
         ck for ck, e in bibliography.items()
         if e.get("_catalogue_candidate")
     ]
+
+
+def _stratum_citekey_collisions(bibliography: dict[str, dict]) -> list[str]:
+    """
+    Entries where the base citekey (without a/b/c suffix) is shared with
+    another entry — may indicate different works with same author+year,
+    or a genuine duplicate that escaped deduplication.
+    """
+    import re as _re
+    base_to_citekeys: dict[str, list] = defaultdict(list)
+    for ck in bibliography:
+        base = _re.sub(r"[a-z]$", "", ck)
+        base_to_citekeys[base].append(ck)
+    return [
+        ck
+        for citekeys in base_to_citekeys.values()
+        if len(citekeys) >= 2
+        for ck in citekeys
+    ]
+
+
+def _stratum_oversized_titles(bibliography: dict[str, dict]) -> list[str]:
+    """Entries flagged as having oversized titles (likely compound citation blowout)."""
+    return [ck for ck, e in bibliography.items() if e.get("_title_too_long")]
+
+
+def _stratum_missing_given_names(bibliography: dict[str, dict]) -> list[str]:
+    """Entries where any author has an empty given name."""
+    result = []
+    for ck, e in bibliography.items():
+        authors = e.get("author", [])
+        if any(not a.get("given", "").strip() for a in authors if a.get("family", "").strip()):
+            result.append(ck)
+    return result
+
+
+def _stratum_near_duplicate_flagged(bibliography: dict[str, dict]) -> list[str]:
+    """Entries flagged as near-duplicate candidates by postprocess."""
+    return [ck for ck, e in bibliography.items() if e.get("_near_duplicate_candidate")]
 
 
 def _stratum_ocr(
@@ -310,6 +370,7 @@ def _render(
     n: int,
     seed: int,
     threshold: float,
+    **kwargs,
 ) -> None:
     """Write the full audit sample Markdown file."""
     lines = []
@@ -476,6 +537,78 @@ def _render(
             )
             for i, ck in enumerate(sample, 1):
                 lines += _render_entry(ck, bibliography[ck], i, len(sample))
+
+    # ── Citekey suffix collisions ─────────────────────────────────────────────
+    citekey_collisions = kwargs.get("citekey_collisions", [])
+    citekey_pool = pool_sizes.get("citekey_collisions", 0)
+    if citekey_pool > 0:
+        lines += _render_stratum_header(
+            title     = "Citekey suffix collisions",
+            sample    = citekey_collisions,
+            pool_size = citekey_pool,
+            n         = n,
+            guidance  = (
+                "These entries share a base citekey with at least one other entry "
+                "(e.g. price2002 and price2002a). Check whether they are genuinely "
+                "different works or duplicates that escaped deduplication."
+            ),
+        )
+        for i, ck in enumerate(citekey_collisions, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(citekey_collisions))
+
+    # ── Oversized titles ──────────────────────────────────────────────────────
+    oversized = kwargs.get("oversized", [])
+    oversized_pool = pool_sizes.get("oversized_titles", 0)
+    if oversized_pool > 0:
+        lines += _render_stratum_header(
+            title     = "Oversized titles",
+            sample    = oversized,
+            pool_size = oversized_pool,
+            n         = n,
+            guidance  = (
+                "These entries have titles over 300 characters, likely from compound "
+                "citation blowout (GROBID treating a full reference string as a title). "
+                "Review the title and correct manually if possible."
+            ),
+        )
+        for i, ck in enumerate(oversized, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(oversized))
+
+    # ── Missing given names ───────────────────────────────────────────────────
+    missing_given = kwargs.get("missing_given", [])
+    missing_pool = pool_sizes.get("missing_given", 0)
+    if missing_pool > 0:
+        lines += _render_stratum_header(
+            title     = "Missing given names",
+            sample    = missing_given,
+            pool_size = missing_pool,
+            n         = n,
+            guidance  = (
+                "These entries have one or more authors with no given name. "
+                "CrossRef enrichment may fill these in. If not, check the source PDF."
+            ),
+        )
+        for i, ck in enumerate(missing_given, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(missing_given))
+
+    # ── Near-duplicate flagged ────────────────────────────────────────────────
+    near_dup = kwargs.get("near_dup", [])
+    near_dup_pool = pool_sizes.get("near_dup_flagged", 0)
+    if near_dup_pool > 0:
+        lines += _render_stratum_header(
+            title     = "Near-duplicate candidates",
+            sample    = near_dup,
+            pool_size = near_dup_pool,
+            n         = n,
+            guidance  = (
+                "These entries were flagged as near-duplicates by postprocess "
+                "(same author+year, ≥70% title token overlap) but could not be "
+                "resolved automatically. Check _near_duplicate_candidate field for "
+                "the paired citekey."
+            ),
+        )
+        for i, ck in enumerate(near_dup, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(near_dup))
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines), encoding="utf-8")

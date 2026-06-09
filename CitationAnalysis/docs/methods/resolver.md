@@ -95,9 +95,25 @@ for entries not in its database, and a larger bibliography just means more
 false positives in absolute terms. Enrichment-mode CrossRef (see below) avoids
 this by requiring a confirmed title match before accepting any result.
 
----
+### Per-paper enrichment
 
-## Enrichment
+CrossRef enrichment also runs per paper during `--iterate-f1`, immediately after
+each new bibliography entry is added to the graph. This is distinct from the
+end-of-corpus `--enrich` pass — it serves a different purpose: ensuring that
+newly added entries have CrossRef-enriched titles available for deduplication of
+subsequent papers.
+
+When a new entry is added to the bibliography and `--email` is provided, the
+pipeline immediately queries CrossRef for it via `enrich_entry()` in
+`enricher.py`. If a match is found, missing fields are filled in (same additive-
+only logic as `--enrich`). The enriched title is then available when `_find_duplicate()`
+is called for the next paper's entries.
+
+The tradeoff is speed: per-paper enrichment adds a CrossRef API call per new
+entry (with a 0.15s polite delay), which can add significant time to long runs.
+This can be disabled by omitting `--email` from the CLI.
+
+---
 
 ### Bibliography enrichment (CrossRef)
 

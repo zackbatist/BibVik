@@ -142,6 +142,72 @@ full rationale for LLM-only resolution.
 
 ---
 
+## Post-enrichment: near-duplicate resolution
+
+**Task:** Given two bibliography entries with the same author+year and similar
+titles, determine whether they refer to the same published work.
+
+**Prompt** (`_llm_same_work` in `bibvik/postprocess.py`):
+
+```
+You are an expert bibliographer. Are the following two bibliography entries
+the same published work? Consider title, author, and year.
+Respond with only 'yes' or 'no'.
+
+Entry A:
+  Title: {title_a}
+  Author: {author_a_family}
+  Year: {year_a}
+
+Entry B:
+  Title: {title_b}
+  Author: {author_b_family}
+  Year: {year_b}
+
+/no_think
+```
+
+**Design rationale:** Near-duplicate resolution is triggered by ≥70% token
+overlap on both titles after the full enriched bibliography is built. Trivial
+titles (Introduction, Conclusion, etc.) and titles under 20 characters are
+excluded before comparison. The LLM is given author and year alongside the
+titles because the same title can legitimately belong to different works (e.g.
+two papers both titled "Viking Age Scandinavia"). Temperature is set to 0.0
+for maximum determinism. If the LLM is unavailable or returns an inconclusive
+response, the pair is flagged `_near_duplicate_candidate` for human review in
+`--audit`.
+
+---
+
+## Post-enrichment: compound citation splitting
+
+**Task:** Given a raw citation string containing multiple bibliographic
+references merged together (GROBID compound citation blowout), split them into
+individual references.
+
+**Prompt** (`split_compound_citations` in `bibvik/postprocess.py`):
+
+```
+You are an expert bibliographer. The following string contains multiple
+bibliographic references merged together. Split them into individual references
+and return a JSON array of objects, each with keys:
+first_author_family, year, title, container_title, entry_type.
+
+String: {raw_citation}
+
+Respond ONLY with a JSON array. /no_think
+```
+
+**Design rationale:** Compound citations arise when GROBID fails to split
+entries that span multiple works — most commonly dash-abbreviated author
+repetitions in humanities reference lists. The pass only operates on entries
+flagged `_possibly_compound` with a non-empty `_raw_citation` field, so the
+LLM always has the original reference string to work from. Results are stored
+in `_split_into` for human review rather than automatically replacing the
+original entry, since the split may be imperfect.
+
+---
+
 ## Citation function and content enrichment (unused in main pipeline)
 
 `bibvik/llm_analyzer.py` also contains prompts for citation function analysis

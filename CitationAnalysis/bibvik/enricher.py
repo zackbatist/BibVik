@@ -143,6 +143,48 @@ def enrich_bibliography(
     return counts
 
 
+def enrich_entry(
+    entry: dict,
+    email: str = "",
+    title_threshold: float = TITLE_SIM_THRESHOLD,
+) -> bool:
+    """
+    Enrich a single bibliography entry in-place using CrossRef.
+
+    Used for per-paper enrichment during graph construction — newly added
+    entries are enriched immediately so their titles are available for
+    deduplication of subsequent papers.
+
+    Returns True if the entry was enriched, False otherwise.
+    """
+    if entry.get("_enriched_via"):
+        return False  # Already enriched
+
+    doi   = (entry.get("doi") or "").strip()
+    title = (entry.get("title") or "").strip()
+
+    if doi:
+        enriched = _crossref_by_doi(doi, email)
+        if enriched:
+            _apply_enrichment(entry, enriched)
+            time.sleep(CROSSREF_DELAY)
+            return True
+
+    elif title:
+        author = ""
+        authors = entry.get("author", [])
+        if authors:
+            author = authors[0].get("family", "")
+        year = entry.get("date", entry.get("year", ""))[:4]
+        enriched = _crossref_by_title(title, author, year, email, title_threshold)
+        if enriched:
+            _apply_enrichment(entry, enriched)
+            time.sleep(CROSSREF_DELAY)
+            return True
+
+    return False
+
+
 def _crossref_by_doi(doi: str, email: str) -> dict | None:
     """Fetch a CrossRef record by DOI. Returns metadata dict or None."""
     doi = _clean_doi(doi)

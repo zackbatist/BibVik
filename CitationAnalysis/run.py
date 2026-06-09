@@ -195,6 +195,9 @@ def main():
 
     llm_cfg = config.get("llm", {})
     email   = args.email or config.get("email", "")
+    # Store email in llm_cfg so graph.py can pass it to per-paper enrichment
+    if email:
+        llm_cfg["_email"] = email
 
     partial_bib = [None]
 

@@ -12,19 +12,24 @@ format:
 
 # Overview
 
-The citation analysis apparatus has five core processes, supported by a shared infrastructure of normalization, deduplication, and metadata management. This document explains how each component works and how they interact.
+The citation analysis apparatus has five core processes, supported by a shared
+infrastructure of normalisation, deduplication, and metadata management. This
+document explains how each component works and how they interact.
 
 # Module Map
 
 | Module | Responsibility |
 |---|---|
 | `detector.py` | Multi-method citation detection (5 methods applied per paper) |
-| `resolver.py` | Resolves unmatched citations via CrossRef and LLM |
+| `resolver.py` | Resolves unmatched citations via LLM inference from contexts |
 | `graph.py` | Builds multi-generational citation graph with deduplication |
 | `tei_parser.py` | Parses GROBID's TEI-XML; splits compound references |
 | `grobid_client.py` | HTTP client for GROBID; OCR fallback for scanned PDFs |
-| `normalize.py` | Title and author name normalization |
-| `audit.py` | Stratified random sampling for manual graph validation |
+| `normalize.py` | Per-entry normalisation applied at graph construction time |
+| `enricher.py` | CrossRef enrichment — additive metadata, never identification |
+| `postprocess.py` | LLM cleaning passes run after enrichment (entry types, near-dups, compound splitting) |
+| `audit.py` | Stratified random sampling and flag annotation for manual validation |
+| `exporter.py` | Graph export to GraphML, GEXF, and CSV formats |
 | `context_extractor.py` | Extracts verbatim citation contexts *(tabled)* |
 | `llm_analyzer.py` | Citation function classification and cluster characterization *(tabled)* |
 | `cluster_analyzer.py` | Co-occurrence matrix and cluster detection *(tabled)* |
@@ -36,19 +41,28 @@ The citation analysis apparatus has five core processes, supported by a shared i
 
 # Citation Detection: The Five Methods
 
-For each paper in the corpus, five detection methods are applied independently. Their results are merged and deduplicated into a single set of citations. Each citation is tagged with which methods found it (provenance tracking).
+For each paper in the corpus, five detection methods are applied independently.
+Their results are merged and deduplicated into a single set of citations. Each
+citation is tagged with which methods found it (provenance tracking).
 
 ## Method 1: GROBID Bibliography
 
-GROBID's ML models parse the PDF's reference list into structured `<biblStruct>` entries. Our TEI parser post-processes these to split compound references (dash-abbreviated authors) and detect merged entries. This yields the richest metadata (title, journal, volume, pages, DOI) when it works.
+GROBID's ML models parse the PDF's reference list into structured `<biblStruct>`
+entries. The TEI parser post-processes these to split compound references
+(dash-abbreviated authors) and detect merged entries. This yields the richest
+metadata (title, journal, volume, pages, DOI) when it works.
 
 **Strengths**: Rich structured metadata. DOIs when available.
 
-**Weaknesses**: Trained on STEM articles. Misses footnote-style references. Fails on non-standard layouts. Under-counts when reference lists use humanities conventions.
+**Weaknesses**: Trained on STEM articles. Misses footnote-style references.
+Fails on non-standard layouts. Under-counts when reference lists use humanities
+conventions.
 
 ## Method 2: GROBID Inline Markers
 
-GROBID annotates `<ref type="bibr">` elements in the body text. We extract (author, year) pairs from the marker text, independently of whether the corresponding bibliography entry was successfully parsed. This catches citations that GROBID linked but whose bibliography entry was malformed.
+GROBID annotates `<ref type="bibr">` elements in the body text. (Author, year)
+pairs are extracted from the marker text independently of whether the
+corresponding bibliography entry was successfully parsed.
 
 **Strengths**: ML-detected, handles diverse inline styles.
 
@@ -56,80 +70,162 @@ GROBID annotates `<ref type="bibr">` elements in the body text. We extract (auth
 
 ## Method 3: Regex Patterns
 
-Pattern matching for standard citation forms in the raw body text: parenthetical `(Smith 2020)`, narrative `Smith (2020)`, multi-author, et al., semicolon-separated groups. Handles non-English connectors (og, und, och, et).
+Pattern matching for standard citation forms in the raw body text: parenthetical
+`(Smith 2020)`, narrative `Smith (2020)`, multi-author, et al., semicolon-
+separated groups. Handles non-English connectors (og, und, och, et).
 
 **Strengths**: Fast. Catches formally styled citations GROBID missed.
 
-**Weaknesses**: Cannot detect discursive references, organizational authors, or numbered citation styles.
+**Weaknesses**: Cannot detect discursive references or organizational authors.
+Unreliable for multilingual text.
 
 ## Method 4: LLM Body Scan
 
-Each paragraph is sent to the local LLM (qwen3.5:35b) with a prompt asking it to identify all referenced works. This catches everything: discursive references ("as Smith argued in her 2020 monograph"), organizational authors, informal references.
+Each paragraph is sent to the local LLM with a prompt asking it to identify all
+referenced works. This catches discursive references, organisational authors,
+and any citation style recognisable to the LLM.
 
 **Strengths**: Most comprehensive detection. Handles any citation style.
 
-**Weaknesses**: Slowest method. May produce false positives for author-year-like patterns that aren't citations.
+**Weaknesses**: Slowest method by a large margin. May produce false positives.
 
 ## Method 5: LLM Footnote Extraction
 
-Each footnote containing year patterns is sent to the LLM with a structured extraction prompt. The LLM returns full bibliographic metadata — not just (author, year) but title, journal, volume, pages, entry type. Essential for papers using Chicago footnote style where the bibliography is in the notes.
+Each footnote containing year patterns is sent to the LLM with a structured
+extraction prompt. The LLM returns full bibliographic metadata — not just
+(author, year) but title, journal, volume, pages, entry type. Essential for
+papers using Chicago footnote style.
 
-**Strengths**: Extracts rich metadata from footnote prose. Handles multiple references per footnote.
+**Strengths**: Extracts rich metadata from footnote prose. Handles multiple
+references per footnote.
 
-**Weaknesses**: Depends on LLM accuracy for metadata extraction.
+**Weaknesses**: Depends on LLM accuracy.
 
 ## Merging
 
-After all five methods run, results are merged by normalized (author, year) key. When multiple methods detect the same citation, their provenance tags are combined. The merged set represents our best knowledge of every work cited anywhere in the document.
+After all five methods run, results are merged by normalized (author, year) key.
+When multiple methods detect the same citation, their provenance tags are
+combined. The merged set represents our best knowledge of every work cited
+anywhere in the document.
 
 # OCR Fallback
 
-Some PDFs in the corpus are scanned images with no embedded text layer. GROBID returns HTTP 500 with `[NO_BLOCKS]` in the response body for these. `grobid_client.py` detects this signal, runs `ocrmypdf` to add a text layer, replaces the original PDF in place, backs up the original to `output/ocr/originals/`, and retries GROBID. The backup's presence is the cache signal on subsequent runs. Requires `ocrmypdf` and Tesseract — installed as an optional dependency (`pip install -e ".[ocr]"`).
+Some PDFs have no embedded text layer. GROBID returns HTTP 500 with
+`[NO_BLOCKS]` for these. `grobid_client.py` detects this signal, runs
+`ocrmypdf` to add a text layer, backs up the original to `output/ocr/originals/`,
+replaces the PDF in place, and retries GROBID. The backup's presence is the
+cache signal on subsequent runs.
 
 # Resolution
 
-For citations detected in the text but not matched to any existing bibliography entry, the resolver attempts two tiers:
+For citations detected in the text but not matched to any existing bibliography
+entry, the resolver uses only the LLM. CrossRef is not used for resolution —
+author+year queries to CrossRef produce a high rate of false positives because
+CrossRef always returns a result regardless of domain. See
+`docs/methods/resolver-method.md` for the full rationale.
 
-1. **CrossRef API**: Query by author surname + year. Accept if author and year match. Free, no auth needed (polite pool with email).
+The LLM receives up to three citation contexts (paragraphs where the citation
+appears) and infers full bibliographic metadata: title, journal, entry type,
+co-authors. If no contexts are available, the entry becomes a stub preserving
+the citation relationship without metadata. Stubs may be resolved naturally on
+subsequent papers where the work appears as a complete GROBID bibliography entry.
 
-2. **LLM metadata generation**: Send citation contexts to the LLM and ask it to infer full bibliographic metadata. Particularly useful for non-English works and grey literature.
-
-Resolved entries are tagged with `_resolution_method` (crossref, llm_from_context, llm_from_footnote, stub) and `_resolution_confidence` (high, medium, low).
+Resolved entries are tagged with `_resolution_method` (llm_from_context,
+llm_from_footnote, stub) and `_resolution_confidence` (medium, low).
 
 # Graph Construction
 
 The citation graph is built incrementally:
 
 1. **Seed paper**: Extract all citations (5 methods). Add to bibliography as F1.
-2. **F1 papers**: For each PDF, extract all citations (5 methods). Match the paper to its existing F1 entry. Add its citations as F2.
-3. **Deduplication**: Each new entry is checked against existing entries by DOI, exact title, and author+year+fuzzy title. Duplicates are merged, accumulating cited_by links and preferring the most complete metadata.
+2. **F1 papers**: For each PDF, extract all citations (5 methods). Match the
+   paper to its existing F1 entry. Add its citations as F2.
+3. **Deduplication**: Each new entry is checked against existing entries by four
+   strategies in order: DOI, exact title, author+year+fuzzy title, and
+   cross-script transliteration (Cyrillic ↔ Latin via ALA-LC table). Duplicates
+   are merged, accumulating cited_by links.
+4. **Per-paper enrichment**: Each newly added entry is enriched via CrossRef
+   immediately after insertion, so its title is available for deduplication of
+   subsequent papers.
 
-Matching an F1 PDF to its bibliography entry uses a tiered strategy: Zotero CSV (if provided) → DOI → exact title → author+year.
+Matching an F1 PDF to its bibliography entry uses a tiered strategy: Zotero CSV
+(if provided) → DOI → exact title → author+year.
 
-# Normalization
+# Normalisation
 
-Two normalization passes run on the bibliography before output:
+Normalisation runs per-entry at creation time inside `normalize_entry()` in
+`normalize.py`. Every new entry is normalised before being added to the
+bibliography:
 
-- **Title normalization**: Detects ALL-CAPS titles (from PDFs with all-caps headings) and converts to title case using humanities conventions. Non-English titles are detected heuristically and left in their original case.
+- **Title cleanup**: ALL-CAPS conversion, letter prefix stripping (`"a: Title"`
+  → `"Title"`), hyphenated line-break joining, LLM placeholder title removal,
+  oversized title flagging (`_title_too_long` for titles >300 chars)
+- **Field normalisation**: DOI prefix stripping, date-to-year extraction, page
+  range normalisation, volume extraction from pages field
+- **Entry type**: Conservative reclassification for `misc` entries only, based
+  on available fields
 
-- **Author name normalization**: Resolves inconsistent given-name forms across entries for the same author (e.g., "H L" vs "Hanne Lovise"). Prefers the most complete form seen across the corpus.
+Corpus-wide author given-name normalisation (preferring the most complete form
+seen for each family name) runs at save time.
+
+# Enrichment
+
+After the full corpus is processed, `--enrich` fills in missing metadata fields
+from CrossRef. Two strategies: DOI lookup (fully reliable) and title query
+(accepted only at ≥0.85 title similarity). Enrichment is strictly additive —
+existing fields are never overwritten, and entry identity (citekey, generation,
+cited_by) is never changed. See `docs/methods/resolver-method.md`.
+
+# Post-processing
+
+`--postprocess` runs LLM cleaning passes after enrichment, on fields that are
+best assessed once the full enriched bibliography is available:
+
+- **Entry type reclassification**: uses enriched `journaltitle`, `volume`,
+  `pages`, and `editor` fields to correct types set under incomplete data, with
+  guards against false reclassification (monograph series ≠ journals,
+  incollection not demoted to inbook)
+- **Near-duplicate resolution**: LLM asked "are these the same work?" for
+  title-rich entry pairs with ≥70% token overlap; trivial titles (Introduction,
+  Conclusion, etc.) are excluded; unresolved pairs are flagged for audit
+- **Compound citation splitting**: LLM splits `_raw_citation` strings for
+  entries flagged as possibly compound
 
 # Completeness Scoring
 
-Each bibliography entry receives a `_completeness` field with a score (0.0–1.0) and a breakdown of which fields are present vs. expected for its entry type. Expected fields vary by type:
+Each bibliography entry receives a `completeness` field with a score (0.0–1.0)
+and a breakdown of which fields are present vs. expected for its entry type.
+Used by the audit tool to stratify entries for manual review.
 
-- **article**: author, title, journaltitle, volume, pages, year
-- **book**: author, title, publisher, year
-- **incollection**: author, title, booktitle, editor, publisher, year
-- **inproceedings**: author, title, eventtitle, year
+# Audit
 
-# Audit Sampling
+`--audit` draws a stratified random sample from the bibliography for human
+review and annotates the full bibliography with data quality flags:
 
-`audit.py` draws a stratified random sample from the citation graph for manual validation. Strata: CrossRef-resolved entries, unresolved entries, minimal-completeness entries, suspected duplicate pairs, OCR-source entries, and non-English source papers per language (pending language detection). Output is `output/audit_sample.md`, designed for direct annotation. See `docs/audit-sampling-method.md` for full methodological documentation.
+**Sample strata**: CrossRef-resolved, unresolved, minimal-completeness, suspected
+duplicate pairs, OCR-source entries, non-English source papers per language.
+
+**Flag strata**: citekey suffix collisions, oversized titles (`_title_too_long`),
+missing given names, near-duplicate candidates (`_near_duplicate_candidate`).
+
+Output is `output/audit_sample.md`, designed for direct annotation. See
+`docs/methods/audit-sampling.md` for full methodological documentation.
+
+# Export
+
+`--export` produces four output files via `exporter.py`:
+
+- `citation_graph.graphml` — for R/igraph (reads natively, direction preserved)
+- `citation_graph.gexf` — for Gephi
+- `citation_edgelist.csv` — directed source→target pairs
+- `citation_nodes.csv` — node attributes: title, year, generation, entry_type,
+  first_author, doi, completeness, in/out degree
 
 # Graceful Cancellation
 
-When the user presses Ctrl-C during a long-running stage, the SIGINT handler writes the current bibliography state to `_partial_bibliography.json` before exiting. This prevents loss of work during multi-hour LLM runs.
+Ctrl-C during a long-running stage writes the current bibliography state to
+`_partial_bibliography.json` before exiting, preventing loss of work during
+multi-hour LLM runs.
 
 # CLI Flags
 
@@ -138,14 +234,17 @@ When the user presses Ctrl-C during a long-running stage, the SIGINT handler wri
 | `--all` | 1-4 | Run full pipeline |
 | `--extract` | 1 | Seed paper only |
 | `--iterate-f1` | 2 | F1 papers → citation graph |
-| `--contexts` | 3 | Citation context analysis *(tabled)* |
-| `--cluster` | 4 | Cluster analysis *(tabled)* |
+| `--enrich` | 3 | CrossRef enrichment of bibliography |
+| `--enrich-bib-only` | 3 | Bibliography enrichment only |
+| `--enrich-auth-only` | 3 | Author enrichment only |
+| `--postprocess` | 4 | LLM cleaning passes (post-enrich) |
+| `--audit` | 5 | Draw stratified audit sample + flag annotations |
+| `--export` | 6 | Export graph to GraphML, GEXF, CSV |
 | `--coverage` | — | PDF coverage report + OA lookup |
-| `--audit` | — | Draw stratified audit sample |
 | `--audit-n N` | — | Entries per audit stratum (default: 10) |
 | `--audit-seed N` | — | Random seed for audit sampling (default: 42) |
 | `--audit-threshold F` | — | Duplicate similarity threshold (default: 0.85) |
 | `--limit N` | 2 | Process only N F1 papers |
-| `--context-limit N` | 3 | Analyze only N contexts with LLM |
-| `--email` | 2,cov | Contact email for CrossRef/Unpaywall |
+| `--email` | 2,3 | Contact email for CrossRef polite pool |
+| `--model` | 2,4 | Override LLM model name |
 | `--verbose` | all | Debug logging |

@@ -100,6 +100,10 @@ are included and the shortfall is noted in the output.
 | Suspected duplicate pairs | High title/author similarity; may have escaped deduplication |
 | Entries from OCR-processed papers | OCR may have introduced character errors corrupting names, titles, or years |
 | Entries from non-English papers (per language) | Non-Latin characters most likely to produce encoding or transliteration errors; sampled independently per language |
+| Citekey suffix collisions | Entries sharing a base citekey (e.g. price2002 and price2002a); may be genuine distinct works or duplicates that escaped merging |
+| Oversized titles | Titles over 300 characters flagged as likely compound citation blowout; requires manual title recovery |
+| Missing given names | Authors with no given name after enrichment; check source PDF or CrossRef |
+| Near-duplicate candidates | Flagged by postprocess as same-author+year with ≥70% title overlap but not auto-resolved; requires human judgment |
 
 ## Sample size
 

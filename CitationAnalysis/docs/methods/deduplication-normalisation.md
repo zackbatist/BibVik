@@ -1,7 +1,7 @@
 # Deduplication and Normalisation
 
 > **Note:** This document was drafted with the assistance of Claude (Anthropic,
-> claude-sonnet-4-6, May 2026) and reviewed by the project author. All cited
+> claude-sonnet-4-6, June 2026) and reviewed by the project author. All cited
 > sources were independently verified to exist before inclusion. No sources have
 > been inferred or hallucinated.
 
@@ -10,124 +10,182 @@
 The BibVik bibliography accumulates entries from five detection methods across
 382 F1 papers, the seed paper, and several resolution and enrichment passes.
 Without deduplication, the same work would appear multiple times under
-different citekeys — e.g. "Price 2002" detected as an inline marker in one
-paper, as a GROBID bibliography entry in another, and as an LLM-resolved stub
-in a third. This document describes how BibVik identifies and merges duplicate
-entries, and how it normalises field values across entries from different sources.
+different citekeys. This document describes how BibVik identifies and merges
+duplicate entries and normalises field values, and how these operations changed
+over the course of the project.
+
+---
+
+## Normalisation
+
+Normalisation is applied per entry at creation time, inside `normalize_entry()`
+in `bibvik/normalize.py`. Every new entry — whether from GROBID, LLM resolution,
+or footnote extraction — is normalised before being added to the bibliography.
+This ensures the bibliography is always clean regardless of source.
+
+**Title normalisation** handles:
+
+1. ALL CAPS titles, common in older Scandinavian publications, converted to
+   title case using a heuristic that detects script and applies language-
+   appropriate capitalisation rules. English titles use standard title case;
+   non-English titles use sentence case to avoid incorrect capitalisation of
+   grammatical particles.
+
+2. Inconsistent Unicode representation normalised to NFC form.
+
+3. Letter prefix artifacts from year+suffix parsing — e.g. `"a: Title"` →
+   `"Title"` — produced when GROBID parses `"2016a: Title"` and treats `a:`
+   as a label. Stripped by regex before any case normalisation.
+
+4. Hyphenated line breaks joined — `"Conti-\nnuity"` → `"Continuity"`.
+
+5. LLM placeholder titles (e.g. `"Article by Ravdonikas"`, `"Статья В. И. X"`)
+   cleared and stored in `_placeholder_title` for reference.
+
+6. Oversized titles (over 300 characters) flagged with `_title_too_long: True`.
+   These are almost always compound citation blowout — GROBID treating an
+   entire raw citation string as a title. The title is preserved unchanged;
+   the flag surfaces them for audit review.
+
+**Date normalisation** extracts the 4-digit year from ISO 8601 date strings
+(`"2016-01"` → `"2016"`) and stores it in both `date` and `year` fields.
+
+**DOI normalisation** strips URL prefixes (`https://doi.org/`) to leave the
+bare DOI string.
+
+**Page range normalisation** removes spurious `e` characters (`e168` → `168`)
+and normalises single hyphens to double hyphens (`6-30` → `6--30`).
+
+**Volume extraction** detects page strings containing a volume number
+(`"87, pp. 6-30"`) and moves the volume to the `volume` field.
+
+**Entry type reclassification** is applied conservatively for `misc` entries
+only, based on which fields are present (journaltitle + volume/pages → article;
+booktitle + editors → incollection). Entries with specific types set by GROBID
+are not touched at creation time — reclassification with enriched fields runs
+later in `--postprocess`.
+
+**Author normalisation** standardises given-name forms: initials are formatted
+consistently, and corpus-wide given-name expansion (preferring the longest seen
+form for each family name) runs at save time via `normalize_authors_in_bibliography()`.
+
+---
 
 ## Deduplication
 
 Deduplication happens in real time during graph construction, in
 `_find_duplicate()` within `bibvik/graph.py`. Every new candidate entry is
-checked against the existing bibliography before being added. Three matching
+checked against the existing bibliography before being added. Four matching
 strategies are applied in order:
 
 **DOI match.** If both the candidate and an existing entry have a DOI, and the
 DOIs match after stripping whitespace and lowercasing, the entries are
-considered identical. DOI matching is the most reliable strategy and is always
-preferred when available.
+considered identical. DOI matching is the most reliable strategy.
 
 **Exact title match.** If both entries have a title of at least 20 characters,
 and the titles match after normalisation (lowercased, punctuation stripped,
-whitespace collapsed), the entries are considered identical. The 20-character
-threshold prevents spurious matches on short or generic titles.
+whitespace collapsed), the entries are considered identical.
 
 **Author + year + fuzzy title match.** If the year and normalised first-author
-family name match, and both entries have titles with at least 60% token overlap
-(measured as the intersection over the smaller title's token set), the entries
-are considered identical. If either entry lacks a title, author and year alone
-are treated as sufficient for a match. This handles cases where GROBID extracts
-slightly different title strings from the same work appearing in different
-reference lists.
+family name match, and both entries have titles with at least 60% token overlap,
+the entries are considered identical. If either entry lacks a title, author and
+year alone are treated as sufficient.
+
+**Cross-script match.** If the year matches and the transliterated first-author
+family names match (Cyrillic → Latin via the ALA-LC transliteration table
+implemented in `_transliterate_author()`), the entries are considered candidate
+duplicates. If their titles also have ≥50% token overlap, or both lack titles,
+the entries are merged. If titles differ despite matching transliterated authors
+and year, the existing entry is flagged with `_cross_script_duplicate_candidate`
+for audit review — automatic merging is not performed in this case because the
+works may be genuinely distinct.
+
+Transliterations are cached in `_TRANSLIT_CACHE` to avoid recomputing. The
+ALA-LC table was chosen because it is the standard used in library cataloguing
+and in CrossRef's author records, giving the best chance of matching
+transliterations that appear in the bibliography.
 
 When a match is found, the existing entry is retained and the new candidate is
-discarded. The `cited_by` list of the existing entry is updated to record the
-citing paper. No fields are merged — the first entry encountered wins. This
-means field completeness depends on the order in which papers are processed,
-which in parallel mode is non-deterministic. CrossRef enrichment (`--enrich`)
-addresses this by filling in missing fields after the graph is fully built.
+discarded. The `cited_by` list of the existing entry is updated. No fields are
+merged — the first entry encountered wins. CrossRef enrichment (`--enrich`)
+fills in missing fields after the graph is built.
+
+### Post-hoc cross-script detection
+
+Creation-time cross-script detection catches the common case where the same
+work appears in one paper's reference list in Cyrillic and in another's in
+Latin transliteration. However, different romanization conventions (German,
+British, ALA-LC) can produce different transliterated forms that the creation-
+time check misses. A post-hoc full-corpus scan is therefore also available in
+`--audit`, which uses looser fuzzy matching and surfaces remaining cross-script
+candidates for human review.
 
 ### Limitations
 
 Deduplication fails when:
 
-- Author names are transliterated inconsistently (e.g. "Ravdonikas" vs
-  "Равдоникас"), since the matching operates on normalised Latin-script strings.
-  Cross-script duplicates are flagged by the `--postprocess` pass but not
-  automatically merged.
-- A title is very short (under 20 characters) and no DOI is available, so
-  neither the DOI nor the exact title strategy can apply, and the author+year
-  strategy may under-match.
+- Cross-script romanization conventions differ beyond what ALA-LC covers.
+- A title is under 20 characters and no DOI is available.
 - The same work is cited as both a book and a chapter, or with different
-  date strings (e.g. "2002" vs "2002a"), leading to separate entries that
-  appear distinct by all three criteria.
+  date strings (e.g. "2002" vs "2002a"), creating entries distinct by all
+  four criteria.
+
+---
 
 ## Author-year matching during integration
 
-Separate from deduplication (which checks new entries against existing ones),
-`_find_by_author_year()` links detected inline citations to existing
-bibliography entries. When the detector identifies a citation like "(Price
-2002)", it normalises the author name and year and checks whether an entry
-already in the bibliography matches.
+Separate from deduplication, `_find_by_author_year()` links detected inline
+citations to existing bibliography entries. The matching applies two rules:
+exact match on normalised family name, then prefix match when the shared prefix
+is at least 5 characters. Loose substring containment matching was rejected
+because it produced false positives — "Lee" matched "Leech", "Li" matched
+"Lindqvist".
 
-The matching applies two rules in order: exact match on normalised family name,
-then prefix match when the shared prefix is at least 5 characters (to handle
-normalisation differences like diacritics removed or truncated initials). Loose
-substring containment matching was deliberately rejected because it produced
-false positives — "Lee" matched "Leech", "Li" matched "Lindqvist" — which
-created spurious citation edges.
+---
 
-When no match is found, the citation becomes an unmatched entry passed to the
-resolver for LLM-based identification.
+## Post-enrichment reclassification
 
-## Normalisation
+A second entry type reclassification pass runs as part of `--postprocess`, after
+CrossRef enrichment has filled in `journaltitle`, `volume`, `pages`, and other
+fields. This pass operates on all entry types (not only `misc`) and uses the
+enriched fields to make more accurate classifications. It applies guards against:
 
-Normalisation is applied to bibliography entries at two points: during graph
-construction (via `normalize_entry()` in `bibvik/normalize.py`) and at save
-time (via `normalize_titles_in_bibliography()` and
-`normalize_authors_in_bibliography()`).
+- Reclassifying `incollection` to `inbook` due to missing editor data
+- Reclassifying `book` to `article` when only a series name appears in `journaltitle`
+  (requires a page range, not just a volume number)
+- Reclassifying `book` to `inbook/incollection` when the booktitle matches the
+  entry's own title (the entry is the book itself, not a chapter)
 
-**Title normalisation** handles three main problems:
-
-1. ALL CAPS titles, common in older Scandinavian publications, are converted to
-   title case using a heuristic that detects the script and applies language-
-   appropriate capitalisation rules. English titles use standard title case;
-   non-English titles use sentence case (first word only capitalised) to avoid
-   incorrect capitalisation of Scandinavian grammatical particles.
-
-2. Inconsistent Unicode representation — e.g. composed vs decomposed diacritics
-   — is normalised to NFC form so that string comparison works correctly across
-   entries from different sources.
-
-3. Trailing punctuation and extraneous whitespace are stripped.
-
-**Author normalisation** standardises family and given name fields: names
-extracted in "Last, First" order are split and reordered, initials are expanded
-where CrossRef provides full names, and Unicode normalisation is applied. No
-attempt is made to disambiguate authors with the same name.
-
-**Date normalisation** extracts the 4-digit year from ISO 8601 date strings
-(e.g. "2016-01" → "2016") and removes non-numeric characters from bare year
-strings.
-
-**Post-processing** (`--postprocess`, `bibvik/postprocess.py`) applies a
-further set of cleaning passes after enrichment, addressing artifacts that
-are best corrected in bulk after the full corpus is processed rather than
-during graph construction: letter prefixes leaked from year+suffix parsing
-(e.g. "a: Title"), hyphenated line-break titles, oversized titles from compound
-citation blowout, DOI and page range format normalisation, LLM placeholder
-title removal, and entry type reclassification.
+---
 
 ## Citekey generation
 
 Citekeys are generated by `generate_citekey()` in `bibvik/utils.py`. The
 format is `familynameyear` — first author's normalised family name (lowercased,
 diacritics removed, non-alphabetic characters stripped) followed by the 4-digit
-year. When a citekey collision occurs (same author and year for a different
-work), a lowercase letter suffix is appended: `price2002`, `price2002a`,
-`price2002b`, etc.
+year. Collisions (same author and year) receive lowercase letter suffixes:
+`price2002`, `price2002a`, `price2002b`, etc.
 
-Citekeys are stable within a run but not guaranteed stable across runs, since
-the order in which works are first encountered depends on paper processing
-order, which in parallel mode is non-deterministic. This means citekeys should
-be treated as internal identifiers rather than persistent external references.
+Citekeys are stable within a run but not guaranteed stable across runs in
+parallel mode, since processing order is non-deterministic. Treat citekeys as
+internal identifiers, not persistent external references.
+
+---
+
+## OCR quality detection — considered and not adopted
+
+A proactive OCR quality detection step was considered for identifying degraded
+PDFs before sending them to GROBID. The `ocr-text-aligner` tool (Farr 2026)
+maps LLM-cleaned text back onto ALTO XML word by word using fuzzy matching and
+geometric proximity, producing per-word confidence scores (`ALIGNCONF`) that
+could serve as an OCR quality signal. This approach was not implemented for two
+reasons: BibVik does not use ALTO XML output (it reads GROBID's TEI-XML derived
+from the PDF text layer), and the tool's primary purpose — restoring bounding
+boxes for searchable/accessible document delivery — is not relevant to BibVik's
+pipeline. The approach remains available as a future option if OCR quality
+becomes a systematic problem and the pipeline is extended to use Tesseract
+output directly.
+
+> Farr, C. (2026). *OCR Text Aligner: Maps LLM-cleaned text to ALTO XML OCR
+> elements using fuzzy string matching, context-based scoring, and geometric
+> proximity analysis.* GitHub. https://github.com/chloe-farr/ocr-text-aligner

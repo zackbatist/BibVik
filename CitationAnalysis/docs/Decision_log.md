@@ -762,3 +762,29 @@ misidentified as journals because they have volume numbers and are
 stored in journaltitle. Added requirement that pages must be a range
 (not a single number) for article reclassification. Reverted affected
 book→article entries.
+
+### 2026-06-09 — Major pipeline refactor
+
+Restructured normalisation, deduplication, postprocessing, and audit
+to reflect correct order of operations and eliminate postprocess as a
+cleanup patch:
+
+- Per-entry fixes (title, date, DOI, pages, oversized, entry type for
+  misc) moved from postprocess into normalize_entry() in normalize.py,
+  applied at graph construction time.
+
+- _find_duplicate() gains cross-script step 4 via ALA-LC transliteration
+  table. Auto-merges on title overlap ≥50%, flags remainder for audit.
+
+- Per-paper CrossRef enrichment added: enrich_entry() called for each
+  new F2 entry, enriched titles available for subsequent deduplication.
+
+- postprocess.py rewritten to 3 LLM-only passes: entry type
+  reclassification (post-enrich, all types), near-duplicate resolution
+  (trivial title blocklist, LLM for title-rich pairs), compound citation
+  splitting.
+
+- audit.py gains 4 new flag strata: citekey collisions, oversized titles,
+  missing given names, near-duplicate candidates.
+
+- All methods docs updated to reflect new architecture.

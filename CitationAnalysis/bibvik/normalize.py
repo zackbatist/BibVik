@@ -395,8 +395,10 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
     """
     Apply all normalizations to a single bibliography entry in-place.
 
-    Call this when inserting a new entry (e.g., from footnote extraction)
-    before it's added to the bibliography dict.
+    Call this when inserting a new entry before it's added to the bibliography.
+    Handles: title cleanup, date/DOI/page normalization, oversized title flagging,
+    letter prefix stripping, hyphenated line-break joining, LLM placeholder removal,
+    and entry type reclassification for misc entries.
 
     Args:
         entry:  Bibliography entry dict (modified in-place).
@@ -407,17 +409,78 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
     """
     lang = langid or entry.get("langid", "")
 
-    # Normalize title.
-    if entry.get("title"):
-        entry["title"] = normalize_title(entry["title"], lang)
+    # ── Title cleanup ──────────────────────────────────────────────────────────
+    title = entry.get("title", "")
+    if title:
+        # Strip letter prefix from year+suffix parsing (e.g. "a: Title" → "Title")
+        title = re.sub(r"^[a-z]\s*:\s*", "", title).strip()
+        # Join hyphenated line breaks
+        title = re.sub(r"-\s*\n\s*", "", title)
+        title = re.sub(r"-\s*$", "", title).strip()
+        # Flag oversized titles (likely compound citation blowout)
+        if len(title) > 300:
+            entry["_title_too_long"] = True
+        # Remove LLM placeholder titles
+        _placeholder = re.compile(
+            r"^(article|статья|стаття)\s+(by|в\.?\s*и\.?|від)\b|"
+            r"^unknown\s+title|^\[untitled\]|^no\s+title",
+            re.IGNORECASE,
+        )
+        if _placeholder.match(title):
+            entry["_placeholder_title"] = title
+            title = ""
+        entry["title"] = normalize_title(title, lang) if title else ""
 
-    # Strip leading apostrophe artifact from booktitle too.
+    # ── Booktitle cleanup ──────────────────────────────────────────────────────
     if entry.get("booktitle"):
         entry["booktitle"] = re.sub(
             r"^['\u2018\u2019\u201c\u201d]+", "", entry["booktitle"]
         ).strip()
 
-    # Normalize author/editor given names to strip stray periods, extra spaces.
+    # ── DOI normalization ──────────────────────────────────────────────────────
+    doi = entry.get("doi", "")
+    if doi:
+        entry["doi"] = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi).strip()
+
+    # ── Date normalization: "2016-01" → "2016" ────────────────────────────────
+    date = entry.get("date", "")
+    if date:
+        m = re.match(r"^(\d{4})", str(date))
+        if m:
+            entry["date"] = m.group(1)
+            entry["year"] = m.group(1)
+
+    # ── Page range normalization ───────────────────────────────────────────────
+    pages = entry.get("pages", "")
+    if pages:
+        pages = re.sub(r"e(\d)", r"\1", pages)              # strip spurious 'e'
+        pages = re.sub(r"(?<!-)-(?!-)", "--", pages)         # normalize single dash
+        entry["pages"] = pages
+
+    # ── Volume extraction from pages field ────────────────────────────────────
+    if pages and not entry.get("volume"):
+        m = re.match(r"^(\d+)\s*[,:]?\s*(?:pp?\.)?\s*(\d+\s*[-–]\s*\d+)$", pages)
+        if m:
+            entry["volume"] = m.group(1)
+            entry["pages"] = re.sub(r"(?<!-)-(?!-)", "--", m.group(2)).strip()
+
+    # ── Entry type reclassification (misc only — conservative) ────────────────
+    if entry.get("entry_type") == "misc":
+        journal   = entry.get("journaltitle", "").strip()
+        booktitle = entry.get("booktitle", "").strip()
+        editors   = entry.get("editor", [])
+        volume    = entry.get("volume", "").strip()
+        number    = entry.get("number", "").strip()
+        p         = entry.get("pages", "").strip()
+        pages_range = bool(re.search(r"\d+\s*[-–]+\s*\d+", p))
+        if journal and (volume or number or pages_range):
+            entry["entry_type"] = "article"
+        elif booktitle and editors:
+            entry["entry_type"] = "incollection"
+        elif booktitle and not editors:
+            entry["entry_type"] = "inbook"
+
+    # ── Author/editor given-name cleanup ──────────────────────────────────────
     for role in ("author", "editor"):
         for person in entry.get(role, []):
             if person.get("given"):
