@@ -48,6 +48,92 @@ _CYRILLIC_TO_LATIN = str.maketrans({
 _TRANSLIT_CACHE: dict[str, str] = {}
 
 
+def _split_compound_entry(ref: dict, llm_config: dict) -> list[dict] | None:
+    """
+    Ask the LLM to split a compound citation entry into individual references.
+    Returns a list of entry dicts if splitting succeeded, None otherwise.
+    Called inline during graph construction for entries flagged _possibly_compound.
+    """
+    import json as _json
+    import requests as _requests
+    import re as _re
+
+    raw = ref.get("_raw_citation", "")
+    if not raw:
+        return None
+
+    prompt = (
+        "You are an expert bibliographer. The following string contains multiple "
+        "bibliographic references merged together. Split them into individual references "
+        "and return a JSON array of objects, each with keys: "
+        "first_author_family, first_author_given, year, title, container_title, entry_type.\n\n"
+        f"String: {raw}\n\n"
+        "Respond ONLY with a JSON array. /no_think"
+    )
+
+    try:
+        base_url = llm_config.get("base_url", "http://localhost:11434")
+        model    = llm_config.get("model", "qwen2.5:7b")
+        timeout  = llm_config.get("timeout", 60)
+        backend  = llm_config.get("backend", "ollama")
+
+        if backend == "ollama":
+            resp = _requests.post(
+                f"{base_url}/api/generate",
+                json={"model": model, "prompt": prompt, "stream": False,
+                      "think": False, "options": {"temperature": 0.1, "num_predict": 512}},
+                timeout=timeout,
+            )
+            raw_resp = resp.json().get("response", "").strip()
+        else:
+            resp = _requests.post(
+                f"{base_url}/v1/chat/completions",
+                json={"model": model, "messages": [{"role": "user", "content": prompt}],
+                      "stream": False, "temperature": 0.1, "max_tokens": 512},
+                timeout=timeout,
+            )
+            raw_resp = resp.json()["choices"][0]["message"]["content"].strip()
+
+        raw_resp = _re.sub(r"<think>[\s\S]*?</think>", "", raw_resp).strip()
+        m = _re.search(r"\[[\s\S]*\]", raw_resp)
+        if not m:
+            return None
+        parsed = _json.loads(m.group(0))
+
+        if not isinstance(parsed, list) or len(parsed) < 2:
+            return None
+
+        entries = []
+        for item in parsed:
+            if not isinstance(item, dict):
+                continue
+            family = item.get("first_author_family", "")
+            given  = item.get("first_author_given", "")
+            if not family:
+                continue
+            entry = {
+                "author":      [{"family": family, "given": given}],
+                "date":        str(item.get("year", "")),
+                "year":        str(item.get("year", ""))[:4],
+                "title":       item.get("title", ""),
+                "entry_type":  item.get("entry_type", "misc"),
+                "_raw_citation": raw,
+                "_split_from": ref.get("citekey", ""),
+            }
+            ct = item.get("container_title", "")
+            if ct:
+                if entry["entry_type"] == "article":
+                    entry["journaltitle"] = ct
+                else:
+                    entry["booktitle"] = ct
+            entries.append(entry)
+
+        return entries if entries else None
+
+    except Exception:
+        return None
+
+
 def _transliterate_author(name: str) -> str:
     """Transliterate a family name to Latin script for cross-script comparison."""
     if not name:
@@ -639,19 +725,37 @@ def _transliterate_author(name: str) -> str:
                 ref["_source_pdf"] = pdf_path.name
                 ref = normalize_entry(ref)
 
-                existing = self._find_duplicate(ref)
-                if existing:
-                    self._merge_into(existing, ref)
-                else:
-                    self.bibliography[citekey] = ref
-                    # Per-paper enrichment: enrich immediately so title is
-                    # available for deduplication of subsequent papers
-                    if llm_config and llm_config.get("_email"):
-                        _enrich_entry(ref, email=llm_config["_email"])
+                # Inline compound citation splitting — if GROBID flagged this
+                # entry as possibly compound and we have an LLM, split it now
+                # so the resulting entries participate in deduplication
+                refs_to_add = [ref]
+                if ref.get("_possibly_compound") and ref.get("_raw_citation") and llm_config:
+                    split = _split_compound_entry(ref, llm_config)
+                    if split:
+                        refs_to_add = split
 
-                gid = ref.get("_grobid_id", "")
-                if gid:
-                    self.grobid_map[(pdf_path.name, gid)] = citekey
+                for r in refs_to_add:
+                    if r is not ref:
+                        # Assign citekey, generation etc to split entries
+                        r_authors = r.get("author", [])
+                        r_year = _extract_year(r.get("date", ""))
+                        r["citekey"] = generate_citekey(r_authors, r_year)
+                        r["generation"] = "F2"
+                        r["cited_by"] = [f1_citekey]
+                        r["_source_pdf"] = pdf_path.name
+                        r = normalize_entry(r)
+
+                    existing = self._find_duplicate(r)
+                    if existing:
+                        self._merge_into(existing, r)
+                    else:
+                        self.bibliography[r["citekey"]] = r
+                        if llm_config and llm_config.get("_email"):
+                            _enrich_entry(r, email=llm_config["_email"])
+
+                    gid = ref.get("_grobid_id", "")
+                    if gid and r is ref:
+                        self.grobid_map[(pdf_path.name, gid)] = r["citekey"]
 
         # ── Detection ────────────────────────────────────────────────────────
         _fire("llm_body_start")

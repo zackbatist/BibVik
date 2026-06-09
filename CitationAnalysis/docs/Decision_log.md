@@ -788,3 +788,20 @@ cleanup patch:
   missing given names, near-duplicate candidates.
 
 - All methods docs updated to reflect new architecture.
+
+### 2026-06-09 — Move compound splitting inline; remove inbook reclassification
+
+Compound citation splitting moved from --postprocess into graph.py,
+called inline during per-paper processing for entries flagged
+_possibly_compound. Split entries now participate in deduplication
+against subsequent papers rather than sitting as garbage entries until
+the full corpus is done. _split_compound_entry() added as a module-level
+helper in graph.py.
+
+postprocess.py now has 2 passes only: entry type reclassification
+(post-enrich) and near-duplicate resolution.
+
+normalize.py: misc→inbook reclassification removed. Missing editor data
+is insufficient to distinguish inbook from incollection in a corpus
+dominated by edited volumes. Only article (journal+volume/pages) and
+incollection (booktitle+editors) are reclassified from misc.

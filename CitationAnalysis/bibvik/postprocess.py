@@ -59,9 +59,6 @@ def fix_entry_types_post_enrich(bib: dict) -> int:
             new_type = "article"
         elif booktitle and editors:
             new_type = "incollection"
-        elif booktitle and not editors and old_type not in ("incollection",):
-            # Don't downgrade incollection — missing editors ≠ inbook
-            new_type = "inbook"
         else:
             continue
 
@@ -207,77 +204,11 @@ def _llm_same_work(
     return None
 
 
-# ── Pass 3: LLM compound citation splitting ───────────────────────────────────
-
-def split_compound_citations(bib: dict, llm_config: dict | None = None) -> int:
-    """
-    For entries flagged as compound citations (multiple works in _raw_citation),
-    ask the LLM to split them into individual references.
-    Only operates on entries with a clean _raw_citation string.
-    """
-    if not llm_config:
-        return 0
-
-    import requests
-
-    count = 0
-    compound = [
-        (ck, e) for ck, e in bib.items()
-        if e.get("_possibly_compound") and e.get("_raw_citation")
-    ]
-
-    for ck, entry in compound:
-        raw = entry["_raw_citation"]
-        prompt = (
-            "You are an expert bibliographer. The following string contains multiple "
-            "bibliographic references merged together. Split them into individual references "
-            "and return a JSON array of objects, each with keys: "
-            "first_author_family, year, title, container_title, entry_type.\n\n"
-            f"String: {raw}\n\n"
-            "Respond ONLY with a JSON array. /no_think"
-        )
-        try:
-            base_url = llm_config.get("base_url", "http://localhost:11434")
-            model    = llm_config.get("model", "qwen2.5:7b")
-            timeout  = llm_config.get("timeout", 60)
-            backend  = llm_config.get("backend", "ollama")
-
-            if backend == "ollama":
-                resp = requests.post(
-                    f"{base_url}/api/generate",
-                    json={"model": model, "prompt": prompt, "stream": False,
-                          "think": False, "options": {"temperature": 0.1, "num_predict": 512}},
-                    timeout=timeout,
-                )
-                raw_resp = resp.json().get("response", "").strip()
-            else:
-                resp = requests.post(
-                    f"{base_url}/v1/chat/completions",
-                    json={"model": model, "messages": [{"role": "user", "content": prompt}],
-                          "stream": False, "temperature": 0.1, "max_tokens": 512},
-                    timeout=timeout,
-                )
-                raw_resp = resp.json()["choices"][0]["message"]["content"].strip()
-
-            raw_resp = re.sub(r"<think>[\s\S]*?</think>", "", raw_resp).strip()
-            parsed = json.loads(re.search(r"\[[\s\S]*\]", raw_resp).group(0))
-
-            if isinstance(parsed, list) and len(parsed) > 1:
-                entry["_split_into"] = parsed
-                count += 1
-
-        except Exception:
-            pass
-
-    return count
-
-
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 PASSES = [
     ("Entry type reclassification (enriched)", fix_entry_types_post_enrich, False),
     ("Near-duplicate flagging / LLM resolution", flag_near_duplicates, True),
-    ("LLM compound citation splitting",          split_compound_citations, True),
 ]
 
 

@@ -477,8 +477,6 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
             entry["entry_type"] = "article"
         elif booktitle and editors:
             entry["entry_type"] = "incollection"
-        elif booktitle and not editors:
-            entry["entry_type"] = "inbook"
 
     # ── Author/editor given-name cleanup ──────────────────────────────────────
     for role in ("author", "editor"):
