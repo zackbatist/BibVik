@@ -820,3 +820,16 @@ Romanization tables instead of a hand-rolled character translation
 table. Domovyk covers 8 Cyrillic scripts and matches the standard
 used by CrossRef and library catalogues. Falls back to the hand-rolled
 table if domovyk is not installed. Added domovyk to requirements.txt.
+
+### 2026-06-09 — Update methods docs for domovyk, OCR aligner, compound splitting
+
+deduplication-normalisation.md: documents domovyk as the ALA-LC
+transliteration library for cross-script dedup, with fallback details.
+
+audit-sampling.md: adds OCR text aligner as a considered-not-adopted
+approach in the Approaches section, consistent with the note already
+in deduplication-normalisation.md.
+
+llm-prompts.md: compound splitting prompt corrected to reflect inline
+placement in graph.py, not postprocess.py. Includes first_author_given
+field added in the graph.py version.

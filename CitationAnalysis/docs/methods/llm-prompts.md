@@ -179,19 +179,19 @@ response, the pair is flagged `_near_duplicate_candidate` for human review in
 
 ---
 
-## Post-enrichment: compound citation splitting
+## Inline: compound citation splitting
 
 **Task:** Given a raw citation string containing multiple bibliographic
 references merged together (GROBID compound citation blowout), split them into
 individual references.
 
-**Prompt** (`split_compound_citations` in `bibvik/postprocess.py`):
+**Prompt** (`_split_compound_entry` in `bibvik/graph.py`):
 
 ```
 You are an expert bibliographer. The following string contains multiple
 bibliographic references merged together. Split them into individual references
 and return a JSON array of objects, each with keys:
-first_author_family, year, title, container_title, entry_type.
+first_author_family, first_author_given, year, title, container_title, entry_type.
 
 String: {raw_citation}
 
@@ -200,11 +200,13 @@ Respond ONLY with a JSON array. /no_think
 
 **Design rationale:** Compound citations arise when GROBID fails to split
 entries that span multiple works — most commonly dash-abbreviated author
-repetitions in humanities reference lists. The pass only operates on entries
-flagged `_possibly_compound` with a non-empty `_raw_citation` field, so the
-LLM always has the original reference string to work from. Results are stored
-in `_split_into` for human review rather than automatically replacing the
-original entry, since the split may be imperfect.
+repetitions in humanities reference lists. This pass runs inline during
+per-paper graph construction, immediately after GROBID references are parsed,
+for entries flagged `_possibly_compound` with a non-empty `_raw_citation` field.
+Running inline (rather than post-hoc) means split entries participate in
+deduplication against subsequent papers. If splitting produces fewer than two
+entries or the LLM is unavailable, the original entry is used unchanged.
+Split entries carry a `_split_from` field recording the originating citekey.
 
 ---
 

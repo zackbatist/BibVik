@@ -200,6 +200,22 @@ incorrect match), so CrossRef metadata cannot serve as ground truth. The
 CrossRef-resolved stratum in the manual audit serves this purpose instead —
 human review can catch cases where the CrossRef match is implausible.
 
+**OCR quality detection via text alignment.** The `ocr-text-aligner` tool
+(Farr 2026) maps LLM-cleaned text back onto ALTO XML word by word using fuzzy
+matching and geometric proximity, producing per-word confidence scores
+(`ALIGNCONF`) that could serve as an upstream OCR quality signal — flagging
+degraded pages before GROBID processes them and suppressing unreliable
+audit strata for entries from those pages. This was considered but not adopted:
+BibVik does not use ALTO XML output (it reads GROBID's TEI-XML derived from
+the PDF text layer), so integrating the aligner would require rerouting the
+OCR pipeline through Tesseract's native output format. The marginal benefit for
+the current corpus does not justify the added complexity. Deferred as a future
+option if OCR quality becomes a systematic problem.
+
+> Farr, C. (2026). *OCR Text Aligner: Maps LLM-cleaned text to ALTO XML OCR
+> elements using fuzzy string matching, context-based scoring, and geometric
+> proximity analysis.* GitHub. https://github.com/chloe-farr/ocr-text-aligner
+
 ## Limitations
 
 This method cannot produce a precision/recall estimate for the pipeline

@@ -92,18 +92,20 @@ the entries are considered identical. If either entry lacks a title, author and
 year alone are treated as sufficient.
 
 **Cross-script match.** If the year matches and the transliterated first-author
-family names match (Cyrillic → Latin via the ALA-LC transliteration table
-implemented in `_transliterate_author()`), the entries are considered candidate
-duplicates. If their titles also have ≥50% token overlap, or both lack titles,
-the entries are merged. If titles differ despite matching transliterated authors
-and year, the existing entry is flagged with `_cross_script_duplicate_candidate`
-for audit review — automatic merging is not performed in this case because the
-works may be genuinely distinct.
+family names match (Cyrillic → Latin via `_transliterate_author()` in
+`bibvik/graph.py`), the entries are considered candidate duplicates. If their
+titles also have ≥50% token overlap, or both lack titles, the entries are merged.
+If titles differ despite matching transliterated authors and year, the existing
+entry is flagged with `_cross_script_duplicate_candidate` for audit review —
+automatic merging is not performed in this case because the works may be
+genuinely distinct.
 
-Transliterations are cached in `_TRANSLIT_CACHE` to avoid recomputing. The
-ALA-LC table was chosen because it is the standard used in library cataloguing
-and in CrossRef's author records, giving the best chance of matching
-transliterations that appear in the bibliography.
+Transliteration uses the `domovyk` library, which implements the ALA-LC
+Romanization tables — the standard used by North American libraries, the British
+Library, and CrossRef. This covers Russian, Ukrainian, Bulgarian, Belarusian,
+Serbian, Macedonian, Church Slavonic, and Carpatho-Rusyn. If `domovyk` is not
+installed, the pipeline falls back to a hand-rolled ALA-LC table covering
+Russian and Ukrainian basics. Transliterations are cached in `_TRANSLIT_CACHE`.
 
 When a match is found, the existing entry is retained and the new candidate is
 discarded. The `cited_by` list of the existing entry is updated. No fields are
