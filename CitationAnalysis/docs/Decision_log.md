@@ -812,3 +812,11 @@ Single-letter family names (b, c, etc.) are GROBID internal reference
 IDs leaking into the author field. normalize_entry() now flags these
 with _grobid_id_as_author: True at creation time. audit.py surfaces
 them as a dedicated stratum for manual correction.
+
+### 2026-06-09 — Replace hand-rolled transliteration with domovyk (todo Z)
+
+_transliterate_author() in graph.py now uses domovyk's ALA-LC
+Romanization tables instead of a hand-rolled character translation
+table. Domovyk covers 8 Cyrillic scripts and matches the standard
+used by CrossRef and library catalogues. Falls back to the hand-rolled
+table if domovyk is not installed. Added domovyk to requirements.txt.

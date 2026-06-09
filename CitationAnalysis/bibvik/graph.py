@@ -31,9 +31,18 @@ logger = logging.getLogger(__name__)
 # Module-level helpers
 # =============================================================================
 
-# Cyrillic → Latin transliteration table (ALA-LC standard, covers Russian,
-# Ukrainian, Bulgarian). Used for cross-script duplicate detection in
-# _find_duplicate() — cached transliterations keyed by raw family name.
+# Cyrillic → Latin transliteration using domovyk (ALA-LC standard).
+# Falls back to a hand-rolled table if domovyk is not installed.
+# Used for cross-script duplicate detection in _find_duplicate().
+_TRANSLIT_CACHE: dict[str, str] = {}
+
+try:
+    from domovyk import translit as _domovyk_translit
+    _DOMOVYK_AVAILABLE = True
+except ImportError:
+    _DOMOVYK_AVAILABLE = False
+
+# Fallback hand-rolled ALA-LC table (Russian/Ukrainian/Bulgarian basics)
 _CYRILLIC_TO_LATIN = str.maketrans({
     'а': 'a',  'б': 'b',  'в': 'v',  'г': 'g',  'д': 'd',
     'е': 'e',  'ё': 'yo', 'ж': 'zh', 'з': 'z',  'и': 'i',
@@ -42,10 +51,32 @@ _CYRILLIC_TO_LATIN = str.maketrans({
     'у': 'u',  'ф': 'f',  'х': 'kh', 'ц': 'ts', 'ч': 'ch',
     'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y',  'ь': '',
     'э': 'e',  'ю': 'iu', 'я': 'ia',
-    # Ukrainian
     'є': 'ie', 'і': 'i',  'ї': 'i',  'ґ': 'g',
 })
-_TRANSLIT_CACHE: dict[str, str] = {}
+
+
+def _transliterate_author(name: str) -> str:
+    """Transliterate a Cyrillic family name to Latin using ALA-LC via domovyk.
+    Falls back to hand-rolled table if domovyk is not installed."""
+    if not name:
+        return ""
+    if name in _TRANSLIT_CACHE:
+        return _TRANSLIT_CACHE[name]
+
+    if _DOMOVYK_AVAILABLE:
+        try:
+            result = _domovyk_translit.transliterate(name.lower(), 'rus')
+        except Exception:
+            try:
+                result = _domovyk_translit.transliterate(name.lower(), 'ukr')
+            except Exception:
+                result = name.lower().translate(_CYRILLIC_TO_LATIN)
+    else:
+        result = name.lower().translate(_CYRILLIC_TO_LATIN)
+
+    result = re.sub(r"[^a-z]", "", result)
+    _TRANSLIT_CACHE[name] = result
+    return result
 
 
 def _split_compound_entry(ref: dict, llm_config: dict) -> list[dict] | None:
@@ -134,17 +165,7 @@ def _split_compound_entry(ref: dict, llm_config: dict) -> list[dict] | None:
         return None
 
 
-def _transliterate_author(name: str) -> str:
-    """Transliterate a family name to Latin script for cross-script comparison."""
-    if not name:
-        return ""
-    if name in _TRANSLIT_CACHE:
-        return _TRANSLIT_CACHE[name]
-    result = name.lower().translate(_CYRILLIC_TO_LATIN)
-    # Strip non-alpha after transliteration and normalize
-    result = re.sub(r"[^a-z]", "", result)
-    _TRANSLIT_CACHE[name] = result
-    return result
+class CitationGraph:
     """
     Build and manage a multi-generational citation graph.
 

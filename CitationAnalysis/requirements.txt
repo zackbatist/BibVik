@@ -46,3 +46,9 @@ lingua-language-detector>=2.0.0
 #
 # Uncomment to install:
 # ocrmypdf>=16.0.0
+
+# Cyrillic → Latin transliteration using ALA-LC tables (American Library
+# Association / Library of Congress standard). Used for cross-script
+# duplicate detection in _find_duplicate(). Falls back to a hand-rolled
+# table if not installed — install for best accuracy.
+domovyk>=0.1.0
