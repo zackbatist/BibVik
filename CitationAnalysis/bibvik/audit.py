@@ -98,6 +98,7 @@ def run_audit(
     oversized_titles    = _stratum_oversized_titles(bibliography)
     missing_given       = _stratum_missing_given_names(bibliography)
     near_dup_flagged    = _stratum_near_duplicate_flagged(bibliography)
+    grobid_id_authors   = _stratum_grobid_id_as_author(bibliography)
 
     # ── Sample ────────────────────────────────────────────────────────────────
     s_crossref         = _sample(crossref,          n, rng)
@@ -109,6 +110,7 @@ def run_audit(
     s_oversized        = _sample(oversized_titles,  n, rng)
     s_missing_given    = _sample(missing_given,     n, rng)
     s_near_dup         = _sample(near_dup_flagged,  n, rng)
+    s_grobid_id        = _sample(grobid_id_authors, n, rng)
     s_by_lang          = {lang: _sample(entries, n, rng) for lang, entries in by_lang.items()}
 
     # Log stratum sizes
@@ -122,6 +124,7 @@ def run_audit(
     logger.info("  Oversized titles:     %d entries (sampling %d)", len(oversized_titles),  len(s_oversized))
     logger.info("  Missing given names:  %d entries (sampling %d)", len(missing_given),     len(s_missing_given))
     logger.info("  Near-dup flagged:     %d entries (sampling %d)", len(near_dup_flagged),  len(s_near_dup))
+    logger.info("  GROBID ID as author:  %d entries (sampling %d)", len(grobid_id_authors), len(s_grobid_id))
     for lang, entries in by_lang.items():
         logger.info("  Language %-10s %d entries (sampling %d)", lang + ":", len(entries), len(s_by_lang[lang]))
     if not by_lang:
@@ -149,6 +152,7 @@ def run_audit(
             "oversized_titles":  len(oversized_titles),
             "missing_given":     len(missing_given),
             "near_dup_flagged":  len(near_dup_flagged),
+            "grobid_id_authors": len(grobid_id_authors),
             "by_lang":           {lang: len(entries) for lang, entries in by_lang.items()},
         },
         n         = n,
@@ -158,6 +162,7 @@ def run_audit(
         oversized          = s_oversized,
         missing_given      = s_missing_given,
         near_dup           = s_near_dup,
+        grobid_id          = s_grobid_id,
     )
 
     logger.info("Audit sample written: %s", output_path)
@@ -282,6 +287,11 @@ def _stratum_missing_given_names(bibliography: dict[str, dict]) -> list[str]:
 def _stratum_near_duplicate_flagged(bibliography: dict[str, dict]) -> list[str]:
     """Entries flagged as near-duplicate candidates by postprocess."""
     return [ck for ck, e in bibliography.items() if e.get("_near_duplicate_candidate")]
+
+
+def _stratum_grobid_id_as_author(bibliography: dict[str, dict]) -> list[str]:
+    """Entries where the first author family name is a single letter — likely a GROBID internal ID artifact."""
+    return [ck for ck, e in bibliography.items() if e.get("_grobid_id_as_author")]
 
 
 def _stratum_ocr(
@@ -609,6 +619,25 @@ def _render(
         )
         for i, ck in enumerate(near_dup, 1):
             lines += _render_entry(ck, bibliography[ck], i, len(near_dup))
+
+    # ── GROBID ID as author ───────────────────────────────────────────────────
+    grobid_id = kwargs.get("grobid_id", [])
+    grobid_id_pool = pool_sizes.get("grobid_id_authors", 0)
+    if grobid_id_pool > 0:
+        lines += _render_stratum_header(
+            title     = "GROBID internal ID as author",
+            sample    = grobid_id,
+            pool_size = grobid_id_pool,
+            n         = n,
+            guidance  = (
+                "These entries have a single-letter first author family name "
+                "(e.g. 'b', 'c') — almost certainly a GROBID internal reference ID "
+                "leaking into the author field. The entry needs manual correction "
+                "from the source PDF."
+            ),
+        )
+        for i, ck in enumerate(grobid_id, 1):
+            lines += _render_entry(ck, bibliography[ck], i, len(grobid_id))
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines), encoding="utf-8")

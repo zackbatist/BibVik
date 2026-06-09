@@ -805,3 +805,10 @@ normalize.py: misc→inbook reclassification removed. Missing editor data
 is insufficient to distinguish inbook from incollection in a corpus
 dominated by edited volumes. Only article (journal+volume/pages) and
 incollection (booktitle+editors) are reclassified from misc.
+
+### 2026-06-09 — Flag GROBID ID artifacts as author (todo Y)
+
+Single-letter family names (b, c, etc.) are GROBID internal reference
+IDs leaking into the author field. normalize_entry() now flags these
+with _grobid_id_as_author: True at creation time. audit.py surfaces
+them as a dedicated stratum for manual correction.

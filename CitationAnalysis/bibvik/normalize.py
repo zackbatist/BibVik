@@ -486,6 +486,13 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
             if person.get("family"):
                 person["family"] = _clean_family_name(person["family"])
 
+    # ── Flag single-letter family names (GROBID internal ID artifact) ─────────
+    # Citekeys like b2005 or c2003 arise when GROBID's internal reference ID
+    # (b1, b2, etc.) leaks into the author family name field.
+    authors = entry.get("author", [])
+    if authors and len(authors[0].get("family", "").strip()) == 1:
+        entry["_grobid_id_as_author"] = True
+
     return entry
 
 
