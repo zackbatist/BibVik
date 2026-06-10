@@ -895,3 +895,21 @@ they reached any pipeline stage. Removed the duplicate assignment at line
 No other missing imports found in conditional blocks. Lazy imports of
 bibvik modules are intentional; stdlib lazy imports (socket, threading,
 time) are safe anywhere.
+
+### 2026-06-10 — Update methods docs for Method 6 and GROBID entry filtering
+
+citation-detection.md: updated to reflect six detection methods. Added Method
+6 (LLM bibliography re-parse from raw text) as a full section covering
+implementation, scope, token budget, and known limitations. Updated design
+rationale to include page-break fragmentation as a motivating failure mode.
+Added GROBID entry filtering section documenting _is_reconstructible(). Updated
+Known Limitations to cover empty references div and LLM dependency for
+Methods 4-6.
+
+deduplication-normalisation.md: added GROBID entry filtering section
+documenting _is_reconstructible() — per-entry-type field requirements, mid-word
+start signal for page-break fragments, and conditional behaviour based on LLM
+availability.
+
+llm-prompts.md: added Method 6 prompt (_LLM_BIB_REPARSE) and design rationale
+as a new section.

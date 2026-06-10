@@ -174,6 +174,35 @@ internal identifiers, not persistent external references.
 
 ---
 
+## GROBID entry filtering at ingestion
+
+Before a GROBID-derived entry is added to the bibliography, `_is_reconstructible()`
+in `bibvik/graph.py` checks whether the normalized fields are sufficient to
+assemble a minimal Chicago author-date citation. The check runs after
+`normalize_entry()` — so entry type inference and field cleanup have already
+been applied — and is conditional on an LLM being configured.
+
+The check is framed as: are the fields sufficient to identify this entry as a
+specific publication? Requirements vary by entry type:
+
+- `article`, `incollection`, `inproceedings`, `thesis`: author + year + title
+- `book`: (author or editor) + year + title
+- `misc`: year + (author or title)
+
+A separate check catches page-break fragments regardless of parsed fields: a
+raw citation starting with a lowercase character that is not a known particle
+(`von`, `van`, `de`, `di`, `el`, `al-`, `la`, `le`, `du`, `des`, `den`, `der`,
+`das`, `ten`, `ter`, `op`, `af`, `av`) is a mid-word continuation produced by
+GROBID splitting an entry across a PDF page break. These are skipped
+unconditionally.
+
+When an LLM is configured, entries that fail the check are silently dropped —
+Method 6 will recover any legitimate references from the raw reference div text.
+When no LLM is configured, all GROBID entries are kept regardless, since there
+is no recovery mechanism.
+
+---
+
 ## OCR quality detection — considered and not adopted
 
 A proactive OCR quality detection step was considered for identifying degraded

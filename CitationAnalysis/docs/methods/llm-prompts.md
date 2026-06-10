@@ -210,6 +210,61 @@ Split entries carry a `_split_from` field recording the originating citekey.
 
 ---
 
+## Method 6: LLM bibliography re-parse from raw text
+
+**Task:** Given the full raw reference list text from a paper's TEI back
+section, parse it into structured bibliographic entries. Handles entries that
+span PDF page breaks and dash-abbreviated author series that GROBID's structured
+parser cannot recover.
+
+**Prompt** (`_LLM_BIB_REPARSE` in `bibvik/detector.py`):
+
+```
+You are an expert at parsing academic bibliography sections. The text below is
+a raw reference list extracted from a PDF. Some entries may span original page
+breaks and appear garbled or truncated — do your best to recover them.
+
+## Reference list text
+---
+{text}
+---
+
+For EACH distinct published work in the list, extract:
+- first_author_family: family/surname of the first author
+- first_author_given: given name(s) or initials of the first author
+- additional_authors: list of {"family": "...", "given": "..."} for co-authors (empty list if sole author)
+- year: publication year (4 digits)
+- title: title of the article, chapter, or book
+- container_title: journal name, book title (for chapters), or series name (empty string if standalone book)
+- volume: volume number (empty string if n/a)
+- pages: page range (empty string if n/a)
+- doi: DOI if present (empty string if not)
+- entry_type: one of "article", "book", "incollection", "inproceedings", "thesis", "misc"
+
+Respond ONLY with a JSON array. If no references: []
+/no_think
+```
+
+**Design rationale:** GROBID writes continuous raw reference list text into
+`<div type="references">` in the TEI back section. Two GROBID failure modes
+leave this text intact while producing broken `<biblStruct>` output: page-break
+fragments (an entry split across a page boundary) and pre-split dash-abbreviated
+series (each dash continuation becomes a separate biblStruct with no author).
+Sending the full raw text to the LLM in a single call bypasses GROBID's
+structured parser entirely for these cases.
+
+The full reference list is sent in one call — no chunking — because completeness
+is the priority and the list fits comfortably within the model's context window.
+`max_tokens` is set to 4096 (vs 1024 for other methods) and the timeout to at
+least 300 seconds to accommodate the larger input and output.
+
+Results carry `_resolution_method: "llm_bib_reparse"` for provenance and are
+integrated via the same rich-entry path used by Method 5 footnote extraction.
+Entries already parsed correctly by GROBID are caught by deduplication; genuine
+gaps land as new bibliography entries.
+
+---
+
 ## Citation function and content enrichment (unused in main pipeline)
 
 `bibvik/llm_analyzer.py` also contains prompts for citation function analysis
