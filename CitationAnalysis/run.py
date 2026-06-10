@@ -193,7 +193,6 @@ def main():
     graph_state_path  = output_dir / "_graph_state.json"
     contexts_path     = output_dir / "citation_contexts.json"
 
-    llm_cfg = config.get("llm", {})
     email   = args.email or config.get("email", "")
     # Store email in llm_cfg so graph.py can pass it to per-paper enrichment
     if email:

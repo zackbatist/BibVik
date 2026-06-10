@@ -883,3 +883,15 @@ failures when an LLM is configured.
 
 Applied in both the seed paper and F1 paper GROBID ref integration
 loops in graph.py.
+
+### 2026-06-10 — Fix llm_cfg reassignment discarding CLI overrides (todo V)
+
+llm_cfg was assigned from config.get("llm", {}) twice in main(): once at
+line 162 before applying --remote, --model, and --no-think overrides, and
+again at line 196 which silently discarded all of those overrides before
+they reached any pipeline stage. Removed the duplicate assignment at line
+196. The overrides now persist correctly into all subsequent stages.
+
+No other missing imports found in conditional blocks. Lazy imports of
+bibvik modules are intentional; stdlib lazy imports (socket, threading,
+time) are safe anywhere.
