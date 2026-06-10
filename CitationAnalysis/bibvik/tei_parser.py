@@ -210,6 +210,66 @@ def get_body_text(tei_xml: str) -> str:
     return _get_text(body) if body is not None else ""
 
 
+def get_raw_references_text(tei_xml: str) -> str:
+    """
+    Extract the continuous raw reference list text from the TEI back section.
+
+    GROBID writes a <div type="references"> element inside <back> that contains
+    the original reference list as continuous prose, including entries that span
+    PDF page breaks. This text is what GROBID parsed into <biblStruct> elements,
+    but page-break fragments cause parsing failures that produce garbage entries.
+    Sending this raw text directly to an LLM bypasses those failures entirely.
+
+    The raw text is preferred over reconstructing text from <biblStruct> elements
+    because it preserves the original formatting, including entries GROBID could
+    not parse at all.
+
+    Returns:
+        The full text of the references div, or empty string if absent or
+        parsing fails. 360 of 380 F1 papers have this div populated; the
+        remaining 20 are chapter-style papers with no embedded bibliography.
+    """
+    root = _parse_xml(tei_xml)
+    if root is None:
+        return ""
+
+    # Primary location: <back><div type="references">
+    back = root.find(f".//{{{TEI_NS}}}back")
+    if back is not None:
+        for div in back.findall(f"{{{TEI_NS}}}div"):
+            if div.get("type") == "references":
+                text = _get_text(div).strip()
+                if text:
+                    logger.debug(
+                        "Found references div in <back>: %d characters", len(text)
+                    )
+                    return text
+                else:
+                    logger.warning(
+                        "References div present in <back> but empty — "
+                        "GROBID bibliography extraction likely failed for this paper."
+                    )
+                    return ""
+
+    # Fallback: search anywhere in the document (some GROBID versions vary)
+    for div in root.findall(f".//{{{TEI_NS}}}div[@type='references']"):
+        text = _get_text(div).strip()
+        if text:
+            logger.debug(
+                "Found references div (fallback location): %d characters", len(text)
+            )
+            return text
+        else:
+            logger.warning(
+                "References div present (fallback location) but empty — "
+                "GROBID bibliography extraction likely failed for this paper."
+            )
+            return ""
+
+    logger.debug("No <div type='references'> found in TEI back section.")
+    return ""
+
+
 def parse_tei_body(tei_xml: str) -> list[dict]:
     """
     Parse the body text from GROBID's TEI-XML, preserving citation markers.

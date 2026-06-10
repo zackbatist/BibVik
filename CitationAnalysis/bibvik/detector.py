@@ -40,6 +40,18 @@ Detection methods (all applied to every paper):
        journal, volume, pages, etc. Essential for papers that embed
        their bibliography in footnotes (e.g., Chicago footnote style).
 
+    6. LLM bibliography re-parse from raw text
+       GROBID writes a <div type="references"> in the TEI back section
+       containing the original reference list as continuous raw text,
+       including entries that span PDF page breaks. Page-break fragments
+       cause GROBID's structured parser to produce garbage <biblStruct>
+       entries (identifiable by forename-without-surname in the author
+       field). We send the full raw text to the LLM in one call and get
+       back structured references. For entries GROBID parsed correctly,
+       deduplication catches them; for page-break fragments and other
+       parsing failures, the LLM version fills the gap. Only applied when
+       an LLM config is available and the references div is non-empty.
+
 After detection, results from all methods are merged and deduplicated
 into a unified set of citations. Each citation is tagged with which
 methods found it (provenance tracking).
@@ -63,6 +75,7 @@ from .tei_parser import (
     parse_tei_header,
     parse_tei_footnotes,
     get_body_text,
+    get_raw_references_text,
     parse_tei_xml,
     TEI_NAMESPACE,
 )
@@ -189,6 +202,29 @@ Example: [{{"first_author_family": "Sindbæk", "first_author_given": "Søren M."
 /no_think"""
 
 
+_LLM_BIB_REPARSE = """You are an expert at parsing academic bibliography sections. The text below is a raw reference list extracted from a PDF. Some entries may span original page breaks and appear garbled or truncated — do your best to recover them.
+
+## Reference list text
+---
+{text}
+---
+
+For EACH distinct published work in the list, extract:
+- first_author_family: family/surname of the first author
+- first_author_given: given name(s) or initials of the first author
+- additional_authors: list of {{"family": "...", "given": "..."}} for co-authors (empty list if sole author)
+- year: publication year (4 digits)
+- title: title of the article, chapter, or book
+- container_title: journal name, book title (for chapters), or series name (empty string if standalone book)
+- volume: volume number (empty string if n/a)
+- pages: page range (empty string if n/a)
+- doi: DOI if present (empty string if not)
+- entry_type: one of "article", "book", "incollection", "inproceedings", "thesis", "misc"
+
+Respond ONLY with a JSON array. If no references: []
+/no_think"""
+
+
 # =============================================================================
 # Main detection function
 # =============================================================================
@@ -256,6 +292,16 @@ def detect_all_citations(
         logger.debug("%s: LLM footnote extraction: %d citations, %d rich entries",
                      stem, len(m5_citations), len(m5_rich))
 
+    # ── Method 6: LLM bibliography re-parse from raw text ──
+    m6_citations = {}
+    m6_rich = []
+    if llm_config and tei_xml:
+        raw_refs_text = get_raw_references_text(tei_xml)
+        if raw_refs_text:
+            m6_citations, m6_rich = _method_llm_bib_reparse(raw_refs_text, llm_config)
+            logger.debug("%s: LLM bibliography re-parse: %d citations, %d rich entries",
+                         stem, len(m6_citations), len(m6_rich))
+
     # ── Merge ──
     merged = _merge_all(
         ("grobid_bib", m1_citations),
@@ -263,9 +309,10 @@ def detect_all_citations(
         ("regex", m3_citations),
         ("llm_body", m4_citations),
         ("llm_footnote", m5_citations),
+        ("llm_bib_reparse", m6_citations),
     )
 
-    rich_entries = m1_rich + m5_rich
+    rich_entries = m1_rich + m5_rich + m6_rich
 
     method_counts = {
         "reference_list": len(m1_citations),
@@ -273,16 +320,17 @@ def detect_all_citations(
         "text_patterns": len(m3_citations),
         "llm_body_scan": len(m4_citations),
         "llm_footnotes": len(m5_citations),
+        "llm_bib_reparse": len(m6_citations),
         "merged_total": len(merged),
     }
 
     logger.info(
         "%s: %d unique citations  "
         "(reference list: %d, inline markers: %d, text patterns: %d, "
-        "LLM body: %d, LLM footnotes: %d)",
+        "LLM body: %d, LLM footnotes: %d, LLM bib re-parse: %d)",
         stem, len(merged),
         len(m1_citations), len(m2_citations), len(m3_citations),
-        len(m4_citations), len(m5_citations),
+        len(m4_citations), len(m5_citations), len(m6_citations),
     )
 
     return {
@@ -631,6 +679,128 @@ def _method_llm_footnotes(
 
 
 # =============================================================================
+# Method 6: LLM bibliography re-parse from raw text
+# =============================================================================
+
+def _method_llm_bib_reparse(
+    raw_refs_text: str,
+    llm_config: dict,
+) -> tuple[dict, list[dict]]:
+    """
+    Re-parse the raw reference list text via LLM to recover entries that
+    GROBID's structured parser missed or mangled.
+
+    The primary failure mode this addresses is page-break fragmentation:
+    GROBID splits bibliography entries that span a PDF page boundary into
+    two garbage <biblStruct> elements — a fragment ending mid-sentence on
+    one page and a fragment beginning mid-sentence on the next. The raw
+    reference text in <div type="references"> contains the original
+    continuous text and is not affected by page-break boundaries.
+
+    The full reference list is sent to the LLM in a single call (no
+    chunking — completeness is the priority). The LLM returns structured
+    entries in the same format as Method 5 (LLM footnote extraction).
+
+    Entries that duplicate something GROBID already parsed correctly are
+    caught by standard deduplication in graph.py; this method adds only
+    genuine gaps.
+
+    Args:
+        raw_refs_text: Full text of the <div type="references"> element.
+        llm_config:    LLM configuration dict.
+
+    Returns:
+        Tuple of (citations dict, rich_entries list).
+        citations maps (norm_author, year) → citation record.
+        rich_entries contains full-metadata dicts for graph integration.
+    """
+    citations: dict = {}
+    rich_entries: list[dict] = []
+
+    base_url = llm_config.get("base_url", "http://localhost:11434")
+    model = llm_config.get("model", "qwen3.5:35b")
+    timeout = llm_config.get("timeout", 120)
+    backend = llm_config.get("backend", "ollama")
+
+    # The reference list can be large; set a generous token limit.
+    # We override num_predict for this specific call.
+    large_timeout = max(timeout, 300)
+
+    parsed = _llm_query_array(
+        base_url, model, large_timeout,
+        _LLM_BIB_REPARSE.format(text=raw_refs_text),
+        backend=backend,
+        max_tokens=4096,
+    )
+
+    if not parsed:
+        logger.debug("LLM bibliography re-parse returned no results.")
+        return citations, rich_entries
+
+    for item in parsed:
+        if not isinstance(item, dict):
+            continue
+
+        family = str(item.get("first_author_family", "")).strip()
+        given = str(item.get("first_author_given", "")).strip()
+        year = str(item.get("year", "")).strip()
+        title = str(item.get("title", "")).strip()
+
+        if not family or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
+            continue
+
+        key = (_norm(family), year[:4])
+        if key not in citations:
+            citations[key] = {
+                "author": family,
+                "year": year[:4],
+                "methods": ["llm_bib_reparse"],
+                "occurrences": 1,
+                "contexts": [],
+            }
+        else:
+            citations[key]["occurrences"] += 1
+
+        # Build rich entry for graph integration.
+        # These are marked with _resolution_method so graph.py picks them up.
+        authors = [{"family": family, "given": given}]
+        for add_auth in item.get("additional_authors", []):
+            if isinstance(add_auth, dict) and add_auth.get("family"):
+                authors.append({
+                    "family": add_auth["family"],
+                    "given": add_auth.get("given", ""),
+                })
+
+        rich_entry: dict = {
+            "author": authors,
+            "date": year[:4],
+            "title": title,
+            "entry_type": item.get("entry_type", "misc"),
+            "_resolution_method": "llm_bib_reparse",
+        }
+
+        container = item.get("container_title", "")
+        if container:
+            if rich_entry["entry_type"] == "article":
+                rich_entry["journaltitle"] = container
+            else:
+                rich_entry["booktitle"] = container
+
+        for field in ("volume", "pages", "doi"):
+            val = item.get(field, "")
+            if val:
+                rich_entry[field] = val
+
+        rich_entries.append(rich_entry)
+
+    logger.info(
+        "LLM bibliography re-parse: %d entries parsed from raw reference text.",
+        len(rich_entries),
+    )
+    return citations, rich_entries
+
+
+# =============================================================================
 # Merge
 # =============================================================================
 
@@ -704,6 +874,7 @@ def _context(text: str, start: int, end: int, window: int = 100) -> str:
 def _llm_query_array(
     base_url: str, model: str, timeout: int, prompt: str,
     backend: str = "ollama",
+    max_tokens: int = 1024,
 ) -> list | None:
     """Send a prompt to the LLM and parse a JSON array response."""
     try:
@@ -715,7 +886,7 @@ def _llm_query_array(
                     "messages": [{"role": "user", "content": prompt}],
                     "stream": False,
                     "temperature": 0.2,
-                    "max_tokens": 1024,
+                    "max_tokens": max_tokens,
                 },
                 timeout=timeout,
             )
@@ -731,7 +902,7 @@ def _llm_query_array(
                     "prompt": prompt,
                     "stream": False,
                     "think": False,
-                    "options": {"temperature": 0.2, "num_predict": 1024},
+                    "options": {"temperature": 0.2, "num_predict": max_tokens},
                 },
                 timeout=timeout,
             )

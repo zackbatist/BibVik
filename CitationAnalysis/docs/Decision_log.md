@@ -833,3 +833,53 @@ in deduplication-normalisation.md.
 llm-prompts.md: compound splitting prompt corrected to reflect inline
 placement in graph.py, not postprocess.py. Includes first_author_given
 field added in the graph.py version.
+
+### 2026-06-10 — Add Method 6: LLM bibliography re-parse from raw TEI text
+
+Added a sixth citation detection method that bypasses GROBID's structured
+bibliography parser entirely for cases where it fails.
+
+GROBID writes a <div type="references"> in the TEI <back> section
+containing the original reference list as continuous raw text, including
+entries that span PDF page breaks. GROBID's biblStruct parser produces
+garbage entries for these (page-break fragments), and also pre-splits
+dash-abbreviated author series into separate biblStructs that lose their
+author context. The raw div text is unaffected by both failure modes.
+
+Method 6 sends the full raw reference text to the LLM in a single call
+and returns structured entries in the same format as Method 5 (footnote
+extraction). Results flow through the existing rich-entry integration
+path in graph.py — entries already parsed correctly by GROBID are caught
+by deduplication; genuine gaps land as new entries.
+
+get_raw_references_text() added to tei_parser.py to extract the raw div
+text, with a warning log when the div is present but empty (5 papers in
+the F1 corpus where GROBID extraction failed entirely). _LLM_BIB_REPARSE
+prompt and _method_llm_bib_reparse() added to detector.py. Uses
+max_tokens=4096 and a 300s minimum timeout given the large input size.
+
+### 2026-06-10 — Skip non-reconstructible GROBID entries at ingestion
+
+Added _is_reconstructible() to graph.py. After normalize_entry() runs,
+each GROBID-derived bibliographic entry is checked against minimum field
+requirements for its entry type before being added to the bibliography.
+The check is framed as: can a minimal Chicago author-date citation be
+assembled from the parsed fields?
+
+Requirements by type:
+- article, incollection, inproceedings, thesis: author + year + title
+- book: (author or editor) + year + title
+- misc: year + (author or title)
+
+An additional check catches page-break fragments regardless of parsed
+fields: a raw citation starting with a lowercase character that is not
+a known particle (von, van, de, etc.) is a mid-word continuation and
+is unconditionally skipped.
+
+The check is conditional on llm_config being present — when no LLM is
+configured, all GROBID entries are kept as the best available data.
+Method 6 recovers any legitimate references lost to GROBID parsing
+failures when an LLM is configured.
+
+Applied in both the seed paper and F1 paper GROBID ref integration
+loops in graph.py.

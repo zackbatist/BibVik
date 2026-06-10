@@ -165,6 +165,113 @@ def _split_compound_entry(ref: dict, llm_config: dict) -> list[dict] | None:
         return None
 
 
+# Known lowercase particles that legitimately begin author surnames.
+# Used by _is_reconstructible to avoid false-positives on entries like
+# "von Carnap-Bornheim" or "de Vries".
+_LOWERCASE_PARTICLES = {
+    "von", "van", "de", "di", "el", "al-", "la", "le", "du", "des",
+    "den", "der", "das", "ten", "ter", "op", "af", "av",
+}
+
+
+def _is_reconstructible(ref: dict) -> bool:
+    """
+    Check whether a normalized GROBID-derived entry is reconstructible as a
+    minimal Chicago author-date citation.
+
+    A legitimate bibliographic reference in any citation style used in this
+    corpus must contain at minimum:
+    - A year (4-digit publication date)
+    - A title (non-empty, not obviously body text or a figure caption)
+    - An author with a family name, OR an editor with a family name (for
+      edited volumes where no personal author is listed)
+
+    Entries that fail this check are structurally incomplete and are almost
+    certainly GROBID parsing failures: page-break fragments (missing author
+    and/or year because those fields appeared on the preceding page),
+    absorbed body text, figure captions, publisher notes, or catalogue
+    entries. When an LLM is configured, Method 6 will recover the correct
+    version of any legitimate reference that was lost this way.
+
+    Entry-type-specific requirements:
+    - article:       author, year, title
+    - book:          author OR editor, year, title
+    - incollection:  author, year, title
+    - inproceedings: author, year, title
+    - thesis:        author, year, title
+    - misc:          author OR title, year  (most permissive — catch-all type)
+
+    The _raw_citation field is used as an additional check: if the raw string
+    starts mid-word (lowercase start that is not a known particle), the entry
+    is a page-break fragment regardless of what parsed fields were extracted.
+
+    Returns True if the entry is reconstructible (should be kept),
+    False if it should be skipped.
+    """
+    entry_type = ref.get("entry_type", "misc")
+    authors    = ref.get("author", [])
+    editors    = ref.get("editor", [])
+    year       = ref.get("year", "") or _extract_year(ref.get("date", ""))
+    title      = (ref.get("title") or "").strip()
+    raw        = (ref.get("_raw_citation") or "").strip()
+
+    has_author  = any(a.get("family", "").strip() for a in authors)
+    has_editor  = any(e.get("family", "").strip() for e in editors)
+    has_year    = bool(year)
+    has_title   = bool(title)
+
+    # Raw citation starts mid-word: page-break fragment.
+    # A lowercase start that is not a known particle is a reliable signal
+    # that we are reading the continuation of a word broken across a page.
+    if raw and raw[0].islower():
+        first_word = raw.split()[0].rstrip(".,;:") if raw.split() else ""
+        if first_word.lower() not in _LOWERCASE_PARTICLES:
+            logger.debug(
+                "Skipping mid-word fragment: %s", repr(raw[:80])
+            )
+            return False
+
+    # Entry-type-specific reconstruction checks.
+    if entry_type == "article":
+        if not (has_author and has_year and has_title):
+            logger.debug(
+                "Skipping non-reconstructible article (missing %s): %s",
+                ", ".join(f for f, v in [("author", has_author), ("year", has_year), ("title", has_title)] if not v),
+                repr(raw[:80]),
+            )
+            return False
+
+    elif entry_type == "book":
+        if not ((has_author or has_editor) and has_year and has_title):
+            logger.debug(
+                "Skipping non-reconstructible book (missing %s): %s",
+                ", ".join(f for f, v in [("author/editor", has_author or has_editor), ("year", has_year), ("title", has_title)] if not v),
+                repr(raw[:80]),
+            )
+            return False
+
+    elif entry_type in ("incollection", "inproceedings", "thesis"):
+        if not (has_author and has_year and has_title):
+            logger.debug(
+                "Skipping non-reconstructible %s (missing %s): %s",
+                entry_type,
+                ", ".join(f for f, v in [("author", has_author), ("year", has_year), ("title", has_title)] if not v),
+                repr(raw[:80]),
+            )
+            return False
+
+    else:  # misc and unknown types — most permissive
+        if not (has_year and (has_author or has_title)):
+            logger.debug(
+                "Skipping non-reconstructible misc entry (missing %s): %s",
+                ", ".join(f for f, v in [("year", has_year), ("author or title", has_author or has_title)] if not v),
+                repr(raw[:80]),
+            )
+            return False
+
+    return True
+
+
 class CitationGraph:
     """
     Build and manage a multi-generational citation graph.
@@ -265,6 +372,12 @@ class CitationGraph:
             ref["cited_by"] = [self.seed_citekey]
             ref["_source_pdf"] = pdf_path.name
             ref = normalize_entry(ref)
+
+            # Skip entries that cannot be reconstructed as a minimal citation.
+            # When an LLM is configured, Method 6 will recover any legitimate
+            # reference that was lost due to GROBID parsing failures.
+            if llm_config and not _is_reconstructible(ref):
+                continue
 
             existing = self._find_duplicate(ref)
             if existing:
@@ -745,6 +858,12 @@ class CitationGraph:
                 ref["cited_by"] = [f1_citekey]
                 ref["_source_pdf"] = pdf_path.name
                 ref = normalize_entry(ref)
+
+                # Skip entries that cannot be reconstructed as a minimal citation.
+                # When an LLM is configured, Method 6 will recover any legitimate
+                # reference that was lost due to GROBID parsing failures.
+                if llm_config and not _is_reconstructible(ref):
+                    continue
 
                 # Inline compound citation splitting — if GROBID flagged this
                 # entry as possibly compound and we have an LLM, split it now
