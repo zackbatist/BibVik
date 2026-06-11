@@ -196,10 +196,44 @@ raw citation starting with a lowercase character that is not a known particle
 GROBID splitting an entry across a PDF page break. These are skipped
 unconditionally.
 
-When an LLM is configured, entries that fail the check are silently dropped —
+Two further checks catch entries that passed the field presence test but are
+not standalone bibliography entries:
+
+**Catalogue/findspot entries** (`_CATALOGUE_PARENS_RE`): entries where the year
+GROBID extracted comes only from a parenthetical cross-reference such as
+`(Pedersen 1995, 71)` rather than from the entry's own publication year. These
+are artefact catalogue records — findspot descriptions, typological catalogue
+entries — where GROBID misidentified a place name or catalogue identifier as an
+author and borrowed the year from a nearby cross-reference. The actual referenced
+work already exists in the bibliography under its own citekey. Five parenthetical
+patterns are covered: page references, catalogue numbers (Kat-Nr), plate
+references (Taf), page ranges (ff.), and figure references (Abb). Pending
+validation on the full corpus — Scandinavian place names (Lund, Bergen, Oslo)
+may appear as author surnames in legitimate parenthetical citations and produce
+false positives (todo AF).
+
+**Shorthand back-references** (`_SHORTHAND_RE`): raw citations of the form
+`Author Year` or `Author/Author Year` with nothing else — cross-reference
+shorthand pointers to entries already in the bibliography, not standalone
+references.
+
+When an LLM is configured, entries that fail any check are silently dropped —
 Method 6 will recover any legitimate references from the raw reference div text.
 When no LLM is configured, all GROBID entries are kept regardless, since there
 is no recovery mechanism.
+
+---
+
+## Year validation
+
+Year extraction in `normalize_entry()` checks that the extracted year falls
+within a plausible range (1450–2030) before writing to the `date` and `year`
+fields. The lower bound of 1450 accepts genuinely old historical sources
+legitimately cited in Viking Age scholarship (16th–18th century works) while
+rejecting pre-printing-press dates and common failure modes: page numbers
+absorbed as years (e.g. `0177`), medieval historical dates absorbed from
+content (e.g. `1050`), and garbled OCR (e.g. `2602`). Years outside the range
+are cleared and a debug log entry is written.
 
 ---
 

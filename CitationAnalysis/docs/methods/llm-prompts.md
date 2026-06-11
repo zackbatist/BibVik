@@ -265,6 +265,35 @@ gaps land as new bibliography entries.
 
 ---
 
+## Post-processing: title recovery from raw citations
+
+**Task:** Given a raw citation string, extract only the title of the cited work.
+
+**Prompt** (`_LLM_TITLE_RECOVERY` in `bibvik/postprocess.py`):
+
+```
+You are an expert bibliographer. The following is a raw citation string extracted from a bibliography.
+Extract only the title of the cited work. Do not include author names, year, publisher, place of publication, volume, pages, or any other metadata.
+If the string does not contain a recognisable title, respond with an empty string.
+
+Raw citation:
+{raw}
+
+Respond with ONLY the title, nothing else. /no_think
+```
+
+**Design rationale:** GROBID sometimes extracts author and year from a
+bibliography entry but fails to populate the title field, even when the title
+is clearly present in the raw citation text. This pass targets those entries
+specifically — ~179 in the June 2026 bibliography — and sends each raw string
+to the LLM asking only for the title. The pass runs as part of `--postprocess`
+after CrossRef enrichment, so entries already resolved by enrichment are
+skipped. Temperature is set to 0 for maximum determinism. `num_predict` is set
+to 100 — titles are short. Recovered titles are marked `_title_recovered: True`
+for provenance.
+
+---
+
 ## Citation function and content enrichment (unused in main pipeline)
 
 `bibvik/llm_analyzer.py` also contains prompts for citation function analysis

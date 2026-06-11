@@ -913,3 +913,46 @@ availability.
 
 llm-prompts.md: added Method 6 prompt (_LLM_BIB_REPARSE) and design rationale
 as a new section.
+
+### 2026-06-10 — Pipeline refinement and bibliography quality analysis
+
+Method 6 (LLM bibliography re-parse from raw TEI text) implemented in
+detector.py and tei_parser.py. get_raw_references_text() extracts the
+raw reference div text; _method_llm_bib_reparse() sends it to the LLM
+in one call and returns structured entries via the existing rich-entry
+integration path. Warning logged for papers with empty references div.
+
+_is_reconstructible() added to graph.py. Checks normalized GROBID entries
+against minimum field requirements by entry type before adding to the
+bibliography. Additional signals: mid-word raw citation start (page-break
+fragment), catalogue/findspot entries where year appears only in a
+parenthetical cross-reference (_CATALOGUE_PARENS_RE), and shorthand
+back-references of the form "Author Year" (_SHORTHAND_RE). Conditional
+on LLM being configured. Applied in seed and F1 integration loops.
+NOTE: _CATALOGUE_PARENS_RE needs corpus validation before next rerun
+(todo AF — Scandinavian place names may produce false positives).
+
+Year validation added to normalize_entry() in normalize.py. Extracted
+years must fall within 1450–2030. Years outside this range are cleared.
+
+generate_citekey() in utils.py fixed to use two-letter suffixes (aa, ab,
+...) after exhausting single-letter suffixes a–z, preventing overflow
+into non-ASCII Unicode characters.
+
+Title recovery pass added to postprocess.py as Pass 2. For entries with
+_raw_citation but no title, sends raw string to LLM asking only for the
+title. Runs before near-duplicate resolution. run.py updated to pass
+llm_config to run_postprocess().
+
+llm_cfg reassignment bug fixed in run.py — duplicate assignment was
+discarding --remote/--model/--no-think CLI overrides.
+
+Full corpus rerun completed (379/382 papers). Bibliography reduced from
+22,901 to 16,578 entries. Reduction fully accounted for by systematic
+comparison against May 2026 bibliography. 1,167 new entries added,
+403 from Method 6 recovery. Analysis documented in
+bibliography-comparison-analysis.qmd and bibliography-comparison-summary.qmd.
+
+Outstanding: todo AF (catalogue signal validation), todo AE (20 empty
+references div papers + 3 GROBID failures), todo AC (compound splitting
+rewrite), todo AD (rerun after current fixes).

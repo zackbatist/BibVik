@@ -447,8 +447,24 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
     if date:
         m = re.match(r"^(\d{4})", str(date))
         if m:
-            entry["date"] = m.group(1)
-            entry["year"] = m.group(1)
+            year_val = m.group(1)
+            year_int = int(year_val)
+            # Accept years in a plausible range for academic publications.
+            # Lower bound 1450 (Gutenberg era); upper bound 2030.
+            # Years outside this range are almost certainly GROBID parsing
+            # failures — page numbers, historical dates absorbed from content,
+            # or garbled OCR. Clear the date and year fields for these entries
+            # so they are handled gracefully downstream.
+            if 1450 <= year_int <= 2030:
+                entry["date"] = year_val
+                entry["year"] = year_val
+            else:
+                entry["date"] = ""
+                entry["year"] = ""
+                logger.debug(
+                    "Implausible year %s cleared for entry: %s",
+                    year_val, repr(entry.get("_raw_citation", "")[:60]),
+                )
 
     # ── Page range normalization ───────────────────────────────────────────────
     pages = entry.get("pages", "")

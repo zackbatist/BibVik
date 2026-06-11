@@ -7,9 +7,8 @@ pages, entry type for misc) happens inline in normalize.py during graph construc
 
 Passes:
     1. Entry type reclassification (all types, using enriched fields)
-    2. LLM entry type classification (ambiguous cases)
-    3. LLM compound citation splitting
-    4. Near-duplicate resolution (LLM, title-rich entries only)
+    2. LLM title recovery from raw citations (entries with _raw_citation but no title)
+    3. Near-duplicate resolution (LLM, title-rich entries only)
 
 Usage:
     python3 run.py --postprocess
@@ -76,7 +75,110 @@ def fix_entry_types_post_enrich(bib: dict) -> int:
     return count
 
 
-# ── Pass 2: Near-duplicate flagging and LLM resolution ───────────────────────
+# ── Pass 2: LLM title recovery from raw citations ────────────────────────────
+
+_LLM_TITLE_RECOVERY = """You are an expert bibliographer. The following is a raw citation string extracted from a bibliography.
+Extract only the title of the cited work. Do not include author names, year, publisher, place of publication, volume, pages, or any other metadata.
+If the string does not contain a recognisable title, respond with an empty string.
+
+Raw citation:
+{raw}
+
+Respond with ONLY the title, nothing else. /no_think"""
+
+
+def recover_titles_from_raw(bib: dict, llm_config: dict | None = None) -> int:
+    """
+    For entries that have a _raw_citation but no title field, attempt to extract
+    the title from the raw citation string using the LLM.
+
+    These entries arise when GROBID parsed author and year from a reference but
+    failed to extract the title into the structured title field. The title is
+    present in the raw citation text and can be recovered.
+
+    Only entries with a non-empty _raw_citation and empty title are processed.
+    Entries that lack a _raw_citation entirely (e.g. LLM body scan detections
+    that returned author+year only) are skipped — there is no text to recover
+    from.
+
+    The pass sets _title_recovered: True on entries where a title was extracted,
+    for provenance tracking.
+
+    Returns the number of entries where a title was successfully recovered.
+    """
+    if not llm_config:
+        logger.debug("LLM not configured — skipping title recovery pass.")
+        return 0
+
+    import requests
+
+    candidates = [
+        (ck, entry) for ck, entry in bib.items()
+        if not entry.get("title")
+        and entry.get("_raw_citation", "").strip()
+        and entry.get("author")
+        and entry.get("year")
+    ]
+
+    logger.info("Title recovery: %d candidates with raw citation but no title.", len(candidates))
+    if not candidates:
+        return 0
+
+    base_url = llm_config.get("base_url", "http://localhost:11434")
+    model    = llm_config.get("model", "qwen2.5:7b")
+    timeout  = llm_config.get("timeout", 30)
+    backend  = llm_config.get("backend", "ollama")
+    count    = 0
+
+    for ck, entry in candidates:
+        raw = entry["_raw_citation"].strip()
+        prompt = _LLM_TITLE_RECOVERY.format(raw=raw)
+
+        try:
+            if backend == "ollama":
+                resp = requests.post(
+                    f"{base_url}/api/generate",
+                    json={
+                        "model": model,
+                        "prompt": prompt,
+                        "stream": False,
+                        "think": False,
+                        "options": {"temperature": 0.0, "num_predict": 100},
+                    },
+                    timeout=timeout,
+                )
+                title = resp.json().get("response", "").strip()
+            else:
+                resp = requests.post(
+                    f"{base_url}/v1/chat/completions",
+                    json={
+                        "model": model,
+                        "messages": [{"role": "user", "content": prompt}],
+                        "stream": False,
+                        "temperature": 0.0,
+                        "max_tokens": 100,
+                    },
+                    timeout=timeout,
+                )
+                title = resp.json()["choices"][0]["message"]["content"].strip()
+
+            # Strip surrounding quotes if the LLM added them
+            title = title.strip('"\'').strip()
+
+            if title and len(title) > 3:
+                entry["title"] = title
+                entry["_title_recovered"] = True
+                count += 1
+                logger.debug("Recovered title for [%s]: %s", ck, repr(title[:60]))
+
+        except Exception as exc:
+            logger.debug("Title recovery failed for [%s]: %s", ck, exc)
+            continue
+
+    return count
+
+
+# ── Pass 3: Near-duplicate flagging and LLM resolution ───────────────────────
 
 def _title_tokens(title: str) -> set:
     return set(re.findall(r"\b\w{4,}\b", title.lower()))
@@ -208,6 +310,7 @@ def _llm_same_work(
 
 PASSES = [
     ("Entry type reclassification (enriched)", fix_entry_types_post_enrich, False),
+    ("Title recovery from raw citations (LLM)", recover_titles_from_raw, True),
     ("Near-duplicate flagging / LLM resolution", flag_near_duplicates, True),
 ]
 

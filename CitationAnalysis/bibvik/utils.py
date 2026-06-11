@@ -157,7 +157,17 @@ def generate_citekey(authors: list[dict], year: str | None) -> str:
         else:
             count = _citekey_registry[base]
             _citekey_registry[base] = count + 1
-            return f"{base}{chr(ord('a') + count - 1)}"
+            # Single-letter suffix a–z for counts 1–26,
+            # then two-letter suffixes aa, ab, ... for overflow.
+            # This avoids non-ASCII characters when a base key has
+            # more than 26 disambiguated entries.
+            if count <= 26:
+                suffix = chr(ord("a") + count - 1)
+            else:
+                first = chr(ord("a") + (count - 27) // 26)
+                second = chr(ord("a") + (count - 27) % 26)
+                suffix = first + second
+            return f"{base}{suffix}"
     else:
         # No author — sequential NOAUTHOR key
         n = _citekey_registry.get("__noauthor__", 0) + 1

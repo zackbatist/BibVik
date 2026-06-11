@@ -173,6 +173,28 @@ _LOWERCASE_PARTICLES = {
     "den", "der", "das", "ten", "ter", "op", "af", "av",
 }
 
+# Catalogue/findspot cross-reference pattern.
+# Matches parenthetical citations of the form (Author Year, page),
+# (Author Year Kat-Nr), (Author Year Taf), (Author Year ff.), etc.
+# Used by _is_reconstructible to detect artefact catalogue records that
+# GROBID absorbed as bibliography entries.
+_CATALOGUE_PARENS_RE = re.compile(
+    r"\([^)]*\b(?:19|20)\d{2}\b[^)]*,\s*\d"   # (... Year ..., digit — page ref
+    r"|\([^)]*\b(?:19|20)\d{2}\b[^)]*Kat"      # (... Year ... Kat — catalogue no.
+    r"|\([^)]*\b(?:19|20)\d{2}\b[^)]*Taf"      # (... Year ... Taf — plate ref
+    r"|\([^)]*\b(?:19|20)\d{2}\b[^)]*ff\."     # (... Year ... ff. — page range
+    r"|\([^)]*\b(?:19|20)\d{2}\b[^)]*Abb"      # (... Year ... Abb — figure ref
+)
+
+# Shorthand back-reference pattern.
+# Matches raw citations of the form "Author Year" or "Author/Author Year"
+# (optionally with a lowercase letter suffix on the year), with nothing else.
+# These are cross-reference pointers to entries already in the bibliography,
+# not standalone references.
+_SHORTHAND_RE = re.compile(
+    r"^[A-Z][^\s/,]+(?:/[A-Z][^\s/,]+)?\s+(?:19|20)\d{2}[a-c]?\s*$"
+)
+
 
 def _is_reconstructible(ref: dict) -> bool:
     """
@@ -220,6 +242,8 @@ def _is_reconstructible(ref: dict) -> bool:
     has_year    = bool(year)
     has_title   = bool(title)
 
+    # ── Pre-checks on raw citation content ───────────────────────────────────
+
     # Raw citation starts mid-word: page-break fragment.
     # A lowercase start that is not a known particle is a reliable signal
     # that we are reading the continuation of a word broken across a page.
@@ -230,6 +254,30 @@ def _is_reconstructible(ref: dict) -> bool:
                 "Skipping mid-word fragment: %s", repr(raw[:80])
             )
             return False
+
+    # Catalogue/findspot entry: year appears only inside a parenthetical
+    # cross-reference of the form (Author Year, page), (Author Year Kat-Nr),
+    # etc. These are artefact catalogue records that GROBID absorbed as
+    # bibliography entries. The actual referenced work (e.g. Pedersen 1995)
+    # already exists in the bibliography under its own citekey.
+    if raw and year:
+        raw_no_parens = re.sub(r"\([^)]*\)", "", raw)
+        year_standalone = bool(re.search(rf"\b{re.escape(year)}\b", raw_no_parens))
+        if not year_standalone and _CATALOGUE_PARENS_RE.search(raw):
+            logger.debug(
+                "Skipping catalogue/findspot entry (year only in cross-reference): %s",
+                repr(raw[:80]),
+            )
+            return False
+
+    # Shorthand back-reference: raw citation is just "Author Year" or
+    # "Author/Author Year" with nothing else — a cross-reference pointer
+    # to another entry already in the bibliography, not a standalone reference.
+    if raw and _SHORTHAND_RE.match(raw):
+        logger.debug(
+            "Skipping shorthand back-reference: %s", repr(raw[:80])
+        )
+        return False
 
     # Entry-type-specific reconstruction checks.
     if entry_type == "article":
@@ -1021,6 +1069,10 @@ class CitationGraph:
                         if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.6:
                             return ck
                         elif not ref_title or not ex_title:
+                            # One or both entries lack a title — match on author+year alone.
+                            # This covers the case where a Method 6 or enriched entry has a
+                            # title and the existing GROBID entry does not: _merge_into will
+                            # fill in the missing title from the incoming entry.
                             return ck
 
                     # 4. Cross-script: transliterate both sides and compare
