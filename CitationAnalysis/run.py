@@ -639,7 +639,7 @@ def main():
         from bibvik.postprocess import run_postprocess as _run_postprocess
 
         bib_path = output_dir / "bibliography.json"
-        counts = _run_postprocess(bib_path, bib_path, llm_config=llm_cfg)
+        counts = _run_postprocess(bib_path, bib_path, llm_config=llm_cfg, email=email)
         for name, count in counts.items():
             print(f"   {name:<45}  {count}", flush=True)
 

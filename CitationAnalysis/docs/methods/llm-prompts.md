@@ -294,6 +294,61 @@ for provenance.
 
 ---
 
+## Post-processing: footnote stub resolution
+
+**Task:** Resolve entries produced by Method 5 (LLM footnote extraction) that
+have author and year but no title — "footnote stubs". These arise when a
+footnote contained a shorthand citation (`Wamers 1991, p. 45`) rather than a
+full reference, and the LLM correctly extracted the author+year but had no
+title to extract.
+
+Three mechanisms are applied in `resolve_footnote_stubs()` in
+`bibvik/postprocess.py`. No LLM is involved — this is a deterministic pass.
+
+### Mechanism 1: Abbreviation expansion
+
+Known series and journal abbreviations used in footnote citations are expanded
+using a lookup table (`_ABBREVIATION_TABLE`):
+
+| Abbreviation | Full title |
+|---|---|
+| AUD | Arkæologiske Udgravninger i Danmark |
+| KAG | Kuml: Årbog for Jysk Arkæologisk Selskab |
+| FMST | Frühmittelalterliche Studien |
+| ACTA | Acta Archaeologica |
+| MS | Medieval Scandinavia |
+
+### Mechanism 2: OCR/normalisation merges
+
+Confirmed OCR or normalisation corruptions of existing titled entries are
+merged. Each pair was verified manually before inclusion in
+`_OCR_MERGE_PAIRS`:
+
+| Source (corrupt) | Target (correct) | Reason |
+|---|---|---|
+| brucemicford2005 | brucemitford2005 | OCR t/c confusion |
+| wamets1985 | wamers1985 | OCR t/r confusion |
+| rsnes1966 | orsnes1966 | Missing initial O |
+| ocarragain2010 | carragain2010 | Ó prefix stripped |
+| ofloinn2013 | floinn2013 | Ó prefix stripped |
+| ofloinn2015 | floinn2015 | Ó prefix stripped |
+| kalming2010 | kalmring2010a | OCR ng/g confusion |
+| sampson1991 | samson1991 | Double p |
+| gurevic1968a | gurevich1968 | Transliteration variant |
+| tenharkel2013 | harkel2013 | Ten prefix stripped |
+
+### Mechanism 3: CrossRef author+year query
+
+For remaining stubs, queries CrossRef by author name and year filter
+(`from-pub-date:{year},until-pub-date:{year}`). Accepts only if:
+- Returned record year matches exactly
+- Author name similarity ≥ 0.70 (SequenceMatcher ratio)
+
+This is weaker than a title query but reasonable for entries with no title.
+Resolved entries are marked `_title_from_crossref_author_year: True`.
+
+---
+
 ## Citation function and content enrichment (unused in main pipeline)
 
 `bibvik/llm_analyzer.py` also contains prompts for citation function analysis

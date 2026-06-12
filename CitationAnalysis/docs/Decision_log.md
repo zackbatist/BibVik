@@ -956,3 +956,28 @@ bibliography-comparison-analysis.qmd and bibliography-comparison-summary.qmd.
 Outstanding: todo AF (catalogue signal validation), todo AE (20 empty
 references div papers + 3 GROBID failures), todo AC (compound splitting
 rewrite), todo AD (rerun after current fixes).
+
+### 2026-06-10 — Add footnote stub resolution pass to postprocess.py
+
+New Pass 2b in postprocess.py: resolve_footnote_stubs(). Targets entries
+produced by Method 5 (LLM footnote extraction) that have author and year
+but no title — 112 such entries in the June 2026 bibliography.
+
+Three resolution mechanisms applied in order:
+
+1. Abbreviation expansion: entries whose author field is a known series
+   abbreviation (AUD → Arkæologiske Udgravninger i Danmark, etc.) have
+   their title set from a hardcoded lookup table (_ABBREVIATION_TABLE).
+
+2. OCR/normalisation merges: 10 confirmed OCR or normalisation corruptions
+   of existing titled entries (_OCR_MERGE_PAIRS) are merged into their
+   targets. cited_by lists are combined; source is marked _merged_into.
+   Pairs were verified manually before inclusion.
+
+3. CrossRef author+year query: for remaining stubs, queries CrossRef by
+   author name and year filter. Accepts only if returned year matches
+   exactly and author name similarity ≥ 0.70. Sets
+   _title_from_crossref_author_year: True for provenance.
+
+run_postprocess() signature updated to accept email parameter.
+run.py updated accordingly.

@@ -8,6 +8,7 @@ pages, entry type for misc) happens inline in normalize.py during graph construc
 Passes:
     1. Entry type reclassification (all types, using enriched fields)
     2. LLM title recovery from raw citations (entries with _raw_citation but no title)
+    2b. Footnote stub resolution (OCR merges, abbreviation expansion, CrossRef author+year)
     3. Near-duplicate resolution (LLM, title-rich entries only)
 
 Usage:
@@ -178,6 +179,172 @@ def recover_titles_from_raw(bib: dict, llm_config: dict | None = None) -> int:
     return count
 
 
+# ── Pass 2b: Footnote stub resolution ────────────────────────────────────────
+
+# Known series/journal abbreviations used in footnote citations.
+# Maps normalised abbreviation (lowercase, no punctuation) to full title.
+# These are unambiguous in the context of Viking Age and medieval archaeology.
+_ABBREVIATION_TABLE = {
+    "aud":    "Arkæologiske Udgravninger i Danmark",
+    "kag":    "Kuml: Årbog for Jysk Arkæologisk Selskab",
+    "fmst":   "Frühmittelalterliche Studien",
+    "acta":   "Acta Archaeologica",
+    "ms":     "Medieval Scandinavia",
+}
+
+# Confirmed OCR/normalisation merge pairs: (source_citekey, target_citekey).
+# Each pair was verified manually — the source is an OCR or normalisation
+# corruption of the target, same author, same year, same work.
+# The source entry's cited_by is merged into the target and source is marked
+# _merged_into. Only entries confirmed as safe are listed here.
+_OCR_MERGE_PAIRS = [
+    ("brucemicford2005",    "brucemitford2005"),   # Micford → Mitford (OCR t/c)
+    ("wamets1985",          "wamers1985"),           # Wamets → Wamers (OCR t/r)
+    ("rsnes1966",           "orsnes1966"),           # missing initial O
+    ("ocarragain2010",      "carragain2010"),        # Ó prefix stripped
+    ("ofloinn2013",         "floinn2013"),           # Ó prefix stripped
+    ("ofloinn2015",         "floinn2015"),           # Ó prefix stripped
+    ("kalming2010",         "kalmring2010a"),        # Kalming → Kalmring (OCR)
+    ("sampson1991",         "samson1991"),           # double p
+    ("gurevic1968a",        "gurevich1968"),         # transliteration variant
+    ("tenharkel2013",       "harkel2013"),           # Ten prefix stripped
+]
+
+
+def resolve_footnote_stubs(bib: dict, email: str = "") -> int:
+    """
+    Resolve footnote stub entries — entries produced by Method 5 (LLM footnote
+    extraction) that have author and year but no title.
+
+    Three mechanisms are applied in order:
+
+    1. Abbreviation expansion: entries whose author field matches a known series
+       or journal abbreviation (e.g. AUD → Arkæologiske Udgravninger i Danmark)
+       have their title set from the abbreviation table.
+
+    2. OCR/normalisation merges: entries that are confirmed OCR or normalisation
+       corruptions of an existing titled entry are merged into that entry. The
+       cited_by list is combined and the source is marked _merged_into.
+
+    3. CrossRef author+year query: for remaining stub entries, queries CrossRef
+       by author name and year. Accepts only if the returned record's year
+       matches exactly and the author name similarity is ≥ 0.7. This is weaker
+       than a title query but reasonable for entries with no title at all.
+
+    Returns the total number of entries resolved (title set or merged).
+    """
+    import re as _re
+    import unicodedata as _ud
+    import difflib
+    import requests
+
+    def _norm(s):
+        if not s: return ''
+        s = _ud.normalize('NFD', s)
+        s = ''.join(c for c in s if _ud.category(c) != 'Mn')
+        return _re.sub(r'[^a-z0-9]', '', s.lower())
+
+    count = 0
+
+    # Identify footnote stub entries
+    stubs = {
+        ck: e for ck, e in bib.items()
+        if e.get('_resolution_method') == 'llm_from_footnote'
+        and not e.get('title')
+        and e.get('author')
+        and e.get('year')
+    }
+
+    if not stubs:
+        return 0
+
+    logger.info("Footnote stub resolution: %d stubs to resolve.", len(stubs))
+
+    # ── Mechanism 1: Abbreviation expansion ──────────────────────────────────
+    for ck, entry in list(stubs.items()):
+        family = (entry.get('author') or [{}])[0].get('family', '')
+        family_norm = _norm(family)
+        if family_norm in _ABBREVIATION_TABLE:
+            entry['title'] = _ABBREVIATION_TABLE[family_norm]
+            entry['_title_from_abbreviation'] = True
+            logger.debug("Abbreviation resolved [%s]: %s → %s", ck, family, entry['title'])
+            del stubs[ck]
+            count += 1
+
+    # ── Mechanism 2: OCR/normalisation merges ────────────────────────────────
+    for src_ck, tgt_ck in _OCR_MERGE_PAIRS:
+        if src_ck not in bib or tgt_ck not in bib:
+            continue
+        src = bib[src_ck]
+        tgt = bib[tgt_ck]
+        # Merge cited_by
+        for cb in src.get('cited_by', []):
+            if cb not in tgt.get('cited_by', []):
+                tgt.setdefault('cited_by', []).append(cb)
+        src['_merged_into'] = tgt_ck
+        if src_ck in stubs:
+            del stubs[src_ck]
+        logger.debug("OCR merge: [%s] → [%s] (%s)", src_ck, tgt_ck, tgt.get('title', '')[:50])
+        count += 1
+
+    # ── Mechanism 3: CrossRef author+year query ───────────────────────────────
+    CROSSREF_BASE = "https://api.crossref.org/works"
+    AUTHOR_SIM_THRESHOLD = 0.70
+
+    for ck, entry in list(stubs.items()):
+        family = (entry.get('author') or [{}])[0].get('family', '')
+        year = str(entry.get('year', ''))
+        if not family or not year:
+            continue
+
+        params = {
+            'query.author': family,
+            'filter': f'from-pub-date:{year},until-pub-date:{year}',
+            'rows': 3,
+        }
+        if email:
+            params['mailto'] = email
+
+        try:
+            resp = requests.get(CROSSREF_BASE, params=params, timeout=15)
+            if resp.status_code != 200:
+                continue
+            items = resp.json().get('message', {}).get('items', [])
+            for item in items:
+                # Verify year
+                issued = item.get('issued', {}).get('date-parts', [[None]])
+                item_year = str(issued[0][0]) if issued and issued[0] and issued[0][0] else ''
+                if item_year != year:
+                    continue
+                # Verify author similarity
+                cr_authors = item.get('author', [])
+                if not cr_authors:
+                    continue
+                cr_family = cr_authors[0].get('family', '')
+                sim = difflib.SequenceMatcher(None, _norm(family), _norm(cr_family)).ratio()
+                if sim < AUTHOR_SIM_THRESHOLD:
+                    continue
+                # Accept
+                cr_title = ' '.join(item.get('title', []))
+                if cr_title:
+                    entry['title'] = cr_title
+                    entry['_title_from_crossref_author_year'] = True
+                    if item.get('DOI'):
+                        entry['doi'] = item['DOI']
+                    logger.debug(
+                        "CrossRef author+year resolved [%s]: %s %s → %s",
+                        ck, family, year, cr_title[:60]
+                    )
+                    count += 1
+                    break
+        except Exception as exc:
+            logger.debug("CrossRef author+year failed for [%s]: %s", ck, exc)
+            continue
+
+    logger.info("Footnote stub resolution: %d entries resolved.", count)
+    return count
+
+
 # ── Pass 3: Near-duplicate flagging and LLM resolution ───────────────────────
 
 def _title_tokens(title: str) -> set:
@@ -311,6 +478,7 @@ def _llm_same_work(
 PASSES = [
     ("Entry type reclassification (enriched)", fix_entry_types_post_enrich, False),
     ("Title recovery from raw citations (LLM)", recover_titles_from_raw, True),
+    ("Footnote stub resolution", resolve_footnote_stubs, False),
     ("Near-duplicate flagging / LLM resolution", flag_near_duplicates, True),
 ]
 
@@ -319,6 +487,7 @@ def run_postprocess(
     input_path: Path,
     output_path: Path | None = None,
     llm_config: dict | None = None,
+    email: str = "",
 ) -> dict:
     """Run all post-enrichment passes on bibliography.json."""
     input_path  = Path(input_path)
@@ -330,7 +499,9 @@ def run_postprocess(
 
     results = {}
     for name, fn, needs_llm in PASSES:
-        if needs_llm:
+        if fn is resolve_footnote_stubs:
+            count = fn(bib, email=email)
+        elif needs_llm:
             count = fn(bib, llm_config)
         else:
             count = fn(bib)
