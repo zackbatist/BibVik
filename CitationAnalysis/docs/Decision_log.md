@@ -981,3 +981,29 @@ Three resolution mechanisms applied in order:
 
 run_postprocess() signature updated to accept email parameter.
 run.py updated accordingly.
+
+### 2026-06-10 — Improve near-duplicate detection and add stub resolution pass
+
+Pass 2b added to postprocess.py: resolve_footnote_stubs(). Targets entries
+with author+year but no title from Methods 5 and 6. Three mechanisms:
+abbreviation expansion (_ABBREVIATION_TABLE), OCR/normalisation merges
+(_OCR_MERGE_PAIRS, 10 manually verified pairs), CrossRef author+year query
+(accepts if year matches exactly and author similarity ≥ 0.70).
+run_postprocess() updated to accept email parameter for CrossRef access.
+
+_first_author_key() now uses last word of compound family name so
+"Hallans Stenholm" pairs correctly with "Stenholm" in near-duplicate
+detection index.
+
+_title_tokens() now normalises through unidecode before tokenising,
+catching OCR Unicode variants in title comparison.
+
+flag_near_duplicates() token overlap gate removed when LLM is configured.
+All same-author same-year title pairs with substantive titles now go
+directly to the LLM for judgment. Token overlap retained as fallback
+when no LLM is available. Resolves cases where titles are semantically
+equivalent but lexically different — different language phrasings, OCR
+variants, compound surname indexing failures.
+
+Postprocess run on June 10 output: 68 stubs resolved by Pass 2b, 3 titles
+recovered by LLM title recovery, 13 near-duplicate merges.

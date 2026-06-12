@@ -213,8 +213,13 @@ _OCR_MERGE_PAIRS = [
 
 def resolve_footnote_stubs(bib: dict, email: str = "") -> int:
     """
-    Resolve footnote stub entries — entries produced by Method 5 (LLM footnote
-    extraction) that have author and year but no title.
+    Resolve stub entries that have author and year but no title.
+
+    Targets two entry types:
+    - Method 5 (llm_from_footnote): footnote shorthand citations where the LLM
+      extracted author+year but had no title to extract
+    - Method 6 (llm_bib_reparse): entries where the LLM re-parsed the reference
+      list but returned no title for a given entry
 
     Three mechanisms are applied in order:
 
@@ -246,10 +251,10 @@ def resolve_footnote_stubs(bib: dict, email: str = "") -> int:
 
     count = 0
 
-    # Identify footnote stub entries
+    # Identify footnote stub entries and Method 6 no-title entries
     stubs = {
         ck: e for ck, e in bib.items()
-        if e.get('_resolution_method') == 'llm_from_footnote'
+        if e.get('_resolution_method') in ('llm_from_footnote', 'llm_bib_reparse')
         and not e.get('title')
         and e.get('author')
         and e.get('year')
@@ -348,7 +353,11 @@ def resolve_footnote_stubs(bib: dict, email: str = "") -> int:
 # ── Pass 3: Near-duplicate flagging and LLM resolution ───────────────────────
 
 def _title_tokens(title: str) -> set:
-    return set(re.findall(r"\b\w{4,}\b", title.lower()))
+    from unidecode import unidecode
+    # Normalise through unidecode before tokenising to handle OCR Unicode variants
+    # e.g. "Kongsga˚rd" → "Kongsgard", "InsularerMetallschmuck" → tokens
+    normalised = unidecode(title).lower()
+    return set(re.findall(r"\b\w{4,}\b", normalised))
 
 def _is_trivial_title(title: str) -> bool:
     return title.strip().lower() in _TRIVIAL_TITLES or len(title.strip()) < 20
@@ -358,7 +367,13 @@ def _first_author_key(entry: dict) -> str:
     authors = entry.get("author", [])
     if not authors:
         return ""
-    return unidecode(authors[0].get("family", "")).lower().strip()
+    family = unidecode(authors[0].get("family", "")).lower().strip()
+    # Use the last word of the family name to handle compound surnames:
+    # "Hallans Stenholm" → "stenholm", "de Vries" → "vries"
+    # This ensures compound-surname entries pair with single-surname variants
+    # of the same person.
+    parts = re.sub(r"[^a-z ]", "", family).split()
+    return parts[-1] if parts else family
 
 
 def flag_near_duplicates(bib: dict, llm_config: dict | None = None) -> int:
@@ -371,6 +386,9 @@ def flag_near_duplicates(bib: dict, llm_config: dict | None = None) -> int:
     index: dict[tuple, list] = defaultdict(list)
 
     for ck, entry in bib.items():
+        # Skip entries already merged by a previous pass
+        if entry.get("_merged_into"):
+            continue
         year = entry.get("date", entry.get("year", ""))[:4]
         ak   = _first_author_key(entry)
         if year and ak:
@@ -392,27 +410,34 @@ def flag_near_duplicates(bib: dict, llm_config: dict | None = None) -> int:
             if not ta or not tb or _is_trivial_title(ta) or _is_trivial_title(tb):
                 continue
 
-            ta_tokens = _title_tokens(ta)
-            tb_tokens = _title_tokens(tb)
-            if not ta_tokens or not tb_tokens:
-                continue
+            # Send all same-author same-year title pairs directly to the LLM.
+            # Token overlap was previously used as a gate but failed on:
+            # - Titles in different languages (Danish vs Norwegian phrasing)
+            # - OCR variants where key tokens differ due to character corruption
+            # - Compound surnames where the index key differs from the entry
+            # The LLM is the appropriate judge for all of these cases.
+            if llm_config:
+                same = _llm_same_work(ta, tb, bib[ck_a], bib[ck_b], llm_config)
+                if same is True:
+                    for cb in bib[ck_b].get("cited_by", []):
+                        if cb not in bib[ck_a].get("cited_by", []):
+                            bib[ck_a].setdefault("cited_by", []).append(cb)
+                    bib[ck_b]["_merged_into"] = ck_a
+                    count += 1
+                    continue
+                elif same is False:
+                    continue
+            else:
+                # No LLM — use token overlap as fallback gate
+                ta_tokens = _title_tokens(ta)
+                tb_tokens = _title_tokens(tb)
+                if not ta_tokens or not tb_tokens:
+                    continue
+                overlap = len(ta_tokens & tb_tokens) / min(len(ta_tokens), len(tb_tokens))
+                if overlap < 0.7:
+                    continue
 
-            overlap = len(ta_tokens & tb_tokens) / min(len(ta_tokens), len(tb_tokens))
-            if overlap >= 0.7:
-                if llm_config:
-                    # LLM resolution: ask if they're the same work
-                    same = _llm_same_work(ta, tb, bib[ck_a], bib[ck_b], llm_config)
-                    if same is True:
-                        # Merge: keep ck_a, update cited_by
-                        for cb in bib[ck_b].get("cited_by", []):
-                            if cb not in bib[ck_a].get("cited_by", []):
-                                bib[ck_a].setdefault("cited_by", []).append(cb)
-                        bib[ck_b]["_merged_into"] = ck_a
-                        count += 1
-                        continue
-                    elif same is False:
-                        continue
-                # LLM unavailable or inconclusive — flag for human review
+            # LLM unavailable or inconclusive — flag for human review
                 bib[ck_a].setdefault("_near_duplicate_candidate", [])
                 if ck_b not in bib[ck_a]["_near_duplicate_candidate"]:
                     bib[ck_a]["_near_duplicate_candidate"].append(ck_b)
