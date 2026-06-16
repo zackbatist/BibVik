@@ -412,8 +412,9 @@ class CitationGraph:
         # Add GROBID bibliography entries as F1
         for ref in grobid_refs:
             authors = ref.get("author", [])
+            editors = ref.get("editor", [])
             year = _extract_year(ref.get("date", ""))
-            citekey = generate_citekey(authors, year)
+            citekey = generate_citekey(authors, year, editors=editors)
 
             ref["citekey"] = citekey
             ref["generation"] = "F1"
@@ -475,10 +476,11 @@ class CitationGraph:
             if not rich.get("_resolution_method"):
                 continue  # Skip GROBID bib entries (already added)
             authors = rich.get("author", [])
+            editors = rich.get("editor", [])
             year = _extract_year(rich.get("date", ""))
             if not authors or not year:
                 continue
-            citekey = generate_citekey(authors, year)
+            citekey = generate_citekey(authors, year, editors=editors)
             rich["citekey"] = citekey
             rich["generation"] = "F1"
             rich["cited_by"] = [self.seed_citekey]
@@ -505,8 +507,9 @@ class CitationGraph:
                 if record.get("_resolution_method") == "stub" and not record.get("title"):
                     continue  # Skip empty stubs
                 authors = record.get("author", [])
+                editors = record.get("editor", [])
                 year = _extract_year(record.get("date", ""))
-                citekey = generate_citekey(authors, year)
+                citekey = generate_citekey(authors, year, editors=editors)
                 record["citekey"] = citekey
                 record["generation"] = "F1"
                 record["cited_by"] = [self.seed_citekey]
@@ -898,8 +901,9 @@ class CitationGraph:
             # Add GROBID refs as F2
             for ref in grobid_refs:
                 authors = ref.get("author", [])
+                editors = ref.get("editor", [])
                 year = _extract_year(ref.get("date", ""))
-                citekey = generate_citekey(authors, year)
+                citekey = generate_citekey(authors, year, editors=editors)
 
                 ref["citekey"] = citekey
                 ref["generation"] = "F2"
@@ -926,8 +930,9 @@ class CitationGraph:
                     if r is not ref:
                         # Assign citekey, generation etc to split entries
                         r_authors = r.get("author", [])
+                        r_editors = r.get("editor", [])
                         r_year = _extract_year(r.get("date", ""))
-                        r["citekey"] = generate_citekey(r_authors, r_year)
+                        r["citekey"] = generate_citekey(r_authors, r_year, editors=r_editors)
                         r["generation"] = "F2"
                         r["cited_by"] = [f1_citekey]
                         r["_source_pdf"] = pdf_path.name
@@ -972,10 +977,11 @@ class CitationGraph:
                 if not rich.get("_resolution_method"):
                     continue
                 authors = rich.get("author", [])
+                editors = rich.get("editor", [])
                 year = _extract_year(rich.get("date", ""))
                 if not authors or not year:
                     continue
-                citekey = generate_citekey(authors, year)
+                citekey = generate_citekey(authors, year, editors=editors)
                 rich["citekey"] = citekey
                 rich["generation"] = "F2"
                 rich["cited_by"] = [f1_citekey]
@@ -997,8 +1003,9 @@ class CitationGraph:
                     if record.get("_resolution_method") == "stub" and not record.get("title"):
                         continue
                     authors = record.get("author", [])
+                    editors = record.get("editor", [])
                     year = _extract_year(record.get("date", ""))
-                    citekey = generate_citekey(authors, year)
+                    citekey = generate_citekey(authors, year, editors=editors)
                     record["citekey"] = citekey
                     record["generation"] = "F2"
                     record["cited_by"] = [f1_citekey]

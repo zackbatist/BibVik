@@ -133,20 +133,26 @@ def reset_citekey_registry():
     _citekey_registry = {}
 
 
-def generate_citekey(authors: list[dict], year: str | None) -> str:
+def generate_citekey(authors: list[dict], year: str | None, editors: list[dict] | None = None) -> str:
     """
     Generate a biblatex-style citekey with disambiguation.
 
     Normal case (author present): lastnameyear with a/b/c suffix
       e.g. sindbæk2022 → sindbaek2022, sindbaek2022a, sindbaek2022b
 
-    No author: NOAUTHOR with sequential number
+    No author, editor present: first editor's surname + year
+      e.g. ahola2014, barrett2012
+
+    No author, no editor: NOAUTHOR with sequential number
       e.g. NOAUTHOR1, NOAUTHOR2, NOAUTHOR3
 
     Non-ASCII is transliterated for the key but preserved in the record.
     """
-    if authors and authors[0].get("family"):
-        family = unidecode(authors[0]["family"]).lower()
+    # Fall back to editors if no author
+    name_source = authors if (authors and authors[0].get("family")) else (editors or [])
+
+    if name_source and name_source[0].get("family"):
+        family = unidecode(name_source[0]["family"]).lower()
         family = re.sub(r"[^a-z]", "", family)
         year_str = str(year).strip()[:4] if year else "nd"
         base = f"{family}{year_str}"
@@ -157,10 +163,6 @@ def generate_citekey(authors: list[dict], year: str | None) -> str:
         else:
             count = _citekey_registry[base]
             _citekey_registry[base] = count + 1
-            # Single-letter suffix a–z for counts 1–26,
-            # then two-letter suffixes aa, ab, ... for overflow.
-            # This avoids non-ASCII characters when a base key has
-            # more than 26 disambiguated entries.
             if count <= 26:
                 suffix = chr(ord("a") + count - 1)
             else:
@@ -169,7 +171,7 @@ def generate_citekey(authors: list[dict], year: str | None) -> str:
                 suffix = first + second
             return f"{base}{suffix}"
     else:
-        # No author — sequential NOAUTHOR key
+        # No author or editor — sequential NOAUTHOR key
         n = _citekey_registry.get("__noauthor__", 0) + 1
         _citekey_registry["__noauthor__"] = n
         return f"NOAUTHOR{n}"
@@ -258,14 +260,33 @@ def norm_author(name: str) -> str:
     """
     Normalise an author surname for deduplication.
 
-    Applies unidecode transliteration then strips all non-alphabetic characters
-    and lowercases. Used consistently across detector, resolver, graph, and
-    zotero_csv for author-key matching.
+    For Cyrillic names, applies ALA-LC transliteration via domovyk before
+    unidecode, so Cyrillic characters produce meaningful Latin equivalents
+    rather than empty strings. Falls back to unidecode for all other scripts.
 
     Examples:
-        "Sindbæk"  → "sindbaek"
-        "de Vries" → "devries"
-        "Müller"   → "muller"
+        "Sindbæk"      → "sindbaek"
+        "de Vries"     → "devries"
+        "Müller"       → "muller"
+        "Непомнящий"   → "nepomniashchii" (via domovyk ALA-LC)
+        "Коваленко"    → "kovalenko"
     """
-    import re
-    return re.sub(r"[^a-z]", "", unidecode(name).lower())
+    import re as _re
+    import unicodedata as _ud
+
+    if not name:
+        return ""
+
+    # Detect Cyrillic content
+    if any('\u0400' <= c <= '\u04FF' for c in name):
+        try:
+            from domovyk import translit as _domovyk_translit
+            try:
+                transliterated = _domovyk_translit.transliterate(name, 'rus')
+            except Exception:
+                transliterated = _domovyk_translit.transliterate(name, 'ukr')
+            name = transliterated
+        except ImportError:
+            pass  # Fall through to unidecode
+
+    return _re.sub(r"[^a-z]", "", unidecode(name).lower())

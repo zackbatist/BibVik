@@ -1007,3 +1007,27 @@ variants, compound surname indexing failures.
 
 Postprocess run on June 10 output: 68 stubs resolved by Pass 2b, 3 titles
 recovered by LLM title recovery, 13 near-duplicate merges.
+
+### 2026-06-10 — Fix editor-based citekeys, Cyrillic normalisation, and systematic merge corrections
+
+generate_citekey() in utils.py now accepts an optional editors parameter
+and falls back to first editor surname when no author is present. Edited
+volumes previously generated NOAUTHOR citekeys despite having editor names
+clearly in the raw citation (e.g. NOAUTHOR1 → ahola2014). All seven
+generate_citekey() call sites in graph.py updated to pass editors from
+the entry's editor field.
+
+norm_author() in utils.py now applies domovyk ALA-LC transliteration for
+Cyrillic names before unidecode. Previously unidecode collapsed Cyrillic
+to empty strings, causing 970 of 975 Cyrillic-authored entries to have
+empty normalised keys, making them invisible to all author-key-based
+deduplication. Fix ensures Непомнящий → nepomniashchii, Коваленко →
+kovalenko etc., enabling proper deduplication of Cyrillic-authored entries
+against each other and against Latin transliterations.
+
+Todo AH updated: design a structured corrections file system for drop-in
+OCR/normalisation merge pairs (e.g. widerstrom2004/norderang2004) that
+postprocess.py reads at runtime, avoiding ad-hoc code changes for each
+new verified pair.
+
+Both fixes apply on next full rerun.
