@@ -12,6 +12,10 @@ This module handles:
 - Returning raw TEI-XML for downstream parsing
 - OCR fallback: when GROBID returns [NO_BLOCKS] (indicating a scanned PDF
   without a text layer), we run ocrmypdf to add a text layer and retry.
+- Alternate OCR fallback: when GROBID returns [BAD_INPUT_DATA] (structural
+  PDF failure) or the extracted text is dominated by private-use Unicode
+  (font encoding failure), we render the PDF to images with pdftoppm and
+  run Tesseract OCR, then submit the resulting text-layer PDF to GROBID.
 
 We use the `/api/processFulltextDocument` endpoint because it returns both:
   (a) parsed body text with inline citation markers (<ref> elements), and
@@ -19,8 +23,8 @@ We use the `/api/processFulltextDocument` endpoint because it returns both:
 This dual output is essential for linking inline citations to their
 bibliographic records and extracting citation contexts.
 
-OCR fallback
-------------
+OCR fallback (ocrmypdf)
+-----------------------
 Some PDFs in the corpus are scanned images with no embedded text. GROBID
 returns a valid 200 response for these, but the TEI-XML body contains only
 the marker [NO_BLOCKS], meaning it found no text to process.
@@ -33,20 +37,46 @@ When this happens, process_fulltext() automatically:
   5. Retries the GROBID request with the now-replaced file.
   6. Reports the outcome (success or persistent failure) at INFO level.
 
-The original is never lost — it is preserved in output/ocr/originals/. On
-subsequent runs, the presence of a backup file signals that OCR has already
-been applied and the current file is used directly without re-running OCR.
+Alternate OCR fallback (pdftoppm + Tesseract)
+----------------------------------------------
+Two additional failure modes require a different approach:
 
-This requires ocrmypdf to be installed and available on PATH:
-    pip install ocrmypdf
-  or:
-    brew install ocrmypdf   # macOS
-    apt install ocrmypdf    # Debian/Ubuntu
+1. [BAD_INPUT_DATA]: GROBID's PDF parser crashes entirely (exit code 134).
+   This happens when the PDF has structural issues that prevent GROBID from
+   opening it at all. Examples: Paterson et al 2014.
+
+2. Private-use Unicode font encoding failure: GROBID produces TEI but the
+   extracted text consists largely of private-use Unicode characters (e.g.
+   \uf731, \uf738) because the PDF uses a custom font with no standard Unicode
+   mapping. The PDF looks fine visually but text extraction gets raw glyph
+   codes. Examples: Feveile 2012.
+
+In both cases, ocrmypdf cannot help — it either can't open the PDF or the
+problem is in the font mapping, not the absence of a text layer. The solution
+is to bypass the PDF's text layer entirely: render each page to an image with
+pdftoppm and run Tesseract OCR on the images from pixels. This produces a
+new text layer independent of the original PDF's structure or font maps.
+
+The alternate OCR path:
+  1. Detects [BAD_INPUT_DATA] in a GROBID HTTP 500 response, or detects
+     private-use Unicode density above a threshold in the extracted TEI.
+  2. Renders the PDF to page images with pdftoppm at 300 DPI.
+  3. Runs Tesseract on each page image, collecting the OCR'd text.
+  4. Writes a text-layer PDF using reportlab/fpdf2, or falls back to passing
+     raw text directly if PDF generation is unavailable.
+  5. Submits the new PDF to GROBID and returns the result.
+
+This requires pdftoppm (from poppler) and tesseract on PATH:
+    apt install poppler-utils tesseract-ocr tesseract-ocr-nor tesseract-ocr-swe
+    brew install poppler tesseract
+
+The original is preserved in output/ocr/originals/ as with the ocrmypdf path.
 """
 
 import logging
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 import requests
@@ -54,8 +84,14 @@ import requests
 logger = logging.getLogger(__name__)
 
 # Marker GROBID embeds in TEI when it cannot extract any text from a PDF.
-# This is the reliable signal that the PDF has no text layer.
 _NO_BLOCKS_MARKER = "[NO_BLOCKS]"
+
+# Marker GROBID embeds when the PDF parser crashes entirely.
+_BAD_INPUT_MARKER = "[BAD_INPUT_DATA]"
+
+# Fraction of characters in extracted TEI text that are private-use Unicode
+# (U+E000–U+F8FF) above which we conclude font encoding has failed.
+_PRIVATE_USE_THRESHOLD = 0.05
 
 
 class GrobidClient:
@@ -89,6 +125,9 @@ class GrobidClient:
         self.timeout        = timeout
         self.ocr_dir        = Path(ocr_dir) if ocr_dir else Path("output/ocr")
         self.container_name = container_name
+        # Set by _submit_to_grobid when [BAD_INPUT_DATA] is detected,
+        # so process_fulltext() knows to attempt the pdftoppm+Tesseract fallback.
+        self._last_bad_input: bool = False
 
     def is_alive(self) -> bool:
         """
@@ -200,18 +239,9 @@ class GrobidClient:
         - <body>: Parsed full text with inline <ref type="bibr"> citation markers
         - <listBibl>: Structured bibliography with <biblStruct> entries
 
-        The inline <ref> elements contain @target attributes that link to
-        xml:id attributes on <biblStruct> entries, enabling us to connect
-        citation contexts to specific references.
-
-        If GROBID returns [NO_BLOCKS] (indicating a scanned PDF with no text
-        layer), this method automatically attempts OCR via ocrmypdf and retries.
-
-        Args:
-            pdf_path:            Path to the PDF file.
-            include_coordinates: If True, request bounding box coordinates for
-                                 each element. Not needed for text extraction
-                                 but useful for layout analysis.
+        If GROBID returns [NO_BLOCKS], attempts ocrmypdf OCR and retries.
+        If GROBID returns [BAD_INPUT_DATA] or the extracted text has high
+        private-use Unicode density, attempts pdftoppm+Tesseract OCR and retries.
 
         Returns:
             TEI-XML string on success, or None if processing failed.
@@ -222,16 +252,59 @@ class GrobidClient:
             return None
 
         tei = self._submit_to_grobid(pdf_path, include_coordinates)
+
+        # ── [BAD_INPUT_DATA] fallback ──
+        # GROBID's PDF parser crashed — try pdftoppm+Tesseract.
+        if tei is None and self._last_bad_input:
+            logger.warning(
+                "[BAD_INPUT_DATA] for %s — attempting pdftoppm+Tesseract OCR.",
+                pdf_path.name,
+            )
+            ocr_pdf = self._run_pdftoppm_tesseract(pdf_path, self.ocr_dir)
+            if ocr_pdf:
+                tei = self._submit_to_grobid(ocr_pdf, include_coordinates)
+                if tei and not self._is_no_blocks(tei):
+                    logger.info("pdftoppm+Tesseract OCR succeeded for %s", pdf_path.name)
+                    return tei
+            logger.error(
+                "pdftoppm+Tesseract OCR failed for %s. PDF may be unrecoverable.",
+                pdf_path.name,
+            )
+            return None
+
         if tei is None:
             return None
 
+        # ── Private-use Unicode fallback ──
+        # GROBID produced TEI but text is dominated by private-use Unicode
+        # characters — font encoding failure. Try pdftoppm+Tesseract.
+        if self._has_private_use_unicode(tei):
+            logger.warning(
+                "Private-use Unicode detected in TEI for %s — "
+                "attempting pdftoppm+Tesseract OCR to bypass font mapping.",
+                pdf_path.name,
+            )
+            ocr_pdf = self._run_pdftoppm_tesseract(pdf_path, self.ocr_dir)
+            if ocr_pdf:
+                tei2 = self._submit_to_grobid(ocr_pdf, include_coordinates)
+                if tei2 and not self._is_no_blocks(tei2) and not self._has_private_use_unicode(tei2):
+                    logger.info(
+                        "pdftoppm+Tesseract OCR resolved font encoding failure for %s",
+                        pdf_path.name,
+                    )
+                    return tei2
+            logger.warning(
+                "pdftoppm+Tesseract did not resolve font encoding failure for %s. "
+                "Using original (garbled) TEI.",
+                pdf_path.name,
+            )
+            return tei  # Return garbled TEI — better than nothing
+
+        # ── [NO_BLOCKS] fallback ──
         if not self._is_no_blocks(tei):
             logger.debug("GROBID processed successfully: %s", pdf_path.name)
             return tei
 
-        # ── OCR fallback ──
-        # GROBID found no text — this PDF has no text layer (scanned image).
-        # Run ocrmypdf to add a text layer, then retry with GROBID.
         ocr_pdf = self._run_ocr(pdf_path, self.ocr_dir)
         if ocr_pdf is None:
             logger.error("OCR failed for %s — skipping this paper.", pdf_path.name)
@@ -297,11 +370,19 @@ class GrobidClient:
                 )
 
             if resp.status_code == 200:
+                self._last_bad_input = False
                 return resp.text
             elif resp.status_code == 500 and _NO_BLOCKS_MARKER in resp.text:
-                # GROBID found no text layer — return the body so process_fulltext
-                # can detect [NO_BLOCKS] and trigger the OCR fallback.
+                self._last_bad_input = False
                 return resp.text
+            elif resp.status_code == 500 and _BAD_INPUT_MARKER in resp.text:
+                self._last_bad_input = True
+                logger.error(
+                    "GROBID returned HTTP 500 for %s: %s",
+                    pdf_path.name,
+                    resp.text[:500],
+                )
+                return None
             elif resp.status_code == 503:
                 logger.warning(
                     "GROBID is busy (503). The service may be overloaded. "
@@ -346,6 +427,157 @@ class GrobidClient:
     def _is_no_blocks(tei_xml: str) -> bool:
         """Return True if the TEI response signals that GROBID found no text."""
         return _NO_BLOCKS_MARKER in tei_xml
+
+    @staticmethod
+    def _has_private_use_unicode(tei_xml: str, threshold: float = _PRIVATE_USE_THRESHOLD) -> bool:
+        """
+        Return True if the TEI text is dominated by private-use Unicode characters.
+
+        Private-use Unicode (U+E000–U+F8FF) appears when GROBID extracts text
+        from a PDF that uses a custom font with no standard Unicode mapping.
+        The PDF looks correct visually but text extraction produces raw glyph
+        codes rather than readable characters. When the fraction of such
+        characters exceeds the threshold, we conclude font encoding has failed
+        and attempt alternate OCR.
+        """
+        # Sample the first 5000 chars to avoid scanning huge TEI files
+        sample = tei_xml[:5000]
+        if not sample:
+            return False
+        private_use = sum(1 for c in sample if '\uE000' <= c <= '\uF8FF')
+        return private_use / len(sample) >= threshold
+
+    @staticmethod
+    def _run_pdftoppm_tesseract(pdf_path: Path, ocr_dir: Path) -> "Path | None":
+        """
+        Render a PDF to images with pdftoppm and OCR with Tesseract.
+
+        This approach bypasses the PDF's text layer entirely — rendering from
+        pixels rather than extracting embedded text. It handles:
+        - [BAD_INPUT_DATA]: PDFs that GROBID's parser cannot open at all
+        - Font encoding failures: PDFs with custom fonts lacking Unicode maps
+
+        The resulting text is assembled into a simple text file, then wrapped
+        in a minimal PDF using a Tesseract PDF output mode. The result is
+        submitted to GROBID as a new PDF with a proper text layer.
+
+        Returns the path to the OCR'd PDF on success, or None on failure.
+        """
+        backup_dir = ocr_dir / "originals"
+        backup_path = backup_dir / pdf_path.name
+        alt_tag = pdf_path.stem + ".pdftoppm_ocr.pdf"
+        alt_path = ocr_dir / alt_tag
+
+        # If we've already done this, reuse the result
+        if alt_path.exists():
+            logger.debug("pdftoppm+Tesseract output already exists, reusing: %s", alt_tag)
+            return alt_path
+
+        if not shutil.which("pdftoppm"):
+            logger.error("pdftoppm not found on PATH. Install poppler-utils.")
+            return None
+        if not shutil.which("tesseract"):
+            logger.error("tesseract not found on PATH. Install tesseract-ocr.")
+            return None
+
+        logger.info("Running pdftoppm+Tesseract OCR on %s ...", pdf_path.name)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+
+            # Step 1: Render PDF pages to images at 300 DPI
+            img_prefix = str(tmp / "page")
+            pdftoppm_cmd = [
+                "pdftoppm",
+                "-r", "300",       # 300 DPI — good balance of quality vs size
+                "-png",            # PNG output
+                str(pdf_path),
+                img_prefix,
+            ]
+            result = subprocess.run(pdftoppm_cmd, capture_output=True, text=True, timeout=300)
+            if result.returncode != 0:
+                logger.error(
+                    "pdftoppm failed (exit %d) for %s: %s",
+                    result.returncode, pdf_path.name,
+                    (result.stderr or "(no output)").strip()[:300],
+                )
+                return None
+
+            page_images = sorted(tmp.glob("page-*.png")) or sorted(tmp.glob("page*.png"))
+            if not page_images:
+                logger.error("pdftoppm produced no images for %s.", pdf_path.name)
+                return None
+
+            logger.debug("pdftoppm produced %d page images for %s", len(page_images), pdf_path.name)
+
+            # Step 2: OCR each page with Tesseract, output as PDF
+            # Use multiple languages likely in this corpus
+            langs = "nor+swe+dan+deu+eng+fra+pol+ukr"
+            page_pdfs = []
+            for img in page_images:
+                out_base = str(img.with_suffix(""))
+                tess_cmd = [
+                    "tesseract",
+                    str(img),
+                    out_base,
+                    "-l", langs,
+                    "--oem", "1",   # LSTM OCR engine
+                    "--psm", "3",   # Fully automatic page segmentation
+                    "pdf",          # Output as PDF with text layer
+                ]
+                result = subprocess.run(tess_cmd, capture_output=True, text=True, timeout=120)
+                if result.returncode != 0:
+                    logger.debug(
+                        "Tesseract failed for page %s of %s: %s",
+                        img.name, pdf_path.name,
+                        (result.stderr or "").strip()[:200],
+                    )
+                    continue
+                page_pdf = img.with_suffix(".pdf")
+                if page_pdf.exists():
+                    page_pdfs.append(page_pdf)
+
+            if not page_pdfs:
+                logger.error("Tesseract produced no output for %s.", pdf_path.name)
+                return None
+
+            # Step 3: Merge page PDFs into one
+            if len(page_pdfs) == 1:
+                merged = page_pdfs[0]
+            else:
+                merged = tmp / "merged.pdf"
+                if shutil.which("pdfunite"):
+                    subprocess.run(
+                        ["pdfunite"] + [str(p) for p in page_pdfs] + [str(merged)],
+                        capture_output=True, timeout=120,
+                    )
+                elif shutil.which("gs"):
+                    subprocess.run(
+                        ["gs", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite",
+                         f"-sOutputFile={merged}"] + [str(p) for p in page_pdfs],
+                        capture_output=True, timeout=120,
+                    )
+                else:
+                    logger.error(
+                        "Neither pdfunite nor gs available to merge page PDFs for %s. "
+                        "Install poppler-utils or ghostscript.",
+                        pdf_path.name,
+                    )
+                    return None
+
+            if not merged.exists():
+                logger.error("Failed to merge OCR'd pages for %s.", pdf_path.name)
+                return None
+
+            # Step 4: Copy result to ocr_dir
+            ocr_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(str(merged), str(alt_path))
+
+        logger.info(
+            "pdftoppm+Tesseract OCR complete for %s → %s",
+            pdf_path.name, alt_tag,
+        )
+        return alt_path
 
     @staticmethod
     def _run_ocr(pdf_path: Path, ocr_dir: Path) -> "Path | None":

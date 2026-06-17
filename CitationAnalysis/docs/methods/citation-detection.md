@@ -21,9 +21,13 @@ which includes:
 - Footnote-style papers (Chicago style) where the bibliography is embedded in
   footnotes rather than a separate section
 - Papers with non-standard or absent bibliography sections
+- Papers where the bibliography appears in the body text rather than a
+  dedicated reference section (e.g. under a "Litteratur" heading)
 - Discursive citations not recognisable as formal (author, year) pairs
 - Non-English citation styles (Scandinavian, German, French)
 - Scanned PDFs where OCR quality affects text layer reliability
+- PDFs with font encoding failures where text extraction produces
+  private-use Unicode characters rather than readable text
 - Bibliography entries that span PDF page breaks, causing GROBID's structured
   parser to produce fragmented garbage entries
 
@@ -215,8 +219,17 @@ the LLM version fills the gap.
 (`_method_llm_bib_reparse()`, prompt `_LLM_BIB_REPARSE`).
 
 **Scope:** 360 of 380 F1 papers have a populated references div. 20 papers have
-an empty references div (GROBID extraction failed entirely for those papers) —
-these are logged as warnings and Method 6 is skipped for them.
+an empty references div — these are logged as warnings and Method 6 falls back
+to the body text tail (see below).
+
+**Body-text fallback:** When the references div is empty, Method 6 sends the
+last 3,000 characters of the body text to the LLM instead. Some papers in the
+corpus place their bibliography at the end of the body text under a non-standard
+heading (e.g. "Litteratur") rather than in a dedicated references section.
+GROBID does not recognise these as reference sections and leaves the div empty.
+The body-tail fallback recovers bibliography entries from these cases.
+`_is_reconstructible()` filters any garbage entries the LLM extracts from
+non-bibliography body text (figure captions, prose, data tables).
 
 **Token budget:** The full reference list can be large. Method 6 uses
 `max_tokens=4096` and a minimum timeout of 300 seconds, both larger than the
@@ -270,9 +283,45 @@ graph state and will support later analysis of method coverage and reliability.
 Occurrence counts are accumulated across methods; up to five citation contexts
 are stored per merged citation (drawn from whichever methods provided them).
 
-## Known limitations
+## PDF processing failure modes and fallbacks
 
-**Completeness vs. false positives:** Running all six methods increases recall
+GROBID's PDF processing can fail in several ways, each requiring a different
+recovery strategy. The `GrobidClient` in `bibvik/grobid_client.py` implements
+three OCR fallback tiers:
+
+### Tier 1: ocrmypdf (scanned PDFs, no text layer)
+
+When GROBID returns `[NO_BLOCKS]`, the PDF has no embedded text layer — it is
+a scanned image. `ocrmypdf` adds a text layer and GROBID retries.
+
+### Tier 2: pdftoppm + Tesseract (structural failures and font encoding)
+
+**`[BAD_INPUT_DATA]` (error code 134):** GROBID's PDF parser crashes before
+any text extraction. Example: Paterson et al 2014.
+
+**Font encoding failure:** GROBID extracts text consisting largely of
+private-use Unicode characters (U+E000–U+F8FF) because the PDF uses a custom
+font with no standard Unicode mapping. Example: Feveile 2012. Detected by
+checking whether private-use Unicode exceeds 5% of a sample of the TEI.
+
+In both cases, `_run_pdftoppm_tesseract()` renders each page to a 300 DPI PNG
+with `pdftoppm`, OCRs with Tesseract (nor+swe+dan+deu+eng+fra+pol+ukr), and
+produces a new PDF with a standard text layer. Cached in `output/ocr/`.
+
+### Known unresolvable cases in the F1 corpus
+
+Investigation of the 20 empty-references-div papers:
+
+| Category | Papers | Coverage |
+|---|---|---|
+| Genuinely sparse intro chapters | Andersson et al 2008, Andrén et al 2006 | 1–2 citations (expected) |
+| Well-covered by Methods 2–5 | Aannestad 2018, Cannell 2016, Macphail & Linderholm 2016, Naum 2004, Perry 2019, Roslund 2013, Runge 2018, Myrberg 2009 | 14–93 citations |
+| Bibliography in body text | Pentz et al 2009, Tummuscheit 2012 | Method 6 body-tail fallback |
+| Journal special section, no embedded bibliography | Vésteinsson & McGovern 2012 (6 chapters) | Methods 2–5 |
+| Incomplete PDF | Skre 2011 - The Inhabitants Activities | Methods 2–5 |
+| Alternate OCR candidates | Gardeła 2014, Moen 2020, Paterson et al 2014, Feveile 2012 | Tier 2 fallback |
+
+## Known limitations
 but also increases the risk of false positives. Method 3 (regex) is the most
 prone to false positives; Method 1 (GROBID bibliography) is the most precise.
 The merged result is the union of all detections — no method's output is

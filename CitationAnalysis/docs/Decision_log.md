@@ -1031,3 +1031,34 @@ postprocess.py reads at runtime, avoiding ad-hoc code changes for each
 new verified pair.
 
 Both fixes apply on next full rerun.
+
+### 2026-06-10 — Add pdftoppm+Tesseract alternate OCR fallback to grobid_client.py
+
+Extends the existing ocrmypdf OCR fallback with a second mechanism that
+bypasses the PDF text layer entirely by rendering pages to images and running
+Tesseract OCR from pixels. This handles two failure modes that ocrmypdf cannot:
+
+[BAD_INPUT_DATA]: GROBID's PDF parser crashes (exit code 134) before any text
+extraction. Triggered by Paterson et al 2014. pdftoppm can render the PDF to
+images even when GROBID's parser fails.
+
+Font encoding failure: GROBID successfully extracts text but the PDF uses a
+custom font with no standard Unicode mapping, producing private-use Unicode
+characters (U+E000–U+F8FF) instead of readable text. Triggered by Feveile 2012.
+Detected by _has_private_use_unicode() which checks whether private-use
+characters exceed 5% of a sample of the extracted TEI.
+
+_run_pdftoppm_tesseract(): renders at 300 DPI using pdftoppm, OCRs with
+Tesseract using a multi-language pack (nor+swe+dan+deu+eng+fra+pol+ukr),
+merges page PDFs with pdfunite or gs. Output cached in output/ocr/ as
+<stem>.pdftoppm_ocr.pdf so subsequent reruns skip the OCR step.
+
+process_fulltext() extended with two new fallback branches in addition to
+the existing [NO_BLOCKS]/ocrmypdf path. _submit_to_grobid() now sets
+_last_bad_input flag when [BAD_INPUT_DATA] is detected.
+
+AE investigation findings documented separately. The 20 empty-div papers
+were categorized: 2 genuinely sparse intro chapters, 9 well-covered by
+Methods 2-5, 2 with bibliography in body text (handled by Method 6 body-tail
+fallback), 1 journal special section, 1 incomplete PDF, 4 needing alternate
+OCR (Gardeła 2014, Moen 2020, Paterson et al 2014, Feveile 2012).
