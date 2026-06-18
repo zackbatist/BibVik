@@ -423,9 +423,9 @@ class CitationGraph:
             ref = normalize_entry(ref)
 
             # Skip entries that cannot be reconstructed as a minimal citation.
-            # When an LLM is configured, Method 6 will recover any legitimate
-            # reference that was lost due to GROBID parsing failures.
-            if llm_config and not _is_reconstructible(ref):
+            # Unconditional — empty GROBID entries should never enter the
+            # bibliography regardless of LLM availability.
+            if not _is_reconstructible(ref):
                 continue
 
             existing = self._find_duplicate(ref)
@@ -891,7 +891,7 @@ class CitationGraph:
                     "date": header.get("date", ""),
                     "year": f1_year,
                     "generation": "F1",
-                    "cited_by": [],
+                    "cited_by": [self.seed_citekey],
                     "_source_pdf": pdf_path.name,
                 })
 
@@ -912,9 +912,11 @@ class CitationGraph:
                 ref = normalize_entry(ref)
 
                 # Skip entries that cannot be reconstructed as a minimal citation.
+                # This check is unconditional — a completely empty GROBID entry
+                # should never enter the bibliography regardless of LLM availability.
                 # When an LLM is configured, Method 6 will recover any legitimate
-                # reference that was lost due to GROBID parsing failures.
-                if llm_config and not _is_reconstructible(ref):
+                # reference from the raw reference div text.
+                if not _is_reconstructible(ref):
                     continue
 
                 # Inline compound citation splitting — if GROBID flagged this

@@ -219,8 +219,10 @@ references.
 
 When an LLM is configured, entries that fail any check are silently dropped —
 Method 6 will recover any legitimate references from the raw reference div text.
-When no LLM is configured, all GROBID entries are kept regardless, since there
-is no recovery mechanism.
+The check is applied unconditionally regardless of LLM availability — previously
+it was gated on LLM configuration, which allowed ghost entries (GROBID biblStructs
+with journal/volume metadata but no author, title, or year) to enter the
+bibliography when the LLM was not available at processing time.
 
 ---
 

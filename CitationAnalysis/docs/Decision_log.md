@@ -1062,3 +1062,25 @@ were categorized: 2 genuinely sparse intro chapters, 9 well-covered by
 Methods 2-5, 2 with bibliography in body text (handled by Method 6 body-tail
 fallback), 1 journal special section, 1 incomplete PDF, 4 needing alternate
 OCR (Gardeła 2014, Moen 2020, Paterson et al 2014, Feveile 2012).
+
+### 2026-06-17 — Fix ghost entries, F1 cited_by bug, and begin NOAUTHOR resolution
+
+_is_reconstructible() made unconditional in all three GROBID integration loops
+(seed paper, F1, F2) in graph.py. Previously gated on llm_config — GROBID
+entries with journal+volume but no author/title/year were entering the
+bibliography when llm_config was not available at processing time. Ghost
+entries (5 identified: NOAUTHOR525, NOAUTHOR752, NOAUTHOR822, NOAUTHOR1236,
+NOAUTHOR1328) will be suppressed on next rerun.
+
+F1 paper entries now correctly set cited_by: [self.seed_citekey]. Previously
+set to [] — 16 F1 entries had empty citation relationships despite being
+cited by the seed paper by definition.
+
+AE investigation complete. 20 empty-references-div papers categorized and
+documented in citation-detection.md. grobid_client.py extended with
+pdftoppm+Tesseract alternate OCR fallback for [BAD_INPUT_DATA] and
+font encoding failures.
+
+NOAUTHOR investigation ongoing — 26 remaining entries categorized:
+5 ghosts (suppressed next rerun), 7 dash-abbreviated (fix pending),
+6 author-in-raw (fix pending), 3 legitimate (keep), 5 ambiguous (pending).
