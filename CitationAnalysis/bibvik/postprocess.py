@@ -310,6 +310,7 @@ _OCR_MERGE_PAIRS = [
     ("gurevic1968a",        "gurevich1968"),         # transliteration variant
     ("tenharkel2013",       "harkel2013"),           # Ten prefix stripped
     ("stolpenda",           "stolpendd"),            # garbled Unicode Björkö (Bj€ork€o)
+    ("NOAUTHOR771",         "pentz2009a"),           # author string absorbed into title field
 ]
 
 
@@ -446,6 +447,72 @@ def resolve_footnote_stubs(bib: dict, email: str = "") -> int:
                     break
         except Exception as exc:
             logger.debug("CrossRef author+year failed for [%s]: %s", ck, exc)
+            continue
+
+    # ── Mechanism 4: CrossRef title lookup for NOAUTHOR entries ──────────────
+    # NOAUTHOR entries that have a title but no author and no raw citation
+    # can be looked up in CrossRef by title. This recovers author, DOI,
+    # and other metadata for entries like edited volumes and software packages
+    # where the author was not extracted by GROBID.
+    TITLE_SIM_THRESHOLD = 0.85
+
+    noauthor_title = {
+        ck: e for ck, e in bib.items()
+        if ck.startswith('NOAUTHOR')
+        and not e.get('author')
+        and e.get('title')
+        and not e.get('_raw_citation')
+        and not e.get('_merged_into')
+    }
+
+    for ck, entry in noauthor_title.items():
+        title = entry.get('title', '')
+        year = entry.get('year', '')
+        params = {
+            'query.title': title,
+            'rows': 3,
+        }
+        if year:
+            params['filter'] = f'from-pub-date:{year},until-pub-date:{year}'
+        if email:
+            params['mailto'] = email
+
+        try:
+            resp = requests.get(CROSSREF_BASE, params=params, timeout=15)
+            if resp.status_code != 200:
+                continue
+            items = resp.json().get('message', {}).get('items', [])
+            for item in items:
+                cr_title = ' '.join(item.get('title', []))
+                if not cr_title:
+                    continue
+                sim = difflib.SequenceMatcher(None, _norm(title), _norm(cr_title)).ratio()
+                if sim < TITLE_SIM_THRESHOLD:
+                    continue
+                # Accept -- populate author/editor from CrossRef
+                cr_authors = item.get('author', [])
+                cr_editors = item.get('editor', [])
+                if cr_authors:
+                    entry['author'] = [{'family': a.get('family', ''), 'given': a.get('given', '')}
+                                       for a in cr_authors if a.get('family')]
+                    entry['_author_from_crossref_title'] = True
+                elif cr_editors:
+                    entry['editor'] = [{'family': a.get('family', ''), 'given': a.get('given', '')}
+                                       for a in cr_editors if a.get('family')]
+                    entry['_author_from_crossref_title'] = True
+                if item.get('DOI'):
+                    entry['doi'] = item['DOI']
+                # Update title to CrossRef version if better
+                if cr_title and len(cr_title) > len(title):
+                    entry['title'] = cr_title
+                logger.debug(
+                    "CrossRef title lookup resolved [%s]: %s -> %s",
+                    ck, title[:50], cr_title[:50]
+                )
+                count += 1
+                break
+        except Exception as exc:
+            logger.debug("CrossRef title lookup failed for [%s]: %s", ck, exc)
             continue
 
     logger.info("Footnote stub resolution: %d entries resolved.", count)
