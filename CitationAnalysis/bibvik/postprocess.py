@@ -230,10 +230,11 @@ def run_postprocess(
     results = {}
 
     # Pass 0: manual corrections (merge, delete, set) from corrections.yaml
-    corrections_path = input_path.parent / CORRECTIONS_FILENAME
-    correction_counts = run_corrections(input_path, corrections_path)
+    # corrections.yaml lives in the project root, not output/
+    project_root = input_path.parent.parent
+    correction_counts = run_corrections(input_path, project_root)
     n_corrections = correction_counts["merge"] + correction_counts["delete"] + correction_counts["set"]
-    if n_corrections or corrections_path.exists():
+    if n_corrections or (project_root / CORRECTIONS_FILENAME).exists():
         results["Manual corrections"] = n_corrections
         logger.info("Manual corrections: %d applied", n_corrections)
         # Reload bib after corrections were written back
@@ -252,12 +253,13 @@ def run_postprocess(
     )
     logger.info("Written to %s", output_path)
 
-    # Write draft corrections based on pipeline-flagged issues
-    from .corrections import write_draft_corrections, _load_yaml, CORRECTIONS_FILENAME
-    existing = _load_yaml(input_path.parent / CORRECTIONS_FILENAME)
-    n_drafts = write_draft_corrections(bib, input_path.parent, existing)
+    # Append pipeline-generated draft candidates to corrections.yaml
+    from .corrections import append_draft_corrections, load_yaml, CORRECTIONS_FILENAME
+    corrections_path = project_root / CORRECTIONS_FILENAME
+    existing = load_yaml(corrections_path)
+    n_drafts = append_draft_corrections(bib, corrections_path, existing)
     if n_drafts:
-        results["Draft corrections generated"] = n_drafts
+        results["Draft corrections appended"] = n_drafts
 
     return results
 

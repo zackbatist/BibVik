@@ -1,32 +1,17 @@
 # BibVik corrections
 #
-# Confirmed manual corrections applied by --postprocess as pass 0.
-# Pipeline-generated candidates appear in corrections_draft.yaml for review.
-#
-# To promote a draft: copy the entry here, remove the _source/_confidence/_* keys,
-# fill in the note field, and delete it from corrections_draft.yaml.
+# Confirmed corrections are applied by --postprocess as pass 0.
+# Pipeline-generated candidates are appended here with _draft: true after
+# each --postprocess run. Review them, remove _draft: true and fill in
+# the note to confirm, or delete the entry to reject.
 #
 # Actions: merge | delete | set
-#
-# merge:
-#   keep:    citekey to retain
-#   discard: citekey to tombstone (cited_by merged into keep)
-#   note:    required — basis for the decision
-#
-# delete:
-#   citekey: entry to tombstone
-#   note:    required — why it's garbage
-#
-# set:
-#   citekey: entry to correct
-#   field:   field name (author, title, year, ...)
-#   value:   new value
-#   note:    required — what was wrong and how it was verified
+# note field is required on all confirmed entries.
 #
 # Known cases pending investigation:
 #
-# widerstrom2004 and norderang2004 have the same title. Correct author unknown.
-# Uncomment after verifying:
+# widerstrom2004 and norderang2004 appear to be the same work with different
+# author name parsing. Verify correct author before confirming.
 #
 # - action: merge
 #   keep: widerstrom2004
@@ -34,15 +19,13 @@
 #   note: ""
 
 # OCR merge pairs (migrated from _OCR_MERGE_PAIRS in postprocess.py)
-# These are cases where OCR corruption produced a different author string
-# that deduplication could not catch automatically.
 #
 # - action: merge
 #   keep: wamers1994
 #   discard: wamets1994
-#   note: "OCR corruption: 'wamers' read as 'wamets' in Baastrup 2014"
+#   note: "OCR corruption in Baastrup 2014: 'wamers' read as 'wamets'"
 #
 # - action: merge
 #   keep: orsnes1966
 #   discard: rsnes1966
-#   note: "OCR corruption: 'orsnes' read as 'rsnes'"
+#   note: "OCR corruption: leading 'o' dropped"

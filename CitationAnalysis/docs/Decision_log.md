@@ -1125,3 +1125,16 @@ pipeline-flagged issues for researcher review before promotion to
 
 `_OCR_MERGE_PAIRS` removed from `postprocess.py`; entries moved to
 `corrections.yaml`.
+
+### 2026-06-19 — Audit corrections system implementation
+
+`corrections.py`: note field now required on all actions (entries skipped
+if missing); `load_yaml`/`save_yaml` exposed as public functions.
+
+`corrections_draft.yaml` removed. Draft candidates are now appended
+directly to `corrections.yaml` with `_draft: true` for in-place review.
+
+`postprocess.py`: corrected to look up `corrections.yaml` at project root
+rather than `output/`.
+
+`exporter.py`: tombstoned entries filtered before export.

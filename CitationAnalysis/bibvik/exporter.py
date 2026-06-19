@@ -278,6 +278,9 @@ def run_export(bib: dict, output_dir: Path) -> dict:
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Exclude tombstoned entries (deleted or merged-away)
+    bib = {ck: e for ck, e in bib.items() if not e.get("_deleted")}
+
     results = {}
 
     n, e = export_graphml(bib, output_dir / "citation_graph.graphml")
