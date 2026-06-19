@@ -1084,3 +1084,27 @@ font encoding failures.
 NOAUTHOR investigation ongoing — 26 remaining entries categorized:
 5 ghosts (suppressed next rerun), 7 dash-abbreviated (fix pending),
 6 author-in-raw (fix pending), 3 legitimate (keep), 5 ambiguous (pending).
+
+### 2026-06-17 -- Suppress dash-prefix entries and add LLM author recovery for NOAUTHOR entries
+
+_DASH_PREFIX_RE added to graph.py. Raw citations starting with "- " or "--"
+followed by a year are Scandinavian scholarly bibliography conventions where
+the dash indicates the same author as the preceding entry. GROBID parses
+these as standalone entries with no author. They passed _is_reconstructible()
+because they had year+title satisfying misc requirements. Now suppressed.
+Affects 7 entries in current bibliography (NOAUTHOR468, 486, 488, 489, 516,
+637, 638) -- will be suppressed on next rerun.
+
+recover_authors_from_raw() added to postprocess.py as Pass 3. Targets NOAUTHOR
+entries with _raw_citation and title but no author. Sends raw string to LLM
+to extract structured author data. Sets _author_recovered: True for provenance.
+_LLM_AUTHOR_RECOVERY prompt defined as module-level string constant.
+Targets 6 entries in current bibliography (NOAUTHOR131, 1267, 1268, 989,
+83, 88).
+
+Remaining NOAUTHOR entries after fixes take effect:
+- 3 legitimate (NOAUTHOR1247 AdapterRemoval, NOAUTHOR635 Schreiner Collection,
+  NOAUTHOR157 FARMPACT) -- keep as-is
+- 5 ambiguous (NOAUTHOR1262, NOAUTHOR771, NOAUTHOR779, NOAUTHOR819, NOAUTHOR528)
+  -- pending investigation
+

@@ -186,6 +186,14 @@ _CATALOGUE_PARENS_RE = re.compile(
     r"|\([^)]*\b(?:19|20)\d{2}\b[^)]*Abb"      # (... Year ... Abb — figure ref
 )
 
+# Dash-prefix same-author abbreviation pattern.
+# In Scandinavian scholarly publishing, a bibliography entry starting with
+# "- " or "--" followed by a year indicates the same author as the preceding
+# entry. GROBID parses these as standalone entries with no author field.
+# They should be suppressed — the author is implicit and cannot be recovered
+# without context from the surrounding bibliography.
+_DASH_PREFIX_RE = re.compile(r"^--?\s+(?:19|20)\d{2}")
+
 # Shorthand back-reference pattern.
 # Matches raw citations of the form "Author Year" or "Author/Author Year"
 # (optionally with a lowercase letter suffix on the year), with nothing else.
@@ -276,6 +284,16 @@ def _is_reconstructible(ref: dict) -> bool:
     if raw and _SHORTHAND_RE.match(raw):
         logger.debug(
             "Skipping shorthand back-reference: %s", repr(raw[:80])
+        )
+        return False
+
+    # Dash-prefix same-author abbreviation: raw citation starts with "- " or
+    # "--" followed by a year. These are Scandinavian scholarly bibliography
+    # conventions where the dash indicates the same author as the preceding
+    # entry. The author is implicit and cannot be recovered without context.
+    if raw and _DASH_PREFIX_RE.match(raw):
+        logger.debug(
+            "Skipping dash-prefix same-author entry: %s", repr(raw[:80])
         )
         return False
 
