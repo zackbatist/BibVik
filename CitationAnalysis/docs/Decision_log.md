@@ -1185,3 +1185,27 @@ Method 6 (LLM re-parse of raw reference div text), which operates on
 continuous text before GROBID's page-break fragmentation occurs. The
 inline approach was dead code — `_possibly_compound` was never set by
 any part of the pipeline.
+
+### 2026-06-22 — Rewrite audit as diagnostic report
+
+audit.py rewritten to produce a self-contained HTML report
+(audit_report.html) rather than an annotatable Markdown sample. The
+audit is reoriented as a diagnostic instrument: it enables a researcher
+to judge whether the bibliography is trustworthy enough to analyse,
+rather than producing a list of things to fix. Corrective actions are
+recorded in corrections.yaml.
+
+The report is organised around five quality dimensions drawn from Wang &
+Strong (1996): completeness (missing-field rates by detection method,
+with a sample of no-title entries), accuracy (sample from non-English
+source papers; sample of CrossRef-resolved entries), representational
+consistency (suspected duplicate pairs), coverage (bottom 20 papers by
+citation count), and provenance (detection method × generation
+breakdown).
+
+Corrective strata removed from the audit: near-duplicate candidates,
+GROBID ID as author, oversized titles, missing given names, citekey
+collisions. These are now surfaced automatically as draft corrections
+in corrections.yaml.
+
+docs/methods/audit-sampling.md updated to reflect the reorientation.

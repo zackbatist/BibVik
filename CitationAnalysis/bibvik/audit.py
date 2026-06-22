@@ -1,56 +1,39 @@
 """
-bibvik.audit — Stratified random sampling and manual audit support.
+bibvik.audit — Citation graph diagnostic report.
 
-Draws a stratified random sample from the citation graph for human review.
-The sample is written as a Markdown file designed for direct annotation.
+Produces a self-contained HTML report (audit_report.html) assessing
+the quality of the bibliography across four dimensions:
 
-See docs/methods/audit-sampling.md for full methodological documentation,
-including citations for the stratified sampling approach, the manual
-validation precedent, and a record of approaches considered and not adopted.
+    Completeness         — missing-field rates by detection method
+    Accuracy             — sample review: non-English papers, CrossRef matches
+    Representational consistency — suspected duplicate pairs
+    Coverage             — papers with low citation counts
+    Provenance           — detection method distribution
 
-Strata
-------
-Each stratum targets a different class of potential pipeline error:
+The report is diagnostic, not corrective. It enables a researcher to
+judge whether the bibliography is trustworthy enough to analyse.
+Corrective actions are recorded in corrections.yaml.
 
-  crossref    — CrossRef-resolved entries: check that the match is correct,
-                not merely plausible.
-  unresolved  — Entries with no external validation: most likely to contain
-                extraction or parsing errors.
-  minimal     — Entries with completeness = 'minimal': only bare minimum
-                fields present; highest risk of being wrong or duplicated.
-  duplicates  — Suspected duplicate pairs: entries with high title/author
-                similarity that may have escaped deduplication. All pairs
-                above the similarity threshold are included (not sampled).
-  ocr         — Entries from OCR-processed papers: OCR may have introduced
-                character errors corrupting names, titles, or years.
-  language    — Entries from non-English source papers, sampled per language.
-                Requires language to be stored in processed_papers; omitted
-                if language data is unavailable (see item C in todo).
+See docs/methods/audit-sampling.md for methodological documentation.
 
-Reproducibility
----------------
-A fixed random seed ensures the same sample is drawn on every run against
-the same graph state. The seed is documented in the output file.
-
-Usage
------
+Usage:
     python run.py --audit
-    python run.py --audit --audit-n 15 --audit-seed 99 --audit-threshold 0.85
+    python run.py --audit --audit-n 15 --audit-seed 99
 """
 
 import difflib
 import logging
 import random
+import re
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Default parameters — all overridable via CLI flags.
-DEFAULT_N = 10           # Entries per stratum
-DEFAULT_SEED = 42        # Random seed for reproducibility
-DEFAULT_THRESHOLD = 0.85 # Title similarity threshold for duplicate detection
+DEFAULT_N         = 10
+DEFAULT_SEED      = 42
+DEFAULT_THRESHOLD = 0.70  # Lower than before — token overlap, not sequence match
 
 
 # =============================================================================
@@ -66,711 +49,730 @@ def run_audit(
     threshold: float = DEFAULT_THRESHOLD,
 ) -> Path:
     """
-    Draw a stratified random sample from the bibliography and write it as a
-    Markdown file for human review.
+    Produce a diagnostic audit report from the bibliography.
 
     Args:
         bibliography:     Full bibliography dict from graph state.
         processed_papers: Processed paper data from graph state.
-        output_dir:       Directory to write audit_sample.md.
-        n:                Sample size per stratum.
+        output_dir:       Directory to write audit_report.html.
+        n:                Sample size for each section.
         seed:             Random seed for reproducibility.
-        threshold:        Title similarity threshold for duplicate detection.
+        threshold:        Title token overlap threshold for duplicate detection.
 
     Returns:
-        Path to the written audit_sample.md.
+        Path to the written audit_report.html.
     """
     rng = random.Random(seed)
-    ocr_originals_dir = output_dir / "ocr" / "originals"
 
-    logger.info("Drawing audit sample (n=%d per stratum, seed=%d)...", n, seed)
+    logger.info("Building audit report (n=%d, seed=%d, threshold=%.2f)...", n, seed, threshold)
 
-    # ── Build strata ──────────────────────────────────────────────────────────
-    crossref       = _stratum_crossref(bibliography)
-    unresolved     = _stratum_unresolved(bibliography)
-    minimal        = _stratum_minimal(bibliography)
-    duplicates     = _stratum_duplicates(bibliography, threshold, rng=rng)
-    ocr            = _stratum_ocr(bibliography, ocr_originals_dir)
-    by_lang        = _stratum_by_language(bibliography, processed_papers)
-    catalogue      = _stratum_catalogue(bibliography)
-    # New flag strata
-    citekey_collisions  = _stratum_citekey_collisions(bibliography)
-    oversized_titles    = _stratum_oversized_titles(bibliography)
-    missing_given       = _stratum_missing_given_names(bibliography)
-    near_dup_flagged    = _stratum_near_duplicate_flagged(bibliography)
-    grobid_id_authors   = _stratum_grobid_id_as_author(bibliography)
+    # Active entries only
+    active = {ck: e for ck, e in bibliography.items() if not e.get("_deleted")}
 
-    # ── Sample ────────────────────────────────────────────────────────────────
-    s_crossref         = _sample(crossref,          n, rng)
-    s_unresolved       = _sample(unresolved,        n, rng)
-    s_minimal          = _sample(minimal,           n, rng)
-    s_ocr              = _sample(ocr,               n, rng)
-    s_catalogue        = _sample(catalogue,         n, rng)
-    s_citekey          = _sample(citekey_collisions, n, rng)
-    s_oversized        = _sample(oversized_titles,  n, rng)
-    s_missing_given    = _sample(missing_given,     n, rng)
-    s_near_dup         = _sample(near_dup_flagged,  n, rng)
-    s_grobid_id        = _sample(grobid_id_authors, n, rng)
-    s_by_lang          = {lang: _sample(entries, n, rng) for lang, entries in by_lang.items()}
-
-    # Log stratum sizes
-    logger.info("  CrossRef-resolved:    %d entries (sampling %d)", len(crossref),          len(s_crossref))
-    logger.info("  Unresolved:           %d entries (sampling %d)", len(unresolved),        len(s_unresolved))
-    logger.info("  Minimal:              %d entries (sampling %d)", len(minimal),           len(s_minimal))
-    logger.info("  Duplicate pairs:      %d pairs (all included)",  len(duplicates))
-    logger.info("  OCR source:           %d entries (sampling %d)", len(ocr),               len(s_ocr))
-    logger.info("  Catalogue candidates: %d entries (sampling %d)", len(catalogue),         len(s_catalogue))
-    logger.info("  Citekey collisions:   %d entries (sampling %d)", len(citekey_collisions), len(s_citekey))
-    logger.info("  Oversized titles:     %d entries (sampling %d)", len(oversized_titles),  len(s_oversized))
-    logger.info("  Missing given names:  %d entries (sampling %d)", len(missing_given),     len(s_missing_given))
-    logger.info("  Near-dup flagged:     %d entries (sampling %d)", len(near_dup_flagged),  len(s_near_dup))
-    logger.info("  GROBID ID as author:  %d entries (sampling %d)", len(grobid_id_authors), len(s_grobid_id))
-    for lang, entries in by_lang.items():
-        logger.info("  Language %-10s %d entries (sampling %d)", lang + ":", len(entries), len(s_by_lang[lang]))
-    if not by_lang:
-        logger.info("  Language strata:    none (lingua not installed or no non-English papers detected)")
-
-    # ── Render ────────────────────────────────────────────────────────────────
-    output_path = output_dir / "audit_sample.md"
-    _render(
-        path         = output_path,
-        crossref     = s_crossref,
-        unresolved   = s_unresolved,
-        minimal      = s_minimal,
-        duplicates   = duplicates,
-        ocr          = s_ocr,
-        catalogue    = s_catalogue,
-        by_lang      = s_by_lang,
-        bibliography = bibliography,
-        pool_sizes   = {
-            "crossref":          len(crossref),
-            "unresolved":        len(unresolved),
-            "minimal":           len(minimal),
-            "ocr":               len(ocr),
-            "catalogue":         len(catalogue),
-            "citekey_collisions": len(citekey_collisions),
-            "oversized_titles":  len(oversized_titles),
-            "missing_given":     len(missing_given),
-            "near_dup_flagged":  len(near_dup_flagged),
-            "grobid_id_authors": len(grobid_id_authors),
-            "by_lang":           {lang: len(entries) for lang, entries in by_lang.items()},
-        },
-        n         = n,
-        seed      = seed,
-        threshold = threshold,
-        citekey_collisions = s_citekey,
-        oversized          = s_oversized,
-        missing_given      = s_missing_given,
-        near_dup           = s_near_dup,
-        grobid_id          = s_grobid_id,
+    # ── Completeness ─────────────────────────────────────────────────────────
+    completeness_data = _compute_completeness(active)
+    no_title_sample   = _sample(
+        [ck for ck, e in active.items() if not e.get("title") and e.get("_raw_citation")],
+        n, rng
     )
 
-    logger.info("Audit sample written: %s", output_path)
+    # ── Accuracy ─────────────────────────────────────────────────────────────
+    non_english = _get_non_english(active, processed_papers)
+    accuracy_lang_sample    = _sample(non_english, n, rng)
+    crossref_sample         = _sample(
+        [ck for ck, e in active.items() if e.get("_resolution_method") == "crossref"],
+        n, rng
+    )
+
+    # ── Representational consistency ──────────────────────────────────────────
+    dup_pairs = _find_duplicate_pairs(active, threshold, rng)
+    dup_sample = dup_pairs[:n]
+
+    # ── Coverage ──────────────────────────────────────────────────────────────
+    coverage_data = _compute_coverage(active, processed_papers)
+
+    # ── Provenance ────────────────────────────────────────────────────────────
+    provenance_data = _compute_provenance(active)
+
+    # ── Render ────────────────────────────────────────────────────────────────
+    output_path = Path(output_dir) / "audit_report.html"
+    _render_html(
+        path               = output_path,
+        bibliography       = active,
+        completeness_data  = completeness_data,
+        no_title_sample    = no_title_sample,
+        accuracy_lang_sample = accuracy_lang_sample,
+        crossref_sample    = crossref_sample,
+        dup_sample         = dup_sample,
+        dup_total          = len(dup_pairs),
+        coverage_data      = coverage_data,
+        provenance_data    = provenance_data,
+        n                  = n,
+        seed               = seed,
+        threshold          = threshold,
+        generated          = datetime.now().strftime("%Y-%m-%d %H:%M"),
+    )
+
+    logger.info("Audit report written: %s", output_path)
     return output_path
 
 
 # =============================================================================
-# Strata builders
+# Data collection
 # =============================================================================
 
-def _stratum_crossref(bibliography: dict[str, dict]) -> list[str]:
-    """Entries resolved via CrossRef."""
-    return [
-        ck for ck, e in bibliography.items()
-        if e.get("_resolution_method") == "crossref"
-    ]
+def _compute_completeness(bib: dict) -> dict:
+    """
+    For each detection method, count entries missing each required field.
+    Returns a dict suitable for table rendering.
+    """
+    methods = ["grobid", "llm_bib_reparse", "llm_from_footnote", "crossref", "other"]
+    method_labels = {
+        "grobid":           "GROBID",
+        "llm_bib_reparse":  "Method 6",
+        "llm_from_footnote":"Footnote extraction",
+        "crossref":         "CrossRef",
+        "other":            "Other / unknown",
+    }
+
+    def _method(entry):
+        m = entry.get("_resolution_method") or ""
+        if not m or m in ("grobid", ""):
+            return "grobid"
+        if m in method_labels:
+            return m
+        return "other"
+
+    rows = {m: {"total": 0, "no_author": 0, "no_title": 0, "no_year": 0} for m in methods}
+
+    for entry in bib.values():
+        m = _method(entry)
+        rows[m]["total"] += 1
+        if not entry.get("author"):
+            rows[m]["no_author"] += 1
+        if not entry.get("title"):
+            rows[m]["no_title"] += 1
+        if not (entry.get("date") or entry.get("year")):
+            rows[m]["no_year"] += 1
+
+    return {"rows": rows, "labels": method_labels, "order": methods}
 
 
-def _stratum_unresolved(bibliography: dict[str, dict]) -> list[str]:
-    """Entries with no resolution method (GROBID extraction only)."""
-    return [
-        ck for ck, e in bibliography.items()
-        if not e.get("_resolution_method")
-        and e.get("generation") != "P"  # exclude seed paper itself
-    ]
+def _get_non_english(
+    bib: dict,
+    processed_papers: dict,
+) -> list[str]:
+    """Citekeys of entries from non-English source papers."""
+    non_eng_pdfs = {
+        name for name, data in processed_papers.items()
+        if data.get("language", "").lower() not in ("en", "english", "eng", "")
+    }
+    return [ck for ck, e in bib.items() if e.get("_source_pdf") in non_eng_pdfs]
 
 
-def _stratum_minimal(bibliography: dict[str, dict]) -> list[str]:
-    """Entries with completeness label 'minimal'."""
-    return [
-        ck for ck, e in bibliography.items()
-        if e.get("completeness", {}).get("label") == "minimal"
-    ]
-
-
-def _stratum_duplicates(
-    bibliography: dict[str, dict],
+def _find_duplicate_pairs(
+    bib: dict,
     threshold: float,
-    max_sample: int = 500,
-    rng: "random.Random | None" = None,
+    rng: random.Random,
+    max_pool: int = 600,
 ) -> list[tuple[str, str, float]]:
     """
-    All pairs of entries with title similarity above threshold.
-
-    To avoid O(n²) comparison on large bibliographies, a random sample
-    of up to max_sample entries is drawn before comparison. At max_sample=500
-    this is ~125k pair comparisons rather than millions. The sample is noted
-    in the rendered output.
-
-    Returns a list of (citekey_a, citekey_b, similarity_score) tuples,
-    sorted by descending similarity.
+    Find pairs with same first-author surname + year and high title token overlap.
+    Returns list of (ck_a, ck_b, score) sorted by descending score.
     """
-    import random as _random
-    all_entries = [
-        (ck, _normalise_title(e.get("title", "")))
-        for ck, e in bibliography.items()
-        if e.get("title")
-    ]
+    from collections import defaultdict
 
-    # Sample if bibliography is large
-    if len(all_entries) > max_sample:
-        r = rng or _random.Random(42)
-        entries = r.sample(all_entries, max_sample)
-    else:
-        entries = all_entries
+    # Index by (norm_author, year)
+    index: dict[tuple, list] = defaultdict(list)
+    for ck, e in bib.items():
+        authors = e.get("author", [])
+        if not authors:
+            continue
+        family = re.sub(r"[^a-z]", "", authors[0].get("family", "").lower())
+        year = str(e.get("date", e.get("year", "")))[:4]
+        if family and year:
+            index[(family, year)].append(ck)
+
+    candidates = [(ck_a, ck_b) for cks in index.values() if len(cks) >= 2
+                  for i, ck_a in enumerate(cks) for ck_b in cks[i+1:]]
+
+    if len(candidates) > max_pool:
+        candidates = rng.sample(candidates, max_pool)
 
     pairs = []
-    for i in range(len(entries)):
-        ck_a, title_a = entries[i]
-        for j in range(i + 1, len(entries)):
-            ck_b, title_b = entries[j]
-            score = difflib.SequenceMatcher(None, title_a, title_b).ratio()
-            if score >= threshold:
-                pairs.append((ck_a, ck_b, score))
+    for ck_a, ck_b in candidates:
+        ta = _token_set(bib[ck_a].get("title", ""))
+        tb = _token_set(bib[ck_b].get("title", ""))
+        if not ta or not tb:
+            continue
+        overlap = len(ta & tb) / min(len(ta), len(tb))
+        if overlap >= threshold:
+            pairs.append((ck_a, ck_b, overlap))
 
     pairs.sort(key=lambda x: -x[2])
     return pairs
 
 
-def _stratum_catalogue(bibliography: dict[str, dict]) -> list[str]:
-    """Entries flagged as possible artefact catalogue references."""
-    return [
-        ck for ck, e in bibliography.items()
-        if e.get("_catalogue_candidate")
-    ]
+def _token_set(title: str) -> set:
+    return set(w for w in re.findall(r"\b\w{4,}\b", title.lower()))
 
 
-def _stratum_citekey_collisions(bibliography: dict[str, dict]) -> list[str]:
+def _compute_coverage(bib: dict, processed_papers: dict) -> list[dict]:
     """
-    Entries where the base citekey (without a/b/c suffix) is shared with
-    another entry — may indicate different works with same author+year,
-    or a genuine duplicate that escaped deduplication.
+    Return papers sorted by citation count (ascending), for bottom-N review.
+    Each dict has: name, citations_extracted, methods_used, failed.
     """
-    import re as _re
-    base_to_citekeys: dict[str, list] = defaultdict(list)
-    for ck in bibliography:
-        base = _re.sub(r"[a-z]$", "", ck)
-        base_to_citekeys[base].append(ck)
-    return [
-        ck
-        for citekeys in base_to_citekeys.values()
-        if len(citekeys) >= 2
-        for ck in citekeys
+    paper_counts: dict[str, dict] = {}
+
+    for ck, e in bib.items():
+        pdf = e.get("_source_pdf", "")
+        if not pdf:
+            continue
+        if pdf not in paper_counts:
+            paper_counts[pdf] = {"name": pdf, "count": 0, "methods": set()}
+        paper_counts[pdf]["count"] += 1
+        m = e.get("_resolution_method") or "grobid"
+        paper_counts[pdf]["methods"].add(m)
+
+    # Add papers that processed but produced zero entries
+    for pdf_name, data in processed_papers.items():
+        if pdf_name not in paper_counts:
+            paper_counts[pdf_name] = {"name": pdf_name, "count": 0, "methods": set()}
+
+    result = [
+        {
+            "name": v["name"].replace(".pdf", ""),
+            "count": v["count"],
+            "methods": ", ".join(sorted(v["methods"])) or "—",
+        }
+        for v in paper_counts.values()
     ]
-
-
-def _stratum_oversized_titles(bibliography: dict[str, dict]) -> list[str]:
-    """Entries flagged as having oversized titles (likely compound citation blowout)."""
-    return [ck for ck, e in bibliography.items() if e.get("_title_too_long")]
-
-
-def _stratum_missing_given_names(bibliography: dict[str, dict]) -> list[str]:
-    """Entries where any author has an empty given name."""
-    result = []
-    for ck, e in bibliography.items():
-        authors = e.get("author", [])
-        if any(not a.get("given", "").strip() for a in authors if a.get("family", "").strip()):
-            result.append(ck)
+    result.sort(key=lambda x: x["count"])
     return result
 
 
-def _stratum_near_duplicate_flagged(bibliography: dict[str, dict]) -> list[str]:
-    """Entries flagged as near-duplicate candidates by postprocess."""
-    return [ck for ck, e in bibliography.items() if e.get("_near_duplicate_candidate")]
-
-
-def _stratum_grobid_id_as_author(bibliography: dict[str, dict]) -> list[str]:
-    """Entries where the first author family name is a single letter — likely a GROBID internal ID artifact."""
-    return [ck for ck, e in bibliography.items() if e.get("_grobid_id_as_author")]
-
-
-def _stratum_ocr(
-    bibliography: dict[str, dict],
-    ocr_originals_dir: Path,
-) -> list[str]:
+def _compute_provenance(bib: dict) -> dict:
     """
-    Entries extracted from OCR-processed papers.
-
-    A paper was OCR-processed if its filename appears in output/ocr/originals/,
-    which is where _run_ocr() moves the original before replacing it in place.
+    Detection method × generation breakdown.
+    Returns {method: {generation: count}}.
     """
-    if not ocr_originals_dir.is_dir():
-        return []
-
-    ocr_processed = {p.name for p in ocr_originals_dir.iterdir() if p.suffix == ".pdf"}
-    if not ocr_processed:
-        return []
-
-    return [
-        ck for ck, e in bibliography.items()
-        if e.get("_source_pdf") in ocr_processed
+    method_labels = {
+        None:               "GROBID (unresolved)",
+        "":                 "GROBID (unresolved)",
+        "crossref":         "CrossRef",
+        "llm_bib_reparse":  "Method 6",
+        "llm_from_footnote":"Footnote extraction",
+        "llm_from_context": "Citation context",
+    }
+    generations = ["P", "F1", "F2"]
+    methods_order = [
+        None, "crossref", "llm_bib_reparse", "llm_from_footnote", "llm_from_context"
     ]
 
+    data: dict = {m: {g: 0 for g in generations} for m in methods_order}
+    totals = {g: 0 for g in generations}
 
-def _stratum_by_language(
-    bibliography: dict[str, dict],
-    processed_papers: dict[str, dict],
-) -> dict[str, list[str]]:
-    """
-    Entries from non-English source papers, grouped by language.
+    for e in bib.values():
+        m = e.get("_resolution_method") or None
+        if m not in data:
+            m = None  # group unknowns with GROBID unresolved
+        g = e.get("generation", "F2")
+        if g not in generations:
+            g = "F2"
+        data[m][g] += 1
+        totals[g] += 1
 
-    Requires language to be stored under processed_papers[pdf_name]['language'].
-    Returns an empty dict if lingua is not installed or no non-English papers
-    were detected. Install lingua with: pip install lingua-language-detector
-    """
-    lang_map: dict[str, str] = {}
-    for pdf_name, paper_data in processed_papers.items():
-        lang = paper_data.get("language", "")
-        if lang and lang.lower() not in ("en", "english", "eng"):
-            lang_map[pdf_name] = lang
-
-    if not lang_map:
-        return {}
-
-    by_lang: dict[str, list[str]] = defaultdict(list)
-    for ck, e in bibliography.items():
-        source_pdf = e.get("_source_pdf", "")
-        if source_pdf in lang_map:
-            by_lang[lang_map[source_pdf]].append(ck)
-
-    return dict(by_lang)
+    return {"data": data, "labels": method_labels, "order": methods_order,
+            "generations": generations, "totals": totals}
 
 
 # =============================================================================
-# Sampling
+# HTML rendering
 # =============================================================================
 
-def _sample(population: list, n: int, rng: random.Random) -> list:
-    """
-    Draw n items from population without replacement.
+_CSS = """
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    If population has fewer than n items, all are returned. The shortfall
-    is noted in the rendered output.
-    """
-    if len(population) <= n:
-        return list(population)
-    return rng.sample(population, n)
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #f8f7f4;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.meta {
+  font-size: 0.78rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+  font-family: monospace;
+}
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #444;
+  margin: 2.5rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ccc;
+}
+
+h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 1.2rem 0 0.4rem;
+  color: #333;
+}
+
+p { margin-bottom: 0.8rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 1rem 0 1.5rem;
+}
+
+th {
+  text-align: left;
+  border-bottom: 2px solid #1a1a1a;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #444;
+}
+
+td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+tr:hover td { background: #f0ede8; }
+
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.pct { text-align: right; color: #888; font-size: 0.8rem; }
+
+.missing-high { color: #c0392b; font-weight: bold; }
+.missing-mid  { color: #e67e22; }
+.missing-low  { color: #888; }
+
+details {
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+
+summary {
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #444;
+  background: #f0ede8;
+  user-select: none;
+}
+
+summary:hover { background: #e8e4de; }
+
+.sample-inner { padding: 0.8rem 1rem; }
+
+.entry {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #e8e4de;
+}
+
+.entry:last-child { border-bottom: none; margin-bottom: 0; }
+
+.entry-header {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 0.3rem;
+}
+
+.entry-title {
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
+.entry-authors {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.entry-year {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.entry-raw {
+  font-size: 0.78rem;
+  color: #666;
+  font-family: monospace;
+  background: #f0ede8;
+  padding: 0.4rem 0.6rem;
+  margin-top: 0.4rem;
+  border-left: 3px solid #ccc;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.entry-method {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  background: #ddd;
+  color: #444;
+  font-family: monospace;
+  margin-top: 0.3rem;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #e8e4de;
+}
+
+.pair:last-child { border-bottom: none; }
+
+.pair-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin-bottom: 0.3rem;
+}
+
+.pair-score {
+  font-size: 0.8rem;
+  color: #888;
+  font-family: monospace;
+  margin-bottom: 0.6rem;
+}
+
+.stat-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.stat {
+  background: #f0ede8;
+  padding: 0.8rem;
+  border-radius: 2px;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  details { border: none; }
+  details[open] summary { display: none; }
+  .stat-block { break-inside: avoid; }
+}
+"""
+
+def _h(s: str) -> str:
+    """Escape HTML."""
+    return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-# =============================================================================
-# Rendering
-# =============================================================================
+def _fmt_authors(authors: list) -> str:
+    if not authors:
+        return "—"
+    parts = []
+    for a in authors[:3]:
+        family = a.get("family", "")
+        given = a.get("given", "")
+        parts.append(f"{_h(family)}, {_h(given)}".strip(", "))
+    s = "; ".join(parts)
+    if len(authors) > 3:
+        s += f" + {len(authors) - 3} more"
+    return s
 
-def _render(
+
+def _method_label(entry: dict) -> str:
+    m = entry.get("_resolution_method") or ""
+    labels = {
+        "crossref":          "CrossRef",
+        "llm_bib_reparse":   "Method 6",
+        "llm_from_footnote": "Footnote",
+        "llm_from_context":  "Context",
+    }
+    return labels.get(m, "GROBID")
+
+
+def _render_entry_card(ck: str, entry: dict) -> str:
+    title   = entry.get("title") or "<em>no title</em>"
+    authors = _fmt_authors(entry.get("author", []))
+    year    = entry.get("date") or entry.get("year") or "—"
+    raw     = entry.get("_raw_citation", "")
+    source  = entry.get("_source_pdf", "")
+    method  = _method_label(entry)
+
+    raw_html = f'<div class="entry-raw">{_h(raw[:300])}{"…" if len(raw) > 300 else ""}</div>' if raw else ""
+    source_html = f'<div class="entry-year">From: {_h(source)}</div>' if source else ""
+
+    return f"""<div class="entry">
+  <div class="entry-header">{_h(ck)}</div>
+  <div class="entry-title">{_h(title) if isinstance(title, str) else title}</div>
+  <div class="entry-authors">{authors}</div>
+  <div class="entry-year">{_h(str(year))}</div>
+  {source_html}
+  <span class="entry-method">{_h(method)}</span>
+  {raw_html}
+</div>"""
+
+
+def _pct_class(rate: float) -> str:
+    if rate >= 0.15:
+        return "missing-high"
+    if rate >= 0.05:
+        return "missing-mid"
+    return "missing-low"
+
+
+def _render_html(
     path: Path,
-    crossref: list[str],
-    unresolved: list[str],
-    minimal: list[str],
-    duplicates: list[tuple[str, str, float]],
-    ocr: list[str],
-    catalogue: list[str],
-    by_lang: dict[str, list[str]],
-    bibliography: dict[str, dict],
-    pool_sizes: dict,
+    bibliography: dict,
+    completeness_data: dict,
+    no_title_sample: list,
+    accuracy_lang_sample: list,
+    crossref_sample: list,
+    dup_sample: list,
+    dup_total: int,
+    coverage_data: list,
+    provenance_data: dict,
     n: int,
     seed: int,
     threshold: float,
-    **kwargs,
+    generated: str,
 ) -> None:
-    """Write the full audit sample Markdown file."""
-    lines = []
 
-    lines += [
-        "# BibVik Citation Graph — Audit Sample",
-        "",
-        f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}  ",
-        f"Sample size per stratum: {n}  ",
-        f"Random seed: {seed}  ",
-        f"Duplicate similarity threshold: {threshold}  ",
-        "",
-        "This file is designed for direct annotation. Add your notes in the "
-        "**Notes** field after each entry or pair. The file becomes part of "
-        "the research record once reviewed.",
-        "",
-        "See `docs/methods/audit-sampling.md` for full methodological documentation.",
-        "",
-        "---",
-        "",
-    ]
+    total = len(bibliography)
+    gen_counts = {"P": 0, "F1": 0, "F2": 0}
+    for e in bibliography.values():
+        g = e.get("generation", "F2")
+        if g in gen_counts:
+            gen_counts[g] += 1
 
-    # ── CrossRef-resolved ─────────────────────────────────────────────────────
-    lines += _render_stratum_header(
-        title     = "CrossRef-resolved entries",
-        sample    = crossref,
-        pool_size = pool_sizes["crossref"],
-        n         = n,
-        guidance  = (
-            "These entries were matched to CrossRef metadata. "
-            "Check that the CrossRef match is actually correct — "
-            "a plausible but wrong match will produce a structurally "
-            "complete but factually incorrect record."
-        ),
-    )
-    for i, ck in enumerate(crossref, 1):
-        lines += _render_entry(ck, bibliography[ck], i, len(crossref))
+    # ── Overview stats ─────────────────────────────────────────────────────────
+    overview_stats = f"""
+<div class="stat-block">
+  <div class="stat"><div class="stat-value">{total:,}</div><div class="stat-label">Total entries</div></div>
+  <div class="stat"><div class="stat-value">{gen_counts['F1']:,}</div><div class="stat-label">F1 papers</div></div>
+  <div class="stat"><div class="stat-value">{gen_counts['F2']:,}</div><div class="stat-label">F2 citations</div></div>
+</div>"""
 
-    # ── Unresolved ────────────────────────────────────────────────────────────
-    lines += _render_stratum_header(
-        title     = "Unresolved entries",
-        sample    = unresolved,
-        pool_size = pool_sizes["unresolved"],
-        n         = n,
-        guidance  = (
-            "These entries could not be matched via CrossRef or LLM. "
-            "They contain only what GROBID extracted from the PDF. "
-            "Check whether the raw citation string was correctly parsed "
-            "into structured fields."
-        ),
-    )
-    for i, ck in enumerate(unresolved, 1):
-        lines += _render_entry(ck, bibliography[ck], i, len(unresolved))
+    # ── Completeness table ─────────────────────────────────────────────────────
+    cd = completeness_data
+    comp_rows = ""
+    for m in cd["order"]:
+        row = cd["rows"][m]
+        if row["total"] == 0:
+            continue
+        t = row["total"]
+        def _cell(k):
+            v = row[k]
+            r = v / t if t else 0
+            cls = _pct_class(r)
+            return f'<td class="num {cls}">{v}</td><td class="pct">({r:.0%})</td>'
+        comp_rows += f"""<tr>
+  <td>{_h(cd["labels"][m])}</td>
+  <td class="num">{t:,}</td>
+  {_cell("no_author")}{_cell("no_title")}{_cell("no_year")}
+</tr>"""
 
-    # ── Minimal completeness ──────────────────────────────────────────────────
-    lines += _render_stratum_header(
-        title     = "Minimal-completeness entries",
-        sample    = minimal,
-        pool_size = pool_sizes["minimal"],
-        n         = n,
-        guidance  = (
-            "These entries have only the bare minimum fields (typically "
-            "author and year). They may be genuine sparse citations or "
-            "extraction failures where most data was lost. Check whether "
-            "the raw citation string contains more information than was "
-            "captured in the structured fields."
-        ),
-    )
-    for i, ck in enumerate(minimal, 1):
-        lines += _render_entry(ck, bibliography[ck], i, len(minimal))
+    completeness_table = f"""<table>
+<thead><tr>
+  <th>Method</th><th class="num">Entries</th>
+  <th class="num" colspan="2">No author</th>
+  <th class="num" colspan="2">No title</th>
+  <th class="num" colspan="2">No year</th>
+</tr></thead>
+<tbody>{comp_rows}</tbody>
+</table>"""
 
-    # ── Suspected duplicates ──────────────────────────────────────────────────
-    lines += [
-        "---",
-        "",
-        f"## Suspected duplicate pairs ({len(duplicates)} pairs — all included)",
-        "",
-        (
-            f"Pairs of entries with title similarity ≥ {threshold} "
-            f"(computed using `difflib.SequenceMatcher` on a sample of up to 500 entries). "
-            "These may represent the same work that escaped deduplication, "
-            "or genuinely distinct works with similar titles. "
-            "Check whether each pair should be merged."
-        ),
-        "",
-    ]
-    if not duplicates:
-        lines += [f"*No pairs found above the {threshold} similarity threshold.*", ""]
-    else:
-        for i, (ck_a, ck_b, score) in enumerate(duplicates, 1):
-            lines += _render_duplicate_pair(
-                ck_a, bibliography[ck_a],
-                ck_b, bibliography[ck_b],
-                score, i, len(duplicates),
-            )
+    # Sample of no-title entries
+    no_title_cards = "".join(_render_entry_card(ck, bibliography[ck]) for ck in no_title_sample)
+    no_title_details = f"""<details>
+<summary>Sample of entries with no title ({len(no_title_sample)} shown)</summary>
+<div class="sample-inner">{no_title_cards}</div>
+</details>""" if no_title_sample else ""
 
-    # ── OCR source ────────────────────────────────────────────────────────────
-    lines += _render_stratum_header(
-        title     = "Entries from OCR-processed papers",
-        sample    = ocr,
-        pool_size = pool_sizes["ocr"],
-        n         = n,
-        guidance  = (
-            "These entries were extracted from papers that had no text "
-            "layer and were processed via ocrmypdf before GROBID extraction. "
-            "Check for character errors in author names, titles, or years "
-            "that may have been introduced by OCR."
-        ),
-    )
-    if not ocr and pool_sizes["ocr"] == 0:
-        lines += ["*No OCR-processed papers in the current graph state.*", ""]
-    else:
-        for i, ck in enumerate(ocr, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(ocr))
+    # ── Accuracy: non-English sample ───────────────────────────────────────────
+    lang_cards = "".join(_render_entry_card(ck, bibliography[ck]) for ck in accuracy_lang_sample)
+    lang_details = f"""<details>
+<summary>Sample from non-English source papers ({len(accuracy_lang_sample)} shown)</summary>
+<div class="sample-inner">{lang_cards or "<p>No non-English source papers detected.</p>"}</div>
+</details>"""
 
-    # ── Catalogue candidates ──────────────────────────────────────────────────
-    lines += _render_stratum_header(
-        title     = "Possible artefact catalogue entries",
-        sample    = catalogue,
-        pool_size = pool_sizes["catalogue"],
-        n         = n,
-        guidance  = (
-            "These entries were flagged as possible artefact catalogue references "
-            "rather than scholarly citations. Patterns detected in the raw citation "
-            "string: `Kat.-Nr.` (German catalogue number), `Taf.` + number (plate "
-            "reference), or museum accession number format (e.g. SHM 3217, C5821). "
-            "Check whether each entry is a genuine bibliographic reference or a "
-            "catalogue/findspot record that should be excluded from citation analysis."
-        ),
-    )
-    if not catalogue and pool_sizes["catalogue"] == 0:
-        lines += ["*No catalogue candidate entries in the current graph state.*", ""]
-    else:
-        for i, ck in enumerate(catalogue, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(catalogue))
+    # CrossRef sample
+    cr_cards = "".join(_render_entry_card(ck, bibliography[ck]) for ck in crossref_sample)
+    cr_details = f"""<details>
+<summary>Sample of CrossRef-resolved entries ({len(crossref_sample)} shown)</summary>
+<div class="sample-inner">{cr_cards or "<p>No CrossRef-resolved entries.</p>"}</div>
+</details>"""
 
-    # ── Non-English source papers ─────────────────────────────────────────────
-    if not by_lang:
-        lines += [
-            "---",
-            "",
-            "## Non-English source papers",
-            "",
-            (
-                "*No non-English papers detected in the current graph state. "
-                "Install lingua-language-detector for language detection: "
-                "`pip install lingua-language-detector`*"
-            ),
-            "",
-        ]
-    else:
-        for lang, sample in sorted(by_lang.items()):
-            pool_size = pool_sizes["by_lang"].get(lang, len(sample))
-            lines += _render_stratum_header(
-                title     = f"Non-English source papers: {lang}",
-                sample    = sample,
-                pool_size = pool_size,
-                n         = n,
-                guidance  = (
-                    f"These entries were extracted from source papers in {lang}. "
-                    "Check for encoding errors in non-Latin characters, incorrect "
-                    "transliteration in citekeys, and broken author name parsing."
-                ),
-            )
-            for i, ck in enumerate(sample, 1):
-                lines += _render_entry(ck, bibliography[ck], i, len(sample))
+    # ── Representational consistency: duplicate pairs ──────────────────────────
+    pair_html = ""
+    for ck_a, ck_b, score in dup_sample:
+        ea = bibliography.get(ck_a, {})
+        eb = bibliography.get(ck_b, {})
+        def _side(ck, e):
+            return f"""<div>
+  <div class="pair-label">{_h(ck)}</div>
+  <div class="entry-title">{_h(e.get("title") or "—")}</div>
+  <div class="entry-authors">{_fmt_authors(e.get("author", []))}</div>
+  <div class="entry-year">{_h(str(e.get("date") or e.get("year") or "—"))}</div>
+  <div class="entry-raw">{_h((e.get("_raw_citation") or "")[:200])}</div>
+</div>"""
+        pair_html += f"""<div class="pair">
+  <div><div class="pair-score">overlap {score:.0%}</div>{_side(ck_a, ea)}</div>
+  <div><div style="height:1.4rem"></div>{_side(ck_b, eb)}</div>
+</div>"""
 
-    # ── Citekey suffix collisions ─────────────────────────────────────────────
-    citekey_collisions = kwargs.get("citekey_collisions", [])
-    citekey_pool = pool_sizes.get("citekey_collisions", 0)
-    if citekey_pool > 0:
-        lines += _render_stratum_header(
-            title     = "Citekey suffix collisions",
-            sample    = citekey_collisions,
-            pool_size = citekey_pool,
-            n         = n,
-            guidance  = (
-                "These entries share a base citekey with at least one other entry "
-                "(e.g. price2002 and price2002a). Check whether they are genuinely "
-                "different works or duplicates that escaped deduplication."
-            ),
+    dup_details = f"""<details>
+<summary>Suspected duplicate pairs ({len(dup_sample)} of {dup_total} shown)</summary>
+<div class="sample-inner">{pair_html or "<p>No suspected duplicate pairs found.</p>"}</div>
+</details>"""
+
+    # ── Coverage table ─────────────────────────────────────────────────────────
+    cov_rows = ""
+    for row in coverage_data[:20]:
+        cov_rows += f"""<tr>
+  <td>{_h(row["name"])}</td>
+  <td class="num">{row["count"]}</td>
+  <td>{_h(row["methods"])}</td>
+</tr>"""
+    coverage_table = f"""<table>
+<thead><tr><th>Paper</th><th class="num">Citations extracted</th><th>Methods used</th></tr></thead>
+<tbody>{cov_rows}</tbody>
+</table>"""
+
+    # ── Provenance table ───────────────────────────────────────────────────────
+    pd_ = provenance_data
+    prov_header = "".join(f'<th class="num">{g}</th>' for g in pd_["generations"])
+    prov_rows = ""
+    for m in pd_["order"]:
+        label = pd_["labels"].get(m, str(m))
+        cells = "".join(
+            f'<td class="num">{pd_["data"][m][g]:,}</td>'
+            for g in pd_["generations"]
         )
-        for i, ck in enumerate(citekey_collisions, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(citekey_collisions))
+        row_total = sum(pd_["data"][m][g] for g in pd_["generations"])
+        prov_rows += f'<tr><td>{_h(label)}</td>{cells}<td class="num">{row_total:,}</td></tr>'
+    gen_totals = "".join(f'<td class="num"><strong>{pd_["totals"][g]:,}</strong></td>' for g in pd_["generations"])
+    all_total = sum(pd_["totals"].values())
+    prov_rows += f'<tr><td><strong>Total</strong></td>{gen_totals}<td class="num"><strong>{all_total:,}</strong></td></tr>'
 
-    # ── Oversized titles ──────────────────────────────────────────────────────
-    oversized = kwargs.get("oversized", [])
-    oversized_pool = pool_sizes.get("oversized_titles", 0)
-    if oversized_pool > 0:
-        lines += _render_stratum_header(
-            title     = "Oversized titles",
-            sample    = oversized,
-            pool_size = oversized_pool,
-            n         = n,
-            guidance  = (
-                "These entries have titles over 300 characters, likely from compound "
-                "citation blowout (GROBID treating a full reference string as a title). "
-                "Review the title and correct manually if possible."
-            ),
-        )
-        for i, ck in enumerate(oversized, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(oversized))
+    provenance_table = f"""<table>
+<thead><tr><th>Detection method</th>{prov_header}<th class="num">Total</th></tr></thead>
+<tbody>{prov_rows}</tbody>
+</table>"""
 
-    # ── Missing given names ───────────────────────────────────────────────────
-    missing_given = kwargs.get("missing_given", [])
-    missing_pool = pool_sizes.get("missing_given", 0)
-    if missing_pool > 0:
-        lines += _render_stratum_header(
-            title     = "Missing given names",
-            sample    = missing_given,
-            pool_size = missing_pool,
-            n         = n,
-            guidance  = (
-                "These entries have one or more authors with no given name. "
-                "CrossRef enrichment may fill these in. If not, check the source PDF."
-            ),
-        )
-        for i, ck in enumerate(missing_given, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(missing_given))
+    # ── Assemble ───────────────────────────────────────────────────────────────
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BibVik — Audit Report</title>
+<style>{_CSS}</style>
+</head>
+<body>
 
-    # ── Near-duplicate flagged ────────────────────────────────────────────────
-    near_dup = kwargs.get("near_dup", [])
-    near_dup_pool = pool_sizes.get("near_dup_flagged", 0)
-    if near_dup_pool > 0:
-        lines += _render_stratum_header(
-            title     = "Near-duplicate candidates",
-            sample    = near_dup,
-            pool_size = near_dup_pool,
-            n         = n,
-            guidance  = (
-                "These entries were flagged as near-duplicates by postprocess "
-                "(same author+year, ≥70% title token overlap) but could not be "
-                "resolved automatically. Check _near_duplicate_candidate field for "
-                "the paired citekey."
-            ),
-        )
-        for i, ck in enumerate(near_dup, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(near_dup))
+<h1>BibVik — Audit Report</h1>
+<div class="meta">Generated {_h(generated)} &nbsp;·&nbsp; seed {seed} &nbsp;·&nbsp; sample n={n} &nbsp;·&nbsp; duplicate threshold {threshold:.0%}</div>
 
-    # ── GROBID ID as author ───────────────────────────────────────────────────
-    grobid_id = kwargs.get("grobid_id", [])
-    grobid_id_pool = pool_sizes.get("grobid_id_authors", 0)
-    if grobid_id_pool > 0:
-        lines += _render_stratum_header(
-            title     = "GROBID internal ID as author",
-            sample    = grobid_id,
-            pool_size = grobid_id_pool,
-            n         = n,
-            guidance  = (
-                "These entries have a single-letter first author family name "
-                "(e.g. 'b', 'c') — almost certainly a GROBID internal reference ID "
-                "leaking into the author field. The entry needs manual correction "
-                "from the source PDF."
-            ),
-        )
-        for i, ck in enumerate(grobid_id, 1):
-            lines += _render_entry(ck, bibliography[ck], i, len(grobid_id))
+{overview_stats}
+
+<p>This report assesses the quality of the bibliography across five dimensions.
+It is diagnostic — it supports a judgment about whether the bibliography is
+trustworthy enough to analyse. To record a correction, add an entry to
+<code>corrections.yaml</code>.</p>
+
+<h2>1. Completeness</h2>
+<p>Entries missing required fields, broken down by detection method.
+High missing-title rates in GROBID entries are expected — GROBID commonly
+fails to extract titles from complex layouts. Method 6 should recover
+many of these from the raw reference text.</p>
+
+{completeness_table}
+{no_title_details}
+
+<h2>2. Accuracy</h2>
+<p>Are extracted values correct? Check author names and titles for encoding
+errors, diacritic loss, or transposed given/family names — particularly in
+entries from non-English source papers.</p>
+
+{lang_details}
+
+<p>For CrossRef-resolved entries, check that the CrossRef match is actually
+correct — a plausible but wrong match produces a structurally complete but
+factually incorrect record.</p>
+
+{cr_details}
+
+<h2>3. Representational consistency</h2>
+<p>Suspected duplicate pairs: same first-author surname and year, with
+{threshold:.0%} or more title word overlap, that were not automatically merged.
+{dup_total} pairs found in total.</p>
+
+{dup_details}
+
+<h2>4. Coverage</h2>
+<p>Papers with the fewest citations extracted. Low counts may indicate a
+bibliography the pipeline failed to process — check whether the paper has
+a substantive reference list that should have been extracted.</p>
+
+{coverage_table}
+
+<h2>5. Provenance</h2>
+<p>How entries were detected, broken down by generation. An unexpected
+distribution — for example, very few Method 6 recoveries — signals a
+systematic failure in that detection path.</p>
+
+{provenance_table}
+
+</body>
+</html>"""
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines), encoding="utf-8")
-
-
-def _render_stratum_header(
-    title: str,
-    sample: list,
-    pool_size: int,
-    n: int,
-    guidance: str,
-) -> list[str]:
-    """Render the header block for a stratum."""
-    shortfall = pool_size < n
-    count_note = (
-        f"{len(sample)} of {pool_size} — "
-        + ("all included (fewer than " + str(n) + " available)" if shortfall
-           else f"sampled from {pool_size}")
-    )
-    return [
-        "---",
-        "",
-        f"## {title} ({count_note})",
-        "",
-        guidance,
-        "",
-    ]
-
-
-def _render_entry(
-    citekey: str,
-    entry: dict,
-    index: int,
-    total: int,
-) -> list[str]:
-    """Render a single bibliography entry for review."""
-    lines = [f"### {citekey} [{index} of {total}]", ""]
-
-    source = entry.get("_source_pdf", "")
-    if source:
-        lines += [f"**Extracted from:** {source}  "]
-
-    method = entry.get("_resolution_method")
-    confidence = entry.get("_resolution_confidence")
-    if method:
-        try:
-            conf_str = f" (confidence: {float(confidence):.2f})" if confidence else ""
-        except (TypeError, ValueError):
-            conf_str = f" (confidence: {confidence})" if confidence else ""
-        lines += [f"**Resolution:** {method}{conf_str}  "]
-
-    raw = entry.get("_raw_citation", "")
-    if raw:
-        lines += ["", "**Raw citation string:**", f"> {raw.strip()}", ""]
-
-    lines += ["**Structured fields:**", ""]
-    lines += [f"- **Authors:** {_format_authors(entry.get('author', []))}"]
-    lines += [f"- **Title:** {entry.get('title', '*(missing)*')}"]
-    lines += [f"- **Year:** {entry.get('date', entry.get('year', '*(missing)*'))}"]
-    lines += [f"- **Type:** {entry.get('entry_type', '*(missing)*')}"]
-
-    if entry.get("journaltitle"):
-        lines += [f"- **Journal:** {entry['journaltitle']}"]
-    if entry.get("booktitle"):
-        lines += [f"- **In:** {entry['booktitle']}"]
-    if entry.get("publisher"):
-        lines += [f"- **Publisher:** {entry['publisher']}"]
-    if entry.get("location"):
-        lines += [f"- **Location:** {entry['location']}"]
-    if entry.get("pages"):
-        lines += [f"- **Pages:** {entry['pages']}"]
-    if entry.get("doi"):
-        lines += [f"- **DOI:** {entry['doi']}"]
-
-    completeness = entry.get("completeness", {})
-    lines += [f"- **Completeness:** {completeness.get('label', '?')} (score: {completeness.get('score', '?')})"]
-
-    cited_by = entry.get("cited_by", [])
-    lines += [f"- **Cited by:** {', '.join(cited_by) if cited_by else '*(none)*'}"]
-
-    lines += ["", "**Notes:**", "", ""]
-    return lines
-
-
-def _render_duplicate_pair(
-    ck_a: str, entry_a: dict,
-    ck_b: str, entry_b: dict,
-    score: float,
-    index: int,
-    total: int,
-) -> list[str]:
-    """Render a suspected duplicate pair for side-by-side comparison."""
-    lines = [
-        f"### Pair {index} of {total} — similarity {score:.3f}",
-        "",
-    ]
-
-    for label, ck, entry in [("Entry A", ck_a, entry_a), ("Entry B", ck_b, entry_b)]:
-        raw = entry.get("_raw_citation", "")
-        lines += [
-            f"**{label} — {ck}**  ",
-            f"Source: {entry.get('_source_pdf', '*(unknown)*')}  ",
-        ]
-        if raw:
-            lines += [f"Raw citation: {raw.strip()[:200]}  "]
-        lines += [
-            f"Authors: {_format_authors(entry.get('author', []))}  ",
-            f"Title: {entry.get('title', '*(missing)*')}  ",
-            f"Year: {entry.get('date', entry.get('year', '*(missing)*'))}  ",
-            f"Type: {entry.get('entry_type', '*(missing)*')}  ",
-            "",
-        ]
-
-    lines += ["**Should these be merged?**", "", "**Notes:**", "", ""]
-    return lines
-
-
-# =============================================================================
-# Helpers
-# =============================================================================
-
-def _format_authors(authors: list[dict]) -> str:
-    """Format an author list as a readable string."""
-    if not authors:
-        return "*(missing)*"
-    parts = []
-    for a in authors:
-        family = a.get("family", "")
-        given = a.get("given", "")
-        parts.append(f"{family}, {given}".strip(", "))
-    return "; ".join(parts)
-
-
-def _normalise_title(title: str) -> str:
-    """Normalise a title string for similarity comparison."""
-    return title.lower().strip()
+    path.write_text(html, encoding="utf-8")
