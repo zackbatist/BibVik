@@ -1228,7 +1228,7 @@ class CitationGraph:
     # =========================================================================
 
     def get_bibliography(self) -> dict[str, dict]:
-        return self.bibliography
+        return {ck: e for ck, e in self.bibliography.items() if not e.get("_deleted")}
 
     def get_processed_papers(self) -> dict[str, dict]:
         return self.processed_papers

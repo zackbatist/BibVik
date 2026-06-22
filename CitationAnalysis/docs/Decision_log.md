@@ -1138,3 +1138,18 @@ directly to `corrections.yaml` with `_draft: true` for in-place review.
 rather than `output/`.
 
 `exporter.py`: tombstoned entries filtered before export.
+
+### 2026-06-22 — Corrections system
+
+Added `bibvik/corrections.py`. `corrections.yaml` in the project root is
+the single file for all manual bibliography curation — both systematic
+failures found through pipeline investigation and decisions from human
+review. Confirmed corrections (merge, delete, set) are applied as pass 0
+of `--postprocess` before LLM passes; notes required on all confirmed
+entries. Pipeline-generated draft candidates are appended with `_draft: true`
+after each run for in-place review.
+
+`postprocess.py`: corrections applied as pass 0; drafts appended after all
+passes. `graph.py`: tombstoned entries filtered from `get_bibliography()`.
+`_OCR_MERGE_PAIRS` removed from `postprocess.py`; entries moved to
+`corrections.yaml`.

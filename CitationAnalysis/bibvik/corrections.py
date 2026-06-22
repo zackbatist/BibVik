@@ -184,7 +184,9 @@ def append_draft_corrections(
         _near_duplicate_candidate         — near-duplicate pairs, LLM inconclusive
         _cross_script_duplicate_candidate — cross-script pairs, titles don't overlap enough
         _author_recovery_failed           — NOAUTHOR entries where LLM couldn't extract author
+                                            (flag must be set by postprocess.recover_authors_from_raw())
         _ocr_candidate                    — entries flagged as likely OCR garbage
+                                            (flag must be set by grobid_client alternate OCR path)
 
     Returns number of draft entries appended.
     """
@@ -200,10 +202,10 @@ def append_draft_corrections(
         for c in existing_corrections
         if c.get("action") == "set"
     }
-    existing_citekeys = {
+    existing_delete_keys = {
         c.get("citekey")
         for c in existing_corrections
-        if c.get("action") in ("delete",)
+        if c.get("action") == "delete"
     } | {
         c.get("discard")
         for c in existing_corrections
@@ -275,7 +277,7 @@ def append_draft_corrections(
         # OCR garbage candidates
         # Flag set by grobid_client when alternate OCR still yields unresolvable entry
         if entry.get("_ocr_candidate"):
-            if ck not in existing_citekeys:
+            if ck not in existing_delete_keys:
                 drafts.append({
                     "action":        "delete",
                     "citekey":       ck,

@@ -216,6 +216,7 @@ def run_postprocess(
     input_path: Path,
     output_path: Path | None = None,
     llm_config: dict | None = None,
+    project_root: Path | None = None,
 ) -> dict:
     """Run all post-enrichment passes on bibliography.json."""
     from .corrections import run_corrections, CORRECTIONS_FILENAME
@@ -230,8 +231,8 @@ def run_postprocess(
     results = {}
 
     # Pass 0: manual corrections (merge, delete, set) from corrections.yaml
-    # corrections.yaml lives in the project root, not output/
-    project_root = input_path.parent.parent
+    # corrections.yaml lives in the project root, passed explicitly or inferred
+    project_root = Path(project_root) if project_root else input_path.parent.parent
     correction_counts = run_corrections(input_path, project_root)
     n_corrections = correction_counts["merge"] + correction_counts["delete"] + correction_counts["set"]
     if n_corrections or (project_root / CORRECTIONS_FILENAME).exists():

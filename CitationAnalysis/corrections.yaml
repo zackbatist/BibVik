@@ -1,31 +1,29 @@
 # BibVik corrections
 #
-# Confirmed corrections are applied by --postprocess as pass 0.
-# Pipeline-generated candidates are appended here with _draft: true after
-# each --postprocess run. Review them, remove _draft: true and fill in
-# the note to confirm, or delete the entry to reject.
+# Confirmed corrections applied as pass 0 of --postprocess.
+# Pipeline-generated draft candidates are appended with _draft: true
+# after each run. Remove _draft: true and fill in the note to confirm;
+# delete the entry to reject. Notes required on all confirmed entries.
 #
 # Actions: merge | delete | set
-# note field is required on all confirmed entries.
-#
-# Known cases pending investigation:
-#
-# widerstrom2004 and norderang2004 appear to be the same work with different
-# author name parsing. Verify correct author before confirming.
+
+# widerstrom2004 and norderang2004 have the same title with different author
+# name parsing. Verify correct author against source before confirming.
 #
 # - action: merge
 #   keep: widerstrom2004
 #   discard: norderang2004
 #   note: ""
 
-# OCR merge pairs (migrated from _OCR_MERGE_PAIRS in postprocess.py)
+# OCR merge pairs from _OCR_MERGE_PAIRS — citekeys to be verified against
+# the actual bibliography before uncommenting.
 #
 # - action: merge
-#   keep: wamers1994
-#   discard: wamets1994
-#   note: "OCR corruption in Baastrup 2014: 'wamers' read as 'wamets'"
+#   keep: ???
+#   discard: ???
+#   note: "OCR corruption: 'wamers' read as 'wamets' in Baastrup 2014"
 #
 # - action: merge
-#   keep: orsnes1966
-#   discard: rsnes1966
-#   note: "OCR corruption: leading 'o' dropped"
+#   keep: ???
+#   discard: ???
+#   note: "OCR corruption: leading 'o' dropped from 'orsnes'"
