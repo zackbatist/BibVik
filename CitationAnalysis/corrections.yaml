@@ -27,3 +27,10 @@
 #   keep: ???
 #   discard: ???
 #   note: "OCR corruption: leading 'o' dropped from 'orsnes'"
+
+- action: merge
+  keep: widerstrom2004
+  discard: norderang2004
+  note: "Same work (Norderäng & Widerström 2004, Gotländskt Arkiv 76:82-89).
+    Author order differs between source papers causing different citekeys.
+    widerstrom2004 has volume field and cleaner author parsing."

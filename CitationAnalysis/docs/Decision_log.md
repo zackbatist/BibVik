@@ -1169,3 +1169,10 @@ pdftoppm+Tesseract.
 `graph.py`: entries from papers where `last_ocr_degraded` is set are
 marked `_ocr_candidate`. These surface as draft `delete` corrections
 in `corrections.yaml` after `--postprocess`.
+
+### 2026-06-22 — Resolve widerstrom2004/norderang2004 same-work collision
+
+Norderäng & Widerström 2004 ("Vikingatida bildstenar," Gotländskt Arkiv
+76:82-89) was cited with different author order in different source papers,
+causing deduplication to miss the match and produce two citekeys.
+`norderang2004` merged into `widerstrom2004` via `corrections.yaml`.
