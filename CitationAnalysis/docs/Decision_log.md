@@ -1245,3 +1245,21 @@ llm-prompts.md: OCR merge pairs section updated to reference
 corrections.yaml; unverified entries removed.
 
 cluster-deployment.md: audit output filename and Zotero CSV path updated.
+
+### 2026-06-22 — Docs consolidation and update
+
+architecture.qmd merged with project_context.qmd. Project overview,
+corpus description, technical environment, and cluster details moved
+into architecture.qmd. Method 6, both OCR fallback paths, corrections
+system, and updated postprocess pass list added. Module map and CLI
+flags updated. project_context.qmd deleted.
+
+corrections-system.md rewritten for single-file approach.
+corrections_draft.yaml references removed; known corrections table added.
+
+deduplication-normalisation.md: _is_reconstructible() correctly described
+as unconditional.
+
+llm-prompts.md: OCR merge pairs reference updated to corrections.yaml.
+
+cluster-deployment.md: audit filename and Zotero CSV path updated.
