@@ -1209,3 +1209,10 @@ collisions. These are now surfaced automatically as draft corrections
 in corrections.yaml.
 
 docs/methods/audit-sampling.md updated to reflect the reorientation.
+
+### 2026-06-22 — Update Zotero CSV
+
+Replaced Exported_Items.csv with BibVik_seed.csv, a fresh export from
+Zotero. Format identical; PDF attachment paths updated. Zotero CSV
+files excluded via .gitignore. config.yaml zotero_csv path updated
+accordingly.

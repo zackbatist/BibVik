@@ -94,7 +94,7 @@ CitationAnalysis/output/
 CitationAnalysis/.venv/
 CitationAnalysis/bibvik.egg-info/
 CitationAnalysis/bibvik/__pycache__/
-CitationAnalysis/Exported_Items.csv
+CitationAnalysis/BibVik_seed.csv
 CitationAnalysis/dev-docs/
 CitationAnalysis/config.yaml
 CitationAnalysis/launch_bibvik_llm.sh
