@@ -9,17 +9,17 @@ Both classes are handled through the same mechanism: `corrections.yaml`.
 
 ---
 
-## Files
+## File
 
-**`corrections.yaml`** — confirmed corrections. Lives in the project root,
-committed to the repo. Applied automatically by `--postprocess` as the first
-pass, before any LLM passes. Human-edited. Every entry requires a `note`
-field documenting the basis for the decision.
+**`corrections.yaml`** — the single file for all manual curation decisions.
+Lives in the project root, committed to the repo. Applied automatically by
+`--postprocess` as the first pass, before any LLM passes. Notes required on
+all confirmed entries.
 
-**`corrections_draft.yaml`** — pipeline-generated candidates. Written by
-`--postprocess` after all passes, based on flags left in the bibliography by
-deduplication and postprocessing. Reviewed by the researcher; accepted entries
-are promoted to `corrections.yaml`. Not committed to the repo.
+Confirmed corrections and pipeline-generated draft candidates live in the same
+file. Draft candidates are appended by `--postprocess` after all passes, marked
+with `_draft: true`. The researcher reviews them in place, removes `_draft: true`
+and fills in the note to confirm, or deletes the entry to reject.
 
 ---
 
@@ -34,8 +34,8 @@ Two entries are the same work. `cited_by` from `discard` is merged into `keep`.
 - action: merge
   keep: widerstrom2004
   discard: norderang2004
-  note: "Same work. Widerström is the correct author; norderang2004 is a
-         GROBID parsing error on the same reference in Cannell 2016."
+  note: "Same work. Author order differs between source papers causing different
+         citekeys. widerstrom2004 has volume field and cleaner author parsing."
 ```
 
 ### delete
@@ -76,7 +76,8 @@ Edit `corrections.yaml` directly. Run `--postprocess` to apply.
 
 ### Pipeline-generated candidates
 
-After `--postprocess`, open `corrections_draft.yaml`. Each entry has:
+After `--postprocess`, open `corrections.yaml` and scroll to the draft entries
+(marked `_draft: true`). Each draft has additional context fields:
 
 - `_source` — what generated it (`near_duplicate`, `cross_script`,
   `noauthor_recovery`, `ocr_candidate`)
@@ -84,14 +85,11 @@ After `--postprocess`, open `corrections_draft.yaml`. Each entry has:
 - `_keep_title` / `_discard_title` — titles for context (merge candidates)
 - `_raw_citation` — original raw string (set/delete candidates)
 
-To accept a candidate:
-1. Copy the entry to `corrections.yaml`
-2. Remove all `_`-prefixed keys
-3. Fill in the `note` field
-4. Delete it from `corrections_draft.yaml`
+To confirm a draft:
+1. Remove `_draft: true` and all `_`-prefixed context keys
+2. Fill in the `note` field
 
-To reject: delete it from `corrections_draft.yaml` or leave it (it will be
-regenerated on the next run if the flag is still present in the bibliography).
+To reject: delete the entry.
 
 ---
 
@@ -106,13 +104,16 @@ regenerated on the next run if the flag is still present in the bibliography).
 
 ---
 
-## Migration from `_OCR_MERGE_PAIRS`
+## Known corrections
 
-The hardcoded `_OCR_MERGE_PAIRS` dict in `postprocess.py` should be deleted.
-Its entries move to `corrections.yaml` as `merge` actions. Known pairs:
+OCR merge pairs verified against the bibliography and recorded in
+`corrections.yaml`:
 
-- `wamers1994` / `wamets1994` — OCR corruption in Baastrup 2014
-- `orsnes1966` / `rsnes1966` — OCR corruption
+| Discard | Keep | Reason |
+|---|---|---|
+| `rsnes1966` | `orsnes1966` | OCR dropped leading O from Orsnes |
+| `wamets1985` | `wamers1985` | OCR misread Wamers as Wamets |
+| `norderang2004` | `widerstrom2004` | Same work cited with different author order |
 
 ---
 

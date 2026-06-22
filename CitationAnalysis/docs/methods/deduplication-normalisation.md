@@ -217,12 +217,12 @@ false positives (todo AF).
 shorthand pointers to entries already in the bibliography, not standalone
 references.
 
-When an LLM is configured, entries that fail any check are silently dropped —
-Method 6 will recover any legitimate references from the raw reference div text.
-The check is applied unconditionally regardless of LLM availability — previously
+The check is applied unconditionally regardless of LLM availability. Previously
 it was gated on LLM configuration, which allowed ghost entries (GROBID biblStructs
 with journal/volume metadata but no author, title, or year) to enter the
-bibliography when the LLM was not available at processing time.
+bibliography when the LLM was not available at processing time. The unconditional
+check ensures ghost entries are suppressed regardless of whether an LLM is
+configured for the run.
 
 ---
 

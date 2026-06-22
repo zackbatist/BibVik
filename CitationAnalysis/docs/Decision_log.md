@@ -1229,3 +1229,19 @@ cited with different author order in different source papers.
 
 Unpaywall API confirmed working against live DOIs. Stale warning
 removed from coverage.py docstring and report output.
+
+### 2026-06-22 — Docs update
+
+corrections-system.md rewritten to reflect single-file approach:
+corrections_draft.yaml removed; confirmed corrections and draft candidates
+both live in corrections.yaml, drafts marked _draft: true. Known
+corrections table added (rsnes1966→orsnes1966, wamets1985→wamers1985,
+norderang2004→widerstrom2004). _OCR_MERGE_PAIRS migration note removed.
+
+deduplication-normalisation.md: _is_reconstructible() described as
+unconditional; stale LLM-gated language corrected.
+
+llm-prompts.md: OCR merge pairs section updated to reference
+corrections.yaml; unverified entries removed.
+
+cluster-deployment.md: audit output filename and Zotero CSV path updated.

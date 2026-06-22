@@ -321,21 +321,13 @@ using a lookup table (`_ABBREVIATION_TABLE`):
 ### Mechanism 2: OCR/normalisation merges
 
 Confirmed OCR or normalisation corruptions of existing titled entries are
-merged. Each pair was verified manually before inclusion in
-`_OCR_MERGE_PAIRS`:
+merged. Each pair was verified manually and recorded in `corrections.yaml`
+(previously hardcoded in `_OCR_MERGE_PAIRS` in `postprocess.py`):
 
 | Source (corrupt) | Target (correct) | Reason |
 |---|---|---|
-| brucemicford2005 | brucemitford2005 | OCR t/c confusion |
 | wamets1985 | wamers1985 | OCR t/r confusion |
 | rsnes1966 | orsnes1966 | Missing initial O |
-| ocarragain2010 | carragain2010 | Ó prefix stripped |
-| ofloinn2013 | floinn2013 | Ó prefix stripped |
-| ofloinn2015 | floinn2015 | Ó prefix stripped |
-| kalming2010 | kalmring2010a | OCR ng/g confusion |
-| sampson1991 | samson1991 | Double p |
-| gurevic1968a | gurevich1968 | Transliteration variant |
-| tenharkel2013 | harkel2013 | Ten prefix stripped |
 
 ### Mechanism 3: CrossRef author+year query
 

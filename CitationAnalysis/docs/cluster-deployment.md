@@ -153,7 +153,7 @@ Create `config.yaml` from the template. Key fields for cluster use:
 seed_paper: "/path/to/pdfs/seed-paper.pdf"
 f1_pdf_dir: "/path/to/pdfs/"
 output_dir: "/path/to/output/"
-zotero_csv: "/path/to/CitationAnalysis/Exported_Items.csv"
+zotero_csv: "/path/to/CitationAnalysis/BibVik_seed.csv"
 
 email: "your@email.com"
 
@@ -213,7 +213,7 @@ Detach from screen with Ctrl-A D. Reattach with `screen -r bibvik`.
 # Copy outputs to local machine (run from laptop)
 scp user@cluster:/path/to/output/bibliography.json ~/Desktop/
 scp user@cluster:/path/to/output/citation_graph.graphml ~/Desktop/
-scp user@cluster:/path/to/output/audit_sample.md ~/Desktop/
+scp user@cluster:/path/to/output/audit_report.html ~/Desktop/
 ```
 
 ## Multi-GPU Parallel Processing
