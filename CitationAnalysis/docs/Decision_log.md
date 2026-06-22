@@ -1176,3 +1176,12 @@ Norderäng & Widerström 2004 ("Vikingatida bildstenar," Gotländskt Arkiv
 76:82-89) was cited with different author order in different source papers,
 causing deduplication to miss the match and produce two citekeys.
 `norderang2004` merged into `widerstrom2004` via `corrections.yaml`.
+
+### 2026-06-22 — Remove inline compound splitting
+
+`_split_compound_entry()` and the `_possibly_compound` check removed
+from `graph.py`. Compound bibliography entries are already handled by
+Method 6 (LLM re-parse of raw reference div text), which operates on
+continuous text before GROBID's page-break fragmentation occurs. The
+inline approach was dead code — `_possibly_compound` was never set by
+any part of the pipeline.

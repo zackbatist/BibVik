@@ -937,38 +937,17 @@ class CitationGraph:
                 if not _is_reconstructible(ref):
                     continue
 
-                # Inline compound citation splitting — if GROBID flagged this
-                # entry as possibly compound and we have an LLM, split it now
-                # so the resulting entries participate in deduplication
-                refs_to_add = [ref]
-                if ref.get("_possibly_compound") and ref.get("_raw_citation") and llm_config:
-                    split = _split_compound_entry(ref, llm_config)
-                    if split:
-                        refs_to_add = split
+                existing = self._find_duplicate(ref)
+                if existing:
+                    self._merge_into(existing, ref)
+                else:
+                    self.bibliography[ref["citekey"]] = ref
+                    if llm_config and llm_config.get("_email"):
+                        _enrich_entry(ref, email=llm_config["_email"])
 
-                for r in refs_to_add:
-                    if r is not ref:
-                        # Assign citekey, generation etc to split entries
-                        r_authors = r.get("author", [])
-                        r_editors = r.get("editor", [])
-                        r_year = _extract_year(r.get("date", ""))
-                        r["citekey"] = generate_citekey(r_authors, r_year, editors=r_editors)
-                        r["generation"] = "F2"
-                        r["cited_by"] = [f1_citekey]
-                        r["_source_pdf"] = pdf_path.name
-                        r = normalize_entry(r)
-
-                    existing = self._find_duplicate(r)
-                    if existing:
-                        self._merge_into(existing, r)
-                    else:
-                        self.bibliography[r["citekey"]] = r
-                        if llm_config and llm_config.get("_email"):
-                            _enrich_entry(r, email=llm_config["_email"])
-
-                    gid = ref.get("_grobid_id", "")
-                    if gid and r is ref:
-                        self.grobid_map[(pdf_path.name, gid)] = r["citekey"]
+                gid = ref.get("_grobid_id", "")
+                if gid:
+                    self.grobid_map[(pdf_path.name, gid)] = ref["citekey"]
 
         # ── Detection ────────────────────────────────────────────────────────
         _fire("llm_body_start")
