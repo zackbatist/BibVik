@@ -1216,3 +1216,11 @@ Replaced Exported_Items.csv with BibVik_seed.csv, a fresh export from
 Zotero. Format identical; PDF attachment paths updated. Zotero CSV
 files excluded via .gitignore. config.yaml zotero_csv path updated
 accordingly.
+
+### 2026-06-22 — Add confirmed corrections
+
+Three merge corrections added to corrections.yaml after verification
+against the bibliography. rsnes1966 merged into orsnes1966 (OCR dropped
+leading O from Orsnes). wamets1985 merged into wamers1985 (OCR misread
+Wamers as Wamets). widerstrom2004 merged into norderang2004 — same work
+cited with different author order in different source papers.

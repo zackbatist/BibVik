@@ -7,30 +7,19 @@
 #
 # Actions: merge | delete | set
 
-# widerstrom2004 and norderang2004 have the same title with different author
-# name parsing. Verify correct author against source before confirming.
-#
-# - action: merge
-#   keep: widerstrom2004
-#   discard: norderang2004
-#   note: ""
-
-# OCR merge pairs from _OCR_MERGE_PAIRS — citekeys to be verified against
-# the actual bibliography before uncommenting.
-#
-# - action: merge
-#   keep: ???
-#   discard: ???
-#   note: "OCR corruption: 'wamers' read as 'wamets' in Baastrup 2014"
-#
-# - action: merge
-#   keep: ???
-#   discard: ???
-#   note: "OCR corruption: leading 'o' dropped from 'orsnes'"
-
 - action: merge
   keep: widerstrom2004
   discard: norderang2004
   note: "Same work (Norderäng & Widerström 2004, Gotländskt Arkiv 76:82-89).
     Author order differs between source papers causing different citekeys.
     widerstrom2004 has volume field and cleaner author parsing."
+
+- action: merge
+  keep: orsnes1966
+  discard: rsnes1966
+  note: "OCR corruption: leading 'O' dropped from 'Orsnes' in source PDF"
+
+- action: merge
+  keep: wamers1985
+  discard: wamets1985
+  note: "OCR corruption: 'wamers' read as 'wamets' in source PDF"
