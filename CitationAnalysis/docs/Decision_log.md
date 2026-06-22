@@ -1153,3 +1153,19 @@ after each run for in-place review.
 passes. `graph.py`: tombstoned entries filtered from `get_bibliography()`.
 `_OCR_MERGE_PAIRS` removed from `postprocess.py`; entries moved to
 `corrections.yaml`.
+
+### 2026-06-22 — Wire draft correction sources
+
+`postprocess.py`: `recover_authors_from_raw()` added as Pass 3. For
+NOAUTHOR entries with a raw citation string and title but no parsed
+author, the LLM attempts to extract structured author data from the raw
+string. Sets `_author_recovery_failed` on failure, which triggers a
+draft `set` correction in `corrections.yaml`.
+
+`grobid_client.py`: `last_ocr_degraded` flag added. Set when the
+private-use Unicode fallback runs but the TEI remains garbled after
+pdftoppm+Tesseract.
+
+`graph.py`: entries from papers where `last_ocr_degraded` is set are
+marked `_ocr_candidate`. These surface as draft `delete` corrections
+in `corrections.yaml` after `--postprocess`.

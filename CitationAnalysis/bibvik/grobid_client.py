@@ -127,6 +127,8 @@ class GrobidClient:
         self.container_name = container_name
         # Set by _submit_to_grobid when [BAD_INPUT_DATA] is detected,
         # so process_fulltext() knows to attempt the pdftoppm+Tesseract fallback.
+        # Set by process_fulltext() when OCR fallback ran but TEI is still garbled.
+        # Checked by graph.py to mark entries from this paper as _ocr_candidate.
         self._last_bad_input: bool = False
 
     def is_alive(self) -> bool:
@@ -251,6 +253,7 @@ class GrobidClient:
             logger.error("PDF file not found: %s", pdf_path)
             return None
 
+        self.last_ocr_degraded = False
         tei = self._submit_to_grobid(pdf_path, include_coordinates)
 
         # ── [BAD_INPUT_DATA] fallback ──
@@ -298,6 +301,7 @@ class GrobidClient:
                 "Using original (garbled) TEI.",
                 pdf_path.name,
             )
+            self.last_ocr_degraded = True
             return tei  # Return garbled TEI — better than nothing
 
         # ── [NO_BLOCKS] fallback ──

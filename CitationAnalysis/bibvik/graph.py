@@ -1050,6 +1050,18 @@ class CitationGraph:
                 "detection": detection["method_counts"],
             }
 
+            # Mark entries from this paper as OCR candidates if the PDF
+            # was processed with a degraded OCR fallback (garbled TEI).
+            # These will surface as draft corrections in corrections.yaml.
+            if self.grobid.last_ocr_degraded:
+                for entry in self.bibliography.values():
+                    if entry.get("_source_pdf") == pdf_path.name:
+                        entry["_ocr_candidate"] = True
+                logger.warning(
+                    "Marked entries from %s as OCR candidates (degraded OCR)",
+                    pdf_path.name,
+                )
+
         return True, ""
 
     # =========================================================================
