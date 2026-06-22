@@ -19,8 +19,7 @@ Endpoint: https://api.unpaywall.org/v2/{doi}?email={email}
 Returns OA status and direct PDF links where available.
 Rate limit: ~100k requests/day.
 
-Note (item H in todo): the Unpaywall mechanism was not working as of
-April 2026. Investigate before relying on OA results.
+
 """
 
 import logging
@@ -256,9 +255,6 @@ def _write_report(
             "## Open access",
             "",
             "*OA lookup not run. Pass `--email your@email.com` to enable.*",
-            "",
-            "Note: the Unpaywall mechanism was not working as of April 2026 "
-            "(item H in the project todo). Verify before relying on these results.",
             "",
         ]
 

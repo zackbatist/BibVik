@@ -1224,3 +1224,8 @@ against the bibliography. rsnes1966 merged into orsnes1966 (OCR dropped
 leading O from Orsnes). wamets1985 merged into wamers1985 (OCR misread
 Wamers as Wamets). widerstrom2004 merged into norderang2004 — same work
 cited with different author order in different source papers.
+
+### 2026-06-22 — Confirm Unpaywall working
+
+Unpaywall API confirmed working against live DOIs. Stale warning
+removed from coverage.py docstring and report output.
