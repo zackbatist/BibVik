@@ -1306,3 +1306,19 @@ suppressed — these are cross-references not standalone entries.
 Editorial shorthand: raw citations starting with Siehe, Vgl., Cf.,
 Nach, ibid and similar are suppressed. _DASH_PREFIX_RE fixed to
 match dash-year without space.
+
+### 2026-06-25 — Fix deduplication; remove redundant postprocess near-duplicate pass
+
+_find_duplicate() in graph.py extended: exact title match threshold
+lowered from 20 to 10 characters, catching short titles like
+"Norske oldsager" that were slipping through. New strategy added for
+undated entries (both missing year): same author with ≥85% title
+overlap triggers a merge. These fixes address clusters of duplicates
+for 19th-century Scandinavian catalogues (Rygh, Nicolaysen, Stolpe)
+that were appearing in the audit.
+
+Near-duplicate flagging pass removed from postprocess.py. Deduplication
+belongs at ingestion time — running it post-hoc in postprocess was
+architecturally wrong and produced redundant flagging. Residual cases
+are handled by corrections.yaml. Author recovery and title recovery
+passes retained.

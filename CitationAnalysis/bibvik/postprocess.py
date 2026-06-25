@@ -204,13 +204,15 @@ def _llm_same_work(
     return None
 
 
-# ── Pass 3: Author recovery from raw citation string ─────────────────────────
+
+
+# ── Pass 2: Author recovery from raw citation string ─────────────────────────
 
 _LLM_AUTHOR_RECOVERY = (
     "You are an expert bibliographer. The following is a raw citation string "
     "from an academic bibliography. Extract the author name(s) as structured data.\n\n"
     "Raw citation:\n{raw}\n\n"
-    "Respond with a JSON array of author objects, each with 'family' and 'given' keys.\n"
+    "Respond with a JSON array of author objects, each with \'family\' and \'given\' keys.\n"
     "Example: [{{\"family\": \"Sindbæk\", \"given\": \"Søren Michael\"}}]\n"
     "If you cannot identify any authors, respond with an empty array: []\n"
     "Respond with only the JSON array, no other text.\n"
@@ -219,18 +221,10 @@ _LLM_AUTHOR_RECOVERY = (
 
 
 def recover_authors_from_raw(bib: dict, llm_config: dict | None = None) -> int:
-    """
-    For NOAUTHOR entries that have a raw citation string and a title but no
-    parsed author, attempt to extract the author from the raw string using
-    the LLM. Sets _author_recovery_failed: true when the LLM returns no
-    usable author, so corrections.py can generate a draft set action.
-    """
     import json as _json
     import requests
-
     if not llm_config:
         return 0
-
     count = 0
     for ck, entry in bib.items():
         if entry.get("_deleted"):
@@ -240,62 +234,43 @@ def recover_authors_from_raw(bib: dict, llm_config: dict | None = None) -> int:
         if not ck.startswith("NOAUTHOR"):
             continue
         raw = entry.get("_raw_citation", "").strip()
-        if not raw:
+        if not raw or not entry.get("title", "").strip():
             continue
-        if not entry.get("title", "").strip():
-            continue
-
         prompt = _LLM_AUTHOR_RECOVERY.format(raw=raw)
-
         try:
             base_url = llm_config.get("base_url", "http://localhost:11434")
             model    = llm_config.get("model", "qwen2.5:7b")
             timeout  = llm_config.get("timeout", 60)
             backend  = llm_config.get("backend", "ollama")
-
             if backend == "ollama":
-                resp = requests.post(
-                    f"{base_url}/api/generate",
+                resp = requests.post(f"{base_url}/api/generate",
                     json={"model": model, "prompt": prompt, "stream": False,
                           "think": False, "options": {"temperature": 0.0, "num_predict": 200}},
-                    timeout=timeout,
-                )
+                    timeout=timeout)
                 raw_resp = resp.json().get("response", "").strip()
             else:
-                resp = requests.post(
-                    f"{base_url}/v1/chat/completions",
-                    json={"model": model,
-                          "messages": [{"role": "user", "content": prompt}],
+                resp = requests.post(f"{base_url}/v1/chat/completions",
+                    json={"model": model, "messages": [{"role": "user", "content": prompt}],
                           "stream": False, "temperature": 0.0, "max_tokens": 200},
-                    timeout=timeout,
-                )
+                    timeout=timeout)
                 raw_resp = resp.json()["choices"][0]["message"]["content"].strip()
-
             raw_resp = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_resp, flags=re.MULTILINE).strip()
             authors = _json.loads(raw_resp)
-
             if isinstance(authors, list) and authors:
-                valid = [
-                    a for a in authors
-                    if isinstance(a, dict) and a.get("family", "").strip()
-                ]
+                valid = [a for a in authors if isinstance(a, dict) and a.get("family", "").strip()]
                 if valid:
                     entry["author"] = valid
                     entry["_author_recovered"] = True
                     count += 1
                     logger.info("Recovered author(s) for %s: %s", ck, valid)
                     continue
-
         except Exception as exc:
             logger.debug("Author recovery LLM error for %s: %s", ck, exc)
-
         entry["_author_recovery_failed"] = True
-        logger.debug("Author recovery failed for %s", ck)
-
     return count
 
 
-# ── Pass 4: Title recovery from raw citation string ───────────────────────────
+# ── Pass 3: Title recovery from raw citation string ───────────────────────────
 
 _LLM_TITLE_RECOVERY = (
     "You are an expert bibliographer. The following is a raw citation string "
@@ -309,15 +284,9 @@ _LLM_TITLE_RECOVERY = (
 
 
 def recover_titles_from_raw(bib: dict, llm_config: dict | None = None) -> int:
-    """
-    For entries that have a raw citation string but no title, attempt to
-    extract the title using the LLM.
-    """
     import requests
-
     if not llm_config:
         return 0
-
     count = 0
     for ck, entry in bib.items():
         if entry.get("_deleted"):
@@ -327,44 +296,32 @@ def recover_titles_from_raw(bib: dict, llm_config: dict | None = None) -> int:
         raw = entry.get("_raw_citation", "").strip()
         if not raw:
             continue
-
         prompt = _LLM_TITLE_RECOVERY.format(raw=raw)
-
         try:
             base_url = llm_config.get("base_url", "http://localhost:11434")
             model    = llm_config.get("model", "qwen2.5:7b")
             timeout  = llm_config.get("timeout", 60)
             backend  = llm_config.get("backend", "ollama")
-
             if backend == "ollama":
-                resp = requests.post(
-                    f"{base_url}/api/generate",
+                resp = requests.post(f"{base_url}/api/generate",
                     json={"model": model, "prompt": prompt, "stream": False,
                           "think": False, "options": {"temperature": 0.0, "num_predict": 100}},
-                    timeout=timeout,
-                )
+                    timeout=timeout)
                 title = resp.json().get("response", "").strip()
             else:
-                resp = requests.post(
-                    f"{base_url}/v1/chat/completions",
-                    json={"model": model,
-                          "messages": [{"role": "user", "content": prompt}],
+                resp = requests.post(f"{base_url}/v1/chat/completions",
+                    json={"model": model, "messages": [{"role": "user", "content": prompt}],
                           "stream": False, "temperature": 0.0, "max_tokens": 100},
-                    timeout=timeout,
-                )
+                    timeout=timeout)
                 title = resp.json()["choices"][0]["message"]["content"].strip()
-
             title = title.strip('"\'').strip()
-
             if title and len(title) > 3:
                 entry["title"] = title
                 entry["_title_recovered"] = True
                 count += 1
                 logger.info("Recovered title for %s: %s", ck, title[:60])
-
         except Exception as exc:
             logger.debug("Title recovery LLM error for %s: %s", ck, exc)
-
     return count
 
 
@@ -372,7 +329,6 @@ def recover_titles_from_raw(bib: dict, llm_config: dict | None = None) -> int:
 
 PASSES = [
     ("Entry type reclassification (enriched)", fix_entry_types_post_enrich, False),
-    ("Near-duplicate flagging / LLM resolution", flag_near_duplicates, True),
     ("Author recovery from raw citation string",  recover_authors_from_raw,  True),
     ("Title recovery from raw citation string",   recover_titles_from_raw,   True),
 ]

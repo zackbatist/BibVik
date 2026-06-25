@@ -1103,9 +1103,9 @@ class CitationGraph:
             if ref_doi and ex_doi and ref_doi == ex_doi:
                 return ck
 
-            # 2. Exact title match (long titles only)
+            # 2. Exact title match (titles ≥10 chars)
             ex_title = _norm_title(existing.get("title", ""))
-            if ref_title and ex_title and ref_title == ex_title and len(ref_title) >= 20:
+            if ref_title and ex_title and ref_title == ex_title and len(ref_title) >= 10:
                 return ck
 
             # 3. Author + year + fuzzy title
@@ -1141,6 +1141,17 @@ class CitationGraph:
                                 existing.setdefault("_cross_script_duplicate_candidate", [])
                                 if ref.get("citekey") and ref["citekey"] not in existing["_cross_script_duplicate_candidate"]:
                                     existing["_cross_script_duplicate_candidate"].append(ref.get("citekey", ""))
+
+            # 5. No-year: same author, both missing year, high title overlap
+            # Catches undated works (nd citekeys) cited multiple times with
+            # slightly different title forms.
+            elif not ref_year and not ex_year:
+                if ref_authors and ex_authors:
+                    r_fam = _norm_author(ref_authors[0].get("family", ""))
+                    e_fam = _norm_author(ex_authors[0].get("family", ""))
+                    if r_fam and e_fam and r_fam == e_fam:
+                        if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.85:
+                            return ck
 
         return None
 
