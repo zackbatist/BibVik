@@ -287,13 +287,36 @@ def _is_reconstructible(ref: dict) -> bool:
         )
         return False
 
-    # Dash-prefix same-author abbreviation: raw citation starts with "- " or
+# Dash-prefix same-author abbreviation: raw citation starts with "- " or
     # "--" followed by a year. These are Scandinavian scholarly bibliography
     # conventions where the dash indicates the same author as the preceding
     # entry. The author is implicit and cannot be recovered without context.
     if raw and _DASH_PREFIX_RE.match(raw):
         logger.debug(
             "Skipping dash-prefix same-author entry: %s", repr(raw[:80])
+        )
+        return False
+
+    # Page-reference shorthand: a short raw citation containing only an author,
+    # year, and page reference — not a standalone bibliography entry.
+    # e.g. "Enoksen 1999, s. 58", "Institution, Washington, 1989:111-7"
+    if raw and len(raw) < 60:
+        if re.search(r"\bs\.\s*\d+|\bpp?\.\s*\d+|:\d+-\d+|,\s*\d+\s*$", raw):
+            logger.debug(
+                "Skipping page-reference shorthand: %s", repr(raw[:80])
+            )
+            return False
+
+    # Editorial/discursive shorthand: raw starts with a known editorial
+    # abbreviation used in footnotes and German/Scandinavian bibliography
+    # sections to introduce cross-references rather than standalone entries.
+    _EDITORIAL_PREFIXES = re.compile(
+        r"^(?:Siehe|Vgl\.|Cf\.|cf\.|Nach|See also|op\. cit|ibid|Ibid|ebd\.|s\.\s*auch)\b",
+        re.IGNORECASE,
+    )
+    if raw and _EDITORIAL_PREFIXES.match(raw):
+        logger.debug(
+            "Skipping editorial shorthand: %s", repr(raw[:80])
         )
         return False
 

@@ -1296,3 +1296,13 @@ recover_authors_from_raw() added as Pass 3. For NOAUTHOR entries
 with a raw citation and title but no author, sends the raw string
 to the LLM to extract structured author data. Sets
 _author_recovery_failed on failure for draft corrections.
+
+### 2026-06-25 — Fix garbage entry detection
+
+_is_reconstructible() in graph.py extended with two new suppression
+checks. Page-reference shorthand: raw citations under 60 characters
+containing page reference patterns (s. \d+, pp. \d+, :\d+-\d+) are
+suppressed — these are cross-references not standalone entries.
+Editorial shorthand: raw citations starting with Siehe, Vgl., Cf.,
+Nach, ibid and similar are suppressed. _DASH_PREFIX_RE fixed to
+match dash-year without space.
