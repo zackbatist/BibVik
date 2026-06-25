@@ -297,10 +297,12 @@ def _is_reconstructible(ref: dict) -> bool:
         )
         return False
 
-    # Page-reference shorthand: a short raw citation containing only an author,
-    # year, and page reference — not a standalone bibliography entry.
+    # Page-reference shorthand: a very short raw citation that is only a
+    # page reference — not a standalone bibliography entry.
+    # Only suppressed when the entry also has no title — legitimate short
+    # journal citations (e.g. "Nielsen 2012. Skalk 2012(2):3-6") have titles.
     # e.g. "Enoksen 1999, s. 58", "Institution, Washington, 1989:111-7"
-    if raw and len(raw) < 60:
+    if raw and not has_title and len(raw) < 60:
         if re.search(r"\bs\.\s*\d+|\bpp?\.\s*\d+|:\d+-\d+|,\s*\d+\s*$", raw):
             logger.debug(
                 "Skipping page-reference shorthand: %s", repr(raw[:80])
