@@ -192,7 +192,7 @@ _CATALOGUE_PARENS_RE = re.compile(
 # entry. GROBID parses these as standalone entries with no author field.
 # They should be suppressed — the author is implicit and cannot be recovered
 # without context from the surrounding bibliography.
-_DASH_PREFIX_RE = re.compile(r"^--?\s+(?:19|20)\d{2}")
+_DASH_PREFIX_RE = re.compile(r"^--?\s*(?:19|20)\d{2}")
 
 # Shorthand back-reference pattern.
 # Matches raw citations of the form "Author Year" or "Author/Author Year"
@@ -937,17 +937,38 @@ class CitationGraph:
                 if not _is_reconstructible(ref):
                     continue
 
-                existing = self._find_duplicate(ref)
-                if existing:
-                    self._merge_into(existing, ref)
-                else:
-                    self.bibliography[ref["citekey"]] = ref
-                    if llm_config and llm_config.get("_email"):
-                        _enrich_entry(ref, email=llm_config["_email"])
+                # Inline compound citation splitting — if GROBID flagged this
+                # entry as possibly compound and we have an LLM, split it now
+                # so the resulting entries participate in deduplication
+                refs_to_add = [ref]
+                if ref.get("_possibly_compound") and ref.get("_raw_citation") and llm_config:
+                    split = _split_compound_entry(ref, llm_config)
+                    if split:
+                        refs_to_add = split
 
-                gid = ref.get("_grobid_id", "")
-                if gid:
-                    self.grobid_map[(pdf_path.name, gid)] = ref["citekey"]
+                for r in refs_to_add:
+                    if r is not ref:
+                        # Assign citekey, generation etc to split entries
+                        r_authors = r.get("author", [])
+                        r_editors = r.get("editor", [])
+                        r_year = _extract_year(r.get("date", ""))
+                        r["citekey"] = generate_citekey(r_authors, r_year, editors=r_editors)
+                        r["generation"] = "F2"
+                        r["cited_by"] = [f1_citekey]
+                        r["_source_pdf"] = pdf_path.name
+                        r = normalize_entry(r)
+
+                    existing = self._find_duplicate(r)
+                    if existing:
+                        self._merge_into(existing, r)
+                    else:
+                        self.bibliography[r["citekey"]] = r
+                        if llm_config and llm_config.get("_email"):
+                            _enrich_entry(r, email=llm_config["_email"])
+
+                    gid = ref.get("_grobid_id", "")
+                    if gid and r is ref:
+                        self.grobid_map[(pdf_path.name, gid)] = r["citekey"]
 
         # ── Detection ────────────────────────────────────────────────────────
         _fire("llm_body_start")
@@ -1028,18 +1049,6 @@ class CitationGraph:
                 },
                 "detection": detection["method_counts"],
             }
-
-            # Mark entries from this paper as OCR candidates if the PDF
-            # was processed with a degraded OCR fallback (garbled TEI).
-            # These will surface as draft corrections in corrections.yaml.
-            if self.grobid.last_ocr_degraded:
-                for entry in self.bibliography.values():
-                    if entry.get("_source_pdf") == pdf_path.name:
-                        entry["_ocr_candidate"] = True
-                logger.warning(
-                    "Marked entries from %s as OCR candidates (degraded OCR)",
-                    pdf_path.name,
-                )
 
         return True, ""
 
@@ -1219,7 +1228,7 @@ class CitationGraph:
     # =========================================================================
 
     def get_bibliography(self) -> dict[str, dict]:
-        return {ck: e for ck, e in self.bibliography.items() if not e.get("_deleted")}
+        return self.bibliography
 
     def get_processed_papers(self) -> dict[str, dict]:
         return self.processed_papers
