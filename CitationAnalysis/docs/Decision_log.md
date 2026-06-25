@@ -1284,3 +1284,15 @@ parameter; replaced with project_root=Path(__file__).parent.
 Audit stage was ordered before postprocess; swapped so
 corrections and LLM passes run before the audit reads the
 bibliography.
+
+### 2026-06-22 — Add title and author recovery passes to postprocess.py
+
+recover_titles_from_raw() added as Pass 4. For entries with a raw
+citation string but no title, sends the raw string to the LLM to
+extract the title. Targets ~310 no-title entries that have raw
+citations.
+
+recover_authors_from_raw() added as Pass 3. For NOAUTHOR entries
+with a raw citation and title but no author, sends the raw string
+to the LLM to extract structured author data. Sets
+_author_recovery_failed on failure for draft corrections.
