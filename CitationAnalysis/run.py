@@ -624,7 +624,8 @@ def main():
 
         # Always read bibliography from disk so postprocess corrections are reflected
         import json as _json
-        _bib_for_audit = _json.loads(bib_path.read_text(encoding="utf-8"))
+        _audit_bib_path = output_dir / "bibliography.json"
+        _bib_for_audit = _json.loads(_audit_bib_path.read_text(encoding="utf-8"))
 
         sample_path = _run_audit(
             bibliography     = _bib_for_audit,
