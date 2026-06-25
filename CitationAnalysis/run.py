@@ -610,6 +610,17 @@ def main():
         _save_graph_state(graph, graph_state_path)
         print(f"   Output → {output_dir}", flush=True)
 
+    # ── Stage: Post-process ───────────────────────────────────────────────────
+    if run_postprocess:
+        print("\n━━ Post-processing bibliography", flush=True)
+
+        from bibvik.postprocess import run_postprocess as _run_postprocess
+
+        bib_path = output_dir / "bibliography.json"
+        counts = _run_postprocess(bib_path, bib_path, llm_config=llm_cfg, project_root=Path(__file__).parent)
+        for name, count in counts.items():
+            print(f"   {name:<45}  {count}", flush=True)
+
     # =========================================================================
     if run_audit:
         print(f"\n━━ Audit sample", flush=True)
@@ -631,17 +642,6 @@ def main():
             threshold        = args.audit_threshold,
         )
         print(f"   Audit sample → {sample_path}", flush=True)
-
-    # ── Stage: Post-process ───────────────────────────────────────────────────
-    if run_postprocess:
-        print("\n━━ Post-processing bibliography", flush=True)
-
-        from bibvik.postprocess import run_postprocess as _run_postprocess
-
-        bib_path = output_dir / "bibliography.json"
-        counts = _run_postprocess(bib_path, bib_path, llm_config=llm_cfg, project_root=Path(__file__).parent)
-        for name, count in counts.items():
-            print(f"   {name:<45}  {count}", flush=True)
 
     # ── Stage: Export ─────────────────────────────────────────────────────────
     if args.export:

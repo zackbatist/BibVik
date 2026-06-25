@@ -1276,3 +1276,11 @@ valid parameter. Fixed to pass `project_root=Path(__file__).parent`
 instead, so `corrections.yaml` is found at the project root. The fix
 was made earlier in the session but the unfixed version of run.py
 was committed.
+
+### 2026-06-22 — Fix run.py stage order and postprocess call
+
+run_postprocess() was called with email= which is not a valid
+parameter; replaced with project_root=Path(__file__).parent.
+Audit stage was ordered before postprocess; swapped so
+corrections and LLM passes run before the audit reads the
+bibliography.
