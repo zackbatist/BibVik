@@ -1268,3 +1268,11 @@ cluster-deployment.md: audit filename and Zotero CSV path updated.
 
 `_sample()` helper missing from `audit.py` — called in `run_audit()`
 but not defined. Added.
+
+### 2026-06-22 — Fix run_postprocess call in run.py
+
+`run_postprocess()` was called with `email=email` which was never a
+valid parameter. Fixed to pass `project_root=Path(__file__).parent`
+instead, so `corrections.yaml` is found at the project root. The fix
+was made earlier in the session but the unfixed version of run.py
+was committed.
