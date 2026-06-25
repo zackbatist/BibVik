@@ -211,7 +211,7 @@ _LLM_AUTHOR_RECOVERY = (
     "from an academic bibliography. Extract the author name(s) as structured data.\n\n"
     "Raw citation:\n{raw}\n\n"
     "Respond with a JSON array of author objects, each with 'family' and 'given' keys.\n"
-    "Example: [{\"family\": \"Sindbæk\", \"given\": \"Søren Michael\"}]\n"
+    "Example: [{{\"family\": \"Sindbæk\", \"given\": \"Søren Michael\"}}]\n"
     "If you cannot identify any authors, respond with an empty array: []\n"
     "Respond with only the JSON array, no other text.\n"
     "/no_think"
