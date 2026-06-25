@@ -127,8 +127,6 @@ class GrobidClient:
         self.container_name = container_name
         # Set by _submit_to_grobid when [BAD_INPUT_DATA] is detected,
         # so process_fulltext() knows to attempt the pdftoppm+Tesseract fallback.
-        # Set by process_fulltext() when OCR fallback ran but TEI is still garbled.
-        # Checked by graph.py to mark entries from this paper as _ocr_candidate.
         self._last_bad_input: bool = False
 
     def is_alive(self) -> bool:
@@ -253,7 +251,6 @@ class GrobidClient:
             logger.error("PDF file not found: %s", pdf_path)
             return None
 
-        self.last_ocr_degraded = False
         tei = self._submit_to_grobid(pdf_path, include_coordinates)
 
         # ── [BAD_INPUT_DATA] fallback ──
@@ -301,7 +298,6 @@ class GrobidClient:
                 "Using original (garbled) TEI.",
                 pdf_path.name,
             )
-            self.last_ocr_degraded = True
             return tei  # Return garbled TEI — better than nothing
 
         # ── [NO_BLOCKS] fallback ──
@@ -310,21 +306,36 @@ class GrobidClient:
             return tei
 
         ocr_pdf = self._run_ocr(pdf_path, self.ocr_dir)
-        if ocr_pdf is None:
-            logger.error("OCR failed for %s — skipping this paper.", pdf_path.name)
+        if ocr_pdf is not None:
+            tei = self._submit_to_grobid(ocr_pdf, include_coordinates)
+            if tei and not self._is_no_blocks(tei):
+                logger.info("OCR + GROBID succeeded for %s", pdf_path.name)
+                return tei
+            logger.warning(
+                "GROBID still found no text after ocrmypdf for %s — "
+                "trying pdftoppm+Tesseract fallback.",
+                pdf_path.name,
+            )
+
+        # ocrmypdf failed or produced no text — try pdftoppm+Tesseract
+        logger.info("Attempting pdftoppm+Tesseract fallback for %s", pdf_path.name)
+        alt_pdf = self._run_pdftoppm_tesseract(pdf_path)
+        if alt_pdf is None:
+            logger.error("pdftoppm+Tesseract fallback failed for %s — skipping.", pdf_path.name)
             return None
 
-        tei = self._submit_to_grobid(ocr_pdf, include_coordinates)
+        tei = self._submit_to_grobid(alt_pdf, include_coordinates)
         if tei and not self._is_no_blocks(tei):
-            logger.info("OCR + GROBID succeeded for %s", pdf_path.name)
+            logger.info("pdftoppm+Tesseract + GROBID succeeded for %s", pdf_path.name)
             return tei
         else:
             logger.error(
-                "GROBID still found no text after OCR for %s. "
+                "GROBID still found no text after pdftoppm+Tesseract for %s. "
                 "The PDF may be too degraded to process.",
                 pdf_path.name,
             )
-            return None
+            self.last_ocr_degraded = True
+            return tei
 
     def _submit_to_grobid(
         self,
