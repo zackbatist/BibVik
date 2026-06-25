@@ -1263,3 +1263,8 @@ as unconditional.
 llm-prompts.md: OCR merge pairs reference updated to corrections.yaml.
 
 cluster-deployment.md: audit filename and Zotero CSV path updated.
+
+### 2026-06-22 — Fix audit crash
+
+`_sample()` helper missing from `audit.py` — called in `run_audit()`
+but not defined. Added.

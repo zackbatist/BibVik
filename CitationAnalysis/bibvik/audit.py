@@ -40,6 +40,13 @@ DEFAULT_THRESHOLD = 0.70  # Lower than before — token overlap, not sequence ma
 # Public entry point
 # =============================================================================
 
+def _sample(population: list, n: int, rng: random.Random) -> list:
+    """Draw a random sample of size n without replacement."""
+    if len(population) <= n:
+        return list(population)
+    return rng.sample(population, n)
+
+
 def run_audit(
     bibliography: dict[str, dict],
     processed_papers: dict[str, dict],
