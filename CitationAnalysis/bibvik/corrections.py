@@ -239,12 +239,25 @@ def append_draft_corrections(
             })
 
         # Cross-script duplicate candidates
+        # Only generate drafts when at least one entry has a Cyrillic author —
+        # Latin-only pairs are false positives from the transliteration comparison.
         for partner in entry.get("_cross_script_duplicate_candidate", []):
             pair = frozenset([ck, partner])
             if pair in seen_pairs or pair in existing_merge_pairs:
                 continue
             seen_pairs.add(pair)
             partner_entry = bib.get(partner, {})
+
+            def _has_cyrillic(e: dict) -> bool:
+                for a in e.get("author", []):
+                    name = a.get("family", "") + a.get("given", "")
+                    if any("\u0400" <= c <= "\u04ff" for c in name):
+                        return True
+                return False
+
+            if not (_has_cyrillic(entry) or _has_cyrillic(partner_entry)):
+                continue
+
             drafts.append({
                 "action":         "merge",
                 "keep":           ck,

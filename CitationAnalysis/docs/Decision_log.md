@@ -1331,3 +1331,11 @@ removed, project_root=Path(__file__).parent added so corrections.yaml
 is found at the project root. Audit now reads bibliography.json from
 disk rather than from in-memory graph, ensuring postprocess corrections
 are reflected in the report.
+
+### 2026-06-25 — Fix cross-script draft corrections
+
+append_draft_corrections() in corrections.py updated to only generate
+cross-script merge drafts when at least one entry in the pair has a
+Cyrillic author name. Previously firing on any same-author same-year
+pair regardless of script, producing ~4,386 false positives. After fix,
+draft corrections will surface only genuine Cyrillic/Latin variant pairs.
