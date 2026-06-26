@@ -1361,3 +1361,9 @@ Adjacent-citation year absorption flagged: raw citations ending with
 an ALL-CAPS author+year pattern that matches the parsed year, where
 the citation body contains a different year, are flagged
 _year_possibly_absorbed for audit review rather than auto-corrected.
+
+### 2026-06-25 — Auto-backup before postprocess
+
+run.py now copies bibliography.json to bibliography_pre_postprocess.json
+at the start of --postprocess. Removes the need to manually back up
+before each postprocess run.

@@ -617,6 +617,14 @@ def main():
         from bibvik.postprocess import run_postprocess as _run_postprocess
 
         bib_path = output_dir / "bibliography.json"
+
+        # Auto-backup bibliography before postprocess
+        if bib_path.exists():
+            backup_path = output_dir / "bibliography_pre_postprocess.json"
+            import shutil as _shutil
+            _shutil.copy2(bib_path, backup_path)
+            logger.info("Bibliography backed up to %s", backup_path)
+
         counts = _run_postprocess(bib_path, bib_path, llm_config=llm_cfg, project_root=Path(__file__).parent)
         for name, count in counts.items():
             print(f"   {name:<45}  {count}", flush=True)
