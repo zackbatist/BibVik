@@ -922,6 +922,13 @@ class CitationGraph:
                 if header.get("abstract") and not existing.get("abstract"):
                     existing["abstract"] = header["abstract"]
                 existing["_source_pdf"] = pdf_path.name
+                # Upgrade generation if this paper was first encountered as F2
+                # before its own PDF was processed
+                if existing.get("generation") == "F2":
+                    existing["generation"] = "F1"
+                # Ensure seed paper is in cited_by
+                if self.seed_citekey and self.seed_citekey not in existing.get("cited_by", []):
+                    existing.setdefault("cited_by", []).append(self.seed_citekey)
             else:
                 f1_authors = header.get("author", [])
                 f1_year = _extract_year(header.get("date", ""))

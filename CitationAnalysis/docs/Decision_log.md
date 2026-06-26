@@ -1339,3 +1339,12 @@ cross-script merge drafts when at least one entry in the pair has a
 Cyrillic author name. Previously firing on any same-author same-year
 pair regardless of script, producing ~4,386 false positives. After fix,
 draft corrections will surface only genuine Cyrillic/Latin variant pairs.
+
+### 2026-06-25 — Fix F1 generation upgrade
+
+When _match_to_existing() finds an existing entry for an F1 paper,
+the entry's generation was not being upgraded from F2 to F1. 22 F1
+papers were mislabeled F2 because they appeared as citations in other
+papers' bibliographies before their own PDFs were processed. Fixed in
+_process_one_f1(): generation now upgraded to F1 and seed citekey
+added to cited_by when matching to an existing F2 entry.
