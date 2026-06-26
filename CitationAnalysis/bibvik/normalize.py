@@ -449,15 +449,35 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
         if m:
             year_val = m.group(1)
             year_int = int(year_val)
-            # Accept years in a plausible range for academic publications.
-            # Lower bound 1450 (Gutenberg era); upper bound 2030.
-            # Years outside this range are almost certainly GROBID parsing
-            # failures — page numbers, historical dates absorbed from content,
-            # or garbled OCR. Clear the date and year fields for these entries
-            # so they are handled gracefully downstream.
             if 1450 <= year_int <= 2030:
                 entry["date"] = year_val
                 entry["year"] = year_val
+
+                # ── AP: Detect adjacent-citation year absorption ───────────────
+                # GROBID sometimes absorbs a year from an adjacent citation at
+                # the end of the raw string (e.g. "... Lund 2005). ØRSNES 1966")
+                # and assigns it as this entry's year. Signal: raw ends with an
+                # ALL-CAPS author name followed by a year that matches the parsed
+                # year, while an earlier year appears in the citation body.
+                raw = (entry.get("_raw_citation") or "").strip()
+                if raw:
+                    end_pattern = re.search(
+                        r"\b([A-ZÆØÅ]{2,}(?:\s+[A-ZÆØÅ]{2,})?)\s+(\d{4})\s*$",
+                        raw
+                    )
+                    if end_pattern and end_pattern.group(2) == year_val:
+                        # Check if there's an earlier year in the citation body
+                        body = raw[:end_pattern.start()]
+                        body_years = re.findall(r"\b(1[456789]\d{2}|20\d{2})\b", body)
+                        if body_years:
+                            entry["_year_possibly_absorbed"] = True
+                            logger.debug(
+                                "Possible adjacent-citation year absorption: "
+                                "parsed year %s may be from trailing '%s', "
+                                "body contains years %s. Raw: %s",
+                                year_val, end_pattern.group(0).strip(),
+                                body_years, repr(raw[:80]),
+                            )
             else:
                 entry["date"] = ""
                 entry["year"] = ""
@@ -493,6 +513,18 @@ def normalize_entry(entry: dict[str, Any], langid: str = "") -> dict[str, Any]:
             entry["entry_type"] = "article"
         elif booktitle and editors:
             entry["entry_type"] = "incollection"
+
+    # ── Downgrade spurious article entries ────────────────────────────────────
+    # GROBID sometimes assigns entry_type "article" to books, reports, and
+    # other non-journal publications. If an entry is typed as article but has
+    # no journaltitle, no volume, and no issue number, it cannot be identified
+    # as a journal article — reclassify to misc for downstream handling.
+    if entry.get("entry_type") == "article":
+        if (not entry.get("journaltitle", "").strip()
+                and not entry.get("volume", "").strip()
+                and not entry.get("number", "").strip()):
+            entry["entry_type"] = "misc"
+            entry.setdefault("_entry_type_original", "article")
 
     # ── Author/editor given-name cleanup ──────────────────────────────────────
     for role in ("author", "editor"):

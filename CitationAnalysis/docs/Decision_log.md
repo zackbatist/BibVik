@@ -1348,3 +1348,16 @@ papers were mislabeled F2 because they appeared as citations in other
 papers' bibliographies before their own PDFs were processed. Fixed in
 _process_one_f1(): generation now upgraded to F1 and seed citekey
 added to cited_by when matching to an existing F2 entry.
+
+### 2026-06-25 — Fix article reclassification and flag absorbed years
+
+normalize.py updated. Article entries with no journaltitle, volume,
+or number are downgraded to misc at ingestion — these are GROBID
+failures where the entry type was set to article without evidence.
+394 entries in the current bibliography are affected; this takes
+effect on the next rerun.
+
+Adjacent-citation year absorption flagged: raw citations ending with
+an ALL-CAPS author+year pattern that matches the parsed year, where
+the citation body contains a different year, are flagged
+_year_possibly_absorbed for audit review rather than auto-corrected.
