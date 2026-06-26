@@ -633,8 +633,13 @@ def main():
 
         from bibvik.audit import run_audit as _run_audit
 
+        # Read bibliography from disk so postprocess corrections are reflected
+        import json as _json
+        _audit_bib_path = output_dir / "bibliography.json"
+        _bib_for_audit = _json.loads(_audit_bib_path.read_text(encoding="utf-8"))
+
         sample_path = _run_audit(
-            bibliography     = graph.get_bibliography(),
+            bibliography     = _bib_for_audit,
             processed_papers = graph.get_processed_papers(),
             output_dir       = output_dir,
             n                = args.audit_n,
