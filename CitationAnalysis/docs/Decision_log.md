@@ -1322,3 +1322,12 @@ belongs at ingestion time — running it post-hoc in postprocess was
 architecturally wrong and produced redundant flagging. Residual cases
 are handled by corrections.yaml. Author recovery and title recovery
 passes retained.
+
+### 2026-06-25 — Fix run.py stage order and postprocess call
+
+Postprocess stage moved before audit so corrections are applied before
+the audit report is generated. run_postprocess() call fixed: email=email
+removed, project_root=Path(__file__).parent added so corrections.yaml
+is found at the project root. Audit now reads bibliography.json from
+disk rather than from in-memory graph, ensuring postprocess corrections
+are reflected in the report.
