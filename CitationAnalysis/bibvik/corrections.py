@@ -111,6 +111,12 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                 if cb not in bib[keep].get("cited_by", []):
                     bib[keep].setdefault("cited_by", []).append(cb)
 
+            # Remap all cited_by references from discard to keep
+            for entry in bib.values():
+                cb_list = entry.get("cited_by", [])
+                if discard in cb_list:
+                    entry["cited_by"] = [keep if x == discard else x for x in cb_list]
+
             bib[discard]["_deleted"]         = True
             bib[discard]["_merged_into"]     = keep
             bib[discard]["_correction_note"] = note

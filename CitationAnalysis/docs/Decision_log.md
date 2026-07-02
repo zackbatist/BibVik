@@ -1386,3 +1386,12 @@ year, causing all citations extracted from that PDF to be attributed
 to the wrong citekey. Now verifies the matched entry's first author
 surname and year against the PDF header before accepting the match.
 Fixes 208 F2 entries incorrectly attributed to tsigaridasglorstad2012.
+
+### 2026-07-02 — Fix merge cited_by remapping in corrections.py
+
+When a merge correction tombstones the discard entry, any bibliography
+entry that had the discard citekey in its cited_by list would lose that
+edge at export time — the exporter skips tombstoned entries, so edges
+pointing to them are dropped. apply_corrections() now remaps all cited_by
+references from discard to keep across the full bibliography when a merge
+is applied.
