@@ -1367,3 +1367,12 @@ _year_possibly_absorbed for audit review rather than auto-corrected.
 run.py now copies bibliography.json to bibliography_pre_postprocess.json
 at the start of --postprocess. Removes the need to manually back up
 before each postprocess run.
+
+### 2026-07-02 — Fix F1 paper matching in _match_to_existing
+
+_match_to_existing() in graph.py failed to find existing F2 entries
+for F1 papers that were first extracted as citations from another
+paper's bibliography. Added _source_pdf + author+year as a matching
+tier before DOI and title matching. Also skip tombstoned entries in
+the search loop. Fixes 208 F2 entries with no F1 in their cited_by
+and 22 F1 papers mislabeled as F2.

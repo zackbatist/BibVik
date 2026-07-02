@@ -1208,6 +1208,19 @@ class CitationGraph:
         for ck, entry in self.bibliography.items():
             if entry.get("generation") == "P":
                 continue
+            if entry.get("_deleted"):
+                continue
+
+            # Tier 1: source PDF + author+year — catches papers first encountered
+            # as F2 citations before their own PDF was processed
+            if entry.get("_source_pdf") == pdf_name:
+                e_authors = entry.get("author", [])
+                e_year = entry.get("year", "")
+                if h_year and e_year and h_year == e_year and h_authors and e_authors:
+                    h_fam = _norm_author(h_authors[0].get("family", ""))
+                    e_fam = _norm_author(e_authors[0].get("family", ""))
+                    if h_fam and e_fam and h_fam == e_fam:
+                        return ck
 
             # DOI
             e_doi = (entry.get("doi") or "").strip().lower()
