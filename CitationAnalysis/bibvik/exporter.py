@@ -45,6 +45,68 @@ def _safe(val) -> str:
     return str(val)
 
 
+def _build_export_set(bib: dict) -> dict:
+    """
+    Build the dict of entries to export as nodes, plus track which
+    tombstoned entries need to be included as "ghost" nodes because
+    they have outbound citations (they cited other works, even though
+    their own bibliographic record was deleted as unresolvable/merged).
+
+    A bibliography record can be tombstoned (_deleted: True) for two
+    different reasons that must be handled differently on export:
+
+      1. Unresolvable/garbage entry (e.g. no title, no raw citation) —
+         the record itself is junk, but if it was an F1/F2 paper that
+         genuinely cited other works, those citation edges are real
+         and must survive.
+      2. Merged into another entry (_merged_into set) — the citing
+         relationships were already remapped onto the surviving
+         "keep" entry by corrections.py, so this tombstone's own
+         outbound presence would double-count if also kept as a
+         ghost node. These are excluded from ghost-node treatment.
+
+    Returns a dict of citekey -> entry for every node that should
+    appear in the exported graph: all active (non-deleted) entries,
+    plus deleted-but-unmerged entries that appear as a citer
+    somewhere (so their outbound edges have a valid source node).
+    """
+    active = {ck: e for ck, e in bib.items() if not e.get("_deleted")}
+
+    # Citekeys that appear as a citer anywhere in the bibliography.
+    citer_keys: set[str] = set()
+    for entry in bib.values():
+        citer_keys.update(entry.get("cited_by", []))
+
+    export_set = dict(active)
+
+    for ck in citer_keys:
+        if ck in export_set:
+            continue
+        entry = bib.get(ck)
+        if entry is None:
+            # Citekey referenced in a cited_by list but never existed
+            # as a bibliography record at all — genuinely orphaned,
+            # nothing to export it as. Logged, not silently dropped.
+            logger.warning(
+                "cited_by references unknown citekey %r — edge(s) from "
+                "it cannot be exported", ck
+            )
+            continue
+        if entry.get("_merged_into"):
+            # Already remapped onto the keep entry — including this as
+            # a ghost node too would double-count its outbound edges.
+            continue
+        # Tombstoned (deleted, not merged) entry that cited other
+        # works — include as a ghost node so those edges are preserved.
+        export_set[ck] = entry
+
+    return export_set
+
+
+def _is_ghost(entry: dict) -> bool:
+    return bool(entry.get("_deleted"))
+
+
 # ── GraphML export ────────────────────────────────────────────────────────────
 
 GRAPHML_NODE_ATTRS = [
@@ -57,11 +119,16 @@ GRAPHML_NODE_ATTRS = [
     ("completeness","double"),
     ("in_degree",   "int"),
     ("out_degree",  "int"),
+    ("is_ghost",    "boolean"),
 ]
 
 
 def export_graphml(bib: dict, output_path: Path):
-    """Export bibliography as directed GraphML for igraph/Gephi."""
+    """Export bibliography as directed GraphML for igraph/Gephi.
+
+    `bib` should already be the full export set (active + ghost citer
+    entries) as built by _build_export_set — see run_export.
+    """
 
     # Pre-compute degree
     in_degree:  dict[str, int] = {ck: 0 for ck in bib}
@@ -104,6 +171,7 @@ def export_graphml(bib: dict, output_path: Path):
             "completeness": _safe(entry.get("completeness", {}).get("score", "")),
             "in_degree":    str(in_degree.get(ck, 0)),
             "out_degree":   str(out_degree.get(ck, 0)),
+            "is_ghost":     "true" if _is_ghost(entry) else "false",
         }
         for attr, key_id in attr_ids.items():
             data = ET.SubElement(node, "data", key=key_id)
@@ -133,7 +201,11 @@ def export_graphml(bib: dict, output_path: Path):
 # ── GEXF export ───────────────────────────────────────────────────────────────
 
 def export_gexf(bib: dict, output_path: Path):
-    """Export bibliography as directed GEXF for Gephi."""
+    """Export bibliography as directed GEXF for Gephi.
+
+    `bib` should already be the full export set (active + ghost citer
+    entries) as built by _build_export_set — see run_export.
+    """
 
     # Pre-compute degree
     in_degree:  dict[str, int] = {ck: 0 for ck in bib}
@@ -165,6 +237,7 @@ def export_gexf(bib: dict, output_path: Path):
         ("6", "completeness", "float"),
         ("7", "in_degree",    "integer"),
         ("8", "out_degree",   "integer"),
+        ("9", "is_ghost",     "boolean"),
     ]
     for attr_id, name, atype in gexf_attrs:
         ET.SubElement(node_attrs_el, "attribute", {
@@ -187,6 +260,7 @@ def export_gexf(bib: dict, output_path: Path):
             ("6", _safe(entry.get("completeness", {}).get("score", ""))),
             ("7", str(in_degree.get(ck, 0))),
             ("8", str(out_degree.get(ck, 0))),
+            ("9", "true" if _is_ghost(entry) else "false"),
         ]
         for attr_id, val in vals:
             ET.SubElement(attvalues, "attvalue", {"for": attr_id, "value": val})
@@ -216,7 +290,11 @@ def export_gexf(bib: dict, output_path: Path):
 # ── CSV edgelist export ───────────────────────────────────────────────────────
 
 def export_edgelist(bib: dict, output_path: Path):
-    """Export directed edgelist as CSV: source,target"""
+    """Export directed edgelist as CSV: source,target
+
+    `bib` should already be the full export set (active + ghost citer
+    entries) as built by _build_export_set — see run_export.
+    """
     import csv
     edges = []
     for ck, entry in bib.items():
@@ -236,7 +314,11 @@ def export_edgelist(bib: dict, output_path: Path):
 # ── Node table CSV export ─────────────────────────────────────────────────────
 
 def export_node_table(bib: dict, output_path: Path):
-    """Export node attributes as CSV."""
+    """Export node attributes as CSV.
+
+    `bib` should already be the full export set (active + ghost citer
+    entries) as built by _build_export_set — see run_export.
+    """
     import csv
 
     in_degree:  dict[str, int] = {ck: 0 for ck in bib}
@@ -251,6 +333,7 @@ def export_node_table(bib: dict, output_path: Path):
         w = csv.DictWriter(f, fieldnames=[
             "citekey", "title", "year", "generation", "entry_type",
             "first_author", "doi", "completeness", "in_degree", "out_degree",
+            "is_ghost",
         ])
         w.writeheader()
         for ck, entry in bib.items():
@@ -265,6 +348,7 @@ def export_node_table(bib: dict, output_path: Path):
                 "completeness": _safe(entry.get("completeness", {}).get("score", "")),
                 "in_degree":    in_degree.get(ck, 0),
                 "out_degree":   out_degree.get(ck, 0),
+                "is_ghost":     _is_ghost(entry),
             })
 
     logger.info("Node table written to %s  (%d nodes)", output_path, len(bib))
@@ -274,25 +358,39 @@ def export_node_table(bib: dict, output_path: Path):
 # ── Main export function ──────────────────────────────────────────────────────
 
 def run_export(bib: dict, output_dir: Path) -> dict:
-    """Export citation graph to all formats. Returns dict of counts."""
+    """Export citation graph to all formats. Returns dict of counts.
+
+    Builds one export set (active entries + tombstoned-but-unmerged
+    entries that appear as citers) and reuses it across all four
+    export functions, so node/edge counts are consistent between
+    formats. See _build_export_set for why tombstoned citers are
+    included: deleting a bibliography record (e.g. an unresolvable
+    ghost entry) does not mean the paper it represented never cited
+    anything — only that its own metadata is untrustworthy.
+    """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Exclude tombstoned entries (deleted or merged-away)
-    bib = {ck: e for ck, e in bib.items() if not e.get("_deleted")}
+    export_set = _build_export_set(bib)
+    n_ghosts = sum(1 for e in export_set.values() if _is_ghost(e))
+    if n_ghosts:
+        logger.info(
+            "%d tombstoned entries retained as ghost nodes to preserve "
+            "their outbound citation edges", n_ghosts
+        )
 
     results = {}
 
-    n, e = export_graphml(bib, output_dir / "citation_graph.graphml")
+    n, e = export_graphml(export_set, output_dir / "citation_graph.graphml")
     results["graphml"] = {"nodes": n, "edges": e}
 
-    n, e = export_gexf(bib, output_dir / "citation_graph.gexf")
+    n, e = export_gexf(export_set, output_dir / "citation_graph.gexf")
     results["gexf"] = {"nodes": n, "edges": e}
 
-    e = export_edgelist(bib, output_dir / "citation_edgelist.csv")
+    e = export_edgelist(export_set, output_dir / "citation_edgelist.csv")
     results["edgelist"] = {"edges": e}
 
-    n = export_node_table(bib, output_dir / "citation_nodes.csv")
+    n = export_node_table(export_set, output_dir / "citation_nodes.csv")
     results["nodes_csv"] = {"nodes": n}
 
     return results

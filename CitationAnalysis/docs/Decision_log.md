@@ -1395,3 +1395,42 @@ edge at export time — the exporter skips tombstoned entries, so edges
 pointing to them are dropped. apply_corrections() now remaps all cited_by
 references from discard to keep across the full bibliography when a merge
 is applied.
+
+## 2026-07-02 — Export was silently dropping ~1,300 citation edges
+
+**Problem:** Full corpus rerun produced 25,904 edges against a baseline
+of ~27,200+. Initial hypothesis (a bad merge, e.g. hallansstenholm2012
+absorbing many citations) did not hold up under data: total cited_by
+entries across the 63 tombstoned nodes from that run summed to only 78,
+nowhere near enough to explain the gap. Diffing _graph_state.json
+against bibliography.json confirmed corrections.py and postprocess were
+not losing any data (27,286 cited_by entries post-postprocess vs.
+27,253 pre — an increase, not a loss; zero cited_by entries lost from
+any surviving non-deleted node).
+
+**Root cause:** run_export filtered _deleted entries out of the
+bibliography before building edges, then only emitted an edge when
+both endpoints (citer and cited) survived that filter. Five NOAUTHOR
+entries tombstoned as unresolvable garbage records (no title, no raw
+citation — correctly deleted from a data-quality standpoint) were
+nonetheless real papers in the corpus that had cited many other works.
+Deleting their bibliography record silently erased every citation
+edge they contributed as a citer. Confirmed directly: 1,300 orphaned
+cited_by references, all pointing to these 5 (plus similar) tombstoned
+citekeys.
+
+**Decision:** Tombstoning (_deleted: True) means "this record's own
+metadata is untrustworthy," not "this paper's citations to other
+works never happened." The exporter must not conflate the two.
+Tombstoned entries that are not merge-absorbed (no _merged_into) and
+that appear as a citer somewhere in the corpus are now retained as
+flagged "ghost" nodes on export, so their outbound edges resolve to a
+valid graph endpoint. Entries tombstoned via merge are excluded from
+this treatment, since corrections.py already remapped their outbound
+relationships onto the keep entry — including them again would
+double-count.
+
+**Follow-up:** downstream analysis (Quarto k-core/Louvain/etc.) should
+filter on is_ghost == false if community detection should only
+consider legitimate bibliography entries as nodes, while still
+crediting their edges. Not yet applied to
