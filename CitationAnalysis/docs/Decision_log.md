@@ -1376,3 +1376,13 @@ paper's bibliography. Added _source_pdf + author+year as a matching
 tier before DOI and title matching. Also skip tombstoned entries in
 the search loop. Fixes 208 F2 entries with no F1 in their cited_by
 and 22 F1 papers mislabeled as F2.
+
+### 2026-07-02 — Fix Zotero match verification in _match_to_existing
+
+Zotero CSV matching in _match_to_existing() was accepted without
+author+year verification. A PDF named after one author could match
+a bibliography entry for a different author who published in the same
+year, causing all citations extracted from that PDF to be attributed
+to the wrong citekey. Now verifies the matched entry's first author
+surname and year against the PDF header before accepting the match.
+Fixes 208 F2 entries incorrectly attributed to tsigaridasglorstad2012.

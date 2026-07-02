@@ -1193,12 +1193,24 @@ class CitationGraph:
 
     def _match_to_existing(self, header: dict, pdf_name: str) -> str | None:
         """Match an F1 paper's header to an existing bibliography entry."""
-        # Tier 0: Zotero CSV
+        # Tier 0: Zotero CSV — verify match against header author+year
         if self.zotero_map:
             from .zotero_csv import match_pdf_to_bibliography
             m = match_pdf_to_bibliography(pdf_name, self.zotero_map, self.bibliography)
-            if m:
-                return m
+            if m and m in self.bibliography:
+                matched_entry = self.bibliography[m]
+                h_authors_check = header.get("author", [])
+                h_year_check = _extract_year(header.get("date", ""))
+                m_authors = matched_entry.get("author", [])
+                m_year = matched_entry.get("year", "")
+                # Accept if author+year match, or if no header author/year to check
+                if not h_authors_check or not h_year_check:
+                    return m
+                h_fam_check = _norm_author(h_authors_check[0].get("family", ""))
+                m_fam = _norm_author(m_authors[0].get("family", "")) if m_authors else ""
+                if h_fam_check and m_fam and h_fam_check == m_fam and h_year_check == m_year:
+                    return m
+                # Zotero match failed author+year verification — fall through
 
         h_doi = (header.get("doi") or "").strip().lower()
         h_title = _norm_title(header.get("title", ""))
@@ -1210,17 +1222,6 @@ class CitationGraph:
                 continue
             if entry.get("_deleted"):
                 continue
-
-            # Tier 1: source PDF + author+year — catches papers first encountered
-            # as F2 citations before their own PDF was processed
-            if entry.get("_source_pdf") == pdf_name:
-                e_authors = entry.get("author", [])
-                e_year = entry.get("year", "")
-                if h_year and e_year and h_year == e_year and h_authors and e_authors:
-                    h_fam = _norm_author(h_authors[0].get("family", ""))
-                    e_fam = _norm_author(e_authors[0].get("family", ""))
-                    if h_fam and e_fam and h_fam == e_fam:
-                        return ck
 
             # DOI
             e_doi = (entry.get("doi") or "").strip().lower()
