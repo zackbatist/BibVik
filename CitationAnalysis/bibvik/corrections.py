@@ -31,11 +31,103 @@ fill in the note to confirm. Delete the entry to reject.
 
 import json
 import logging
+import re
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 CORRECTIONS_FILENAME = "corrections.yaml"
+
+
+# ── Citekey regeneration ──────────────────────────────────────────────────────
+#
+# generate_citekey() in utils.py relies on a module-level, in-process
+# disambiguation registry (_citekey_registry) that is populated during
+# ingestion (--iterate-f1) and does not persist across runs. It is not
+# available here, and calling it fresh from corrections.py would have no
+# knowledge of which lastnameyear keys already exist in the bibliography —
+# risking a silent collision with a real, unrelated entry. Instead this
+# regenerates a citekey using the same lastnameyear + a/b/c scheme, but
+# checks uniqueness directly against the live bibliography dict.
+
+def _slugify_family(family: str) -> str:
+    """Match utils.generate_citekey's family-name slugification."""
+    from unidecode import unidecode
+    slug = unidecode(family).lower()
+    return re.sub(r"[^a-z]", "", slug)
+
+
+def _disambiguation_suffix(count: int) -> str:
+    """Match utils.generate_citekey's a, b, ..., z, aa, ab, ... suffix scheme."""
+    if count <= 26:
+        return chr(ord("a") + count - 1)
+    first = chr(ord("a") + (count - 27) // 26)
+    second = chr(ord("a") + (count - 27) % 26)
+    return first + second
+
+
+def regenerate_citekey_for_author(bib: dict, old_citekey: str) -> str | None:
+    """
+    Given an entry whose author field was just corrected, regenerate a
+    lastnameyear-style citekey if the entry currently has a NOAUTHOR-style
+    key and now has a usable family name. Returns the new citekey, or None
+    if regeneration isn't applicable (no NOAUTHOR key, or still no usable
+    family name after the correction).
+
+    Does not mutate bib — the caller (apply_corrections) is responsible
+    for performing the rename and remapping cited_by references, since
+    only it knows whether the rename should proceed (e.g. after checking
+    the entry actually exists).
+    """
+    if not old_citekey.startswith("NOAUTHOR"):
+        return None
+
+    entry = bib.get(old_citekey)
+    if entry is None:
+        return None
+
+    authors = entry.get("author", [])
+    if not authors or not authors[0].get("family"):
+        return None
+
+    family = _slugify_family(authors[0]["family"])
+    if not family:
+        return None
+
+    year = str(entry.get("year", "")).strip()[:4]
+    base = f"{family}{year}" if year else f"{family}nd"
+
+    if base not in bib:
+        return base
+
+    # base collides with an existing citekey — disambiguate against
+    # every existing key that starts with base (base, basea, baseb, ...)
+    count = 1
+    while True:
+        candidate = base if count == 1 else f"{base}{_disambiguation_suffix(count - 1)}"
+        if candidate not in bib:
+            return candidate
+        count += 1
+
+
+def _rename_citekey(bib: dict, old_citekey: str, new_citekey: str, note: str) -> None:
+    """
+    Rename a bibliography entry's citekey in place: move the entry to the
+    new key and remap every cited_by reference to the old key across the
+    whole bibliography, so no edges are silently orphaned (same remapping
+    pattern used for merge).
+    """
+    entry = bib.pop(old_citekey)
+    entry["_renamed_from"] = old_citekey
+    entry["_rename_note"] = note
+    bib[new_citekey] = entry
+
+    for other in bib.values():
+        cb_list = other.get("cited_by", [])
+        if old_citekey in cb_list:
+            other["cited_by"] = [new_citekey if x == old_citekey else x for x in cb_list]
+
+    logger.info("Renamed %r to %r", old_citekey, new_citekey)
 
 
 # ── YAML loading ──────────────────────────────────────────────────────────────
@@ -77,7 +169,7 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
     Apply confirmed corrections (those without _draft: true) to the
     bibliography in place. Returns counts: {merge, delete, set, skipped}.
     """
-    counts = {"merge": 0, "delete": 0, "set": 0, "skipped": 0}
+    counts = {"merge": 0, "delete": 0, "set": 0, "skipped": 0, "citekey_regenerated": 0}
 
     for i, corr in enumerate(corrections):
         if corr.get("_draft"):
@@ -100,11 +192,25 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                 counts["skipped"] += 1
                 continue
             if keep not in bib:
-                logger.warning("Correction %d (merge): keep citekey %r not found", i, keep)
+                if keep.startswith("NOAUTHOR"):
+                    logger.warning(
+                        "Correction %d (merge): keep citekey %r not found — if this "
+                        "was renamed by an earlier author-set correction in this same "
+                        "run, update this correction to use the new citekey", i, keep
+                    )
+                else:
+                    logger.warning("Correction %d (merge): keep citekey %r not found", i, keep)
                 counts["skipped"] += 1
                 continue
             if discard not in bib:
-                logger.debug("Correction %d (merge): discard %r already absent", i, discard)
+                if discard.startswith("NOAUTHOR"):
+                    logger.warning(
+                        "Correction %d (merge): discard citekey %r not found — if this "
+                        "was renamed by an earlier author-set correction in this same "
+                        "run, update this correction to use the new citekey", i, discard
+                    )
+                else:
+                    logger.debug("Correction %d (merge): discard %r already absent", i, discard)
                 continue
 
             for cb in bib[discard].get("cited_by", []):
@@ -165,6 +271,21 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
 
             logger.info("Set %r.%s", citekey, field)
             counts["set"] += 1
+
+            # If this set corrected the author field on a NOAUTHOR entry,
+            # regenerate its citekey so it stops being stuck as NOAUTHOR*
+            # forever. Must happen after the field is set (regeneration
+            # reads the new author value) and must remap cited_by
+            # references, since other entries may already point at the
+            # old citekey.
+            if field == "author":
+                new_citekey = regenerate_citekey_for_author(bib, citekey)
+                if new_citekey:
+                    _rename_citekey(
+                        bib, citekey, new_citekey,
+                        note=f"Citekey regenerated after author correction: {note}",
+                    )
+                    counts["citekey_regenerated"] = counts.get("citekey_regenerated", 0) + 1
 
         else:
             logger.warning("Correction %d: unknown action %r", i, action)
@@ -331,7 +452,7 @@ def run_corrections(bib_path: Path, project_root: Path | None = None) -> dict:
     corrections = load_yaml(corrections_path)
 
     if not corrections:
-        return {"merge": 0, "delete": 0, "set": 0, "skipped": 0}
+        return {"merge": 0, "delete": 0, "set": 0, "skipped": 0, "citekey_regenerated": 0}
 
     counts = apply_corrections(bib, corrections)
     bib_path.write_text(json.dumps(bib, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -347,4 +468,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     counts = run_corrections(Path(args.bib), Path(args.root))
     print(f"merge={counts['merge']}  delete={counts['delete']}  "
-          f"set={counts['set']}  skipped={counts['skipped']}")
+          f"set={counts['set']}  skipped={counts['skipped']}  "
+          f"citekey_regenerated={counts['citekey_regenerated']}")

@@ -1433,4 +1433,37 @@ double-count.
 **Follow-up:** downstream analysis (Quarto k-core/Louvain/etc.) should
 filter on is_ghost == false if community detection should only
 consider legitimate bibliography entries as nodes, while still
-crediting their edges. Not yet applied to
+crediting their edges. Not yet applied to architecture.qmd — needs a
+follow-up pass through the analysis document.
+
+## 2026-07-02 — NOAUTHOR citekeys now regenerate after author is set (AQ)
+
+**Problem:** `set` corrections on the author field (e.g. NOAUTHOR83 →
+Ryan) updated the field value but left the citekey unchanged, since
+citekeys are only generated once at ingestion time in
+utils.generate_citekey(). Entries stayed NOAUTHOR* permanently even
+after their author was correctly identified.
+
+**Why not just call generate_citekey():** it depends on a module-level
+registry (_citekey_registry) that tracks disambiguation counts and is
+populated during --iterate-f1. That registry does not persist between
+runs and is empty when corrections.py runs during --postprocess.
+Calling it fresh would silently risk colliding with an existing,
+unrelated lastnameyear key already in the bibliography.
+
+**Decision:** implemented a separate regeneration path in
+corrections.py that mirrors generate_citekey's naming scheme
+(lastnameyear, with a/b/c disambiguation) but checks uniqueness
+directly against the live bibliography dict rather than an in-memory
+registry. Triggered automatically whenever a `set` correction targets
+the author field on an entry whose citekey currently starts with
+NOAUTHOR. The rename remaps cited_by references across the whole
+bibliography using the same pattern as merge, so this doesn't
+reintroduce the orphaned-edge bug just fixed in exporter.py.
+
+**Known limitation:** if a corrections.yaml file contains both a `set`
+(author) and a `merge` referencing the same NOAUTHOR citekey, ordering
+matters — the merge must come before the set, or it will fail to find
+the citekey after it's been renamed. Not an issue with current
+corrections.yaml content (NOAUTHOR83/974/etc. are set-only, not merge
+targets), but flagged with a warning if it ever occurs.
