@@ -286,6 +286,24 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
     forms with the most complete one, but only where we can be confident
     it's the same person (same family name + overlapping given-name prefix).
 
+    Do not collapse different people who share a family name — use year/
+    title context as a guard.
+
+    Guard against false collapses:
+        Matching on initial-letter prefix alone is not sufficient — two
+        different people can share both a family name and the same set of
+        given-name initials (e.g. "Hanne Lovise" and "Henrik Larsen" both
+        reduce to the prefix "hl"). Before treating two given-name forms as
+        the same person, we additionally require that they are compatible
+        at the full-word level: either one form is a pure set of initials
+        (e.g. "H.L.", "H L", "H"), which is unambiguous shorthand for any
+        expansion, or the full first words of both forms are themselves a
+        prefix match (e.g. "Søren" and "Søren Michael" are compatible;
+        "Hanne" and "Henrik" are not, even though both start with "H").
+        This preserves the intended behavior (unifying "S." / "Søren
+        Michael" for the same author) while refusing to merge genuinely
+        different people who happen to share initials.
+
     Returns the number of author records changed.
     """
     # --- Pass 1: Build a registry of best known given-name forms per family name ---
@@ -299,6 +317,37 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
         # Convert "Hanne Lovise" → "hl", "H L" → "hl", "H." → "h"
         parts = re.split(r"[\s.]+", s.strip())
         return "".join(p[0].lower() for p in parts if p)
+
+    def _is_pure_initials(s: str) -> bool:
+        """True if every word in s is a single letter (with optional period),
+        e.g. "H.L.", "H L", "H." — unambiguous shorthand that can't conflict
+        with any full given name sharing the same initials."""
+        parts = re.split(r"[\s.]+", s.strip())
+        parts = [p for p in parts if p]
+        return bool(parts) and all(len(p) == 1 for p in parts)
+
+    def _first_words_compatible(a: str, b: str) -> bool:
+        """True if the first full word of each given-name form is mutually
+        prefix-compatible (e.g. "Søren" vs "Sørens", or an exact match).
+        This is the actual corroborating signal that two abbreviated/full
+        forms plausibly refer to the same first name, as opposed to two
+        different first names that merely share an initial."""
+        a_words = re.split(r"[\s.]+", a.strip())
+        b_words = re.split(r"[\s.]+", b.strip())
+        a_first = a_words[0].lower() if a_words and a_words[0] else ""
+        b_first = b_words[0].lower() if b_words and b_words[0] else ""
+        if not a_first or not b_first:
+            return False
+        return a_first.startswith(b_first) or b_first.startswith(a_first)
+
+    def _same_person(given_a: str, given_b: str) -> bool:
+        """Corroborated same-person check: prefix overlap is necessary but
+        not sufficient. At least one side must be pure initials (safe to
+        expand regardless of the other's full form), or the full first
+        words must themselves be compatible."""
+        if _is_pure_initials(given_a) or _is_pure_initials(given_b):
+            return True
+        return _first_words_compatible(given_a, given_b)
 
     # Build: family_norm → list of (given_norm_prefix, full_given_string, length_score)
     registry: dict[str, list[tuple[str, str, int]]] = {}
@@ -320,7 +369,8 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
                 registry[fam_key].append((giv_prefix, given, length_score))
 
     # For each family name, find the best (most complete) given form per prefix group.
-    # Two given forms belong to the same person if one prefix is a prefix of the other.
+    # Two given forms belong to the same person if one prefix is a prefix of the
+    # other AND they pass the _same_person corroboration check above.
     best_given: dict[tuple[str, str], str] = {}  # (fam_key, giv_prefix) → best given
 
     for fam_key, records in registry.items():
@@ -335,8 +385,12 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
                 if existing_prefix[0] != fam_key:
                     continue
                 ep = existing_prefix[1]
-                # Same person if one prefix is a prefix of the other.
-                if ep.startswith(giv_prefix) or giv_prefix.startswith(ep):
+                existing_given = best_given[existing_prefix]
+                # Same person if one prefix is a prefix of the other AND
+                # the corroboration check passes — prefix overlap alone is
+                # not sufficient (see _same_person docstring above).
+                if (ep.startswith(giv_prefix) or giv_prefix.startswith(ep)) \
+                        and _same_person(given, existing_given):
                     # Keep whichever is longer (already in best_given because
                     # we sorted by length descending, so the existing is better
                     # or equal — only update if new is longer).
@@ -366,11 +420,15 @@ def normalize_authors_in_bibliography(bibliography: dict[str, dict]) -> int:
                 giv_prefix = _norm_given(given)
 
                 # Look up the best known given name for this person.
+                # As in Pass 1, prefix overlap alone is not sufficient —
+                # require the corroboration check before treating a
+                # candidate "best" form as the same person.
                 best = None
                 for (fk, gp), best_g in best_given.items():
                     if fk != fam_key:
                         continue
-                    if gp.startswith(giv_prefix) or giv_prefix.startswith(gp):
+                    if (gp.startswith(giv_prefix) or giv_prefix.startswith(gp)) \
+                            and _same_person(given, best_g):
                         if best is None or len(re.sub(r"\s+", "", best_g)) > len(re.sub(r"\s+", "", best)):
                             best = best_g
 

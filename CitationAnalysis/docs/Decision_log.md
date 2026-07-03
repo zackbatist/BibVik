@@ -1517,3 +1517,38 @@ self.grobid.ocr_dir as the second argument. Prompted a full AST sweep
 for the same call-site arity-mismatch pattern across every
 @staticmethod in the codebase; found one further instance
 (grobid_client.py, see companion log entry), no others.
+
+## 2026-07-02 — Author given-name normalization could silently conflate different people (AV)
+
+**Problem:** found during a full codebase audit. normalize.py's
+normalize_authors_in_bibliography treated two authors sharing a family
+name as the same person whenever their given-name initials overlapped
+as a prefix — with no further corroboration, despite the function's
+own docstring promising one. Confirmed the failure mode is real by
+running the function against a minimal test case: "Hanne Lovise" and
+"Henrik Larsen" (same family name, both reduce to initial prefix "hl")
+were merged, with one silently overwritten to the other's full name.
+
+**Verification before fixing:** ran a heuristic diagnostic against the
+live bibliography.json (10,716 family names) to check whether this had
+already produced a real corruption. Found zero suspicious collisions —
+every existing same-family, same-initial-prefix pair in the current
+data appears to genuinely be the same person. No remediation of
+existing data was needed. This does not rule out subtler cases the
+heuristic can't catch (e.g. two different people sharing the same
+first name exactly, differing only in a second/middle name), but no
+evidence of harm was found.
+
+**Decision:** rather than disabling the feature (it correctly unifies
+"S." and "Søren Michael" for the same author across entries, which is
+useful) or requiring exact given-name equality (which would break that
+same legitimate case), added a corroboration check: a merge is now
+only allowed if one side is pure initials, or if the two forms' full
+first words are themselves prefix-compatible. This closes the "Hanne
+Lovise"/"Henrik Larsen" gap while preserving every legitimate merge
+pattern tested.
+
+**Status:** fixed, tested against four cases (one bug reproduction,
+two legitimate merges, one adjacent edge case), all behaving as
+intended. No backfill/remediation needed since no live data was found
+to be affected.
