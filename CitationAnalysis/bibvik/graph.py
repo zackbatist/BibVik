@@ -79,92 +79,6 @@ def _transliterate_author(name: str) -> str:
     return result
 
 
-def _split_compound_entry(ref: dict, llm_config: dict) -> list[dict] | None:
-    """
-    Ask the LLM to split a compound citation entry into individual references.
-    Returns a list of entry dicts if splitting succeeded, None otherwise.
-    Called inline during graph construction for entries flagged _possibly_compound.
-    """
-    import json as _json
-    import requests as _requests
-    import re as _re
-
-    raw = ref.get("_raw_citation", "")
-    if not raw:
-        return None
-
-    prompt = (
-        "You are an expert bibliographer. The following string contains multiple "
-        "bibliographic references merged together. Split them into individual references "
-        "and return a JSON array of objects, each with keys: "
-        "first_author_family, first_author_given, year, title, container_title, entry_type.\n\n"
-        f"String: {raw}\n\n"
-        "Respond ONLY with a JSON array. /no_think"
-    )
-
-    try:
-        base_url = llm_config.get("base_url", "http://localhost:11434")
-        model    = llm_config.get("model", "qwen2.5:7b")
-        timeout  = llm_config.get("timeout", 60)
-        backend  = llm_config.get("backend", "ollama")
-
-        if backend == "ollama":
-            resp = _requests.post(
-                f"{base_url}/api/generate",
-                json={"model": model, "prompt": prompt, "stream": False,
-                      "think": False, "options": {"temperature": 0.1, "num_predict": 512}},
-                timeout=timeout,
-            )
-            raw_resp = resp.json().get("response", "").strip()
-        else:
-            resp = _requests.post(
-                f"{base_url}/v1/chat/completions",
-                json={"model": model, "messages": [{"role": "user", "content": prompt}],
-                      "stream": False, "temperature": 0.1, "max_tokens": 512},
-                timeout=timeout,
-            )
-            raw_resp = resp.json()["choices"][0]["message"]["content"].strip()
-
-        raw_resp = _re.sub(r"<think>[\s\S]*?</think>", "", raw_resp).strip()
-        m = _re.search(r"\[[\s\S]*\]", raw_resp)
-        if not m:
-            return None
-        parsed = _json.loads(m.group(0))
-
-        if not isinstance(parsed, list) or len(parsed) < 2:
-            return None
-
-        entries = []
-        for item in parsed:
-            if not isinstance(item, dict):
-                continue
-            family = item.get("first_author_family", "")
-            given  = item.get("first_author_given", "")
-            if not family:
-                continue
-            entry = {
-                "author":      [{"family": family, "given": given}],
-                "date":        str(item.get("year", "")),
-                "year":        str(item.get("year", ""))[:4],
-                "title":       item.get("title", ""),
-                "entry_type":  item.get("entry_type", "misc"),
-                "_raw_citation": raw,
-                "_split_from": ref.get("citekey", ""),
-            }
-            ct = item.get("container_title", "")
-            if ct:
-                if entry["entry_type"] == "article":
-                    entry["journaltitle"] = ct
-                else:
-                    entry["booktitle"] = ct
-            entries.append(entry)
-
-        return entries if entries else None
-
-    except Exception:
-        return None
-
-
 # Known lowercase particles that legitimately begin author surnames.
 # Used by _is_reconstructible to avoid false-positives on entries like
 # "von Carnap-Bornheim" or "de Vries".
@@ -454,12 +368,6 @@ class CitationGraph:
 
         # Add GROBID bibliography entries as F1
         for ref in grobid_refs:
-            authors = ref.get("author", [])
-            editors = ref.get("editor", [])
-            year = _extract_year(ref.get("date", ""))
-            citekey = generate_citekey(authors, year, editors=editors)
-
-            ref["citekey"] = citekey
             ref["generation"] = "F1"
             ref["cited_by"] = [self.seed_citekey]
             ref["_source_pdf"] = pdf_path.name
@@ -467,9 +375,19 @@ class CitationGraph:
 
             # Skip entries that cannot be reconstructed as a minimal citation.
             # Unconditional — empty GROBID entries should never enter the
-            # bibliography regardless of LLM availability.
+            # bibliography regardless of LLM availability. Checked before
+            # citekey generation so rejected entries don't consume a
+            # disambiguation slot in the citekey registry (a slot consumed
+            # by a discarded entry would leave a permanent gap in a later,
+            # real entry's a/b/c suffix numbering).
             if not _is_reconstructible(ref):
                 continue
+
+            authors = ref.get("author", [])
+            editors = ref.get("editor", [])
+            year = _extract_year(ref.get("date", ""))
+            citekey = generate_citekey(authors, year, editors=editors)
+            ref["citekey"] = citekey
 
             existing = self._find_duplicate(ref)
             if existing:
@@ -950,12 +868,6 @@ class CitationGraph:
 
             # Add GROBID refs as F2
             for ref in grobid_refs:
-                authors = ref.get("author", [])
-                editors = ref.get("editor", [])
-                year = _extract_year(ref.get("date", ""))
-                citekey = generate_citekey(authors, year, editors=editors)
-
-                ref["citekey"] = citekey
                 ref["generation"] = "F2"
                 ref["cited_by"] = [f1_citekey]
                 ref["_source_pdf"] = pdf_path.name
@@ -965,42 +877,37 @@ class CitationGraph:
                 # This check is unconditional — a completely empty GROBID entry
                 # should never enter the bibliography regardless of LLM availability.
                 # When an LLM is configured, Method 6 will recover any legitimate
-                # reference from the raw reference div text.
+                # reference from the raw reference div text. Checked before citekey
+                # generation so rejected entries don't consume a disambiguation
+                # slot in the citekey registry.
                 if not _is_reconstructible(ref):
                     continue
 
-                # Inline compound citation splitting — if GROBID flagged this
-                # entry as possibly compound and we have an LLM, split it now
-                # so the resulting entries participate in deduplication
-                refs_to_add = [ref]
-                if ref.get("_possibly_compound") and ref.get("_raw_citation") and llm_config:
-                    split = _split_compound_entry(ref, llm_config)
-                    if split:
-                        refs_to_add = split
+                authors = ref.get("author", [])
+                editors = ref.get("editor", [])
+                year = _extract_year(ref.get("date", ""))
+                citekey = generate_citekey(authors, year, editors=editors)
+                ref["citekey"] = citekey
 
-                for r in refs_to_add:
-                    if r is not ref:
-                        # Assign citekey, generation etc to split entries
-                        r_authors = r.get("author", [])
-                        r_editors = r.get("editor", [])
-                        r_year = _extract_year(r.get("date", ""))
-                        r["citekey"] = generate_citekey(r_authors, r_year, editors=r_editors)
-                        r["generation"] = "F2"
-                        r["cited_by"] = [f1_citekey]
-                        r["_source_pdf"] = pdf_path.name
-                        r = normalize_entry(r)
-
-                    existing = self._find_duplicate(r)
-                    if existing:
-                        self._merge_into(existing, r)
-                    else:
-                        self.bibliography[r["citekey"]] = r
-                        if llm_config and llm_config.get("_email"):
-                            _enrich_entry(r, email=llm_config["_email"])
+                # Compound citation splitting for GROBID entries that merge
+                # multiple references together is handled earlier, at parse
+                # time in tei_parser.py (regex, dash-year and author-boundary
+                # detection) and by Method 6 (LLM raw-text re-parse) — see
+                # docs/methods/deduplication-normalisation.md. An LLM-based
+                # inline splitting step used to run here as well, gated on
+                # a _possibly_compound flag that was never actually set
+                # anywhere in the codebase; that dead branch has been removed.
+                existing = self._find_duplicate(ref)
+                if existing:
+                    self._merge_into(existing, ref)
+                else:
+                    self.bibliography[ref["citekey"]] = ref
+                    if llm_config and llm_config.get("_email"):
+                        _enrich_entry(ref, email=llm_config["_email"])
 
                     gid = ref.get("_grobid_id", "")
-                    if gid and r is ref:
-                        self.grobid_map[(pdf_path.name, gid)] = r["citekey"]
+                    if gid:
+                        self.grobid_map[(pdf_path.name, gid)] = ref["citekey"]
 
         # ── Detection ────────────────────────────────────────────────────────
         _fire("llm_body_start")
