@@ -206,22 +206,27 @@ existing fields are never overwritten. See `docs/methods/resolver.md`.
 
 `--postprocess` runs as follows:
 
-1. **Pass 0: Corrections** — applies `corrections.yaml` (merge, delete, set)
+1. **Pass 0: Corrections** — applies `corrections.yaml` (merge, delete, set, split)
 2. **Pass 1: Entry type reclassification** — uses enriched fields to correct
    types, with guards against false reclassification
-3. **Pass 2: Near-duplicate resolution** — LLM resolves title-rich pairs with
-   ≥70% overlap; unresolved pairs become draft merge candidates
-4. **Pass 3: Author recovery** — LLM extracts authors from raw citation strings
+3. **Pass 2: Author recovery** — LLM extracts authors from raw citation strings
    for NOAUTHOR entries; failures become draft set candidates
+4. **Pass 3: Title recovery** — LLM extracts titles from raw citation strings
+   for entries missing one
 5. **Draft corrections** — pipeline flags appended to `corrections.yaml` as
    `_draft: true` for researcher review
+
+Near-duplicate resolution as a standalone LLM pass (`flag_near_duplicates()`
+in `postprocess.py`) exists in the codebase but is not currently wired into
+the `--postprocess` pipeline — deduplication is handled at creation time
+during graph construction instead (see `docs/methods/deduplication-normalisation.md`).
 
 # Corrections
 
 `corrections.yaml` in the project root is the single file for all manual
-bibliography curation. Three action types: merge, delete, set. Notes required
-on all confirmed entries. Pipeline-generated drafts (`_draft: true`) are
-appended after each `--postprocess` run. See `docs/methods/corrections-system.md`.
+bibliography curation. Four action types: merge, delete, set, split. Notes
+required on all confirmed entries. Pipeline-generated drafts (`_draft: true`)
+are appended after each `--postprocess` run. See `docs/methods/corrections-system.md`.
 
 # Completeness Scoring
 
@@ -238,7 +243,11 @@ actions go in `corrections.yaml`. See `docs/methods/audit-sampling.md`.
 # Export
 
 `--export` produces four output files via `exporter.py`. Tombstoned entries
-(deleted or merged-away) are excluded.
+are excluded as nodes, with one exception: an entry deleted (not merged) that
+appears as a citer elsewhere is retained as a flagged "ghost" node so its
+outbound citation edges are not lost on export. Entries tombstoned via merge
+are fully excluded, since their outbound relationships were already remapped
+onto the surviving entry during the merge itself.
 
 - `citation_graph.graphml` — for R/igraph
 - `citation_graph.gexf` — for Gephi

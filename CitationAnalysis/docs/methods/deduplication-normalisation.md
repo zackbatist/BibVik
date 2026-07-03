@@ -68,6 +68,15 @@ later in `--postprocess`.
 **Author normalisation** standardises given-name forms: initials are formatted
 consistently, and corpus-wide given-name expansion (preferring the longest seen
 form for each family name) runs at save time via `normalize_authors_in_bibliography()`.
+Two given-name forms are only treated as the same person if, beyond sharing an
+initial-letter prefix, they are additionally corroborated: either one form is
+pure initials (unambiguous shorthand, safe to expand regardless of the other's
+full form), or the two forms' full first words are themselves prefix-compatible.
+This guards against collapsing two different people who happen to share a
+family name and the same initials — e.g. "Hanne Lovise" and "Henrik Larsen"
+both reduce to the initial-prefix "HL" but are not treated as the same person,
+since neither is pure initials and their first words ("Hanne" vs. "Henrik")
+are not compatible.
 
 ---
 
@@ -88,17 +97,25 @@ whitespace collapsed), the entries are considered identical.
 
 **Author + year + fuzzy title match.** If the year and normalised first-author
 family name match, and both entries have titles with at least 60% token overlap,
-the entries are considered identical. If either entry lacks a title, author and
-year alone are treated as sufficient.
+the entries are considered identical. If exactly one entry has a title, author
+and year alone are treated as sufficient — the title only fills a metadata gap,
+it doesn't need to adjudicate between two candidate identities. If *neither*
+entry has a title, the match is not made automatically: author and year alone
+are not enough corroboration, since the same author publishing multiple works
+in a single year is a common, unremarkable pattern. Instead the existing entry
+is flagged with `_titleless_duplicate_candidate` for audit review, following
+the same caution already applied to cross-script pairs with differing titles.
 
 **Cross-script match.** If the year matches and the transliterated first-author
 family names match (Cyrillic → Latin via `_transliterate_author()` in
 `bibvik/graph.py`), the entries are considered candidate duplicates. If their
-titles also have ≥50% token overlap, or both lack titles, the entries are merged.
-If titles differ despite matching transliterated authors and year, the existing
-entry is flagged with `_cross_script_duplicate_candidate` for audit review —
-automatic merging is not performed in this case because the works may be
-genuinely distinct.
+titles also have ≥50% token overlap, or exactly one entry has a title, the
+entries are merged automatically. If titles differ despite matching
+transliterated authors and year, or if *both* entries lack a title, the
+existing entry is flagged with `_cross_script_duplicate_candidate` for audit
+review instead — automatic merging is not performed in either case, since
+the works may be genuinely distinct and there is no title to corroborate
+either way.
 
 Transliteration uses the `domovyk` library, which implements the ALA-LC
 Romanization tables — the standard used by North American libraries, the British
@@ -171,6 +188,18 @@ year. Collisions (same author and year) receive lowercase letter suffixes:
 Citekeys are stable within a run but not guaranteed stable across runs in
 parallel mode, since processing order is non-deterministic. Treat citekeys as
 internal identifiers, not persistent external references.
+
+Citekeys can also be regenerated after ingestion, via `corrections.yaml`.
+Whenever a `set` correction changes an entry's `author` field, the pipeline
+checks whether the current citekey still matches what the corrected author
+would produce (same `familynameyear` logic, checked against the live
+bibliography rather than the in-process registry). If it no longer matches —
+whether because the entry originally had no author (`NOAUTHOR*` citekeys) or
+because it had an incorrect one — the entry is renamed and every other
+entry's `cited_by` references are remapped to the new citekey. An entry whose
+citekey already matches its (corrected) author, including one carrying a
+valid disambiguation suffix, is left unchanged. See
+`docs/methods/corrections-system.md`.
 
 ---
 

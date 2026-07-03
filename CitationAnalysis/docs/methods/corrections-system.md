@@ -66,6 +66,50 @@ CrossRef cannot overwrite a manually corrected value.
          DOI 10.1017/S0003598X00094734."
 ```
 
+If a `set` correction changes the `author` field and the entry's citekey no
+longer matches the corrected author, the citekey is automatically regenerated
+and every `cited_by` reference to it elsewhere in the bibliography is remapped
+to the new citekey. See [Citekey generation](deduplication-normalisation.md)
+for the exact matching rule.
+
+### split
+
+An entry was incorrectly merged and needs to be separated back into two or
+more entries — for example, two different people sharing a family name and
+initials, wrongly combined by the duplicate-detection heuristics. The
+original entry is tombstoned (`_deleted: true`, `_split_into: [new_citekey, ...]`)
+rather than removed, consistent with merge and delete.
+
+```yaml
+- action: split
+  citekey: jorgensennorgard1997
+  into:
+    - citekey: jorgensen1997
+      author:
+        - family: Jørgensen
+          given: Lars
+      citers: [baastrup2014, hilberg2018]
+    - citekey: norgardjorgensen1997
+      author:
+        - family: Nørgård Jørgensen
+          given: A.
+      citers: [iversen2015, lemm2014]
+  note: "Two different works by different authors were wrongly merged under
+         one citekey. Citing papers checked individually to determine which
+         citations belong to which author."
+```
+
+`into[].citers` is required on every item and must be listed explicitly — the
+pipeline cannot infer which citing paper meant which person, this requires a
+reviewer to have actually checked the citing papers' reference-list context.
+The union of every `citers` list across all `into` items must exactly equal
+the original entry's `cited_by` list. Any citekey that's missing, duplicated,
+or doesn't belong causes the entire split to be refused (logged as an error,
+no partial changes made) rather than silently dropping or double-counting a
+citation edge. Fields other than `citekey` and `citers` on an `into` item
+(e.g. `author`, `title`) are set on the target entry, whether it's newly
+created or already exists.
+
 ---
 
 ## Workflow
@@ -98,7 +142,8 @@ To reject: delete the entry.
 | Source | Flag in bibliography | Draft action |
 |---|---|---|
 | Near-duplicate pairs (LLM inconclusive) | `_near_duplicate_candidate` | `merge` |
-| Cross-script pairs (title overlap insufficient) | `_cross_script_duplicate_candidate` | `merge` |
+| Cross-script pairs (title overlap insufficient, or both titleless) | `_cross_script_duplicate_candidate` | `merge` |
+| Same author+year, both entries titleless | `_titleless_duplicate_candidate` | `merge` (confidence 0.3 — weakest evidence tier; includes both sides' `_raw_citation` since no title is available to compare) |
 | Failed NOAUTHOR author recovery | `_author_recovery_failed` | `set` (author field, value blank) |
 | Alternate OCR candidate still unresolved | `_ocr_candidate` | `delete` |
 
@@ -120,6 +165,21 @@ OCR merge pairs verified against the bibliography and recorded in
 ## Tombstoning
 
 Deleted and merged-away entries are never removed from `bibliography.json`.
-They retain `_deleted: true` (and `_merged_into: citekey` for merges).
-This preserves citation link history. Exporters and graph analysis skip
-tombstoned entries.
+They retain `_deleted: true` (`_merged_into: citekey` for merges,
+`_split_into: [citekey, ...]` for splits). This preserves citation link
+history.
+
+Export (`exporter.py`) treats tombstoned entries differently depending on
+why they were tombstoned. Entries tombstoned via `merge` are fully excluded
+from the exported graph — their outbound citation relationships were already
+remapped onto the surviving `keep` entry during the merge, so nothing is
+lost by dropping the tombstone itself. Entries tombstoned via `delete` are
+excluded as a *node* — the record's own metadata is being discarded as
+unreliable — but if the entry appears as a citer anywhere in the corpus
+(i.e. it genuinely cited other works, even though its own bibliographic
+record is garbage), it is retained as a flagged "ghost" node so those
+outbound edges are not silently lost. A `delete` correction should be
+understood as "this record's own metadata cannot be trusted," not "this
+paper's citations to other works never happened" — those are two different
+claims, and only the exporter's ghost-node handling keeps them from being
+conflated.

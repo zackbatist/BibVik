@@ -1713,3 +1713,33 @@ logic's behavior is checkable at all.
 **Fix:** one-line change, default corrected to 0.70 to match audit.py.
 No judgment call involved — audit.py's comment already states the
 intended value, this just makes the CLI actually deliver it.
+
+## 2026-07-02 — Documentation updated to match this session's fixes
+
+**Problem:** three documentation files (architecture.qmd,
+deduplication-normalisation.md, corrections-system.md) contained
+claims that no longer matched actual pipeline behavior after this
+session's fixes (exporter ghost-nodes, AV's corroboration guard, AW's
+titleless-duplicate flagging, the new split action, AQ's broadened
+citekey regeneration). One additional pre-existing documentation bug
+was found in the process: architecture.qmd described a "near-duplicate
+resolution" pass as an active part of --postprocess, but the function
+it describes (flag_near_duplicates in postprocess.py) is dead code,
+never wired into PASSES — this predates today's session and wasn't
+something today's changes caused, just something the update pass
+happened to surface.
+
+**Decision:** updated all three files to describe actual current
+behavior rather than intended-but-superseded behavior, added
+documentation for the new split action and the AV/AQ changes, and
+flagged the dead near-duplicate pass explicitly in the text rather
+than silently removing the claim (so a future reader isn't left
+wondering whether the feature was removed or never existed).
+
+**Not touched:** README.md and the remaining docs/methods/*.md files
+(citation-detection.md, audit-sampling.md, data-capture.md,
+llm-prompts.md, resolver.md, grobid-configuration.md) and
+cluster-deployment.md were not reviewed for staleness in this pass —
+worth a check if there's reason to think they reference merge/dedup/
+corrections behavior in detail, but they weren't flagged by the grep
+sweep for the specific claims this session's fixes touched.
