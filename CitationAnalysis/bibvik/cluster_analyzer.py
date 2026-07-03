@@ -433,8 +433,9 @@ def _build_contexts_text(
 
     # Limit to 10 contexts to keep prompt manageable.
     if len(parts) > 10:
+        total = len(parts)
         parts = parts[:10]
-        parts.append(f"... and {len(parts) - 10} more contexts.")
+        parts.append(f"... and {total - 10} more contexts.")
 
     return "\n".join(parts)
 
