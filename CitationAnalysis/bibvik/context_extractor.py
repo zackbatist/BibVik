@@ -184,12 +184,14 @@ def extract_all_contexts(
                             break
 
                     if citing_entry is None:
-                        # Determine the generation of this citation link.
+                        # This record describes the citing paper, so its
+                        # generation field should be the citer's generation —
+                        # not the cited work's own (already available one
+                        # level up via bib_entry itself).
                         citing_gen = bibliography.get(citing_citekey, {}).get("generation", "")
-                        cited_gen = bib_entry.get("generation", "")
                         citing_entry = {
                             "citekey": citing_citekey,
-                            "generation": cited_gen,
+                            "generation": citing_gen,
                             "contexts": [],
                         }
                         bib_entry["cited_by"].append(citing_entry)
