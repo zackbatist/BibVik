@@ -5,7 +5,15 @@ One file: corrections.yaml in the project root.
 
 The pipeline appends draft candidates (marked _draft: true) after each
 --postprocess run. The researcher reviews, removes _draft: true to confirm,
-and deletes rejected entries. Confirmed entries are applied on the next run.
+or uses the `reject` action to permanently dismiss a draft (see below).
+
+IMPORTANT: simply deleting a draft entry from this file does NOT
+permanently reject it. The underlying flag (_near_duplicate_candidate,
+_cross_script_duplicate_candidate, _titleless_duplicate_candidate, etc.)
+lives on the bibliography entry itself, not in this file — if the flag
+is still present next time --postprocess runs, append_draft_corrections
+will regenerate the same draft again. Use the `reject` action to suppress
+regeneration permanently.
 
 Actions:
 
@@ -23,6 +31,23 @@ Actions:
       field: author
       value: [{family: Sindbæk, given: Søren Michael}]
       note: "reason (required)"
+
+    - action: reject
+      pair: [citekey_a, citekey_b]
+      note: "reason (required)"
+
+      Permanently dismisses a draft merge candidate without merging,
+      deleting, or otherwise modifying either entry. Use this when a
+      flagged pair (_near_duplicate_candidate, _cross_script_duplicate_candidate,
+      or _titleless_duplicate_candidate) has been reviewed and judged NOT
+      to be the same work — e.g. two different publications by the same
+      author in the same year, or a false-positive cross-script match.
+      Without this action, deleting the draft entry alone does nothing:
+      the flag remains on the bibliography entries and
+      append_draft_corrections will regenerate the identical draft on
+      the next --postprocess run. `pair` is unordered (order doesn't
+      matter) and must name exactly the two citekeys the original draft
+      flagged.
 
     - action: split
       citekey: citekey_a
@@ -222,7 +247,7 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
     Apply confirmed corrections (those without _draft: true) to the
     bibliography in place. Returns counts: {merge, delete, set, skipped}.
     """
-    counts = {"merge": 0, "delete": 0, "set": 0, "split": 0, "skipped": 0, "citekey_regenerated": 0}
+    counts = {"merge": 0, "delete": 0, "set": 0, "split": 0, "reject": 0, "skipped": 0, "citekey_regenerated": 0}
 
     for i, corr in enumerate(corrections):
         if corr.get("_draft"):
@@ -436,6 +461,59 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
             )
             counts["split"] += 1
 
+        elif action == "reject":
+            pair = corr.get("pair", [])
+
+            if not pair or len(pair) != 2:
+                logger.warning(
+                    "Correction %d (reject): pair must have exactly 2 citekeys", i
+                )
+                counts["skipped"] += 1
+                continue
+
+            ck_a, ck_b = pair
+            if ck_a not in bib and ck_b not in bib:
+                logger.debug(
+                    "Correction %d (reject): neither %r nor %r found — "
+                    "already absent, nothing to reject", i, ck_a, ck_b
+                )
+                continue
+
+            # A rejected pair might have come from any of the three
+            # duplicate-candidate flag types — strip it from all of them,
+            # on both entries, in both directions. This is what actually
+            # prevents append_draft_corrections from regenerating the
+            # identical draft next run; simply deleting the draft entry
+            # from corrections.yaml does NOT do this, since the flag lives
+            # on the bibliography entry, not in this file.
+            candidate_fields = (
+                "_near_duplicate_candidate",
+                "_cross_script_duplicate_candidate",
+                "_titleless_duplicate_candidate",
+            )
+            removed_any = False
+            for ck, other_ck in ((ck_a, ck_b), (ck_b, ck_a)):
+                entry = bib.get(ck)
+                if entry is None:
+                    continue
+                for field in candidate_fields:
+                    candidates = entry.get(field)
+                    if candidates and other_ck in candidates:
+                        candidates.remove(other_ck)
+                        removed_any = True
+
+            if not removed_any:
+                logger.warning(
+                    "Correction %d (reject): no matching candidate flag found "
+                    "for pair (%r, %r) — nothing to reject. Check the pair "
+                    "matches an actual flagged draft.", i, ck_a, ck_b
+                )
+                counts["skipped"] += 1
+                continue
+
+            logger.info("Rejected duplicate-candidate pair (%r, %r)", ck_a, ck_b)
+            counts["reject"] += 1
+
         else:
             logger.warning("Correction %d: unknown action %r", i, action)
             counts["skipped"] += 1
@@ -630,7 +708,7 @@ def run_corrections(bib_path: Path, project_root: Path | None = None) -> dict:
     corrections = load_yaml(corrections_path)
 
     if not corrections:
-        return {"merge": 0, "delete": 0, "set": 0, "split": 0, "skipped": 0, "citekey_regenerated": 0}
+        return {"merge": 0, "delete": 0, "set": 0, "split": 0, "reject": 0, "skipped": 0, "citekey_regenerated": 0}
 
     counts = apply_corrections(bib, corrections)
     bib_path.write_text(json.dumps(bib, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -646,5 +724,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     counts = run_corrections(Path(args.bib), Path(args.root))
     print(f"merge={counts['merge']}  delete={counts['delete']}  "
-          f"set={counts['set']}  split={counts['split']}  skipped={counts['skipped']}  "
-          f"citekey_regenerated={counts['citekey_regenerated']}")
+          f"set={counts['set']}  split={counts['split']}  reject={counts['reject']}  "
+          f"skipped={counts['skipped']}  citekey_regenerated={counts['citekey_regenerated']}")

@@ -1782,3 +1782,36 @@ real work into false fragments) anywhere in the sample. Both failure
 modes were worth checking; only one turned out to be a live concern
 (the under-split case, before this session's other fixes), and this
 one (over-split risk) checked out clean.
+
+## 2026-07-03 — Draft rejection was not actually permanent (reject action added)
+
+**Problem:** cleaned corrections.yaml by removing three draft merges
+for the goriunova1978 cluster, judged (via title inspection) to be
+three genuinely different publications rather than duplicates. After
+the next --postprocess run, the identical three drafts reappeared.
+
+**Root cause:** the duplicate-candidate flags
+(_near_duplicate_candidate, _cross_script_duplicate_candidate,
+_titleless_duplicate_candidate) live on the bibliography entries
+themselves, set once when the candidate is first detected during graph
+construction or postprocess. corrections.yaml only records decisions
+about what to do with a flagged pair — it has no mechanism to record
+"this flag was reviewed and dismissed." Deleting the draft entry from
+corrections.yaml removes the record of the suggestion, but not the
+flag that produces it, so append_draft_corrections regenerates it on
+every subsequent run. The module's docstring incorrectly described
+deletion as sufficient for rejection — this was never true.
+
+**Decision:** added a `reject` action that takes a pair of citekeys and
+strips that pair from whichever candidate-flag field(s) it's present
+in, on both entries. This is the only action that modifies the flag
+data itself rather than the corrections file's record of a decision.
+Tested end-to-end to confirm it actually prevents regeneration, not
+just removes the current draft.
+
+**Follow-up needed:** the goriunova1978 and any other drafts removed
+during the earlier corrections.yaml cleanup this session were removed
+using plain deletion, not reject — they will keep reappearing until
+converted to reject actions. Re-check corrections.yaml for any
+draft-source entries that were manually removed rather than confirmed,
+and add proper reject entries for each.
