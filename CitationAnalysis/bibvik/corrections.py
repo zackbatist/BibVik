@@ -310,6 +310,8 @@ def append_draft_corrections(
     Sources:
         _near_duplicate_candidate         — near-duplicate pairs, LLM inconclusive
         _cross_script_duplicate_candidate — cross-script pairs, titles don't overlap enough
+        _titleless_duplicate_candidate    — same author+year, neither entry has a title
+                                            (flag set by graph._find_duplicate Strategy 3/4)
         _author_recovery_failed           — NOAUTHOR entries where LLM couldn't extract author
                                             (flag must be set by postprocess.recover_authors_from_raw())
         _ocr_candidate                    — entries flagged as likely OCR garbage
@@ -363,6 +365,33 @@ def append_draft_corrections(
                 "_confidence":    entry.get("_near_duplicate_score", 0.0),
                 "_keep_title":    entry.get("title", ""),
                 "_discard_title": partner_entry.get("title", ""),
+            })
+
+        # Titleless duplicate candidates
+        # Same author + year, but neither entry has a title to corroborate
+        # against — the weakest evidence of the three candidate types, since
+        # there's no way to distinguish "same work, GROBID missed both
+        # titles" from "two different works by the same author in the same
+        # year". Confidence is set lower than cross_script/near_duplicate
+        # for that reason.
+        for partner in entry.get("_titleless_duplicate_candidate", []):
+            pair = frozenset([ck, partner])
+            if pair in seen_pairs or pair in existing_merge_pairs:
+                continue
+            seen_pairs.add(pair)
+            partner_entry = bib.get(partner, {})
+            drafts.append({
+                "action":         "merge",
+                "keep":           ck,
+                "discard":        partner,
+                "note":           "",
+                "_draft":         True,
+                "_source":        "titleless_duplicate",
+                "_confidence":    0.3,
+                "_keep_title":    entry.get("title", ""),
+                "_discard_title": partner_entry.get("title", ""),
+                "_keep_raw":      entry.get("_raw_citation", ""),
+                "_discard_raw":   partner_entry.get("_raw_citation", ""),
             })
 
         # Cross-script duplicate candidates

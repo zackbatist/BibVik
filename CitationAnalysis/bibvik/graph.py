@@ -1094,8 +1094,15 @@ class CitationGraph:
         Matching strategies applied in order:
         1. DOI match
         2. Exact title match (≥20 chars)
-        3. Author + year + fuzzy title (≥60% token overlap)
-        4. Cross-script: transliterated author + year match (Cyrillic ↔ Latin)
+        3. Author + year + fuzzy title (≥60% token overlap). If only one
+           side has a title, auto-merges (the title fills a gap, doesn't
+           adjudicate between candidates). If neither side has a title,
+           flags as `_titleless_duplicate_candidate` for manual review
+           instead of merging — author+year alone is not enough
+           corroboration, since the same author publishing multiple works
+           in one year is a common, unremarkable pattern.
+        4. Cross-script: transliterated author + year match (Cyrillic ↔ Latin).
+           Same one-title/no-title handling as Strategy 3.
         """
         ref_doi = (ref.get("doi") or "").strip().lower()
         ref_title = _norm_title(ref.get("title", ""))
@@ -1127,12 +1134,27 @@ class CitationGraph:
                     if r_fam and e_fam and r_fam == e_fam:
                         if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.6:
                             return ck
-                        elif not ref_title or not ex_title:
-                            # One or both entries lack a title — match on author+year alone.
+                        elif ref_title or ex_title:
+                            # Exactly one side has a title — safe to auto-merge.
                             # This covers the case where a Method 6 or enriched entry has a
                             # title and the existing GROBID entry does not: _merge_into will
-                            # fill in the missing title from the incoming entry.
+                            # fill in the missing title from the incoming entry. There is no
+                            # title-vs-title comparison possible here, but the side with a
+                            # title corroborates that a real work exists; the merge only
+                            # supplies metadata, it doesn't need to adjudicate between two
+                            # candidate identities.
                             return ck
+                        else:
+                            # Neither side has a title — author+year alone is not enough
+                            # corroboration to merge automatically. Two different works by
+                            # the same author in the same year is a common real pattern
+                            # (e.g. 1994a/1994b), and with no title on either side there is
+                            # no way to tell them apart. Flag for manual review instead of
+                            # guessing, matching the caution already used for cross-script
+                            # candidates below.
+                            existing.setdefault("_titleless_duplicate_candidate", [])
+                            if ref.get("citekey") and ref["citekey"] not in existing["_titleless_duplicate_candidate"]:
+                                existing["_titleless_duplicate_candidate"].append(ref.get("citekey", ""))
 
                     # 4. Cross-script: transliterate both sides and compare
                     if ref_fam_translit:
@@ -1143,10 +1165,15 @@ class CitationGraph:
                             # and merge if titles also match or both lack titles
                             if ref_title and ex_title and _token_overlap(ref_title, ex_title) >= 0.5:
                                 return ck
-                            elif not ref_title and not ex_title:
+                            elif ref_title or ex_title:
+                                # Exactly one side has a title — safe to auto-merge, same
+                                # reasoning as Strategy 3 above.
                                 return ck
                             else:
-                                # Flag for audit but don't auto-merge — titles differ
+                                # Neither side has a title — flag for manual review rather
+                                # than guessing, same reasoning as Strategy 3 above. This
+                                # was previously auto-merged on transliterated author+year
+                                # alone with no corroboration.
                                 existing.setdefault("_cross_script_duplicate_candidate", [])
                                 if ref.get("citekey") and ref["citekey"] not in existing["_cross_script_duplicate_candidate"]:
                                     existing["_cross_script_duplicate_candidate"].append(ref.get("citekey", ""))

@@ -1552,3 +1552,39 @@ pattern tested.
 two legitimate merges, one adjacent edge case), all behaving as
 intended. No backfill/remediation needed since no live data was found
 to be affected.
+
+## 2026-07-02 — Duplicate detection no longer auto-merges titleless author+year matches (AW)
+
+**Problem:** found during a full codebase audit, same session as AV.
+graph.py's _find_duplicate Strategy 3 and 4 auto-merged two entries
+purely on matching author family name + year whenever neither entry
+had a title to compare. No other corroboration was checked. The
+sibling case in the same function — titles present but not similar
+enough — already declined to auto-merge and flagged for review
+instead; the titleless case, which has strictly less information and
+is therefore more uncertain, was getting the opposite (more
+permissive) treatment.
+
+**Likely real-world impact:** this plausibly explains the "3 remaining
+same-author same-year pairs confirmed as genuinely different works"
+noted in an earlier manual-audit session — caught by hand, not by any
+automated check, because nothing in the pipeline flagged them.
+
+**Decision:** distinguish "one side has a title" (safe to auto-merge —
+the title supplies missing metadata, it doesn't need to prove the two
+records are the same work) from "neither side has a title" (not safe
+— flag for review instead of merging). Added
+_titleless_duplicate_candidate as a new flag type, following the exact
+pattern already used for _cross_script_duplicate_candidate, and wired
+it into corrections.py's append_draft_corrections so flagged pairs
+actually reach corrections.yaml as reviewable drafts rather than
+sitting inert as an unused bibliography field. Set confidence lower
+(0.3) than the other two candidate types to reflect that this is the
+weakest evidence tier — no title on either side to compare at all.
+
+**Status:** fixed and tested against three cases plus an end-to-end
+check that the flag correctly produces a draft correction. Requires a
+full rerun to apply to the existing bibliography — any titleless
+same-author-same-year merges that already happened under the old
+logic are not automatically un-merged by this fix; they'd need to be
+identified separately if Zack wants to audit historical merges.
