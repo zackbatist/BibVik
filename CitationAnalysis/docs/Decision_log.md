@@ -1631,3 +1631,34 @@ not individually investigated — they were statistical outliers only,
 not confirmed problems. Worth a closer look if time allows, but not
 treated as urgent given jorgensennorgard1997 (the strongest candidate)
 turned out to be a false positive.
+
+## 2026-07-02 — --postprocess was crashing unconditionally (undefined logger)
+
+**Problem:** Zack ran python3 run.py --postprocess (to apply the
+jorgensennorgard1997 corrections) and hit:
+  NameError: name 'logger' is not defined
+at run.py line 626, inside the auto-backup step that runs before
+postprocess itself.
+
+**Root cause:** run.py has no module-level `logger` — logging is done
+through a `log` variable created in main() via setup_logging(). Every
+other logging call in the file correctly uses `log`; this one line
+used `logger` instead, a name that was never defined anywhere in the
+module.
+
+**Impact:** since the auto-backup step runs unconditionally whenever
+bibliography.json exists (the normal case), --postprocess has likely
+been completely non-functional since the auto-backup feature was
+added (AR) — independent of anything found or fixed earlier in this
+session's audit. This was caught only because Zack tried to actually
+run it, not by the audit itself; worth noting as a gap in the audit's
+coverage (a full read-through doesn't catch every executable path).
+
+**Fix:** changed logger.info(...) to log.info(...). Confirmed via grep
+this was the only such reference in the file.
+
+**Follow-up:** worth doing a basic smoke-test pass (actually invoking
+each CLI stage once with trivial input) rather than relying solely on
+static reading, given this is now the second stage found broken by
+attempted execution rather than review (the first being --contexts/
+--cluster via the missing _query_llm method).
