@@ -21,7 +21,7 @@ output_dir: "./output"
 
 # Optional: Path to a Zotero CSV export for exact PDF ↔ citekey matching.
 # Export from Zotero via File > Export Library as CSV.
-zotero_csv: "./Exported_Items.csv"
+zotero_csv: "./BibVik_seed.csv"
 
 # ---------------------------------------------------------------------------
 # Coverage & Open Access
