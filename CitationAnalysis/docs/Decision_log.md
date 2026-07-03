@@ -1499,3 +1499,21 @@ needed.
 non-functional for some unknown period prior to this audit. Worth
 checking whether any citation_contexts.json or clusters_*.json output
 predating this fix exists and should be treated as incomplete/invalid.
+
+## 2026-07-02 — _run_ocr call site missing ocr_dir argument
+
+**Problem:** found during a full codebase audit. graph.py line 886
+called self.grobid._run_ocr(pdf_path) — one argument. _run_ocr is
+defined as a @staticmethod requiring two (pdf_path, ocr_dir).
+
+**Impact:** TypeError on any [NO_BLOCKS] OCR-fallback trigger during
+F1 processing (scanned PDF with no text layer). grobid_client.py's own
+internal call to the same method (line 308) passes both arguments
+correctly, confirming the two-arg signature is intentional and the
+graph.py call site was the one at fault.
+
+**Decision:** straightforward fix, no judgment call — passed
+self.grobid.ocr_dir as the second argument. Prompted a full AST sweep
+for the same call-site arity-mismatch pattern across every
+@staticmethod in the codebase; found one further instance
+(grobid_client.py, see companion log entry), no others.

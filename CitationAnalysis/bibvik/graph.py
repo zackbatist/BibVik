@@ -883,7 +883,7 @@ class CitationGraph:
                 _fire("grobid_done", _t.time() - _t0)
                 _fire("ocr_start")
                 _t0 = _t.time()
-                ocr_pdf = self.grobid._run_ocr(pdf_path)
+                ocr_pdf = self.grobid._run_ocr(pdf_path, self.grobid.ocr_dir)
                 _fire("ocr_done", _t.time() - _t0)
                 if ocr_pdf:
                     _fire("grobid_start")
