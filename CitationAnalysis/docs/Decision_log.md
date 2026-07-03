@@ -1743,3 +1743,42 @@ cluster-deployment.md were not reviewed for staleness in this pass —
 worth a check if there's reason to think they reference merge/dedup/
 corrections behavior in detail, but they weren't flagged by the grep
 sweep for the specific claims this session's fixes touched.
+
+## 2026-07-02 — BJ resolved: regex compound-splitting kept as-is (data-backed)
+
+**Question:** tei_parser.py's parse_tei_references() unconditionally
+runs regex-based compound-reference splitting on every GROBID entry —
+architecturally in tension with the project's stated LLM-first
+principle for citation parsing. Should it be gated, removed, or left
+alone?
+
+**Zack's call:** wanted to see actual data before deciding, rather
+than resolve it on architectural principle alone.
+
+**Data:** queried the live bibliography for entries carrying the
+splitter's _grobid_id "_split_N" marker. Found 116 entries produced
+from 67 distinct compound-entry groups — a meaningful, non-trivial
+volume. Sampled 15+ groups directly: every split-off piece had a
+distinct author, distinct title, and a clean, well-formed raw citation
+string. No evidence of false-positive fragmentation anywhere in the
+sample — no garbled names, no truncated titles, no duplicated content.
+
+**Decision:** keep the splitter unconditional and ungated. The
+architectural concern was reasonable in the abstract, but the data
+shows this narrow regex pattern (dash-year, clear author-boundary
+detection) is doing correct recovery work at real scale. Gating it
+behind LLM availability would silently degrade 116 real citations
+whenever the LLM happens to be down, for no benefit the data supports.
+Removing it would mean re-doing already-correct work through a more
+expensive LLM pass.
+
+**Relationship to jorgensennorgard1997:** worth noting this is the
+opposite failure mode from what that case represented. jorgensennorgard1997
+was under-splitting — GROBID and every splitter failed to separate a
+citation that should have stayed together as one joint work (it was
+actually correctly one entry, the raw_citation was just garbled).
+Today's check found no instances of the reverse (over-splitting one
+real work into false fragments) anywhere in the sample. Both failure
+modes were worth checking; only one turned out to be a live concern
+(the under-split case, before this session's other fixes), and this
+one (over-split risk) checked out clean.
