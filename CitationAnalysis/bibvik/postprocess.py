@@ -356,7 +356,7 @@ def run_postprocess(
     # corrections.yaml lives in the project root, passed explicitly or inferred
     project_root = Path(project_root) if project_root else input_path.parent.parent
     correction_counts = run_corrections(input_path, project_root)
-    n_corrections = correction_counts["merge"] + correction_counts["delete"] + correction_counts["set"]
+    n_corrections = correction_counts["merge"] + correction_counts["delete"] + correction_counts["set"] + correction_counts.get("split", 0)
     if n_corrections or (project_root / CORRECTIONS_FILENAME).exists():
         results["Manual corrections"] = n_corrections
         logger.info("Manual corrections: %d applied", n_corrections)

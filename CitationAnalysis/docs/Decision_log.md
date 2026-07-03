@@ -1588,3 +1588,46 @@ full rerun to apply to the existing bibliography — any titleless
 same-author-same-year merges that already happened under the old
 logic are not automatically un-merged by this fix; they'd need to be
 identified separately if Zack wants to audit historical merges.
+
+## 2026-07-02 — jorgensennorgard1997 investigated; new split correction action added
+
+**Context:** after fixing AW (titleless duplicate auto-merge), ran a
+forensic check against the live bibliography for evidence the old bug
+had already produced a bad merge. jorgensennorgard1997 stood out:
+cited_by=8 (highest among 244 titleless entries checked), and its
+_raw_citation showed a garbled two-name fragment — "Jorgensen/Norgard
+Jorgensen 1997. Lars Jorgensen/Anne" — that looked exactly like two
+different people's citations collapsed together.
+
+**Investigation:** pulled the 8 citing papers' TEI XML and searched
+for the actual reference-list context around "Jorgensen"/"1997".
+Baastrup 2014 and Rundkvist 2010 both explicitly cite "Jørgensen &
+Nørgård Jørgensen 1997" as a joint work, with figure/plate references
+to a Bornholm cemetery site. Zack confirmed via Google Scholar: this
+is a real, single publication — Jørgensen, Lars, and A. Nørgård
+Jørgensen, "Nørre Sandegård Vest: A Cemetery from the 6th–8th
+Centuries on Bornholm" (1997).
+
+**Conclusion:** not an AW instance. The garbled raw_citation reflects
+a genuine two-author joint publication that GROBID/Method 6 failed to
+parse cleanly, not two solo works incorrectly merged. Resolved via two
+set corrections (author list with both co-authors, recovered title).
+AQ's citekey regeneration will fire automatically on next postprocess
+run now that the entry has a real author list.
+
+**Byproduct — new split action:** the investigation surfaced a real
+gap regardless of this specific case's outcome: corrections.py had no
+mechanism to undo a bad merge if one is ever confirmed. Added a split
+action requiring explicit, human-verified citer-to-entry assignment
+(cannot be inferred), with strict all-or-nothing validation that the
+citer accounting is exact before any mutation happens — same
+discipline as the exporter fix earlier this session, applied
+preemptively here rather than reactively.
+
+**Note for future review:** no genuine AW-bug instance was confirmed
+in this pass. The 18 other multi-cited titleless entries surfaced by
+the forensic check (jochens1995e, olausson2002, naum2008d, etc.) were
+not individually investigated — they were statistical outliers only,
+not confirmed problems. Worth a closer look if time allows, but not
+treated as urgent given jorgensennorgard1997 (the strongest candidate)
+turned out to be a false positive.

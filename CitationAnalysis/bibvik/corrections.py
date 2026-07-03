@@ -24,6 +24,32 @@ Actions:
       value: [{family: Sindbæk, given: Søren Michael}]
       note: "reason (required)"
 
+    - action: split
+      citekey: citekey_a
+      into:
+        - citekey: new_citekey_1
+          author: [{family: Jorgensen, given: Lars}]
+          title: ""                              # optional fields to set
+          citers: [citer_a, citer_b]              # required — see below
+        - citekey: new_citekey_2
+          author: [{family: Nørgård Jørgensen, given: Anne}]
+          citers: [citer_c]
+      note: "reason (required)"
+
+      Splits one entry that was incorrectly merged (e.g. two different
+      people sharing a family name, wrongly matched by AW's old
+      author+year logic) back into two or more entries. The `citers`
+      list under each `into` item is required and must be spelled out
+      explicitly by the reviewer — the reviewer has to actually check
+      which citing papers meant which person; this cannot be inferred
+      automatically. The union of every `citers` list across all
+      `into` items must exactly equal the original entry's `cited_by`
+      list (same citekeys, no omissions, no duplicates) or the split
+      is refused and logged as an error rather than silently dropping
+      or double-counting a citation edge. The original entry is
+      tombstoned (`_deleted: True`, `_split_into: [...]`), not removed
+      outright, consistent with merge/delete.
+
 Draft candidates have _draft: true and additional context fields (_source,
 _confidence, _keep_title, etc.) to aid review. Remove _draft: true and
 fill in the note to confirm. Delete the entry to reject.
@@ -169,7 +195,7 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
     Apply confirmed corrections (those without _draft: true) to the
     bibliography in place. Returns counts: {merge, delete, set, skipped}.
     """
-    counts = {"merge": 0, "delete": 0, "set": 0, "skipped": 0, "citekey_regenerated": 0}
+    counts = {"merge": 0, "delete": 0, "set": 0, "split": 0, "skipped": 0, "citekey_regenerated": 0}
 
     for i, corr in enumerate(corrections):
         if corr.get("_draft"):
@@ -286,6 +312,102 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                         note=f"Citekey regenerated after author correction: {note}",
                     )
                     counts["citekey_regenerated"] = counts.get("citekey_regenerated", 0) + 1
+
+        elif action == "split":
+            citekey = corr.get("citekey", "")
+            into    = corr.get("into", [])
+
+            if not citekey or not into:
+                logger.warning("Correction %d (split): missing citekey or into", i)
+                counts["skipped"] += 1
+                continue
+            if citekey not in bib:
+                logger.debug("Correction %d (split): %r already absent", i, citekey)
+                continue
+
+            original = bib[citekey]
+            original_citers = list(original.get("cited_by", []))
+
+            # Validate: every `into` item must specify its own citekey and
+            # an explicit citers list. The union of all citers lists must
+            # exactly equal the original's cited_by list — no citer left
+            # unassigned, none double-assigned, none invented. This is
+            # deliberately strict: a silent mismatch here would reintroduce
+            # exactly the class of edge-loss bug fixed in exporter.py
+            # earlier this session, just via a different mechanism.
+            seen_citers: list[str] = []
+            malformed = False
+            for j, item in enumerate(into):
+                item_citekey = item.get("citekey", "")
+                item_citers  = item.get("citers")
+                if not item_citekey:
+                    logger.warning(
+                        "Correction %d (split): into[%d] missing citekey", i, j
+                    )
+                    malformed = True
+                    break
+                if item_citers is None:
+                    logger.warning(
+                        "Correction %d (split): into[%d] (%r) missing required "
+                        "citers list — must be spelled out explicitly, cannot "
+                        "be inferred", i, j, item_citekey
+                    )
+                    malformed = True
+                    break
+                seen_citers.extend(item_citers)
+
+            if malformed:
+                counts["skipped"] += 1
+                continue
+
+            if sorted(seen_citers) != sorted(original_citers):
+                missing = set(original_citers) - set(seen_citers)
+                extra   = set(seen_citers) - set(original_citers)
+                dupes   = [c for c in set(seen_citers) if seen_citers.count(c) > 1]
+                logger.error(
+                    "Correction %d (split): citer accounting mismatch for %r — "
+                    "refusing to apply. missing=%s extra=%s duplicated=%s. "
+                    "The union of all `into[].citers` must exactly equal the "
+                    "original's cited_by list.",
+                    i, citekey, sorted(missing), sorted(extra), sorted(dupes),
+                )
+                counts["skipped"] += 1
+                continue
+
+            # All checks passed — perform the split.
+            for item in into:
+                item_citekey = item["citekey"]
+                item_citers  = item["citers"]
+
+                if item_citekey in bib and item_citekey != citekey:
+                    target = bib[item_citekey]
+                else:
+                    # New entry — start from a copy of the original's fields
+                    # (entry_type, year, etc.) then apply any explicit
+                    # overrides from the correction below.
+                    target = {k: v for k, v in original.items()
+                              if k not in ("cited_by", "_deleted", "_split_into",
+                                           "_correction_note")}
+                    bib[item_citekey] = target
+
+                for field, value in item.items():
+                    if field in ("citekey", "citers"):
+                        continue
+                    target[field] = value
+
+                target["cited_by"] = item_citers
+                target.setdefault("_split_from", citekey)
+                target["_correction_note"] = note
+
+            original["_deleted"] = True
+            original["_split_into"] = [item["citekey"] for item in into]
+            original["_correction_note"] = note
+            original["cited_by"] = []
+
+            logger.info(
+                "Split %r into %s", citekey, [item["citekey"] for item in into]
+            )
+            counts["split"] += 1
 
         else:
             logger.warning("Correction %d: unknown action %r", i, action)
@@ -481,7 +603,7 @@ def run_corrections(bib_path: Path, project_root: Path | None = None) -> dict:
     corrections = load_yaml(corrections_path)
 
     if not corrections:
-        return {"merge": 0, "delete": 0, "set": 0, "skipped": 0, "citekey_regenerated": 0}
+        return {"merge": 0, "delete": 0, "set": 0, "split": 0, "skipped": 0, "citekey_regenerated": 0}
 
     counts = apply_corrections(bib, corrections)
     bib_path.write_text(json.dumps(bib, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -497,5 +619,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     counts = run_corrections(Path(args.bib), Path(args.root))
     print(f"merge={counts['merge']}  delete={counts['delete']}  "
-          f"set={counts['set']}  skipped={counts['skipped']}  "
+          f"set={counts['set']}  split={counts['split']}  skipped={counts['skipped']}  "
           f"citekey_regenerated={counts['citekey_regenerated']}")
