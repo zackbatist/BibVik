@@ -502,7 +502,7 @@ class LLMAnalyzer:
 
         return None
 
-
+    def _query_llm(self, prompt: str) -> dict | None:
         """
         Send a prompt to Ollama and parse the JSON response.
 

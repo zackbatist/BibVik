@@ -1467,3 +1467,35 @@ matters — the merge must come before the set, or it will fail to find
 the citekey after it's been renamed. Not an issue with current
 corrections.yaml content (NOAUTHOR83/974/etc. are set-only, not merge
 targets), but flagged with a warning if it ever occurs.
+
+## 2026-07-02 — _query_llm was silently missing, breaking --contexts and --cluster
+
+**Problem:** discovered during a full codebase audit, not reported by
+Zack — classify_citation_function, classify_citation_with_content, and
+cluster_analyzer.analyze_clusters all called self._query_llm(prompt),
+but LLMAnalyzer had no such method. Confirmed via AST parse of the
+class body before the fix: __init__, is_available,
+_is_available_ollama, _is_available_llama_server,
+classify_citation_function, classify_citation_with_content,
+extract_references_from_footnote, _query_llm_raw, _query_ollama,
+_query_llama_server — no _query_llm.
+
+**Root cause:** the method's docstring and body existed in the file,
+but sat orphaned directly after _query_llama_server's return None,
+with no def line — almost certainly lost during a prior refactor that
+split a combined query-and-parse method into _query_llm_raw (raw text)
+and _query_llm (parsed JSON), where the def line for the latter was
+accidentally deleted while its body was left behind. Because the
+orphaned body followed a return statement, it was syntactically
+unreachable but not a syntax error, so it never surfaced as an import
+failure — only as an AttributeError the first time any code path
+actually tried to call it.
+
+**Decision:** restored the def line using the orphaned body verbatim,
+since inspection showed it was complete and correct. No other changes
+needed.
+
+**Note:** this means --contexts and --cluster have likely been
+non-functional for some unknown period prior to this audit. Worth
+checking whether any citation_contexts.json or clusters_*.json output
+predating this fix exists and should be treated as incomplete/invalid.
