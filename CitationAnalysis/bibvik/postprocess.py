@@ -18,19 +18,9 @@ Usage:
 import json
 import logging
 import re
-from collections import defaultdict
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
-
-# Titles too generic/short to be useful for near-duplicate matching
-_TRIVIAL_TITLES = frozenset({
-    "introduction", "conclusion", "conclusions", "preface", "foreword",
-    "abstract", "summary", "notes", "bibliography", "references",
-    "index", "appendix", "appendices", "chapter", "part", "section",
-    "review", "overview", "discussion", "results", "methods", "methodology",
-    "afterword", "epilogue", "prologue", "acknowledgements", "acknowledgments",
-})
 
 
 # ── Pass 1: Entry type reclassification (post-enrich) ────────────────────────
@@ -76,137 +66,11 @@ def fix_entry_types_post_enrich(bib: dict) -> int:
     return count
 
 
-# ── Pass 2: Near-duplicate flagging and LLM resolution ───────────────────────
-
-def _title_tokens(title: str) -> set:
-    return set(re.findall(r"\b\w{4,}\b", title.lower()))
-
-def _is_trivial_title(title: str) -> bool:
-    return title.strip().lower() in _TRIVIAL_TITLES or len(title.strip()) < 20
-
-def _first_author_key(entry: dict) -> str:
-    from unidecode import unidecode
-    authors = entry.get("author", [])
-    if not authors:
-        return ""
-    return unidecode(authors[0].get("family", "")).lower().strip()
-
-
-def flag_near_duplicates(bib: dict, llm_config: dict | None = None) -> int:
-    """
-    Flag and optionally LLM-resolve near-duplicate entries.
-    Only operates on title-rich pairs (both have substantive titles).
-    Trivial titles are skipped.
-    """
-    count = 0
-    index: dict[tuple, list] = defaultdict(list)
-
-    for ck, entry in bib.items():
-        year = entry.get("date", entry.get("year", ""))[:4]
-        ak   = _first_author_key(entry)
-        if year and ak:
-            index[(year, ak)].append(ck)
-
-    for citekeys in index.values():
-        if len(citekeys) < 2:
-            continue
-        pairs = [
-            (citekeys[i], citekeys[j])
-            for i in range(len(citekeys))
-            for j in range(i + 1, len(citekeys))
-        ]
-        for ck_a, ck_b in pairs:
-            ta = bib[ck_a].get("title", "")
-            tb = bib[ck_b].get("title", "")
-
-            # Skip trivial or missing titles
-            if not ta or not tb or _is_trivial_title(ta) or _is_trivial_title(tb):
-                continue
-
-            ta_tokens = _title_tokens(ta)
-            tb_tokens = _title_tokens(tb)
-            if not ta_tokens or not tb_tokens:
-                continue
-
-            overlap = len(ta_tokens & tb_tokens) / min(len(ta_tokens), len(tb_tokens))
-            if overlap >= 0.7:
-                if llm_config:
-                    # LLM resolution: ask if they're the same work
-                    same = _llm_same_work(ta, tb, bib[ck_a], bib[ck_b], llm_config)
-                    if same is True:
-                        # Merge: keep ck_a, update cited_by
-                        for cb in bib[ck_b].get("cited_by", []):
-                            if cb not in bib[ck_a].get("cited_by", []):
-                                bib[ck_a].setdefault("cited_by", []).append(cb)
-                        bib[ck_b]["_merged_into"] = ck_a
-                        count += 1
-                        continue
-                    elif same is False:
-                        continue
-                # LLM unavailable or inconclusive — flag for human review
-                bib[ck_a].setdefault("_near_duplicate_candidate", [])
-                if ck_b not in bib[ck_a]["_near_duplicate_candidate"]:
-                    bib[ck_a]["_near_duplicate_candidate"].append(ck_b)
-                    count += 1
-                bib[ck_b].setdefault("_near_duplicate_candidate", [])
-                if ck_a not in bib[ck_b]["_near_duplicate_candidate"]:
-                    bib[ck_b]["_near_duplicate_candidate"].append(ck_a)
-
-    return count
-
-
-def _llm_same_work(
-    title_a: str, title_b: str,
-    entry_a: dict, entry_b: dict,
-    llm_config: dict,
-) -> bool | None:
-    """Ask LLM if two entries are the same work. Returns True/False/None."""
-    import requests
-
-    prompt = (
-        "You are an expert bibliographer. Are the following two bibliography entries "
-        "the same published work? Consider title, author, and year. "
-        "Respond with only 'yes' or 'no'.\n\n"
-        f"Entry A:\n  Title: {title_a}\n  Author: {entry_a.get('author', [{}])[0].get('family', '')}\n  Year: {entry_a.get('date', '')}\n\n"
-        f"Entry B:\n  Title: {title_b}\n  Author: {entry_b.get('author', [{}])[0].get('family', '')}\n  Year: {entry_b.get('date', '')}\n\n"
-        "/no_think"
-    )
-
-    try:
-        base_url = llm_config.get("base_url", "http://localhost:11434")
-        model    = llm_config.get("model", "qwen2.5:7b")
-        timeout  = llm_config.get("timeout", 30)
-        backend  = llm_config.get("backend", "ollama")
-
-        if backend == "ollama":
-            resp = requests.post(
-                f"{base_url}/api/generate",
-                json={"model": model, "prompt": prompt, "stream": False,
-                      "think": False, "options": {"temperature": 0.0, "num_predict": 10}},
-                timeout=timeout,
-            )
-            raw = resp.json().get("response", "").strip().lower()
-        else:
-            resp = requests.post(
-                f"{base_url}/v1/chat/completions",
-                json={"model": model, "messages": [{"role": "user", "content": prompt}],
-                      "stream": False, "temperature": 0.0, "max_tokens": 10},
-                timeout=timeout,
-            )
-            raw = resp.json()["choices"][0]["message"]["content"].strip().lower()
-
-        if raw.startswith("yes"):
-            return True
-        if raw.startswith("no"):
-            return False
-    except Exception:
-        pass
-    return None
-
-
-
-
 # ── Pass 2: Author recovery from raw citation string ─────────────────────────
+# (Near-duplicate flagging was previously Pass 2 here. flag_near_duplicates()
+# and its helper _llm_same_work() were removed as dead code — never wired
+# into PASSES below; deduplication is handled at creation time during graph
+# construction instead. See docs/methods/deduplication-normalisation.md.)
 
 _LLM_AUTHOR_RECOVERY = (
     "You are an expert bibliographer. The following is a raw citation string "
