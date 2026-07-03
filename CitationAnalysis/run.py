@@ -53,7 +53,7 @@ Examples:
     parser.add_argument("--audit", action="store_true", help="Draw stratified audit sample from graph state.")
     parser.add_argument("--audit-n", type=int, default=10, help="Entries per audit stratum (default: 10).")
     parser.add_argument("--audit-seed", type=int, default=42, help="Random seed for audit sampling (default: 42).")
-    parser.add_argument("--audit-threshold", type=float, default=0.85, help="Title similarity threshold for duplicate detection (default: 0.85).")
+    parser.add_argument("--audit-threshold", type=float, default=0.70, help="Title similarity threshold for duplicate detection (default: 0.70).")
     parser.add_argument("--enrich", action="store_true", help="Enrich bibliography and authors from CrossRef and OpenAlex.")
     parser.add_argument("--enrich-bib-only", action="store_true", help="Bibliography enrichment only (skip author enrichment).")
     parser.add_argument("--enrich-auth-only", action="store_true", help="Author enrichment only (skip bibliography enrichment).")

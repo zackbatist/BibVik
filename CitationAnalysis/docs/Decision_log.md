@@ -1696,3 +1696,20 @@ corrected author are regenerated.
 NOAUTHOR path (regression-checked, unaffected) and the real
 jorgensennorgard1997 case (now correctly regenerates to jorgensen1997,
 or jorgensen1997a if jorgensen1997 is already taken by someone else).
+
+## 2026-07-02 — audit threshold CLI default corrected to 0.70 (BK)
+
+**Problem:** run.py's --audit-threshold defaulted to 0.85; audit.py's
+own DEFAULT_THRESHOLD is 0.70, explicitly chosen with a code comment
+explaining the reasoning. Since run.py always passes the CLI value
+explicitly, audit.py's real default was never used in practice.
+
+**Why it mattered:** widened the blind spot already noted during AW's
+investigation — the audit's duplicate-pairs section can only report
+pairs that weren't auto-merged, so raising the reporting threshold
+above the merge threshold silently shrinks how much of the merge
+logic's behavior is checkable at all.
+
+**Fix:** one-line change, default corrected to 0.70 to match audit.py.
+No judgment call involved — audit.py's comment already states the
+intended value, this just makes the CLI actually deliver it.
