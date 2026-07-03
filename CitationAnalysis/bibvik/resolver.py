@@ -187,8 +187,8 @@ def _try_llm(
 
         record = {
             "author": authors,
-            "date": parsed.get("year", year),
-            "year": parsed.get("year", year)[:4],
+            "date": parsed.get("year") or year,
+            "year": (parsed.get("year") or year)[:4],
             "title": title,
             "entry_type": parsed.get("entry_type", "misc"),
             "_resolution_method": "llm_from_context",
