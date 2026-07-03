@@ -1662,3 +1662,37 @@ each CLI stage once with trivial input) rather than relying solely on
 static reading, given this is now the second stage found broken by
 attempted execution rather than review (the first being --contexts/
 --cluster via the missing _query_llm method).
+
+## 2026-07-02 — Citekey regeneration broadened beyond NOAUTHOR-only
+
+**Problem:** applying the jorgensennorgard1997 correction (set author
+to the two real co-authors) didn't trigger AQ's citekey regeneration —
+the entry stayed under its old, now-inaccurate citekey. Root cause:
+regenerate_citekey_for_author only fires when the citekey starts with
+"NOAUTHOR". jorgensennorgard1997 never lacked an author (it had a
+garbled/wrong one, a merged two-name fragment), so it never matched
+that gate even though the underlying problem — a citekey that no
+longer matches its (corrected) author — is identical to what AQ was
+built to solve.
+
+**Decision (discussed with Zack):** broaden the trigger to compare the
+current citekey against what the corrected author would actually
+produce, rather than checking a specific naming prefix. Chose this
+over two alternatives: leaving AQ NOAUTHOR-only (would require a
+manual one-off fix for every future case like this, and this
+codebase already has too much of that pattern — see the audit's
+findings on duplicated merge/citekey logic) and unconditionally
+regenerating on every author edit (rejected as too aggressive — a
+normal citekey like "sindbaek2022" shouldn't get renamed over a minor
+given-name correction; renaming has real cost if the citekey is
+already referenced elsewhere, e.g. in manuscript drafts or Zotero).
+
+**Safety property preserved:** an existing valid disambiguation suffix
+(e.g. "jorgensen1997a") is still treated as matching its base and is
+not renamed — only citekeys whose base genuinely doesn't match the
+corrected author are regenerated.
+
+**Status:** fixed and tested against five cases including the original
+NOAUTHOR path (regression-checked, unaffected) and the real
+jorgensennorgard1997 case (now correctly regenerates to jorgensen1997,
+or jorgensen1997a if jorgensen1997 is already taken by someone else).

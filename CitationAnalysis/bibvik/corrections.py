@@ -95,19 +95,34 @@ def _disambiguation_suffix(count: int) -> str:
 def regenerate_citekey_for_author(bib: dict, old_citekey: str) -> str | None:
     """
     Given an entry whose author field was just corrected, regenerate a
-    lastnameyear-style citekey if the entry currently has a NOAUTHOR-style
-    key and now has a usable family name. Returns the new citekey, or None
-    if regeneration isn't applicable (no NOAUTHOR key, or still no usable
-    family name after the correction).
+    lastnameyear-style citekey if the current citekey no longer matches
+    what the corrected author would actually produce. Returns the new
+    citekey, or None if regeneration isn't applicable (no usable family
+    name after the correction, or the current citekey already matches).
+
+    Originally scoped to NOAUTHOR* citekeys only (entries that never had
+    an author at all). Broadened after finding a case where an entry had
+    a non-NOAUTHOR citekey built from a garbled/wrong author string
+    (jorgensennorgard1997 — a merged two-author fragment) that a `set`
+    correction then fixed. The citekey needed to change even though it
+    never went through the NOAUTHOR path. The underlying problem — a
+    citekey that no longer matches its author — isn't unique to NOAUTHOR
+    entries, so the trigger condition now checks the actual mismatch
+    rather than a specific naming convention.
+
+    Deliberately conservative about what counts as "no longer matches":
+    only the base (family+year) form is compared, and an existing
+    disambiguation suffix (e.g. "a", "b") is treated as still matching
+    its base — renaming purely to strip a legitimate suffix would risk
+    colliding with whatever the base key currently refers to, and provides
+    no benefit. This avoids over-triggering on ordinary entries whose
+    author was edited but whose citekey was already correct.
 
     Does not mutate bib — the caller (apply_corrections) is responsible
     for performing the rename and remapping cited_by references, since
     only it knows whether the rename should proceed (e.g. after checking
     the entry actually exists).
     """
-    if not old_citekey.startswith("NOAUTHOR"):
-        return None
-
     entry = bib.get(old_citekey)
     if entry is None:
         return None
@@ -122,6 +137,18 @@ def regenerate_citekey_for_author(bib: dict, old_citekey: str) -> str | None:
 
     year = str(entry.get("year", "")).strip()[:4]
     base = f"{family}{year}" if year else f"{family}nd"
+
+    # If the current citekey already starts with the correct base (with or
+    # without a disambiguation suffix), it still matches — no rename needed.
+    # This is what makes the broadened check safe: NOAUTHOR* keys never
+    # match any real base, so they always proceed to regeneration exactly
+    # as before; a normal citekey that's already correct is left alone.
+    if old_citekey == base or (
+        old_citekey.startswith(base)
+        and old_citekey[len(base):].isalpha()
+        and old_citekey[len(base):].islower()
+    ):
+        return None
 
     if base not in bib:
         return base
