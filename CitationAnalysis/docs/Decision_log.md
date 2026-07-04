@@ -1815,3 +1815,41 @@ using plain deletion, not reject — they will keep reappearing until
 converted to reject actions. Re-check corrections.yaml for any
 draft-source entries that were manually removed rather than confirmed,
 and add proper reject entries for each.
+
+## 2026-07-03 — Stale candidate-flag references fixed across all four correction actions
+
+**Problem:** discovered live while cleaning up the Kovalenko 2003
+cluster. Merging kovalenko2003f into kovalenko2003c produced three
+new, unexpected drafts on the next run — proposals to merge
+kovalenko2003a/2003d/2003e into kovalenko2003f, a citekey already
+deleted two runs earlier.
+
+**Root cause:** merge's cited_by remapping was correct, but nothing
+cleaned up other entries' duplicate-candidate flags that still named
+the deleted discard citekey. Checking further: delete and split had
+the identical gap — any action that deactivates a citekey needs to
+consider whether other entries hold stale references to it in their
+candidate-flag lists, and only merge's cited_by handling had actually
+been built with that discipline.
+
+**Fix:** added one shared helper, _strip_candidate_flag_references(),
+used by merge, delete, and split right after each deactivates a
+citekey. Refactored reject's own (already-correct) cleanup to use the
+same shared field-name constant rather than a fourth independent copy.
+
+**Pattern worth naming:** this is the third bug found in this area
+this session (missing reject action; reject not covering merge
+references; now merge/delete/split not covering candidate-flag
+references to themselves). All three share a cause: duplicate-
+candidate flags are mutable state distributed across many bibliography
+entries, and every citekey-lifecycle action needs explicit handling
+for stale references elsewhere — it doesn't happen automatically.
+Consolidating into one shared helper (rather than three more
+copy-pasted blocks) is meant to reduce the chance of a fourth instance
+of this same gap the next time an action is added.
+
+**Status:** fixed and tested across all four actions. Ready to deploy
+to the cluster — once pulled, the Kovalenko cluster's remaining
+correct state (kovalenko2003a/2003c/2003d/2003e as separate, real
+works; kovalenko2003c absorbed kovalenko2003f) should be fully stable
+with no further spurious draft regeneration.

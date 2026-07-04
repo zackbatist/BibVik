@@ -208,6 +208,36 @@ def _rename_citekey(bib: dict, old_citekey: str, new_citekey: str, note: str) ->
     logger.info("Renamed %r to %r", old_citekey, new_citekey)
 
 
+_CANDIDATE_FLAG_FIELDS = (
+    "_near_duplicate_candidate",
+    "_cross_script_duplicate_candidate",
+    "_titleless_duplicate_candidate",
+)
+
+
+def _strip_candidate_flag_references(bib: dict, removed_citekey: str) -> None:
+    """
+    Strip every reference to `removed_citekey` from every other entry's
+    duplicate-candidate flag lists (_near_duplicate_candidate,
+    _cross_script_duplicate_candidate, _titleless_duplicate_candidate).
+
+    Used by merge, delete, and split whenever an action causes a citekey
+    to stop being a live, active entry. Without this, any other entry
+    that still lists the now-gone citekey as a possible duplicate keeps
+    that stale reference, and append_draft_corrections will regenerate a
+    fresh draft proposing a merge against a citekey that no longer
+    exists — confirmed live when merging kovalenko2003f into
+    kovalenko2003c left kovalenko2003a/2003d/2003e still flagging
+    kovalenko2003f, producing three new spurious drafts on the next
+    --postprocess run.
+    """
+    for entry in bib.values():
+        for field in _CANDIDATE_FLAG_FIELDS:
+            candidates = entry.get(field)
+            if candidates and removed_citekey in candidates:
+                candidates.remove(removed_citekey)
+
+
 # ── YAML loading ──────────────────────────────────────────────────────────────
 
 def load_yaml(path: Path) -> list[dict]:
@@ -301,6 +331,11 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                 if discard in cb_list:
                     entry["cited_by"] = [keep if x == discard else x for x in cb_list]
 
+            # Strip any lingering references to `discard` from every entry's
+            # duplicate-candidate flag lists — see
+            # _strip_candidate_flag_references for why this matters.
+            _strip_candidate_flag_references(bib, discard)
+
             bib[discard]["_deleted"]         = True
             bib[discard]["_merged_into"]     = keep
             bib[discard]["_correction_note"] = note
@@ -321,6 +356,9 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
 
             bib[citekey]["_deleted"]         = True
             bib[citekey]["_correction_note"] = note
+
+            # Same cleanup as merge — see _strip_candidate_flag_references.
+            _strip_candidate_flag_references(bib, citekey)
 
             logger.info("Deleted %r", citekey)
             counts["delete"] += 1
@@ -456,6 +494,10 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
             original["_correction_note"] = note
             original["cited_by"] = []
 
+            # Same cleanup as merge/delete — see
+            # _strip_candidate_flag_references.
+            _strip_candidate_flag_references(bib, citekey)
+
             logger.info(
                 "Split %r into %s", citekey, [item["citekey"] for item in into]
             )
@@ -486,17 +528,12 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
             # identical draft next run; simply deleting the draft entry
             # from corrections.yaml does NOT do this, since the flag lives
             # on the bibliography entry, not in this file.
-            candidate_fields = (
-                "_near_duplicate_candidate",
-                "_cross_script_duplicate_candidate",
-                "_titleless_duplicate_candidate",
-            )
             removed_any = False
             for ck, other_ck in ((ck_a, ck_b), (ck_b, ck_a)):
                 entry = bib.get(ck)
                 if entry is None:
                     continue
-                for field in candidate_fields:
+                for field in _CANDIDATE_FLAG_FIELDS:
                     candidates = entry.get(field)
                     if candidates and other_ck in candidates:
                         candidates.remove(other_ck)
