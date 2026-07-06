@@ -1853,3 +1853,52 @@ to the cluster — once pulled, the Kovalenko cluster's remaining
 correct state (kovalenko2003a/2003c/2003d/2003e as separate, real
 works; kovalenko2003c absorbed kovalenko2003f) should be fully stable
 with no further spurious draft regeneration.
+
+## 2026-07-06 — Worker threads silently blocked by enrichment calls inside the shared lock
+
+**Problem:** during a full-corpus rerun, F1 processing (376 papers,
+3 parallel workers) consistently showed only 1 of 3 workers ever
+completing its LLM detection step. The other two would finish GROBID
+successfully and then simply stop — no error, no timeout, no further
+log output, indefinitely.
+
+**Diagnosis, ruling out alternatives in order:**
+- Confirmed via direct curl that the LLM endpoints for the stalled
+  workers responded correctly and quickly when called directly —
+  ruled out broken/misconfigured LLM containers.
+- Confirmed via `ss -tnp` that zero connections were open to the
+  stalled workers' assigned ports during the stall — ruled out a slow
+  or hanging HTTP request to the LLM.
+- Traced the actual code path from config → worker thread → HTTP call
+  and found no issue in URL assignment, module-level caching, or
+  exception handling.
+- Found the real cause: `_process_one_f1` calls `enrich_entry()`
+  (CrossRef/OpenAlex network lookups) once per GROBID reference,
+  inside the `with state_lock:` block shared by all worker threads.
+  This lock is meant to protect brief, in-memory bibliography
+  mutations (citekey assignment, dedup checks) — not real network I/O.
+  A paper with many GROBID references holds this lock for the
+  cumulative duration of all its enrichment calls, blocking every
+  other worker thread from even attempting their own citekey-matching
+  step in the meantime.
+
+**Fix:** refs needing enrichment are now collected into a list while
+the lock is held (in-memory only, fast), and the actual `enrich_entry`
+calls happen after the lock is released.
+
+**Why this matters beyond this one bug:** this is the third bug this
+session found only through actual execution, not static code review —
+alongside the missing `_query_llm` method (BC) and the `logger`/`log`
+mismatch in run.py (BN). All three passed a full-file static audit
+undetected. This one is more serious than the other two because it
+doesn't crash — it silently degrades multi-worker parallelism to
+effectively single-threaded execution, with no error output at all,
+making it far harder to notice without deliberately watching GPU
+utilization during a real run. Worth treating "the audit read the
+code and found no bug" as a weaker signal than it might seem,
+specifically for concurrency-related code — locks, shared state, and
+what happens *inside* a critical section are exactly the kind of
+thing static review reliably misses, since the bug only manifests
+under real concurrent load with realistic data volume (many GROBID
+references) and realistic config (an email actually set, enabling
+the enrichment path) — none of which a code read alone exercises.

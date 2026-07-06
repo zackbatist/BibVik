@@ -866,6 +866,20 @@ class CitationGraph:
             # Update citekey now that we know it
             _citekey[0] = f1_citekey
 
+            # Collect refs that will need network-bound enrichment, to be
+            # enriched AFTER this lock is released (see below) — enrichment
+            # makes real external API calls (CrossRef/OpenAlex) and must
+            # never run while holding the shared state_lock, or every other
+            # worker thread blocks for as long as this one's enrichment
+            # calls take. A paper with hundreds of GROBID reference-list
+            # entries could hold the lock for many minutes this way,
+            # silently stalling every other paper's citekey-matching step
+            # with no error, no timeout, and no visible symptom beyond
+            # "nothing happens." Confirmed live: this is exactly what was
+            # causing only one of three parallel workers to ever complete
+            # its LLM step during F1 processing.
+            _refs_to_enrich = []
+
             # Add GROBID refs as F2
             for ref in grobid_refs:
                 ref["generation"] = "F2"
@@ -903,11 +917,20 @@ class CitationGraph:
                 else:
                     self.bibliography[ref["citekey"]] = ref
                     if llm_config and llm_config.get("_email"):
-                        _enrich_entry(ref, email=llm_config["_email"])
+                        _refs_to_enrich.append(ref)
 
                     gid = ref.get("_grobid_id", "")
                     if gid:
                         self.grobid_map[(pdf_path.name, gid)] = ref["citekey"]
+
+        # ── Enrichment (outside lock — network calls run in parallel) ─────────
+        # Deliberately outside the lock above: enrich_entry makes real
+        # external API calls (CrossRef/OpenAlex) per reference, and a paper
+        # with hundreds of GROBID entries could otherwise hold the shared
+        # lock for many minutes, blocking every other worker thread with no
+        # error or timeout. See the comment where _refs_to_enrich is built.
+        for ref in _refs_to_enrich:
+            _enrich_entry(ref, email=llm_config["_email"])
 
         # ── Detection ────────────────────────────────────────────────────────
         _fire("llm_body_start")
