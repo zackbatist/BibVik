@@ -25,11 +25,7 @@ strategy and reasoning; sections with code are live analysis.
 
 The original motivating question, from the seed paper (Lund & Sindbæk 2022):
 does the field divide into something like two camps around the origin of the
-Viking Age, along lines that co-vary across **gender, topic, and method**?
-The seed paper proposes this division without drawing firm boundaries and
-without assigning most authors to a side — it names at least one individual
-as an anchor point, but the claim itself is about the tripartite
-co-variation, not about any specific person.
+Viking Age, along lines that co-vary across gender, topic, method and sources of evidence?
 
 This is a substantive, testable proposition from the literature — worth
 distinguishing from the research team's own fieldwork-based instincts about
@@ -38,12 +34,6 @@ informally in the field). Both are legitimate to bring to this analysis, but
 they carry different epistemic weight and should be kept distinct in any
 eventual writeup: one is a claim to confirm or complicate; the other is an
 interpretive lens the team brings to reading whatever the data shows.
-
-Because Julie Lund is both PI on this project and a co-author of the seed
-paper, testing the seed paper's own supposition carries some obvious
-sensitivity. The recommendation is to be transparent about this in whatever
-methods writeup accompanies the analysis, rather than obscuring whose claim
-is under examination.
 
 ## Core methodological stance: no baseline, just independent descriptions
 
@@ -59,7 +49,7 @@ is not a neutral default for this kind of data.
 The working alternative, used throughout this document: treat every
 computed structure — citation-graph community structure, the annotation
 cross-tab, per-work citer profiles, direct homophily rates — as an
-**independent, self-contained description** of the corpus, computed on its
+independent, self-contained description of the corpus, computed on its
 own terms with no reference point implied. None is privileged as ground
 truth against which another is checked. The actual analytical content is in
 the *relationship* between these descriptions once more than one exists:
