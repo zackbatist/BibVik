@@ -34,16 +34,16 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      # - href: manuscript.qmd
-      #   text: Manuscript
-      - href: workshop.qmd
-        text: Workshop
-      - href: analysis/full_analysis.qmd
-        text: Analysis
-      - href: codebook.qmd
-        text: Codebook
       - href: research-protocol.qmd
         text: Research Protocol
+      - href: manuscript/index.qmd
+        text: Manuscript
+      - href: analysis/full_analysis.qmd
+        text: Analysis
+      - href: workshop.qmd
+        text: Workshop
+      - href: codebook.qmd
+        text: Codebook
 toc: true
 toc-depth: 3
 toc-expand: 2
