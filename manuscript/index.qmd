@@ -48,7 +48,7 @@ keywords:
 #   doi: xxx
 #   url: https://zackbatist.info/BibVik
 filters: 
-  - assets/count-para.lua
+  - ../assets/count-para.lua
 format:
   html: default
   pdf:
@@ -65,7 +65,7 @@ format:
         \usepackage{orcidlink}
         \usepackage{marvosym}
     template-partials:
-      - assets/title.tex
+      - ../assets/title.tex
 ---
 
 <!-- ```{r setup}
