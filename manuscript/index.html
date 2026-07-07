@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-07-07">
+<meta name="keywords" content="aaa, bbb, ccc">
 
-<title>meeting – BibVik</title>
+<title>Title TBD – BibVik</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -67,6 +89,20 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+ 
+<!-- CSS added by lua-filter 'count-para' -->
+<style>
+.paragraph-number { 
+  float: left;
+  margin-left: -5em;
+  width: 4.5em;
+  text-align: right;
+  color: grey;
+  font-size: x-small;
+  padding-top: 5px;
+}
+</style>
+    
 
 
 </head>
@@ -80,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../manuscript/index.html">Manuscript</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -110,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../manuscript/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../manuscript/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Manuscript</span></a>
   </div>
 </li>
@@ -142,153 +178,155 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link active" data-scroll-target="#discussion">Discussion</a>
-  <ul class="collapse">
-  <li><a href="#developing-a-controlled-vocabulary" id="toc-developing-a-controlled-vocabulary" class="nav-link" data-scroll-target="#developing-a-controlled-vocabulary">Developing a controlled vocabulary</a></li>
-  <li><a href="#coding-process" id="toc-coding-process" class="nav-link" data-scroll-target="#coding-process">Coding process</a></li>
-  <li><a href="#analysis-of-references" id="toc-analysis-of-references" class="nav-link" data-scroll-target="#analysis-of-references">Analysis of references</a></li>
-  <li><a href="#analysis-of-gender" id="toc-analysis-of-gender" class="nav-link" data-scroll-target="#analysis-of-gender">Analysis of gender</a></li>
-  <li><a href="#predictions-and-expectations" id="toc-predictions-and-expectations" class="nav-link" data-scroll-target="#predictions-and-expectations">Predictions and expectations</a></li>
-  <li><a href="#additional-ideas-and-insights" id="toc-additional-ideas-and-insights" class="nav-link" data-scroll-target="#additional-ideas-and-insights">Additional ideas and insights</a></li>
-  <li><a href="#logistics" id="toc-logistics" class="nav-link" data-scroll-target="#logistics">Logistics</a></li>
-  </ul></li>
-  <li><a href="#action-items" id="toc-action-items" class="nav-link" data-scroll-target="#action-items">Action items</a></li>
-  <li><a href="#links-and-references" id="toc-links-and-references" class="nav-link" data-scroll-target="#links-and-references">Links and references</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#methods-and-materials" id="toc-methods-and-materials" class="nav-link" data-scroll-target="#methods-and-materials">Methods and Materials</a></li>
+  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#back-matter" id="toc-back-matter" class="nav-link" data-scroll-target="#back-matter">Back Matter</a></li>
+  <li><a href="#supplementary-materials" id="toc-supplementary-materials" class="nav-link" data-scroll-target="#supplementary-materials">Supplementary Materials</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Title TBD</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://www.hf.uio.no/iakh/english/people/aca/archaeology/tenured/julielun/">Julie Lund</a> <a href="mailto:julie.lund@iakh.uio.no" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Oslo
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://www.au.dk/isak.roalkvam@cas.au.dk/">Isak Roalkvam</a> <a href="mailto:isak.roalkvam@cas.au.dk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-6974-1374" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Aarhus
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://zackbatist.info">Zachary Batist</a> <a href="mailto:zachary.batist@mcgill.ca" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-0435-508X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            McGill University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>XXXX</p>
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>aaa, bbb, ccc</p>
+  </div>
+</div>
+
+</header>
+
+
+<!-- ```{r setup}
+
+```
+
+
+::: {.cell}
+
+:::
 
 
 
-
-<p>Meeting Notes<br>
-Zack, Julie and Isak<br>
-Friday May 16, 15:15 CEST / 9:15 EST</p>
+``` -->
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><span id="1" class="paragraph-number">[1]</span> <span class="citation" data-cites="lund2022">Lund and Sindbæk (<a href="#ref-lund2022" role="doc-biblioref">2022</a>)</span> <!-- The LaTeX template needs at least one reference to build, so using this as a placeholder. --></p>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+</section>
+<section id="methods-and-materials" class="level1">
+<h1>Methods and Materials</h1>
+</section>
+<section id="findings" class="level1">
+<h1>Findings</h1>
+</section>
 <section id="discussion" class="level1">
 <h1>Discussion</h1>
-<section id="developing-a-controlled-vocabulary" class="level2">
-<h2 class="anchored" data-anchor-id="developing-a-controlled-vocabulary">Developing a controlled vocabulary</h2>
-<ul>
-<li>Three axes:
-<ul>
-<li>Topics: What is the paper about? (i.e.&nbsp;diaspora, mobility, gender, ritual, etc)</li>
-<li>Methods: What methods were applied in the paper? (i.e.&nbsp;spatial analysis, genetics, stable isotope analysis, finds analysis)</li>
-<li>Kind of contribution (i.e.&nbsp;field report, “standard” scientific paper, review of prior work, opinion)</li>
-</ul></li>
-<li>The medium (i.e.&nbsp;journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.</li>
-<li>It’s ok to assign multiple terms to each record.</li>
-</ul>
 </section>
-<section id="coding-process" class="level2">
-<h2 class="anchored" data-anchor-id="coding-process">Coding process</h2>
-<ul>
-<li>A research assistant will be able to start work in September, and will be able to work for four weeks.</li>
-<li>Limited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.</li>
-<li>Since this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.</li>
-<li>The research assistant will ideally be a more experienced student in the field of Viking Age archaeology.</li>
-<li>Zack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns.</li>
-</ul>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
 </section>
-<section id="analysis-of-references" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-of-references">Analysis of references</h2>
-<ul>
-<li>We won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.</li>
-<li>NLP using scite is not as useful as initially thought.
-<ul>
-<li>tends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al.&nbsp;2023).</li>
-<li>Its corpus is limited to works put out by partnered publishers.</li>
-</ul></li>
-<li>Potential alternative to scite, but requires greater knowledge of NLP to implement:
-<ul>
-<li>https://github.com/davidjurgens/citation-function</li>
-<li>https://jurgens.people.si.umich.edu/citation-function</li>
-</ul></li>
-<li>We may be able to derive a sample based on network statistics, i.e.&nbsp;the most or least central references.</li>
-</ul>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-lund2022" class="csl-entry" role="listitem">
+Lund, Julie, and Søren M. Sindbæk. 2022. <span>“Crossing the <span>Maelstrom</span>: <span>New Departures</span> in <span>Viking Archaeology</span>.”</span> <em>Journal of Archaeological Research</em> 30 (2): 169–229. <a href="https://doi.org/10.1007/s10814-021-09163-3">https://doi.org/10.1007/s10814-021-09163-3</a>.
+</div>
+</div>
 </section>
-<section id="analysis-of-gender" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-of-gender">Analysis of gender</h2>
-<ul>
-<li>Our intent is to identify citation biases against women.</li>
-<li>The goal is not to identify gender diversity, which is not supported by our method.</li>
-</ul>
+<section id="back-matter" class="level1">
+<h1>Back Matter</h1>
+<!--
+## Acknowledgments
+
+
+## Funding
+
+
+## Competing Interests
+
+
+## Author Contributions
+
+
+## Informed Consent
+
+
+## Data Availability Statement
+
+
+## Author Bios
+
+
+## Figure Captions
+-->
 </section>
-<section id="predictions-and-expectations" class="level2">
-<h2 class="anchored" data-anchor-id="predictions-and-expectations">Predictions and expectations</h2>
-<ul>
-<li>We’re gonna find sub-clusters within clusters, and bridging clusters.</li>
-<li>Some sub-clusters will be tight-knit and closed, others very broad and open.</li>
-<li>Some will be very focused on specific topics.</li>
-<li>There will be many links across institutions, they are not really that fixed.</li>
-<li>Some citation chains will emerge that reflect casual observations (just a few examples):
-<ul>
-<li>Lots of cross-references within the Mälaren valley community.</li>
-<li>Tight-knit cluster among papers that are concerned with ritual.</li>
-<li>Major computational cluster at Aarhus.</li>
-</ul></li>
-<li>If had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.</li>
-<li>Clustering in methods by “academic upbringing”, which has a localized character</li>
-<li>We may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data.</li>
-</ul>
-</section>
-<section id="additional-ideas-and-insights" class="level2">
-<h2 class="anchored" data-anchor-id="additional-ideas-and-insights">Additional ideas and insights</h2>
-<ul>
-<li>Keeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.</li>
-<li>We’ll be able to do some non-network descriptive statistics:
-<ul>
-<li>Distribution of topics by affiliations of authors.</li>
-<li>Distribution of topics by number of co-authors.</li>
-<li>Temporal distributions of genders of lead authors.</li>
-<li>Gender of lead author by size and genders of their co-authors.</li>
-</ul></li>
-</ul>
-</section>
-<section id="logistics" class="level2">
-<h2 class="anchored" data-anchor-id="logistics">Logistics</h2>
-<ul>
-<li>Keep things on GitHub for now.</li>
-<li>Keep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the <a href="https://about.archaeo.social/">archaeo-social</a> collective).</li>
-</ul>
-</section>
-</section>
-<section id="action-items" class="level1">
-<h1>Action items</h1>
-<p><strong>Next meeting:</strong> Monday June 2, 15:15 CEST / 9:15 EST</p>
-<p><strong>Zack:</strong></p>
-<ul>
-<li>Assemble a series of core variables to be included in a data frame</li>
-<li>Initiate a script to scrape abstracts and metadata</li>
-<li>Modify the research protocol with today’s notes
-<ul>
-<li>Expectations and predictions</li>
-<li>Tone down expectations for analysis of references (based on volume of papers, limited time)</li>
-<li>Document the controlled vocabulary and coding process</li>
-</ul></li>
-</ul>
-<p><strong>Julie:</strong></p>
-<ul>
-<li>Draft controlled vocabulary for article annotation</li>
-</ul>
-<p><strong>Isak:</strong></p>
-<ul>
-<li>Review and modify the R script</li>
-</ul>
-</section>
-<section id="links-and-references" class="level1">
-<h1>Links and references</h1>
-<ul>
-<li>Peterson, David, and Aaron Panofsky. 2023. “Metascience as a Scientific Social Movement.” Minerva 61 (2): 147–74. https://doi.org/10.1007/s11024-023-09490-3.</li>
-<li>Bakker, Caitlin, Nicole Theis-Mahon, and Sarah Jane Brown. 2023. “Evaluating the Accuracy of Scite, a Smart Citation Index.” Hypothesis: Research Journal for Health Information Professionals 35 (2). https://doi.org/10.18060/26528.</li>
-<li>Thesis by Julie’s former student, about us/we/them in Viking Age literature.</li>
-<li>Open source alternative to scite:
-<ul>
-<li>https://github.com/davidjurgens/citation-function</li>
-<li>https://jurgens.people.si.umich.edu/citation-function</li>
-</ul></li>
-</ul>
+<section id="supplementary-materials" class="level1">
+<h1>Supplementary Materials</h1>
 
 
 </section>

@@ -40,303 +40,133 @@
     ]
   },
   {
-    "objectID": "sections/12_back-matter.html",
-    "href": "sections/12_back-matter.html",
-    "title": "1 Back Matter",
+    "objectID": "notes/2025-08-11-meeting.html",
+    "href": "notes/2025-08-11-meeting.html",
+    "title": "Discussion Topics",
     "section": "",
-    "text": "1 Back Matter"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\nDiscussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\nAction Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\nLinks and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11."
   },
   {
-    "objectID": "sections/06_conclusion.html",
-    "href": "sections/06_conclusion.html",
-    "title": "1 Conclusion",
+    "objectID": "notes/2025-06-16-meeting.html",
+    "href": "notes/2025-06-16-meeting.html",
+    "title": "Discussion Topics",
     "section": "",
-    "text": "1 Conclusion"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 16, 15:15 CEST / 9:15 EST"
   },
   {
-    "objectID": "sections/04_findings.html",
-    "href": "sections/04_findings.html",
-    "title": "1 Findings",
+    "objectID": "notes/2025-06-16-meeting.html#developing-the-codebook",
+    "href": "notes/2025-06-16-meeting.html#developing-the-codebook",
+    "title": "Discussion Topics",
+    "section": "Developing the codebook",
+    "text": "Developing the codebook\nJulie worked on it with another colleague (I don’t recall his name). We discussed means of improving it further. Specifically: develop groupings, and highlighting or boldening terms that stand out as the core concept or heading.\nWe also clarified how this is an iterative process. The codes are not meant to be prescriptive, and should adapt to reflect the contents of the corpus and the realizations we make as coding progresses."
+  },
+  {
+    "objectID": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
+    "href": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
+    "title": "Discussion Topics",
+    "section": "Assessing the quality of scholarly metadata",
+    "text": "Assessing the quality of scholarly metadata\nZack looked into the quality of scholarly metadata indexes, and found that they are not really suited for non-anglophone monographs and grey literature, which constitutes a significant aspect of our corpus. He proposed an alternative solution: to use Grobid to extract bibliographic references from PDFs using targeted machine learning algorithms.\nThis approach has a few caveats: We need full and clean PDFs of all works in the corpus, which may be particularly challenging for books. Julie has this covered based on her extensive library and teaching materials. For works that are published as part of anthologies and edited volumes, we also need to isolate references for each chapter or book section. Zack will develop a workflow to assist with this vetting, and Isak will test it out.\nThis led to some discussion about the nature and scope of the corpus. We reiterated the sense that we should be led by the questions and the practical analytical challenges, rather than the data contained in the seed paper. For instance, the disproportionate number of references in a book relative to a journal article may affect the constitution of a network and generate misleading findings (especially regarding centrality metrics), and it may be prudent to exclude them, or to replace them with a series of papers by the same author that cover the same ground as the book. Moreover, an excavation report may be more descriptive and engage with the literature to a lesser extent than an “standalone” study (for lack of a better term right now), and we may want to discard those. These considerations make the difference between an “easy” bibliometric analysis and a meaningful one."
+  },
+  {
+    "objectID": "notes/2025-06-16-meeting.html#miscellaneous",
+    "href": "notes/2025-06-16-meeting.html#miscellaneous",
+    "title": "Discussion Topics",
+    "section": "Miscellaneous",
+    "text": "Miscellaneous\nZack mentioned his brief social media interactions, which pointed to Christian Bergeron’s recent work with the same/similar toolsets, and whose presentation in April coincidentally helped inspire those whole project. Zack is also consulting with Till Grallert, who develops software to convert between TEI and bibtex (among other data formats used to store bibliographic data). It’s great that we’re relying so much on tools developed by the digital humanities!\nWe addressed the general plans for the workshop, which we agreed we should hold in March. This will provide greater opportunity to generate meaningful findings and to invite other interesting participants."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html",
+    "href": "notes/2025-05-16-meeting.html",
+    "title": "Discussion",
     "section": "",
-    "text": "1 Findings"
+    "text": "Meeting Notes\nZack, Julie and Isak\nFriday May 16, 15:15 CEST / 9:15 EST"
   },
   {
-    "objectID": "sections/02_background.html",
-    "href": "sections/02_background.html",
-    "title": "1 Background",
+    "objectID": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
+    "href": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
+    "title": "Discussion",
+    "section": "Developing a controlled vocabulary",
+    "text": "Developing a controlled vocabulary\n\nThree axes:\n\nTopics: What is the paper about? (i.e. diaspora, mobility, gender, ritual, etc)\nMethods: What methods were applied in the paper? (i.e. spatial analysis, genetics, stable isotope analysis, finds analysis)\nKind of contribution (i.e. field report, “standard” scientific paper, review of prior work, opinion)\n\nThe medium (i.e. journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.\nIt’s ok to assign multiple terms to each record."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#coding-process",
+    "href": "notes/2025-05-16-meeting.html#coding-process",
+    "title": "Discussion",
+    "section": "Coding process",
+    "text": "Coding process\n\nA research assistant will be able to start work in September, and will be able to work for four weeks.\nLimited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.\nSince this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology.\nZack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#analysis-of-references",
+    "href": "notes/2025-05-16-meeting.html#analysis-of-references",
+    "title": "Discussion",
+    "section": "Analysis of references",
+    "text": "Analysis of references\n\nWe won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.\nNLP using scite is not as useful as initially thought.\n\ntends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al. 2023).\nIts corpus is limited to works put out by partnered publishers.\n\nPotential alternative to scite, but requires greater knowledge of NLP to implement:\n\nhttps://github.com/davidjurgens/citation-function\nhttps://jurgens.people.si.umich.edu/citation-function\n\nWe may be able to derive a sample based on network statistics, i.e. the most or least central references."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#analysis-of-gender",
+    "href": "notes/2025-05-16-meeting.html#analysis-of-gender",
+    "title": "Discussion",
+    "section": "Analysis of gender",
+    "text": "Analysis of gender\n\nOur intent is to identify citation biases against women.\nThe goal is not to identify gender diversity, which is not supported by our method."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#predictions-and-expectations",
+    "href": "notes/2025-05-16-meeting.html#predictions-and-expectations",
+    "title": "Discussion",
+    "section": "Predictions and expectations",
+    "text": "Predictions and expectations\n\nWe’re gonna find sub-clusters within clusters, and bridging clusters.\nSome sub-clusters will be tight-knit and closed, others very broad and open.\nSome will be very focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering in methods by “academic upbringing”, which has a localized character\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
+    "href": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
+    "title": "Discussion",
+    "section": "Additional ideas and insights",
+    "text": "Additional ideas and insights\n\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors."
+  },
+  {
+    "objectID": "notes/2025-05-16-meeting.html#logistics",
+    "href": "notes/2025-05-16-meeting.html#logistics",
+    "title": "Discussion",
+    "section": "Logistics",
+    "text": "Logistics\n\nKeep things on GitHub for now.\nKeep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the archaeo-social collective)."
+  },
+  {
+    "objectID": "manuscript/sections/12_back-matter.html",
+    "href": "manuscript/sections/12_back-matter.html",
+    "title": "Back Matter",
     "section": "",
-    "text": "1 Background"
+    "text": "Back Matter"
   },
   {
-    "objectID": "scratchpad.html#working-with-open-scholarly-metadata",
-    "href": "scratchpad.html#working-with-open-scholarly-metadata",
-    "title": "Scratchpad",
-    "section": "0.2 Working with open scholarly metadata",
-    "text": "0.2 Working with open scholarly metadata\n# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\n\n# It's not necessary to retrieve abstracts via API.\n# Abstracts are too messy and inconsistent, and it's a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#cleaning-and-integrating-the-annotations-spreadsheet",
-    "href": "scratchpad.html#cleaning-and-integrating-the-annotations-spreadsheet",
-    "title": "Scratchpad",
-    "section": "0.3 Cleaning and integrating the annotations spreadsheet",
-    "text": "0.3 Cleaning and integrating the annotations spreadsheet",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#intial-plots",
-    "href": "scratchpad.html#intial-plots",
-    "title": "Scratchpad",
-    "section": "1.1 Intial plots",
-    "text": "1.1 Intial plots\n\n1.1.1 Number of publications per year",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#gender-by-first-author-and-all-authors",
-    "href": "scratchpad.html#gender-by-first-author-and-all-authors",
-    "title": "Scratchpad",
-    "section": "1.2 Gender by first author and all authors",
-    "text": "1.2 Gender by first author and all authors\nPublications by gender for each year. We also discussed looking at single author work and collaborations separately, but have not gotten around to doing that yet.\n\n\n\n\n\n\n\n\n\n\n1.2.1 Primary topic, in aggregate and over time\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.2.2 Primary method, in aggregate and over time\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.2.3 Primary sources of evidence, in aggregate and over time\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.2.4 Seconday topics by primary topic\n\n\n\n\n\n\n\n\n\n\n\n1.2.5 Secondary methods by primary method\n\n\n\n\n\n\n\n\n\n\n\n1.2.6 Seconday sources of evidence by primary source of evidence\n\n\n\n\n\n\n\n\n\n\n\n1.2.7 Primary topic by first author gender\nFor the subsequent three plots we could also try normalizing the proportions for each topic against the total proportion men/women in the entire corpus.",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#primary-method-by-first-author-gender",
-    "href": "scratchpad.html#primary-method-by-first-author-gender",
-    "title": "Scratchpad",
-    "section": "1.3 Primary method by first author gender",
-    "text": "1.3 Primary method by first author gender",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#primary-source-of-evidence-by-first-author-gender",
-    "href": "scratchpad.html#primary-source-of-evidence-by-first-author-gender",
-    "title": "Scratchpad",
-    "section": "1.4 Primary source of evidence by first author gender",
-    "text": "1.4 Primary source of evidence by first author gender",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#citation-networks",
-    "href": "scratchpad.html#citation-networks",
-    "title": "Scratchpad",
-    "section": "1.5 Citation networks",
-    "text": "1.5 Citation networks\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#citation-contexts",
-    "href": "scratchpad.html#citation-contexts",
-    "title": "Scratchpad",
-    "section": "1.6 Citation contexts",
-    "text": "1.6 Citation contexts\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "scratchpad.html#citation-clusters",
-    "href": "scratchpad.html#citation-clusters",
-    "title": "Scratchpad",
-    "section": "1.7 Citation clusters",
-    "text": "1.7 Citation clusters\nTBD: Integrate the BibVik-CitationAnalysis toolkit here, somehow.",
-    "crumbs": [
-      "Scratchpad"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html",
-    "href": "research-protocol.html",
-    "title": "Research Protocol",
+    "objectID": "manuscript/sections/06_conclusion.html",
+    "href": "manuscript/sections/06_conclusion.html",
+    "title": "Conclusion",
     "section": "",
-    "text": "Note\n\n\n\nNote that the project has significantly evolved since drafting this protocol, and this document does not reflect our current scope of work. It still has value as a marker of our original intent.",
-    "crumbs": [
-      "Research Protocol"
-    ]
+    "text": "Conclusion"
   },
   {
-    "objectID": "research-protocol.html#predictions-and-expectations",
-    "href": "research-protocol.html#predictions-and-expectations",
-    "title": "Research Protocol",
-    "section": "1.1 Predictions and Expectations",
-    "text": "1.1 Predictions and Expectations\nHere we document some predicted outcomes, which may or may not come to fruition. However, it is good to express our assumptions and expectations at this early point, for purposes of reflexivity.\n\nWe are going to find some sub-clusters within clusters, and perhaps also “bridging” clusters.\nSome sub-clusters will be tight-knit and closed, others will be broad and open.\nSome clusters will be focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf we had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering of methods by “academic upbringing”, which has a localized character.\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#the-corpus-of-works",
-    "href": "research-protocol.html#the-corpus-of-works",
-    "title": "Research Protocol",
-    "section": "2.1 The corpus of works",
-    "text": "2.1 The corpus of works\nThis project is fundamentally rooted on analysis of published papers, reports and proceedings, which we consider representative of a broader discursive phenomenon.\nThe corpus of works is rooted in Lund and Sindbæk (2022), which is a review that… [summarize the paper in one or two sentences here]. See the supplement for information on alternative (and less suitable) methods for producing a corpus that we decided not to pursue.\nAside from its representative content, Lund and Sindbæk (2022) is a great seed paper due to the circumstances of its creation. It is authored by two eminent archaeologists of the Viking Age, who are intimately familiar with the community of which they wrote. The authors also acknowledge their adherence to the different fields they identify, which imbues the paper with a balanced perspective. Moreover, the paper, which was published in the Journal of Archaeological Science, underwent an unusually rigorous peer-review process through which seven anonymous reviewers recommended additional sources and commentary on their respective character.1 Overall, the seed paper is a summary of a discursive phenomenon led by two extremely experienced archaeologists who represent different yet converging perspectives, which has been supplemented and validated by a jury of seven anonymous peers.\nThe corpus will emerge from this seed paper through its bibliographic references, which will be identified using CrossRef or OpenCitations. Using a genealogical metaphor, the seed paper may be referred to as P (for parental generation), its references as F1 (first filial generation), their bibliographic references as F2 (second filial generation), and so on. These linkages will enable us to ascertain whether the chains of references that each paper relies on follow any identifiable patterns, amalgamate into any discrete clusters, or point toward any “common ancestors” from which new lineages emerged or diverged.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#annotating-papers",
-    "href": "research-protocol.html#annotating-papers",
-    "title": "Research Protocol",
-    "section": "2.2 Annotating papers",
-    "text": "2.2 Annotating papers\nThis formal genealogical approach will be greatly enhanced through qualitative assessment of each paper. Ascertaining the qualities of each paper will enable us to understand their respective roles in the corpus rather than their mere presence.\nA significant portion of work will therefore involve identifying, characterizing and annotating the series of papers that are referenced in the seed paper. This will entail extracting structured information regarding the papers’ authors and publication venues, and characterizing each paper by kind (i.e. reports on findings, reviews of prior work, opinion pieces, etc). We will then determine the character of each paper, as considered in Lund and Sindbæk (2022), and through an additional qualitative assessment of each paper following an a priori coding protocol (methodological details presented below).\nIt should be noted that we will only be able to annotate papers referenced in the seed paper. In other words, our qualitative evaluation is limited to a single generation. However, we may sample the F1 generation and conduct deeper qualitative analysis based on sampled subsets.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#relational-and-contextual-ties",
-    "href": "research-protocol.html#relational-and-contextual-ties",
-    "title": "Research Protocol",
-    "section": "2.3 Relational and contextual ties",
-    "text": "2.3 Relational and contextual ties\nWe will also include additional information to help contexualize each paper as a product of social and situational circumstances. This will involve retrieving additional metadata about the papers, including the journals or venues in which they were published, as well as information about their authors, including their affiliations, genders and areas of expertise.2 Much of this information may be retrieved from CrossRef.\nThis information will allow us to ascertain a few key insights regarding publishing and citation practices. For instance, we may observe that certain kinds of work tend to be published in edited volumes rather than as standalone papers, to have specific institutional origins, to have authors of a specific gender. Aside from documenting the nature of discrete clusters of works, these factors may contribute to greater consideration of citational politics.\nRegarding gender, we may use the gender R package, created specifically for this purpose. The information assigned through both of these processes will have to be manually verified, but the community is small enough to make this feasible. We may consult with community interest groups (e.g. the SAA Queer Archaeology Interest group) to help support or provide critical feedback on “best practices” for identifying gender or other identity-based information.\nIt is important to be clear about our intent, since this influences (a) the ways we go about tryjng to achieve our goals, and (b) the reception of our approach in relation to contemporary discourse on gender diversity in research. Out goal is not to identify gender diversity or to assign gendered characteristics to certain clusters or subclusters, and these objectives would not be supported by our methods and supporting data. Instead, our intent is to identify citation biases and to critically assess the citational politics of research on the emergence of the Viking Age.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#qualitative-methods",
-    "href": "research-protocol.html#qualitative-methods",
-    "title": "Research Protocol",
-    "section": "4.1 Qualitative methods",
-    "text": "4.1 Qualitative methods\nA research assistant will annotate each reference using a series of keywords deriving from a controlled vocabulary. The controlled vocabulary has three axes:\n\nTopics\n\nWhat is the paper about?\ni.e. diaspora, mobility, gender, ritual, etc\n\nMethods\n\nWhat methods were applied in the paper?\ni.e. spatial analysis, genetics, stable isotope analysis, finds analysis\n\nKind of contribution\n\ni.e. field report, “standard” scientific paper, review of prior work, opinion, etc\n\nMedium\n\ni.e. journal article, book, chapter in an edited volume, etc\n\n\nThe research assistant will identify and record key terms from the controlled vocabulary for each paper, based on their reading of the abstract, introduction, conclusion or other summaritive section. Since this does not involve comprehensive or open coding, this can simply be entered into a customized spreadsheet, rather than using some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology, who may also benefit from this as a learning experience. Zack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns. Julie will then verify the annotations after the research assistant has completed the work.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#analyzing-references",
-    "href": "research-protocol.html#analyzing-references",
-    "title": "Research Protocol",
-    "section": "4.2 Analyzing references",
-    "text": "4.2 Analyzing references\nWe may characterize the citations themselves to ascertain the nature of each reference. We may follow a relatively simple classification scheme, i.e. supporting, contrasting/disputing or mentioning, which can be determined using natural language processing (NLP) (specifically, the scite zotero plugin). Alternatively, we may qualitatively code each reference following a more specialized coding scheme, as per Huvila, Andersson, and Sköld (2022) (see additional notes on this approach below).\nHowever, upon further reflection, this may not be feasible given the project’s timeframe, our material resources, and the reliability of the software solutions at hand. Qualitative coding can be very time-consuming, and we are only able to hire an assistant for four weeks of work to analyze over 500 references (in addition to other research tasks). Moreover, scite tends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker, Theis-Mahon, and Brown 2023). Additionally, scite’s corpus is limited to works put out by partnered publishers. There is an open source alternative to scite (see Jurgens (2017); https://jurgens.people.si.umich.edu/citation-function) but it requires more knowledge of NLP methods than we are able to implement.\nThese challenges aside, it may be reasonable to derive a sample based on network statistics, and then qualitatively annotate the references within the sample.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#statistical-analysis",
-    "href": "research-protocol.html#statistical-analysis",
-    "title": "Research Protocol",
-    "section": "4.3 Statistical analysis",
-    "text": "4.3 Statistical analysis\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#ai-tools-and-resources",
-    "href": "research-protocol.html#ai-tools-and-resources",
-    "title": "Research Protocol",
-    "section": "4.4 AI tools and resources",
-    "text": "4.4 AI tools and resources\nWe may apply LLM, NLP or topic-modelling methods to simplify, verify, or compare how it differs from human-led classification of research papers.\nMaxQDA has some guidelines on how to use AI to enhance literature reviews. However it’s unclear whether any effort has been made to specialize the use of AI toward lit reviews specifically. I’m sure there are additional services that specialize in AI-assisted literature reviews too.\nTopic modelling??\nI wonder if we can relate this work to Alex Brandsen’s dissertation research (Brandsen and Lippok 2021; Brandsen 2022, 2023).",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#alternative-means-of-assembling-the-corpus",
-    "href": "research-protocol.html#alternative-means-of-assembling-the-corpus",
-    "title": "Research Protocol",
-    "section": "4.5 Alternative means of assembling the corpus",
-    "text": "4.5 Alternative means of assembling the corpus\nThere are a few alternative approaches we may take to collect different kinds of datasets.\nOne approach is to conduct systematic keyword searches to return a subset of the archaeological literature for deeper evaluation, using a tool like Publish or Perish or the various R packages designed to access scholarly reference databases (e.g. rcrossref, wosr, openalexR, citecorp). This affords a relatively systematic approach to literature review, since the search’s scope is pre-established. However it is rather inflexible and risks becoming an extremely monumental undertaking. From prior experience attempting such a study, keyword searches return an extreme quantity of results, even when limiting the search by specific date ranges and journal titles. Moreover, the terminology that archaeologists use may not match the terms we use as scholars of scientific practice. Having to account for more terms produces more duplicates and false positives, which must be manually winnowed to a dataset of a viable, yet still realistic size.\nAnother approach is to examine the contents of all writing produced in a compendium of selected journals or publication venues. This requires justification for why the journals are selected and how this aligns with the study’s scope. This is viable in situations where the study is investigating publication practices (i.e. referencing R scripts, as per Schmidt and Marwick (2020)), but is harder to justify when exploring the scientific content of published work.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#parsing-references-from-pdfs",
-    "href": "research-protocol.html#parsing-references-from-pdfs",
-    "title": "Research Protocol",
-    "section": "4.6 Parsing references from PDFs",
-    "text": "4.6 Parsing references from PDFs\nIt has become clear that the quality of scholarly metadata is very poor for anything that is not an english peer-reviewed STEM article. Through a cursory examination of the major databases (Scopus, Web of Science, OpenAlex, CrossRef, etc), we found that these sources are not useful for our corpus, which includes many monographs and grey literature in languages other than english. It may therefore be better to extract references directly from the text of each work, at least for works that are not in those databases, using a tool like Grobid.\nThese sources can then be reconciled with the rest of the database through a common citekey format (first author’s last name + year of publication, and then double check all duplicates). Grobid also has a “consolidation” service that normalizes references against the CrossRef (or other) database.\nThis requires us to have good quality PDFs of each work, which Julie does have through her private library and teaching materials. Moreover, this also presents us with an opportunity to be more thoughtful in assembling our corpus. For instance, we may want to exclude whole books because the disproportionate number of references they contain will surely distort the citation networks (especially when it comes to centrality metrics). So, if a book is actually presenting the culmination of a few articles by the same author, it may be more prudent to include those instead of the book. Basically, this is an opportunity to transform the bibliography from the seed paper — which was never intended to be used in this way — into a functional and purposeful dataset.\nSo here is a basic protocol for vetting the quality of work that will be put into Grobid. Take detailed notes while doing this vetting. This involves making decisions, and we need to be transparent and reflexive about how we are developing our corpus.\n\nFilter out any journal articles; assume journal articles from the past 10-15 years have proper scholarly metadata.\nFlag any books that may be better represented by articles by the same authors based on your own experience and familiarity with the community of practice, or which may not be suitable to include in our analysis (i.e. a museum catalog).\nFor all books, book chapters, etc:\n\nMake sure we have the PDF available.\n\nPrioritize native PDFs, not scanned documents.\nIf scanned, then ensure it is good quality.\n\nMake sure the PDF is of the appropriate page range.\n\nFor book chapters:\n\nClip any pages before the first page.\nClip any pages after the last page of the bibliography.\nIf the book assembles all references into a common bibliography, flag the record for manual entry.\n\nFor whole books and/or theses:\n\nEnsure the PDF contains the full contents, i.e. not just a preview of the front matter.\n\n\nMake sure the metadata is correct:\n\nVerify that the item is correctly identified as a book, book chapter or journal articles.\nFor book chapters, make sure that the book title, editors, publisher, place, and page range are correct.\nFor book chapters, verify that book editors are not listed as authors of the chapters.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#workflows",
-    "href": "research-protocol.html#workflows",
-    "title": "Research Protocol",
-    "section": "6.1 Workflows",
-    "text": "6.1 Workflows\nThe is a quarto-based project situated in a git repository (BibVik). Zack is the repository’s primary maintainer, but Isak has been granted full administrative access, including the ability to make commits directly to the repository without submitting a pull request. Zack and Isak will clearly communicate about what they are working on so as to avoid generating conflictng commit histories which would produce a messy merge scenario.\nFor less technical users, it would be best to annotate automatically-generated PDFs or to work with an un-tracked copy of the markdown files, whose diffs can then be identified and applied by someone who is more familiar with using git.\nHere are a few procedural notes and workflows:\n\nAll writing is done in the file pertaining to the specific section, which are compiled into BibVik.qmd, which is where the paper’s main parameters are specified.\nReferences are cited using @ followed by the citekey, which follows a strict pattern of the first author’s surname followed by the year of publication, all lowercase and without spaces, e.g. @lund2022.\nReferences are stored in assets/BibVik.bib which is an automatically-updated export of Zack’s Zotero library. If you want to include a reference that is not yet in the library, refer to the DOI and Zack will add it in his revisions.\nAlthough we are keeping this as a private repository for now, all of this can be made into a public website. To preview the site locally, use quarto preview and navigate to localhost:7777 in your browser.\n\nHere is an overview of the directory structure:\nBibVik/                                 # Main directory\n    ├── BibVik.qmd                      # The paper's config file\n    ├── sections/                       # Files corresponding with each of the paper's sections\n        ├── 01_introduction.qmd\n        ├── 02_background.qmd\n        ├── etc.qmd\n    ├── assets/                         # Files that support quarto rendering\n        ├── BibVik.bib                  # Biblatex file (currently synced with Zack's entire Zotero library)\n        ├── chicago-author-date.csl     # Citation style language used to generate pretty citations\n        ├── title.tex                   # LaTeX include to generate pretty PDFs\n    ├── data/                           # Where the data live\n    ├── figures/                        # Where figures live\n    ├── R/                              # R functions called from the embedded code blocks\n    ├── research-protocol.qmd           # This planning document\n    ├── README                          # Project documentation\n    ├── _quarto.yml                     # Quarto config file\n    ├── .gitignore                      # Git support file\n    ├── .luarc.json                     # Ignored quarto support file\n    ├── .quarto                         # Various quarto support files\n    ├── _site                           # Where the rendered website files live",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#roles-and-responsibilities",
-    "href": "research-protocol.html#roles-and-responsibilities",
-    "title": "Research Protocol",
-    "section": "6.2 Roles and responsibilities",
-    "text": "6.2 Roles and responsibilities\nJulie Lund: Project lead and point person for anything related to Viking Age archaeology, and the professional community and interests that this paper is concerned with.\nIsak Roalkvam: Contributes insights about Viking Age archaeology and the professional community. Works with Zack to implement methodological decisions and processes in code.\nZack Batist: Contributes experience doing bibliometric research in the domain of archaeology. Works with Isak and Julie to derive sound methodological decisions and ensure that they are implemented in a manner that produces valuable and defensible outcomes.\nResearch assistant: Responsible for qualitatively evaluating the content of research papers that form the basis of this study.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#funding",
-    "href": "research-protocol.html#funding",
-    "title": "Research Protocol",
-    "section": "6.3 Funding",
-    "text": "6.3 Funding\nThe Research Assistant’s salary is funded by the Faculty of Humanities here at the University of Oslo.",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#timeline",
-    "href": "research-protocol.html#timeline",
-    "title": "Research Protocol",
-    "section": "6.4 Timeline",
-    "text": "6.4 Timeline\nTBD",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "research-protocol.html#footnotes",
-    "href": "research-protocol.html#footnotes",
-    "title": "Research Protocol",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nI wonder if we could also examine, or perhaps publish, an edited version of the peer reviews.↩︎\nNote that keywords submitted by authors are not included in this list. This is due to their simplicity and the likelyhood of them being irrelevant to our own objectives. Additionally, some data sources (i.e. anthologies or edited volumes) do not typically use keywords, which will limit our ability to draw comprehensive comparisons.↩︎",
-    "crumbs": [
-      "Research Protocol"
-    ]
-  },
-  {
-    "objectID": "notes/2025-07-07-meeting.html",
-    "href": "notes/2025-07-07-meeting.html",
-    "title": "1 Discussion Topics",
+    "objectID": "manuscript/sections/04_findings.html",
+    "href": "manuscript/sections/04_findings.html",
+    "title": "Findings",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\n2 Action Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\n3 Links and references"
+    "text": "Findings"
   },
   {
-    "objectID": "notes/2025-06-02-meeting.html",
-    "href": "notes/2025-06-02-meeting.html",
-    "title": "1 Discussion Topics",
+    "objectID": "manuscript/sections/02_background.html",
+    "href": "manuscript/sections/02_background.html",
+    "title": "Background",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\n2 Action Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\n3 Links and references"
+    "text": "Background"
   },
   {
-    "objectID": "manuscript.html",
-    "href": "manuscript.html",
+    "objectID": "manuscript/index.html",
+    "href": "manuscript/index.html",
     "title": "Title TBD",
     "section": "",
-    "text": "1 Introduction\n[1] Lund and Sindbæk (2022) \n\n\n2 Background\n\n\n3 Methods and Materials\n\n\n4 Findings\n\n\n5 Discussion\n\n\n6 Conclusion\n\n\n7 References\n\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3.\n\n\n\n\n8 Back Matter\n\n\n\n9 Supplementary Materials"
+    "text": "Introduction\n[1] Lund and Sindbæk (2022) \n\n\nBackground\n\n\nMethods and Materials\n\n\nFindings\n\n\nDiscussion\n\n\nConclusion\n\n\nReferences\n\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3.\n\n\n\n\nBack Matter\n\n\n\nSupplementary Materials",
+    "crumbs": [
+      "Manuscript"
+    ]
   },
   {
     "objectID": "codebook.html",
@@ -362,8 +192,8 @@
     "objectID": "codebook.html#authorship",
     "href": "codebook.html#authorship",
     "title": "Codebook",
-    "section": "2 Authorship",
-    "text": "2 Authorship\nLast names of all authors\nEstablished during data preparation.\nSeparated by a comma and space.\nInstitutional affiliation of the first author\nThe full name of the affiliation stated on the paper.\nValues will be normalized after coding is coding is completed.\nGenders of all authors\nExpressed as M or F.\nSeparated by a comma and a space.\nBased on their first name and coders’ knowledge about their peer community.",
+    "section": "Authorship",
+    "text": "Authorship\nLast names of all authors\nEstablished during data preparation.\nSeparated by a comma and space.\nInstitutional affiliation of the first author\nThe full name of the affiliation stated on the paper.\nValues will be normalized after coding is coding is completed.\nGenders of all authors\nExpressed as M or F.\nSeparated by a comma and a space.\nBased on their first name and coders’ knowledge about their peer community.",
     "crumbs": [
       "Codebook"
     ]
@@ -372,8 +202,8 @@
     "objectID": "codebook.html#topics",
     "href": "codebook.html#topics",
     "title": "Codebook",
-    "section": "3 Topics",
-    "text": "3 Topics\nCoders will mark an X if the record deals with a stated topic. Coders may also reference additional topics in the “Other” field under the Topics category. Overall comments about any record should be made in overall “Comments” field in the Other category.\nTrade\nTrade, economy, silver, weight looms, dirhems, coins.\nThis topic covers papers working with economic issues, including the organisation of the trade, the use of balance weights and weight looms, the flow of silver, including dirhems and British, Continental and Scandinavian coins.\nDiaspora\nDiaspora, migration, mobility.\nThis topic covers papers dealing with material traces of mobility and migration. Further, paper studying the Viking diaspora as a concept and the material traces of it are included in this topic.\nGender\nGender, Viking women, queer, masculinity.\nThis topic covers papers on gender and genders, including papers specifically relating to women or men as a category, papers dealing with queer and queer theory, including the discussion of Odinn as queer. Further, discussions of hegemonic masculinity and other aspects of masculinity (and femininity, but I have not seen any papers on the issue) are included in this topic.\nIdentity\nIdentity, identities, intersectionality.\nThis topic covers papers studying various issues of identity, including intersectionality. A number of papers will overlap between this topic and the topics Gender and Diaspora. Further, lifeways and aspects of economy that deal with occupation such as tradespersons and craftspersons may be included in this topic, if the papers explicitly deal with the identity of tradespersons, including tradesmen and tradeswomen and craftsmen and craftswomen.\nViolence\nViolence, warriors, raids, war, piracy, army.\nThis topic relates to papers working with traces of plunder, piracy, violence, and warfare. Further, papers on warriors may overlap with the topic identity and gender. Papers working with the material traces of armies, including army camps are also part of this topic. Further, the construction of defence systems, earth works, fortresses and ring fortresses are included in this topic.\nEthnicity\nEthnicity, creolisation, hybridisation, Old Norse and Sámi population.\nThis topic covers papers relating to discussion of ethnicity as part of social identity studies. Papers examining the material aspects of creolisation and hybridisation are included in this topic as is more essentialistic studies of ethnicity. Papers working with the differences and similarities between Old Norse/Germanic and Sámi populations are part of this topic as is studies of meetings between Inuit and Old Norse populations in Greenland and between Old Norse and Native Americans as well as Inuit populations in Newfoundland. This topic may have overlaps with papers exploring the Viking Diaspora, and with mobility and migration.\nEnslaved\nSlaves, trell, enslaved, unfree.\nThis topic covers papers dealing with the social dynamics between free and enslaved. It includes studies of settlements structures with examinations of ‘the room behind the byre’ as well as pit house studies focusing on social differences and unfree and trell (Old Norse for unfree) population members. Further, studies of burials with more than one individual as well as graves with few or no grave goods interpreted as unfree are included. In addition, a number of stabile isotope studies of food and nutrition with discussion of social differences in foods due to unfree social status are included in this topic.\nPower\nPower, chiefs, magnates, kings, anarchistic perspectives, social organisation, central places and power.\nThis topic deals with analyses of power relations, manifestations of power and social organisation. Papers relating to magnates and kings and their social position and manifestations of it are included in this topic. Further, analyses building on anarchistic perspectives of power and collective action theory challenging the dominating discourse of power are included in this topic. Further, the analyses of settlement and regions with focus on central places and their position for redistribution of goods in a center-periphery model are included.\nWorld views\nCosmology, world view, ontology, the Viking way, religion, the cognitive landscape, Old Norse and Sámi religion in the Viking Age.\nThis topic deals with studies of religion, world views, ontology and cosmology. Further, studies of what Neil Price has termed ‘The Viking Way’ as a specific cognitive field or approach are included. Analyses of actions conducted in the landscape as part of creating, maintaining, and dealing with the cognitive or cosmological landscape are part of this topic.\nPersonhood\nPersonhood, animated objects, human-non human relationship, post-humanism and the Viking Age.\nThis topic covers studies of the boundaries between humans and the material world, including human-animal relationship, personhood studies of graves and hoards, and papers working with post-humanistic perspectives as part of their approach to studying the Viking Age. This topic may have overlaps with studies of world views, the Viking Way and Old Norse religion.\nEnvironment\nEnvironment, climate, seasonality, resilience.\nThis topic covers studies of climate changes and adaption to different climates and seasonal variation in the use of the landscape and its resources. Studies of resilience in relation to the variations during the Late Iron Age are included, if they also covers the Viking Age and not only “the 536/540 AD event”. The topic includes studies of settlements and graves, geoarchaeological studies, and analysis of the use of the landscape in economic terms and its relationship to the condition for farming and other activities in the landscape.\nThe Viking Ship\nMaritime activities, Viking ships.\nThis topic covers technological analyses of Viking ships, the use of and lack of sail and the symbolic of Viking ships in the Viking Age. The papers included studies finds of Viking ships and the construction and production of them, including tools for ship building. The topic overlaps with studies of migration and mobility as well as with warfare and piracy. Further, this topic may have overlaps with studies of social identity of ship builders based on burial finds.\nIncludes all work on ships and/or boats, and ship technology, Viking or otherwise (revised December 19).\nRituals\nMortuary practices, burial actions.\nThis topic covers all studies of ritual actions, including papers studying ritual actions related to the Old Norse and Sámi religion or world view. The performative aspects of burials, their function in society, and the acts of depositions of hoards, tools, and coins may be included in so far as they related to the depositions as rituals.\nMemory\nCultural memory, social memory, the use of the past in the Viking Age.\nThis topic covers all papers studying cultural, social or collective memory. Papers analysing the use and reuse of older structures and antiquities in the Viking Age are included in this topic. The papers may be dealing with the commemorative aspects present in settlements, burial rituals and in hoards. This topic may have overlaps with studies of ritual actions and world views.\nCraft\nCraft, production, spinning, weaving, non-ferrous metal, smithing, comb making, ceramics.\nThis topic covers papers working with craft and production at urban as well as rural settings. Production sites as well as traces of craft and production on the individual objects are included in this topic. This topic may have overlap with outfield resources.\nOutfield resources\nLiving in the outfield, extraction of resources in the outfields, iron production, tar production, soap stone vessel production.\nThis topic covers outfield economy and lifeway and the extraction of resources in the outfield areas. This topic may have overlaps with craft and hunting as well as with studies of ethnicity and intersectionality.\nHunting\nHunting, hunting pits, hunting pit systems, scaring sticks, arrows, snow patch finds.\nThis topic covers papers dealing with hunting activities. Snow patch finds of scaring sticks and bone and iron arrow heads and arrows are also included in this topic. This topic may have overlaps with studies of ethnicity.\nOther\nAdditional topics identified by the coder.\nHeritage\nContemporary views of the past. To be more closely examined as a focus of investigation later.",
+    "section": "Topics",
+    "text": "Topics\nCoders will mark an X if the record deals with a stated topic. Coders may also reference additional topics in the “Other” field under the Topics category. Overall comments about any record should be made in overall “Comments” field in the Other category.\nTrade\nTrade, economy, silver, weight looms, dirhems, coins.\nThis topic covers papers working with economic issues, including the organisation of the trade, the use of balance weights and weight looms, the flow of silver, including dirhems and British, Continental and Scandinavian coins.\nDiaspora\nDiaspora, migration, mobility.\nThis topic covers papers dealing with material traces of mobility and migration. Further, paper studying the Viking diaspora as a concept and the material traces of it are included in this topic.\nGender\nGender, Viking women, queer, masculinity.\nThis topic covers papers on gender and genders, including papers specifically relating to women or men as a category, papers dealing with queer and queer theory, including the discussion of Odinn as queer. Further, discussions of hegemonic masculinity and other aspects of masculinity (and femininity, but I have not seen any papers on the issue) are included in this topic.\nIdentity\nIdentity, identities, intersectionality.\nThis topic covers papers studying various issues of identity, including intersectionality. A number of papers will overlap between this topic and the topics Gender and Diaspora. Further, lifeways and aspects of economy that deal with occupation such as tradespersons and craftspersons may be included in this topic, if the papers explicitly deal with the identity of tradespersons, including tradesmen and tradeswomen and craftsmen and craftswomen.\nViolence\nViolence, warriors, raids, war, piracy, army.\nThis topic relates to papers working with traces of plunder, piracy, violence, and warfare. Further, papers on warriors may overlap with the topic identity and gender. Papers working with the material traces of armies, including army camps are also part of this topic. Further, the construction of defence systems, earth works, fortresses and ring fortresses are included in this topic.\nEthnicity\nEthnicity, creolisation, hybridisation, Old Norse and Sámi population.\nThis topic covers papers relating to discussion of ethnicity as part of social identity studies. Papers examining the material aspects of creolisation and hybridisation are included in this topic as is more essentialistic studies of ethnicity. Papers working with the differences and similarities between Old Norse/Germanic and Sámi populations are part of this topic as is studies of meetings between Inuit and Old Norse populations in Greenland and between Old Norse and Native Americans as well as Inuit populations in Newfoundland. This topic may have overlaps with papers exploring the Viking Diaspora, and with mobility and migration.\nEnslaved\nSlaves, trell, enslaved, unfree.\nThis topic covers papers dealing with the social dynamics between free and enslaved. It includes studies of settlements structures with examinations of ‘the room behind the byre’ as well as pit house studies focusing on social differences and unfree and trell (Old Norse for unfree) population members. Further, studies of burials with more than one individual as well as graves with few or no grave goods interpreted as unfree are included. In addition, a number of stabile isotope studies of food and nutrition with discussion of social differences in foods due to unfree social status are included in this topic.\nPower\nPower, chiefs, magnates, kings, anarchistic perspectives, social organisation, central places and power.\nThis topic deals with analyses of power relations, manifestations of power and social organisation. Papers relating to magnates and kings and their social position and manifestations of it are included in this topic. Further, analyses building on anarchistic perspectives of power and collective action theory challenging the dominating discourse of power are included in this topic. Further, the analyses of settlement and regions with focus on central places and their position for redistribution of goods in a center-periphery model are included.\nWorld views\nCosmology, world view, ontology, the Viking way, religion, the cognitive landscape, Old Norse and Sámi religion in the Viking Age.\nThis topic deals with studies of religion, world views, ontology and cosmology. Further, studies of what Neil Price has termed ‘The Viking Way’ as a specific cognitive field or approach are included. Analyses of actions conducted in the landscape as part of creating, maintaining, and dealing with the cognitive or cosmological landscape are part of this topic.\nPersonhood\nPersonhood, animated objects, human-non human relationship, post-humanism and the Viking Age.\nThis topic covers studies of the boundaries between humans and the material world, including human-animal relationship, personhood studies of graves and hoards, and papers working with post-humanistic perspectives as part of their approach to studying the Viking Age. This topic may have overlaps with studies of world views, the Viking Way and Old Norse religion.\nEnvironment\nEnvironment, climate, seasonality, resilience.\nThis topic covers studies of climate changes and adaption to different climates and seasonal variation in the use of the landscape and its resources. Studies of resilience in relation to the variations during the Late Iron Age are included, if they also covers the Viking Age and not only “the 536/540 AD event”. The topic includes studies of settlements and graves, geoarchaeological studies, and analysis of the use of the landscape in economic terms and its relationship to the condition for farming and other activities in the landscape.\nThe Viking Ship\nMaritime activities, Viking ships.\nThis topic covers technological analyses of Viking ships, the use of and lack of sail and the symbolic of Viking ships in the Viking Age. The papers included studies finds of Viking ships and the construction and production of them, including tools for ship building. The topic overlaps with studies of migration and mobility as well as with warfare and piracy. Further, this topic may have overlaps with studies of social identity of ship builders based on burial finds.\nIncludes all work on ships and/or boats, and ship technology, Viking or otherwise (revised December 19).\nRituals\nMortuary practices, burial actions.\nThis topic covers all studies of ritual actions, including papers studying ritual actions related to the Old Norse and Sámi religion or world view. The performative aspects of burials, their function in society, and the acts of depositions of hoards, tools, and coins may be included in so far as they related to the depositions as rituals.\nMemory\nCultural memory, social memory, the use of the past in the Viking Age.\nThis topic covers all papers studying cultural, social or collective memory. Papers analysing the use and reuse of older structures and antiquities in the Viking Age are included in this topic. The papers may be dealing with the commemorative aspects present in settlements, burial rituals and in hoards. This topic may have overlaps with studies of ritual actions and world views.\nCraft\nCraft, production, spinning, weaving, non-ferrous metal, smithing, comb making, ceramics.\nThis topic covers papers working with craft and production at urban as well as rural settings. Production sites as well as traces of craft and production on the individual objects are included in this topic. This topic may have overlap with outfield resources.\nOutfield resources\nLiving in the outfield, extraction of resources in the outfields, iron production, tar production, soap stone vessel production.\nThis topic covers outfield economy and lifeway and the extraction of resources in the outfield areas. This topic may have overlaps with craft and hunting as well as with studies of ethnicity and intersectionality.\nHunting\nHunting, hunting pits, hunting pit systems, scaring sticks, arrows, snow patch finds.\nThis topic covers papers dealing with hunting activities. Snow patch finds of scaring sticks and bone and iron arrow heads and arrows are also included in this topic. This topic may have overlaps with studies of ethnicity.\nOther\nAdditional topics identified by the coder.\nHeritage\nContemporary views of the past. To be more closely examined as a focus of investigation later.",
     "crumbs": [
       "Codebook"
     ]
@@ -382,8 +212,8 @@
     "objectID": "codebook.html#methodology",
     "href": "codebook.html#methodology",
     "title": "Codebook",
-    "section": "4 Methodology",
-    "text": "4 Methodology\n\n4.1 Sources of Evidence\nThe material basis upon which a study depends.\nGraves and monuments\nContexts of memorialized human remains, including artefacts, monuments, and the remains themselves.\nRevised (December 19) to include monuments, including rune stones.\nHoards\nA collection of valuable objects or artifacts, sometimes purposely buried in the ground.\nSettlements\nPlaces of human habitation.\nEmporia\nTrading settlements characterized by their peripheral locations, their lack of infrastructure and their short-lived nature.\nOther structures, sites of production or pit systems\nMay include quarries, smithies, mines or middens.\nPortable artefacts\nHuman-made objects that are not fixed in place.\nHuman biological remains\nHuman bones, teeth or soft tissue preserved in the archaeological record.\nNon-anthropogenic materials\nAnimal or plant remains, geological specimens, features of the natural landscape.\nStray finds\nMetal-detector finds, items from historic museum archives, or other finds that lack complete contextual information.\nWritten sources\nPoetry, inscriptions, sagas, annals, and other sources from the Viking Age and Mediaval Era.\nEthnographic sources\nObservations of cultural practice, social organizations, or Indigenous lifeways, and scholarly interpretations thereof.\n\n\n4.2 Methods\nThe mode of analysis through which materials are examined to derive additional knowledge.\naDNA\nAnalysis of DNA from archaeological or anthropological sources, including skeletons of humans, domesticate animal or plants, artefacts, or cave sediments.\nBiological analyses\nOsteoarchaeology, analysis of preserved soft tissue.\nConcerned with the biological study of bones, teeth and other human biological remains available in the archaeological record.\nPalaeoenvironment reconstruction\nZooarchaeology, archaeobotany, pollen and phytolith analysis.\nConcerned with better understanding past environments in which humans lived through analysis of non-human biological remains.\nStable isotope analyses\nAnalysis of Strontium, Oxygen and Nitrogen in teeth and bone.\nIdentification of the relatively abundance of isotopic elements in organic and inorganic compounds, to reconstruct ancient food webs or to reconstruct past environmental and climatic conditions.\nAbsolute dating\nRadiocarbon dating, dendrochronology, optically stimulated luminescence (OSL).\nDetermination of absolute dates through scientific means. May involve analysis of stable isotopes (C14, Potassium-Argon, Uranium-Lead), measuring doses of ionizing radiation (OSL), or by counting characteristic patterns of annual change in the natural environment (dendrochronology).\nGeophysical analyses\nGeoarchaeology, ground penetrating radar, LiDAR.\nApplication of geology and earth science methods. May also include systematic collection and analysis of geophysical signals, such as magnetic and gravitational fields emanating from the earth.\nGeochemical analyses\nX-Ray Fluorescence (XRF), Instrumental Neutron activation analysis, Inductively coupled plasma mass spectrometry (ICP-MS).\nTechniques for identifying the elemental composition of physical objects.\nSpatial analysis\nRegional distributions, viewshed analysis, distributions in relationship to landscape features, GIS.\nIdentification and analysis of patterns relating to spatial distributions or relationships.\nArtefact analysis\nAnalysis of pottery, lithics and other portable objects preserved in the archaeological record. Includes 3D scanning and analysis of artefacts.\nIdentification and comparison of artefacts’ physical features. May also include advanced computer-assisted shape-recognition techniques to automatically classify objects based on input representations of their physical shapes or morphological properties.\nLiterary analysis and epigraphy\nAnalysis of myths, sagas, runes and inscriptions.\nTechniques for examining ancient texts and symbols.\nQuantitative or statistical analysis\nMultivariate analysis, similarity measurements, multidimensional scaling, principal components analysis, cluster analysis, network analysis, agent-based modelling and simulation.\nIdentification and analysis of quantitative distributions of object types and features.\nDiscourse analysis\nAnalysis and reflection regarding the ideas and attitudes expressed by the community of practice that investigates the Viking Age.\nRelative Dating\nTypological comparison and other means of relative dating (to be identified as we go).",
+    "section": "Methodology",
+    "text": "Methodology\n\nSources of Evidence\nThe material basis upon which a study depends.\nGraves and monuments\nContexts of memorialized human remains, including artefacts, monuments, and the remains themselves.\nRevised (December 19) to include monuments, including rune stones.\nHoards\nA collection of valuable objects or artifacts, sometimes purposely buried in the ground.\nSettlements\nPlaces of human habitation.\nEmporia\nTrading settlements characterized by their peripheral locations, their lack of infrastructure and their short-lived nature.\nOther structures, sites of production or pit systems\nMay include quarries, smithies, mines or middens.\nPortable artefacts\nHuman-made objects that are not fixed in place.\nHuman biological remains\nHuman bones, teeth or soft tissue preserved in the archaeological record.\nNon-anthropogenic materials\nAnimal or plant remains, geological specimens, features of the natural landscape.\nStray finds\nMetal-detector finds, items from historic museum archives, or other finds that lack complete contextual information.\nWritten sources\nPoetry, inscriptions, sagas, annals, and other sources from the Viking Age and Mediaval Era.\nEthnographic sources\nObservations of cultural practice, social organizations, or Indigenous lifeways, and scholarly interpretations thereof.\n\n\nMethods\nThe mode of analysis through which materials are examined to derive additional knowledge.\naDNA\nAnalysis of DNA from archaeological or anthropological sources, including skeletons of humans, domesticate animal or plants, artefacts, or cave sediments.\nBiological analyses\nOsteoarchaeology, analysis of preserved soft tissue.\nConcerned with the biological study of bones, teeth and other human biological remains available in the archaeological record.\nPalaeoenvironment reconstruction\nZooarchaeology, archaeobotany, pollen and phytolith analysis.\nConcerned with better understanding past environments in which humans lived through analysis of non-human biological remains.\nStable isotope analyses\nAnalysis of Strontium, Oxygen and Nitrogen in teeth and bone.\nIdentification of the relatively abundance of isotopic elements in organic and inorganic compounds, to reconstruct ancient food webs or to reconstruct past environmental and climatic conditions.\nAbsolute dating\nRadiocarbon dating, dendrochronology, optically stimulated luminescence (OSL).\nDetermination of absolute dates through scientific means. May involve analysis of stable isotopes (C14, Potassium-Argon, Uranium-Lead), measuring doses of ionizing radiation (OSL), or by counting characteristic patterns of annual change in the natural environment (dendrochronology).\nGeophysical analyses\nGeoarchaeology, ground penetrating radar, LiDAR.\nApplication of geology and earth science methods. May also include systematic collection and analysis of geophysical signals, such as magnetic and gravitational fields emanating from the earth.\nGeochemical analyses\nX-Ray Fluorescence (XRF), Instrumental Neutron activation analysis, Inductively coupled plasma mass spectrometry (ICP-MS).\nTechniques for identifying the elemental composition of physical objects.\nSpatial analysis\nRegional distributions, viewshed analysis, distributions in relationship to landscape features, GIS.\nIdentification and analysis of patterns relating to spatial distributions or relationships.\nArtefact analysis\nAnalysis of pottery, lithics and other portable objects preserved in the archaeological record. Includes 3D scanning and analysis of artefacts.\nIdentification and comparison of artefacts’ physical features. May also include advanced computer-assisted shape-recognition techniques to automatically classify objects based on input representations of their physical shapes or morphological properties.\nLiterary analysis and epigraphy\nAnalysis of myths, sagas, runes and inscriptions.\nTechniques for examining ancient texts and symbols.\nQuantitative or statistical analysis\nMultivariate analysis, similarity measurements, multidimensional scaling, principal components analysis, cluster analysis, network analysis, agent-based modelling and simulation.\nIdentification and analysis of quantitative distributions of object types and features.\nDiscourse analysis\nAnalysis and reflection regarding the ideas and attitudes expressed by the community of practice that investigates the Viking Age.\nRelative Dating\nTypological comparison and other means of relative dating (to be identified as we go).",
     "crumbs": [
       "Codebook"
     ]
@@ -392,10 +222,324 @@
     "objectID": "codebook.html#other",
     "href": "codebook.html#other",
     "title": "Codebook",
-    "section": "5 Other",
-    "text": "5 Other\nRegion\nTo be filled in by the coder based on keywords used by the study’s authors.\nMay be left blank.\nComments\nQuestions or concerns regarding the record and coding procedures.",
+    "section": "Other",
+    "text": "Other\nRegion\nTo be filled in by the coder based on keywords used by the study’s authors.\nMay be left blank.\nComments\nQuestions or concerns regarding the record and coding procedures.",
     "crumbs": [
       "Codebook"
+    ]
+  },
+  {
+    "objectID": "analysis/open-scholarly-metadata.html",
+    "href": "analysis/open-scholarly-metadata.html",
+    "title": "BibVik",
+    "section": "",
+    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\n\n# It's not necessary to retrieve abstracts via API.\n# Abstracts are too messy and inconsistent, and it's a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+  },
+  {
+    "objectID": "analysis/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
+    "href": "analysis/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
+    "title": "BibVik",
+    "section": "",
+    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\n\n# It's not necessary to retrieve abstracts via API.\n# Abstracts are too messy and inconsistent, and it's a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+  },
+  {
+    "objectID": "analysis/full_analysis.html",
+    "href": "analysis/full_analysis.html",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "",
+    "text": "This is a single working document combining the analytical plan with the code and outputs that carry it out. Several conceptual questions below are resolved; several concrete decisions (final scope of Girvan-Newman, whether to add directionality, which alternative unit of analysis to pursue first) are deliberately still open and marked as such. Sections without code are strategy and reasoning; sections with code are live analysis.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#status",
+    "href": "analysis/full_analysis.html#status",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "",
+    "text": "This is a single working document combining the analytical plan with the code and outputs that carry it out. Several conceptual questions below are resolved; several concrete decisions (final scope of Girvan-Newman, whether to add directionality, which alternative unit of analysis to pursue first) are deliberately still open and marked as such. Sections without code are strategy and reasoning; sections with code are live analysis.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#starting-point",
+    "href": "analysis/full_analysis.html#starting-point",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Starting point",
+    "text": "Starting point\nThe original motivating question, from the seed paper (Lund & Sindbæk 2022): does the field divide into something like two camps around the origin of the Viking Age, along lines that co-vary across gender, topic, method and sources of evidence?\nThis is a substantive, testable proposition from the literature — worth distinguishing from the research team’s own fieldwork-based instincts about where the data might be heading (e.g. topic/gender associations noticed informally in the field). Both are legitimate to bring to this analysis, but they carry different epistemic weight and should be kept distinct in any eventual writeup: one is a claim to confirm or complicate; the other is an interpretive lens the team brings to reading whatever the data shows.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#core-methodological-stance-no-baseline-just-independent-descriptions",
+    "href": "analysis/full_analysis.html#core-methodological-stance-no-baseline-just-independent-descriptions",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Core methodological stance: no baseline, just independent descriptions",
+    "text": "Core methodological stance: no baseline, just independent descriptions\nThis is not a search for deviation from an expected or random pattern. The dataset is historically and socially situated — citation clustering along social, institutional, or intellectual lines is the expected, produced-by-history outcome, not an anomaly standing out against a null model. This is a real objection to modularity-based community detection (Louvain, Leiden), whose optimization target is explicitly “more clustered than a random graph with the same degree sequence would be.” That framing is not a neutral default for this kind of data.\nThe working alternative, used throughout this document: treat every computed structure — citation-graph community structure, the annotation cross-tab, per-work citer profiles, direct homophily rates — as an independent, self-contained description of the corpus, computed on its own terms with no reference point implied. None is privileged as ground truth against which another is checked. The actual analytical content is in the relationship between these descriptions once more than one exists: agreement, disagreement, partial overlap, or cross-cutting are all just facts about that relationship, not confirmations or violations of anything. This is the logic behind treating the annotation data as something to “bolt on” to a citation-structure analysis, rather than using one to validate the other, and it governs how every result below should be read.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#why-girvan-newman-over-modularity-methods-for-the-camps-question",
+    "href": "analysis/full_analysis.html#why-girvan-newman-over-modularity-methods-for-the-camps-question",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Why Girvan-Newman over modularity methods, for the “camps” question",
+    "text": "Why Girvan-Newman over modularity methods, for the “camps” question\nLouvain and Leiden are fast (near-linear time, tractable at any scale without special hardware) and were considered as a way around Girvan-Newman’s poor scalability. Both are computed below as additional independent descriptions, but neither is treated as the primary method for the “camps” question specifically, for reasons distinct from performance:\n\nTheir optimization target (deviation from a random-graph null model) is the wrong lens for socially/historically produced structure, per above.\nThe “camps” question is specifically about whether the graph splits cleanly, and in what order — a first split into two, each of which may or may not split further into more nuanced sub-divisions. Girvan-Newman’s hierarchical, edge-removal structure encodes exactly this nesting as a byproduct of how it runs; a flat modularity partition does not answer “is two-way division the first-order truth” as directly.\n\nLouvain/Leiden are computed as additional, independent descriptions in their own right — not as a faster substitute for Girvan-Newman, and not as a “cross-check” implying agreement would validate either method. The two families of method ask different structural questions (dense-cluster membership vs. load-bearing bridges) and can legitimately produce different, non-comparable pictures of the same graph. Their disagreement, if any, is reported as a finding, not a discrepancy to resolve.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#girvan-newman-tractability",
+    "href": "analysis/full_analysis.html#girvan-newman-tractability",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Girvan-Newman tractability",
+    "text": "Girvan-Newman tractability\nThe problem. Full Girvan-Newman decomposition is expensive because edge betweenness centrality must be recomputed after every single edge removal — this is inherently sequential across iterations (removal i+1 depends on the graph state after removal i), so parallelizing across iterations is not possible. An earlier assessment that GN “can’t really be parallelized” on an available 84-core server is only half right.\nWhat does parallelize. The betweenness calculation within a single iteration (Brandes’ algorithm) sums independent per-source-node contributions, and is embarrassingly parallel across those source nodes. graph-tool supports this; a networkx-based multiprocessing wrapper could achieve something similar. This would meaningfully speed up the expensive per-iteration cost, without approximating anything — every node, including low-degree ones, remains fully part of the calculation. Not yet implemented in the code below — the current implementation uses igraph::cluster_edge_betweenness() as-is, which does not parallelize the per-iteration cost. This should be revisited if runtime on the full graph proves impractical.\nRejected optimization: peeling degree-1 (leaf) nodes, or pre-filtering to a k-core, before running GN. Considered and explicitly rejected. Leaves (or low-coreness nodes generally) are cheap to strip and their community assignment could be trivially inferred afterward from their highest-degree neighbor — but this is a real approximation, not a free win:\n\nLeaves attached to a neighbor whose own community assignment is itself marginal/unstable would inherit an arbitrary decision.\nLeaf-peeling cascades: removing one leaf can drop a neighbor to degree 1, triggering further removal, which can strip small but genuine citation chains, not just pendant noise.\nRemoving leaves changes the betweenness values of the edges that remain, since leaves still contribute path endpoints to the full-graph calculation — the pruned-graph result is not guaranteed to approximate the full-graph result closely.\nMost importantly for this project: a paper cited only once may be exactly the interesting case (niche, contested, or newly-emerging reference) for a study of citational politics, not noise to discard. Peripheral/rarely-cited nodes are data, not overhead, given the research question explicitly concerns how peripheral material relates to dominant positions.\n\nCurrent direction: bounded-depth GN on the full, unfiltered graph. Rather than decomposing to individual papers, or filtering the input graph first, the edge-removal process is read off at the first several splits (e.g. first split, then the splits within each resulting side), computed on every node in the graph. This is not merely a performance compromise — the first few splits are the more interpretable structural fact for the “camps” question; full decomposition to singleton papers stops being a meaningful description of factional structure at all. This is implemented below; whether it is fast enough on the full graph without the parallelization described above has not yet been benchmarked.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#time-and-directionality",
+    "href": "analysis/full_analysis.html#time-and-directionality",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Time and directionality",
+    "text": "Time and directionality\nThe F1 corpus spans a single decade — too short to usefully time-slice without each slice becoming too sparse to support reliable community detection or homophily estimates. Time-sliced structural analysis and homophily-as-a-trend-over-time were both considered and set aside for this reason, not because time is uninteresting in principle.\nDirectionality remains open and is a separate matter from time-slicing. The citation graph is directed (citer → cited); the community-detection methods below are run on the undirected projection (standard practice for this class of algorithm, and consistent with the centrality measures, which are computed in directed form separately). Whether “who is drawn upon vs. who does the drawing” should be built into the community-detection step itself, using directed variants of GN/Louvain/Leiden, is not yet decided.\nF2 publication date at time of citation is a separate small thread worth keeping in mind: F2 works are not bound by the F1 decade and may span a much longer history. Whether the age of cited material varies systematically depending on which part of the F1 corpus is doing the citing is a fact already present in the data (publication years) without requiring any time-slicing of the corpus itself. Not yet implemented below.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#the-independent-descriptions-computed-in-this-document",
+    "href": "analysis/full_analysis.html#the-independent-descriptions-computed-in-this-document",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "The independent descriptions computed in this document",
+    "text": "The independent descriptions computed in this document\nConsistent with the no-baseline stance, the analysis is organized as a set of independently computable, independently meaningful descriptions of the corpus, to be placed alongside each other rather than run in a required sequence. This document computes:\n\nStructural descriptions of the citation graph — degree, centrality (betweenness, closeness, PageRank, HITS), k-core, connected components, and community detection (Girvan-Newman, Louvain, Leiden, k-means on centrality profiles). See below.\nThe annotation cross-tab — author gender × primary/secondary topic × primary/secondary method, across the F1 corpus. Tests whether the seed paper’s supposed tripartite co-variation is visible in the coded data at all. Computed independently of any graph work.\n\nNot yet implemented in this document, recorded here so the plan is not lost:\n\nPer-F2-node citer profiles. For F2 works cited by multiple F1 papers, characterize the citer set using annotation data that exists only on the F1 side: gender composition, topic/method diversity, and whether the citer set is itself structurally clustered or scattered. Does not require resolving the community-detection method question and is tractable immediately once prioritized. Speaks to a genuinely different citational-politics phenomenon than the corpus-wide cross-tab: whether particular sources function as shared/foundational touchstones cited across the field’s internal divisions, or as in-group markers cited mainly within one part of it.\nDirect citation homophily. Do papers (or, at the author level — see “alternative units” below — authors) disproportionately cite others sharing their coded gender/topic/method characteristics? A direct join of two already-independent descriptions (citation edges, annotation data) with no algorithmic mediation in between. Likely the most immediately tractable of the not-yet-built analyses.\nJoining structural and annotation descriptions. Whether Girvan-Newman’s top-level split(s), Louvain communities, and Leiden communities correspond to, cut across, or ignore the coded categories; whether centrality within a community correlates with author gender even when a community’s dominant topic is not itself gender-skewed.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#extension-for-future-consideration-alternative-units-of-analysis",
+    "href": "analysis/full_analysis.html#extension-for-future-consideration-alternative-units-of-analysis",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Extension for future consideration: alternative units of analysis",
+    "text": "Extension for future consideration: alternative units of analysis\nEverything in this document treats the paper as the unit of the graph (papers cite papers). This is one particular projection of a richer structure, not the only one, and is worth extending in future work — not resolved or prioritized now, but recorded so it isn’t lost:\n\nAuthor-level graphs. Collapsing papers into authors changes what centrality means (a prolific author becomes a hub independent of any single paper’s standing) and makes author-to-author citation homophily a more natural unit than paper-to-paper for gender-citation questions. Co-authorship itself becomes an additional structural question: do co-authorships cross or reinforce whatever divisions appear elsewhere.\nVenue-level graphs (journal, edited volume, conference proceedings, grey literature/excavation report). Likely to reveal institutional or disciplinary structure rather than intellectual structure directly, and could complicate a purely topic/gender reading — a “camp” might partly reflect which kind of venue a sub-field mostly publishes in, particularly given the corpus’s substantial non-English, non-journal material (excavation reports, conference proceedings).\nKind-of-work as a unit (monograph vs. article vs. excavation report vs. edited-volume chapter). Related to venue but not identical; may track disciplinary/generational norms that could explain or cross-cut part of any gender/topic pattern rather than sitting alongside it as a fully independent axis.\n\nEach alternative unit would be, again, an independent description rather than a more “real” or authoritative one. A useful way to stress-test any finding at the paper level is to check whether it persists, sharpens, or dissolves when re-aggregated to authors or venues — if a division only appears at one level of aggregation, that is itself informative about whether the division is fundamentally about individual works, about people, or about where people publish.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#publications-per-year",
+    "href": "analysis/full_analysis.html#publications-per-year",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Publications per year",
+    "text": "Publications per year",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#gender-by-first-author-and-all-authors",
+    "href": "analysis/full_analysis.html#gender-by-first-author-and-all-authors",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Gender by first author and all authors",
+    "text": "Gender by first author and all authors\nPublications by gender for each year. Single-author work vs. collaborations have not yet been examined separately.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#multi-author-gender-composition-and-author-order",
+    "href": "analysis/full_analysis.html#multi-author-gender-composition-and-author-order",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Multi-author gender composition and author order",
+    "text": "Multi-author gender composition and author order\nThe analyses above use first-author gender only (for the topic/method/source cross-tabs later in this document) or a flattened, order-blind pool of all author genders (the “all authors” plot). Neither captures gender composition per paper (all-male vs. all-female vs. mixed) or order within a paper, both of which are needed for the co-authorship questions raised in planning (do co-authorships cross or reinforce whatever divisions appear elsewhere; does the most senior/lead author’s gender matter independently of the full author-list composition).\nAuthor order is genuinely ambiguous in this corpus and must be handled carefully, not with a single fixed rule. Field convention varies: first-author-as-lead is standard for excavation/fieldwork-based publications, but last-author-as-lead (PI convention) is standard for lab-based work. Which convention applies depends on the paper’s own method — one of the coded variables, not something inferable from the author list alone. The lookup below (fieldwork_lead_methods) is a placeholder mapping specific coded method categories to the convention that applies; it must be filled in with the actual method category names from the codebook before this analysis is meaningful. Left unmapped, methods default to “ambiguous” and are excluded from any lead-author-specific analysis (though still included in the order-blind composition analysis below).\nThis section works generically across however many Authors..Genders..Author.N. columns exist in the data — no fixed column count is assumed.\n\nCandidate gender-composition categorizations\nSeveral ways of collapsing a per-paper gender sequence into a single cross-tabbable category are computed side by side below, since it is not yet decided which is most useful. This is a case of comparing several independent categorization schemes against the same underlying data, not picking the “correct” one — inspect the resulting distributions before choosing.\n\n\nLead-author gender, conditioned on field convention\n\n\nGender composition by primary topic, method, and source of evidence\nUnlike the first-author-only cross-tabs later in this document, this uses the composition categories above — bringing multi-author, order-aware gender data into the same kind of comparison already done for first-author gender. composition_strict is used here as a starting point; swap in composition_majority or composition_singleauthor_split to compare.\nNot yet done, worth noting: the topic/method/source cross-tabs above use primary values only, same limitation as the first-author-only cross-tabs later in this document — secondary topic/method/source values are not yet brought into any gender comparison. Extending composition_topic/composition_method/composition_source to include secondary values would mean joining on both Primary and Secondary counts rather than filtering to Primary only, and deciding how to weight or display a paper that contributes to multiple topics at once.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-topic-in-aggregate-and-over-time",
+    "href": "analysis/full_analysis.html#primary-topic-in-aggregate-and-over-time",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary topic, in aggregate and over time",
+    "text": "Primary topic, in aggregate and over time",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-method-in-aggregate-and-over-time",
+    "href": "analysis/full_analysis.html#primary-method-in-aggregate-and-over-time",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary method, in aggregate and over time",
+    "text": "Primary method, in aggregate and over time",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-sources-of-evidence-in-aggregate-and-over-time",
+    "href": "analysis/full_analysis.html#primary-sources-of-evidence-in-aggregate-and-over-time",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary sources of evidence, in aggregate and over time",
+    "text": "Primary sources of evidence, in aggregate and over time",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#secondary-topics-by-primary-topic",
+    "href": "analysis/full_analysis.html#secondary-topics-by-primary-topic",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Secondary topics by primary topic",
+    "text": "Secondary topics by primary topic",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#secondary-methods-by-primary-method",
+    "href": "analysis/full_analysis.html#secondary-methods-by-primary-method",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Secondary methods by primary method",
+    "text": "Secondary methods by primary method",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#secondary-sources-of-evidence-by-primary-source-of-evidence",
+    "href": "analysis/full_analysis.html#secondary-sources-of-evidence-by-primary-source-of-evidence",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Secondary sources of evidence by primary source of evidence",
+    "text": "Secondary sources of evidence by primary source of evidence",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-topic-by-first-author-gender",
+    "href": "analysis/full_analysis.html#primary-topic-by-first-author-gender",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary topic by first author gender",
+    "text": "Primary topic by first author gender\nThis is the first of the three plots most directly relevant to the seed paper’s tripartite (gender/topic/method) supposition. Normalizing each topic’s proportions against the corpus-wide gender base rate has been discussed as a follow-up refinement but not yet implemented — the raw proportions below do not yet control for the overall gender imbalance in the corpus.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-method-by-first-author-gender",
+    "href": "analysis/full_analysis.html#primary-method-by-first-author-gender",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary method by first author gender",
+    "text": "Primary method by first author gender",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#primary-source-of-evidence-by-first-author-gender",
+    "href": "analysis/full_analysis.html#primary-source-of-evidence-by-first-author-gender",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Primary source of evidence by first author gender",
+    "text": "Primary source of evidence by first author gender",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#region",
+    "href": "analysis/full_analysis.html#region",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Region",
+    "text": "Region",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#setup",
+    "href": "analysis/full_analysis.html#setup",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Setup",
+    "text": "Setup",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#degree-and-centrality",
+    "href": "analysis/full_analysis.html#degree-and-centrality",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Degree and centrality",
+    "text": "Degree and centrality\nIn-degree (times cited within the corpus) and out-degree (number of works cited) capture different roles. High in-degree identifies widely-cited works — the intellectual anchors of the field. High out-degree identifies works that are heavily engaged with the literature, drawing on many sources.\nBetweenness centrality identifies works that sit on many shortest paths between other works — brokers between sub-literatures. Betweenness is expensive to compute on large graphs; normalized values are reported.\nPageRank assigns authority based on incoming links weighted by the authority of the linking node — conceptually similar to being cited by works that are themselves widely cited. Hub and authority scores (HITS) are complementary: hubs point to many authorities; authorities are pointed to by many hubs.\nPeripheral works — low degree, low centrality by every measure below — are not treated as noise in this project. A work cited only once may be exactly the interesting case (a niche, contested, or newly emerging reference) for a study of citational politics. No node is excluded from any measure in this section on the basis of low degree.\n\nMost cited (by in-degree)\n\n\nMost citing (by out-degree)\n\n\nDegree distribution\nA power-law or scale-free degree distribution is characteristic of citation networks: most works are cited rarely, a small number are cited frequently. The log-log plot tests this.\n\n\nTop by betweenness centrality\nWorks with high betweenness mediate between otherwise disconnected parts of the citation network — likely works that bridge sub-fields or periods.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#connected-components",
+    "href": "analysis/full_analysis.html#connected-components",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Connected components",
+    "text": "Connected components\nA weakly connected component (WCC) treats edges as undirected. A strongly connected component (SCC) requires paths in both directions — rare in citation networks, since citations are historically directed (a 2010 paper cannot cite a 2020 paper). The WCC structure shows how fragmented the network is; a dominant giant component indicates a well-connected literature.\n\nWCC size distribution",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#k-core-decomposition",
+    "href": "analysis/full_analysis.html#k-core-decomposition",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "K-core decomposition",
+    "text": "K-core decomposition\nThe k-core of a graph is the maximal subgraph in which every node has at least k connections to other nodes within that subgraph. It is computed by iteratively removing nodes with degree below k until no further removal is possible. Nodes are assigned a coreness value equal to the highest k for which they remain in the k-core.\nK-core decomposition is reported here purely as a descriptive measure — identifying which works are structurally embedded in dense mutual-citation relationships versus which sit at the periphery. It is not used below as a preprocessing filter for any other method; every peripheral node (coreness = 1, or excluded entirely from any k ≥ 2 core) remains a full participant in every other analysis in this document, including Girvan-Newman.\nReference: Alvarez-Hamelin et al. (2005). Large scale networks fingerprinting and visualization using the k-core decomposition. Advances in Neural Information Processing Systems, 18.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#community-detection",
+    "href": "analysis/full_analysis.html#community-detection",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Community detection",
+    "text": "Community detection\nCommunity detection here produces several independent descriptions of how the graph divides, not a single answer to be triangulated (see “Core methodological stance” above). Louvain and Leiden ask “which groups of nodes are more densely interconnected than a random graph with the same degree sequence would predict.” Girvan-Newman asks “which edges, if removed, disconnect otherwise-separate parts of the network.” These are genuinely different questions; neither validates the other.\nReferences:\n\nBlondel et al. (2008). Fast unfolding of communities in large networks. Journal of Statistical Mechanics, P10008.\nTraag et al. (2019). From Louvain to Leiden. Scientific Reports, 9, 5233.\nGirvan & Newman (2002). Community structure in social and biological networks. PNAS, 99(12), 7821–7826.\nNewman (2006). Modularity and community structure in networks. PNAS, 103(23), 8577–8582.\n\n\nGirvan-Newman, bounded depth, full graph, no pre-filtering\nRun on the complete undirected graph — no k-core or degree-based pre-filtering (see “Girvan-Newman tractability” above for why). n_splits controls how many top-level divisions to read off, rather than decomposing to full singleton dendrogram depth. igraph::cluster_edge_betweenness() computes the full dendrogram internally; cutat() reads off the partition at a given number of communities without altering the underlying (expensive) betweenness computation — this means the implementation below does not yet save the compute cost of full decomposition; it defers that optimization (parallelized per-iteration betweenness) to future work and should be benchmarked on the full graph before assuming it is tractable as-is.",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#k-means-clustering",
+    "href": "analysis/full_analysis.html#k-means-clustering",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "K-means clustering",
+    "text": "K-means clustering\nK-means clusters nodes based on their centrality feature profiles rather than graph structure. It groups works that occupy similar structural positions — for example, highly-cited authorities vs. high-betweenness brokers vs. peripheral works — rather than groups that densely cite each other. This is a further independent description, not a validation of the community-detection methods above.\n\nCluster profiles",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#structural-node-table-export",
+    "href": "analysis/full_analysis.html#structural-node-table-export",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Structural node table export",
+    "text": "Structural node table export",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/full_analysis.html#open-decisions-not-yet-resolved",
+    "href": "analysis/full_analysis.html#open-decisions-not-yet-resolved",
+    "title": "BibVik Citation Analysis: Camps, Communities, and Citational Politics",
+    "section": "Open decisions (not yet resolved)",
+    "text": "Open decisions (not yet resolved)\n\nWhether and how to implement bounded-depth, parallelized Girvan-Newman; no benchmarking done yet on how many splits are needed for a stable, interpretable first division, or on runtime for the full-graph betweenness computation as currently implemented.\nWhether directed variants of GN/Louvain/Leiden are worth the added complexity for this project’s specific questions.\nWhich alternative unit of analysis (author, venue, kind-of-work), if any, to pursue first, and on what timeline relative to the paper-level work in this document.\nHow explicitly to frame the seed-paper-testing angle in eventual writeups, given the PI/co-author relationship.\nNormalizing topic/method/source proportions against the corpus-wide gender base rate, rather than reporting raw proportions.\nWhich gender-composition categorization (composition_strict, composition_majority, composition_singleauthor_split, or another) is actually the most useful for the topic/method/source cross-tabs — computed side by side, not yet chosen.\nfieldwork_lead_methods (the mapping from coded method category to first-vs-last lead-author convention) is a placeholder and must be filled in with real codebook category names before the lead-author analysis is meaningful; currently everything defaults to “ambiguous.”\nSecondary topic/method/source values are not yet included in any gender cross-tab (composition-based or first-author-only) — only primary values are currently compared against gender.\nRegion is not yet cross-tabbed against gender/topic/method/source (word cloud only, by design for now).",
+    "crumbs": [
+      "Analysis"
     ]
   },
   {
@@ -521,157 +665,212 @@
     ]
   },
   {
-    "objectID": "notes/2025-05-16-meeting.html",
-    "href": "notes/2025-05-16-meeting.html",
-    "title": "1 Discussion",
+    "objectID": "manuscript/sections/01_introduction.html",
+    "href": "manuscript/sections/01_introduction.html",
+    "title": "Introduction",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nFriday May 16, 15:15 CEST / 9:15 EST"
+    "text": "Introduction\nLund and Sindbæk (2022) \n\n\n\n\n\nReferences\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3."
   },
   {
-    "objectID": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
-    "href": "notes/2025-05-16-meeting.html#developing-a-controlled-vocabulary",
-    "title": "1 Discussion",
-    "section": "1.1 Developing a controlled vocabulary",
-    "text": "1.1 Developing a controlled vocabulary\n\nThree axes:\n\nTopics: What is the paper about? (i.e. diaspora, mobility, gender, ritual, etc)\nMethods: What methods were applied in the paper? (i.e. spatial analysis, genetics, stable isotope analysis, finds analysis)\nKind of contribution (i.e. field report, “standard” scientific paper, review of prior work, opinion)\n\nThe medium (i.e. journal article, book, chapter in an edited volume, etc) will be identified by CrossRef and does not need to be annotated.\nIt’s ok to assign multiple terms to each record."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#coding-process",
-    "href": "notes/2025-05-16-meeting.html#coding-process",
-    "title": "1 Discussion",
-    "section": "1.2 Coding process",
-    "text": "1.2 Coding process\n\nA research assistant will be able to start work in September, and will be able to work for four weeks.\nLimited to review of titles and abstracts, or if there is no abstract, the introductions and conclusions.\nSince this does not involve comprehensive or open coding, we can just do this in a spreadsheet rather than some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology.\nZack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#analysis-of-references",
-    "href": "notes/2025-05-16-meeting.html#analysis-of-references",
-    "title": "1 Discussion",
-    "section": "1.3 Analysis of references",
-    "text": "1.3 Analysis of references\n\nWe won’t be able to qualitatively annotate references due to lack of time relative to the corpus’ volume.\nNLP using scite is not as useful as initially thought.\n\ntends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker et al. 2023).\nIts corpus is limited to works put out by partnered publishers.\n\nPotential alternative to scite, but requires greater knowledge of NLP to implement:\n\nhttps://github.com/davidjurgens/citation-function\nhttps://jurgens.people.si.umich.edu/citation-function\n\nWe may be able to derive a sample based on network statistics, i.e. the most or least central references."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#analysis-of-gender",
-    "href": "notes/2025-05-16-meeting.html#analysis-of-gender",
-    "title": "1 Discussion",
-    "section": "1.4 Analysis of gender",
-    "text": "1.4 Analysis of gender\n\nOur intent is to identify citation biases against women.\nThe goal is not to identify gender diversity, which is not supported by our method."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#predictions-and-expectations",
-    "href": "notes/2025-05-16-meeting.html#predictions-and-expectations",
-    "title": "1 Discussion",
-    "section": "1.5 Predictions and expectations",
-    "text": "1.5 Predictions and expectations\n\nWe’re gonna find sub-clusters within clusters, and bridging clusters.\nSome sub-clusters will be tight-knit and closed, others very broad and open.\nSome will be very focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering in methods by “academic upbringing”, which has a localized character\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
-    "href": "notes/2025-05-16-meeting.html#additional-ideas-and-insights",
-    "title": "1 Discussion",
-    "section": "1.6 Additional ideas and insights",
-    "text": "1.6 Additional ideas and insights\n\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors."
-  },
-  {
-    "objectID": "notes/2025-05-16-meeting.html#logistics",
-    "href": "notes/2025-05-16-meeting.html#logistics",
-    "title": "1 Discussion",
-    "section": "1.7 Logistics",
-    "text": "1.7 Logistics\n\nKeep things on GitHub for now.\nKeep our eyes open for alternative collaborative writing platforms that may emerge over the next few months (including via the archaeo-social collective)."
-  },
-  {
-    "objectID": "notes/2025-06-16-meeting.html",
-    "href": "notes/2025-06-16-meeting.html",
-    "title": "1 Discussion Topics",
+    "objectID": "manuscript/sections/03_methods-materials.html",
+    "href": "manuscript/sections/03_methods-materials.html",
+    "title": "Methods and Materials",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 16, 15:15 CEST / 9:15 EST"
+    "text": "Methods and Materials"
   },
   {
-    "objectID": "notes/2025-06-16-meeting.html#developing-the-codebook",
-    "href": "notes/2025-06-16-meeting.html#developing-the-codebook",
-    "title": "1 Discussion Topics",
-    "section": "1.1 Developing the codebook",
-    "text": "1.1 Developing the codebook\nJulie worked on it with another colleague (I don’t recall his name). We discussed means of improving it further. Specifically: develop groupings, and highlighting or boldening terms that stand out as the core concept or heading.\nWe also clarified how this is an iterative process. The codes are not meant to be prescriptive, and should adapt to reflect the contents of the corpus and the realizations we make as coding progresses."
-  },
-  {
-    "objectID": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
-    "href": "notes/2025-06-16-meeting.html#assessing-the-quality-of-scholarly-metadata",
-    "title": "1 Discussion Topics",
-    "section": "1.2 Assessing the quality of scholarly metadata",
-    "text": "1.2 Assessing the quality of scholarly metadata\nZack looked into the quality of scholarly metadata indexes, and found that they are not really suited for non-anglophone monographs and grey literature, which constitutes a significant aspect of our corpus. He proposed an alternative solution: to use Grobid to extract bibliographic references from PDFs using targeted machine learning algorithms.\nThis approach has a few caveats: We need full and clean PDFs of all works in the corpus, which may be particularly challenging for books. Julie has this covered based on her extensive library and teaching materials. For works that are published as part of anthologies and edited volumes, we also need to isolate references for each chapter or book section. Zack will develop a workflow to assist with this vetting, and Isak will test it out.\nThis led to some discussion about the nature and scope of the corpus. We reiterated the sense that we should be led by the questions and the practical analytical challenges, rather than the data contained in the seed paper. For instance, the disproportionate number of references in a book relative to a journal article may affect the constitution of a network and generate misleading findings (especially regarding centrality metrics), and it may be prudent to exclude them, or to replace them with a series of papers by the same author that cover the same ground as the book. Moreover, an excavation report may be more descriptive and engage with the literature to a lesser extent than an “standalone” study (for lack of a better term right now), and we may want to discard those. These considerations make the difference between an “easy” bibliometric analysis and a meaningful one."
-  },
-  {
-    "objectID": "notes/2025-06-16-meeting.html#miscellaneous",
-    "href": "notes/2025-06-16-meeting.html#miscellaneous",
-    "title": "1 Discussion Topics",
-    "section": "1.3 Miscellaneous",
-    "text": "1.3 Miscellaneous\nZack mentioned his brief social media interactions, which pointed to Christian Bergeron’s recent work with the same/similar toolsets, and whose presentation in April coincidentally helped inspire those whole project. Zack is also consulting with Till Grallert, who develops software to convert between TEI and bibtex (among other data formats used to store bibliographic data). It’s great that we’re relying so much on tools developed by the digital humanities!\nWe addressed the general plans for the workshop, which we agreed we should hold in March. This will provide greater opportunity to generate meaningful findings and to invite other interesting participants."
-  },
-  {
-    "objectID": "notes/2025-08-11-meeting.html",
-    "href": "notes/2025-08-11-meeting.html",
-    "title": "1 Discussion Topics",
+    "objectID": "manuscript/sections/05_discussion.html",
+    "href": "manuscript/sections/05_discussion.html",
+    "title": "Discussion",
     "section": "",
-    "text": "Meeting Notes\nZack, Julie and Isak\nMonday August 11, 15:15 CEST / 9:15 EST\n\n1 Discussion Topics\n\nWent over the revised spreadsheet, and tested a sample entry.\n\nDivided it into four sections (kind, authorship, topics, methodology).\nSimplified process for annotating gender of authors in multi-authored works.\nMethodologies need to be brainstormed.\n\nAlthough the scopes are quite different, Zack mentioned his list of tags for open-archaeo as one potential resource to from from.\n\n\nDiscussed challenges with the citation networks.\n\nAddressed by github issue with the Grobid maintainers.\nAddressed some workarounds:\n\nDoing some topic modelling / NLP / machine learning based on the titles of papers.\nLinking up with Alex Brandsen, who has done similar very similar work (Brandsen 2023).\n\n\n\n\n\n2 Action Items\nNext meeting: Thursday August 21, 15:15 CEST / 9:15 EST\nFocus will be on brainstorming the methodology, as well as general status updates.\nZack:\n\nInvite Alex Brandsen to our next meeting.\nInquire about using md.archaeo.dev for collaborative brainstorming. about archaeo md\nPost about the challenges of working with scholarly metadata.\n\nIsak:\n\nFinish collecting the PDFs and cleaning the data pertaining to books and book chapters.\n\nJulie:\n\nDraw up initial list of methodology categories.\nFollow up with admin re: hiring an RA.\n\n\n\n3 Links and references\n\nhttps://md.archaeo.dev\nhttps://github.com/zackbatist/open-archaeo/blob/master/tags.md\nhttps://github.com/kermitt2/grobid/issues/1322\nhttps://doi.org/10.1007/978-3-031-37156-1_11\n\n\n\n\n\n\nReferences\n\nBrandsen, Alex. 2023. “Information Extraction and Machine Learning for Archaeological Texts.” In Discourse and Argumentation in Archaeology: Conceptual and Computational Approaches, edited by Cesar Gonzalez-Perez, Patricia Martin-Rodilla, and Martín Pereira-Fariña, 229–61. Quantitative Archaeology and Archaeological Modelling. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-37156-1_11."
+    "text": "Discussion"
   },
   {
-    "objectID": "scratchpad-sections/basic-descriptive-stats.html",
-    "href": "scratchpad-sections/basic-descriptive-stats.html",
-    "title": "1 Basic descriptive statistics",
+    "objectID": "manuscript/sections/11_references.html",
+    "href": "manuscript/sections/11_references.html",
+    "title": "References",
     "section": "",
-    "text": "Set up some initial color palettes based on the nord package.\nRead in the data.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPublications by gender for each year. We also discussed looking at single author work and collaborations separately, but have not gotten around to doing that yet.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFor the subsequent three plots we could also try normalizing the proportions for each topic against the total proportion men/women in the entire corpus."
+    "text": "References"
   },
   {
-    "objectID": "scratchpad-sections/basic-descriptive-stats.html#gender-by-first-author-and-all-authors",
-    "href": "scratchpad-sections/basic-descriptive-stats.html#gender-by-first-author-and-all-authors",
-    "title": "1 Basic descriptive statistics",
+    "objectID": "manuscript/sections/13_supplement.html",
+    "href": "manuscript/sections/13_supplement.html",
+    "title": "Supplementary Materials",
     "section": "",
-    "text": "Publications by gender for each year. We also discussed looking at single author work and collaborations separately, but have not gotten around to doing that yet.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFor the subsequent three plots we could also try normalizing the proportions for each topic against the total proportion men/women in the entire corpus."
+    "text": "Supplementary Materials"
   },
   {
-    "objectID": "scratchpad-sections/open-scholarly-metadata.html",
-    "href": "scratchpad-sections/open-scholarly-metadata.html",
-    "title": "BibVik",
+    "objectID": "notes/2025-06-02-meeting.html",
+    "href": "notes/2025-06-02-meeting.html",
+    "title": "Discussion Topics",
     "section": "",
-    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\n\n# It's not necessary to retrieve abstracts via API.\n# Abstracts are too messy and inconsistent, and it's a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 2, 15:15 CEST / 9:15 EST\n\nDiscussion Topics\n\nDeveloping the code book\nDiscrepancies among bibliographic data sources\n\n\n\nAction Items\nNext meeting: Monday June 16, 15:15 CEST / 9:15 EST\nZack:\n\nDo research on overlap between citation databases\nTest the use of Publish or Perish (https://harzing.com/resources/publish-or-perish)\nUpdate the research protocol with discussion about sampling strategies\nUpdate the research protocol with methods for developing the codebook\n\nJulie and Isak:\n\nRefine the code book, derive code categories\nSolicit input from Søren\n\n\n\nLinks and references"
   },
   {
-    "objectID": "scratchpad-sections/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
-    "href": "scratchpad-sections/open-scholarly-metadata.html#working-with-open-scholarly-metadata",
-    "title": "BibVik",
+    "objectID": "notes/2025-07-07-meeting.html",
+    "href": "notes/2025-07-07-meeting.html",
+    "title": "Discussion Topics",
     "section": "",
-    "text": "# Get list of refs from the OpenCitations API.\n# Get list of refs from the OpenCitations API\nresponse &lt;- GET(\"https://opencitations.net/index/api/v2/references/doi:10.1007/s10814-021-09163-3\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nseed_refs &lt;- sub('.*doi:', '', parsed_data$cited)\nseed_refs &lt;- gsub( \" .*$\", \"\", seed_refs)\nseed_refs &lt;- data.frame(seed_refs)\ncolnames(seed_refs)[1] &lt;- \"doi\"\n# Retrieve bibliographic metadata for each referenced work from Crossref.\nseed_refs_cr &lt;- cr_works(seed_refs$doi)\nseed_refs_cr &lt;- seed_refs_cr$data\nseed_refs$title &lt;- seed_refs_cr$title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$container_title &lt;- seed_refs_cr$container.title[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$type &lt;- seed_refs_cr$type[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$date &lt;- seed_refs_cr$created[match(seed_refs$doi, seed_refs_cr$doi)]\nseed_refs$year &lt;- substr(seed_refs$date, 1, 4)\n\n# It's not necessary to retrieve abstracts via API.\n# Abstracts are too messy and inconsistent, and it's a pain to deal with html tags.\n# Generate lists of authors, indexed by DOIs.\n# TBD\nI’m missing a step here, from my previous work several months ago. Need to find the code that generated seed_refs_bib.\n# Filter bib file for items with a DOI.\nseed_refs_bib &lt;- bib2df::bib2df(paste(\"https://opencitations.net/index/api/v2/references/doi:\",seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI))\n# Query CrossRef for metadata pertaining to references with a DOI.\nf1_cr &lt;- cr_works(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nf1_cr &lt;- f1_cr$data\n# Query OpenCitations for references pertaining to f1.\nf1_oc &lt;- oc_coci_meta(seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI)\nresponse &lt;- GET(\"seed_refs_bib[!is.na(seed_refs_bib$DOI),]$DOI\")\ncontent &lt;- content(response, \"text\")\nparsed_data &lt;- fromJSON(content)\nf1_oc &lt;- sub('.*doi:', '', parsed_data$cited)\nf1_oc &lt;- gsub( \" .*$\", \"\", f1_oc)\nf1_oc &lt;- data.frame(f1_oc)\ncolnames(f1_oc)[1] &lt;- \"doi\"\n# For data cleaning purposes.\n# Modify the variables to find articles without DOI, non-articles with DOI, etc.\nseed_refs_bib %&gt;%\n  filter(CATEGORY != \"ARTICLE\",\n    !is.na(DOI)\n  )\n\nseed_refs_bib %&gt;%\n  filter(CATEGORY == \"BOOK\"\n  )"
+    "text": "Meeting Notes\nZack, Julie and Isak\nMonday June 17, 15:15 CEST / 9:15 EST\n\nDiscussion Topics\n\nJulie refined the codebook, Zack will make comments before the next meeting.\nIsak cleaned a significant amount of data, with emphasis on the books and book sections.\nZack expressed frustration with the inability to extract data from monographs or to derive complete metadata pertaining to monographs, book chapters and grey literature.\n\nHowever, we may not need a full record, just enough to get a unique identifier.\n\n\n\n\nAction Items\nNext meeting: Monday August 11, 15:15 CEST / 9:15 EST (July is Vacation in the Nordic countries)\nZack:\n\nTrack changes revisions on the codebook.\nWrite a report / blog post about the challenges of getting clean metadata.\n\nIsak:\n\nContinue the bib file, with special focus on books and book sections.\n\nJulie:\n\nCreate the initial spreadsheet to support coding.\n\n\n\nLinks and references"
   },
   {
-    "objectID": "sections/01_introduction.html",
-    "href": "sections/01_introduction.html",
-    "title": "1 Introduction",
+    "objectID": "research-protocol.html",
+    "href": "research-protocol.html",
+    "title": "Research Protocol",
     "section": "",
-    "text": "1 Introduction\nLund and Sindbæk (2022) \n\n\n\n\n\nReferences\n\nLund, Julie, and Søren M. Sindbæk. 2022. “Crossing the Maelstrom: New Departures in Viking Archaeology.” Journal of Archaeological Research 30 (2): 169–229. https://doi.org/10.1007/s10814-021-09163-3."
+    "text": "Note\n\n\n\nNote that the project has significantly evolved since drafting this protocol, and this document does not reflect our current scope of work. It still has value as a marker of our original intent.",
+    "crumbs": [
+      "Research Protocol"
+    ]
   },
   {
-    "objectID": "sections/03_methods-materials.html",
-    "href": "sections/03_methods-materials.html",
-    "title": "1 Methods and Materials",
-    "section": "",
-    "text": "1 Methods and Materials"
+    "objectID": "research-protocol.html#predictions-and-expectations",
+    "href": "research-protocol.html#predictions-and-expectations",
+    "title": "Research Protocol",
+    "section": "Predictions and Expectations",
+    "text": "Predictions and Expectations\nHere we document some predicted outcomes, which may or may not come to fruition. However, it is good to express our assumptions and expectations at this early point, for purposes of reflexivity.\n\nWe are going to find some sub-clusters within clusters, and perhaps also “bridging” clusters.\nSome sub-clusters will be tight-knit and closed, others will be broad and open.\nSome clusters will be focused on specific topics.\nThere will be many links across institutions, they are not really that fixed.\nSome citation chains will emerge that reflect casual observations (just a few examples):\n\nLots of cross-references within the Mälaren valley community.\nTight-knit cluster among papers that are concerned with ritual.\nMajor computational cluster at Aarhus.\n\nIf we had a broader time horizon, we might be able to trace “genealogies of affiliation” by tracing how identities change based on the evolution of their collaborative networks.\nClustering of methods by “academic upbringing”, which has a localized character.\nWe may be able to find associations based on age, but mainly by doing a rough assessment of the n most and least central nodes, rather than keying age into the data.",
+    "crumbs": [
+      "Research Protocol"
+    ]
   },
   {
-    "objectID": "sections/05_discussion.html",
-    "href": "sections/05_discussion.html",
-    "title": "1 Discussion",
-    "section": "",
-    "text": "1 Discussion"
+    "objectID": "research-protocol.html#the-corpus-of-works",
+    "href": "research-protocol.html#the-corpus-of-works",
+    "title": "Research Protocol",
+    "section": "The corpus of works",
+    "text": "The corpus of works\nThis project is fundamentally rooted on analysis of published papers, reports and proceedings, which we consider representative of a broader discursive phenomenon.\nThe corpus of works is rooted in Lund and Sindbæk (2022), which is a review that… [summarize the paper in one or two sentences here]. See the supplement for information on alternative (and less suitable) methods for producing a corpus that we decided not to pursue.\nAside from its representative content, Lund and Sindbæk (2022) is a great seed paper due to the circumstances of its creation. It is authored by two eminent archaeologists of the Viking Age, who are intimately familiar with the community of which they wrote. The authors also acknowledge their adherence to the different fields they identify, which imbues the paper with a balanced perspective. Moreover, the paper, which was published in the Journal of Archaeological Science, underwent an unusually rigorous peer-review process through which seven anonymous reviewers recommended additional sources and commentary on their respective character.1 Overall, the seed paper is a summary of a discursive phenomenon led by two extremely experienced archaeologists who represent different yet converging perspectives, which has been supplemented and validated by a jury of seven anonymous peers.\nThe corpus will emerge from this seed paper through its bibliographic references, which will be identified using CrossRef or OpenCitations. Using a genealogical metaphor, the seed paper may be referred to as P (for parental generation), its references as F1 (first filial generation), their bibliographic references as F2 (second filial generation), and so on. These linkages will enable us to ascertain whether the chains of references that each paper relies on follow any identifiable patterns, amalgamate into any discrete clusters, or point toward any “common ancestors” from which new lineages emerged or diverged.",
+    "crumbs": [
+      "Research Protocol"
+    ]
   },
   {
-    "objectID": "sections/11_references.html",
-    "href": "sections/11_references.html",
-    "title": "1 References",
-    "section": "",
-    "text": "1 References"
+    "objectID": "research-protocol.html#annotating-papers",
+    "href": "research-protocol.html#annotating-papers",
+    "title": "Research Protocol",
+    "section": "Annotating papers",
+    "text": "Annotating papers\nThis formal genealogical approach will be greatly enhanced through qualitative assessment of each paper. Ascertaining the qualities of each paper will enable us to understand their respective roles in the corpus rather than their mere presence.\nA significant portion of work will therefore involve identifying, characterizing and annotating the series of papers that are referenced in the seed paper. This will entail extracting structured information regarding the papers’ authors and publication venues, and characterizing each paper by kind (i.e. reports on findings, reviews of prior work, opinion pieces, etc). We will then determine the character of each paper, as considered in Lund and Sindbæk (2022), and through an additional qualitative assessment of each paper following an a priori coding protocol (methodological details presented below).\nIt should be noted that we will only be able to annotate papers referenced in the seed paper. In other words, our qualitative evaluation is limited to a single generation. However, we may sample the F1 generation and conduct deeper qualitative analysis based on sampled subsets.",
+    "crumbs": [
+      "Research Protocol"
+    ]
   },
   {
-    "objectID": "sections/13_supplement.html",
-    "href": "sections/13_supplement.html",
-    "title": "1 Supplementary Materials",
-    "section": "",
-    "text": "1 Supplementary Materials"
+    "objectID": "research-protocol.html#relational-and-contextual-ties",
+    "href": "research-protocol.html#relational-and-contextual-ties",
+    "title": "Research Protocol",
+    "section": "Relational and contextual ties",
+    "text": "Relational and contextual ties\nWe will also include additional information to help contexualize each paper as a product of social and situational circumstances. This will involve retrieving additional metadata about the papers, including the journals or venues in which they were published, as well as information about their authors, including their affiliations, genders and areas of expertise.2 Much of this information may be retrieved from CrossRef.\nThis information will allow us to ascertain a few key insights regarding publishing and citation practices. For instance, we may observe that certain kinds of work tend to be published in edited volumes rather than as standalone papers, to have specific institutional origins, to have authors of a specific gender. Aside from documenting the nature of discrete clusters of works, these factors may contribute to greater consideration of citational politics.\nRegarding gender, we may use the gender R package, created specifically for this purpose. The information assigned through both of these processes will have to be manually verified, but the community is small enough to make this feasible. We may consult with community interest groups (e.g. the SAA Queer Archaeology Interest group) to help support or provide critical feedback on “best practices” for identifying gender or other identity-based information.\nIt is important to be clear about our intent, since this influences (a) the ways we go about tryjng to achieve our goals, and (b) the reception of our approach in relation to contemporary discourse on gender diversity in research. Out goal is not to identify gender diversity or to assign gendered characteristics to certain clusters or subclusters, and these objectives would not be supported by our methods and supporting data. Instead, our intent is to identify citation biases and to critically assess the citational politics of research on the emergence of the Viking Age.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#qualitative-methods",
+    "href": "research-protocol.html#qualitative-methods",
+    "title": "Research Protocol",
+    "section": "Qualitative methods",
+    "text": "Qualitative methods\nA research assistant will annotate each reference using a series of keywords deriving from a controlled vocabulary. The controlled vocabulary has three axes:\n\nTopics\n\nWhat is the paper about?\ni.e. diaspora, mobility, gender, ritual, etc\n\nMethods\n\nWhat methods were applied in the paper?\ni.e. spatial analysis, genetics, stable isotope analysis, finds analysis\n\nKind of contribution\n\ni.e. field report, “standard” scientific paper, review of prior work, opinion, etc\n\nMedium\n\ni.e. journal article, book, chapter in an edited volume, etc\n\n\nThe research assistant will identify and record key terms from the controlled vocabulary for each paper, based on their reading of the abstract, introduction, conclusion or other summaritive section. Since this does not involve comprehensive or open coding, this can simply be entered into a customized spreadsheet, rather than using some specialized QDA software.\nThe research assistant will ideally be a more experienced student in the field of Viking Age archaeology, who may also benefit from this as a learning experience. Zack will schedule weekly check-ins with the research assistant and make himself available to address any methodological questions or concerns. Julie will then verify the annotations after the research assistant has completed the work.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#analyzing-references",
+    "href": "research-protocol.html#analyzing-references",
+    "title": "Research Protocol",
+    "section": "Analyzing references",
+    "text": "Analyzing references\nWe may characterize the citations themselves to ascertain the nature of each reference. We may follow a relatively simple classification scheme, i.e. supporting, contrasting/disputing or mentioning, which can be determined using natural language processing (NLP) (specifically, the scite zotero plugin). Alternatively, we may qualitatively code each reference following a more specialized coding scheme, as per Huvila, Andersson, and Sköld (2022) (see additional notes on this approach below).\nHowever, upon further reflection, this may not be feasible given the project’s timeframe, our material resources, and the reliability of the software solutions at hand. Qualitative coding can be very time-consuming, and we are only able to hire an assistant for four weeks of work to analyze over 500 references (in addition to other research tasks). Moreover, scite tends to “play it safe” by coding references as neutral mentions when human coders identify a more robust stance (see Bakker, Theis-Mahon, and Brown 2023). Additionally, scite’s corpus is limited to works put out by partnered publishers. There is an open source alternative to scite (see Jurgens (2017); https://jurgens.people.si.umich.edu/citation-function) but it requires more knowledge of NLP methods than we are able to implement.\nThese challenges aside, it may be reasonable to derive a sample based on network statistics, and then qualitatively annotate the references within the sample.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#statistical-analysis",
+    "href": "research-protocol.html#statistical-analysis",
+    "title": "Research Protocol",
+    "section": "Statistical analysis",
+    "text": "Statistical analysis\nKeeping track of topics independently from citational links enables us to validate whether topics are actually clustered around certain individuals or papers, or whether there are diverse centres.\nWe’ll be able to do some non-network descriptive statistics:\n\nDistribution of topics by affiliations of authors.\nDistribution of topics by number of co-authors.\nTemporal distributions of genders of lead authors.\nGender of lead author by size and genders of their co-authors.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#ai-tools-and-resources",
+    "href": "research-protocol.html#ai-tools-and-resources",
+    "title": "Research Protocol",
+    "section": "AI tools and resources",
+    "text": "AI tools and resources\nWe may apply LLM, NLP or topic-modelling methods to simplify, verify, or compare how it differs from human-led classification of research papers.\nMaxQDA has some guidelines on how to use AI to enhance literature reviews. However it’s unclear whether any effort has been made to specialize the use of AI toward lit reviews specifically. I’m sure there are additional services that specialize in AI-assisted literature reviews too.\nTopic modelling??\nI wonder if we can relate this work to Alex Brandsen’s dissertation research (Brandsen and Lippok 2021; Brandsen 2022, 2023).",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#alternative-means-of-assembling-the-corpus",
+    "href": "research-protocol.html#alternative-means-of-assembling-the-corpus",
+    "title": "Research Protocol",
+    "section": "Alternative means of assembling the corpus",
+    "text": "Alternative means of assembling the corpus\nThere are a few alternative approaches we may take to collect different kinds of datasets.\nOne approach is to conduct systematic keyword searches to return a subset of the archaeological literature for deeper evaluation, using a tool like Publish or Perish or the various R packages designed to access scholarly reference databases (e.g. rcrossref, wosr, openalexR, citecorp). This affords a relatively systematic approach to literature review, since the search’s scope is pre-established. However it is rather inflexible and risks becoming an extremely monumental undertaking. From prior experience attempting such a study, keyword searches return an extreme quantity of results, even when limiting the search by specific date ranges and journal titles. Moreover, the terminology that archaeologists use may not match the terms we use as scholars of scientific practice. Having to account for more terms produces more duplicates and false positives, which must be manually winnowed to a dataset of a viable, yet still realistic size.\nAnother approach is to examine the contents of all writing produced in a compendium of selected journals or publication venues. This requires justification for why the journals are selected and how this aligns with the study’s scope. This is viable in situations where the study is investigating publication practices (i.e. referencing R scripts, as per Schmidt and Marwick (2020)), but is harder to justify when exploring the scientific content of published work.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#parsing-references-from-pdfs",
+    "href": "research-protocol.html#parsing-references-from-pdfs",
+    "title": "Research Protocol",
+    "section": "Parsing references from PDFs",
+    "text": "Parsing references from PDFs\nIt has become clear that the quality of scholarly metadata is very poor for anything that is not an english peer-reviewed STEM article. Through a cursory examination of the major databases (Scopus, Web of Science, OpenAlex, CrossRef, etc), we found that these sources are not useful for our corpus, which includes many monographs and grey literature in languages other than english. It may therefore be better to extract references directly from the text of each work, at least for works that are not in those databases, using a tool like Grobid.\nThese sources can then be reconciled with the rest of the database through a common citekey format (first author’s last name + year of publication, and then double check all duplicates). Grobid also has a “consolidation” service that normalizes references against the CrossRef (or other) database.\nThis requires us to have good quality PDFs of each work, which Julie does have through her private library and teaching materials. Moreover, this also presents us with an opportunity to be more thoughtful in assembling our corpus. For instance, we may want to exclude whole books because the disproportionate number of references they contain will surely distort the citation networks (especially when it comes to centrality metrics). So, if a book is actually presenting the culmination of a few articles by the same author, it may be more prudent to include those instead of the book. Basically, this is an opportunity to transform the bibliography from the seed paper — which was never intended to be used in this way — into a functional and purposeful dataset.\nSo here is a basic protocol for vetting the quality of work that will be put into Grobid. Take detailed notes while doing this vetting. This involves making decisions, and we need to be transparent and reflexive about how we are developing our corpus.\n\nFilter out any journal articles; assume journal articles from the past 10-15 years have proper scholarly metadata.\nFlag any books that may be better represented by articles by the same authors based on your own experience and familiarity with the community of practice, or which may not be suitable to include in our analysis (i.e. a museum catalog).\nFor all books, book chapters, etc:\n\nMake sure we have the PDF available.\n\nPrioritize native PDFs, not scanned documents.\nIf scanned, then ensure it is good quality.\n\nMake sure the PDF is of the appropriate page range.\n\nFor book chapters:\n\nClip any pages before the first page.\nClip any pages after the last page of the bibliography.\nIf the book assembles all references into a common bibliography, flag the record for manual entry.\n\nFor whole books and/or theses:\n\nEnsure the PDF contains the full contents, i.e. not just a preview of the front matter.\n\n\nMake sure the metadata is correct:\n\nVerify that the item is correctly identified as a book, book chapter or journal articles.\nFor book chapters, make sure that the book title, editors, publisher, place, and page range are correct.\nFor book chapters, verify that book editors are not listed as authors of the chapters.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#workflows",
+    "href": "research-protocol.html#workflows",
+    "title": "Research Protocol",
+    "section": "Workflows",
+    "text": "Workflows\nThe is a quarto-based project situated in a git repository (BibVik). Zack is the repository’s primary maintainer, but Isak has been granted full administrative access, including the ability to make commits directly to the repository without submitting a pull request. Zack and Isak will clearly communicate about what they are working on so as to avoid generating conflictng commit histories which would produce a messy merge scenario.\nFor less technical users, it would be best to annotate automatically-generated PDFs or to work with an un-tracked copy of the markdown files, whose diffs can then be identified and applied by someone who is more familiar with using git.\nHere are a few procedural notes and workflows:\n\nAll writing is done in the file pertaining to the specific section, which are compiled into BibVik.qmd, which is where the paper’s main parameters are specified.\nReferences are cited using @ followed by the citekey, which follows a strict pattern of the first author’s surname followed by the year of publication, all lowercase and without spaces, e.g. @lund2022.\nReferences are stored in assets/BibVik.bib which is an automatically-updated export of Zack’s Zotero library. If you want to include a reference that is not yet in the library, refer to the DOI and Zack will add it in his revisions.\nAlthough we are keeping this as a private repository for now, all of this can be made into a public website. To preview the site locally, use quarto preview and navigate to localhost:7777 in your browser.\n\nHere is an overview of the directory structure:\nBibVik/                                 # Main directory\n    ├── BibVik.qmd                      # The paper's config file\n    ├── sections/                       # Files corresponding with each of the paper's sections\n        ├── 01_introduction.qmd\n        ├── 02_background.qmd\n        ├── etc.qmd\n    ├── assets/                         # Files that support quarto rendering\n        ├── BibVik.bib                  # Biblatex file (currently synced with Zack's entire Zotero library)\n        ├── chicago-author-date.csl     # Citation style language used to generate pretty citations\n        ├── title.tex                   # LaTeX include to generate pretty PDFs\n    ├── data/                           # Where the data live\n    ├── figures/                        # Where figures live\n    ├── R/                              # R functions called from the embedded code blocks\n    ├── research-protocol.qmd           # This planning document\n    ├── README                          # Project documentation\n    ├── _quarto.yml                     # Quarto config file\n    ├── .gitignore                      # Git support file\n    ├── .luarc.json                     # Ignored quarto support file\n    ├── .quarto                         # Various quarto support files\n    ├── _site                           # Where the rendered website files live",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#roles-and-responsibilities",
+    "href": "research-protocol.html#roles-and-responsibilities",
+    "title": "Research Protocol",
+    "section": "Roles and responsibilities",
+    "text": "Roles and responsibilities\nJulie Lund: Project lead and point person for anything related to Viking Age archaeology, and the professional community and interests that this paper is concerned with.\nIsak Roalkvam: Contributes insights about Viking Age archaeology and the professional community. Works with Zack to implement methodological decisions and processes in code.\nZack Batist: Contributes experience doing bibliometric research in the domain of archaeology. Works with Isak and Julie to derive sound methodological decisions and ensure that they are implemented in a manner that produces valuable and defensible outcomes.\nResearch assistant: Responsible for qualitatively evaluating the content of research papers that form the basis of this study.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#funding",
+    "href": "research-protocol.html#funding",
+    "title": "Research Protocol",
+    "section": "Funding",
+    "text": "Funding\nThe Research Assistant’s salary is funded by the Faculty of Humanities here at the University of Oslo.",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#timeline",
+    "href": "research-protocol.html#timeline",
+    "title": "Research Protocol",
+    "section": "Timeline",
+    "text": "Timeline\nTBD",
+    "crumbs": [
+      "Research Protocol"
+    ]
+  },
+  {
+    "objectID": "research-protocol.html#footnotes",
+    "href": "research-protocol.html#footnotes",
+    "title": "Research Protocol",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nI wonder if we could also examine, or perhaps publish, an edited version of the peer reviews.↩︎\nNote that keywords submitted by authors are not included in this list. This is due to their simplicity and the likelyhood of them being irrelevant to our own objectives. Additionally, some data sources (i.e. anthologies or edited volumes) do not typically use keywords, which will limit our ability to draw comprehensive comparisons.↩︎",
+    "crumbs": [
+      "Research Protocol"
+    ]
   }
 ]

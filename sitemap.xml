@@ -2,98 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zackbatist.info/BibVik/workshop.html</loc>
-    <lastmod>2026-04-13T09:58:13.585Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/sections/12_back-matter.html</loc>
-    <lastmod>2026-03-12T22:28:17.734Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/sections/06_conclusion.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/sections/04_findings.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/sections/02_background.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/scratchpad.html</loc>
-    <lastmod>2026-04-02T15:50:01.399Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/scratchpad-sections/data-cleaning.html</loc>
-    <lastmod>2026-03-15T21:00:26.332Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/research-protocol.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/notes/2025-07-07-meeting.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/notes/2025-06-02-meeting.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/manuscript.html</loc>
-    <lastmod>2026-03-15T21:37:35.173Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/codebook.html</loc>
-    <lastmod>2026-03-12T22:28:17.730Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/analytical-protocol-slides.html</loc>
-    <lastmod>2026-04-10T17:18:02.133Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/index.html</loc>
-    <lastmod>2026-04-01T18:04:08.050Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/notes/2025-05-16-meeting.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zackbatist.info/BibVik/notes/2025-06-16-meeting.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
+    <lastmod>2026-05-17T21:08:15.424Z</lastmod>
   </url>
   <url>
     <loc>https://zackbatist.info/BibVik/notes/2025-08-11-meeting.html</loc>
-    <lastmod>2026-03-12T22:28:17.732Z</lastmod>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/scratchpad-sections/basic-descriptive-stats.html</loc>
-    <lastmod>2026-04-12T11:18:41.087Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/notes/2025-06-16-meeting.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/scratchpad-sections/open-scholarly-metadata.html</loc>
-    <lastmod>2026-03-15T21:38:04.491Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/notes/2025-05-16-meeting.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/sections/01_introduction.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/12_back-matter.html</loc>
+    <lastmod>2026-05-17T21:08:15.423Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/sections/03_methods-materials.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/06_conclusion.html</loc>
+    <lastmod>2026-05-17T21:08:15.422Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/sections/05_discussion.html</loc>
-    <lastmod>2026-03-12T22:28:17.733Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/04_findings.html</loc>
+    <lastmod>2026-05-17T21:08:15.422Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/sections/11_references.html</loc>
-    <lastmod>2026-03-12T22:28:17.734Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/02_background.html</loc>
+    <lastmod>2026-05-17T21:08:15.422Z</lastmod>
   </url>
   <url>
-    <loc>https://zackbatist.info/BibVik/sections/13_supplement.html</loc>
-    <lastmod>2026-03-12T22:28:17.734Z</lastmod>
+    <loc>https://zackbatist.info/BibVik/manuscript/index.html</loc>
+    <lastmod>2026-07-07T19:52:52.323Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/codebook.html</loc>
+    <lastmod>2026-05-17T21:08:15.417Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/analysis/open-scholarly-metadata.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/analysis/full_analysis.html</loc>
+    <lastmod>2026-07-07T20:06:18.864Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/analytical-protocol-slides.html</loc>
+    <lastmod>2026-05-17T21:08:15.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/index.html</loc>
+    <lastmod>2026-05-17T21:08:15.418Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/01_introduction.html</loc>
+    <lastmod>2026-05-17T21:08:15.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/03_methods-materials.html</loc>
+    <lastmod>2026-05-17T21:08:15.422Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/05_discussion.html</loc>
+    <lastmod>2026-05-17T21:08:15.422Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/11_references.html</loc>
+    <lastmod>2026-05-17T21:08:15.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/manuscript/sections/13_supplement.html</loc>
+    <lastmod>2026-05-17T21:08:15.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/notes/2025-06-02-meeting.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/notes/2025-07-07-meeting.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zackbatist.info/BibVik/research-protocol.html</loc>
+    <lastmod>2026-05-17T21:08:15.419Z</lastmod>
   </url>
 </urlset>
