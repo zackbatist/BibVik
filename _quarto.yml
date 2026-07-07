@@ -38,8 +38,8 @@ website:
       #   text: Manuscript
       - href: workshop.qmd
         text: Workshop
-      - href: scratchpad.qmd
-        text: Scratchpad
+      - href: analysis/full_analysis.qmd
+        text: Analysis
       - href: codebook.qmd
         text: Codebook
       - href: research-protocol.qmd
@@ -47,7 +47,7 @@ website:
 toc: true
 toc-depth: 3
 toc-expand: 2
-number-sections: true
+number-sections: false
 format:
   html:
     theme: cosmo
