@@ -321,6 +321,47 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                     logger.debug("Correction %d (merge): discard %r already absent", i, discard)
                 continue
 
+            # Direction sanity check — refuses to apply, same principle as
+            # split's citer-accounting check above. A merge that discards
+            # the more central entry (lower generation number = closer to
+            # the seed paper) in favour of a less-central one is very
+            # likely backwards, not a deliberate choice — e.g. discarding
+            # an F1 paper that real papers cite, keeping an F2 stub. This
+            # is the exact bug class that shipped once already (an F1
+            # entry silently merged away into a weaker F2 duplicate) and
+            # was only caught afterward by noticing aggregate
+            # generation/edge counts looked wrong.
+            #
+            # Deliberately checks generation only, not citer count: citer
+            # count is exactly what a legitimate merge is supposed to
+            # move (discard's citers transfer to keep), so a higher count
+            # on discard pre-merge is normal, not suspicious — generation
+            # reflects how the entry was discovered and doesn't change
+            # from a merge, making it the actual stable signal for which
+            # side should structurally be more central.
+            #
+            # An explicit `override: true` on the correction bypasses this
+            # for the rare legitimate case where generation alone doesn't
+            # tell the real story (e.g. a mis-tagged generation field) —
+            # the override must be deliberate, not silent.
+            _GEN_ORDER = {"P": 0, "F1": 1, "F2": 2, "F3": 3}
+            keep_entry, discard_entry = bib[keep], bib[discard]
+            keep_gen = _GEN_ORDER.get(keep_entry.get("generation", ""), 99)
+            discard_gen = _GEN_ORDER.get(discard_entry.get("generation", ""), 99)
+
+            if discard_gen < keep_gen and not corr.get("override"):
+                logger.error(
+                    "Correction %d (merge): keep=%r (generation=%s) vs "
+                    "discard=%r (generation=%s) — discard is more central "
+                    "than keep. Refusing to apply; this looks backwards. "
+                    "If this is deliberate, add `override: true` to the "
+                    "correction and re-run.",
+                    i, keep, keep_entry.get("generation", ""),
+                    discard, discard_entry.get("generation", ""),
+                )
+                counts["skipped"] += 1
+                continue
+
             for cb in bib[discard].get("cited_by", []):
                 if cb not in bib[keep].get("cited_by", []):
                     bib[keep].setdefault("cited_by", []).append(cb)

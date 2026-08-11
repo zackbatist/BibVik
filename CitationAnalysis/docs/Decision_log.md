@@ -1902,3 +1902,37 @@ thing static review reliably misses, since the bug only manifests
 under real concurrent load with realistic data volume (many GROBID
 references) and realistic config (an email actually set, enabling
 the enrichment path) — none of which a code read alone exercises.
+
+## 2026-08-11 — `merge` corrections had no direction check (BS)
+
+**Problem:** a confirmed `merge` correction (`keep: stenholm2012,
+discard: hallansstenholm2012`) applied cleanly during a `--postprocess`
+run, discarding an F1 entry with 7 real citers in favor of an F2 entry
+with none. Only noticed afterward because aggregate stats looked
+wrong — F1 count dropped from 556 to 551, F2-entries-with-no-F1-parent
+jumped from 208 to 1,377, edge count dropped from 27,211 to 25,904 —
+and traced back through bibliography.json to the one bad correction.
+
+**Root cause:** apply_corrections()'s merge handler only ever
+validated that keep and discard both existed as citekeys and that a
+note was present. Nothing checked whether the merge direction made
+sense — the function had no concept of which side should structurally
+survive. split, in the same file, already refuses to apply on a
+citer-accounting mismatch; merge had no equivalent safeguard.
+
+**Fix:** added a direction check before a merge is applied — compares
+keep and discard's generation field (P/F1/F2/F3, the existing ranking
+already used elsewhere in graph.py to decide which label survives a
+merge, here used for the first time to help decide which entry
+survives). Refuses and logs if discard is more central than keep. An
+explicit override: true on the correction bypasses the check for the
+rare legitimate exception.
+
+**Verification:** tested against the exact real correction that
+caused this (correctly refused), the corrected direction (applies
+cleanly, cited_by transfers as expected), an explicit override
+(respected), and an ordinary same-generation merge (unaffected, no
+false positive).
+
+**Status:** fixed in the sandbox copy of bibvik/corrections.py only —
+not yet copied to the cluster.
