@@ -30,6 +30,18 @@ and fills in the note to confirm, or deletes the entry to reject.
 Two entries are the same work. `cited_by` from `discard` is merged into `keep`.
 `discard` is tombstoned with `_deleted: true` and `_merged_into: keep`.
 
+Before applying, the correction's direction is checked against `keep` and
+`discard`'s `generation` (P/F1/F2/F3 — see [Citekey generation](deduplication-normalisation.md)
+for how generation is assigned). If `discard` is more central than `keep`
+(e.g. discarding an F1 paper to keep an F2 stub), the merge is refused and
+logged rather than applied — this class of mistake shipped once already: a
+confirmed correction discarded a real F1 entry with several citers in favor
+of a weaker F2 duplicate, and was only caught afterward by noticing aggregate
+generation and edge counts had shifted unexpectedly after a `--postprocess`
+run. Add `override: true` to the correction to apply it anyway, for the rare
+case where generation alone doesn't reflect which side should actually
+survive.
+
 ```yaml
 - action: merge
   keep: widerstrom2004

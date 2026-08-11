@@ -1936,3 +1936,27 @@ false positive).
 
 **Status:** fixed in the sandbox copy of bibvik/corrections.py only —
 not yet copied to the cluster.
+
+## 2026-08-11 — Docs updated to match corrections.py's merge direction check (BS follow-up)
+
+**Problem:** corrections-system.md still described `merge` as
+validated only on citekey existence and note presence, with no
+mention of the generation-based direction check added to
+apply_corrections() earlier this session (see BS). Left as-is, the
+docs would misrepresent actual pipeline behavior — the same failure
+mode already caught once this session in a different context
+(architecture.qmd/deduplication-normalisation.md/corrections-system.md
+describing superseded behavior, 2026-07-02).
+
+**Fix:** added a paragraph under corrections-system.md's `merge`
+section documenting the check: compares `keep`/`discard` generation,
+refuses and logs if `discard` is more central than `keep`, references
+the stenholm2012 case as the reason it exists, documents the
+`override: true` bypass.
+
+**Also removed:** one sentence and a dead link in
+deduplication-normalisation.md referencing a merge-exposure-audit
+tool (a separate diagnostic module, `_one_sided_title_automerge`
+snapshot capture, and `--audit-merges` CLI flag) that was built
+earlier this session and then explicitly dropped — not part of the
+kept changes, so the
