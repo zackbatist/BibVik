@@ -682,6 +682,41 @@ def _method_llm_footnotes(
 # Method 6: LLM bibliography re-parse from raw text
 # =============================================================================
 
+def _locate_reference_snippet(raw_refs_text: str, family: str, year: str, window: int = 200) -> str:
+    """
+    Best-effort recovery of the original raw text around an author+year
+    mention in the full reference-list text, for use as a _source_footnote
+    fallback when Method 6 extracts an author+year but fails to extract a
+    title. This is not a citation parser — it is a last-resort provenance
+    trail so a blank-title entry isn't completely unrecoverable, the same
+    role _source_footnote already plays for Method 5 (llm_from_footnote).
+
+    Searches for the family name followed reasonably closely by the year
+    (allows a few words between, to tolerate "Family, Given (Year)" and
+    "Family et al. Year" orderings) and returns a window of surrounding
+    text. Returns an empty string if no confident match is found — this
+    deliberately does not fall back to returning the entire reference list,
+    since that would defeat the purpose of a targeted snippet and make the
+    fallback no more useful than not having one.
+    """
+    if not raw_refs_text or not family:
+        return ""
+
+    pattern = re.compile(
+        re.escape(family) + r"[^\n]{0,60}?" + re.escape(year),
+        re.IGNORECASE,
+    )
+    m = pattern.search(raw_refs_text)
+    if not m:
+        return ""
+
+    start = max(0, m.start() - window // 2)
+    end = min(len(raw_refs_text), m.end() + window // 2)
+    snippet = raw_refs_text[start:end].strip()
+    # Collapse internal whitespace/newlines from the raw extracted text.
+    return re.sub(r"\s+", " ", snippet)
+
+
 def _method_llm_bib_reparse(
     raw_refs_text: str,
     llm_config: dict,
@@ -749,6 +784,27 @@ def _method_llm_bib_reparse(
         if not family or not re.match(r"^(19|20)\d{2}[a-c]?$", year):
             continue
 
+        # Guard against the LLM extracting an author+year but no title —
+        # previously these passed straight through as blank ghost entries.
+        # Since a single LLM call over the whole reference-list text has no
+        # per-entry provenance to fall back on, _source_footnote is set to
+        # a best-effort locate-by-author-year slice of the original text
+        # so a manual reviewer has something to work from later, the same
+        # safety net Method 5 (llm_from_footnote) already provides. This
+        # does not attempt to re-extract the title automatically — that
+        # would just move the same failure one level down; it only ensures
+        # the raw text survives instead of being silently discarded.
+        if not title:
+            snippet = _locate_reference_snippet(raw_refs_text, family, year[:4])
+            logger.debug(
+                "Method 6: no title extracted for %s %s — creating entry "
+                "with _source_footnote fallback instead of discarding.",
+                family, year[:4],
+            )
+            title = ""  # left blank deliberately; do not fabricate one
+        else:
+            snippet = ""
+
         key = (_norm(family), year[:4])
         if key not in citations:
             citations[key] = {
@@ -778,6 +834,8 @@ def _method_llm_bib_reparse(
             "entry_type": item.get("entry_type", "misc"),
             "_resolution_method": "llm_bib_reparse",
         }
+        if snippet:
+            rich_entry["_source_footnote"] = snippet
 
         container = item.get("container_title", "")
         if container:

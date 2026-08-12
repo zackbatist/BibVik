@@ -1960,3 +1960,59 @@ tool (a separate diagnostic module, `_one_sided_title_automerge`
 snapshot capture, and `--audit-merges` CLI flag) that was built
 earlier this session and then explicitly dropped — not part of the
 kept changes, so the
+
+## Method 6 (llm_bib_reparse) blank-title entries preserved via source snippet — 2026-08-11
+
+**Problem:** investigating the llm_from_footnote root-cause finding
+(167 blank-title entries, 1.16% of the bibliography) surfaced a second,
+distinct failure mode under a different resolution method. 9 of
+poulsen2011's 19 blank-ghost entries were produced by llm_bib_reparse
+(Method 6) rather than llm_from_footnote, with `_source_footnote`
+completely empty rather than containing garbled-but-present text.
+
+**Root cause:** `_method_llm_bib_reparse` in detector.py never set
+`_source_footnote` at all — not a bug destroying the field, a field
+that was never populated for this method in the first place. When the
+LLM's single-call re-parse of the full reference list returns an
+author+year with an empty title (plausibly the `max_tokens=4096`
+budget already documented in citation-detection.md being exhausted
+partway through a long reference list, or a genuinely unparseable
+page-broken fragment), the existing filter at the top of the loop only
+checked family+year validity, so the entry passed through and became
+a permanent, unrecoverable blank ghost with no raw text preserved
+anywhere.
+
+**Fix:** added `_locate_reference_snippet()` to detector.py, which
+searches the original raw reference-list text for the author+year and
+returns a bounded window of surrounding text, stored as
+`_source_footnote` only when title extraction failed — giving Method 6
+entries the same recoverability fallback Method 5 already had.
+Deliberately does not attempt to re-derive the title itself.
+
+**Bug caught during testing, not shipped blind:** the first version of
+the new regex excluded periods from the search window between family
+name and year, which broke on the extremely common "Family, X. Year"
+format (a middle-initial period blocked the match) — would have
+silently failed on a large fraction of real citations. Fixed and
+re-verified against 6 cases (2 real matches including the
+middle-initial case, and 4 correctly-empty negative cases) before
+considering this done.
+
+**Documentation:** citation-detection.md's Method 6 section updated
+with a "Blank-title fallback" paragraph, placed directly after the
+existing token-budget note it's addressing.
+
+**Scope and limitations:** this only prevents *new* Method 6 blank
+ghosts on future runs — it does not retroactively recover the 9
+already-blank poulsen2011 entries (or the wider 167-entry issue) in
+the current bibliography. Retroactive recovery would need the same
+author+year-based snippet search run against each affected paper's
+already-stored raw reference-list text, if available, or re-running
+that paper through detection. Not yet investigated: whether affected
+entries cluster near the end of long reference lists, which would
+confirm the token-budget-exhaustion hypothesis specifically (versus
+genuinely unparseable fragments).
+
+**Status:** fixed and tested locally against synthetic cases; not yet
+deployed to the cluster or run against real data.
+

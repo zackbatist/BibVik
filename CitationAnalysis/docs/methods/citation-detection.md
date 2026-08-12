@@ -239,6 +239,20 @@ defaults used by Methods 4 and 5.
 metadata that flow through the existing integration path in `graph.py`.
 Entries are marked `_resolution_method: "llm_bib_reparse"` for provenance.
 
+**Blank-title fallback:** When the LLM extracts a valid author+year for an
+entry but returns an empty title — plausibly caused by the single-call
+token budget above being exhausted partway through a long reference list,
+or a genuinely unparseable page-broken fragment — the entry is no longer
+created with nothing to fall back on. `_locate_reference_snippet()` searches
+the original raw reference-list text for that author+year and, if found,
+stores a bounded window of surrounding text as `_source_footnote` on the
+entry, matching the fallback Method 5 already provides. This does not
+attempt to recover the title itself; it only ensures the entry isn't a
+completely unrecoverable blank ghost. A retrospective audit of the live
+bibliography (2026-08-11) found 9 such entries under a single source paper
+with `_source_footnote` empty prior to this fix — see `todo.md` for the
+full investigation and scope across the corpus.
+
 **Strengths:** Recovers entries that GROBID's structured parser cannot handle
 due to page-break fragmentation or dash-abbreviation pre-splitting. Operates on
 the same source text GROBID used, bypassing its ML parser entirely.
