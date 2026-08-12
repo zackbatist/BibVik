@@ -209,12 +209,37 @@ _LLM_BIB_REPARSE = """You are an expert at parsing academic bibliography section
 {text}
 ---
 
+IMPORTANT — compound citations: this text often contains SEVERAL distinct
+works packed into one dense run, separated by semicolons, with the years
+sometimes listed together before the author list. Split every such run into
+one entry PER work. Do not create a single entry that covers multiple works,
+and do not leave any named work out.
+
+Example of a compound run and its correct split:
+
+Input text: "Riddersporre, 1988; Riddersporre, Reisnert, and Skansjö, 1989;
+Tesch, 1992; Anglert, 1995."
+
+Correct output — FOUR separate entries, not one:
+[
+  {{"first_author_family": "Riddersporre", "first_author_given": "", "additional_authors": [], "year": "1988", "title": "", "container_title": "", "volume": "", "pages": "", "doi": "", "entry_type": "misc"}},
+  {{"first_author_family": "Riddersporre", "first_author_given": "", "additional_authors": [{{"family": "Reisnert", "given": ""}}, {{"family": "Skansjö", "given": ""}}], "year": "1989", "title": "", "container_title": "", "volume": "", "pages": "", "doi": "", "entry_type": "misc"}},
+  {{"first_author_family": "Tesch", "first_author_given": "", "additional_authors": [], "year": "1992", "title": "", "container_title": "", "volume": "", "pages": "", "doi": "", "entry_type": "misc"}},
+  {{"first_author_family": "Anglert", "first_author_given": "", "additional_authors": [], "year": "1995", "title": "", "container_title": "", "volume": "", "pages": "", "doi": "", "entry_type": "misc"}}
+]
+
+Note that in this example none of the four works have a recoverable title —
+that is normal and expected for a bare in-text list like this. Leave title
+as an empty string rather than guessing or copying another entry's title
+into it. It is far better to return four correctly-separated entries with
+no title than one entry that merges several different works together.
+
 For EACH distinct published work in the list, extract:
 - first_author_family: family/surname of the first author
 - first_author_given: given name(s) or initials of the first author
 - additional_authors: list of {{"family": "...", "given": "..."}} for co-authors (empty list if sole author)
 - year: publication year (4 digits)
-- title: title of the article, chapter, or book
+- title: title of the article, chapter, or book (empty string if not present in the text — never invent or copy one from a different entry)
 - container_title: journal name, book title (for chapters), or series name (empty string if standalone book)
 - volume: volume number (empty string if n/a)
 - pages: page range (empty string if n/a)
