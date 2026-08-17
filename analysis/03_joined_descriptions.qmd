@@ -1,0 +1,89 @@
+---
+title: "BibVik — Part 3: Joining structural and annotation descriptions"
+format:
+  html:
+    toc: true
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+  eval: false
+---
+
+Strategy and reasoning for this analysis: see `00_plan.qmd`. Reads outputs
+of `01_annotation.qmd` and `02_network_structure.qmd` — does not recompute
+either.
+
+Everything in Part 1 describes the graph on its own terms; everything in
+Part 2 describes the annotation data on its own terms. Neither is a
+baseline the other is checked against — this section places them side by
+side and reads the relationship, which is where the actual analytical
+content of this project lives.
+
+```{r}
+#| label: join
+#| eval: false
+# Adjust path once the annotation export location is finalized. df (from
+# Part 2) is keyed by cite_key; centrality_df / node_table (from Part 1)
+# is keyed by name (citekey). F1-only: annotations exist for F1 papers
+# only. F2 works cited by multiple F1 papers can still be described using
+# the annotation profile of their *citer set*, even though the F2 works
+# themselves are not annotated — see "per-F2-node citer profiles" above.
+
+node_table_annotated <- centrality_df |>
+  filter(is_ghost == "false") |>
+  left_join(df, by = c("name" = "cite_key"))
+```
+
+Planned comparisons, not yet implemented:
+
+- Whether Girvan-Newman's top-level split(s) (`community_gn`), Louvain
+  communities (`community_louvain`), and Leiden communities
+  (`community_leiden`) correspond to, cut across, or ignore the coded
+  topic / method / source-of-evidence / author-gender categories from
+  Part 2.
+- Whether centrality (`in_degree`, `betweenness`, `pagerank`) within a
+  community correlates with author gender — i.e. whether the most central
+  or bridging works within a cluster are disproportionately authored by
+  one gender even when the cluster's dominant topic is not itself
+  gender-skewed in the annotation data.
+- Direct citation homophily: whether papers (or, at a future author-level
+  aggregation, authors) disproportionately cite others sharing their coded
+  gender / topic / method characteristics. Computable directly from the
+  edge list and the join above; does not require any community-detection
+  output.
+- Per-F2-node citer profiles: for F2 works with `in_degree` above some
+  threshold, characterize the annotation profile (gender, topic, method)
+  of their F1 citer set, to see whether particular sources function as
+  shared touchstones across the field's internal divisions or as
+  in-group markers cited mainly within one part of it.
+
+## Open decisions (not yet resolved)
+
+- Whether and how to implement bounded-depth, parallelized Girvan-Newman;
+  no benchmarking done yet on how many splits are needed for a stable,
+  interpretable first division, or on runtime for the full-graph
+  betweenness computation as currently implemented.
+- Whether directed variants of GN/Louvain/Leiden are worth the added
+  complexity for this project's specific questions.
+- Which alternative unit of analysis (author, venue, kind-of-work), if any,
+  to pursue first, and on what timeline relative to the paper-level work
+  in this document.
+- How explicitly to frame the seed-paper-testing angle in eventual
+  writeups, given the PI/co-author relationship.
+- Normalizing topic/method/source proportions against the corpus-wide
+  gender base rate, rather than reporting raw proportions.
+- Which gender-composition categorization (`composition_strict`,
+  `composition_majority`, `composition_singleauthor_split`, or another)
+  is actually the most useful for the topic/method/source cross-tabs —
+  computed side by side, not yet chosen.
+- `fieldwork_lead_methods` (the mapping from coded method category to
+  first-vs-last lead-author convention) is a placeholder and must be
+  filled in with real codebook category names before the lead-author
+  analysis is meaningful; currently everything defaults to "ambiguous."
+- Secondary topic/method/source values are not yet included in any
+  gender cross-tab (composition-based or first-author-only) — only
+  primary values are currently compared against gender.
+- Region is not yet cross-tabbed against gender/topic/method/source
+  (word cloud only, by design for now).

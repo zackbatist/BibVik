@@ -1,0 +1,26 @@
+---
+title: "BibVik Citation Analysis: Camps, Communities, and Citational Politics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+  eval: false
+---
+
+This document renders the full analysis by including each stage in
+sequence. Each stage is also a standalone `.qmd` and can be read, edited,
+or rendered independently — see `00_plan.qmd`, `01_annotation.qmd`,
+`02_network_structure.qmd`, `03_joined_descriptions.qmd`. Girvan-Newman
+runs separately, outside this chain entirely — see `gn_analysis/README.md`.
+
+{{< include 00_plan.qmd >}}
+
+{{< include 01_annotation.qmd >}}
+
+{{< include 02_network_structure.qmd >}}
+
+{{< include 03_joined_descriptions.qmd >}}

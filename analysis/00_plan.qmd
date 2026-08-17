@@ -1,0 +1,254 @@
+---
+title: "BibVik Citation Analysis: Camps, Communities, and Citational Politics"
+subtitle: "Strategy and method — working document, 2026-07-03"
+format:
+  html:
+    toc: true
+    self-contained: true
+---
+
+Executed analysis lives in separate files:
+
+- `01_annotation.qmd` — annotation cross-tab (F1 corpus), independent of
+  the citation graph
+- `02_network_structure.qmd` — degree, centrality, k-core, components,
+  Louvain, Leiden, k-means on centrality profiles (GN excluded — see below)
+- `gn_analysis/` — Girvan-Newman, run standalone on the remote server via
+  tmux, outside the Quarto render chain entirely (see `gn_analysis/README.md`)
+- `03_joined_descriptions.qmd` — places the annotation and structural
+  descriptions side by side
+
+This document holds only the analytical plan and reasoning; no executed
+code.
+
+## Status
+
+This is a single working document combining the analytical plan with the
+code and outputs that carry it out. Several conceptual questions below are
+resolved; several concrete decisions (final scope of Girvan-Newman, whether
+to add directionality, which alternative unit of analysis to pursue first)
+are deliberately still open and marked as such. Sections without code are
+strategy and reasoning; sections with code are live analysis.
+
+## Starting point
+
+The original motivating question, from the seed paper (Lund & Sindbæk 2022):
+does the field divide into something like two camps around the origin of the
+Viking Age, along lines that co-vary across gender, topic, method and sources of evidence?
+
+This is a substantive, testable proposition from the literature — worth
+distinguishing from the research team's own fieldwork-based instincts about
+where the data might be heading (e.g. topic/gender associations noticed
+informally in the field). Both are legitimate to bring to this analysis, but
+they carry different epistemic weight and should be kept distinct in any
+eventual writeup: one is a claim to confirm or complicate; the other is an
+interpretive lens the team brings to reading whatever the data shows.
+
+## Core methodological stance: no baseline, just independent descriptions
+
+This is not a search for deviation from an expected or random pattern. The
+dataset is historically and socially situated — citation clustering along
+social, institutional, or intellectual lines is the expected,
+produced-by-history outcome, not an anomaly standing out against a null
+model. This is a real objection to modularity-based community detection
+(Louvain, Leiden), whose optimization target is explicitly "more clustered
+than a random graph with the same degree sequence would be." That framing
+is not a neutral default for this kind of data.
+
+The working alternative, used throughout this document: treat every
+computed structure — citation-graph community structure, the annotation
+cross-tab, per-work citer profiles, direct homophily rates — as an
+independent, self-contained description of the corpus, computed on its
+own terms with no reference point implied. None is privileged as ground
+truth against which another is checked. The actual analytical content is in
+the *relationship* between these descriptions once more than one exists:
+agreement, disagreement, partial overlap, or cross-cutting are all just
+facts about that relationship, not confirmations or violations of anything.
+This is the logic behind treating the annotation data as something to
+"bolt on" to a citation-structure analysis, rather than using one to
+validate the other, and it governs how every result below should be read.
+
+## Why Girvan-Newman over modularity methods, for the "camps" question
+
+Louvain and Leiden are fast (near-linear time, tractable at any scale
+without special hardware) and were considered as a way around
+Girvan-Newman's poor scalability. Both are computed below as additional
+independent descriptions, but neither is treated as the primary method for
+the "camps" question specifically, for reasons distinct from performance:
+
+- Their optimization target (deviation from a random-graph null model) is
+  the wrong lens for socially/historically produced structure, per above.
+- The "camps" question is specifically about **whether the graph splits
+  cleanly, and in what order** — a first split into two, each of which may
+  or may not split further into more nuanced sub-divisions. Girvan-Newman's
+  hierarchical, edge-removal structure encodes exactly this nesting as a
+  byproduct of how it runs; a flat modularity partition does not answer
+  "is two-way division the first-order truth" as directly.
+
+Louvain/Leiden are computed as **additional, independent descriptions** in
+their own right — not as a faster substitute for Girvan-Newman, and not as
+a "cross-check" implying agreement would validate either method. The two
+families of method ask different structural questions (dense-cluster
+membership vs. load-bearing bridges) and can legitimately produce
+different, non-comparable pictures of the same graph. Their disagreement,
+if any, is reported as a finding, not a discrepancy to resolve.
+
+## Girvan-Newman tractability
+
+**The problem.** Full Girvan-Newman decomposition is expensive because edge
+betweenness centrality must be recomputed after every single edge removal —
+this is inherently sequential across iterations (removal *i+1* depends on
+the graph state after removal *i*), so parallelizing across iterations is
+not possible. An earlier assessment that GN "can't really be parallelized"
+on an available 84-core server is only half right.
+
+**What does parallelize.** The betweenness calculation *within* a single
+iteration (Brandes' algorithm) sums independent per-source-node
+contributions, and is embarrassingly parallel across those source nodes.
+`graph-tool` supports this; a `networkx`-based multiprocessing wrapper could
+achieve something similar. This would meaningfully speed up the expensive
+per-iteration cost, without approximating anything — every node, including
+low-degree ones, remains fully part of the calculation. **Not yet
+implemented in the code below** — the current implementation uses
+`igraph::cluster_edge_betweenness()` as-is, which does not parallelize the
+per-iteration cost. This should be revisited if runtime on the full graph
+proves impractical.
+
+**Rejected optimization: peeling degree-1 (leaf) nodes, or pre-filtering to
+a k-core, before running GN.** Considered and explicitly rejected. Leaves
+(or low-coreness nodes generally) are cheap to strip and their community
+assignment could be trivially inferred afterward from their highest-degree
+neighbor — but this is a real approximation, not a free win:
+
+- Leaves attached to a neighbor whose own community assignment is itself
+  marginal/unstable would inherit an arbitrary decision.
+- Leaf-peeling cascades: removing one leaf can drop a neighbor to degree 1,
+  triggering further removal, which can strip small but genuine citation
+  chains, not just pendant noise.
+- Removing leaves changes the betweenness values of the edges that remain,
+  since leaves still contribute path endpoints to the full-graph
+  calculation — the pruned-graph result is not guaranteed to approximate
+  the full-graph result closely.
+- Most importantly for this project: **a paper cited only once may be
+  exactly the interesting case** (niche, contested, or newly-emerging
+  reference) for a study of citational politics, not noise to discard.
+  Peripheral/rarely-cited nodes are data, not overhead, given the research
+  question explicitly concerns how peripheral material relates to
+  dominant positions.
+
+**Current direction: bounded-depth GN on the full, unfiltered graph.**
+Rather than decomposing to individual papers, or filtering the input graph
+first, the edge-removal process is read off at the first several splits
+(e.g. first split, then the splits within each resulting side), computed on
+every node in the graph. This is not merely a performance compromise — the
+first few splits are the more interpretable structural fact for the "camps"
+question; full decomposition to singleton papers stops being a meaningful
+description of factional structure at all. This is implemented below;
+whether it is *fast enough* on the full graph without the parallelization
+described above has not yet been benchmarked.
+
+## Time and directionality
+
+The F1 corpus spans a single decade — too short to usefully time-slice
+without each slice becoming too sparse to support reliable community
+detection or homophily estimates. Time-sliced structural analysis and
+homophily-as-a-trend-over-time were both considered and set aside for this
+reason, not because time is uninteresting in principle.
+
+**Directionality remains open** and is a separate matter from time-slicing.
+The citation graph is directed (citer → cited); the community-detection
+methods below are run on the undirected projection (standard practice for
+this class of algorithm, and consistent with the centrality measures, which
+are computed in directed form separately). Whether "who is drawn upon vs.
+who does the drawing" should be built into the community-detection step
+itself, using directed variants of GN/Louvain/Leiden, is not yet decided.
+
+**F2 publication date at time of citation** is a separate small thread worth
+keeping in mind: F2 works are not bound by the F1 decade and may span a much
+longer history. Whether the age of cited material varies systematically
+depending on which part of the F1 corpus is doing the citing is a fact
+already present in the data (publication years) without requiring any
+time-slicing of the corpus itself. Not yet implemented below.
+
+## The independent descriptions computed in this document
+
+Consistent with the no-baseline stance, the analysis is organized as a set
+of independently computable, independently meaningful descriptions of the
+corpus, to be placed alongside each other rather than run in a required
+sequence. This document computes:
+
+1. **Structural descriptions of the citation graph** — degree, centrality
+   (betweenness, closeness, PageRank, HITS), k-core, connected components,
+   and community detection (Girvan-Newman, Louvain, Leiden, k-means on
+   centrality profiles). See below.
+
+2. **The annotation cross-tab** — author gender × primary/secondary topic ×
+   primary/secondary method, across the F1 corpus. Tests whether the seed
+   paper's supposed tripartite co-variation is visible in the coded data at
+   all. Computed independently of any graph work.
+
+Not yet implemented in this document, recorded here so the plan is not
+lost:
+
+3. **Per-F2-node citer profiles.** For F2 works cited by multiple F1 papers,
+   characterize the citer set using annotation data that exists only on the
+   F1 side: gender composition, topic/method diversity, and whether the
+   citer set is itself structurally clustered or scattered. Does not
+   require resolving the community-detection method question and is
+   tractable immediately once prioritized. Speaks to a genuinely different
+   citational-politics phenomenon than the corpus-wide cross-tab: whether
+   particular sources function as shared/foundational touchstones cited
+   across the field's internal divisions, or as in-group markers cited
+   mainly within one part of it.
+
+4. **Direct citation homophily.** Do papers (or, at the author level — see
+   "alternative units" below — authors) disproportionately cite others
+   sharing their coded gender/topic/method characteristics? A direct join
+   of two already-independent descriptions (citation edges, annotation
+   data) with no algorithmic mediation in between. Likely the most
+   immediately tractable of the not-yet-built analyses.
+
+5. **Joining structural and annotation descriptions.** Whether
+   Girvan-Newman's top-level split(s), Louvain communities, and Leiden
+   communities correspond to, cut across, or ignore the coded categories;
+   whether centrality within a community correlates with author gender
+   even when a community's dominant topic is not itself gender-skewed.
+
+## Extension for future consideration: alternative units of analysis
+
+Everything in this document treats the paper as the unit of the graph
+(papers cite papers). This is one particular projection of a richer
+structure, not the only one, and is worth extending in future work — not
+resolved or prioritized now, but recorded so it isn't lost:
+
+- **Author-level graphs.** Collapsing papers into authors changes what
+  centrality means (a prolific author becomes a hub independent of any
+  single paper's standing) and makes author-to-author citation homophily a
+  more natural unit than paper-to-paper for gender-citation questions.
+  Co-authorship itself becomes an additional structural question: do
+  co-authorships cross or reinforce whatever divisions appear elsewhere.
+
+- **Venue-level graphs** (journal, edited volume, conference proceedings,
+  grey literature/excavation report). Likely to reveal institutional or
+  disciplinary structure rather than intellectual structure directly, and
+  could complicate a purely topic/gender reading — a "camp" might partly
+  reflect which kind of venue a sub-field mostly publishes in, particularly
+  given the corpus's substantial non-English, non-journal material
+  (excavation reports, conference proceedings).
+
+- **Kind-of-work as a unit** (monograph vs. article vs. excavation report
+  vs. edited-volume chapter). Related to venue but not identical; may track
+  disciplinary/generational norms that could explain or cross-cut part of
+  any gender/topic pattern rather than sitting alongside it as a fully
+  independent axis.
+
+Each alternative unit would be, again, an independent description rather
+than a more "real" or authoritative one. A useful way to stress-test any
+finding at the paper level is to check whether it persists, sharpens, or
+dissolves when re-aggregated to authors or venues — if a division only
+appears at one level of aggregation, that is itself informative about
+whether the division is fundamentally about individual works, about
+people, or about where people publish.
+
+---
+

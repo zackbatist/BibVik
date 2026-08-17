@@ -1,0 +1,455 @@
+---
+title: "BibVik — Part 2: Citation graph, structural descriptions"
+format:
+  html:
+    toc: true
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+  eval: false
+---
+
+Strategy and reasoning for this analysis: see `00_plan.qmd`.
+
+Girvan-Newman is run separately, outside this document — see
+`gn_analysis/README.md`. Its output (`gn_analysis/results/communities.csv`)
+can be read in here once available; see the commented-out read-in at the
+end of this file.
+
+# Part 2 — Citation graph: structural descriptions
+
+## Setup
+
+```{r}
+#| label: install
+#| eval: false
+install.packages(c("igraph", "tidyverse", "ggraph", "tidygraph", "jsonlite"))
+```
+
+```{r}
+#| label: libraries
+library(igraph)
+library(tidyverse)
+library(ggraph)
+library(tidygraph)
+library(jsonlite)
+library(here)
+```
+
+```{r}
+#| label: load-graph
+g <- read_graph("/home/zack/models/BibVik_output/citation_graph.graphml", format = "graphml")
+g <- as.directed(g, mode = "arbitrary")
+
+bib <- fromJSON("/home/zack/models/BibVik_output/bibliography.json", simplifyDataFrame = FALSE)
+
+# Active entries only (tombstoned entries are excluded from the export,
+# but guard here in case of an older bibliography file). Note: entries
+# tombstoned via `delete` (not `merge`) that appear as a citer elsewhere
+# are retained in the export as flagged "ghost" nodes so their outbound
+# edges aren't lost — see exporter.py and docs/methods/corrections-system.md.
+# Ghost nodes carry is_ghost = "true" in the GraphML attributes and have
+# no reliable bibliographic metadata; they are kept in the graph (their
+# edges are real) but excluded from any display table or join that assumes
+# real title/author/topic data.
+bib <- bib[!sapply(bib, function(e) isTRUE(e[["_deleted"]]))]
+
+node_attrs <- tibble(
+  name            = names(bib),
+  title           = map_chr(bib, ~ .x$title %||% ""),
+  year            = map_chr(bib, ~ .x$date %||% .x$year %||% ""),
+  generation      = map_chr(bib, ~ .x$generation %||% ""),
+  entry_type      = map_chr(bib, ~ .x$entry_type %||% ""),
+  resolution      = map_chr(bib, ~ .x[["_resolution_method"]] %||% "grobid"),
+  completeness    = map_chr(bib, ~ .x$completeness$label %||% ""),
+)
+
+is_ghost <- tibble(
+  name     = V(g)$name,
+  is_ghost = V(g)$is_ghost %||% rep("false", vcount(g))
+)
+
+cat("Nodes:", vcount(g), "\n")
+cat("Edges:", ecount(g), "\n")
+cat("Directed:", is_directed(g), "\n")
+cat("Density:", edge_density(g), "\n")
+cat("Ghost nodes (tombstoned entries retained for edge preservation):",
+    sum(is_ghost$is_ghost == "true"), "\n")
+```
+
+## Degree and centrality
+
+In-degree (times cited within the corpus) and out-degree (number of works
+cited) capture different roles. High in-degree identifies widely-cited works
+— the intellectual anchors of the field. High out-degree identifies works
+that are heavily engaged with the literature, drawing on many sources.
+
+Betweenness centrality identifies works that sit on many shortest paths
+between other works — brokers between sub-literatures. Betweenness is
+expensive to compute on large graphs; normalized values are reported.
+
+PageRank assigns authority based on incoming links weighted by the
+authority of the linking node — conceptually similar to being cited by
+works that are themselves widely cited. Hub and authority scores (HITS)
+are complementary: hubs point to many authorities; authorities are pointed
+to by many hubs.
+
+Peripheral works — low degree, low centrality by every measure below — are
+not treated as noise in this project. A work cited only once may be exactly
+the interesting case (a niche, contested, or newly emerging reference) for
+a study of citational politics. No node is excluded from any measure in
+this section on the basis of low degree.
+
+```{r}
+#| label: degree
+V(g)$degree_in  <- degree(g, mode = "in")
+V(g)$degree_out <- degree(g, mode = "out")
+V(g)$degree_all <- degree(g, mode = "all")
+```
+
+```{r}
+#| label: centrality
+V(g)$betweenness  <- betweenness(g, directed = TRUE, normalized = TRUE)
+V(g)$closeness_in <- closeness(g, mode = "in", normalized = TRUE)
+V(g)$pagerank     <- page_rank(g, directed = TRUE)$vector
+V(g)$hub          <- hub_score(g)$vector
+V(g)$authority    <- authority_score(g)$vector
+
+centrality_df <- tibble(
+  name        = V(g)$name,
+  betweenness = V(g)$betweenness,
+  closeness   = V(g)$closeness_in,
+  pagerank    = V(g)$pagerank,
+  hub         = V(g)$hub,
+  authority   = V(g)$authority,
+  in_degree   = V(g)$degree_in,
+  out_degree  = V(g)$degree_out,
+  degree      = V(g)$degree_all,
+) |> left_join(node_attrs, by = "name") |> left_join(is_ghost, by = "name")
+```
+
+### Most cited (by in-degree)
+
+```{r}
+centrality_df |>
+  filter(is_ghost == "false") |>
+  arrange(desc(in_degree)) |>
+  head(20) |>
+  select(name, title, year, generation, in_degree) |>
+  knitr::kable()
+```
+
+### Most citing (by out-degree)
+
+```{r}
+centrality_df |>
+  filter(is_ghost == "false") |>
+  arrange(desc(out_degree)) |>
+  head(20) |>
+  select(name, title, year, generation, out_degree) |>
+  knitr::kable()
+```
+
+### Degree distribution
+
+A power-law or scale-free degree distribution is characteristic of citation
+networks: most works are cited rarely, a small number are cited frequently.
+The log-log plot tests this.
+
+```{r}
+#| label: degree-dist
+#| fig-width: 8
+#| fig-height: 5
+ggplot(centrality_df, aes(x = in_degree)) +
+  geom_histogram(bins = 50, fill = "steelblue") +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(
+    title = "In-degree distribution (log-log)",
+    x = "In-degree (times cited)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+### Top by betweenness centrality
+
+Works with high betweenness mediate between otherwise disconnected parts
+of the citation network — likely works that bridge sub-fields or periods.
+
+```{r}
+centrality_df |>
+  filter(is_ghost == "false") |>
+  arrange(desc(betweenness)) |>
+  head(20) |>
+  select(name, title, year, betweenness) |>
+  knitr::kable(digits = 4)
+```
+
+## Connected components
+
+A weakly connected component (WCC) treats edges as undirected. A strongly
+connected component (SCC) requires paths in both directions — rare in
+citation networks, since citations are historically directed (a 2010 paper
+cannot cite a 2020 paper). The WCC structure shows how fragmented the
+network is; a dominant giant component indicates a well-connected literature.
+
+```{r}
+#| label: components
+wcc <- components(g, mode = "weak")
+scc <- components(g, mode = "strong")
+
+cat("Weakly connected components:", wcc$no, "\n")
+cat("Largest WCC:", max(wcc$csize), "nodes (",
+    round(100 * max(wcc$csize) / vcount(g), 1), "% of graph)\n")
+cat("Strongly connected components:", scc$no, "\n")
+cat("Largest SCC:", max(scc$csize), "nodes\n")
+
+V(g)$component_weak   <- wcc$membership
+V(g)$component_strong <- scc$membership
+```
+
+### WCC size distribution
+
+```{r}
+tibble(size = wcc$csize) |>
+  count(size) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+## K-core decomposition
+
+The k-core of a graph is the maximal subgraph in which every node has at
+least k connections to other nodes within that subgraph. It is computed by
+iteratively removing nodes with degree below k until no further removal
+is possible. Nodes are assigned a coreness value equal to the highest k
+for which they remain in the k-core.
+
+K-core decomposition is reported here purely as a **descriptive** measure —
+identifying which works are structurally embedded in dense mutual-citation
+relationships versus which sit at the periphery. It is not used below as a
+preprocessing filter for any other method; every peripheral node (coreness
+= 1, or excluded entirely from any k ≥ 2 core) remains a full participant in
+every other analysis in this document, including Girvan-Newman.
+
+Reference: Alvarez-Hamelin et al. (2005). Large scale networks
+fingerprinting and visualization using the k-core decomposition.
+*Advances in Neural Information Processing Systems*, 18.
+
+```{r}
+#| label: kcore
+g_undirected <- as.undirected(g, mode = "collapse")
+V(g)$coreness <- coreness(g_undirected)
+
+cat("Coreness distribution:\n")
+table(V(g)$coreness) |> print()
+
+centrality_df <- centrality_df |>
+  left_join(tibble(name = V(g)$name, coreness = V(g)$coreness), by = "name")
+
+centrality_df |>
+  group_by(coreness) |>
+  summarise(n = n(), mean_in_degree = mean(in_degree)) |>
+  arrange(desc(coreness)) |>
+  head(15) |>
+  knitr::kable(digits = 2)
+```
+
+```{r}
+#| label: kcore-top
+centrality_df |>
+  filter(is_ghost == "false") |>
+  arrange(desc(coreness), desc(in_degree)) |>
+  head(20) |>
+  select(name, title, year, coreness, in_degree) |>
+  knitr::kable()
+```
+
+## Community detection
+
+Community detection here produces several independent descriptions of how
+the graph divides, not a single answer to be triangulated (see "Core
+methodological stance" above). Louvain and Leiden ask "which groups of
+nodes are more densely interconnected than a random graph with the same
+degree sequence would predict." Girvan-Newman asks "which edges, if
+removed, disconnect otherwise-separate parts of the network." These are
+genuinely different questions; neither validates the other.
+
+References:
+
+- Blondel et al. (2008). Fast unfolding of communities in large networks.
+  *Journal of Statistical Mechanics*, P10008.
+- Traag et al. (2019). From Louvain to Leiden. *Scientific Reports*, 9, 5233.
+- Girvan & Newman (2002). Community structure in social and biological
+  networks. *PNAS*, 99(12), 7821–7826.
+- Newman (2006). Modularity and community structure in networks.
+  *PNAS*, 103(23), 8577–8582.
+
+```{r}
+#| label: louvain
+louvain <- cluster_louvain(g_undirected)
+cat("Louvain communities:", length(louvain), "\n")
+cat("Modularity:", round(modularity(louvain), 4), "\n")
+V(g)$community_louvain <- membership(louvain)
+
+tibble(community = seq_along(sizes(louvain)), size = sizes(louvain)) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: louvain-viz
+#| fig-width: 12
+#| fig-height: 12
+#| cache: true
+tg <- as_tbl_graph(g) |>
+  activate(nodes) |>
+  mutate(community = as.factor(V(g)$community_louvain))
+
+ggraph(tg, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey60") +
+  geom_node_point(aes(colour = community), size = 0.3, alpha = 0.7) +
+  scale_colour_viridis_d(guide = "none") +
+  theme_graph() +
+  labs(title = "Citation graph — Louvain communities")
+
+ggsave("bibvik_louvain.png", width = 16, height = 16, dpi = 300)
+ggsave("bibvik_louvain.pdf", width = 16, height = 16)
+```
+
+```{r}
+#| label: leiden
+leiden <- cluster_leiden(g_undirected, objective_function = "modularity")
+cat("Leiden communities:", length(leiden), "\n")
+cat("Modularity:", round(modularity(leiden), 4), "\n")
+V(g)$community_leiden <- membership(leiden)
+
+tibble(community = seq_along(sizes(leiden)), size = sizes(leiden)) |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: leiden-viz
+#| fig-width: 12
+#| fig-height: 12
+#| cache: true
+tg <- as_tbl_graph(g) |>
+  activate(nodes) |>
+  mutate(community = as.factor(V(g)$community_leiden))
+
+ggraph(tg, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey60") +
+  geom_node_point(aes(colour = community), size = 0.3, alpha = 0.7) +
+  scale_colour_viridis_d(guide = "none") +
+  theme_graph() +
+  labs(title = "Citation graph — Leiden communities")
+
+ggsave("bibvik_leiden.png", width = 16, height = 16, dpi = 300)
+ggsave("bibvik_leiden.pdf", width = 16, height = 16)
+```
+
+## K-means clustering
+
+K-means clusters nodes based on their centrality feature profiles rather
+than graph structure. It groups works that occupy similar structural
+positions — for example, highly-cited authorities vs. high-betweenness
+brokers vs. peripheral works — rather than groups that densely cite each
+other. This is a further independent description, not a validation of the
+community-detection methods above.
+
+```{r}
+#| label: km
+features <- centrality_df |>
+  select(betweenness, closeness, pagerank, hub, authority, in_degree) |>
+  mutate(across(everything(), ~ replace_na(., 0))) |>
+  mutate(across(everything(), ~ scale(.)[,1]))
+
+set.seed(42)
+k <- 6
+km <- kmeans(features, centers = k, nstart = 25)
+centrality_df$cluster_kmeans <- km$cluster
+V(g)$cluster_kmeans <- km$cluster
+
+cat("Cluster sizes:\n")
+table(km$cluster) |> print()
+```
+
+```{r}
+#| label: km-viz
+#| fig-width: 12
+#| fig-height: 12
+#| cache: true
+tg <- as_tbl_graph(g) |>
+  activate(nodes) |>
+  mutate(cluster = as.factor(V(g)$cluster_kmeans))
+
+ggraph(tg, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey60") +
+  geom_node_point(aes(colour = cluster), size = 0.3, alpha = 0.7) +
+  scale_colour_viridis_d(guide = "none") +
+  theme_graph() +
+  labs(title = "Citation graph — K-means clusters (by centrality profile)")
+
+ggsave("bibvik_kmeans.png", width = 16, height = 16, dpi = 300)
+ggsave("bibvik_kmeans.pdf", width = 16, height = 16)
+```
+
+### Cluster profiles
+
+```{r}
+#| label: km-profiles
+centrality_df |>
+  group_by(cluster_kmeans) |>
+  summarise(
+    n                = n(),
+    mean_pagerank    = mean(pagerank, na.rm = TRUE),
+    mean_betweenness = mean(betweenness, na.rm = TRUE),
+    mean_authority   = mean(authority, na.rm = TRUE),
+    mean_in_degree   = mean(in_degree, na.rm = TRUE),
+  ) |>
+  arrange(desc(mean_in_degree)) |>
+  knitr::kable(digits = 5)
+```
+
+## Structural node table export
+
+```{r}
+#| label: export-structural
+node_table <- centrality_df |>
+  left_join(
+    tibble(
+      name              = V(g)$name,
+      coreness          = V(g)$coreness,
+      component_weak    = V(g)$component_weak,
+      component_strong  = V(g)$component_strong,
+      community_louvain = V(g)$community_louvain,
+      community_leiden  = V(g)$community_leiden,
+      cluster_kmeans    = V(g)$cluster_kmeans,
+    ),
+    by = "name"
+  )
+
+# Girvan-Newman communities are computed standalone (see gn_analysis/) and
+# joined in here only if that run has finished and produced output.
+gn_result_path <- here("analysis", "gn_analysis", "results", "communities.csv")
+if (file.exists(gn_result_path)) {
+  gn_communities <- read_csv(gn_result_path) |>
+    rename(community_gn = community_id)
+  node_table <- node_table |> left_join(gn_communities, by = c("name" = "node_id"))
+  cat("Joined Girvan-Newman communities from", gn_result_path, "\n")
+} else {
+  cat("No Girvan-Newman results found at", gn_result_path, "— skipping join.\n")
+}
+
+write_csv(node_table, "bibvik_node_table.csv")
+cat("Written bibvik_node_table.csv\n")
+cat("Rows:", nrow(node_table), "\n")
+```
+
