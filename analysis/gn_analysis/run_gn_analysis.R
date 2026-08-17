@@ -27,6 +27,7 @@ dir.create(checkpoint_dir, showWarnings = FALSE, recursive = TRUE)
 state_file    <- file.path(checkpoint_dir, "state.rds")
 log_file      <- file.path(checkpoint_dir, "run.log")
 modularity_csv<- file.path(checkpoint_dir, "modularity_trace.csv")
+removal_log_csv <- file.path(checkpoint_dir, "removal_log.csv")
 result_csv    <- file.path(checkpoint_dir, "communities.csv")
 result_graphml<- file.path(checkpoint_dir, "final_graph.graphml")
 
@@ -76,6 +77,7 @@ if (file.exists(state_file)) {
   g <- state$graph
   round_num <- state$round_num
   modularity_trace <- state$modularity_trace
+  removal_log <- state$removal_log
   best_modularity <- state$best_modularity
   best_membership <- state$best_membership
   best_round <- state$best_round
@@ -93,12 +95,19 @@ if (file.exists(state_file)) {
   round_num <- 0
   modularity_trace <- data.frame(round = integer(0), edges_removed = integer(0),
                                   n_components = integer(0), modularity = double(0))
+  # Full removal order — endpoint names of the edge removed each round, in
+  # order. This is sufficient to reconstruct the complete dendrogram (the
+  # partition at any cut point, not just the best-modularity one) after the
+  # fact: replaying removals 1..k against the original graph reproduces the
+  # exact component structure at k removals, for any k.
+  removal_log <- data.frame(round = integer(0), from = character(0), to = character(0))
   best_modularity <- -Inf
   best_membership <- NULL
   best_round <- 0
 
   # header for the live CSV trace
   write.csv(modularity_trace, modularity_csv, row.names = FALSE)
+  write.csv(removal_log, removal_log_csv, row.names = FALSE)
 }
 
 total_edges_start <- ecount(g) + round_num  # approx, only exact if resuming with no prior loss
@@ -115,6 +124,7 @@ while (ecount(g) > 0) {
 
   eb <- edge_betweenness(g, directed = FALSE)
   max_idx <- which.max(eb)
+  removed_endpoints <- ends(g, max_idx, names = TRUE)
   g <- delete_edges(g, max_idx)
 
   round_num <- round_num + 1
@@ -129,8 +139,16 @@ while (ecount(g) > 0) {
                                         n_components = comp$no,
                                         modularity = mod))
 
-  # append single row to CSV so progress is visible without waiting for R to exit
+  removal_log <- rbind(removal_log,
+                        data.frame(round = round_num,
+                                   from = removed_endpoints[1, 1],
+                                   to = removed_endpoints[1, 2]))
+
+  # append single row to each live CSV so progress is visible without
+  # waiting for R to exit
   write.table(tail(modularity_trace, 1), modularity_csv, sep = ",",
+              row.names = FALSE, col.names = FALSE, append = TRUE)
+  write.table(tail(removal_log, 1), removal_log_csv, sep = ",",
               row.names = FALSE, col.names = FALSE, append = TRUE)
 
   if (mod > best_modularity) {
@@ -147,6 +165,7 @@ while (ecount(g) > 0) {
   # ---- checkpoint every round (cheap relative to betweenness cost) ----
   state <- list(graph = g, round_num = round_num,
                 modularity_trace = modularity_trace,
+                removal_log = removal_log,
                 best_modularity = best_modularity,
                 best_membership = best_membership,
                 best_round = best_round)
@@ -176,5 +195,8 @@ log_msg("Wrote community assignment: %s", result_csv)
 V(g_orig)$community <- best_membership
 write_graph(g_orig, result_graphml, format = "graphml")
 log_msg("Wrote annotated graph: %s", result_graphml)
+
+log_msg("Full removal order (%d edges) written incrementally to: %s", round_num, removal_log_csv)
+log_msg("That file, replayed against the original graph, reconstructs the full dendrogram — the partition at any cut point, not just the best-modularity one saved above.")
 
 log_msg("Done.")
