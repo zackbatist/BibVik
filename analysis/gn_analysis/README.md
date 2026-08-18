@@ -28,17 +28,20 @@ as an igraph `communities` object, so there's no `plot_dendrogram()` for
 free, but the same information is in `removal_log.csv` if you need to
 build one.
 
+## Input format
+
+Reads a plain two-column edge list CSV (header: `source,target`), not
+GraphML. Some igraph builds ship with GraphML support compiled out
+(missing `libxml2` at build time), and that can't always be fixed
+without root access on a shared server. `data/citation_edgelist.csv`
+already exists in this repo in the right format — use that.
+
 ## Usage (remote server, inside tmux)
 
 ```bash
 cd analysis/gn_analysis
-./start_gn.sh /home/zack/models/BibVik_output/citation_graph.graphml results/
+./start_gn.sh ../../data/citation_edgelist.csv results/
 ```
-
-Same graph file `02_network_structure.qmd` loads (see its `load-graph`
-chunk). That file is directed; this script's loop runs on the undirected
-projection, same as Louvain/Leiden/k-core elsewhere in the project.
-Convert first if your source file isn't already undirected.
 
 - Detach: `Ctrl+b`, `d`
 - Reattach: `tmux attach -t girvan_newman`
@@ -53,14 +56,17 @@ Convert first if your source file isn't already undirected.
   rest of the project should read.
 - `results/removal_log.csv` — `round, from, to`. Full removal order;
   replay it to get the partition at any cut point.
-- `results/final_graph.graphml` — original graph annotated with the
-  chosen community assignment.
+- `results/final_edgelist.csv` — the input edge list, copied through
+  unchanged, for reference alongside `communities.csv`.
 - `results/state.rds`, `results/run.log`, `results/modularity_trace.csv`
   — working files, not for git.
 
 `02_network_structure.qmd` joins `results/communities.csv` in if it
 exists. GN is an optional input, not something the rest of the pipeline
-waits on.
+waits on. That file currently loads the graph from an absolute path
+(`/home/zack/models/BibVik_output/citation_graph.graphml`) rather than
+`data/` — worth checking whether that's stale, and whether it hits the
+same GraphML/libxml2 problem this script ran into.
 
 ## Keep out of git
 
@@ -73,4 +79,6 @@ analysis/gn_analysis/results/session_stdout.log
 analysis/gn_analysis/results/final_graph.graphml
 ```
 
-`communities.csv` and `removal_log.csv` are small enough to commit.
+Note `final_graph.graphml` there is now stale — this script writes
+`final_edgelist.csv` instead, which isn't excluded (small, fine to
+commit alongside `communities.csv` and `removal_log.csv`).

@@ -4,7 +4,12 @@
 # logging, and interrupt handling.
 #
 # Usage:
-#   Rscript run_gn_analysis.R path/to/graph.graphml path/to/checkpoint_dir
+#   Rscript run_gn_analysis.R path/to/edgelist.csv path/to/checkpoint_dir
+#
+# Reads a plain two-column edge list CSV (header: source,target) rather
+# than GraphML, since some igraph builds have GraphML support disabled
+# (missing libxml2 at compile time) and that can't always be fixed
+# without root/sudo access on a shared server.
 #
 # Resumes automatically if checkpoint_dir already has state.
 # Safe to Ctrl+C or `tmux kill-session` — next run picks up
@@ -17,7 +22,7 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 2) {
-  stop("Usage: Rscript run_gn_analysis.R <graph_file> <checkpoint_dir>")
+  stop("Usage: Rscript run_gn_analysis.R <edgelist_csv> <checkpoint_dir>")
 }
 graph_file      <- args[1]
 checkpoint_dir  <- args[2]
@@ -29,7 +34,7 @@ log_file      <- file.path(checkpoint_dir, "run.log")
 modularity_csv<- file.path(checkpoint_dir, "modularity_trace.csv")
 removal_log_csv <- file.path(checkpoint_dir, "removal_log.csv")
 result_csv    <- file.path(checkpoint_dir, "communities.csv")
-result_graphml<- file.path(checkpoint_dir, "final_graph.graphml")
+result_edgelist_csv <- file.path(checkpoint_dir, "final_edgelist.csv")
 
 # ---------------------------------------------------------
 # Logging: timestamped, appended to file AND printed to stdout
@@ -84,10 +89,15 @@ if (file.exists(state_file)) {
   log_msg("Resumed at round %d, %d edges remaining, best modularity so far: %.4f (round %d)",
           round_num, ecount(g), best_modularity, best_round)
 } else {
-  log_msg("Starting fresh run. Loading graph from %s", graph_file)
-  g <- read_graph(graph_file, format = "graphml")
+  log_msg("Starting fresh run. Loading edge list from %s", graph_file)
+  edges_df <- read.csv(graph_file, stringsAsFactors = FALSE)
+  if (!all(c("source", "target") %in% names(edges_df))) {
+    stop("Expected columns 'source' and 'target' in ", graph_file,
+         " — found: ", paste(names(edges_df), collapse = ", "))
+  }
+  g <- graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE)
   if (is_directed(g)) {
-    log_msg("Source graph is directed — collapsing to undirected (mode='collapse') before GN.")
+    log_msg("Source edge list is directed — collapsing to undirected (mode='collapse') before GN.")
     g <- as.undirected(g, mode = "collapse")
   }
   log_msg("Graph loaded: %d nodes, %d edges", vcount(g), ecount(g))
@@ -184,7 +194,8 @@ log_msg("Girvan-Newman complete after %d rounds (%.2f hours this session). Best 
 # ---------------------------------------------------------
 # Write final portable outputs
 # ---------------------------------------------------------
-g_orig <- read_graph(graph_file, format = "graphml")  # reload original edges for output labeling
+edges_df_orig <- read.csv(graph_file, stringsAsFactors = FALSE)
+g_orig <- graph_from_data_frame(edges_df_orig[, c("source", "target")], directed = TRUE)
 if (is_directed(g_orig)) g_orig <- as.undirected(g_orig, mode = "collapse")
 node_ids <- V(g_orig)$name
 if (is.null(node_ids)) node_ids <- seq_len(vcount(g_orig))
@@ -192,9 +203,9 @@ out_df <- data.frame(node_id = node_ids, community_id = best_membership)
 write.csv(out_df, result_csv, row.names = FALSE)
 log_msg("Wrote community assignment: %s", result_csv)
 
-V(g_orig)$community <- best_membership
-write_graph(g_orig, result_graphml, format = "graphml")
-log_msg("Wrote annotated graph: %s", result_graphml)
+write.csv(edges_df_orig[, c("source", "target")], result_edgelist_csv, row.names = FALSE)
+log_msg("Wrote original edge list (for reference, unchanged from input): %s", result_edgelist_csv)
+log_msg("Community assignment for each node is in %s — join on node_id to annotate the edge list yourself if needed.", result_csv)
 
 log_msg("Full removal order (%d edges) written incrementally to: %s", round_num, removal_log_csv)
 log_msg("That file, replayed against the original graph, reconstructs the full dendrogram — the partition at any cut point, not just the best-modularity one saved above.")

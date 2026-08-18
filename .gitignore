@@ -91,7 +91,6 @@ scratchpad.html
 ########################################
 
 analysis/gn_analysis/results/state.rds
-analysis/gn_analysis/results/final_graph.graphml
 analysis/gn_analysis/results/modularity_trace.csv
 # communities.csv intentionally NOT ignored — small, portable, worth tracking
 

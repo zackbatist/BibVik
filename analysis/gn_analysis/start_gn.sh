@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Launch (or resume) the GN run inside a named tmux session.
-# Usage: ./start_gn.sh path/to/graph.graphml path/to/checkpoint_dir
+# Usage: ./start_gn.sh path/to/edgelist.csv path/to/checkpoint_dir
 set -euo pipefail
 
 GRAPH_FILE="$1"
