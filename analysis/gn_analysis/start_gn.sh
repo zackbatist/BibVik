@@ -12,8 +12,12 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
   exit 0
 fi
 
-tmux new-session -d -s "$SESSION" \
-  "Rscript run_gn_analysis.R '$GRAPH_FILE' '$CHECKPOINT_DIR' 2>&1 | tee -a '$CHECKPOINT_DIR/session_stdout.log'"
+mkdir -p "$CHECKPOINT_DIR"
+
+# Run inside bash, redirect straight to a file (no pipe/tee) so the pane
+# has a shell underneath it and survives even if Rscript dies unexpectedly.
+tmux new-session -d -s "$SESSION" bash -c \
+  "Rscript run_gn_analysis.R '$GRAPH_FILE' '$CHECKPOINT_DIR' > '$CHECKPOINT_DIR/session_stdout.log' 2>&1; echo EXITED WITH CODE \$?; exec bash"
 
 echo "Started in tmux session '$SESSION'."
 echo "Attach:  tmux attach -t $SESSION"
