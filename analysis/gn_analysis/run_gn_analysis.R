@@ -140,6 +140,7 @@ while (ecount(g) > 0) {
   round_num <- round_num + 1
   comp <- components(g)
   mod <- modularity(g, comp$membership)
+  if (is.nan(mod)) mod <- -Inf  # fully-fragmented graph (no edges left) — modularity is undefined; treat as worst, not a crash
 
   round_elapsed <- as.numeric(difftime(Sys.time(), round_start, units = "secs"))
 
