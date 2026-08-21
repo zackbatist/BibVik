@@ -95,7 +95,9 @@ analysis/gn_analysis/results/modularity_trace.csv
 analysis/gn_analysis/results/removal_log.csv
 analysis/gn_analysis/results/dendrogram/gn_dendrogram.rds
 analysis/gn_analysis/results/dendrogram/split_events.csv
-# communities.csv intentionally NOT ignored — small, portable, worth tracking
+analysis/gn_analysis/results/communities.csv
+analysis/gn_analysis/results/multi_cut/communities_round_*.csv
+analysis/gn_analysis/results/multi_cut/multi_cut_summary.csv
 
 # 02_network_structure.qmd render outputs #
 ############################################
