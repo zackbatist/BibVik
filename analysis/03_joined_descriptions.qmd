@@ -72,16 +72,22 @@ if (!exists("df", inherits = FALSE)) {
 } else {
   cat("df already in scope:", nrow(df), "rows\n")
 }
-if (!exists("centrality_df", inherits = FALSE) && !exists("node_table", inherits = FALSE)) {
+if (!exists("node_table", inherits = FALSE)) {
   node_table <- read_csv(here("analysis", "bibvik_node_table.csv"), show_col_types = FALSE)
   cat("Loaded node_table from disk:", nrow(node_table), "rows\n")
 } else {
-  cat("centrality_df or node_table already in scope\n")
+  cat("node_table already in scope:", nrow(node_table), "rows\n")
 }
-# node_table (Part 2's export) already has the is_ghost column and the
-# same join key (name) that centrality_df would have; use whichever is
-# in scope.
-structural_df <- if (exists("centrality_df", inherits = FALSE)) centrality_df else node_table
+# node_table, not centrality_df, is the object that actually carries
+# community_gn: in 02_network_structure.qmd, node_table is built FROM
+# centrality_df with the community assignment joined on afterward
+# (node_table <- centrality_df |> left_join(...)), so centrality_df
+# itself never has community_gn even when it's in scope. Preferring
+# centrality_df here (an earlier version of this join checked for it
+# first) silently grabbed the wrong, earlier object in the combined
+# index.qmd render, where centrality_df exists but lacks the column
+# this file needs — always use node_table.
+structural_df <- node_table
 cat("structural_df:", nrow(structural_df), "rows. is_ghost values:",
     paste(unique(structural_df$is_ghost), collapse = ", "),
     "(class:", class(structural_df$is_ghost), ")\n")
@@ -92,12 +98,12 @@ cat("structural_df:", nrow(structural_df), "rows. is_ghost values:",
 # original in-memory comparison assumed. Compare against both to be safe
 # regardless of whether structural_df came from disk (logical after
 # read_csv's type inference) or was passed in memory as character "false".
-node_table_annotated <- structural_df |>
+cluster_table_annotated <- structural_df |>
   filter(is_ghost == FALSE | is_ghost == "false") |>
   left_join(df, by = c("name" = "cite_key"))
 
-cat("Joined node_table_annotated:", nrow(node_table_annotated), "rows\n")
-cat("Rows with a matching annotation:", sum(!is.na(node_table_annotated$publication_year)), "\n")
+cat("Joined cluster_table_annotated:", nrow(cluster_table_annotated), "rows\n")
+cat("Rows with a matching annotation:", sum(!is.na(cluster_table_annotated$publication_year)), "\n")
 ```
 
 ## Cluster structure vs. topics, methods, and sources of evidence
@@ -155,7 +161,7 @@ just present because it's common everywhere.
 
 ```{r}
 #| label: cluster-vs-topic
-annotated_only <- node_table_annotated |>
+annotated_only <- cluster_table_annotated |>
   filter(!is.na(publication_year))
 
 cat("Works with both a cluster assignment and an annotation:", nrow(annotated_only), "\n")
