@@ -125,9 +125,27 @@ write.csv(split_summary, file.path(output_dir, "split_events.csv"), row.names = 
 cat("Wrote", file.path(output_dir, "split_events.csv"), "\n")
 
 # ---------------------------------------------------------
-# Build an hclust-compatible merge tree from the split events, read in
-# reverse. Only feasible/readable for the top_n_splits earliest splits
-# (== the coarsest structure, fewest components) unless top_n_splits==0.
+# Build an hclust-compatible merge tree from split events, over PIECES
+# (blobs sized by member count), not individual node names — a piece
+# that never splits again within the selected window stays a leaf,
+# labeled by its size. This keeps the plotted tree's leaf count on the
+# order of the number of splits used, not the whole 14k-node graph.
+#
+# Only the top_n_splits EARLIEST splits are used (coarsest structure —
+# fewest components, closest to the full graph) unless top_n_splits==0.
+#
+# Construction: walk the selected splits in DECREASING round order
+# (i.e. starting from the most-fragmented state within the window and
+# working back toward the full graph). Each split, read this way, is a
+# MERGE of its output pieces back into the piece that existed just
+# before that round — which is exactly what hclust's merge matrix
+# needs. A piece's hclust reference (negative = leaf position, positive
+# = producing row index) is recorded the moment it's created, so later
+# rows can look it up directly with no unresolved placeholders.
+#
+# Height = -round, so height increases as round decreases — required
+# by hclust (ascending height toward the root) while keeping "smaller
+# round = closer to the full graph = higher up the tree."
 # ---------------------------------------------------------
 splits_to_use <- if (top_n_splits > 0 && top_n_splits < length(splits)) {
   cat("Using earliest", top_n_splits, "of", length(splits),
@@ -136,104 +154,104 @@ splits_to_use <- if (top_n_splits > 0 && top_n_splits < length(splits)) {
 } else {
   splits
 }
+splits_rev <- rev(splits_to_use)  # decreasing round order
 
-# Collect the set of node names actually touched by the splits we're
-# using, to build a compact hclust object over just those leaves rather
-# than all 14k nodes (which would make labels/plotting meaningless).
-touched_names <- unique(unlist(lapply(splits_to_use, function(s) unlist(s$pieces))))
-cat("Leaves in plotted tree:", length(touched_names), "\n")
+next_id     <- 1L
+piece_size  <- c()          # id (as character) -> size
+name_to_id  <- new.env()    # node name -> current piece id
+is_leaf     <- integer(0)   # ids that are genuine leaves (registered directly from a piece, never later a merge output... wait, see below)
+hclust_ref  <- new.env()    # id (as character) -> hclust reference, set at creation
+leaf_counter <- 0L
 
-# hclust wants: merge matrix (bottom-up), height vector, order, labels.
-# We build this by walking splits_to_use in REVERSE (last split first —
-# smallest pieces merge first, going back toward the full graph).
-rev_splits <- rev(splits_to_use)
+register_leaf <- function(members) {
+  id <- next_id; next_id <<- next_id + 1L
+  piece_size[as.character(id)] <<- length(members)
+  is_leaf <<- c(is_leaf, id)
+  for (nm in members) assign(nm, id, envir = name_to_id)
+  leaf_counter <<- leaf_counter + 1L
+  assign(as.character(id), -leaf_counter, envir = hclust_ref)
+  id
+}
 
-# cluster_of[name] tracks which working node (leaf index, or negative
-# internal merge index) currently contains that name.
-leaf_idx <- setNames(seq_along(touched_names), touched_names)
-cluster_of <- leaf_idx  # positive = leaf index; will become negative merge refs conceptually via merge matrix
+get_id <- function(name) {
+  v <- mget(name, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
+  v  # NA if not yet seen — register_leaf() call site handles that
+}
 
-merge_mat <- matrix(NA_integer_, nrow = length(rev_splits), ncol = 2)
-heights   <- numeric(length(rev_splits))
-# track, for each currently-active cluster label (positive=leaf idx,
-# or i for the i-th merge row), which names belong to it
-active_members <- as.list(setNames(touched_names, touched_names))  # name -> name initially; replaced below
-active_members <- lapply(seq_along(touched_names), function(i) touched_names[i])
-names(active_members) <- as.character(leaf_idx)  # keyed by current cluster label
+merge_a <- integer(0)
+merge_b <- integer(0)   # store as hclust refs directly (signed), not raw ids
+heights <- numeric(0)
 
-cur_label_of <- leaf_idx  # name -> current active cluster label
+for (s in splits_rev) {
+  ids_here <- integer(0)
+  for (p in s$pieces) {
+    rep_name <- p[1]
+    id <- get_id(rep_name)
+    if (is.na(id)) id <- register_leaf(p)
+    ids_here <- c(ids_here, id)
+  }
+  ids_here <- unique(ids_here)
+  if (length(ids_here) < 2) next
 
-for (m in seq_along(rev_splits)) {
-  s <- rev_splits[[m]]
-  # pieces that split apart going forward are, in reverse, pieces that
-  # MERGE at this step. Only pieces with >=1 touched member matter.
-  piece_labels <- unique(unlist(lapply(s$pieces, function(p) {
-    members_here <- intersect(p, names(cur_label_of))
-    if (length(members_here) == 0) return(NULL)
-    unique(cur_label_of[members_here])
-  })))
-  piece_labels <- piece_labels[!is.na(piece_labels)]
+  while (length(ids_here) >= 2) {
+    a <- ids_here[1]; b <- ids_here[2]
+    parent_id <- next_id; next_id <- next_id + 1L
+    piece_size[as.character(parent_id)] <- piece_size[as.character(a)] + piece_size[as.character(b)]
 
-  if (length(piece_labels) < 2) next  # nothing to merge at this step for our tracked leaves
+    ref_a <- get(as.character(a), envir = hclust_ref)
+    ref_b <- get(as.character(b), envir = hclust_ref)
+    merge_a <- c(merge_a, ref_a)
+    merge_b <- c(merge_b, ref_b)
+    heights <- c(heights, -s$round)
 
-  # Merge pairwise if more than 2 pieces reunite at once (rare but
-  # possible) — chain them into sequential binary merges at the same
-  # height for simplicity.
-  while (length(piece_labels) >= 2) {
-    a <- piece_labels[1]; b <- piece_labels[2]
-    merge_mat[m, ] <- c(a, b)
-    heights[m] <- s$round
-    new_label <- m  # hclust convention: positive = merge row index, will negate leaves below
-    all_members <- unlist(c(active_members[[as.character(a)]], active_members[[as.character(b)]]))
-    active_members[[as.character(new_label)]] <- all_members
-    for (nm in all_members) cur_label_of[nm] <- new_label
-    piece_labels <- c(new_label, piece_labels[-c(1, 2)])
-    if (length(piece_labels) < 2) break
+    row_index <- length(merge_a)
+    assign(as.character(parent_id), row_index, envir = hclust_ref)
+
+    # repoint every name currently mapped to a or b onto parent_id
+    for (nm in ls(name_to_id)) {
+      v <- get(nm, envir = name_to_id)
+      if (v == a || v == b) assign(nm, parent_id, envir = name_to_id)
+    }
+
+    ids_here <- c(parent_id, ids_here[-c(1, 2)])
   }
 }
 
-# Convert to hclust's signed convention: negative = original leaf,
-# positive = row index of an earlier merge.
-merge_signed <- merge_mat
-for (i in seq_len(nrow(merge_mat))) {
-  for (j in 1:2) {
-    v <- merge_mat[i, j]
-    if (is.na(v)) next
-    merge_signed[i, j] <- if (v <= length(touched_names)) -v else (v - length(touched_names))
-  }
-}
+cat("Merges in plotted tree:", length(merge_a), "\n")
+cat("Leaves in plotted tree (whole pieces, not individual nodes):", length(is_leaf), "\n")
 
-valid_rows <- !is.na(merge_signed[, 1])
-merge_signed <- merge_signed[valid_rows, , drop = FALSE]
-heights_valid <- heights[valid_rows]
-
-if (nrow(merge_signed) == 0) {
+if (length(merge_a) == 0) {
   stop("Could not build any merges from the selected splits — try a larger top_n_splits.")
 }
 
+leaf_size_by_pos <- vapply(is_leaf, function(id) piece_size[as.character(id)], numeric(1))
+leaf_pos_order <- vapply(is_leaf, function(id) -get(as.character(id), envir = hclust_ref), integer(1))
+leaf_labels <- character(length(is_leaf))
+leaf_labels[leaf_pos_order] <- sprintf("n=%d", leaf_size_by_pos)
+
 hc <- list(
-  merge  = merge_signed,
-  height = heights_valid,
-  order  = order(leaf_idx),   # placeholder order; hclust plot recomputes a sensible order itself via as.dendrogram
-  labels = touched_names,
+  merge  = cbind(merge_a, merge_b),
+  height = heights,
+  order  = seq_along(leaf_labels),
+  labels = leaf_labels,
   method = "girvan-newman-divisive"
 )
 class(hc) <- "hclust"
 
 # ---------------------------------------------------------
-# Plot. Labels off by default (unreadable at this leaf count) —
-# turn on manually if plotting a small subtree.
+# Plot. Labels off by default (unreadable at this leaf count unless
+# top_n_splits is small) — turn on manually for a small subtree.
 # ---------------------------------------------------------
 png(file.path(output_dir, "gn_dendrogram.png"), width = 4000, height = 2000, res = 200)
 plot(hc, labels = FALSE, hang = -1,
      main = sprintf("Girvan-Newman dendrogram (top %d splits, %d leaves)",
-                     length(splits_to_use), length(touched_names)),
-     xlab = "", sub = "", ylab = "Round (distance from full graph)")
+                     length(splits_to_use), length(is_leaf)),
+     xlab = "", sub = "", ylab = "-Round (height increases away from full graph)")
 dev.off()
 cat("Wrote", file.path(output_dir, "gn_dendrogram.png"), "\n")
 
 saveRDS(hc, file.path(output_dir, "gn_dendrogram.rds"))
 cat("Wrote", file.path(output_dir, "gn_dendrogram.rds"), "— reload with readRDS() to replot,",
-    "zoom into a subtree, or pass to cutree() at any height/k.\n")
+    "relabel, or pass to cutree() at any height/k.\n")
 
 cat("Done.\n")
