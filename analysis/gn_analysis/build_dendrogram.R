@@ -356,6 +356,15 @@ leaf_pos_order <- vapply(is_leaf, function(id) -get(as.character(id), envir = hc
 leaf_labels <- character(length(is_leaf))
 leaf_labels[leaf_pos_order] <- sprintf("n=%d", leaf_size_by_pos)
 
+# hc$order must be a permutation matching the tree's actual branch
+# structure, not just 1:n. A naive 1:n placeholder only works by
+# accident on trivial trees. Build with a placeholder, then derive the
+# correct order from the merge structure via as.dendrogram(). The
+# result must be unnamed: order.dendrogram() inherits names from
+# cbind(merge_a, merge_b)'s column names, which as.dendrogram() accepts
+# but plot.hclust() rejects with "invalid dendrogram input". Confirmed
+# directly by inspecting hc$order on a failing tree in
+# build_subcluster_trees.R (same construction logic as here).
 hc <- list(
   merge  = cbind(merge_a, merge_b),
   height = heights,
@@ -364,6 +373,7 @@ hc <- list(
   method = "girvan-newman-divisive"
 )
 class(hc) <- "hclust"
+hc$order <- unname(order.dendrogram(as.dendrogram(hc)))
 
 # ---------------------------------------------------------
 # Zoom: if min_round is set, extract the subtree covering only merges
