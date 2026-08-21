@@ -8,7 +8,7 @@ format:
 execute:
   warning: false
   message: false
-  eval: false
+  eval: true
 ---
 
 Strategy and reasoning for this analysis: see `00_plan.qmd`.
@@ -40,20 +40,19 @@ library(here)
 
 ```{r}
 #| label: load-graph
-g <- read_graph("/home/zack/models/BibVik_output/citation_graph.graphml", format = "graphml")
-g <- as.directed(g, mode = "arbitrary")
+edges <- read_csv(here("data", "citation_edgelist.csv"), show_col_types = FALSE)
+g <- graph_from_data_frame(edges, directed = TRUE)
 
-bib <- fromJSON("/home/zack/models/BibVik_output/bibliography.json", simplifyDataFrame = FALSE)
+bib <- fromJSON(here("data", "bibliography.json"), simplifyDataFrame = FALSE)
 
 # Active entries only (tombstoned entries are excluded from the export,
 # but guard here in case of an older bibliography file). Note: entries
 # tombstoned via `delete` (not `merge`) that appear as a citer elsewhere
-# are retained in the export as flagged "ghost" nodes so their outbound
-# edges aren't lost — see exporter.py and docs/methods/corrections-system.md.
-# Ghost nodes carry is_ghost = "true" in the GraphML attributes and have
-# no reliable bibliographic metadata; they are kept in the graph (their
-# edges are real) but excluded from any display table or join that assumes
-# real title/author/topic data.
+# are retained in the edge list so their outbound edges aren't lost — see
+# exporter.py and docs/methods/corrections-system.md. Ghost nodes have no
+# reliable bibliographic metadata; they are kept in the graph (their edges
+# are real) but excluded from any display table or join that assumes real
+# title/author/topic data.
 bib <- bib[!sapply(bib, function(e) isTRUE(e[["_deleted"]]))]
 
 node_attrs <- tibble(
@@ -66,9 +65,15 @@ node_attrs <- tibble(
   completeness    = map_chr(bib, ~ .x$completeness$label %||% ""),
 )
 
+# Ghost = a node present in the edge list (it cites or is cited by
+# something) but absent from the active bibliography — i.e. no real
+# metadata to join. Derived from edge-list membership rather than a
+# GraphML attribute, since we're not loading GraphML at all (libxml2
+# isn't installable here without sudo — see gn_analysis/README.md for
+# the same constraint on the GN side).
 is_ghost <- tibble(
   name     = V(g)$name,
-  is_ghost = V(g)$is_ghost %||% rep("false", vcount(g))
+  is_ghost = if_else(V(g)$name %in% node_attrs$name, "false", "true")
 )
 
 cat("Nodes:", vcount(g), "\n")
