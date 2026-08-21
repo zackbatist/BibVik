@@ -8,7 +8,7 @@ format:
 execute:
   warning: false
   message: false
-  eval: false
+  eval: true
 ---
 
 Strategy and reasoning for this analysis: see `00_plan.qmd`.
@@ -21,6 +21,8 @@ side by side.
 
 ```{r}
 #| label: annotation-libraries
+library(here)
+library(tidyverse)
 library(patchwork)
 library(nord)
 library(tidytext)
@@ -55,6 +57,12 @@ df$publication_year <- factor(df$publication_year,
                               levels = as.character(seq(min(df$publication_year,
                                        na.rm = TRUE),
                                        max(df$publication_year, na.rm = TRUE), 1)))
+
+# Exported so 03_joined_descriptions.qmd can load it when rendered
+# standalone (outside the combined index.qmd include chain), without
+# recomputing Part 1 — consistent with 03's own stated design ("does
+# not recompute either" upstream part).
+write_csv(df, here("analysis", "bibvik_annotation_df.csv"))
 ```
 
 ## Publications per year
@@ -287,7 +295,18 @@ primary_method_lookup <- df %>%
 lead_author_gender <- gender_sequences %>%
   left_join(primary_method_lookup, by = "cite_key") %>%
   mutate(
-    lead_convention = fieldwork_lead_methods[primary_method],
+    # Indexing an EMPTY named vector (fieldwork_lead_methods currently
+    # has zero entries — see the placeholder above) returns an
+    # unnamed NA vector, which broke replace_na() downstream and halted
+    # the whole render. unname() + explicit NA_character_ fallback
+    # makes this run safely while the mapping is still unfilled; every
+    # row will show "ambiguous" until real method names are added
+    # above, same as the placeholder's own stated behavior.
+    lead_convention = if (length(fieldwork_lead_methods) > 0) {
+      unname(fieldwork_lead_methods[primary_method])
+    } else {
+      rep(NA_character_, nrow(.))
+    },
     lead_convention = replace_na(lead_convention, "ambiguous"),
     lead_author_gender = case_when(
       lead_convention == "first" ~ first_author_gender,
