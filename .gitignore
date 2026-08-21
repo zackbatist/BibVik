@@ -92,7 +92,18 @@ scratchpad.html
 
 analysis/gn_analysis/results/state.rds
 analysis/gn_analysis/results/modularity_trace.csv
+analysis/gn_analysis/results/removal_log.csv
+analysis/gn_analysis/results/dendrogram/gn_dendrogram.rds
+analysis/gn_analysis/results/dendrogram/split_events.csv
 # communities.csv intentionally NOT ignored — small, portable, worth tracking
+
+# 02_network_structure.qmd render outputs #
+############################################
+
+analysis/bibvik_*.pdf
+analysis/bibvik_node_table.csv
+analysis/02_network_structure_cache/
+analysis/02_network_structure_files/
 
 # BibVik CitationAnalysis #
 ############################

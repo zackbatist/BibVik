@@ -324,15 +324,16 @@ ggraph(tg, layout = "drl") +
   labs(title = "Citation graph — Louvain communities")
 
 ggsave("bibvik_louvain.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_louvain.pdf", width = 16, height = 16)
+ggsave("bibvik_louvain.pdf", width = 16, height = 16, device = cairo_pdf)
 ```
 
 ```{r}
 #| label: leiden
 leiden <- cluster_leiden(g_undirected, objective_function = "modularity")
 cat("Leiden communities:", length(leiden), "\n")
-cat("Modularity:", round(modularity(leiden), 4), "\n")
-V(g)$community_leiden <- membership(leiden)
+leiden_membership <- as.integer(membership(leiden))
+cat("Modularity:", round(modularity(g_undirected, leiden_membership), 4), "\n")
+V(g)$community_leiden <- leiden_membership
 
 tibble(community = seq_along(sizes(leiden)), size = sizes(leiden)) |>
   arrange(desc(size)) |>
@@ -357,7 +358,7 @@ ggraph(tg, layout = "drl") +
   labs(title = "Citation graph — Leiden communities")
 
 ggsave("bibvik_leiden.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_leiden.pdf", width = 16, height = 16)
+ggsave("bibvik_leiden.pdf", width = 16, height = 16, device = cairo_pdf)
 ```
 
 ## K-means clustering
@@ -403,7 +404,7 @@ ggraph(tg, layout = "drl") +
   labs(title = "Citation graph — K-means clusters (by centrality profile)")
 
 ggsave("bibvik_kmeans.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_kmeans.pdf", width = 16, height = 16)
+ggsave("bibvik_kmeans.pdf", width = 16, height = 16, device = cairo_pdf)
 ```
 
 ### Cluster profiles
@@ -456,5 +457,65 @@ if (file.exists(gn_result_path)) {
 write_csv(node_table, "bibvik_node_table.csv")
 cat("Written bibvik_node_table.csv\n")
 cat("Rows:", nrow(node_table), "\n")
+```
+
+### Girvan-Newman communities
+
+Computed standalone (see `gn_analysis/README.md`) and joined in above only
+if that run's output was available at render time. Summary, size table,
+and plot below are shown only if `communities.csv` was found; this is the
+single best-modularity cut from the GN run, not the nested dendrogram.
+
+```{r}
+#| label: gn-summary
+#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "communities.csv"))
+gn_sizes <- node_table |>
+  filter(!is.na(community_gn)) |>
+  count(community_gn, name = "size")
+
+cat("Girvan-Newman communities:", nrow(gn_sizes), "\n")
+cat("Modularity:", round(modularity(g_undirected, as.integer(factor(node_table$community_gn))), 4), "\n")
+
+gn_sizes |>
+  arrange(desc(size)) |>
+  head(20) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: gn-viz
+#| fig-width: 12
+#| fig-height: 12
+#| cache: true
+#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "communities.csv"))
+tg <- as_tbl_graph(g) |>
+  activate(nodes) |>
+  left_join(node_table |> select(name, community_gn), by = "name") |>
+  mutate(community_gn = as.factor(community_gn))
+
+ggraph(tg, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey60") +
+  geom_node_point(aes(colour = community_gn), size = 0.3, alpha = 0.7) +
+  scale_colour_viridis_d(guide = "none") +
+  theme_graph() +
+  labs(title = "Citation graph — Girvan-Newman communities (best-modularity cut)")
+
+ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
+ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
+```
+
+### Girvan-Newman dendrogram
+
+Built separately by `gn_analysis/build_dendrogram.R` from
+`removal_log.csv` — not part of this render, run manually and embedded
+here if present. Shows the earliest split events (coarsest structure);
+see the script for the full `split_events.csv` and the `.rds` tree
+object if you want to zoom into a subtree.
+
+```{r}
+#| label: gn-dendrogram-embed
+#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "dendrogram", "gn_dendrogram.png"))
+#| out-width: "100%"
+knitr::include_graphics(here("analysis", "gn_analysis", "results", "dendrogram", "gn_dendrogram.png"))
 ```
 
