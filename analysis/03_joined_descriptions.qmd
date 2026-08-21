@@ -8,50 +8,539 @@ format:
 execute:
   warning: false
   message: false
-  eval: false
+  eval: true
 ---
 
 Strategy and reasoning for this analysis: see `00_plan.qmd`. Reads outputs
-of `01_annotation.qmd` and `02_network_structure.qmd` — does not recompute
+of `01_annotation.qmd` and `02_network_structure.qmd`. Does not recompute
 either.
 
-Everything in Part 1 describes the graph on its own terms; everything in
-Part 2 describes the annotation data on its own terms. Neither is a
-baseline the other is checked against — this section places them side by
+Everything in Part 1 describes the annotation data on its own terms;
+everything in Part 2 describes the graph on its own terms. Neither is a
+baseline the other is checked against. This section places them side by
 side and reads the relationship, which is where the actual analytical
 content of this project lives.
 
 ```{r}
-#| label: join
-#| eval: false
-# Adjust path once the annotation export location is finalized. df (from
-# Part 2) is keyed by cite_key; centrality_df / node_table (from Part 1)
-# is keyed by name (citekey). F1-only: annotations exist for F1 papers
-# only. F2 works cited by multiple F1 papers can still be described using
-# the annotation profile of their *citer set*, even though the F2 works
-# themselves are not annotated — see "per-F2-node citer profiles" above.
+#| label: setup
+# Loaded here (not assumed already in scope) so this file can render
+# standalone, reading 01_annotation.qmd and 02_network_structure.qmd's
+# saved outputs rather than requiring the combined index.qmd include
+# chain. If rendered as part of that chain instead, df and
+# centrality_df/node_table are already in scope from the included
+# upstream parts, and these loads are redundant but harmless (they
+# will just re-read the same values from disk).
+library(here)
+library(tidyverse)
+if (!requireNamespace("ggrepel", quietly = TRUE)) {
+  install.packages("ggrepel", repos = "https://cloud.r-project.org")
+}
+library(ggrepel)
 
-node_table_annotated <- centrality_df |>
-  filter(is_ghost == "false") |>
-  left_join(df, by = c("name" = "cite_key"))
+# Standard Wilson score interval on a proportion, base R only (matches
+# the method underlying stats::prop.test, computed directly here for
+# clarity). Used throughout this document as the single, consistent
+# criterion for "is a cluster's coverage of a category meaningfully
+# above the corpus baseline" — the lower bound of the interval must
+# exceed the corpus rate. Replaces earlier, separately-chosen fixed
+# floors (an arbitrary minimum count and enrichment ratio) that were
+# used in different places in this document without being reconciled
+# with each other; one method, defined once, used everywhere below.
+wilson_lower_bound <- function(x, n, conf = 0.95) {
+  z <- qnorm(1 - (1 - conf) / 2)
+  phat <- x / n
+  denom <- 1 + z^2 / n
+  centre <- phat + z^2 / (2 * n)
+  adj <- z * sqrt(phat * (1 - phat) / n + z^2 / (4 * n^2))
+  (centre - adj) / denom
+}
 ```
 
-Planned comparisons, not yet implemented:
+```{r}
+#| label: join
+# df (Part 1's annotation dataframe, from 01_annotation.qmd) is keyed by
+# cite_key; centrality_df / node_table (Part 2's structural data, from
+# 02_network_structure.qmd) is keyed by name (citekey). F1-only:
+# annotations exist for F1 papers only. F2 works cited by multiple F1
+# papers can still be described using the annotation profile of their
+# *citer set*, even though the F2 works themselves are not annotated.
+# See "per-F2-node citer profiles" below.
 
-- Whether Girvan-Newman's top-level split(s) (`community_gn`), Louvain
-  communities (`community_louvain`), and Leiden communities
-  (`community_leiden`) correspond to, cut across, or ignore the coded
-  topic / method / source-of-evidence / author-gender categories from
-  Part 2.
+if (!exists("df", inherits = FALSE)) {
+  df <- read_csv(here("analysis", "bibvik_annotation_df.csv"), show_col_types = FALSE)
+  cat("Loaded df from disk:", nrow(df), "rows\n")
+} else {
+  cat("df already in scope:", nrow(df), "rows\n")
+}
+if (!exists("centrality_df", inherits = FALSE) && !exists("node_table", inherits = FALSE)) {
+  node_table <- read_csv(here("analysis", "bibvik_node_table.csv"), show_col_types = FALSE)
+  cat("Loaded node_table from disk:", nrow(node_table), "rows\n")
+} else {
+  cat("centrality_df or node_table already in scope\n")
+}
+# node_table (Part 2's export) already has the is_ghost column and the
+# same join key (name) that centrality_df would have; use whichever is
+# in scope.
+structural_df <- if (exists("centrality_df", inherits = FALSE)) centrality_df else node_table
+cat("structural_df:", nrow(structural_df), "rows. is_ghost values:",
+    paste(unique(structural_df$is_ghost), collapse = ", "),
+    "(class:", class(structural_df$is_ghost), ")\n")
+
+# is_ghost is written as an R logical (TRUE/FALSE) by 02_network_structure.qmd
+# internally, but a round-trip through write_csv()/read_csv() serializes
+# logicals as the bare words TRUE/FALSE, not the quoted string "false" the
+# original in-memory comparison assumed. Compare against both to be safe
+# regardless of whether structural_df came from disk (logical after
+# read_csv's type inference) or was passed in memory as character "false".
+node_table_annotated <- structural_df |>
+  filter(is_ghost == FALSE | is_ghost == "false") |>
+  left_join(df, by = c("name" = "cite_key"))
+
+cat("Joined node_table_annotated:", nrow(node_table_annotated), "rows\n")
+cat("Rows with a matching annotation:", sum(!is.na(node_table_annotated$publication_year)), "\n")
+```
+
+## Cluster structure vs. topics, methods, and sources of evidence
+
+`community_gn` (Girvan-Newman, fragmentation-onset cut) is checked here
+against the topics, methods, and sources of evidence coded in Part 1,
+restricted to the 294 works with a matching annotation (F1-only; see
+the join above). Louvain and Leiden cluster assignments also exist
+from Part 2 but are not used in this section.
+
+Coverage is thin relative to the graph as a whole: 294 annotated works
+out of 14,331 nodes, and within any single cluster that annotated
+count is often a small fraction of the cluster's real size (the
+"other" grouping below hides clusters with fewer than 3 annotated
+works, but even the clusters shown may have only a handful of
+annotated works out of a much larger true membership). A prior
+exploratory pass on an earlier GN cut of this same corpus found 7-13
+annotated nodes per cluster typical, out of hundreds of members, and
+treated agreement between structure and annotation as directionally
+suggestive rather than comprehensively verified for that reason. The
+same caution applies here: what follows can show that structure and
+coding line up somewhere, but cannot rule out that the uncoded majority
+of any cluster tells a different story.
+
+The coded columns are wide, one column per topic/method/source
+category, valued `"Primary"`, `"Secondary"`, or blank. Primary and
+secondary are merged throughout what follows: a work counts as coded
+with a category at either level, matching the method used in a prior
+exploratory pass on an earlier GN cut of this corpus. A work can carry
+more than one topic, method, or source, so per-cluster percentages
+below do not sum to 100%; each cell shows the raw count behind its
+percentage for transparency.
+
+**How to read the enrichment heatmaps below.** Raw coverage (what
+fraction of a cluster's annotated works carry a given category) is
+misleading on its own: some categories are common across the whole
+corpus regardless of cluster — "Spatial analysis" as a method, or
+"Environment" as a topic, show up in most clusters simply because
+most works in this corpus use them, not because any one cluster is
+distinctively characterized by them. To separate genuine
+distinctiveness from corpus-wide popularity, each heatmap cell instead
+shows **enrichment**: a cluster's coverage of a category divided by
+that category's rate across the whole annotated corpus. A value of 1x
+means the cluster carries the category at exactly the corpus
+average; 2x means twice the corpus rate; 0.5x means half. White is 1x
+(baseline); blue is above baseline (the category is over-represented in
+that cluster, a real distinguishing signal); red is below baseline
+(under-represented). For example, if "Palaeoenvironment reconstruction"
+is coded in 23% of the whole corpus but 100% of cluster 52's
+annotated works, that cell shows roughly 4.4x — a real signal that
+environmental method is disproportionately concentrated there, not
+just present because it's common everywhere.
+
+### By topic
+
+```{r}
+#| label: cluster-vs-topic
+annotated_only <- node_table_annotated |>
+  filter(!is.na(publication_year))
+
+cat("Works with both a cluster assignment and an annotation:", nrow(annotated_only), "\n")
+
+gn_true_sizes <- node_table |>
+  filter(!is.na(community_gn)) |>
+  count(community_gn, name = "true_size")
+
+topic_long <- annotated_only |>
+  select(name, community_gn, contains("Topics..")) |>
+  pivot_longer(contains("Topics.."), names_to = "topic", values_to = "value") |>
+  filter(!is.na(value)) |>
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " "))
+
+cat("Works with any topic coded:", n_distinct(topic_long$name), "\n")
+```
+
+**Girvan-Newman clusters by topic.** A threshold of 3+ annotated
+works let through 118 of 199 clusters, unworkable at any scale.
+Shown here instead, in the heatmap below: the 20 clusters with the
+most annotated works. This is a readability choice, not a derived
+breakpoint; the underlying cluster sizes have a clear natural break
+only between the first and second-largest clusters (a drop of over
+600 members), after which the size distribution tapers smoothly with
+no further break to justify any particular cutoff.
+
+```{r}
+#| label: gn-vs-topic-table
+gn_topic_annotated_n <- topic_long |>
+  distinct(community_gn, name) |>
+  count(community_gn, name = "n_annotated")
+gn_topic_keep <- gn_topic_annotated_n |> slice_max(n_annotated, n = 20) |> pull(community_gn)
+```
+
+Coverage varies a lot by cluster (annotation is thin relative to true
+cluster size, per the caveat above), so each row label shows how many
+annotated works its percentages are based on, out of the cluster's
+true total size.
+
+```{r}
+#| label: gn-vs-topic-heatmap
+#| fig-width: 10
+#| fig-height: 7
+gn_topic_labels <- gn_topic_annotated_n |>
+  filter(community_gn %in% gn_topic_keep) |>
+  left_join(gn_true_sizes, by = "community_gn") |>
+  arrange(desc(true_size)) |>
+  mutate(label = sprintf("Cluster %s (%d of %d annotated)", community_gn, n_annotated, true_size)) |>
+  mutate(label = fct_rev(fct_inorder(label))) |>
+  select(community_gn, label) |>
+  deframe()
+
+# Corpus-wide base rate per topic: what fraction of ALL annotated works
+# (not just the 20 shown clusters) carry this topic. Some categories
+# (e.g. broad topics like "Environment") are common across the whole
+# corpus regardless of cluster, so raw per-cluster coverage lights
+# up almost everywhere for them without saying anything distinctive
+# about any one cluster. Dividing by the corpus rate instead shows
+# enrichment: whether a cluster carries a topic MORE than the corpus
+# baseline, which is the actual signal of thematic distinctiveness.
+topic_corpus_rate <- topic_long |>
+  distinct(name, topic) |>
+  count(topic, name = "n_corpus") |>
+  mutate(corpus_rate = n_corpus / n_distinct(topic_long$name))
+
+topic_long |>
+  filter(community_gn %in% gn_topic_keep) |>
+  distinct(community_gn, name, topic) |>
+  count(community_gn, topic) |>
+  left_join(gn_topic_annotated_n, by = "community_gn") |>
+  left_join(topic_corpus_rate, by = "topic") |>
+  mutate(
+    prop = n / n_annotated,
+    enrichment = prop / corpus_rate
+  ) |>
+  # Drop topics with no coverage in any of the shown clusters, so the
+  # chart doesn't carry empty columns for categories nobody here was
+  # coded with.
+  group_by(topic) |>
+  filter(sum(n) > 0) |>
+  ungroup() |>
+  mutate(cluster_label = gn_topic_labels[as.character(community_gn)]) |>
+  ggplot(aes(x = topic, y = cluster_label, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 3, colour = "grey20") +
+  # Diverging scale centred on 1.0 (cluster rate == corpus rate): blue
+  # means this cluster carries the topic more than the corpus baseline
+  # (distinctive), red means less. Capped at 3x so a handful of extreme
+  # small-n ratios don't wash out the rest of the scale.
+  scale_fill_gradient2(low = "firebrick", mid = "white", high = "steelblue",
+                        midpoint = 1, limits = c(0, 3), oob = scales::squish,
+                        labels = scales::label_number(suffix = "x")) +
+  labs(x = "", y = "", fill = "Enrichment vs.\ncorpus base rate",
+       title = "Topic enrichment within each Girvan-Newman cluster",
+       subtitle = "Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that topic, not raw coverage — a cluster at 1x carries the topic at exactly the corpus average; ubiquitous topics (e.g. Environment) will not dominate every row here the way they do on raw coverage") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### By method
+
+Same approach as the topic comparison above, applied to method.
+
+```{r}
+#| label: cluster-vs-method
+method_long <- annotated_only |>
+  select(name, community_gn, contains("Methods..")) |>
+  pivot_longer(contains("Methods.."), names_to = "method", values_to = "value") |>
+  filter(!is.na(value)) |>
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " "))
+
+cat("Works with any method coded:", n_distinct(method_long$name), "\n")
+```
+
+```{r}
+#| label: gn-vs-method-table
+gn_method_annotated_n <- method_long |>
+  distinct(community_gn, name) |>
+  count(community_gn, name = "n_annotated")
+gn_method_keep <- gn_method_annotated_n |> slice_max(n_annotated, n = 20) |> pull(community_gn)
+```
+
+```{r}
+#| label: gn-vs-method-heatmap
+#| fig-width: 10
+#| fig-height: 7
+gn_method_labels <- gn_method_annotated_n |>
+  filter(community_gn %in% gn_method_keep) |>
+  left_join(gn_true_sizes, by = "community_gn") |>
+  arrange(desc(true_size)) |>
+  mutate(label = sprintf("Cluster %s (%d of %d annotated)", community_gn, n_annotated, true_size)) |>
+  mutate(label = fct_rev(fct_inorder(label))) |>
+  select(community_gn, label) |>
+  deframe()
+
+method_corpus_rate <- method_long |>
+  distinct(name, method) |>
+  count(method, name = "n_corpus") |>
+  mutate(corpus_rate = n_corpus / n_distinct(method_long$name))
+
+method_long |>
+  filter(community_gn %in% gn_method_keep) |>
+  distinct(community_gn, name, method) |>
+  count(community_gn, method) |>
+  left_join(gn_method_annotated_n, by = "community_gn") |>
+  left_join(method_corpus_rate, by = "method") |>
+  mutate(
+    prop = n / n_annotated,
+    enrichment = prop / corpus_rate
+  ) |>
+  group_by(method) |>
+  filter(sum(n) > 0) |>
+  ungroup() |>
+  mutate(cluster_label = gn_method_labels[as.character(community_gn)]) |>
+  ggplot(aes(x = method, y = cluster_label, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 3, colour = "grey20") +
+  scale_fill_gradient2(low = "firebrick", mid = "white", high = "steelblue",
+                        midpoint = 1, limits = c(0, 3), oob = scales::squish,
+                        labels = scales::label_number(suffix = "x")) +
+  labs(x = "", y = "", fill = "Enrichment vs.\ncorpus base rate",
+       title = "Method enrichment within each Girvan-Newman cluster",
+       subtitle = "Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that method, not raw coverage — ubiquitous methods (e.g. Spatial analysis) will not dominate every row here the way they do on raw coverage") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### By source of evidence
+
+Same approach again, applied to source of evidence.
+
+```{r}
+#| label: cluster-vs-source
+source_long <- annotated_only |>
+  select(name, community_gn, contains("Sources.of.Evidence..")) |>
+  pivot_longer(contains("Sources.of.Evidence.."), names_to = "source", values_to = "value") |>
+  filter(!is.na(value)) |>
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " "))
+
+cat("Works with any source of evidence coded:", n_distinct(source_long$name), "\n")
+```
+
+```{r}
+#| label: gn-vs-source-table
+gn_source_annotated_n <- source_long |>
+  distinct(community_gn, name) |>
+  count(community_gn, name = "n_annotated")
+gn_source_keep <- gn_source_annotated_n |> slice_max(n_annotated, n = 20) |> pull(community_gn)
+```
+
+```{r}
+#| label: gn-vs-source-heatmap
+#| fig-width: 10
+#| fig-height: 7
+gn_source_labels <- gn_source_annotated_n |>
+  filter(community_gn %in% gn_source_keep) |>
+  left_join(gn_true_sizes, by = "community_gn") |>
+  arrange(desc(true_size)) |>
+  mutate(label = sprintf("Cluster %s (%d of %d annotated)", community_gn, n_annotated, true_size)) |>
+  mutate(label = fct_rev(fct_inorder(label))) |>
+  select(community_gn, label) |>
+  deframe()
+
+source_corpus_rate <- source_long |>
+  distinct(name, source) |>
+  count(source, name = "n_corpus") |>
+  mutate(corpus_rate = n_corpus / n_distinct(source_long$name))
+
+source_long |>
+  filter(community_gn %in% gn_source_keep) |>
+  distinct(community_gn, name, source) |>
+  count(community_gn, source) |>
+  left_join(gn_source_annotated_n, by = "community_gn") |>
+  left_join(source_corpus_rate, by = "source") |>
+  mutate(
+    prop = n / n_annotated,
+    enrichment = prop / corpus_rate
+  ) |>
+  group_by(source) |>
+  filter(sum(n) > 0) |>
+  ungroup() |>
+  mutate(cluster_label = gn_source_labels[as.character(community_gn)]) |>
+  ggplot(aes(x = source, y = cluster_label, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 3, colour = "grey20") +
+  scale_fill_gradient2(low = "firebrick", mid = "white", high = "steelblue",
+                        midpoint = 1, limits = c(0, 3), oob = scales::squish,
+                        labels = scales::label_number(suffix = "x")) +
+  labs(x = "", y = "", fill = "Enrichment vs.\ncorpus base rate",
+       title = "Source-of-evidence enrichment within each Girvan-Newman cluster",
+       subtitle = "Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that source, not raw coverage — ubiquitous sources (e.g. Written sources, Graves and monuments) will not dominate every row here the way they do on raw coverage") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Cluster signatures: peak count and peak strength
+
+Throughout this section, "cluster" means a Girvan-Newman graph
+cluster (`community_gn`), not a scholarly or social cluster.
+
+The topic, method, and source enrichment findings above surface
+individual standout cells one at a time. This section combines them
+into two directly interpretable numbers per cluster, so the
+clusters most worth a closer look surface first instead of
+requiring a manual scan across three separate tables.
+
+A **peak** is any category (topic, method, or source) whose 95% Wilson
+confidence interval on a cluster's coverage rate lies entirely above
+the corpus-wide rate for that category — meaning the cluster's
+coverage is higher than baseline with reasonable statistical
+confidence, not just a higher raw count. This adapts to sample size
+automatically: a cluster with only 3 annotated works needs a much
+larger raw enrichment to register as a peak than a cluster with 13,
+because a small sample's interval is wider. This is the same criterion
+used in the topic, method, and source findings above (`ci_lower >
+corpus_rate`); "peak" here just names a category that already met that
+bar, so this section's peak count and mean enrichment are computed
+directly from the same standouts listed there, not a separate pass.
+
+For each cluster, two numbers: how many peaks it has, and how strong
+those peaks are on average. Neither is combined into a single score —
+peak count times mean enrichment is not a real, interpretable unit, and
+collapsing two different kinds of signal into one number invites
+over-reading it. Plotted directly instead: clusters with many peaks
+AND high average enrichment are worth reading first; a cluster with
+one very large but isolated peak is a different kind of finding (a
+strong single signal) than one with several moderate peaks (a broader,
+possibly more coherent pattern) — the plot keeps that distinction
+visible rather than flattening it. Whether a cluster's peak
+categories actually cohere thematically is a judgment that requires
+reading them against domain knowledge of this corpus, which this plot
+does not attempt.
+
+```{r}
+#| label: gn-cluster-signature
+# A peak requires the Wilson lower bound (defined in setup) on a
+# cluster's coverage rate to exceed the corpus baseline rate for
+# that category.
+topic_peaks <- topic_long |>
+  filter(community_gn %in% gn_topic_keep) |>
+  distinct(community_gn, name, topic) |>
+  count(community_gn, topic) |>
+  left_join(gn_topic_annotated_n, by = "community_gn") |>
+  left_join(topic_corpus_rate, by = "topic") |>
+  mutate(prop = n / n_annotated, enrichment = prop / corpus_rate,
+         ci_lower = wilson_lower_bound(n, n_annotated),
+         category_type = "topic") |>
+  rename(category = topic)
+
+method_peaks <- method_long |>
+  filter(community_gn %in% gn_method_keep) |>
+  distinct(community_gn, name, method) |>
+  count(community_gn, method) |>
+  left_join(gn_method_annotated_n, by = "community_gn") |>
+  left_join(method_corpus_rate, by = "method") |>
+  mutate(prop = n / n_annotated, enrichment = prop / corpus_rate,
+         ci_lower = wilson_lower_bound(n, n_annotated),
+         category_type = "method") |>
+  rename(category = method)
+
+source_peaks <- source_long |>
+  filter(community_gn %in% gn_source_keep) |>
+  distinct(community_gn, name, source) |>
+  count(community_gn, source) |>
+  left_join(gn_source_annotated_n, by = "community_gn") |>
+  left_join(source_corpus_rate, by = "source") |>
+  mutate(prop = n / n_annotated, enrichment = prop / corpus_rate,
+         ci_lower = wilson_lower_bound(n, n_annotated),
+         category_type = "source") |>
+  rename(category = source)
+
+all_peaks <- bind_rows(topic_peaks, method_peaks, source_peaks) |>
+  filter(ci_lower > corpus_rate)
+
+cat("Peaks found (Wilson lower bound exceeds corpus baseline):", nrow(all_peaks), "\n")
+
+cluster_signatures <- all_peaks |>
+  group_by(community_gn) |>
+  summarise(
+    n_peaks = n(),
+    mean_peak_enrichment = mean(enrichment),
+    peak_categories = paste0(category_type, ": ", category, " (", round(enrichment, 1), "x)", collapse = "; "),
+    .groups = "drop"
+  ) |>
+  arrange(desc(n_peaks), desc(mean_peak_enrichment))
+
+# No composite "score" here — peak count x mean enrichment is not a real
+# unit and a single number invites over-interpretation. Plotted directly
+# instead: clusters with many peaks AND high average enrichment sit
+# in the upper right, which is where to look first; clusters with one
+# very large peak but few others sit lower-right (a strong single
+# signal, not necessarily a broad pattern); clusters with several
+# modest peaks sit upper-left.
+cluster_signatures |>
+  ggplot(aes(x = n_peaks, y = mean_peak_enrichment, label = community_gn)) +
+  geom_point(size = 3, colour = "steelblue") +
+  geom_text_repel(size = 3.5, seed = 1) +
+  scale_x_continuous(breaks = scales::breaks_pretty()) +
+  labs(x = "Number of peaks (categories where coverage exceeds\ncorpus baseline, Wilson 95% lower bound)",
+       y = "Mean enrichment among those peaks",
+       title = "Clusters by peak count and peak strength",
+       subtitle = "Upper right: several strong, corroborating signals. Lower right: one very strong but isolated signal.") +
+  theme_minimal()
+```
+
+The peak categories behind the clusters with the most peaks, shown
+directly rather than as a summary number:
+
+```{r}
+#| label: gn-cluster-signature-detail
+#| fig-width: 9
+#| fig-height: 7
+top_communities <- cluster_signatures |> slice_max(n_peaks, n = 8, with_ties = FALSE) |> pull(community_gn)
+
+all_peaks |>
+  filter(community_gn %in% top_communities) |>
+  mutate(
+    cluster_label = fct_relevel(paste("Cluster", community_gn),
+                                    paste("Cluster", top_communities)),
+    category_label = fct_reorder(paste0(category, " (", category_type, ")"), enrichment)
+  ) |>
+  ggplot(aes(x = enrichment, y = category_label)) +
+  geom_col(fill = "steelblue") +
+  geom_vline(xintercept = 1, linetype = "dashed", colour = "grey50") +
+  facet_wrap(vars(cluster_label), scales = "free_y", ncol = 2) +
+  labs(x = "Enrichment vs. corpus base rate", y = "",
+       title = "Peak categories for the clusters with the most peaks",
+       subtitle = "Dashed line = corpus baseline (1x). Bars are that cluster's individual peaks.") +
+  theme_minimal() +
+  theme(strip.text = element_text(face = "bold"))
+```
+
+## Not yet done
+
+### Remaining planned comparisons
+
 - Whether centrality (`in_degree`, `betweenness`, `pagerank`) within a
-  community correlates with author gender — i.e. whether the most central
+  cluster correlates with author gender — i.e. whether the most central
   or bridging works within a cluster are disproportionately authored by
   one gender even when the cluster's dominant topic is not itself
   gender-skewed in the annotation data.
 - Direct citation homophily: whether papers (or, at a future author-level
   aggregation, authors) disproportionately cite others sharing their coded
   gender / topic / method characteristics. Computable directly from the
-  edge list and the join above; does not require any community-detection
+  edge list and the join above; does not require any cluster-detection
   output.
 - Per-F2-node citer profiles: for F2 works with `in_degree` above some
   threshold, characterize the annotation profile (gender, topic, method)
@@ -59,7 +548,7 @@ Planned comparisons, not yet implemented:
   shared touchstones across the field's internal divisions or as
   in-group markers cited mainly within one part of it.
 
-## Open decisions (not yet resolved)
+### Open decisions
 
 - Whether and how to implement bounded-depth, parallelized Girvan-Newman;
   no benchmarking done yet on how many splits are needed for a stable,
