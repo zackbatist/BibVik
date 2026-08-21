@@ -442,33 +442,140 @@ node_table <- centrality_df |>
     by = "name"
   )
 
-# Girvan-Newman communities are computed standalone (see gn_analysis/) and
-# joined in here only if that run has finished and produced output.
-gn_result_path <- here("analysis", "gn_analysis", "results", "communities.csv")
-if (file.exists(gn_result_path)) {
+# Girvan-Newman communities are computed standalone (see gn_analysis/)
+# and joined in here only if available. communities.csv (written by
+# run_gn_analysis.R) holds the best-modularity cut, which on this
+# corpus is 97.5% singletons and not usable — see the write-up below.
+# The partition actually joined here is the earliest fragmentation-onset
+# cut from gn_analysis/results/multi_cut/, produced by
+# generate_multi_cut_communities.R. That directory holds one file per
+# detected onset round; the earliest (smallest round number) is the one
+# established below as usable, so it's selected by sorting rather than
+# a hardcoded round number, in case a future re-run shifts which rounds
+# qualify.
+gn_multi_cut_dir <- here("analysis", "gn_analysis", "results", "multi_cut")
+gn_cut_files <- if (dir.exists(gn_multi_cut_dir)) {
+  list.files(gn_multi_cut_dir, pattern = "^communities_round_[0-9]+\\.csv$", full.names = TRUE)
+} else {
+  character(0)
+}
+
+if (length(gn_cut_files) > 0) {
+  gn_rounds <- as.integer(gsub(".*communities_round_([0-9]+)\\.csv$", "\\1", gn_cut_files))
+  gn_result_path <- gn_cut_files[which.min(gn_rounds)]
   gn_communities <- read_csv(gn_result_path) |>
     rename(community_gn = community_id)
   node_table <- node_table |> left_join(gn_communities, by = c("name" = "node_id"))
-  cat("Joined Girvan-Newman communities from", gn_result_path, "\n")
+  cat("Joined Girvan-Newman communities from", gn_result_path,
+      "(fragmentation-onset round", min(gn_rounds), ") \n")
 } else {
-  cat("No Girvan-Newman results found at", gn_result_path, "— skipping join.\n")
+  cat("No Girvan-Newman multi-cut results found at", gn_multi_cut_dir,
+      "— run gn_analysis/generate_multi_cut_communities.R first. Skipping join.\n")
 }
 
 write_csv(node_table, "bibvik_node_table.csv")
 cat("Written bibvik_node_table.csv\n")
 cat("Rows:", nrow(node_table), "\n")
+
+# Plain boolean, computed once here rather than repeated as a quoted
+# expression in each downstream chunk's eval: guard — avoids YAML
+# quoting issues with !expr and string literals.
+gn_has_communities <- "community_gn" %in% colnames(node_table) && any(!is.na(node_table$community_gn))
 ```
 
 ### Girvan-Newman communities
 
 Computed standalone (see `gn_analysis/README.md`) and joined in above only
 if that run's output was available at render time. Summary, size table,
-and plot below are shown only if `communities.csv` was found; this is the
-single best-modularity cut from the GN run, not the nested dendrogram.
+and plot below are shown only if `communities.csv` was found.
+
+**Choosing a stopping point.** Girvan-Newman is a divisive algorithm: it
+removes one edge at a time, so the graph passes through every possible
+partition from fully connected to fully atomized, and a single partition
+must be chosen from that sequence to report as "the communities." The
+conventional stopping rule — the round of highest modularity across the
+whole run — fails on this corpus: modularity keeps rising as the graph
+disintegrates into isolated works, peaking only once 97.5% of nodes are
+singleton "communities" of size one. This is a known limitation of
+modularity as a stopping criterion on sparse, hub-dominated citation
+networks rather than a fault in the computation, but it means the
+best-modularity partition cannot be used as reported.
+
+Two alternative stopping criteria were evaluated directly against this
+corpus's edge-removal sequence. The first, locating the sharpest single-round
+drop in modularity, proved unreliable here: the modularity trace is noisy
+throughout the heavily-fragmented tail of the run, so the single steepest
+drop falls in that same noisy region rather than at a meaningful
+transition. The second — treating the point where the count of connected
+components begins rising by roughly one per round, and continues doing so
+for a sustained run of 100 or more consecutive rounds — identifies the
+onset of active fragmentation directly from the graph's own breakup
+behaviour, independent of modularity. This is the criterion used here.
+(Percolation-theory measures that track component *size* rather than
+component *count* — e.g. a susceptibility statistic, or the rate of
+decline of the giant component — were considered as complementary checks
+on this choice but have not yet been computed for this corpus.)
+
+Applying the fragmentation-onset criterion to this run's edge-removal
+sequence identifies six points at which the corpus's fragmentation rate
+undergoes a sustained increase, not one: rounds 9,115, 9,454, 11,139,
+11,860, 13,040, and 23,868. This is itself informative about the
+corpus's structure — literature does not fragment into communities in
+one clean step, but in a series of accelerating breakups. However, these
+six points are not interchangeable candidates for "the" community
+partition:
+
+| Round | Communities | Singletons | % singleton | Largest community |
+|---|---|---|---|---|
+| 9,115  | 199    | 0     | 0%  | 1,076 |
+| 9,454  | 447    | 240   | 54% | 836   |
+| 11,139 | 1,521  | 1,234 | 81% | 161   |
+| 11,860 | 2,035  | 1,714 | 84% | 96    |
+| 13,040 | 3,122  | 2,786 | 89% | 87    |
+| 23,868 | 13,626 | 13,281| 97% | 5     |
+
+Only the earliest transition (round 9,115) yields a partition with no
+singleton communities; every subsequent transition is already
+majority-singleton, worsening monotonically toward the same
+near-total-fragmentation state that ruled out the modularity-peak
+stopping rule in the first place. The corpus's later fragmentation
+points therefore document how community structure dissolves rather than
+offering alternative, equally-valid readings of it. Round 9,115 is used
+below as the working partition (`community_gn`); the partitions at the
+other five points are retained in `gn_analysis/results/multi_cut/` as a
+record of that dissolution, not as alternative community assignments.
+
+This procedure identifies the coarsest point at which the corpus still
+exhibits legible community structure — it does not, on its own,
+establish that this is where the *most meaningful* structure lies. An
+earlier exploratory pass checked two individual communities from a
+nearby cut against paper titles and the study's own annotation coding
+and found the groupings interpretable (a theory/ritual cluster
+separating cleanly from a place-names/hoards cluster within one
+community, for instance); that spot-check has not been extended
+systematically across the full partition, nor repeated at any of the
+other five transition points, so it supports plausibility rather than
+confirming that round 9,115 is uniquely correct. Readers who want a
+finer-grained or differently-motivated partition should treat the
+dendrogram below, not this flat cut, as the primary source: it preserves
+the full nested structure and does not require committing to one round.
+
+**Reading the dendrogram.** `gn_analysis/build_dendrogram.R`
+reconstructs the complete nested merge structure from the edge-removal
+sequence, rather than the single flat partition above. Its construction
+logic was verified against hand-traced synthetic cases and reproduces
+the expected leaf and merge counts on this corpus. Height on the plotted
+tree reflects merge order rather than raw round number: because splits
+are unevenly spaced across the run's ~24,600 rounds, a linear round-based
+axis compressed the whole tree into an unreadable band. The real round
+underlying each merge is preserved separately (`round_at_height` in the
+saved `.rds` object) for anyone who needs actual round distances rather
+than sequence order. The six fragmentation points identified above are
+not yet marked on the plotted tree.
 
 ```{r}
 #| label: gn-summary
-#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "communities.csv"))
+#| eval: !expr gn_has_communities
 gn_sizes <- node_table |>
   filter(!is.na(community_gn)) |>
   count(community_gn, name = "size")
@@ -487,7 +594,7 @@ gn_sizes |>
 #| fig-width: 12
 #| fig-height: 12
 #| cache: true
-#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "communities.csv"))
+#| eval: !expr gn_has_communities
 tg <- as_tbl_graph(g) |>
   activate(nodes) |>
   left_join(node_table |> select(name, community_gn), by = "name") |>
@@ -498,7 +605,7 @@ ggraph(tg, layout = "drl") +
   geom_node_point(aes(colour = community_gn), size = 0.3, alpha = 0.7) +
   scale_colour_viridis_d(guide = "none") +
   theme_graph() +
-  labs(title = "Citation graph — Girvan-Newman communities (best-modularity cut)")
+  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9115)")
 
 ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
 ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
