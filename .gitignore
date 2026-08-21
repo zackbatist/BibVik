@@ -98,6 +98,8 @@ analysis/gn_analysis/results/dendrogram/split_events.csv
 analysis/gn_analysis/results/communities.csv
 analysis/gn_analysis/results/multi_cut/communities_round_*.csv
 analysis/gn_analysis/results/multi_cut/multi_cut_summary.csv
+analysis/gn_analysis/results/subclusters/subcluster_summary.csv
+analysis/gn_analysis/results/subclusters/community_*_tree.png
 
 # 02_network_structure.qmd render outputs #
 ############################################

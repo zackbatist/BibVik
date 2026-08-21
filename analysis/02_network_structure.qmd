@@ -487,7 +487,8 @@ gn_has_communities <- "community_gn" %in% colnames(node_table) && any(!is.na(nod
 
 Computed standalone (see `gn_analysis/README.md`) and joined in above only
 if that run's output was available at render time. Summary, size table,
-and plot below are shown only if `communities.csv` was found.
+and plot below are shown only if a partition was found in
+`gn_analysis/results/multi_cut/`.
 
 **Choosing a stopping point.** Girvan-Newman is a divisive algorithm: it
 removes one edge at a time, so the graph passes through every possible
@@ -595,17 +596,40 @@ gn_sizes |>
 #| fig-height: 12
 #| cache: true
 #| eval: !expr gn_has_communities
+# 199 communities colored individually via a continuous viridis scale
+# is not legible: adjacent community IDs land on near-identical shades,
+# so the plot reads as ~5 broad color bands rather than 199 distinct
+# groups (confirmed visually on a render). Highlighting only the
+# largest communities in distinct colors, with everything else grey,
+# shows the actual pattern in this partition instead: a handful of
+# large communities against a long tail of small ones.
+top_gn_communities <- node_table |>
+  filter(!is.na(community_gn)) |>
+  count(community_gn, sort = TRUE) |>
+  slice_head(n = 12) |>
+  pull(community_gn)
+
 tg <- as_tbl_graph(g) |>
   activate(nodes) |>
   left_join(node_table |> select(name, community_gn), by = "name") |>
-  mutate(community_gn = as.factor(community_gn))
+  mutate(
+    community_gn_highlight = if_else(community_gn %in% top_gn_communities,
+                                      as.character(community_gn), "other"),
+    community_gn_highlight = fct_relevel(community_gn_highlight, "other")
+  )
 
 ggraph(tg, layout = "drl") +
   geom_edge_link(alpha = 0.05, colour = "grey60") +
-  geom_node_point(aes(colour = community_gn), size = 0.3, alpha = 0.7) +
-  scale_colour_viridis_d(guide = "none") +
+  geom_node_point(aes(colour = community_gn_highlight),
+                   size = 0.3, alpha = 0.7) +
+  scale_colour_manual(
+    values = c("other" = "grey85", setNames(grDevices::hcl(h = seq(15, 375, length.out = 13)[-13],
+                                                            c = 100, l = 65), top_gn_communities)),
+    guide = "none"
+  ) +
   theme_graph() +
-  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9115)")
+  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9115)",
+       subtitle = "12 largest communities highlighted; remaining 187 shown in grey")
 
 ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
 ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
@@ -614,7 +638,7 @@ ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
 ### Girvan-Newman dendrogram
 
 Built separately by `gn_analysis/build_dendrogram.R` from
-`removal_log.csv` — not part of this render, run manually and embedded
+`removal_log.csv`. Not part of this render; run manually and embedded
 here if present. Shows the earliest split events (coarsest structure);
 see the script for the full `split_events.csv` and the `.rds` tree
 object if you want to zoom into a subtree.
@@ -625,4 +649,87 @@ object if you want to zoom into a subtree.
 #| out-width: "100%"
 knitr::include_graphics(here("analysis", "gn_analysis", "results", "dendrogram", "gn_dendrogram.png"))
 ```
+
+### Internal structure of individual communities
+
+The round-9,115 partition and the whole-graph dendrogram above both
+describe the corpus at a single level: 199 communities, and one tree
+covering the earliest few hundred splits across all of them together.
+A separate question is whether any individual community has further
+structure worth surfacing on its own, the same kind of check performed
+earlier (see "Choosing a stopping point") for two clusters against
+paper titles and annotation coding.
+
+`gn_analysis/build_subcluster_trees.R` addresses this directly: seeded
+from the real round-9,115 community membership (not a re-derived or
+arbitrary starting point), it replays `removal_log.csv` separately for
+each of the round's largest communities and records what happens to
+each one afterward. An initial version capped this replay at a fixed
+number of split events; that cap was itself an arbitrary choice with
+no basis in the data, so the script now replays each community to
+natural completion (full fragmentation or the end of the log) by
+default.
+
+Doing so shows that, past each community's first split, every one of
+the twelve largest communities collapses the same way the whole graph
+does: a single dominant piece sheds one node at a time for hundreds of
+further rounds, with no further balanced division anywhere in the
+sequence. Plotted as a dendrogram, this produces the same long
+single-branch shape for every community regardless of its size or its
+first split, differing only in length, so the per-community dendrogram
+plots turned out uninformative and are not included here (the script
+still writes them; see `gn_analysis/results/subclusters/` if useful).
+
+The one real signal in this data is the size of the two pieces at each
+community's first split, which varies meaningfully across the twelve:
+most split off a single node or a small handful, but five communities
+(54 and 52 most balanced, then 27, 40, and 37 to a lesser extent) split
+into two pieces of comparable size, which is the same kind of balanced
+division that made the two clusters checked earlier interpretable.
+
+```{r}
+#| label: gn-first-splits
+#| fig-width: 11
+#| fig-height: 6.5
+#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "subclusters", "subcluster_summary.csv"))
+subcluster_summary <- read_csv(
+  here("analysis", "gn_analysis", "results", "subclusters", "subcluster_summary.csv"),
+  show_col_types = FALSE
+)
+
+first_splits <- subcluster_summary |>
+  filter(!is.na(first_split_sizes)) |>
+  separate(first_split_sizes, into = c("piece_a", "piece_b"), sep = "/", convert = TRUE) |>
+  mutate(
+    larger_piece  = pmax(piece_a, piece_b),
+    smaller_piece = pmin(piece_a, piece_b)
+  ) |>
+  arrange(desc(smaller_piece)) |>
+  mutate(community_label = fct_reorder(paste("Community", community_id), smaller_piece))
+
+first_splits_long <- first_splits |>
+  select(community_label, larger_piece, smaller_piece) |>
+  pivot_longer(c(larger_piece, smaller_piece), names_to = "piece", values_to = "size") |>
+  mutate(piece = factor(piece, levels = c("larger_piece", "smaller_piece"),
+                         labels = c("Larger piece", "Smaller piece")))
+
+ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
+  geom_col(position = position_dodge(width = 0.7), width = 0.6) +
+  geom_text(aes(label = size), position = position_dodge(width = 0.7),
+            hjust = -0.15, size = 3) +
+  scale_x_log10(expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c("Larger piece" = "#4C72B0", "Smaller piece" = "#DD8452")) +
+  labs(
+    title = "First-split piece sizes, round 9115's largest communities",
+    subtitle = "Sorted by size of the smaller piece; most balanced at top",
+    x = "Nodes in each piece at first split (log scale)",
+    y = NULL, fill = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+Community 54's split (111/47 nodes) is the most balanced of the twelve
+and the strongest remaining candidate for the kind of title/annotation
+check performed earlier; this has not yet been done.
 
