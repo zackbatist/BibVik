@@ -493,6 +493,119 @@ is meant to represent the "primary" continuation of the original work.
 
 ---
 
+## Incident: two F1 source papers missing their own bibliography node
+
+Found while investigating why a Girvan-Newman run loaded far fewer nodes
+(12,798) than the corrected bibliography's active entry count (14,328).
+
+### Diagnosis
+
+1,467 `F2`-generation entries had `cited_by: []` — no inbound edge at all,
+despite `generation: F2` meaning by definition "extracted from an F1 paper's
+reference list," which should guarantee at least one citer (the F1 paper
+itself). All 1,467 traced to exactly two `_source_pdf` values: `Puškina et
+al 2017 - Der Archäologische Komplex von Gnezdovo.pdf` (1,053 entries) and
+`Søvsø 2014 - Ansgars Kirche in Ribe.pdf` (417 entries).
+
+The cause was not a citation-detection miss (the more common, expected
+reason an F2 entry lacks a citer — see the case study above). Both papers
+already existed as `F1` entries, correctly `cited_by: ['lund2021']` (the
+seed paper), with correctly-preserved `_raw_citation` text naming the real
+titles. The problem was narrower: **both entries' `title` field had been
+misparsed** — `puskina2017`'s title was overwritten with a fragment of the
+*editor's* book title from the surrounding text ("Jahrhundert: Ein
+archäologisches Panorama" instead of "Der archäologische Komplex von
+Gnezdovo"), and `sovso2014`'s title had been swapped for an entirely
+different, real Søvsø work ("Om dateringen af Ribe runehjerneskallen"
+instead of "Ansgars Kirche in Ribe"). Because the extraction pipeline
+apparently matches an F1 paper's reference-list children to their parent
+by title (or a process downstream of title), these 1,470 F2 children were
+extracted and stored correctly, but never got linked back to their parent's
+`cited_by` because the parent's own title didn't match what the linking step
+was looking for.
+
+### Fix
+
+Two `set` corrections fixed the parent titles (`puskina2017`,
+`sovso2014` — no new citekey created; both already existed with correct
+`generation` and `cited_by`, only `title` was wrong). Then a script wrote
+one `set` correction per orphaned child, repointing `cited_by` to the
+corrected parent citekey — 1,053 to `puskina2017`, 417 (416 expected from
+the initial scan, 417 found live — the live count is authoritative) to
+`sovso2014`. Total: 1,472 corrections in one batch, applied via
+`--postprocess` in a single run. Edge count rose from 22,886 to 24,356.
+
+Verified after applying: both parent titles correct, and the F2-orphan count
+dropped from 1,467 to 60 — the residual 60 are the ordinary, scattered
+citation-detection misses described in the case study above (each traces to
+a different F1 parent, a handful per paper), not another instance of this
+same missing-title-link problem.
+
+### Standing lesson
+
+An F2 entry's `cited_by` being empty has (at least) two structurally
+different causes that look identical from the entry's own fields alone:
+ordinary citation-detection miss (the common case — the F1 paper's in-text
+citation to this specific work wasn't matched), or a broken link to the
+parent itself (rare, but total when it happens — every child of that parent
+loses its citer at once). The second is diagnosable by checking whether many
+orphaned F2 entries cluster under one or two `_source_pdf` values rather
+than being scattered thinly across many — a large cluster under a single
+source PDF is the signature to check the parent F1 entry's own correctness
+first, before assuming each child needs individual citation-detection work.
+
+### Follow-up: the remaining 60 orphans, and the true final count
+
+After the `puskina2017`/`sovso2014` fix, 60 F2 entries remained orphaned,
+scattered across many different F1 parents (unlike the 1,467, which
+concentrated in two). These were mostly the deliberate `citers: []` stub
+entries created throughout the concatenation-backlog case study above —
+real, correctly split-out works that had no citer at the time because no
+evidence supported attributing one. Since each stub's `_source_pdf` records
+which F1 paper's raw citation it was originally split out of, the F1 parent
+that generated the original garbled entry was almost always the correct
+citer to add — this is not a new citation being invented, it is the citer
+relationship the original split correction should have carried but the
+stub's `citers: []` had deferred.
+
+Resolution: for each orphan, parse the author-surname and year out of its
+`_source_pdf` filename, then match against F1 entries by exact surname and
+year. 53 resolved unambiguously (single exact match). Of the remaining 7,
+5 resolved with individual review — two multi-candidate cases
+(`price2006c`, `zoega2004b`) where the correct match was confirmed by
+checking which candidate's own `_source_pdf` matched the actual uploaded
+PDF, and three (`radins1998`, `radins2001b`, `tonisson1999`) that shared one
+F1 parent (`Mägi 2016`) findable only by an exact-title search of
+`_raw_citation`, since the parent's own `year` field (2015) didn't match the
+source PDF's filename year (2016) — an edited-volume original-vs-publication
+date mismatch, not an error.
+
+**One entry remains genuinely unresolved**: `holmqvist1977` (source
+`Åhfeldt 2015 - Picture-Stone Workshops on Viking Age Gotland`). Checked
+two ways — a title-fragment search against every F1 entry's `_raw_citation`,
+and a direct `_source_pdf` equality check across all generations — and
+neither found any trace of this paper as an F1 node under any citekey.
+`mannerfelt1936` (source `Sanmark and Semple 2008`), initially believed to
+be in the same position, turned out not to be: the direct `_source_pdf`
+equality check found `sanmarknd`, an already-correct F1 entry with a
+non-standard citekey (`nd` in place of a year) that the earlier
+surname-plus-year matching heuristic had no way to find, since it filtered
+on an exact year match the citekey didn't carry. That is the general lesson
+of this whole follow-up: `_source_pdf` equality is the reliable check;
+citekey-pattern matching is a shortcut that can miss real matches when a
+citekey doesn't follow the usual convention.
+
+Fixing `holmqvist1977` properly would require creating a new F1 entry and
+asserting `cited_by: ['lund2021']` without a directly parsed citation to
+support it — the same inference-risk tradeoff considered and avoided for
+`puskina2017`/`sovso2014`. Left flagged rather than forced.
+
+**Final count: of the original 1,467 orphaned F2 entries found via the GN
+node-count mismatch, 1,466 are now correctly linked to their real citer.
+1 remains, with a specific, checked, and named cause — not a mystery.**
+
+---
+
 ## Incident: `_merged_into` is not safely `set`-correctable retroactively
 
 Discovered and fixed in a follow-up validation session (same August 2026
