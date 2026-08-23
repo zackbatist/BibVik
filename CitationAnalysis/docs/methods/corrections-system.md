@@ -348,6 +348,151 @@ beyond the "citekey not found" warnings for the *old* key.
 
 ---
 
+## Case study: resolving the concatenation-flagged backlog, August 2026
+
+Follow-on work to the case study above, in the same session window. The
+manual verification pass had left 128 entries flagged with a `[CORRUPTED: ...]`
+placeholder in their `title` field — diagnosed as genuine extraction failures
+(GROBID or the LLM re-parse merging two or more distinct bibliography entries
+into one) but not repaired, since the original garbled text needed for a
+proper `split` had been overwritten by the diagnostic flag itself.
+
+### The key finding that made this tractable
+
+The garbled text was not actually lost. `_raw_citation` — the field GROBID
+populates with the unparsed reference-list string — was never touched by the
+earlier flagging pass, which only overwrote `title`. Checking confirmed all
+128 flagged entries still carried their full original `_raw_citation` text.
+This meant every one of the 128 could be resolved directly from data already
+in `bibliography.json`, without needing the source PDFs at all. (The two
+entries that genuinely required PDF text — `aust2002` and `hb2006`, handled
+in the case study above — turned out to be the exception: their
+`_source_footnote` field had captured the *wrong* span of the PDF, which
+`_raw_citation` cannot fix since it comes from GROBID's bibliography
+extraction, not the footnote-detection pass.)
+
+### Method
+
+For each flagged entry: read `_raw_citation`, identify how many distinct real
+citations it actually contains, and resolve accordingly:
+
+- **Single real citation, garbled or with an incidental trailing date** (a
+  cited reprint year, an excavation date range) — corrected via `set` on
+  `title` and any other misparsed fields. Not a concatenation error at all;
+  the original Test 3 flag was a false positive.
+- **Two or more genuinely distinct citations merged into one entry** —
+  resolved via `split`, with the surviving entry's citers attributed to
+  whichever constituent work they most plausibly belong to. Where the
+  original entry had a citer and multiple constituent works were plausible
+  matches, attribution used the closest year/topic fit and was noted as an
+  inference, not a verified fact — the note on each such correction says so
+  explicitly, and is the record of what's actually known versus assumed.
+- **No confirmable single work at all** — bare cross-reference shorthand
+  (e.g. `Nilsson 1995.` with nothing else), or a fragment of an unstructured
+  site-gazetteer table misidentified as a citation, or citing-paper analytical
+  prose with several citations embedded as asides — re-flagged with a
+  specific `[CORRUPTED: ...]` description of what the content actually is,
+  since these cannot be resolved into a bibliography entry without the source
+  PDF and are a structurally different problem from concatenation.
+
+Entries with no `cited_by` and multiple real citations packed into one
+`_raw_citation` (common in the `Puškina et al 2017` and `Baastrup 2014`
+source PDFs, which show the same severe extraction failure repeated across
+many consecutive bibliography entries) were resolved by recovering the
+primary/first citation only, with the note explicit that the remaining real
+works in the raw text were dropped rather than reconstructed — since with no
+citer requiring attribution, the marginal value of reconstructing every
+trailing fragment did not justify the risk of a wrong guess on OCR-damaged
+names.
+
+### Outcome
+
+All 128 entries resolved: roughly 95 recovered to correct records (single
+citations or proper splits), roughly 30 confirmed as duplicates of an
+already-existing entry and merged, and 5 re-flagged as genuinely
+unrecoverable without the source PDF (`godwin1962`, `nielsen1943`,
+`kivikoski1905`, `segschneider1982`, `fagerlund2005` — matching non-citation
+content, not concatenation).
+
+### Bugs found and fixed along the way
+
+**`split` never wrote `citekey` onto its own target entries.** The action's
+per-item field loop explicitly excluded `citekey` from the fields copied onto
+a newly created entry (`if field in ("citekey", "citers"): continue`),
+relying solely on `item_citekey` as the bibliography dict key. New entries
+therefore inherited the *original* (pre-split) entry's stale `citekey` field
+internally, even though they were correctly stored under the new key. Found
+when a split target's `citekey` field read the old value; confirmed via
+direct reading of `bibvik/corrections.py`. Fixed with a one-line addition
+(`target["citekey"] = item_citekey`) immediately before the field-copy loop.
+Patched locally, committed, and pulled to the server mid-session; entries
+created before the patch (e.g. the first `goody1977`/`goody1986` split) needed
+a follow-up `set` correction to fix the stale field on the already-created
+entry, since the patch only affects entries created after it takes effect.
+
+**`set` silently no-ops when `value` is `None`/`null`.** Discovered while
+trying to clear a stray garbled field (a fragment bled in from an adjacent
+citation in the same raw text) via `set ... value: None`. The field never
+changed. Confirmed the correction was in fact being read (a later log showed
+`WARNING: ... missing value` for the same correction once enough runs had
+passed for that log line to surface) — `None` is indistinguishable from "no
+value provided" to the `set` handler, so the correction is silently treated
+as a no-op rather than as "clear this field." **The working alternative,
+confirmed by direct test: use an empty string (`''`) for scalar fields, or an
+empty list (`[]`) for list-type fields (e.g. `editor`).** This is now the
+only confirmed-working way to clear a field via a `set` correction in this
+pipeline; `None`/`null` should not be used for this purpose.
+
+**A `split` whose `into` item reuses the same citekey as the original entry
+can silently fail to tombstone the original**, observed on two entries
+(`kleemann1939`, `stankus1995`) where several sibling `into` items were
+created correctly but the original entry was never marked `_deleted` and its
+title was never updated — it simply sat unchanged alongside its new siblings.
+The retry that fixed both used a distinct target citekey for the item that
+would otherwise have collided with the original (`kleemann1939` →
+`kleemann1939b`), which resolved cleanly. The exact mechanism was not traced
+in `corrections.py` (unlike the two bugs above, this one was worked around
+rather than root-caused), so it remains a known trap: **avoid giving any
+`into` item the same citekey as the entry being split**, even when that item
+is meant to represent the "primary" continuation of the original work.
+
+### Process notes
+
+- Every correction in this pass was verified against the live
+  `bibliography.json` after applying, not assumed from the `corrections.yaml`
+  diff or the `--postprocess` summary line alone.
+- `corrections.yaml` accumulates every correction ever written, including
+  ones that already succeeded — re-running `--postprocess` replays the entire
+  file every time, so already-succeeded `split`/`set` corrections increasingly
+  show up as `WARNING: citekey not found` (harmless: the old key no longer
+  exists because the correction already renamed or tombstoned it) or, for
+  `split` specifically, `ERROR: citer accounting mismatch` (also harmless in
+  this case: the original's `cited_by` is now empty because the split already
+  moved it, so replaying the same correction against the now-empty list
+  looks like a mismatch and is correctly refused). Both are expected, not
+  signs of a new problem — but the volume of accumulated noise made it worth
+  periodically removing confirmed-succeeded corrections from `corrections.yaml`
+  (checking each target entry's live `title` matches what the correction
+  specified before removing it) purely to keep the log readable session to
+  session. This is a good practice going forward for any long correction
+  session, not a one-off cleanup for this one.
+- A citekey rename triggered by a `set` correction to `author` happens
+  *immediately*, before any later `set` corrections in the same submitted
+  batch have a chance to apply under the old key. This was already known from
+  the case study above, but this pass surfaced its sharper edge: fields set
+  *after* the renaming correction in the same batch don't just fail to
+  apply — they can be silently populated with stale or wrong data bled in
+  from an adjacent, unrelated citation in the same raw text block (observed
+  on `baastrup1990`, `mulkeen1995`, `lobbedey1992`, and others), because the
+  entry that ends up under the new key is a copy of whatever the original
+  entry's fields happened to be at that point, not a blank slate. The
+  practical rule: after any batch containing an `author` correction, check
+  every field intended to land on that entry, not just whether the batch
+  applied without error — a clean apply does not guarantee every intended
+  field actually reached the right entry.
+
+---
+
 ## Incident: `_merged_into` is not safely `set`-correctable retroactively
 
 Discovered and fixed in a follow-up validation session (same August 2026
