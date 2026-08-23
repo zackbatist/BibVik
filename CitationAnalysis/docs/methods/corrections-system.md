@@ -580,29 +580,44 @@ F1 parent (`Mägi 2016`) findable only by an exact-title search of
 source PDF's filename year (2016) — an edited-volume original-vs-publication
 date mismatch, not an error.
 
-**One entry remains genuinely unresolved**: `holmqvist1977` (source
-`Åhfeldt 2015 - Picture-Stone Workshops on Viking Age Gotland`). Checked
-two ways — a title-fragment search against every F1 entry's `_raw_citation`,
-and a direct `_source_pdf` equality check across all generations — and
-neither found any trace of this paper as an F1 node under any citekey.
-`mannerfelt1936` (source `Sanmark and Semple 2008`), initially believed to
-be in the same position, turned out not to be: the direct `_source_pdf`
-equality check found `sanmarknd`, an already-correct F1 entry with a
-non-standard citekey (`nd` in place of a year) that the earlier
-surname-plus-year matching heuristic had no way to find, since it filtered
-on an exact year match the citekey didn't carry. That is the general lesson
-of this whole follow-up: `_source_pdf` equality is the reliable check;
-citekey-pattern matching is a shortcut that can miss real matches when a
-citekey doesn't follow the usual convention.
+**One entry initially appeared unresolved**: `holmqvist1977` (source
+`Åhfeldt 2015 - Picture-Stone Workshops on Viking Age Gotland`). Every
+name-based search — F1 title/author matching, `_source_pdf` equality across
+generations — came back empty, because the actual paper was in the corpus
+under a different author-name form entirely: `kitzlerahfeld2015a`, whose
+`author` field carries the full surname "Kitzler Åhfeldt," not the shorter
+"Åhfeldt" the source PDF filename used. It was also `F2`, not F1 — a normal
+citation with its own citers already (`lund2021`, `oehrl2019`), never
+actually missing from the corpus at all. Found only by searching for the
+exact title text directly rather than any name-based heuristic, the same
+lesson `sanmarknd` had already taught for citekeys: **when a name- or
+year-based search comes up empty, search by the title text itself before
+concluding the parent is genuinely absent** — a wrong assumption about which
+generation an entry belongs to, or which name form it was extracted under,
+produces the same "nothing found" result as an entry that's truly missing.
 
-Fixing `holmqvist1977` properly would require creating a new F1 entry and
-asserting `cited_by: ['lund2021']` without a directly parsed citation to
-support it — the same inference-risk tradeoff considered and avoided for
-`puskina2017`/`sovso2014`. Left flagged rather than forced.
+**Final count: all 1,467 originally orphaned F2 entries are resolved. Zero
+remain.** The graph closed from 22,886 to 24,416 edges over the course of
+this follow-up, entirely through repointing existing, correctly-extracted
+citations to their real (sometimes mislabeled or misfiled) parent — no
+citation was invented or asserted without a textual basis found somewhere
+in the corpus.
 
-**Final count: of the original 1,467 orphaned F2 entries found via the GN
-node-count mismatch, 1,466 are now correctly linked to their real citer.
-1 remains, with a specific, checked, and named cause — not a mystery.**
+**Note on a small, unrelated edge-count discrepancy noticed during this
+follow-up:** the Girvan-Newman loader (`analysis/gn_analysis/`) reports
+24,413 edges after loading the same `citation_edgelist.csv` that the
+pipeline itself reports as 24,416. The 3-edge gap is fully explained and not
+a bug: `citation_edgelist.csv` correctly contains all 24,416 directed edges
+with no duplicates, but 3 pairs of papers cite each other directly
+(`price2012`↔`frei2012`, `raffield2019`↔`raffield2016`,
+`richards2018`↔`hadley2018` — all plausible real mutual citations, not
+extraction errors). `run_gn_analysis.R` collapses the directed graph to
+undirected via `as.undirected(g, mode = "collapse")` before running GN
+(Girvan-Newman needs an undirected graph); collapsing merges each reciprocal
+directed pair into a single undirected edge, accounting for exactly the
+3-edge difference. The 41 self-loops present in the same edge list (an
+entry whose `cited_by` includes its own citekey) do not contribute to this
+gap — `mode = "collapse"` preserves self-loops rather than dropping them.
 
 ---
 
