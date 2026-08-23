@@ -521,6 +521,8 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
                                            "_correction_note")}
                     bib[item_citekey] = target
 
+                target["citekey"] = item_citekey
+
                 for field, value in item.items():
                     if field in ("citekey", "citers"):
                         continue
