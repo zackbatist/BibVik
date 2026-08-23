@@ -483,7 +483,7 @@ cat("Rows:", nrow(node_table), "\n")
 gn_has_communities <- "community_gn" %in% colnames(node_table) && any(!is.na(node_table$community_gn))
 ```
 
-### Girvan-Newman communities
+## Girvan-Newman communities
 
 Computed standalone (see `gn_analysis/README.md`) and joined in above only
 if that run's output was available at render time. Summary, size table,
@@ -732,4 +732,122 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
 Community 54's split (111/47 nodes) is the most balanced of the twelve
 and the strongest remaining candidate for the kind of title/annotation
 check performed earlier; this has not yet been done.
+
+## Cluster labeling
+
+Describing what a community (Girvan-Newman, Louvain, Leiden, or the
+k-means centrality clusters) actually contains, in words, independent
+of the F1 annotation codebook. Per the "no baseline" stance above, this
+is its own independent description of the corpus, standing on its own;
+it is not validated against, and does not draw on, the codebook
+categories or examples in any form. Comparison against the codebook is
+`03_joined_descriptions.qmd`: a separate, later step, so the two stay
+apart until then. Not yet run; the method below is settled, the code
+is not yet written.
+
+**Independent of any specific GN cut.** The method below takes a
+partition as input: any partition, from any community-detection method,
+at any cut, with no dependency on which one. It is written to run
+against Louvain or Leiden communities as-is, right now, or against
+whichever GN cut this document's fragmentation-onset analysis
+identifies as usable. Nothing about embedding titles or prompting an
+LLM for a description cares which method produced the grouping being
+described.
+
+**Why not a direct port of a word-frequency topic model (NMF/LDA).**
+These entries' only reliably-available text is `title` (13,760 of
+14,328 active entries have a usable title; `abstract` exists on only
+232 F1 entries, 1.6% of the corpus, so any method that depends on
+abstract text cannot be applied corpus-wide). Titles here average 10.8
+words, and the corpus is genuinely multilingual: titles appear in at
+least Danish, Norwegian, Swedish, German, English, Russian, Polish,
+Icelandic, and Ukrainian across the entries handled during tonight's
+correction work alone. Word-frequency methods (NMF, LDA) find structure
+by detecting words that co-occur within and across documents; at this
+document length, after stopword removal a title typically contributes
+5 to 7 content words, which is thin for establishing reliable
+co-occurrence statistics, and titles on the same real subject in
+different languages share no tokens at all ("gravskik" and "burial
+customs" carry the same meaning but no lexical overlap a word-frequency
+method can use). This is a structural mismatch between what the method
+needs (redundant word co-occurrence across many documents in a shared
+vocabulary) and what a corpus of short, cross-linguistic titles can
+supply: not a tuning problem correctable by better stopword lists or a
+different choice of *k*. Running such a method here risks producing
+plausible-looking topics that are actually artifacts of a handful of
+shared proper nouns (place names, period terms) rather than genuine
+thematic groupings, and no coherence-score threshold distinguishes the
+two cases after the fact.
+
+**Method: multilingual sentence embeddings, not word-frequency
+factorization.** A multilingual sentence-embedding model encodes each
+title as a dense vector positioned by meaning rather than literal word
+overlap, which directly addresses both problems above: it needs no
+minimum document length to produce a usable vector, and multilingual
+models are trained specifically to place semantically equivalent text
+from different languages near one another, without a separate
+translation step. This trades away the free, interpretable keyword
+lists NMF produces as a byproduct of its factorization: an embedding
+cluster gives you a group of titles with no automatic explanation of
+what unites them. That interpretability work moves entirely onto the
+labeling step below, which is a real cost (unlike the CITF email
+topic-modeling precedent this method draws loose inspiration from,
+where NMF's keyword output already did substantial interpretive work
+before any LLM saw the data; see
+`zackbatist.info/CITF-emails/topic-modelling`), but is the more honest
+match to what title-only, multilingual text can actually support.
+
+**Steps:**
+
+1. **Embed every active entry's title** using a multilingual
+   sentence-embedding model (e.g. a `sentence-transformers`
+   multilingual model such as `paraphrase-multilingual-mpnet-base-v2`
+   or a comparably-scoped alternative; final model choice not yet
+   made). Titles only, no abstract text mixed in, so F1 and F2 entries
+   are embedded on equal footing rather than giving F1 entries an
+   unfair richer signal purely because more of them happen to have an
+   abstract.
+2. **For each community/cluster under study**, pull the member titles
+   and compute each member's cosine distance to the cluster centroid,
+   to identify the most centrally-representative titles rather than an
+   arbitrary or alphabetical sample.
+3. **LLM labeling as a distinct, downstream step**, structurally
+   separate from the embedding/clustering step exactly as in the CITF
+   precedent (mechanical structure first, interpretive label applied to
+   its output after, never the reverse). The prompt supplies only the
+   representative titles for one cluster at a time and asks for a short
+   thematic description in the model's own words. It does not mention
+   the annotation codebook, its categories, or any example labels drawn
+   from it, in any form; this is the concrete mechanism by which
+   "independent of the codebook" is enforced, not just a stated
+   intention.
+4. **Stability and model-choice checks before trusting any output**,
+   following the CITF precedent: run the labeling prompt across more
+   than one model and more than one temperature/seed setting, and treat
+   labels that shift substantially across those runs as unstable for
+   that cluster rather than averaging or picking one arbitrarily.
+5. **Human review of every generated label** against the actual member
+   titles before any label is treated as established: the CITF
+   precedent's "reviewed and refined by the research team to ensure
+   face validity" step, not skipped here.
+
+**Open, not yet decided:**
+
+- Final embedding model choice, and whether to also embed `author`
+  affiliation or `booktitle`/`journaltitle` fields alongside `title` as
+  weak additional signal, or keep the embedding title-only for the
+  cleanest, most consistently-available input across the whole corpus.
+- Whether to label every community found at the working GN cut, or only
+  the largest N (this document's own GN visualization above already
+  makes exactly this call for the *plot*: 12 largest communities
+  highlighted, the rest shown as an undifferentiated "other." Labeling
+  could follow the same practical threshold, or could aim for full
+  coverage; not yet decided).
+- Whether the same embedding-and-label pipeline should also run against
+  Louvain and Leiden communities as further independent descriptions
+  (consistent with treating all three detection methods as separate,
+  non-competing readings of the graph throughout this document), or
+  whether labeling effort concentrates on the GN partition alone given
+  the "camps" question's specific interest in Girvan-Newman's nested,
+  nothing-assumed structure.
 
