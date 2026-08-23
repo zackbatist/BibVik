@@ -11,6 +11,8 @@ execute:
   eval: true
 ---
 
+# Part 1 — Annotation descriptives (F1 corpus)
+
 Strategy and reasoning for this analysis: see `00_plan.qmd`.
 
 This section computes the annotation cross-tab entirely independently of

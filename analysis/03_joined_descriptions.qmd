@@ -11,6 +11,8 @@ execute:
   eval: true
 ---
 
+# Part 3 — Joining structural and annotation descriptions
+
 Strategy and reasoning for this analysis: see `00_plan.qmd`. Reads outputs
 of `01_annotation.qmd` and `02_network_structure.qmd`. Does not recompute
 either.

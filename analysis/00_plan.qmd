@@ -7,6 +7,8 @@ format:
     self-contained: true
 ---
 
+# Part 0 — Strategy and method
+
 Executed analysis lives in separate files:
 
 - `01_annotation.qmd` — annotation cross-tab (F1 corpus), independent of
@@ -249,6 +251,3 @@ dissolves when re-aggregated to authors or venues — if a division only
 appears at one level of aggregation, that is itself informative about
 whether the division is fundamentally about individual works, about
 people, or about where people publish.
-
----
-
