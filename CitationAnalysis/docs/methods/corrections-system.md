@@ -345,3 +345,75 @@ touching `author` should be followed by a check for newly-collided citekeys
 before being considered done — this session did that check after every batch,
 but it was a manual step, not something `--postprocess` surfaces on its own
 beyond the "citekey not found" warnings for the *old* key.
+
+---
+
+## Incident: `_merged_into` is not safely `set`-correctable retroactively
+
+Discovered and fixed in a follow-up validation session (same August 2026
+window as the case study above), after a fresh re-run of the cross-entry
+title-stem clustering check against a fuller export of the corpus surfaced
+two new fabricated entries (unrelated to this incident) and prompted a
+retroactive audit of the merges described above.
+
+**What was attempted:** two of the manual merges from the case study
+(`pentz2009a` → `pentz2009`, `ahfeldt2015` → `kitzlerahfeld2015a`) were found,
+on retroactive review, to have discarded the more-central (F1) entry in favor
+of a less-central (F2) one — the exact mistake class the `merge` action's
+generation-direction check exists to catch. Since both entries were already
+tombstoned via manual `delete` rather than the `merge` action, the fix
+attempted was a `set` correction adding the missing `_merged_into` field
+after the fact, to at least restore correct provenance.
+
+**What went wrong:** the exporter's documented behaviour for `merge`-type
+tombstones is to fully exclude the node, on the assumption that "their
+outbound citation relationships were already remapped onto the surviving
+`keep` entry during the merge" (see *Tombstoning*, above). Setting
+`_merged_into` retroactively made the exporter treat these two entries as if
+they had gone through that remapping — but they had not, because the
+original operation was a manual `set`+`delete`, not the `merge` action, and
+no remapping step ever ran. `ahfeldt2015` was itself a real F1 paper with 94
+outbound citation edges (94 other bibliography entries listed it as a citer).
+All 94 were silently dropped from the exported graph the moment
+`_merged_into` was set — confirmed by an edge count drop from 23,005 to
+22,910 immediately following the correction.
+
+**Why it was hard to undo:** the natural fix — a further `set` correction
+setting `_merged_into` back to `null`/`None` — did not work. Re-running
+`--postprocess` after adding the revert correction left the field unchanged
+on the live entries, and removing the correction lines from `corrections.yaml`
+entirely *also* left the field unchanged. `bibliography.json` is mutated
+incrementally across runs (per the pipeline's stateful design, described at
+the top of this document), so a field write, once applied, is not undone
+merely by removing or reverting the correction that caused it — the value
+persists in the live JSON regardless of what `corrections.yaml` currently
+says. `_graph_state.json` was checked as a possible second source of truth
+and found not to be relevant here: it had not been touched since August 12,
+predating this session, confirming `bibliography.json` alone is what
+`--postprocess` actually reads and writes on each run in this workflow.
+
+**The actual fix:** direct edit of the live `bibliography.json` (`del
+bib[citekey]['_merged_into']`), bypassing `corrections.yaml` entirely, followed
+by a normal `--postprocess` run to confirm the field did not reappear and the
+edge count recovered. It did — 23,005 edges restored exactly. This is the
+only case in this project's history (that this documentation is aware of) 
+where a fix required editing `bibliography.json` directly rather than going
+through `corrections.yaml`, and it should remain exceptional: direct edits
+bypass the note-and-provenance discipline the whole corrections system exists
+to enforce, and were only justified here because the corrections-file
+mechanism had already been shown not to reach the actual problem.
+
+**Standing conclusion:** `_merged_into` (and by extension, most likely
+`_split_into`) should be treated as **write-once, pipeline-internal fields**,
+correctly set only by the `merge` and `split` actions performing the actual
+edge remapping they describe. They are not safe to set via a plain `set`
+correction after the fact, even to fix missing provenance on an
+already-tombstoned entry — doing so does not merely annotate the record, it
+changes how the exporter treats that node's real outbound edges. If an entry
+was merged manually (as happened throughout the case study above) and its
+provenance needs correcting, the safe options are: leave `_merged_into` unset
+(the entry keeps its current `delete`-tombstone/ghost-node treatment, which is
+correct if not fully descriptive), or re-do the operation properly through
+the `merge` action from scratch, accepting that this will re-run the
+generation-direction check and may require `override: true` if the direction
+genuinely needs to go against a stronger entry.
