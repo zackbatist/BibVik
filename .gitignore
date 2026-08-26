@@ -138,3 +138,6 @@ scratchpad-sections/basic-descriptive-stats.html
 workshop_files/*
 workshop.html
 *.egg-info/
+
+analysis/index_cache/
+site_libs/
