@@ -112,15 +112,17 @@ cat("Rows with a matching annotation:", sum(!is.na(cluster_table_annotated$publi
 
 `community_gn` (Girvan-Newman, fragmentation-onset cut) is checked here
 against the topics, methods, and sources of evidence coded in Part 1,
-restricted to the 294 works with a matching annotation (F1-only; see
-the join above). Louvain and Leiden cluster assignments also exist
-from Part 2 but are not used in this section.
+restricted to the `r sum(!is.na(cluster_table_annotated$publication_year))`
+works with a matching annotation (F1-only; see the join above). Louvain
+and Leiden cluster assignments also exist from Part 2 but are not used
+in this section.
 
-Coverage is thin relative to the graph as a whole: 294 annotated works
-out of 14,331 nodes, and within any single cluster that annotated
-count is often a small fraction of the cluster's real size (the
-"other" grouping below hides clusters with fewer than 3 annotated
-works, but even the clusters shown may have only a handful of
+Coverage is thin relative to the graph as a whole:
+`r sum(!is.na(cluster_table_annotated$publication_year))` annotated
+works out of `r nrow(node_table)` nodes, and within any single cluster
+that annotated count is often a small fraction of the cluster's real
+size (the "other" grouping below hides clusters with fewer than 3
+annotated works, but even the clusters shown may have only a handful of
 annotated works out of a much larger true membership). A prior
 exploratory pass on an earlier GN cut of this same corpus found 7-13
 annotated nodes per cluster typical, out of hundreds of members, and
@@ -182,13 +184,32 @@ cat("Works with any topic coded:", n_distinct(topic_long$name), "\n")
 ```
 
 **Girvan-Newman clusters by topic.** A threshold of 3+ annotated
-works let through 118 of 199 clusters, unworkable at any scale.
-Shown here instead, in the heatmap below: the 20 clusters with the
-most annotated works. This is a readability choice, not a derived
-breakpoint; the underlying cluster sizes have a clear natural break
-only between the first and second-largest clusters (a drop of over
-600 members), after which the size distribution tapers smoothly with
-no further break to justify any particular cutoff.
+works lets through most clusters in this corpus (unworkable at any
+scale — see the size distribution below). Shown here instead, in the
+heatmap below: the 20 clusters with the most annotated works. This is
+a readability choice, not a derived breakpoint.
+
+```{r}
+#| label: gn-cluster-size-check
+gn_all_sizes <- node_table |>
+  filter(!is.na(community_gn)) |>
+  count(community_gn, name = "size") |>
+  arrange(desc(size))
+
+n_clusters_total <- nrow(gn_all_sizes)
+n_pass_3plus <- topic_long |> distinct(community_gn, name) |> count(community_gn) |> filter(n >= 3) |> nrow()
+size_drop_1_to_2 <- gn_all_sizes$size[1] - gn_all_sizes$size[2]
+
+cat(n_clusters_total, "total clusters at this cut;", n_pass_3plus,
+    "pass a 3+ annotated-works threshold.\n")
+cat("Size drop from largest to second-largest cluster:", size_drop_1_to_2, "\n")
+```
+
+The underlying cluster sizes have a clear natural break only between
+the first and second-largest clusters (`r size_drop_1_to_2` members);
+after that the size distribution tapers into small, irregular drops
+with no further break to justify any particular cutoff, the same
+qualitative pattern found in an earlier version of this corpus.
 
 ```{r}
 #| label: gn-vs-topic-table

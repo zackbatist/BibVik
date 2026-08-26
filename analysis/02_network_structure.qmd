@@ -518,48 +518,63 @@ decline of the giant component — were considered as complementary checks
 on this choice but have not yet been computed for this corpus.)
 
 Applying the fragmentation-onset criterion to this run's edge-removal
-sequence identifies six points at which the corpus's fragmentation rate
-undergoes a sustained increase, not one: rounds 9,115, 9,454, 11,139,
-11,860, 13,040, and 23,868. This is itself informative about the
-corpus's structure — literature does not fragment into communities in
-one clean step, but in a series of accelerating breakups. However, these
-six points are not interchangeable candidates for "the" community
-partition:
+sequence identifies eleven points at which the corpus's fragmentation
+rate undergoes a sustained increase, not one: rounds 9,062, 10,837,
+11,560, 11,859, 21,451, 21,805, 22,162, 22,524, 22,892, 23,264, and
+23,644. As with the previous corpus, this is itself informative about
+the corpus's structure — literature does not fragment into communities
+in one clean step, but in a series of accelerating breakups. However,
+these eleven points are not interchangeable candidates for "the"
+community partition:
 
-| Round | Communities | Singletons | % singleton | Largest community |
+| Round  | Communities | Singletons | % singleton | Largest community |
 |---|---|---|---|---|
-| 9,115  | 199    | 0     | 0%  | 1,076 |
-| 9,454  | 447    | 240   | 54% | 836   |
-| 11,139 | 1,521  | 1,234 | 81% | 161   |
-| 11,860 | 2,035  | 1,714 | 84% | 96    |
-| 13,040 | 3,122  | 2,786 | 89% | 87    |
-| 23,868 | 13,626 | 13,281| 97% | 5     |
+| 9,062  | 297    | 90    | 30% | 964 |
+| 10,837 | 1,449  | 1,165 | 80% | 168 |
+| 11,560 | 1,986  | 1,666 | 84% | 96  |
+| 11,859 | 2,243  | 1,918 | 86% | 88  |
+| 21,451 | 11,570 | 11,224| 97% | 17  |
+| 21,805 | 11,902 | 11,556| 97% | 15  |
+| 22,162 | 12,237 | 11,891| 97% | 13  |
+| 22,524 | 12,575 | 12,229| 97% | 11  |
+| 22,892 | 12,919 | 12,573| 97% | 9   |
+| 23,264 | 13,267 | 12,921| 97% | 7   |
+| 23,644 | 13,620 | 13,274| 97% | 5   |
 
-Only the earliest transition (round 9,115) yields a partition with no
-singleton communities; every subsequent transition is already
-majority-singleton, worsening monotonically toward the same
-near-total-fragmentation state that ruled out the modularity-peak
-stopping rule in the first place. The corpus's later fragmentation
-points therefore document how community structure dissolves rather than
-offering alternative, equally-valid readings of it. Round 9,115 is used
-below as the working partition (`community_gn`); the partitions at the
-other five points are retained in `gn_analysis/results/multi_cut/` as a
-record of that dissolution, not as alternative community assignments.
+Unlike the previous corpus, the earliest transition (round 9,062) is
+not fully singleton-free: 90 of its 297 communities are singletons.
+Checked directly, all 90 have degree exactly 1 in the original,
+unfiltered graph — each was connected to only a single other node
+before Girvan-Newman removed any edges at all. Their appearance as
+singletons this early is therefore a structural property of the
+corpus (a set of peripheral, minimally-connected nodes) rather than an
+artifact of stopping at this particular round; a later cut would not
+have kept them attached to anything more substantial. Every subsequent
+transition after round 9,062 is already majority-singleton, worsening
+monotonically toward the same near-total-fragmentation state that
+ruled out the modularity-peak stopping rule in the first place. The
+corpus's later fragmentation points therefore document how community
+structure dissolves rather than offering alternative, equally-valid
+readings of it. Round 9,062 is used below as the working partition
+(`community_gn`); the partitions at the other ten points are retained
+in `gn_analysis/results/multi_cut/` as a record of that dissolution,
+not as alternative community assignments.
 
 This procedure identifies the coarsest point at which the corpus still
 exhibits legible community structure — it does not, on its own,
 establish that this is where the *most meaningful* structure lies. An
-earlier exploratory pass checked two individual communities from a
-nearby cut against paper titles and the study's own annotation coding
-and found the groupings interpretable (a theory/ritual cluster
-separating cleanly from a place-names/hoards cluster within one
-community, for instance); that spot-check has not been extended
-systematically across the full partition, nor repeated at any of the
-other five transition points, so it supports plausibility rather than
-confirming that round 9,115 is uniquely correct. Readers who want a
-finer-grained or differently-motivated partition should treat the
-dendrogram below, not this flat cut, as the primary source: it preserves
-the full nested structure and does not require committing to one round.
+earlier exploratory pass, on an earlier version of this corpus,
+checked two individual communities from a nearby cut against paper
+titles and the study's own annotation coding and found the groupings
+interpretable (a theory/ritual cluster separating cleanly from a
+place-names/hoards cluster within one community, for instance); that
+spot-check has not been repeated on this corpus's community
+assignments, nor extended systematically across the full partition, so
+it supports plausibility rather than confirming that round 9,062 is
+uniquely correct. Readers who want a finer-grained or
+differently-motivated partition should treat the dendrogram below, not
+this flat cut, as the primary source: it preserves the full nested
+structure and does not require committing to one round.
 
 **Reading the dendrogram.** `gn_analysis/build_dendrogram.R`
 reconstructs the complete nested merge structure from the edge-removal
@@ -596,10 +611,11 @@ gn_sizes |>
 #| fig-height: 12
 #| cache: true
 #| eval: !expr gn_has_communities
-# 199 communities colored individually via a continuous viridis scale
+# 297 communities colored individually via a continuous viridis scale
 # is not legible: adjacent community IDs land on near-identical shades,
-# so the plot reads as ~5 broad color bands rather than 199 distinct
-# groups (confirmed visually on a render). Highlighting only the
+# so the plot reads as a handful of broad color bands rather than 297
+# distinct groups (confirmed visually on a render of the previous
+# corpus, at a similar community count). Highlighting only the
 # largest communities in distinct colors, with everything else grey,
 # shows the actual pattern in this partition instead: a handful of
 # large communities against a long tail of small ones.
@@ -628,8 +644,8 @@ ggraph(tg, layout = "drl") +
     guide = "none"
   ) +
   theme_graph() +
-  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9115)",
-       subtitle = "12 largest communities highlighted; remaining 187 shown in grey")
+  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9062)",
+       subtitle = "12 largest communities highlighted; remaining 285 shown in grey")
 
 ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
 ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
@@ -652,8 +668,8 @@ knitr::include_graphics(here("analysis", "gn_analysis", "results", "dendrogram",
 
 ### Internal structure of individual communities
 
-The round-9,115 partition and the whole-graph dendrogram above both
-describe the corpus at a single level: 199 communities, and one tree
+The round-9,062 partition and the whole-graph dendrogram above both
+describe the corpus at a single level: 297 communities, and one tree
 covering the earliest few hundred splits across all of them together.
 A separate question is whether any individual community has further
 structure worth surfacing on its own, the same kind of check performed
@@ -661,7 +677,7 @@ earlier (see "Choosing a stopping point") for two clusters against
 paper titles and annotation coding.
 
 `gn_analysis/build_subcluster_trees.R` addresses this directly: seeded
-from the real round-9,115 community membership (not a re-derived or
+from the real round-9,062 community membership (not a re-derived or
 arbitrary starting point), it replays `removal_log.csv` separately for
 each of the round's largest communities and records what happens to
 each one afterward. An initial version capped this replay at a fixed
@@ -682,10 +698,20 @@ still writes them; see `gn_analysis/results/subclusters/` if useful).
 
 The one real signal in this data is the size of the two pieces at each
 community's first split, which varies meaningfully across the twelve:
-most split off a single node or a small handful, but five communities
-(54 and 52 most balanced, then 27, 40, and 37 to a lesser extent) split
-into two pieces of comparable size, which is the same kind of balanced
-division that made the two clusters checked earlier interpretable.
+most split off a single node or a small handful, but two communities
+(56, with a 111/47 split, and 130, with a 92/53 split) divide into two
+pieces of comparable size, the same kind of balanced division that made
+the two clusters checked earlier interpretable. One community (19) is a
+genuine anomaly rather than a matter of degree: its first split produces
+a 10/257 division, the *smaller* piece splitting off first while the
+bulk of the community stays together, unlike every other community
+here (and every community checked in the previous version of this
+corpus), where the smaller piece is the one shed and the bulk always
+stays intact on the first split. This has not yet been investigated
+further; it may indicate a distinct substructure worth checking against
+titles or annotation coding, or it may be an artifact of how this
+particular community's internal edges were structured before edge
+removal began.
 
 ```{r}
 #| label: gn-first-splits
@@ -720,7 +746,7 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
   scale_x_log10(expand = expansion(mult = c(0, 0.15))) +
   scale_fill_manual(values = c("Larger piece" = "#4C72B0", "Smaller piece" = "#DD8452")) +
   labs(
-    title = "First-split piece sizes, round 9115's largest communities",
+    title = "First-split piece sizes, round 9062's largest communities",
     subtitle = "Sorted by size of the smaller piece; most balanced at top",
     x = "Nodes in each piece at first split (log scale)",
     y = NULL, fill = NULL
@@ -729,9 +755,12 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
   theme(legend.position = "bottom")
 ```
 
-Community 54's split (111/47 nodes) is the most balanced of the twelve
-and the strongest remaining candidate for the kind of title/annotation
-check performed earlier; this has not yet been done.
+Community 56's split (111/47 nodes) is the most balanced of the twelve
+by ratio and the strongest remaining candidate for the kind of
+title/annotation check performed earlier; community 19's 10/257
+anomaly is the strongest candidate for a different kind of check,
+since it doesn't fit the balanced-split pattern at all. Neither has
+been done yet.
 
 ## Cluster labeling
 
