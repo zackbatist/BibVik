@@ -55,7 +55,8 @@ format:
     code-overflow: wrap
     page-layout: article
     grid:
-      body-width: 1000px
+      body-width: 1100px
+      margin-width: 600px
 filters:
   - quarto
   - assets/include-files.lua

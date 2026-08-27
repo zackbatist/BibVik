@@ -3,6 +3,7 @@ title: "BibVik Citation Analysis: Camps, Communities, and Citational Politics"
 format:
   html:
     toc: true
+    toc-depth: 2
     code-fold: true
     self-contained: true
 execute:
@@ -10,6 +11,12 @@ execute:
   message: false
   eval: true
 ---
+
+```{css, echo = FALSE}
+p {
+  text-align: justify !important;
+}
+```
 
 This document renders the full analysis by including each stage in
 sequence. Each stage is also a standalone `.qmd` and can be read, edited,
