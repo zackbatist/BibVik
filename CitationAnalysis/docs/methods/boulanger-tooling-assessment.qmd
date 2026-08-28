@@ -1,0 +1,348 @@
+---
+title: "Assessment: Boulanger/mpilhlt Reference-Extraction Tooling"
+subtitle: "Could any of it replace or complement BibVik's existing methods?"
+date: 2026-08-27
+---
+
+> **Note:** This document was drafted with the assistance of Claude (Anthropic,
+> claude-sonnet-5, August 2026) and reviewed by the project author. All cited
+> sources were independently verified to exist before inclusion. No sources
+> have been inferred or hallucinated.
+
+## Summary (read this first)
+
+Christian Boulanger (Max Planck Institute for Legal History and Legal Theory,
+mpilhlt) and collaborators, chiefly Luca Foppiano (ScienciaLAB), build reference-
+extraction tooling for law and humanities scholarship — the same structural
+problem BibVik has (footnote-embedded citations, poor bibliometric database
+coverage, non-English material). Their public work was reviewed piece by piece
+against BibVik's pipeline to see what, if anything, is worth adopting.
+
+**Verdict: adopt narrowly, mostly for what it teaches rather than what it
+runs.**
+
+- **Worth doing:** use `llamore`'s F1 evaluation harness (fuzzy string +
+  Hungarian matching) to finally get a measured accuracy number for BibVik's
+  own detection/postprocess methods, none of which currently have one.
+- **Worth trying, bounded:** run `tei-bibl-annotator` (a small fine-tuned
+  model that tags author/title/date spans in a raw citation string) against
+  the backlog of ~167 `llm_from_footnote` entries with blank title and blank
+  `_raw_citation`, after splitting the compound citations those footnotes
+  contain. Low cost, low risk, narrow scope — and the hard diagnostic work on
+  that backlog is already done by hand (see Decision_log, 2026-08-11 entry).
+- **Not worth adopting:** the retrained GROBID footnote-segmentation model
+  (targets a weakness BibVik's Method 5 already routes around by not
+  depending on GROBID zoning at all), the TOC-extraction model (German-only
+  training data, a dead end for our multilingual corpus), and `pdf-tei-editor`
+  as an annotation workbench (plugin architecture still mid-refactor; would
+  mean restructuring our correction workflow for uncertain gain).
+- **Not touched at all:** detection itself — deciding whether a span of text
+  *is* a citation, in six languages, embedded in archaeological prose. None
+  of Boulanger's tools do this; it's a different problem from the one his
+  tools solve (structuring a citation string you've already isolated).
+- **The stated bottleneck (his own words):** *"It's all experimental though,
+  nothing is production-ready. As I said, annotated footnote data is the key
+  to progress, and it's the hardest to come by."* We have exactly the kind
+  of annotated data he lacks — multilingual, non-legal, non-German — as a
+  byproduct of our own correction workflow. A joint annotation effort is a
+  more realistic path forward than adopting his checkpoints as-is.
+
+The rest of this document is the full reasoning behind each of those calls.
+
+---
+
+## Why this was worth looking into
+
+Christian Boulanger posted about a fine-tuned vision-language model for
+extracting table-of-contents structure from scanned book pages
+([sciences.social/@cmboulanger/117149370355856933](https://sciences.social/@cmboulanger/117149370355856933)),
+which is directly relevant to BibVik's `CitationAnalysis` pipeline: book
+chapters have historically poor metadata coverage, and BibVik already has to
+manually decide whether to treat a book as one bloated entry or decompose it
+into its constituent chapters (see `research-protocol.qmd`'s discussion of
+this). His broader body of work — spread across
+[github.com/cboulanger](https://github.com/cboulanger),
+[github.com/mpilhlt](https://github.com/mpilhlt), and
+[huggingface.co/cmboulanger](https://huggingface.co/cmboulanger) — targets
+the same structural gap BibVik exists to work around: standard bibliometric
+databases (Scopus, WoS, OpenAlex, CrossRef) have poor coverage of footnote-
+heavy, non-English, humanities/monograph literature.
+
+## Who's involved and how real this is
+
+Boulanger runs the "Legal Theory Knowledge Graph" project at mpilhlt since
+2022, aimed at producing machine-readable data on socio-legal theory
+scholarship. His main collaborator is Luca Foppiano (ScienciaLAB, Portugal;
+GROBID/document-ML background), with Andreas Wagner (mpilhlt), Anselm Küsters
+(University of Stuttgart), and others in supporting roles. The work is real
+and active, not vaporware: `pdf-tei-editor` has 1,300+ commits and 78
+releases; the FOSSIL dataset/paper (Foppiano & Boulanger, arXiv 2606.01109,
+May 2026) reports actual measured results; the HuggingFace models come with
+quantified, honestly-reported evaluation numbers rather than marketing
+claims. But it is explicitly experimental — Boulanger's own assessment, from
+a public post: *"It's all experimental though, nothing is production-ready.
+As I said, annotated footnote data is the key to progress, and it's the
+hardest to come by."* The evaluation numbers that exist are small-sample
+(FOSSIL's end-to-end eval is 4 documents) and single-domain (German legal-
+sociology footnotes, or German-only book TOCs) — nothing has been tested on
+archaeology or on Scandinavian-language material.
+
+## Piece-by-piece assessment
+
+### GROBID footnote flavour / FOSSIL specialization
+
+A retrained version of GROBID's article-*segmentation* model (the stage that
+decides whether a zone of a page is `<body>`, `<footnote>`, `<listBibl>`,
+etc.), trained on FOSSIL, a 96-document, multi-language (English, Portuguese,
+Italian, German), multi-discipline SSH corpus with real footnote-embedded
+citations. Checked directly against the actual training PDFs
+(`grobid-footnote-flavour/batches/`): DOIs resolve to journals like *German
+History* (Oxford), *Medical Law Review*, *Sociological Review*, *Historical
+Social Research*, and Italian-language humanities journals — genuinely
+multi-disciplinary within SSH, but no archaeology and no Scandinavian-language
+material.
+
+**What it actually fixes:** stock GROBID, trained mostly on STEM papers where
+footnotes are rare short asides, often mislabels a footnote-heavy page's
+footnote zone as ordinary body text — so that content never reaches GROBID's
+citation parser at all, correct or not. The retrained model is better at
+correctly zoning footnote content so it gets a chance to be parsed. This is a
+segmentation/plumbing fix, not a citation-recognition or parsing improvement
+— FOSSIL's own reported gains are almost entirely in *recall* (content that
+was previously invisible is now seen), not precision (what happens once it's
+seen — splitting bundled citations, filtering non-citation commentary — 
+remains a stated open problem, along with cross-reference resolution
+generally, e.g. "Ibid.", "see n. 9").
+
+**Why this doesn't matter much for BibVik specifically:** Method 5 (LLM
+Footnote Extraction) already reaches footnote content independent of GROBID's
+zoning, by sending footnotes to an LLM directly rather than depending on
+GROBID's segmentation to route them correctly first. BibVik built around
+this exact weakness without knowing this fix existed. The flavour's benefit
+would only show up in improving what reaches Methods 1/2 (GROBID
+bibliography, GROBID inline markers) — a real but narrow effect, testable
+cheaply against the 20 F1 papers already known to have empty reference divs
+(`architecture.qmd`, Method 6 weaknesses), but not worth prioritizing.
+
+**A closer look at the actual annotated footnote data** (viewed directly,
+not just described secondhand from the paper) showed something more useful
+than the segmentation fix itself: real footnote-embedded citations are not
+just "differently formatted" versions of bibliography entries. They're
+embedded in continuous prose, broken across page boundaries, share a text
+block with unrelated content (author biographical blurbs, quotations,
+running-header page numbers physically interleaved with citation text), and
+frequently bundle more than one work into what reads as a single footnote
+(e.g. "AUD 1996, 242; AUD 1997, 153–154; Graham-Campbell 2004, 362; Baastrup
+2010b" — four separate works run together with no clean delimiter beyond
+punctuation). This is a more concrete and more useful picture of the failure
+mode than "footnote-style references," and is worth keeping as a reference
+point when characterizing BibVik's own footnote data — independent of
+whether the flavour itself is ever adopted.
+
+**Verdict: not worth pursuing as a priority.** Test only against the 20
+empty-reference-div papers if curious; don't commit pipeline changes around
+it.
+
+### `tei-bibl-annotator`
+
+A LoRA fine-tune of Qwen2.5-3B-Instruct that takes one raw citation string
+and wraps XML tags around the author/title/date spans within it. It does not
+find citations, does not decide what counts as a citation, and does not
+split compound/bundled citation strings — it only tags structure in a string
+already handed to it, one string at a time. Measured on a 1,207-record
+held-out set: 99.83% well-formed XML output, 42.5% exact match against gold
+markup. Trained on German (mostly) legal-sociology footnote citations, plus
+some English — untested on archaeology or Scandinavian languages, and the
+domain gap is real (its whole training set is legal citation conventions,
+not ours).
+
+**Direct comparison against BibVik's own code:** `postprocess.py`'s
+`recover_authors_from_raw()` and `recover_titles_from_raw()` do the same
+task — extract structured fields from a raw citation string — via a bare
+prompt to a general chat model (`qwen2.5:7b`), with no confidence score
+beyond a binary success/fail flag and no gold set anywhere in the pipeline
+to check accuracy against. This is the same failure pattern already
+documented elsewhere in BibVik: `docs/methods/resolver.md` records that an
+earlier CrossRef-based resolution approach was scrapped after an audit found
+70–80% false positives — i.e., unvalidated automated resolution has already
+burned this project once. `tei-bibl-annotator`'s 42.5% is not necessarily
+better than what the current prompt achieves on BibVik's material — the
+honest point is that it's *measured* and BibVik's current approach isn't.
+
+**Concrete opening:** the ~167-entry `llm_from_footnote` cluster (title and
+`_raw_citation` both blank) is exactly the shape of input this model expects,
+once split. Root cause (see Decision_log, 2026-08-11) is that a footnote
+citing several works in one string produces one blank entry per citekey
+instead of being split into its components; the raw footnote text survives
+in `_source_footnote` even when parsing failed, so this is a structuring
+problem, not a data-loss problem. Plan: (1) rule-based split on the
+semicolon/clause pattern these compound footnotes use — cheap, not an LLM
+call; (2) run `tei-bibl-annotator` on each resulting fragment; (3) feed
+results into `corrections.yaml` as `_draft: true` candidates for the normal
+review workflow, never auto-applied.
+
+**Important scoping note:** by the time this was investigated, the
+diagnostic work on this backlog was already substantially done by hand —
+24 of the original 98-entry sub-batch were closed out through
+`raw_citation` cross-checks and `cited_by` provenance review, and the
+underlying compound-footnote mechanism was already identified. What
+`tei-bibl-annotator` could still help with is the comparatively mechanical
+remainder (structuring the split fragments), not the harder diagnostic work,
+which is finished.
+
+**Verdict: worth a bounded experiment**, evaluated against a gold subset
+using `llamore`'s F1 class before trusting its output for anything more than
+draft corrections.
+
+### `nuextract3-toc`
+
+A LoRA fine-tune of NuExtract3 (Qwen3.5-based vision-language model) that
+extracts `{title, authors, page_number}` entries from a table-of-contents
+page image. Measured on a 44-book held-out split: F1 0.7544 (up from a 0.6783
+zero-shot baseline), with the gain almost entirely in precision (the base
+model over-generates entries). **Trained exclusively on German-language book
+TOCs**; the model card itself warns of degraded quality outside that domain.
+
+This directly addresses a real BibVik problem — deciding whether an edited
+volume should be treated as one bloated F1/F2 node or decomposed into
+per-chapter entries, flagged as a concern in `research-protocol.qmd`'s
+discussion of vetting books for Grobid processing. A TOC extractor could
+correctly decompose a volume's structure before citations are attributed to
+it. But it does not solve the harder adjacent problem — reattaching a
+unified, volume-level bibliography's entries back to the specific chapter
+that actually cited each one — which remains unsolved by anything in
+Boulanger's toolkit or elsewhere.
+
+**Verdict: dead end for BibVik as-is.** The German-only training data rules
+it out for a corpus that is Norwegian/Swedish/Danish/German/French/English,
+and fine-tuning a replacement for our own languages is not a small
+undertaking. Not worth pursuing unless a future joint project with
+Boulanger made producing multilingual TOC training data a shared goal in its
+own right (see "The data problem" below).
+
+### `pdf-tei-editor`
+
+A full web-based PDF/TEI annotation tool (dual-pane viewer, versioning,
+role-based access, plugin architecture for pluggable extraction backends
+including GROBID and `llamore`). Active and substantial (1,300+ commits, 78
+releases, most recent within the last month), but its own developer
+documentation (`docs/history/plugin-architecture-simplification.md`)
+describes the frontend plugin system as still absorbing two coexisting
+architectural patterns, with backward compatibility as an explicit, ongoing
+commitment rather than a settled state. Backend (Python/FastAPI) plugins
+look more stable than frontend (JavaScript) plugins.
+
+**Verdict: not worth adopting as BibVik's annotation environment.** Would
+mean restructuring the existing `corrections.yaml` workflow around someone
+else's UI and access-control model, for a plugin API that is still visibly
+in flux. If BibVik ever needs a proper human-correction UI (beyond
+hand-editing YAML), worth a second look once the frontend plugin
+architecture has settled — check for backward-compatibility violations
+before adopting even then.
+
+### `llamore`
+
+A Python package (importable via `pip install llamore`) with two useful,
+independent parts: (1) reference extractors pluggable to various LLM/VLM
+backends, and (2) an `F1` evaluation class using Levenshtein-based fuzzy
+matching and Hungarian (optimal bipartite) matching to score extracted
+references against gold labels — confirmed by reading
+`src/llamore/metrics.py` directly, it has no hard dependency on GROBID or
+`pdf-tei-editor` and can be pointed at any `Reference` objects, including
+BibVik's own output.
+
+**Verdict: the single highest-value adoption**, and the one with zero domain
+risk. BibVik currently has no measured accuracy for any of its six detection
+methods or its LLM-based postprocess passes — everything is validated by
+spot-checking, not by a number. Hand-annotating even ~50 entries from the
+existing corpus and scoring current methods (and, if tried,
+`tei-bibl-annotator`) against that gold set with `llamore`'s `F1` class would
+answer, for the first time, whether any given method is actually working as
+well as assumed.
+
+### FOSSIL (the dataset itself, distinct from the model trained on it)
+
+96 annotated scholarly articles, ~7,600 footnote-embedded references,
+CC0-licensed, English/Portuguese/Italian/German, 1959–2025. Not directly
+usable — contains no archaeology and no Scandinavian-language material, so
+none of it can be merged into BibVik's bibliography or used as gold data for
+our corpus. Its value here is entirely as a **template**: a documented,
+measured, five-phase annotation workflow (pre-annotate with GROBID → correct
+→ verify by a senior reviewer → integrate feedback into a living guide,
+tracked via GitHub issues → retrain), with real inter-annotator-agreement
+statistics (Krippendorff's α = 0.917 across 194 comparisons, 96 documents, 7
+annotators) run before the resulting data was trusted for anything. If BibVik
+or a joint project ever built its own gold-standard footnote corpus, this is
+the concrete precedent to follow, not a document to merely admire.
+
+## The data problem, and whether there's a way around it
+
+Boulanger names the actual bottleneck himself: annotated footnote data,
+which is scarce because producing it requires slow, disagreement-prone,
+domain-expert annotation work (FOSSIL needed 7 annotators and formal
+agreement checks even within one relatively well-defined domain). This is
+not a modeling problem his tools can shortcut around; it is a supply
+problem.
+
+Three ways to make progress on it, independent of whether Boulanger's
+specific checkpoints are ever adopted:
+
+1. **Piggyback on work already happening.** BibVik's `corrections.yaml`
+   review process already produces exactly the raw-string-in,
+   corrected-structured-fields-out pairs that constitute training data, as a
+   byproduct of routine curation. Capturing these systematically (rather
+   than only applying the correction and discarding the "before" state)
+   would build a gold set at close to zero marginal annotation cost.
+
+2. **Weak supervision from method agreement.** Since BibVik already runs six
+   independent detection methods, citations where multiple methods agree
+   are a plausible silver-label source requiring no manual annotation;
+   effort then concentrates on disagreements. This is broadly the same
+   principle behind FOSSIL's own pre-annotate-then-correct workflow, applied
+   using BibVik's existing method redundancy instead of a single baseline
+   model.
+
+3. **A joint annotation effort, proposed on mutually rational terms.** If a
+   small batch of BibVik's non-English monograph/chapter material were
+   annotated using `pdf-tei-editor` and a schema compatible with (or
+   extending) FOSSIL's, it would produce exactly the multilingual,
+   cross-disciplinary annotated data Boulanger says is scarce, while
+   yielding a validated extraction approach tuned to our own corpus as the
+   direct output. This is a fair trade, not a favour: BibVik has the kind of
+   underrepresented material (Scandinavian-language archaeological grey
+   literature) that is structurally absent from every dataset cited in the
+   FOSSIL paper's own related-work section.
+
+None of these are fast. All three require real annotation hours from
+someone. But they are the actual way around the stated bottleneck — not a
+better model, more data.
+
+## Open questions for Boulanger, if contact is made
+
+- Does the footnote-flavour GROBID or FOSSIL's specialized segmentation
+  generalize at all beyond SSH/law/German-language material — has it been
+  tried on archaeology or non-German-language monographs?
+- Would he be interested in a small multilingual archaeology TOC/footnote
+  annotation collaboration, given the corpus gap on his side?
+- What's the actual state of cross-reference resolution ("Ibid.", "see n.
+  9") — confirmed from the FOSSIL paper as "largely open" rather than
+  merely modest — is there any interim heuristic he'd recommend before it's
+  properly solved?
+- Is `pdf-tei-editor`'s plugin architecture stable enough to build a
+  lightweight custom backend against yet, given the ongoing frontend
+  refactor documented in the repo's own history?
+
+## Bottom line
+
+This toolset does not fare well against the bulk of BibVik's current
+citation-verification work (the ~900-record manual review), because that
+work is fundamentally source-fidelity checking against real PDFs — reading
+a document and judging what's actually printed there, reconciling against
+existing corpus data, catching fabrications and misattributions. None of
+Boulanger's tools do this; they only restructure a string already believed
+to be a real citation. Where his tools do bear on BibVik's actual work (the
+167-entry blank-title backlog), the expensive diagnostic work is already
+done by hand, leaving a narrower, more mechanical opening than it first
+appeared. The clearest, lowest-risk, highest-value takeaway is not a tool at
+all: adopt `llamore`'s evaluation methodology to put a real number on
+methods BibVik has been running on faith.
