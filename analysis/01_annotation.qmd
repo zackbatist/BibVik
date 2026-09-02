@@ -82,10 +82,14 @@ ggplot(data = pubyears, aes(x = publication_year, y = n)) +
   labs(x = "", y = "Count", title = "Publications by year")
 ```
 
-## Gender by first author and all authors
+## Gender
 
-Publications by gender for each year. Single-author work vs. collaborations
-have not yet been examined separately.
+Author gender, examined three ways: first-author gender and all-author
+gender by year; gender composition across the full author list per
+paper; and (for a subset where a lead-author convention can be
+established) lead-author gender.
+
+### By year
 
 ```{r}
 #| label: gender-by-year
@@ -96,16 +100,13 @@ gender_pubyears <- df %>%
   count(publication_year) %>%
   mutate(proportion_year = n / sum(n))
 
-men_prcnt <- round(nrow(gender_pubyears[gender_pubyears$Authors..Genders..Author.1. == "Man",]) / nrow(gender_pubyears) * 100)
-women_prcnt <- round(nrow(gender_pubyears[gender_pubyears$Authors..Genders..Author.1. == "Woman",]) / nrow(gender_pubyears) * 100)
-
 plt1 <-
 ggplot(data = gender_pubyears, aes(x = publication_year, y = n, fill = Authors..Genders..Author.1.)) +
   geom_bar(stat="identity", position = 'dodge') +
   theme_bw() +
   scale_fill_manual(values = gender_colors) +
   scale_x_discrete(breaks = seq(2000, 2022, 1), drop = FALSE) +
-  labs(x = "", y = "Count", fill = "First author gender", title = paste0("First author gender: Women = ", women_prcnt, "% Men = ", men_prcnt, "%")) +
+  labs(x = "", y = "Count", fill = "First author gender", title = "First author gender by year") +
   theme(legend.position = "bottom")
 
 all_authors_gender_year <- df %>%
@@ -118,74 +119,36 @@ all_authors_gender_year <- df %>%
   mutate(gender = na_if(gender, "")) %>%
   drop_na()
 
-all_authors_gender <- df %>%
-  pivot_longer(
-    cols = starts_with("Authors.."),
-    names_to  = "position",
-    values_to = "gender"
-  ) %>%
-  count(gender) %>%
-  mutate(gender = na_if(gender, "")) %>%
-  drop_na()
-
-men_aa <- round(all_authors_gender[all_authors_gender$gender == "Man", "n"] / sum(all_authors_gender$n) * 100)
-women_aa <- round(all_authors_gender[all_authors_gender$gender == "Woman", "n"] / sum(all_authors_gender$n) * 100)
-uncertain_aa <- round(all_authors_gender[all_authors_gender$gender == "Uncertain", "n"] / sum(all_authors_gender$n) * 100)
-
 plt2 <-
 ggplot(data = all_authors_gender_year, aes(x = publication_year, y = n, fill = gender)) +
   geom_bar(stat="identity", position = 'dodge') +
   theme_bw() +
   scale_fill_manual(values = nord_palettes$victory_bonds[c(3, 1, 4)]) +
   scale_x_discrete(breaks = seq(2000, 2022, 1), drop = FALSE) +
-  labs(x = "", y = "Count", fill = "Author gender",
-       title = paste0("All authors gender: Uncertain = ", uncertain_aa, "% Women = ", women_aa, "% Men = ", men_aa, "%")) +
+  labs(x = "", y = "Count", fill = "Author gender", title = "All authors' gender by year") +
   theme(legend.position = "bottom")
 
 plt1 / plt2
 ```
 
-## Multi-author gender composition and author order
+### Composition across the full author list
 
-The analyses above use first-author gender only (for the topic/method/source
-cross-tabs later in this document) or a flattened, order-blind pool of all
-author genders (the "all authors" plot). Neither captures gender
+First-author gender and the order-blind pool above don't capture gender
 **composition per paper** (all-male vs. all-female vs. mixed) or **order**
-within a paper, both of which are needed for the co-authorship questions
-raised in planning (do co-authorships cross or reinforce whatever divisions
-appear elsewhere; does the most senior/lead author's gender matter
-independently of the full author-list composition).
-
-**Author order is genuinely ambiguous in this corpus and must be handled
-carefully, not with a single fixed rule.** Field convention varies:
-first-author-as-lead is standard for excavation/fieldwork-based
-publications, but last-author-as-lead (PI convention) is standard for
-lab-based work. Which convention applies depends on the paper's own
-method — one of the coded variables, not something inferable from the
-author list alone. The lookup below (`fieldwork_lead_methods`) is a
-placeholder mapping specific coded method categories to the convention
-that applies; **it must be filled in with the actual method category
-names from the codebook before this analysis is meaningful.** Left
-unmapped, methods default to "ambiguous" and are excluded from any
-lead-author-specific analysis (though still included in the
-order-blind composition analysis below).
-
-This section works generically across however many
-`Authors..Genders..Author.N.` columns exist in the data — no fixed
-column count is assumed.
+within a paper. Author order is genuinely ambiguous here: field
+convention varies (first-author-as-lead for fieldwork, last-author-as-lead
+for lab-based work), and which applies depends on a paper's own method —
+see [Lead-author gender](#lead-author-gender) below, where that mapping
+is still a placeholder.
 
 ```{r}
-#| label: author-gender-cols
+#| label: gender-sequence
+#| fig-width: 6
+#| fig-height: 3
 author_gender_cols <- df %>%
   select(starts_with("Authors..Genders..Author.")) %>%
   names()
 
-cat("Detected", length(author_gender_cols), "author-position gender columns:\n")
-print(author_gender_cols)
-```
-
-```{r}
-#| label: gender-sequence
 # Per-paper ordered gender sequence (e.g. "Man, Woman, Man"), preserving
 # author order and author count, rather than pooling into an unordered set.
 gender_sequences <- df %>%
@@ -210,20 +173,26 @@ gender_sequences <- df %>%
     .groups = "drop"
   )
 
-gender_sequences |> count(n_authors) |> knitr::kable(caption = "Author-count distribution")
+gender_sequences |>
+  count(n_authors) |>
+  ggplot(aes(x = factor(n_authors), y = n)) +
+  geom_col(fill = topic_col) +
+  geom_text(aes(label = n), vjust = -0.3, size = 3.5) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(x = "Authors per paper", y = "Papers") +
+  theme_bw()
 ```
 
-### Candidate gender-composition categorizations
-
 Several ways of collapsing a per-paper gender sequence into a single
-cross-tabbable category are computed side by side below, since it is not
-yet decided which is most useful. This is a case of comparing several
-independent categorization schemes against the same underlying data, not
-picking the "correct" one — inspect the resulting distributions before
-choosing.
+cross-tabbable category are compared below — a strict all-same-vs-mixed
+split, a majority-based split, and a version that separates solo
+authorship out from multi-author teams (since "all-male" means something
+different for n=1 than for a genuinely uniform team).
 
 ```{r}
 #| label: gender-composition-candidates
+#| fig-width: 10
+#| fig-height: 3.5
 composition_candidates <- gender_sequences %>%
   rowwise() %>%
   mutate(
@@ -234,7 +203,7 @@ composition_candidates <- gender_sequences %>%
   ) %>%
   ungroup() %>%
   mutate(
-    # Candidate 1: strict all-same vs. mixed
+    # Strict: all-same vs. mixed
     composition_strict = case_when(
       n_uncertain > 0            ~ "includes uncertain",
       n_men > 0 & n_women == 0   ~ "all-male",
@@ -242,7 +211,7 @@ composition_candidates <- gender_sequences %>%
       n_men > 0 & n_women > 0    ~ "mixed",
       TRUE                       ~ NA_character_
     ),
-    # Candidate 2: majority-based (ties = balanced)
+    # Majority-based (ties = balanced)
     composition_majority = case_when(
       n_uncertain > 0     ~ "includes uncertain",
       n_men > n_women     ~ "majority-male",
@@ -250,9 +219,8 @@ composition_candidates <- gender_sequences %>%
       n_men == n_women    ~ "balanced",
       TRUE                ~ NA_character_
     ),
-    # Candidate 3: single-author papers split out separately, since
-    # "all-male"/"all-female" for n=1 is a different phenomenon
-    # (individual authorship) than for n>1 (a genuinely uniform team)
+    # Single-author papers split out separately, since "all-male"/
+    # "all-female" for n=1 is a different phenomenon than for n>1
     composition_singleauthor_split = case_when(
       n_authors == 1 & n_men == 1   ~ "solo-male",
       n_authors == 1 & n_women == 1 ~ "solo-female",
@@ -265,21 +233,36 @@ composition_candidates <- gender_sequences %>%
   ) %>%
   select(-genders_list)
 
-composition_candidates |> count(composition_strict) |> knitr::kable(caption = "Candidate 1: strict (all-same vs. mixed)")
-composition_candidates |> count(composition_majority) |> knitr::kable(caption = "Candidate 2: majority-based")
-composition_candidates |> count(composition_singleauthor_split) |> knitr::kable(caption = "Candidate 3: solo-authorship split out")
+bind_rows(
+  composition_candidates |> count(value = composition_strict) |> mutate(scheme = "Strict"),
+  composition_candidates |> count(value = composition_majority) |> mutate(scheme = "Majority"),
+  composition_candidates |> count(value = composition_singleauthor_split) |> mutate(scheme = "Solo split out")
+) |>
+  mutate(scheme = factor(scheme, levels = c("Strict", "Majority", "Solo split out"))) |>
+  ggplot(aes(x = fct_reorder(value, n), y = n)) +
+  geom_col(fill = topic_col) +
+  geom_text(aes(label = n), hjust = -0.3, size = 3) +
+  facet_wrap(vars(scheme), scales = "free", ncol = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  coord_flip() +
+  labs(x = "", y = "Papers") +
+  theme_bw()
 ```
 
-### Lead-author gender, conditioned on field convention
+### Lead-author gender {#lead-author-gender}
+
+**Placeholder — not yet meaningful.** `fieldwork_lead_methods` below maps
+each coded method to whether first-author or last-author is the
+conventional "lead" for that kind of work, and needs real method names
+from the codebook before this result can be trusted. Every paper
+currently falls under "ambiguous" until that mapping is filled in.
 
 ```{r}
 #| label: lead-author-convention
+#| fig-width: 6
+#| fig-height: 2.5
 # PLACEHOLDER — fill in with actual method category names from the
-# codebook. Maps each coded primary method to whether first-author or
-# last-author is the conventional "lead" position for that kind of work.
-# Methods not listed default to "ambiguous" and are excluded from the
-# lead-author-specific comparison below (they remain in every other
-# analysis in this document).
+# codebook. Methods not listed default to "ambiguous".
 fieldwork_lead_methods <- c(
   # "Excavation"        = "first",
   # "Survey"            = "first",
@@ -298,12 +281,9 @@ lead_author_gender <- gender_sequences %>%
   left_join(primary_method_lookup, by = "cite_key") %>%
   mutate(
     # Indexing an EMPTY named vector (fieldwork_lead_methods currently
-    # has zero entries — see the placeholder above) returns an
-    # unnamed NA vector, which broke replace_na() downstream and halted
-    # the whole render. unname() + explicit NA_character_ fallback
-    # makes this run safely while the mapping is still unfilled; every
-    # row will show "ambiguous" until real method names are added
-    # above, same as the placeholder's own stated behavior.
+    # has zero entries) returns an unnamed NA vector, which broke
+    # replace_na() downstream; unname() + explicit fallback avoids that
+    # while the mapping is unfilled.
     lead_convention = if (length(fieldwork_lead_methods) > 0) {
       unname(fieldwork_lead_methods[primary_method])
     } else {
@@ -317,33 +297,244 @@ lead_author_gender <- gender_sequences %>%
     )
   )
 
-cat("Papers by lead convention (based on placeholder mapping above — fill in before trusting this):\n")
-lead_author_gender |> count(lead_convention) |> knitr::kable()
+lead_author_gender |>
+  count(lead_convention) |>
+  ggplot(aes(x = fct_reorder(lead_convention, n), y = n)) +
+  geom_col(fill = topic_col) +
+  geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  coord_flip() +
+  labs(x = "", y = "Papers") +
+  theme_bw()
 ```
 
-### Gender composition by primary topic, method, and source of evidence
+## Topic
 
-Unlike the first-author-only cross-tabs later in this document, this uses
-the composition categories above — bringing multi-author, order-aware
-gender data into the same kind of comparison already done for first-author
-gender. `composition_strict` is used here as a starting point; swap in
-`composition_majority` or `composition_singleauthor_split` to compare.
+Every plot in this section is shown two ways: **Unmerged**, where a
+paper's Primary- and Secondary-coded topics are kept distinguished, and
+**Merged**, where a paper counts toward a topic if it carries either
+value. In the Merged view a paper with one primary and two secondary
+topics contributes to three bars, so counts and proportions are no
+longer mutually exclusive across topics and won't sum to the corpus
+total — this applies throughout, not just here.
 
-#### By primary topic, method, and source
+```{r}
+#| label: topics-setup
+topic_count <- df %>%
+  select(publication_year, contains("Topics")) %>%
+  pivot_longer(!publication_year,
+               names_to = "topic",
+               values_to = "count")
+
+totals_by_year <- df %>%
+  count(publication_year) %>%
+  rename(total = n)
+```
+
+### Totals
+
+```{r}
+#| label: topics-totals
+#| fig-width: 10
+#| fig-height: 6
+unmerged_count <- topic_count %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic, count) %>%
+  group_by(topic) %>%
+  mutate(pct = n / sum(n)) %>%
+  ungroup()
+
+merged_count <- topic_count %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic) %>%
+  mutate(pct = n / sum(n))
+
+plt_unmerged <-
+ggplot(unmerged_count |> mutate(topic = str_wrap(topic, width = 25)),
+       aes(x = reorder(topic, n, sum), y = n, fill = count)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            position = position_stack(vjust = 0.5), size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c(Primary = topic_col, Secondary = "#d8d8a0")) +
+  labs(x = "Topic", y = "Count", fill = "", title = "Unmerged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_merged <-
+ggplot(merged_count |> mutate(topic = str_wrap(topic, width = 25)),
+       aes(x = reorder(topic, n), y = n)) +
+  geom_bar(stat="identity", fill = topic_col) +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            hjust = -0.2, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  labs(x = "", y = "Count", title = "Merged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_unmerged + plt_merged
+ggsave("topics_aggregate.png", plot = plt_unmerged, width = 10, height = 6, dpi = 300)
+ggsave("topics_aggregate_merged.png", plot = plt_merged, width = 10, height = 6, dpi = 300)
+```
+
+### Over time
+
+```{r}
+#| label: topics-over-time
+#| fig-width: 12
+#| fig-height: 7
+unmerged_count_year <- topic_count %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic, publication_year, count) %>%
+  group_by(publication_year, count) %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup()
+
+merged_count_year <- topic_count %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic, publication_year) %>%
+  group_by(publication_year) %>%
+  mutate(prop_merged = n / sum(n))
+
+ggplot(unmerged_count_year, aes(x = publication_year, y = n, fill = topic)) +
+  geom_bar(stat="identity") +
+  facet_wrap(vars(count), ncol = 1) +
+  labs(x = "", y = "Count", fill = "Topic", title = "Unmerged — counts by year") +
+  scale_fill_manual(values = custom_palette) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("topics_count_by_year.png", plot = last_plot(), width = 12, height = 8, dpi = 300)
+
+ggplot(merged_count_year, aes(x = publication_year, y = n, fill = topic)) +
+  geom_bar(stat="identity") +
+  labs(x = "", y = "Count", fill = "Topic", title = "Merged — counts by year") +
+  scale_fill_manual(values = custom_palette) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 6))
+ggsave("topics_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By first-author gender
+
+Every plot in this document that normalizes proportions against the
+corpus-wide gender base rate is a stated follow-up, not yet implemented
+— the raw proportions below do not control for the overall gender
+imbalance in the corpus.
+
+```{r}
+#| label: topic-by-gender
+#| fig-width: 12
+#| fig-height: 8
+topic_count_gender <- df %>%
+  select(Authors..Genders..Author.1., contains("Topics")) %>%
+  pivot_longer(!Authors..Genders..Author.1.,
+               names_to = "topic",
+               values_to = "count") %>%
+  rename(gender_first_author = Authors..Genders..Author.1.)
+
+unmerged_topic_gender <- topic_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic, gender_first_author, count) %>%
+  group_by(topic, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup()
+
+unmerged_topic_gender |>
+  group_by(topic, count) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(topic = fct_relabel(factor(topic), ~str_wrap(., width = 25)),
+         topic_label = paste0(topic, " (n=", total, ")"),
+         topic_label = fct_reorder(topic_label, ratio)) |>
+  ggplot(aes(x = topic_label, y = prop, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Unmerged")
+ggsave("topic_by_gender.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
+
+merged_topic_gender <- topic_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
+  count(topic, gender_first_author) %>%
+  group_by(topic) %>%
+  mutate(prop_merged = n / sum(n))
+
+merged_topic_gender |>
+  group_by(topic) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
+         total = sum(n)) |>
+  ungroup() |>
+  mutate(topic = fct_reorder(topic, ratio),
+         topic = fct_relabel(topic, ~str_wrap(., width = 25)),
+         topic_label = paste0(topic, " (n=", total, ")"),
+         topic_label = fct_reorder(topic_label, ratio)) |>
+  ggplot(aes(x = topic_label, y = prop_merged, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Merged")
+ggsave("topic_by_gender_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By full-author-list gender composition
+
+Unlike first-author-only gender above, this uses the composition
+categories from the Gender section — bringing multi-author, order-aware
+gender data into the same comparison. `composition_strict` is used as a
+starting point; swap in `composition_majority` or
+`composition_singleauthor_split` to compare.
 
 ```{r}
 #| label: composition-by-topic
-#| fig-width: 8
+#| fig-width: 12
 composition_topic <- composition_candidates %>%
   select(cite_key, composition_strict) %>%
   left_join(
     df %>% select(cite_key, contains("Topics")) %>%
       pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
-      filter(count == "Primary") %>%
+      filter(!is.na(count)) %>%
       mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
     by = "cite_key"
   ) %>%
   filter(!is.na(topic), !is.na(composition_strict))
+
+composition_topic %>%
+  count(topic, composition_strict, count) %>%
+  group_by(topic, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup() %>%
+  mutate(topic = fct_relabel(factor(topic), ~str_wrap(., width = 25)),
+         topic_label = paste0(topic, " (n=", total, ")")) %>%
+  ggplot(aes(x = topic_label, y = prop, fill = composition_strict)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Unmerged")
+ggsave("composition_by_topic.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 
 composition_topic %>%
   count(topic, composition_strict) %>%
@@ -359,579 +550,22 @@ composition_topic %>%
   coord_flip() +
   theme_bw() +
   force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Primary topic by full-author-list gender composition")
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Merged")
+ggsave("composition_by_topic_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
 ```
 
-```{r}
-#| label: composition-by-method
-#| fig-width: 8
-composition_method <- composition_candidates %>%
-  select(cite_key, composition_strict) %>%
-  left_join(
-    df %>% select(cite_key, contains("Methods")) %>%
-      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
-      filter(count == "Primary") %>%
-      mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-    by = "cite_key"
-  ) %>%
-  filter(!is.na(method), !is.na(composition_strict))
+### Co-occurrence
 
-composition_method %>%
-  count(method, composition_strict) %>%
-  group_by(method) %>%
-  mutate(prop = n / sum(n), total = sum(n)) %>%
-  ungroup() %>%
-  mutate(method = fct_relabel(method, ~str_wrap(., width = 25)),
-         method_label = paste0(method, " (n=", total, ")")) %>%
-  ggplot(aes(x = method_label, y = prop, fill = composition_strict)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Primary method by full-author-list gender composition")
-```
+**Directional**: given a paper's Primary-coded topic, what proportion of
+the time is each other topic marked Secondary on the same paper.
+**Undirected**: which topics tend to appear together at all, regardless
+of which one a coder ranked first — a topic counts as present if it
+carries either value, and the row/column pairing is symmetric (relabelled
+`Topic.A`/`Topic.B` to avoid implying an order that doesn't exist here).
+These answer different questions and neither supersedes the other.
 
 ```{r}
-#| label: composition-by-source
-#| fig-width: 8
-composition_source <- composition_candidates %>%
-  select(cite_key, composition_strict) %>%
-  left_join(
-    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
-      filter(count == "Primary") %>%
-      mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-    by = "cite_key"
-  ) %>%
-  filter(!is.na(source), !is.na(composition_strict))
-
-composition_source %>%
-  count(source, composition_strict) %>%
-  group_by(source) %>%
-  mutate(prop = n / sum(n), total = sum(n)) %>%
-  ungroup() %>%
-  mutate(source = fct_relabel(source, ~str_wrap(., width = 25)),
-         source_label = paste0(source, " (n=", total, ")")) %>%
-  ggplot(aes(x = source_label, y = prop, fill = composition_strict)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Primary source of evidence by full-author-list gender composition")
-```
-
-#### By topic, method, and source, primary/secondary distinction removed
-
-The three plots above use *primary* values only. Below, a paper counts
-toward a topic/method/source if it carries either value, so a paper that
-lists three secondary topics alongside its primary one now contributes to
-all four bars rather than just one. This changes what "n" means in the
-label: it is no longer a count of papers for which that category is *the*
-primary designation, but a count of papers for which that category applies
-at all, so the n's across categories are no longer mutually exclusive and
-will not sum to the corpus total.
-
-```{r}
-#| label: composition-by-topic-merged
-#| fig-width: 8
-composition_topic_merged <- composition_candidates %>%
-  select(cite_key, composition_strict) %>%
-  left_join(
-    df %>% select(cite_key, contains("Topics")) %>%
-      pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
-      filter(!is.na(count)) %>%
-      mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
-    by = "cite_key"
-  ) %>%
-  filter(!is.na(topic), !is.na(composition_strict))
-
-composition_topic_merged %>%
-  count(topic, composition_strict) %>%
-  group_by(topic) %>%
-  mutate(prop = n / sum(n), total = sum(n)) %>%
-  ungroup() %>%
-  mutate(topic = fct_reorder(topic, prop * (composition_strict == "all-female"), .fun = sum),
-         topic = fct_relabel(topic, ~str_wrap(., width = 25)),
-         topic_label = paste0(topic, " (n=", total, ")")) %>%
-  ggplot(aes(x = topic_label, y = prop, fill = composition_strict)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Topic by full-author-list gender composition, primary/secondary merged")
-```
-
-```{r}
-#| label: composition-by-method-merged
-#| fig-width: 8
-composition_method_merged <- composition_candidates %>%
-  select(cite_key, composition_strict) %>%
-  left_join(
-    df %>% select(cite_key, contains("Methods")) %>%
-      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
-      filter(!is.na(count)) %>%
-      mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-    by = "cite_key"
-  ) %>%
-  filter(!is.na(method), !is.na(composition_strict))
-
-composition_method_merged %>%
-  count(method, composition_strict) %>%
-  group_by(method) %>%
-  mutate(prop = n / sum(n), total = sum(n)) %>%
-  ungroup() %>%
-  mutate(method = fct_relabel(method, ~str_wrap(., width = 25)),
-         method_label = paste0(method, " (n=", total, ")")) %>%
-  ggplot(aes(x = method_label, y = prop, fill = composition_strict)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Method by full-author-list gender composition, primary/secondary merged")
-```
-
-```{r}
-#| label: composition-by-source-merged
-#| fig-width: 8
-composition_source_merged <- composition_candidates %>%
-  select(cite_key, composition_strict) %>%
-  left_join(
-    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
-      filter(!is.na(count)) %>%
-      mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-    by = "cite_key"
-  ) %>%
-  filter(!is.na(source), !is.na(composition_strict))
-
-composition_source_merged %>%
-  count(source, composition_strict) %>%
-  group_by(source) %>%
-  mutate(prop = n / sum(n), total = sum(n)) %>%
-  ungroup() %>%
-  mutate(source = fct_relabel(source, ~str_wrap(., width = 25)),
-         source_label = paste0(source, " (n=", total, ")")) %>%
-  ggplot(aes(x = source_label, y = prop, fill = composition_strict)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = "Author gender composition",
-       title = "Source of evidence by full-author-list gender composition, primary/secondary merged")
-```
-
-## Topic, in aggregate and over time
-
-### Primary topic
-
-```{r}
-#| label: topics
-#| fig-width: 10
-#| fig-height: 6
-topic_count <- df %>%
-  select(publication_year, contains("Topics")) %>%
-  pivot_longer(!publication_year,
-               names_to = "topic",
-               values_to = "count")
-
-totals_by_year <- df %>%
-  count(publication_year) %>%
-  rename(total = n)
-
-primary_count_year <- topic_count %>%
-  group_by(topic, publication_year) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  group_by(publication_year) %>%
-  mutate(prop_primary = n / sum(n))
-
-primary_count <- topic_count %>%
-  group_by(topic) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  ungroup() %>%
-  mutate(pct = n / sum(n))
-
-ggplot(primary_count_year, aes(x = publication_year, y = n, fill = topic)) +
-  geom_bar(stat="identity")+
-  labs(x = "", y = "Count", fill = "Primary topic") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 6))
-ggsave("topics_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_count_year, aes(x = publication_year, y = prop_primary, fill = topic)) +
-  geom_bar(stat="identity")+
-  geom_text(data = totals_by_year,
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion by year", fill = "Primary topic") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 6))
-ggsave("topics_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_count |> mutate(topic = str_wrap(topic, width = 25)),
-       aes(x = reorder(topic, n), y = n)) +
-  geom_bar(stat="identity", fill = topic_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Primary topic", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("topics_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-### Topic, primary/secondary distinction removed
-
-Filtering to `count == "Primary"` above means every paper contributes to
-exactly one topic bar, so counts and proportions sum to the corpus total
-and to 1 within a year respectively. Dropping the distinction and counting
-any non-missing value (`!is.na(count)`) breaks that: a paper with one
-primary and two secondary topics now contributes to three bars instead of
-one, so `n` below sums to more than the corpus size and the "proportion by
-year" bars no longer sum to 1 (the per-year total annotated above each bar
-still reflects the paper count, not the topic-assignment count, and is
-kept for reference).
-
-```{r}
-#| label: topics-merged-time
-#| fig-width: 10
-#| fig-height: 6
-merged_count_year <- topic_count %>%
-  filter(!is.na(count)) %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  count(topic, publication_year) %>%
-  group_by(publication_year) %>%
-  mutate(prop_merged = n / sum(n))
-
-merged_count <- topic_count %>%
-  filter(!is.na(count)) %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  count(topic) %>%
-  mutate(pct = n / sum(n))
-
-ggplot(merged_count_year, aes(x = publication_year, y = n, fill = topic)) +
-  geom_bar(stat="identity")+
-  labs(x = "", y = "Count", fill = "Topic") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 6))
-ggsave("topics_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_count_year, aes(x = publication_year, y = prop_merged, fill = topic)) +
-  geom_bar(stat="identity")+
-  geom_text(data = totals_by_year,
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion of topic assignments by year", fill = "Topic") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 6))
-ggsave("topics_proportion_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_count |> mutate(topic = str_wrap(topic, width = 25)),
-       aes(x = reorder(topic, n), y = n)) +
-  geom_bar(stat="identity", fill = topic_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Topic", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("topics_aggregate_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-## Method, in aggregate and over time
-
-### Primary method
-
-```{r}
-#| label: methods
-#| fig-width: 10
-#| fig-height: 6
-method_count <- df %>%
-  select(publication_year, contains("Methods")) %>%
-  pivot_longer(!publication_year,
-               names_to = "method",
-               values_to = "count")
-
-primary_method_year <- method_count %>%
-  group_by(method, publication_year) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  group_by(publication_year) %>%
-  mutate(prop_primary = n / sum(n))
-
-primary_count_method <- method_count %>%
-  group_by(method) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  ungroup() %>%
-  mutate(pct = n / sum(n))
-
-ggplot(primary_method_year, aes(x = publication_year, y = n, fill = method)) +
-  geom_bar(stat="identity") +
-  labs(x = "", y = "Count", fill = "Primary method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("methods_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_method_year, aes(x = publication_year, y = prop_primary, fill = method)) +
-  geom_bar(stat="identity") +
-  geom_text(data = totals_by_year,
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion by year", fill = "Primary method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("methods_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_count_method |> mutate(method = str_wrap(method, width = 25)),
-       aes(x = reorder(method, n), y = n)) +
-  geom_bar(stat="identity", fill = method_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Primary method", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("methods_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-### Method, primary/secondary distinction removed
-
-Same change and same caveat as the topic version above: a paper counts
-toward every method it carries a value for, not just its primary one, so
-counts and per-year proportions are no longer mutually exclusive across
-methods.
-
-```{r}
-#| label: methods-merged-time
-#| fig-width: 10
-#| fig-height: 6
-merged_method_year <- method_count %>%
-  filter(!is.na(count)) %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  count(method, publication_year) %>%
-  group_by(publication_year) %>%
-  mutate(prop_merged = n / sum(n))
-
-merged_count_method <- method_count %>%
-  filter(!is.na(count)) %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  count(method) %>%
-  mutate(pct = n / sum(n))
-
-ggplot(merged_method_year, aes(x = publication_year, y = n, fill = method)) +
-  geom_bar(stat="identity") +
-  labs(x = "", y = "Count", fill = "Method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("methods_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_method_year, aes(x = publication_year, y = prop_merged, fill = method)) +
-  geom_bar(stat="identity") +
-  geom_text(data = totals_by_year,
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion of method assignments by year", fill = "Method") +
-  scale_fill_manual(values = custom_palette2) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("methods_proportion_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_count_method |> mutate(method = str_wrap(method, width = 25)),
-       aes(x = reorder(method, n), y = n)) +
-  geom_bar(stat="identity", fill = method_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Method", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("methods_aggregate_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-## Source of evidence, in aggregate and over time
-
-### Primary source of evidence
-
-```{r}
-#| label: sources
-#| fig-width: 10
-#| fig-height: 6
-totals_by_year <- df %>%
-  count(publication_year) %>%
-  rename(total = n) %>%
-  mutate(publication_year = factor(publication_year, levels = sort(unique(as.numeric(as.character(publication_year))))))
-
-source_count <- df %>%
-  select(publication_year, contains("Sources.of.Evidence")) %>%
-  mutate(publication_year = factor(publication_year, levels = levels(totals_by_year$publication_year))) %>%
-  pivot_longer(!publication_year,
-               names_to = "source",
-               values_to = "count")
-
-primary_source_year <- source_count %>%
-  group_by(source, publication_year) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  group_by(publication_year) %>%
-  mutate(prop_primary = n / sum(n)) %>%
-  ungroup() %>%
-  mutate(publication_year = droplevels(publication_year))
-
-primary_source_count <- source_count %>%
-  group_by(source) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  ungroup() %>%
-  mutate(pct = n / sum(n))
-
-ggplot(primary_source_year, aes(x = publication_year, y = n, fill = source)) +
-  geom_bar(stat="identity")+
-  labs(x = "", y = "Count", fill = "Primary source of evidence") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 2))
-ggsave("sources_count_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_source_year, aes(x = publication_year, y = prop_primary, fill = source)) +
-  geom_bar(stat="identity")+
-  geom_text(data = totals_by_year %>% filter(publication_year %in% unique(primary_source_year$publication_year)),
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion by year", fill = "Primary source of evidence") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("sources_proportion_by_year.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(primary_source_count |> mutate(source = str_wrap(source, width = 25)),
-       aes(x = reorder(source, n), y = n)) +
-  geom_bar(stat="identity", fill = source_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Primary source of evidence", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("sources_aggregate.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-### Source of evidence, primary/secondary distinction removed
-
-Same change and same caveat as the topic and method versions above: a
-paper counts toward every source of evidence it carries a value for, not
-just its primary one.
-
-```{r}
-#| label: sources-merged-time
-#| fig-width: 10
-#| fig-height: 6
-merged_source_year <- source_count %>%
-  filter(!is.na(count)) %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  count(source, publication_year) %>%
-  group_by(publication_year) %>%
-  mutate(prop_merged = n / sum(n)) %>%
-  ungroup() %>%
-  mutate(publication_year = droplevels(publication_year))
-
-merged_source_count <- source_count %>%
-  filter(!is.na(count)) %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  count(source) %>%
-  mutate(pct = n / sum(n))
-
-ggplot(merged_source_year, aes(x = publication_year, y = n, fill = source)) +
-  geom_bar(stat="identity")+
-  labs(x = "", y = "Count", fill = "Source of evidence") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 2))
-ggsave("sources_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_source_year, aes(x = publication_year, y = prop_merged, fill = source)) +
-  geom_bar(stat="identity")+
-  geom_text(data = totals_by_year %>% filter(publication_year %in% unique(merged_source_year$publication_year)),
-            aes(x = publication_year, y = 1.05, label = total),
-            inherit.aes = FALSE, size = 3) +
-  labs(x = "", y = "Proportion of source assignments by year", fill = "Source of evidence") +
-  scale_fill_manual(values = custom_palette) +
-  scale_x_discrete(guide = guide_axis(angle = 45)) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 4))
-ggsave("sources_proportion_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-
-ggplot(merged_source_count |> mutate(source = str_wrap(source, width = 25)),
-       aes(x = reorder(source, n), y = n)) +
-  geom_bar(stat="identity", fill = source_col) +
-  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
-            hjust = -0.2, size = 3) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-  labs(x = "Source of evidence", y = "Count") +
-  theme_bw() +
-  coord_flip() +
-  force_panelsizes(cols = unit(10, "cm"))
-ggsave("sources_aggregate_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
-```
-
-## Topic co-occurrence
-
-### Secondary topics by primary topic
-
-```{r}
-#| label: topics-secondary
+#| label: topics-cooccurrence-directional
 #| fig-width: 30
 #| fig-height: 20
 topics <- df %>%
@@ -963,25 +597,11 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of secondary topic by primary topic")
+  labs(x = "", y = "", title = "Directional: secondary topic given primary topic")
 ```
 
-### Topic co-occurrence, primary/secondary distinction removed
-
-The version above is directional: it reads as "given that paper X has
-topic A marked primary, what proportion of the time is topic B marked
-secondary on the same paper." That direction is only meaningful if the
-primary/secondary distinction itself is trusted as coded. The version
-below drops that distinction entirely and instead asks a simpler, symmetric
-question: across all papers, which topics tend to appear together at all,
-regardless of which one a coder ranked first. A topic is counted as
-present on a paper if it carries either value (`Primary` or `Secondary`);
-the resulting matrix is undirected, so the row/column pairing above
-(`Secondary`/`Primary`) is relabelled here as `Topic.A`/`Topic.B` to avoid
-implying an order that no longer exists.
-
 ```{r}
-#| label: topics-merged
+#| label: topics-cooccurrence-undirected
 #| fig-width: 30
 #| fig-height: 20
 coocurrences_merged <- c()
@@ -1008,15 +628,237 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Topic.A, Prop, Topic.B), y =
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of co-occurring topic, primary/secondary merged")
+  labs(x = "", y = "", title = "Undirected: co-occurring topics")
 ```
 
-## Method co-occurrence
+## Method
 
-### Secondary methods by primary method
+Same Unmerged/Merged logic as the Topic section above.
 
 ```{r}
-#| label: methods-secondary
+#| label: methods-setup
+method_count <- df %>%
+  select(publication_year, contains("Methods")) %>%
+  pivot_longer(!publication_year,
+               names_to = "method",
+               values_to = "count")
+```
+
+### Totals
+
+```{r}
+#| label: methods-totals
+#| fig-width: 10
+#| fig-height: 6
+unmerged_count_method <- method_count %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method, count) %>%
+  group_by(method) %>%
+  mutate(pct = n / sum(n)) %>%
+  ungroup()
+
+merged_count_method <- method_count %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method) %>%
+  mutate(pct = n / sum(n))
+
+plt_unmerged <-
+ggplot(unmerged_count_method |> mutate(method = str_wrap(method, width = 25)),
+       aes(x = reorder(method, n, sum), y = n, fill = count)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            position = position_stack(vjust = 0.5), size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c(Primary = method_col, Secondary = "#8eaa9c")) +
+  labs(x = "Method", y = "Count", fill = "", title = "Unmerged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_merged <-
+ggplot(merged_count_method |> mutate(method = str_wrap(method, width = 25)),
+       aes(x = reorder(method, n), y = n)) +
+  geom_bar(stat="identity", fill = method_col) +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            hjust = -0.2, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  labs(x = "", y = "Count", title = "Merged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_unmerged + plt_merged
+ggsave("methods_aggregate.png", plot = plt_unmerged, width = 10, height = 6, dpi = 300)
+ggsave("methods_aggregate_merged.png", plot = plt_merged, width = 10, height = 6, dpi = 300)
+```
+
+### Over time
+
+```{r}
+#| label: methods-over-time
+#| fig-width: 12
+#| fig-height: 7
+unmerged_method_year <- method_count %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method, publication_year, count) %>%
+  group_by(publication_year, count) %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup()
+
+merged_method_year <- method_count %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method, publication_year) %>%
+  group_by(publication_year) %>%
+  mutate(prop_merged = n / sum(n))
+
+ggplot(unmerged_method_year, aes(x = publication_year, y = n, fill = method)) +
+  geom_bar(stat="identity") +
+  facet_wrap(vars(count), ncol = 1) +
+  labs(x = "", y = "Count", fill = "Method", title = "Unmerged — counts by year") +
+  scale_fill_manual(values = custom_palette2) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("methods_count_by_year.png", plot = last_plot(), width = 12, height = 8, dpi = 300)
+
+ggplot(merged_method_year, aes(x = publication_year, y = n, fill = method)) +
+  geom_bar(stat="identity") +
+  labs(x = "", y = "Count", fill = "Method", title = "Merged — counts by year") +
+  scale_fill_manual(values = custom_palette2) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 4))
+ggsave("methods_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By first-author gender
+
+```{r}
+#| label: method-by-gender
+#| fig-width: 12
+#| fig-height: 8
+method_count_gender <- df %>%
+  select(Authors..Genders..Author.1., contains("Methods")) %>%
+  pivot_longer(!Authors..Genders..Author.1.,
+               names_to = "method",
+               values_to = "count") %>%
+  rename(gender_first_author = Authors..Genders..Author.1.)
+
+unmerged_method_gender <- method_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method, gender_first_author, count) %>%
+  group_by(method, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup()
+
+unmerged_method_gender |>
+  group_by(method, count) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(method = fct_relabel(factor(method), ~str_wrap(., width = 25)),
+         method_label = paste0(method, " (n=", total, ")"),
+         method_label = fct_reorder(method_label, ratio)) |>
+  ggplot(aes(x = method_label, y = prop, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Unmerged")
+ggsave("method_by_gender.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
+
+merged_method_gender <- method_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
+  count(method, gender_first_author) %>%
+  group_by(method) %>%
+  mutate(prop_merged = n / sum(n))
+
+merged_method_gender |>
+  group_by(method) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
+         total = sum(n)) |>
+  ungroup() |>
+  mutate(method = fct_reorder(method, ratio),
+         method = fct_relabel(method, ~str_wrap(., width = 25)),
+         method_label = paste0(method, " (n=", total, ")"),
+         method_label = fct_reorder(method_label, ratio)) |>
+  ggplot(aes(x = method_label, y = prop_merged, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Merged")
+ggsave("method_by_gender_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By full-author-list gender composition
+
+```{r}
+#| label: composition-by-method
+#| fig-width: 12
+composition_method <- composition_candidates %>%
+  select(cite_key, composition_strict) %>%
+  left_join(
+    df %>% select(cite_key, contains("Methods")) %>%
+      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+      filter(!is.na(count)) %>%
+      mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
+    by = "cite_key"
+  ) %>%
+  filter(!is.na(method), !is.na(composition_strict))
+
+composition_method %>%
+  count(method, composition_strict, count) %>%
+  group_by(method, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup() %>%
+  mutate(method = fct_relabel(factor(method), ~str_wrap(., width = 25)),
+         method_label = paste0(method, " (n=", total, ")")) %>%
+  ggplot(aes(x = method_label, y = prop, fill = composition_strict)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Unmerged")
+ggsave("composition_by_method.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
+
+composition_method %>%
+  count(method, composition_strict) %>%
+  group_by(method) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup() %>%
+  mutate(method = fct_relabel(method, ~str_wrap(., width = 25)),
+         method_label = paste0(method, " (n=", total, ")")) %>%
+  ggplot(aes(x = method_label, y = prop, fill = composition_strict)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Merged")
+ggsave("composition_by_method_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### Co-occurrence
+
+```{r}
+#| label: methods-cooccurrence-directional
 #| fig-width: 20
 #| fig-height: 20
 methods <- df %>%
@@ -1048,17 +890,11 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of secondary method by primary method")
+  labs(x = "", y = "", title = "Directional: secondary method given primary method")
 ```
 
-### Method co-occurrence, primary/secondary distinction removed
-
-Same logic as the topic version above: a method counts as present on a
-paper regardless of whether it was coded primary or secondary, and the
-resulting matrix is undirected.
-
 ```{r}
-#| label: methods-merged
+#| label: methods-cooccurrence-undirected
 #| fig-width: 20
 #| fig-height: 20
 coocurrences_merged <- c()
@@ -1085,15 +921,246 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Method.A, Prop, Method.B), y
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of co-occurring method, primary/secondary merged")
+  labs(x = "", y = "", title = "Undirected: co-occurring methods")
 ```
 
-## Source-of-evidence co-occurrence
+## Source of evidence
 
-### Secondary sources of evidence by primary source of evidence
+Same Unmerged/Merged logic as above.
 
 ```{r}
-#| label: sources-secondary
+#| label: sources-setup
+totals_by_year <- df %>%
+  count(publication_year) %>%
+  rename(total = n) %>%
+  mutate(publication_year = factor(publication_year, levels = sort(unique(as.numeric(as.character(publication_year))))))
+
+source_count <- df %>%
+  select(publication_year, contains("Sources.of.Evidence")) %>%
+  mutate(publication_year = factor(publication_year, levels = levels(totals_by_year$publication_year))) %>%
+  pivot_longer(!publication_year,
+               names_to = "source",
+               values_to = "count")
+```
+
+### Totals
+
+```{r}
+#| label: sources-totals
+#| fig-width: 10
+#| fig-height: 6
+unmerged_count_source <- source_count %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source, count) %>%
+  group_by(source) %>%
+  mutate(pct = n / sum(n)) %>%
+  ungroup()
+
+merged_source_count <- source_count %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source) %>%
+  mutate(pct = n / sum(n))
+
+plt_unmerged <-
+ggplot(unmerged_count_source |> mutate(source = str_wrap(source, width = 25)),
+       aes(x = reorder(source, n, sum), y = n, fill = count)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            position = position_stack(vjust = 0.5), size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c(Primary = source_col, Secondary = "#d89898")) +
+  labs(x = "Source of evidence", y = "Count", fill = "", title = "Unmerged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_merged <-
+ggplot(merged_source_count |> mutate(source = str_wrap(source, width = 25)),
+       aes(x = reorder(source, n), y = n)) +
+  geom_bar(stat="identity", fill = source_col) +
+  geom_text(aes(label = scales::percent(pct, accuracy = 1)),
+            hjust = -0.2, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  labs(x = "", y = "Count", title = "Merged") +
+  theme_bw() +
+  coord_flip() +
+  force_panelsizes(cols = unit(9, "cm"))
+
+plt_unmerged + plt_merged
+ggsave("sources_aggregate.png", plot = plt_unmerged, width = 10, height = 6, dpi = 300)
+ggsave("sources_aggregate_merged.png", plot = plt_merged, width = 10, height = 6, dpi = 300)
+```
+
+### Over time
+
+```{r}
+#| label: sources-over-time
+#| fig-width: 12
+#| fig-height: 6
+unmerged_source_year <- source_count %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source, publication_year, count) %>%
+  group_by(publication_year, count) %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup() %>%
+  mutate(publication_year = droplevels(publication_year))
+
+merged_source_year <- source_count %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source, publication_year) %>%
+  group_by(publication_year) %>%
+  mutate(prop_merged = n / sum(n)) %>%
+  ungroup() %>%
+  mutate(publication_year = droplevels(publication_year))
+
+ggplot(unmerged_source_year, aes(x = publication_year, y = n, fill = source)) +
+  geom_bar(stat="identity") +
+  facet_wrap(vars(count), ncol = 1) +
+  labs(x = "", y = "Count", fill = "Source of evidence", title = "Unmerged — counts by year") +
+  scale_fill_manual(values = custom_palette) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 3))
+ggsave("sources_count_by_year.png", plot = last_plot(), width = 12, height = 8, dpi = 300)
+
+ggplot(merged_source_year, aes(x = publication_year, y = n, fill = source)) +
+  geom_bar(stat="identity") +
+  labs(x = "", y = "Count", fill = "Source of evidence", title = "Merged — counts by year") +
+  scale_fill_manual(values = custom_palette) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
+ggsave("sources_count_by_year_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By first-author gender
+
+```{r}
+#| label: source-by-gender
+#| fig-width: 12
+#| fig-height: 8
+source_count_gender <- df %>%
+  select(Authors..Genders..Author.1., contains("Sources")) %>%
+  pivot_longer(!Authors..Genders..Author.1.,
+               names_to = "source",
+               values_to = "count") %>%
+  rename(gender_first_author = Authors..Genders..Author.1.)
+
+unmerged_source_gender <- source_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source, gender_first_author, count) %>%
+  group_by(source, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup()
+
+unmerged_source_gender |>
+  group_by(source, count) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n)) |>
+  ungroup() |>
+  mutate(source = fct_relabel(factor(source), ~str_wrap(., width = 25)),
+         source_label = paste0(source, " (n=", total, ")"),
+         source_label = fct_reorder(source_label, ratio)) |>
+  ggplot(aes(x = source_label, y = prop, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Unmerged")
+ggsave("source_by_gender.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
+
+merged_source_gender <- source_count_gender %>%
+  filter(!is.na(count)) %>%
+  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
+  count(source, gender_first_author) %>%
+  group_by(source) %>%
+  mutate(prop_merged = n / sum(n))
+
+merged_source_gender |>
+  group_by(source) |>
+  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
+         total = sum(n)) |>
+  ungroup() |>
+  mutate(source = fct_reorder(source, ratio),
+         source = fct_relabel(source, ~str_wrap(., width = 25)),
+         source_label = paste0(source, " (n=", total, ")"),
+         source_label = fct_reorder(source_label, ratio)) |>
+  ggplot(aes(x = source_label, y = prop_merged, fill = gender_first_author)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = gender_colors) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = NULL, title = "Merged")
+ggsave("source_by_gender_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### By full-author-list gender composition
+
+```{r}
+#| label: composition-by-source
+#| fig-width: 12
+composition_source <- composition_candidates %>%
+  select(cite_key, composition_strict) %>%
+  left_join(
+    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
+      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+      filter(!is.na(count)) %>%
+      mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
+    by = "cite_key"
+  ) %>%
+  filter(!is.na(source), !is.na(composition_strict))
+
+composition_source %>%
+  count(source, composition_strict, count) %>%
+  group_by(source, count) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup() %>%
+  mutate(source = fct_relabel(factor(source), ~str_wrap(., width = 25)),
+         source_label = paste0(source, " (n=", total, ")")) %>%
+  ggplot(aes(x = source_label, y = prop, fill = composition_strict)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  facet_wrap(vars(count)) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(8, "cm")) +
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Unmerged")
+ggsave("composition_by_source.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
+
+composition_source %>%
+  count(source, composition_strict) %>%
+  group_by(source) %>%
+  mutate(prop = n / sum(n), total = sum(n)) %>%
+  ungroup() %>%
+  mutate(source = fct_relabel(source, ~str_wrap(., width = 25)),
+         source_label = paste0(source, " (n=", total, ")")) %>%
+  ggplot(aes(x = source_label, y = prop, fill = composition_strict)) +
+  geom_col(position = "fill", linewidth = 0, width = 1) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_bw() +
+  force_panelsizes(cols = unit(10, "cm")) +
+  labs(x = "", y = "Proportion", fill = "Gender composition", title = "Merged")
+ggsave("composition_by_source_merged.png", plot = last_plot(), width = 10, height = 6, dpi = 300)
+```
+
+### Co-occurrence
+
+```{r}
+#| label: sources-cooccurrence-directional
 #| fig-width: 20
 #| fig-height: 20
 sources <- df %>%
@@ -1125,17 +1192,11 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of secondary source of evidence by primary source of evidence")
+  labs(x = "", y = "", title = "Directional: secondary source given primary source")
 ```
 
-### Source-of-evidence co-occurrence, primary/secondary distinction removed
-
-Same logic as the topic and method versions above: a source of evidence
-counts as present on a paper regardless of whether it was coded primary or
-secondary, and the resulting matrix is undirected.
-
 ```{r}
-#| label: sources-merged
+#| label: sources-cooccurrence-undirected
 #| fig-width: 20
 #| fig-height: 20
 coocurrences_merged <- c()
@@ -1162,246 +1223,7 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Source.A, Prop, Source.B), y
   theme(axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
         strip.text = element_text(size = 14)) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(x = "", y = "", title = "Proportion of co-occurring source of evidence, primary/secondary merged")
-```
-
-## Topic by first author gender
-
-This is the first of the three plots most directly relevant to the seed
-paper's tripartite (gender/topic/method) supposition. Normalizing each
-topic's proportions against the corpus-wide gender base rate has been
-discussed as a follow-up refinement but not yet implemented — the raw
-proportions below do not yet control for the overall gender imbalance in
-the corpus.
-
-### Primary topic
-
-```{r}
-#| label: topic-by-gender
-#| fig-width: 8
-topic_count_gender <- df %>%
-  select(Authors..Genders..Author.1., contains("Topics")) %>%
-  pivot_longer(!Authors..Genders..Author.1.,
-               names_to = "topic",
-               values_to = "count") %>%
-  rename(gender_first_author = Authors..Genders..Author.1.)
-
-primary_topic_gender <- topic_count_gender %>%
-  group_by(topic, gender_first_author) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  group_by(topic) %>%
-  mutate(prop_primary = n / sum(n))
-
-primary_topic_gender |>
-  group_by(topic) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(topic = fct_reorder(topic, ratio),
-         topic = fct_relabel(topic, ~str_wrap(., width = 25)),
-         topic_label = paste0(topic, " (n=", total, ")"),
-         topic_label = fct_reorder(topic_label, ratio)) |>
-  ggplot(aes(x = topic_label, y = prop_primary, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Primary topic by first author gender")
-```
-
-### Topic, primary/secondary distinction removed
-
-A paper contributes to a topic's bar here if it carries either value, so
-`n` per topic is a count of topic-assignments (which can exceed the number
-of papers with that first-author gender), not a count of papers.
-
-```{r}
-#| label: topic-by-gender-merged
-#| fig-width: 8
-merged_topic_gender <- topic_count_gender %>%
-  filter(!is.na(count)) %>%
-  mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")) %>%
-  count(topic, gender_first_author) %>%
-  group_by(topic) %>%
-  mutate(prop_merged = n / sum(n))
-
-merged_topic_gender |>
-  group_by(topic) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(topic = fct_reorder(topic, ratio),
-         topic = fct_relabel(topic, ~str_wrap(., width = 25)),
-         topic_label = paste0(topic, " (n=", total, ")"),
-         topic_label = fct_reorder(topic_label, ratio)) |>
-  ggplot(aes(x = topic_label, y = prop_merged, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Topic by first author gender, primary/secondary merged")
-```
-
-## Method by first author gender
-
-### Primary method
-
-```{r}
-#| label: method-by-gender
-#| fig-width: 8
-method_count_gender <- df %>%
-  select(Authors..Genders..Author.1., contains("Methods")) %>%
-  pivot_longer(!Authors..Genders..Author.1.,
-               names_to = "method",
-               values_to = "count") %>%
-  rename(gender_first_author = Authors..Genders..Author.1.)
-
-primary_method_gender <- method_count_gender %>%
-  group_by(method, gender_first_author) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  group_by(method) %>%
-  mutate(prop_primary = n / sum(n))
-
-primary_method_gender |>
-  group_by(method) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(method = fct_reorder(method, ratio),
-         method = fct_relabel(method, ~str_wrap(., width = 25)),
-         method_label = paste0(method, " (n=", total, ")"),
-         method_label = fct_reorder(method_label, ratio)) |>
-  ggplot(aes(x = method_label, y = prop_primary, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Primary method by first author gender")
-```
-
-### Method, primary/secondary distinction removed
-
-```{r}
-#| label: method-by-gender-merged
-#| fig-width: 8
-merged_method_gender <- method_count_gender %>%
-  filter(!is.na(count)) %>%
-  mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")) %>%
-  count(method, gender_first_author) %>%
-  group_by(method) %>%
-  mutate(prop_merged = n / sum(n))
-
-merged_method_gender |>
-  group_by(method) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(method = fct_reorder(method, ratio),
-         method = fct_relabel(method, ~str_wrap(., width = 25)),
-         method_label = paste0(method, " (n=", total, ")"),
-         method_label = fct_reorder(method_label, ratio)) |>
-  ggplot(aes(x = method_label, y = prop_merged, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Method by first author gender, primary/secondary merged")
-```
-
-## Source of evidence by first author gender
-
-### Primary source of evidence
-
-```{r}
-#| label: source-by-gender
-#| fig-width: 8
-source_count_gender <- df %>%
-  select(Authors..Genders..Author.1., contains("Sources")) %>%
-  pivot_longer(!Authors..Genders..Author.1.,
-               names_to = "source",
-               values_to = "count") %>%
-  rename(gender_first_author = Authors..Genders..Author.1.)
-
-primary_source_gender <- source_count_gender %>%
-  group_by(source, gender_first_author) %>%
-  count(count) %>%
-  filter(count == "Primary") %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  group_by(source) %>%
-  mutate(prop_primary = n / sum(n))
-
-primary_source_gender |>
-  group_by(source) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(source = fct_reorder(source, ratio),
-         source = fct_relabel(source, ~str_wrap(., width = 25)),
-         source_label = paste0(source, " (n=", total, ")"),
-         source_label = fct_reorder(source_label, ratio)) |>
-  ggplot(aes(x = source_label, y = prop_primary, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Primary source of evidence by first author gender")
-```
-
-### Source of evidence, primary/secondary distinction removed
-
-```{r}
-#| label: source-by-gender-merged
-#| fig-width: 8
-merged_source_gender <- source_count_gender %>%
-  filter(!is.na(count)) %>%
-  mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")) %>%
-  count(source, gender_first_author) %>%
-  group_by(source) %>%
-  mutate(prop_merged = n / sum(n))
-
-merged_source_gender |>
-  group_by(source) |>
-  mutate(ratio = n[gender_first_author == "Woman"] / sum(n),
-         total = sum(n)) |>
-  ungroup() |>
-  mutate(source = fct_reorder(source, ratio),
-         source = fct_relabel(source, ~str_wrap(., width = 25)),
-         source_label = paste0(source, " (n=", total, ")"),
-         source_label = fct_reorder(source_label, ratio)) |>
-  ggplot(aes(x = source_label, y = prop_merged, fill = gender_first_author)) +
-  geom_col(position = "fill", linewidth = 0, width = 1) +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75), alpha = 0.5) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = gender_colors) +
-  coord_flip() +
-  theme_bw() +
-  force_panelsizes(cols = unit(10, "cm")) +
-  labs(x = "", y = "Proportion", fill = NULL,
-       title = "Source of evidence by first author gender, primary/secondary merged")
+  labs(x = "", y = "", title = "Undirected: co-occurring sources of evidence")
 ```
 
 ## Region
@@ -1429,5 +1251,3 @@ ggplot(region_counts, aes(label = Region, size = n_scaled, color = n)) +
   scale_color_gradient(low = topic_col, high = "darkred") +
   theme_minimal()
 ```
-
----
