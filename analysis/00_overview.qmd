@@ -1,0 +1,98 @@
+---
+title: "BibVik — Part 0a: Corpus overview"
+format:
+  html:
+    toc: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+  eval: true
+---
+
+```{css, echo = FALSE}
+p {
+text-align: justify !important;
+}
+```
+
+# Part 0a — Corpus overview
+
+Placeholder outline, not a finished section. Corpus size, date range,
+and the publications-per-year chart, moved out of `01_annotation.qmd`.
+
+Motivating question and methodological stance: see `00_plan.qmd`,
+pending its own revision.
+
+```{r}
+#| label: overview-load
+library(tidyverse)
+library(here)
+
+df <- read.csv(here("data/annotations.csv"), na.strings = "")
+
+df <- df %>%
+  mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
+
+df$publication_year <- factor(df$publication_year,
+                              levels = as.character(seq(min(df$publication_year,
+                                       na.rm = TRUE),
+                                       max(df$publication_year, na.rm = TRUE), 1)))
+```
+
+## Corpus size and date range
+
+```{r}
+#| label: overview-basic-facts
+n_papers <- n_distinct(df$cite_key)
+year_range <- range(as.numeric(as.character(df$publication_year)), na.rm = TRUE)
+cat("Papers:", n_papers, "\n")
+cat("Date range:", year_range[1], "-", year_range[2], "\n")
+```
+
+## From seed paper to corpus
+
+The F1 corpus is built from the bibliography of the seed paper (Lund &
+Sindbæk 2022) — its cited references, treated as a first generation of
+descendant works. The seed paper's own reference list runs to over 500
+works; the F1 corpus analyzed here holds 372.
+
+Full books and edited volumes with consolidated bibliographies were
+excluded. A book's reference list is not comparable in scale or
+character to a journal article's, and including it as a single node
+alongside articles would distort network measures — centrality in
+particular — that depend on reference-list size.
+
+**Not yet done** — a precise, confirmed account of the full
+inclusion/exclusion criteria applied to reach 372 from the 500+
+starting point.
+
+## Publications per year
+
+```{r}
+#| label: overview-pubyears
+#| fig-cap: "Papers published per year across the F1 corpus."
+pubyears <- df %>%
+  count(publication_year) %>%
+  mutate(proportion_year = n / sum(n))
+
+ggplot(data = pubyears, aes(x = publication_year, y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  theme_bw() +
+  scale_x_discrete(breaks = seq(2000, 2022, 1), drop = FALSE) +
+  labs(x = "", y = "Count", title = "Publications by year")
+```
+
+## Not yet done
+
+- Placeholder outline only — holds what moved out of `01_annotation.qmd`
+  (corpus size, date range, publications-per-year chart) plus a first
+  pass at the seed-paper-to-corpus filtering explanation.
+- No restatement of the "camps" question or no-baseline stance here;
+  both live in `00_plan.qmd` only. Revisit once that file is rewritten.
+- No corpus-level gender, topic, method, or source summary — those
+  currently start inside `01_annotation.qmd`'s own sections.
+- No region/geographic preview — currently only a word cloud at the end
+  of `01_annotation.qmd`.
+- No pointers forward to `01_annotation.qmd`, `02_network_structure.qmd`,
+  or `03_joined_descriptions.qmd`.
