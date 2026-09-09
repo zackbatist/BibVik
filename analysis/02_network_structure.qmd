@@ -726,7 +726,26 @@ only whatever's written to a file and fetched.
 gn_export_dir <- here("analysis", "gn_analysis", "results", "interactive")
 dir.create(gn_export_dir, showWarnings = FALSE, recursive = TRUE)
 
+# Debug guard: fail loudly and early with the actual column list if
+# node_table is ever missing an expected centrality column, instead of
+# letting a downstream select() throw a generic "doesn't exist" error
+# that gives no clue why.
+required_cols <- c("name", "title", "year", "pagerank", "betweenness", "in_degree", "out_degree")
+missing_cols <- setdiff(required_cols, colnames(node_table))
+if (length(missing_cols) > 0) {
+  stop("node_table is missing expected column(s): ", paste(missing_cols, collapse = ", "),
+       ". node_table currently has: ", paste(colnames(node_table), collapse = ", "))
+}
+
 layout_coords <- create_layout(tg, layout = "drl")
+
+# node_table is a plain tibble; tg is an active tbl_graph in this same
+# chunk's scope. dplyr::select() must be qualified here — otherwise
+# it can resolve against tg's node context instead of node_table,
+# which is what produced "column pagerank doesn't exist" on first run
+# (node_table has that column; the active tbl_graph subset didn't).
+node_table_export_cols <- node_table |>
+  dplyr::select(name, title, year, pagerank, betweenness, in_degree, out_degree)
 
 interactive_nodes <- tg |>
   activate(nodes) |>
@@ -737,12 +756,9 @@ interactive_nodes <- tg |>
     community = community_gn_highlight,
     is_f1 = is_f1
   ) |>
-  left_join(
-    node_table |> select(name, title, year, pagerank, betweenness, in_degree, out_degree),
-    by = "name"
-  ) |>
-  select(name, title, year, community, is_f1, pagerank, betweenness,
-         in_degree, out_degree, x, y)
+  dplyr::left_join(node_table_export_cols, by = "name") |>
+  dplyr::select(name, title, year, community, is_f1, pagerank, betweenness,
+                in_degree, out_degree, x, y)
 
 # Edges kept sparse deliberately: at ~24,600 edges, drawing all of them
 # in the browser is both unreadable (same reason the static plot uses
@@ -752,12 +768,12 @@ interactive_nodes <- tg |>
 # dropped from this export only (the full edge list stays in
 # data/citation_edgelist.csv for any analysis that needs it).
 plotted_names <- interactive_nodes |>
-  filter(community != "other" | is_f1) |>
-  pull(name)
+  dplyr::filter(community != "other" | is_f1) |>
+  dplyr::pull(name)
 
 interactive_edges <- edges |>
-  filter(source %in% plotted_names, target %in% plotted_names) |>
-  select(source, target)
+  dplyr::filter(source %in% plotted_names, target %in% plotted_names) |>
+  dplyr::select(source, target)
 
 jsonlite::write_json(
   list(nodes = interactive_nodes, edges = interactive_edges,
