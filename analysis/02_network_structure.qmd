@@ -646,33 +646,245 @@ top_gn_communities <- node_table |>
   slice_head(n = gn_top_n) |>
   pull(community_gn)
 
+# Community fill uses a discrete HCL wheel, one hue per top community plus
+# grey for everything else — legible up to ~20 communities (see the note
+# above the previous version of this plot on why a continuous viridis
+# scale over community ID doesn't work here). F1/F2 is shown as a
+# separate visual channel (point border) rather than folded into this
+# same color scale, since F1/F2 cuts across community membership rather
+# than nesting inside it — conflating the two into one legend would
+# misrepresent that relationship.
+gn_community_colours <- c(
+  "other" = "grey85",
+  setNames(
+    grDevices::hcl(h = seq(15, 375, length.out = gn_top_n + 1)[-(gn_top_n + 1)],
+                    c = 100, l = 65),
+    top_gn_communities
+  )
+)
+
 tg <- as_tbl_graph(g) |>
   activate(nodes) |>
-  left_join(node_table |> select(name, community_gn), by = "name") |>
+  left_join(node_table |> select(name, community_gn, generation), by = "name") |>
   mutate(
     community_gn_highlight = if_else(community_gn %in% top_gn_communities,
                                       as.character(community_gn), "other"),
-    community_gn_highlight = fct_relevel(community_gn_highlight, "other")
+    community_gn_highlight = fct_relevel(community_gn_highlight, "other"),
+    community_label = if_else(community_gn_highlight == "other", "Other",
+                               paste("Community", community_gn_highlight)),
+    community_label = fct_reorder(community_label, community_gn_highlight == "other"),
+    is_f1 = generation == "F1"
   )
 
 ggraph(tg, layout = "drl") +
   geom_edge_link(alpha = 0.05, colour = "grey60") +
-  geom_node_point(aes(colour = community_gn_highlight),
-                   size = 0.3, alpha = 0.7) +
-  scale_colour_manual(
-    values = c("other" = "grey85", setNames(grDevices::hcl(h = seq(15, 375, length.out = gn_top_n + 1)[-(gn_top_n + 1)],
-                                                            c = 100, l = 65), top_gn_communities)),
-    guide = "none"
+  # Base points, colored by community, carry the fill legend.
+  geom_node_point(aes(colour = community_label), size = 0.3, alpha = 0.7) +
+  # F1 nodes get a thin black outline on top, on their own legend via a
+  # dummy shape aesthetic — the size difference alone isn't legible at
+  # this point scale, so the outline is the signal.
+  geom_node_point(
+    data = ~ filter(.x, is_f1),
+    aes(shape = "F1 seed paper"), size = 0.9, stroke = 0.3,
+    colour = "black", fill = NA
   ) +
+  scale_colour_manual(
+    values = setNames(gn_community_colours, c("Other", paste("Community", top_gn_communities))),
+    name = "Girvan-Newman community",
+    guide = guide_legend(override.aes = list(size = 3, alpha = 1), ncol = 2)
+  ) +
+  scale_shape_manual(values = c("F1 seed paper" = 21), name = NULL) +
   theme_graph() +
+  theme(legend.position = "right", legend.text = element_text(size = 7)) +
   labs(title = paste0("Citation graph — Girvan-Newman communities (fragmentation-onset cut, round ",
                        format(gn_earliest$round, big.mark = ","), ")"),
        subtitle = paste0(gn_top_n, " largest communities highlighted; remaining ",
-                          format(gn_earliest$n_communities - gn_top_n, big.mark = ","), " shown in grey"))
+                          format(gn_earliest$n_communities - gn_top_n, big.mark = ","),
+                          " shown in grey; F1 seed papers outlined"))
 
-ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
+ggsave("bibvik_gn.png", width = 18, height = 16, dpi = 300)
+ggsave("bibvik_gn.pdf", width = 18, height = 16, device = cairo_pdf)
 ```
+
+### Interactive view
+
+The static plot above is fixed at render time: one color scheme, one
+set of communities highlighted, no way to inspect a single node. The
+interactive version below uses the same DRL layout coordinates (so
+node positions match the static plot) but lets you hover a node for
+its title/year/degree, and toggle community highlighting, the F1
+outline, and which centrality metric drives point size, without a
+re-render.
+
+It reads a JSON export rather than passing the graph object directly
+into ojs, since ojs cells run in the browser and can't see R objects —
+only whatever's written to a file and fetched.
+
+```{r}
+#| label: gn-interactive-export
+#| eval: !expr gn_has_communities
+gn_export_dir <- here("analysis", "gn_analysis", "results", "interactive")
+dir.create(gn_export_dir, showWarnings = FALSE, recursive = TRUE)
+
+layout_coords <- create_layout(tg, layout = "drl")
+
+interactive_nodes <- tg |>
+  activate(nodes) |>
+  as_tibble() |>
+  mutate(
+    x = layout_coords$x,
+    y = layout_coords$y,
+    community = community_gn_highlight,
+    is_f1 = is_f1
+  ) |>
+  left_join(
+    node_table |> select(name, title, year, pagerank, betweenness, in_degree, out_degree),
+    by = "name"
+  ) |>
+  select(name, title, year, community, is_f1, pagerank, betweenness,
+         in_degree, out_degree, x, y)
+
+# Edges kept sparse deliberately: at ~24,600 edges, drawing all of them
+# in the browser is both unreadable (same reason the static plot uses
+# alpha = 0.05) and slow to render as SVG/canvas paths client-side.
+# Edges between two of the plotted top-N-community or F1 nodes are the
+# ones a reader would actually want to trace; everything else is
+# dropped from this export only (the full edge list stays in
+# data/citation_edgelist.csv for any analysis that needs it).
+plotted_names <- interactive_nodes |>
+  filter(community != "other" | is_f1) |>
+  pull(name)
+
+interactive_edges <- edges |>
+  filter(source %in% plotted_names, target %in% plotted_names) |>
+  select(source, target)
+
+jsonlite::write_json(
+  list(nodes = interactive_nodes, edges = interactive_edges,
+       top_communities = as.character(top_gn_communities)),
+  file.path(gn_export_dir, "gn_interactive.json"),
+  auto_unbox = TRUE, na = "null"
+)
+cat("Wrote", nrow(interactive_nodes), "nodes and", nrow(interactive_edges),
+    "edges to", file.path(gn_export_dir, "gn_interactive.json"), "\n")
+```
+
+```{ojs}
+//| label: gn-interactive-load
+gn_data = FileAttachment("gn_analysis/results/interactive/gn_interactive.json").json()
+```
+
+```{ojs}
+//| label: gn-interactive-controls
+viewof gn_highlight_mode = Inputs.radio(
+  ["Community", "F1 seed papers", "None"],
+  {value: "Community", label: "Highlight by"}
+)
+
+viewof gn_size_metric = Inputs.select(
+  ["pagerank", "betweenness", "in_degree", "out_degree"],
+  {value: "pagerank", label: "Point size driven by"}
+)
+
+viewof gn_show_f1_outline = Inputs.toggle(
+  {label: "Outline F1 seed papers", value: true}
+)
+```
+
+```{ojs}
+//| label: gn-interactive-plot
+gn_plot = {
+  const nodes = gn_data.nodes;
+  const edges = gn_data.edges;
+  const width = 900, height = 800, margin = 20;
+
+  const xExtent = d3.extent(nodes, d => d.x);
+  const yExtent = d3.extent(nodes, d => d.y);
+  const xScale = d3.scaleLinear().domain(xExtent).range([margin, width - margin]);
+  const yScale = d3.scaleLinear().domain(yExtent).range([margin, height - margin]);
+
+  const sizeExtent = d3.extent(nodes, d => +d[gn_size_metric] || 0);
+  const sizeScale = d3.scaleSqrt().domain(sizeExtent).range([1.5, 9]);
+
+  const colourScale = d3.scaleOrdinal(d3.schemeTableau10)
+    .domain(gn_data.top_communities);
+
+  function fillFor(d) {
+    if (gn_highlight_mode === "Community") {
+      return d.community === "other" ? "#ccc" : colourScale(d.community);
+    }
+    if (gn_highlight_mode === "F1 seed papers") {
+      return d.is_f1 ? "#d62728" : "#ccc";
+    }
+    return "#888";
+  }
+
+  const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .style("font-family", "sans-serif");
+
+  svg.append("g")
+    .selectAll("line")
+    .data(edges)
+    .join("line")
+    .attr("x1", d => xScale(nodes.find(n => n.name === d.source)?.x ?? 0))
+    .attr("y1", d => yScale(nodes.find(n => n.name === d.source)?.y ?? 0))
+    .attr("x2", d => xScale(nodes.find(n => n.name === d.target)?.x ?? 0))
+    .attr("y2", d => yScale(nodes.find(n => n.name === d.target)?.y ?? 0))
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.15);
+
+  const tooltip = d3.select(DOM.element("div"))
+    .style("position", "absolute")
+    .style("pointer-events", "none")
+    .style("background", "white")
+    .style("border", "1px solid #ccc")
+    .style("border-radius", "4px")
+    .style("padding", "6px 8px")
+    .style("font-size", "12px")
+    .style("max-width", "260px")
+    .style("opacity", 0);
+
+  svg.append("g")
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+    .attr("cx", d => xScale(d.x))
+    .attr("cy", d => yScale(d.y))
+    .attr("r", d => sizeScale(+d[gn_size_metric] || 0))
+    .attr("fill", fillFor)
+    .attr("fill-opacity", 0.8)
+    .attr("stroke", d => (gn_show_f1_outline && d.is_f1) ? "black" : "none")
+    .attr("stroke-width", d => (gn_show_f1_outline && d.is_f1) ? 0.8 : 0)
+    .on("mouseover", (event, d) => {
+      tooltip.style("opacity", 1)
+        .html(`<strong>${d.title ?? d.name}</strong><br>
+               ${d.year ?? "n.d."} · community ${d.community}${d.is_f1 ? " · F1" : ""}<br>
+               ${gn_size_metric}: ${(+d[gn_size_metric] || 0).toFixed(4)}`);
+    })
+    .on("mousemove", (event) => {
+      tooltip.style("left", (event.offsetX + 12) + "px")
+             .style("top", (event.offsetY + 12) + "px");
+    })
+    .on("mouseout", () => tooltip.style("opacity", 0));
+
+  const container = html`<div style="position: relative;">`;
+  container.appendChild(svg.node());
+  container.appendChild(tooltip.node());
+  return container;
+}
+```
+
+**Scope note.** The interactive plot draws only nodes in the top
+`r gn_top_n` communities or marked F1 — the same subset as the static
+plot's colored points — for the same readability and render-time
+reasons as the static version's grey "other" bucket. Plotting all
+`r format(gn_earliest$n_communities, big.mark = ",")` communities'
+edges as SVG lines in-browser was not attempted and is expected to be
+too slow; a canvas or WebGL renderer would be the next thing to try if
+full coverage is wanted later.
 
 ### Girvan-Newman dendrogram
 
@@ -857,8 +1069,10 @@ is its own independent description of the corpus, standing on its own;
 it is not validated against, and does not draw on, the codebook
 categories or examples in any form. Comparison against the codebook is
 `03_joined_descriptions.qmd`: a separate, later step, so the two stay
-apart until then. Not yet run; the method below is settled, the code
-is not yet written.
+apart until then. Implemented as a standalone pipeline in
+`cluster_labelling/` (same convention as `gn_analysis/`: not part of
+this document's render chain), not yet run against this corpus's
+partition — see `cluster_labelling/README.md` for usage.
 
 **Independent of any specific GN cut.** The method below takes a
 partition as input: any partition, from any community-detection method,

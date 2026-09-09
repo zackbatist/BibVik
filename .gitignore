@@ -100,6 +100,12 @@ analysis/gn_analysis/results/multi_cut/communities_round_*.csv
 analysis/gn_analysis/results/multi_cut/multi_cut_summary.csv
 analysis/gn_analysis/results/subclusters/subcluster_summary.csv
 analysis/gn_analysis/results/subclusters/community_*_tree.png
+analysis/gn_analysis/results/interactive/gn_interactive.json
+
+# BibVik cluster labelling standalone run #
+############################################
+
+analysis/cluster_labelling/results/title_embeddings.npz
 
 # 01_annotation.qmd render outputs #
 ############################################
