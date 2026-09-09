@@ -460,6 +460,22 @@ gn_cut_files <- if (dir.exists(gn_multi_cut_dir)) {
   character(0)
 }
 
+# Full onset-round summary table, for soft-coding every round/count/
+# percentage figure quoted in the prose below via inline `r` expressions
+# rather than hand-typed numbers that go stale on re-render.
+gn_summary_path <- file.path(gn_multi_cut_dir, "multi_cut_summary.csv")
+gn_summary <- if (file.exists(gn_summary_path)) {
+  read_csv(gn_summary_path) |>
+    mutate(pct_singleton = n_singletons / n_communities) |>
+    arrange(round)
+} else {
+  tibble(round = integer(), n_communities = integer(),
+         n_singletons = integer(), largest_community = integer(),
+         pct_singleton = double())
+}
+gn_earliest <- if (nrow(gn_summary) > 0) gn_summary |> slice(1) else NULL
+gn_latest   <- if (nrow(gn_summary) > 0) gn_summary |> slice(n()) else NULL
+
 if (length(gn_cut_files) > 0) {
   gn_rounds <- as.integer(gsub(".*communities_round_([0-9]+)\\.csv$", "\\1", gn_cut_files))
   gn_result_path <- gn_cut_files[which.min(gn_rounds)]
@@ -518,45 +534,47 @@ decline of the giant component — were considered as complementary checks
 on this choice but have not yet been computed for this corpus.)
 
 Applying the fragmentation-onset criterion to this run's edge-removal
-sequence identifies eleven points at which the corpus's fragmentation
-rate undergoes a sustained increase, not one: rounds 9,062, 10,837,
-11,560, 11,859, 21,451, 21,805, 22,162, 22,524, 22,892, 23,264, and
-23,644. As with the previous corpus, this is itself informative about
+sequence identifies `r nrow(gn_summary)` points at which the corpus's
+fragmentation rate undergoes a sustained increase, not one: rounds
+`r paste(format(gn_summary$round, big.mark = ","), collapse = ", ")`.
+As with the previous corpus, this is itself informative about
 the corpus's structure — literature does not fragment into communities
 in one clean step, but in a series of accelerating breakups. However,
-these eleven points are not interchangeable candidates for "the"
+these `r nrow(gn_summary)` points are not interchangeable candidates for "the"
 community partition:
 
-| Round  | Communities | Singletons | % singleton | Largest community |
-|---|---|---|---|---|
-| 9,062  | 297    | 90    | 30% | 964 |
-| 10,837 | 1,449  | 1,165 | 80% | 168 |
-| 11,560 | 1,986  | 1,666 | 84% | 96  |
-| 11,859 | 2,243  | 1,918 | 86% | 88  |
-| 21,451 | 11,570 | 11,224| 97% | 17  |
-| 21,805 | 11,902 | 11,556| 97% | 15  |
-| 22,162 | 12,237 | 11,891| 97% | 13  |
-| 22,524 | 12,575 | 12,229| 97% | 11  |
-| 22,892 | 12,919 | 12,573| 97% | 9   |
-| 23,264 | 13,267 | 12,921| 97% | 7   |
-| 23,644 | 13,620 | 13,274| 97% | 5   |
+```{r gn-onset-table}
+#| echo: false
+#| eval: !expr nrow(gn_summary) > 0
+gn_summary |>
+  transmute(
+    Round = format(round, big.mark = ","),
+    Communities = format(n_communities, big.mark = ","),
+    Singletons = format(n_singletons, big.mark = ","),
+    `% singleton` = scales::percent(pct_singleton, accuracy = 1),
+    `Largest community` = largest_community
+  ) |>
+  knitr::kable()
+```
 
-Unlike the previous corpus, the earliest transition (round 9,062) is
-not fully singleton-free: 90 of its 297 communities are singletons.
-Checked directly, all 90 have degree exactly 1 in the original,
+Unlike the previous corpus, the earliest transition (round
+`r format(gn_earliest$round, big.mark = ",")`) is
+not fully singleton-free: `r format(gn_earliest$n_singletons, big.mark = ",")`
+of its `r format(gn_earliest$n_communities, big.mark = ",")` communities are singletons.
+Checked directly, all `r format(gn_earliest$n_singletons, big.mark = ",")` have degree exactly 1 in the original,
 unfiltered graph — each was connected to only a single other node
 before Girvan-Newman removed any edges at all. Their appearance as
 singletons this early is therefore a structural property of the
 corpus (a set of peripheral, minimally-connected nodes) rather than an
 artifact of stopping at this particular round; a later cut would not
 have kept them attached to anything more substantial. Every subsequent
-transition after round 9,062 is already majority-singleton, worsening
+transition after round `r format(gn_earliest$round, big.mark = ",")` is already majority-singleton, worsening
 monotonically toward the same near-total-fragmentation state that
 ruled out the modularity-peak stopping rule in the first place. The
 corpus's later fragmentation points therefore document how community
 structure dissolves rather than offering alternative, equally-valid
-readings of it. Round 9,062 is used below as the working partition
-(`community_gn`); the partitions at the other ten points are retained
+readings of it. Round `r format(gn_earliest$round, big.mark = ",")` is used below as the working partition
+(`community_gn`); the partitions at the other `r nrow(gn_summary) - 1` points are retained
 in `gn_analysis/results/multi_cut/` as a record of that dissolution,
 not as alternative community assignments.
 
@@ -570,8 +588,10 @@ interpretable (a theory/ritual cluster separating cleanly from a
 place-names/hoards cluster within one community, for instance); that
 spot-check has not been repeated on this corpus's community
 assignments, nor extended systematically across the full partition, so
-it supports plausibility rather than confirming that round 9,062 is
+it supports plausibility rather than confirming that round
+`r format(gn_earliest$round, big.mark = ",")` is
 uniquely correct. Readers who want a finer-grained or
+
 differently-motivated partition should treat the dendrogram below, not
 this flat cut, as the primary source: it preserves the full nested
 structure and does not require committing to one round.
@@ -611,18 +631,19 @@ gn_sizes |>
 #| fig-height: 12
 #| cache: true
 #| eval: !expr gn_has_communities
-# 297 communities colored individually via a continuous viridis scale
+# Community count colored individually via a continuous viridis scale
 # is not legible: adjacent community IDs land on near-identical shades,
-# so the plot reads as a handful of broad color bands rather than 297
+# so the plot reads as a handful of broad color bands rather than
 # distinct groups (confirmed visually on a render of the previous
 # corpus, at a similar community count). Highlighting only the
 # largest communities in distinct colors, with everything else grey,
 # shows the actual pattern in this partition instead: a handful of
 # large communities against a long tail of small ones.
+gn_top_n <- 20
 top_gn_communities <- node_table |>
   filter(!is.na(community_gn)) |>
   count(community_gn, sort = TRUE) |>
-  slice_head(n = 12) |>
+  slice_head(n = gn_top_n) |>
   pull(community_gn)
 
 tg <- as_tbl_graph(g) |>
@@ -639,13 +660,15 @@ ggraph(tg, layout = "drl") +
   geom_node_point(aes(colour = community_gn_highlight),
                    size = 0.3, alpha = 0.7) +
   scale_colour_manual(
-    values = c("other" = "grey85", setNames(grDevices::hcl(h = seq(15, 375, length.out = 13)[-13],
+    values = c("other" = "grey85", setNames(grDevices::hcl(h = seq(15, 375, length.out = gn_top_n + 1)[-(gn_top_n + 1)],
                                                             c = 100, l = 65), top_gn_communities)),
     guide = "none"
   ) +
   theme_graph() +
-  labs(title = "Citation graph — Girvan-Newman communities (fragmentation-onset cut, round 9062)",
-       subtitle = "12 largest communities highlighted; remaining 285 shown in grey")
+  labs(title = paste0("Citation graph — Girvan-Newman communities (fragmentation-onset cut, round ",
+                       format(gn_earliest$round, big.mark = ","), ")"),
+       subtitle = paste0(gn_top_n, " largest communities highlighted; remaining ",
+                          format(gn_earliest$n_communities - gn_top_n, big.mark = ","), " shown in grey"))
 
 ggsave("bibvik_gn.png", width = 16, height = 16, dpi = 300)
 ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
@@ -653,11 +676,47 @@ ggsave("bibvik_gn.pdf", width = 16, height = 16, device = cairo_pdf)
 
 ### Girvan-Newman dendrogram
 
-Built separately by `gn_analysis/build_dendrogram.R` from
-`removal_log.csv`. Not part of this render; run manually and embedded
-here if present. Shows the earliest split events (coarsest structure);
-see the script for the full `split_events.csv` and the `.rds` tree
-object if you want to zoom into a subtree.
+Generated by `gn_analysis/build_dendrogram.R` from `removal_log.csv`,
+run below as part of this render (not a separate manual step) using
+the same earliest onset round (`r format(gn_earliest$round, big.mark = ",")`)
+established above. Shows the earliest split events (coarsest
+structure); see the script for the full `split_events.csv` and the
+`.rds` tree object if you want to zoom into a subtree.
+
+```{r}
+#| label: gn-dendrogram-generate
+#| eval: !expr gn_has_communities
+#| results: hide
+gn_dendrogram_dir <- here("analysis", "gn_analysis", "results", "dendrogram")
+gn_dendrogram_png <- file.path(gn_dendrogram_dir, "gn_dendrogram.png")
+
+# Regenerated whenever missing or older than the removal log it's
+# built from, so a fresh GN run is reflected without a manual step,
+# but re-rendering right after an unrelated edit doesn't re-run this
+# multi-minute build for no reason.
+gn_removal_log <- here("analysis", "gn_analysis", "results", "removal_log.csv")
+gn_dendrogram_stale <- !file.exists(gn_dendrogram_png) ||
+  file.info(gn_dendrogram_png)$mtime < file.info(gn_removal_log)$mtime
+
+if (gn_dendrogram_stale) {
+  dir.create(gn_dendrogram_dir, recursive = TRUE, showWarnings = FALSE)
+  status <- system2(
+    "Rscript",
+    args = c(
+      here("analysis", "gn_analysis", "build_dendrogram.R"),
+      here("data", "citation_edgelist.csv"),
+      gn_removal_log,
+      gn_dendrogram_dir,
+      "300", "0", "0",
+      here("analysis", "gn_analysis", "results", "modularity_trace.csv")
+    )
+  )
+  if (status != 0) {
+    warning("build_dendrogram.R exited with status ", status,
+            "; dendrogram figure may be missing or stale.")
+  }
+}
+```
 
 ```{r}
 #| label: gn-dendrogram-embed
@@ -668,8 +727,8 @@ knitr::include_graphics(here("analysis", "gn_analysis", "results", "dendrogram",
 
 ### Internal structure of individual communities
 
-The round-9,062 partition and the whole-graph dendrogram above both
-describe the corpus at a single level: 297 communities, and one tree
+The round-`r format(gn_earliest$round, big.mark = ",")` partition and the whole-graph dendrogram above both
+describe the corpus at a single level: `r format(gn_earliest$n_communities, big.mark = ",")` communities, and one tree
 covering the earliest few hundred splits across all of them together.
 A separate question is whether any individual community has further
 structure worth surfacing on its own, the same kind of check performed
@@ -677,17 +736,48 @@ earlier (see "Choosing a stopping point") for two clusters against
 paper titles and annotation coding.
 
 `gn_analysis/build_subcluster_trees.R` addresses this directly: seeded
-from the real round-9,062 community membership (not a re-derived or
+from the real round-`r format(gn_earliest$round, big.mark = ",")` community membership (not a re-derived or
 arbitrary starting point), it replays `removal_log.csv` separately for
 each of the round's largest communities and records what happens to
-each one afterward. An initial version capped this replay at a fixed
-number of split events; that cap was itself an arbitrary choice with
-no basis in the data, so the script now replays each community to
-natural completion (full fragmentation or the end of the log) by
-default.
+each one afterward, run below using that same round so it can't drift
+out of sync with the partition described above. An initial version
+capped this replay at a fixed number of split events; that cap was
+itself an arbitrary choice with no basis in the data, so the script
+now replays each community to natural completion (full fragmentation
+or the end of the log) by default.
+
+```{r}
+#| label: gn-subclusters-generate
+#| eval: !expr gn_has_communities
+#| results: hide
+gn_subclusters_dir <- here("analysis", "gn_analysis", "results", "subclusters")
+gn_subcluster_summary_csv <- file.path(gn_subclusters_dir, "subcluster_summary.csv")
+
+gn_subclusters_stale <- !file.exists(gn_subcluster_summary_csv) ||
+  file.info(gn_subcluster_summary_csv)$mtime < file.info(gn_result_path)$mtime
+
+if (gn_subclusters_stale) {
+  dir.create(gn_subclusters_dir, recursive = TRUE, showWarnings = FALSE)
+  status <- system2(
+    "Rscript",
+    args = c(
+      here("analysis", "gn_analysis", "build_subcluster_trees.R"),
+      here("data", "citation_edgelist.csv"),
+      here("analysis", "gn_analysis", "results", "removal_log.csv"),
+      gn_result_path,
+      as.character(gn_earliest$round),
+      gn_subclusters_dir
+    )
+  )
+  if (status != 0) {
+    warning("build_subcluster_trees.R exited with status ", status,
+            "; subcluster figures may be missing or stale.")
+  }
+}
+```
 
 Doing so shows that, past each community's first split, every one of
-the twelve largest communities collapses the same way the whole graph
+the `r gn_top_n` largest communities collapses the same way the whole graph
 does: a single dominant piece sheds one node at a time for hundreds of
 further rounds, with no further balanced division anywhere in the
 sequence. Plotted as a dendrogram, this produces the same long
@@ -697,21 +787,17 @@ plots turned out uninformative and are not included here (the script
 still writes them; see `gn_analysis/results/subclusters/` if useful).
 
 The one real signal in this data is the size of the two pieces at each
-community's first split, which varies meaningfully across the twelve:
-most split off a single node or a small handful, but two communities
-(56, with a 111/47 split, and 130, with a 92/53 split) divide into two
-pieces of comparable size, the same kind of balanced division that made
-the two clusters checked earlier interpretable. One community (19) is a
-genuine anomaly rather than a matter of degree: its first split produces
-a 10/257 division, the *smaller* piece splitting off first while the
-bulk of the community stays together, unlike every other community
-here (and every community checked in the previous version of this
-corpus), where the smaller piece is the one shed and the bulk always
-stays intact on the first split. This has not yet been investigated
-further; it may indicate a distinct substructure worth checking against
-titles or annotation coding, or it may be an artifact of how this
-particular community's internal edges were structured before edge
-removal began.
+community's first split, plotted below. Most communities split off a
+single node or a small handful at first split; any community whose two
+pieces are closer in size is a candidate for the same kind of
+title/annotation check performed earlier (see "Choosing a stopping
+point"), and any community where the *smaller* piece is the one that
+stays intact — rather than the one shed — runs against the pattern
+seen in every other community here and in the previous version of this
+corpus, and would be worth investigating further. Reading the specific
+communities and split sizes that meet either description off the plot,
+rather than naming them in prose here, keeps this section accurate
+across re-runs against different partitions.
 
 ```{r}
 #| label: gn-first-splits
@@ -746,7 +832,8 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
   scale_x_log10(expand = expansion(mult = c(0, 0.15))) +
   scale_fill_manual(values = c("Larger piece" = "#4C72B0", "Smaller piece" = "#DD8452")) +
   labs(
-    title = "First-split piece sizes, round 9062's largest communities",
+    title = paste0("First-split piece sizes, round ", format(gn_earliest$round, big.mark = ","),
+                    "'s largest communities"),
     subtitle = "Sorted by size of the smaller piece; most balanced at top",
     x = "Nodes in each piece at first split (log scale)",
     y = NULL, fill = NULL
@@ -755,12 +842,11 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
   theme(legend.position = "bottom")
 ```
 
-Community 56's split (111/47 nodes) is the most balanced of the twelve
-by ratio and the strongest remaining candidate for the kind of
-title/annotation check performed earlier; community 19's 10/257
-anomaly is the strongest candidate for a different kind of check,
-since it doesn't fit the balanced-split pattern at all. Neither has
-been done yet.
+**Not yet done.** Whichever community stands out above as the most
+balanced split is the strongest remaining candidate for a
+title/annotation check; whichever community shows the smaller-piece-
+stays-intact anomaly is the strongest candidate for a different kind
+of check. Neither has been carried out against this corpus's partition.
 
 ## Cluster labeling
 

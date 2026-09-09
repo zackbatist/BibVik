@@ -156,7 +156,7 @@ average; 2x means twice the corpus rate; 0.5x means half. White is 1x
 (baseline); blue is above baseline (the category is over-represented in
 that cluster, a real distinguishing signal); red is below baseline
 (under-represented). For example, if "Palaeoenvironment reconstruction"
-is coded in 23% of the whole corpus but 100% of cluster 52's
+is coded in 23% of the whole corpus but 100% of a given cluster's
 annotated works, that cell shows roughly 4.4x — a real signal that
 environmental method is disproportionately concentrated there, not
 just present because it's common everywhere.
