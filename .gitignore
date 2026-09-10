@@ -122,6 +122,15 @@ analysis/bibvik_node_table.csv
 analysis/02_network_structure_cache/
 analysis/02_network_structure_files/
 
+# Quarto/knitr chunk cache — a plain top-level cache/ directory has
+# started showing up alongside the doc-specific *_cache/ directories
+# above (gn-viz_*.RData, km-viz_*.rdb/.rdx, leiden-viz_*, louvain-viz_*,
+# __packages — all knitr::cache-related artifacts, none of them meant
+# to be committed, regenerable on any render). Ignoring the whole
+# directory rather than trying to enumerate every hashed chunk-cache
+# filename.
+cache/
+
 # 03_joined_descriptions.qmd render outputs #
 ############################################
 

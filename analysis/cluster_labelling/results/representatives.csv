@@ -1,0 +1,151 @@
+community_id,name,title,rank,cosine_distance_to_centroid,cluster_size
+101,barrett2010,Rounding up the usual suspects: Causation and the Viking Age diaspora,1,0.123817,88
+101,montgomery2003,"The Mineralization, Preservation and Sampling of Teeth: Strategies to Optimise Comparative Study and Minimise Age-Related Change for Lead and Strontium Analysis",2,0.836267,88
+101,grahamcampbell1975,Bossed Penannular Brooches: A Review of Recent Research,3,0.674505,88
+101,fossier1999,Rural Economy and Country Life,4,0.59066,88
+101,dahljensen1998,Past Temperatures Directly From the Greenland Ice Sheet,5,0.642206,88
+101,arrhenius1995,Women and Gold: On the Role of Women in Society at the Time of the Great Migrations and Their Relationship to the Production and Distribution of Ornaments,6,0.553618,88
+101,santiagoirizarry2008,Transnationalism and Migration: Locating Sociocultural Practices Among Mexican Immigrants in the United States,7,0.69783,88
+101,jonsson1911,Snorri Sturluson: Heimskringla. Copenhagen: G.E.C. Gads Forlag,8,0.481733,88
+101,pirenne1939,Mohammed and Charlemagne,9,0.516485,88
+101,wallace2003,L'Anse aux Meadows and Vinland: an abandoned experiment,10,0.477899,88
+101,earle1997,How Chiefs Come to Power: The Political Economy in Prehistory,11,0.535873,88
+101,warner1976,Scottish Silver Arm-Rings: An Analysis of Weights,12,0.581177,88
+101,heinsohn2003,Söhne und Weltmacht: Terror im Aufstieg und Fall der Nationen,13,0.613022,88
+101,smith1993,Reindeer antler combs at Howe: contact between late Iron Age Orkney and Norway. Universitetets Oldsaksamling Årbok,14,0.435517,88
+101,hannon2005,Climate Change and Human Settlement as Drivers of Late-Holocene Vegetational Change in the Faroe Islands,15,0.522498,88
+14,pagesk2013,Millennial Reconstruction of Northern Hemisphere Extratropical Surface Temperature Variations,1,0.139232,87
+14,torrence1998,A Practical Guide to Wavelets,2,0.750463,87
+14,schweingruber1978,The X-Ray Technique as Applied to Dendroclimatology,3,0.718925,87
+14,smerdon2010,Erroneous Model Field Representations in Multiple Pseudoproxy Studies: Corrections and Implications,4,0.676382,87
+14,pederson2014,"Pluvials, droughts, the Mongol Empire, and modern Mongolia",5,0.618799,87
+14,rimbu2003,Shift in ENSO teleconnections recorded by a northern Red Sea coral,6,0.623426,87
+14,verosub2008,Global impacts of the 1600 eruption of Peru's Huaynaputina volcano,7,0.512622,87
+14,schweingruber1993,A tree-ring densitometric transect from Alaska to Labrador,8,0.462514,87
+14,tingley2012,Piecing Together the past: Statistical Insights into Paleoclimatic Reconstructions,9,0.4432,87
+14,melvin2004,Historical Growth Rates and Changing Climatic Sensitivity of Boreal Conifers,10,0.444385,87
+14,seager2007,Blueprints for Medieval Hydroclimate,11,0.384821,87
+14,stott1998,Scale-Dependent Detection of Climate Change,12,0.336964,87
+14,pongratz2008,A Reconstruction of Global Agricultural Areas and Land Cover for the Last Millennium,13,0.510002,87
+14,muscheler2007,Solar Activity During the Last 1000yr Inferred From Radionuclide Records,14,0.380487,87
+14,shindell2015,Spatial Patterns of Radiative Forcing and Surface Temperature Response,15,0.456977,87
+67,thoroddsen1914,Islands Klima i Oldtiden,1,0.087263,87
+67,jones2008,"Ethnicity: Theoretical Approaches, Methodological Implications",2,0.739394,87
+67,hartman2015,Unpacking the Black Box: The Need for Integrated Environmental Humanities,3,0.573363,87
+67,garciaherrera2008,A chronology of El Niño Events from Primary Documentary Sources in Northern Peru,4,0.560267,87
+67,waters2016,The Anthropocene Is Functionally and Stratigraphically Distinct From the Holocene,5,0.545389,87
+67,stern2000,"A Hertfordshire Demesne of Westminster Abbey: Profits, Productivity and Weather",6,0.536612,87
+67,teitsson1975,Bjarnfeldir í máldögum,7,0.467226,87
+67,miles2014,A Signal of Persistent Atlantic Multidecadal Variability in Arctic Sea Ice,8,0.514851,87
+67,hambrecht2015,The first European colonization of the North Atlantic,9,0.418099,87
+67,harrison2013,Everyday life in Viking-Age towns: social approaches to towns in England and Ireland,10,0.43146,87
+67,thorarinsson1967,The Eruptions of Hekla in Historical Times. The Eruption of Hekla 1947-1948. 1,11,0.445775,87
+67,mcgovern2013,Hard times at Hofstadir: an archaeofauna ca AD 1300 from Hofstadir Myvatnssveit,12,0.380177,87
+67,stora2005,Human exploitation and history of seals in the Baltic during the Late Holocene,13,0.387119,87
+67,larsen1917,The King's Mirror (Speculum Regale-Konungs Skuggsjá),14,0.494065,87
+67,stine1994,Extreme and Persistent Drought in California and Patagonia During Mediaeval Time,15,0.518354,87
+86,vince1995,Approaches to Residuality in Urban Archaeology,1,0.135789,87
+86,verleyen2017,Siliceous Microfossils From Single-Celled Organisms: Diatoms and Chrysophycean Stomatocysts,2,0.782828,87
+86,leroigourhan1964,Le geste et la parole,3,0.730544,87
+86,ottaway1970,Ribe ironworks,4,0.608995,87
+86,oexle1992,Studien zu merowingerzeitlichem Pferdegeschirr am Beispiel der Trensen. Mainz am Rhein: P. von Zabern,5,0.582528,87
+86,vepraskas2018,Redoximorphic Features,6,0.656102,87
+86,hummler2015,Recording fieldwork,7,0.565001,87
+86,jupiter2018,National boringsdatabase. Geological Survey of Denmark and Greenland (online),8,0.523295,87
+86,wailes1996,Gordon Childe and the relations of production,9,0.617877,87
+86,rentzel2017,"Trampling, Poaching and the Effect of Traffic",10,0.663374,87
+86,barfod2016,Micro-XRF Analysis of Crucible Fragments from ASR 7 Sct Nicolajgade,11,0.627117,87
+86,dobres2014,Concluding and Future Thoughts on Material Crossovers,12,0.53561,87
+86,gebers2004,Auf dem Weg nach Walhal: Die Pferde der Altsachsen,13,0.544351,87
+86,fao2006,Guidelines for Soil Profile Description,14,0.506368,87
+86,jennings2016,"Urbanization, State Formation, and Cooperation: A Reappraisal",15,0.618227,87
+171,brandt2017,Beständig ist nur der Wandel! Die Rekonstruktion der Besiedlungsgeschichte Europas während des Neolithikums mittels Paläo-und Populationsgenetischer Verfahren,1,0.148209,87
+171,smiley2016,"From ""Brute"" to ""Thug:"" the Demonization and Criminalization of Unarmed Black Male Victims in America",2,0.719051,87
+171,ling2018,Maritime Mode of Production: Raiding and Trading in Seafaring Chiefdoms,3,0.69884,87
+171,knorrcetina1981,The Manufacture of Knowledge: An Essay on the Constructivist and Contextual Nature of Science,4,0.632938,87
+171,halcrow2018,On Engagement with Anthropology: A Critical Evaluation of Developmental Abnormalities in the Atacama Preterm Baby and Issues of Forensic and Bioarchaeological Research Ethics. Response to Bhattacharya Et Al,5,0.544954,87
+171,bonacchi2018,The Heritage of Brexit: Roles of the past in the Construction of Identities through Social Media,6,0.568676,87
+171,bosl2017,Zur Wissenschaftsgeschichte der aDNA-Forschung,7,0.527434,87
+171,hall2017,Steppe Thugs Pacified by the Love of Stone Age Women,8,0.592434,87
+171,scodari2017,"When Markers Meet Marketing: Ethnicity, Race, Hybridity, and Kinship in Genetic Genealogy Television Advertising",9,0.519326,87
+171,contreras2014,Summed Radiocarbon Calibrations as A Population Proxy: A Critical Evaluation Using A Realistic Simulation Approach,10,0.683312,87
+171,james1999,"Excavations of a medieval cemetery at Skaill House, and a cist in the Bay of Skaill",11,0.559747,87
+171,barras2019,Story of Most Murderous People of All Time Revealed in Ancient DNA,12,0.432732,87
+171,hofmann2016,Keep on Walking: The Role of Migration in Linearbandkeramik Life,13,0.570893,87
+171,guidi1996,Nationalism without a Nation: The Italian Case,14,0.485951,87
+171,barras2018,Was Ancient Briton Dark-Skinned?,15,0.414227,87
+292,svestad1995,Oldsakenes orden. Om tilkomsten av arkeologi,1,0.206457,87
+292,holmberg2008,Natural resources in sub-Saharan Africa. Assets and vulnerabilities. Current African Issues 38. The Nordic Africa Institute,2,0.627513,87
+292,nussbaum1999,Sex and Social Justice,3,0.661058,87
+292,skolimowski1974,Problems of Rationality in Biology,4,0.68729,87
+292,nummedal1912,Bjørneremsfundet. Det Kgl. Norske Videnskabers Selskabs Skrifter,5,0.575091,87
+292,latour1993,We Have Never Been Modern. Harvester Wheatsheaf,6,0.635289,87
+292,kirshenblattgimblett1994,Spaces of dispersal,7,0.667195,87
+292,todorov1993,"On Human Diversity. Nationalism, Racism, and Exoticism in French Thought",8,0.469442,87
+292,grosjean2007,Ice-borne prehistoric finds in the Swiss Alps reflect Holocene glacier fluctuations,9,0.659953,87
+292,fraser2001,Recognition without ethics? Theory,10,0.577591,87
+292,weisman2007,The World Without Us,11,0.488653,87
+292,terrill2008,Climate change. How should the World Heritage Convention respond?,12,0.486405,87
+292,piotrowski2006,Auschwitz vs. Auschwitz,13,0.591428,87
+292,latour2005h,Making Things Public. Atmospheres of Democracy,14,0.579991,87
+292,samuel1994,Theatres of Memory,15,0.487538,87
+11,solberg1986,Lite påaktede gjenstandsgrupper i vestnorsk yngre steinalder,1,0.139883,86
+11,barth1976,Anlegg for massefangst av villrein i rondaneområdet,2,0.528792,86
+11,johansen1981,Kulturtilknytning og forutsetninger for en marginalekspansjon,3,0.505076,86
+11,fredriksen1983,Samer i Trysil?,4,0.480692,86
+11,grandell1986,Kredithandel med tilhjälp av karvstock. en epok i mänsklighetens historia,5,0.586406,86
+11,stenvik1988,Steinkøller med skaftfure,6,0.468335,86
+11,scheen1979,En Typologisk-Kronologisk Analyse,7,0.475239,86
+11,grimbe2013,Rapport från arkeologisk registrering i forbindelse med planarbete vid bullmuseet på gnr,8,0.376383,86
+11,bull2002,Vàrjjat sàmi musea čàllosat / varanger samiske museers skrifter 1. varangerbotn: varanger samiske museum,9,0.307423,86
+11,odner2000,"Tradition and Transmission. Bantu, Indo-European and Circumpolar Great Traditions",10,0.397253,86
+11,gustavsen2014,Geofysiske undersøkelser ved Høie Mellem,11,0.351044,86
+11,zachrisson2015,Samiska väskor på svenska örlogsskepp,12,0.40089,86
+11,apel2001,"Daggers, Knowledge and Power: The Social Aspects of Flint Dagger Technology in Scandinavia 2350 -1500 cal BC. Coast to Coast-Book 3",13,0.378581,86
+11,braseth2014,Samer sør for Midnattssole,14,0.470989,86
+11,spangen2010,Guder-makter-mennesker-ting. om deponering av sølv som offer,15,0.496076,86
+39,schlesinger1965,Über germanisches Heerkönigtum,1,0.171825,86
+39,ljungkvist2017,Two Workshops with Garnet Crafts in Gamla Uppsala,2,0.554555,86
+39,bergsveinn2007,New Perspectives on the Composition of the Ynglingatal,3,0.532425,86
+39,collis1995,The first towns,4,0.44375,86
+39,schnetz1990,"Ravennatis Anonymi cosmographia et Guidonis geographica. Itineraria Romana, 2",5,0.521744,86
+39,ellmers1985,Die Bedeutung der Friesen für die Handelsverbindungen des Ostseeraumes,6,0.495986,86
+39,etchingham2014,Names for the Vikings in Irish annals,7,0.397182,86
+39,sundqvist2018,"Kultpelare, rituellt hägn och religiösa processioner",8,0.388207,86
+39,bradley1991,Anglo-Saxon poetry. An anthology of Old English poems in prose translation,9,0.459926,86
+39,myrvoll2014,Distribusjon av metriske og språklege drag i høve til tradisjonell datering og attribuering. unpublished phd thesis,10,0.435821,86
+39,wood1977,"Kings, Kingdoms and Consent",11,0.41802,86
+39,sorensen1982,Nye arkaeologiske udgravninger i Gl,12,0.419579,86
+39,sawyer1991,När Sverige blev Sverige,13,0.421815,86
+39,hardh2002,Central Places in the Migration and Merovingian Periods,14,0.342752,86
+39,talbot1954,"Being the lives of S.S. Willibrord, Boniface, Sturm, Leoba and Lebuin, together with the Hodoeporicon of St. Willibald and a selection from the correspondence of St",15,0.392677,86
+43,nedoma1988,Die bildlichen und schriftlichen Denkmäler der Wielandsage,1,0.104032,86
+43,faulkes1989,Edda,2,0.748891,86
+43,oehrl2019,Re-interpretations of Gotlandic picture stones based on the reflectance transformation imaging method (RTI): Some examples,3,0.624149,86
+43,north2001,Loki's Gender: Or why Skaði Laughed,4,0.5442,86
+43,meyernd,Eine Untersuchung,5,0.563184,86
+43,quast2009,"Communication, migration, mobility, and trade. Explanatory models for exchange processes from the Roman Iron Age to the Viking Age",6,0.503684,86
+43,neckel1983,"A hall she saw standing far from the sun, on corpsestrand; its doors look north; poison-drops fall in through the roofvents, the hall is woven of serpent's spines. there she saw wading in turbid streams false-oaths swearers and murderers, and the seducer of another man's close confidante",7,0.510406,86
+43,hauck1982,Zum zweiten Band der Sutton Hoo-Edition,8,0.486512,86
+43,andreeff2014,Med hjärta och hjärna: En vänbok till professor Elisabeth Arwill-Nordbladh,9,0.456237,86
+43,faulkes1987,"Snorri Sturluson. Edda: Skâldskaparmâl, I-II",10,0.364196,86
+43,imer2001,Gotlandske billedsten -dateringen af Lindqvists gruppe C og D [Gotlandic picture stonesthe dating of Lindqvist's group C and D],11,0.317501,86
+43,hultgard1987,"Old Norse and Finnish Religions and Cultic Place-Names. Based on Papers Read at the Symposium on Encounters Between Religions in Old Nordic Times and on Cultic Place-Names Held at Åbo, Finland, on the 19th-21st of August",12,0.386508,86
+43,ellisdavidson1950,Gods and Heroes in Stone,13,0.430404,86
+43,north2003,Vǫluspá and the Book of Revelation,14,0.41683,86
+43,mundal1998,Androgyny as an Image of Chaos in Old Norse Mythology. Maal och Minne,15,0.32488,86
+49,kaland2008,Children and society in the Viking Age,1,0.190842,86
+49,haapasalo2000,Exercise-induced bone gain is due to enlargement in bone size without a change in volumetric bone density: a peripheral quantitative computed tomography study of the upper arms of male tennis players,2,0.995093,86
+49,tacitus1999a,Agricola and Germany,3,0.773256,86
+49,hooper2001,"Manly States: Masculinities, International Relations, and Gender Politics",4,0.51652,86
+49,preston2014,Summary: Identifying the Victims,5,0.560255,86
+49,soderberg2017,Några nyfynd ur museets magasin,6,0.556165,86
+49,weisner1977,My Brother's Keeper: Child and Sibling Caretaking,7,0.578355,86
+49,smallwood2007,Saltwater Slavery: A Middle Passage from Africa to American Diaspora,8,0.524188,86
+49,orchard2011,The Elder Edda,9,0.584577,86
+49,gilligan1990,Making connections: the relational worlds of adolescent girls at Emma Willard School,10,0.49983,86
+49,varney2000,"Playing with ""war fare",11,0.604499,86
+49,worldhealthorganization2018,Adverse Childhood Experiences International Questionnaire (ACE-IQ),12,0.59218,86
+49,honwana2006,Child soldiers in Africa,13,0.590185,86
+49,knusel2000,Activity-related skeletal change. In Blood red roses: the archaeology of a mass grave from the Battle of Towton AD 1461. Veronica Fiorato,14,0.502058,86
+49,keith2005,Childhood Learning and Distribution of Knowledge in Foraging Societies,15,0.532174,86
