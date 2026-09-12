@@ -1,151 +1,501 @@
-community_id,name,title,rank,cosine_distance_to_centroid,cluster_size
-101,barrett2010,Rounding up the usual suspects: Causation and the Viking Age diaspora,1,0.123817,88
-101,montgomery2003,"The Mineralization, Preservation and Sampling of Teeth: Strategies to Optimise Comparative Study and Minimise Age-Related Change for Lead and Strontium Analysis",2,0.836267,88
-101,grahamcampbell1975,Bossed Penannular Brooches: A Review of Recent Research,3,0.674505,88
-101,fossier1999,Rural Economy and Country Life,4,0.59066,88
-101,dahljensen1998,Past Temperatures Directly From the Greenland Ice Sheet,5,0.642206,88
-101,arrhenius1995,Women and Gold: On the Role of Women in Society at the Time of the Great Migrations and Their Relationship to the Production and Distribution of Ornaments,6,0.553618,88
-101,santiagoirizarry2008,Transnationalism and Migration: Locating Sociocultural Practices Among Mexican Immigrants in the United States,7,0.69783,88
-101,jonsson1911,Snorri Sturluson: Heimskringla. Copenhagen: G.E.C. Gads Forlag,8,0.481733,88
-101,pirenne1939,Mohammed and Charlemagne,9,0.516485,88
-101,wallace2003,L'Anse aux Meadows and Vinland: an abandoned experiment,10,0.477899,88
-101,earle1997,How Chiefs Come to Power: The Political Economy in Prehistory,11,0.535873,88
-101,warner1976,Scottish Silver Arm-Rings: An Analysis of Weights,12,0.581177,88
-101,heinsohn2003,Söhne und Weltmacht: Terror im Aufstieg und Fall der Nationen,13,0.613022,88
-101,smith1993,Reindeer antler combs at Howe: contact between late Iron Age Orkney and Norway. Universitetets Oldsaksamling Årbok,14,0.435517,88
-101,hannon2005,Climate Change and Human Settlement as Drivers of Late-Holocene Vegetational Change in the Faroe Islands,15,0.522498,88
-14,pagesk2013,Millennial Reconstruction of Northern Hemisphere Extratropical Surface Temperature Variations,1,0.139232,87
-14,torrence1998,A Practical Guide to Wavelets,2,0.750463,87
-14,schweingruber1978,The X-Ray Technique as Applied to Dendroclimatology,3,0.718925,87
-14,smerdon2010,Erroneous Model Field Representations in Multiple Pseudoproxy Studies: Corrections and Implications,4,0.676382,87
-14,pederson2014,"Pluvials, droughts, the Mongol Empire, and modern Mongolia",5,0.618799,87
-14,rimbu2003,Shift in ENSO teleconnections recorded by a northern Red Sea coral,6,0.623426,87
-14,verosub2008,Global impacts of the 1600 eruption of Peru's Huaynaputina volcano,7,0.512622,87
-14,schweingruber1993,A tree-ring densitometric transect from Alaska to Labrador,8,0.462514,87
-14,tingley2012,Piecing Together the past: Statistical Insights into Paleoclimatic Reconstructions,9,0.4432,87
-14,melvin2004,Historical Growth Rates and Changing Climatic Sensitivity of Boreal Conifers,10,0.444385,87
-14,seager2007,Blueprints for Medieval Hydroclimate,11,0.384821,87
-14,stott1998,Scale-Dependent Detection of Climate Change,12,0.336964,87
-14,pongratz2008,A Reconstruction of Global Agricultural Areas and Land Cover for the Last Millennium,13,0.510002,87
-14,muscheler2007,Solar Activity During the Last 1000yr Inferred From Radionuclide Records,14,0.380487,87
-14,shindell2015,Spatial Patterns of Radiative Forcing and Surface Temperature Response,15,0.456977,87
-67,thoroddsen1914,Islands Klima i Oldtiden,1,0.087263,87
-67,jones2008,"Ethnicity: Theoretical Approaches, Methodological Implications",2,0.739394,87
-67,hartman2015,Unpacking the Black Box: The Need for Integrated Environmental Humanities,3,0.573363,87
-67,garciaherrera2008,A chronology of El Niño Events from Primary Documentary Sources in Northern Peru,4,0.560267,87
-67,waters2016,The Anthropocene Is Functionally and Stratigraphically Distinct From the Holocene,5,0.545389,87
-67,stern2000,"A Hertfordshire Demesne of Westminster Abbey: Profits, Productivity and Weather",6,0.536612,87
-67,teitsson1975,Bjarnfeldir í máldögum,7,0.467226,87
-67,miles2014,A Signal of Persistent Atlantic Multidecadal Variability in Arctic Sea Ice,8,0.514851,87
-67,hambrecht2015,The first European colonization of the North Atlantic,9,0.418099,87
-67,harrison2013,Everyday life in Viking-Age towns: social approaches to towns in England and Ireland,10,0.43146,87
-67,thorarinsson1967,The Eruptions of Hekla in Historical Times. The Eruption of Hekla 1947-1948. 1,11,0.445775,87
-67,mcgovern2013,Hard times at Hofstadir: an archaeofauna ca AD 1300 from Hofstadir Myvatnssveit,12,0.380177,87
-67,stora2005,Human exploitation and history of seals in the Baltic during the Late Holocene,13,0.387119,87
-67,larsen1917,The King's Mirror (Speculum Regale-Konungs Skuggsjá),14,0.494065,87
-67,stine1994,Extreme and Persistent Drought in California and Patagonia During Mediaeval Time,15,0.518354,87
-86,vince1995,Approaches to Residuality in Urban Archaeology,1,0.135789,87
-86,verleyen2017,Siliceous Microfossils From Single-Celled Organisms: Diatoms and Chrysophycean Stomatocysts,2,0.782828,87
-86,leroigourhan1964,Le geste et la parole,3,0.730544,87
-86,ottaway1970,Ribe ironworks,4,0.608995,87
-86,oexle1992,Studien zu merowingerzeitlichem Pferdegeschirr am Beispiel der Trensen. Mainz am Rhein: P. von Zabern,5,0.582528,87
-86,vepraskas2018,Redoximorphic Features,6,0.656102,87
-86,hummler2015,Recording fieldwork,7,0.565001,87
-86,jupiter2018,National boringsdatabase. Geological Survey of Denmark and Greenland (online),8,0.523295,87
-86,wailes1996,Gordon Childe and the relations of production,9,0.617877,87
-86,rentzel2017,"Trampling, Poaching and the Effect of Traffic",10,0.663374,87
-86,barfod2016,Micro-XRF Analysis of Crucible Fragments from ASR 7 Sct Nicolajgade,11,0.627117,87
-86,dobres2014,Concluding and Future Thoughts on Material Crossovers,12,0.53561,87
-86,gebers2004,Auf dem Weg nach Walhal: Die Pferde der Altsachsen,13,0.544351,87
-86,fao2006,Guidelines for Soil Profile Description,14,0.506368,87
-86,jennings2016,"Urbanization, State Formation, and Cooperation: A Reappraisal",15,0.618227,87
-171,brandt2017,Beständig ist nur der Wandel! Die Rekonstruktion der Besiedlungsgeschichte Europas während des Neolithikums mittels Paläo-und Populationsgenetischer Verfahren,1,0.148209,87
-171,smiley2016,"From ""Brute"" to ""Thug:"" the Demonization and Criminalization of Unarmed Black Male Victims in America",2,0.719051,87
-171,ling2018,Maritime Mode of Production: Raiding and Trading in Seafaring Chiefdoms,3,0.69884,87
-171,knorrcetina1981,The Manufacture of Knowledge: An Essay on the Constructivist and Contextual Nature of Science,4,0.632938,87
-171,halcrow2018,On Engagement with Anthropology: A Critical Evaluation of Developmental Abnormalities in the Atacama Preterm Baby and Issues of Forensic and Bioarchaeological Research Ethics. Response to Bhattacharya Et Al,5,0.544954,87
-171,bonacchi2018,The Heritage of Brexit: Roles of the past in the Construction of Identities through Social Media,6,0.568676,87
-171,bosl2017,Zur Wissenschaftsgeschichte der aDNA-Forschung,7,0.527434,87
-171,hall2017,Steppe Thugs Pacified by the Love of Stone Age Women,8,0.592434,87
-171,scodari2017,"When Markers Meet Marketing: Ethnicity, Race, Hybridity, and Kinship in Genetic Genealogy Television Advertising",9,0.519326,87
-171,contreras2014,Summed Radiocarbon Calibrations as A Population Proxy: A Critical Evaluation Using A Realistic Simulation Approach,10,0.683312,87
-171,james1999,"Excavations of a medieval cemetery at Skaill House, and a cist in the Bay of Skaill",11,0.559747,87
-171,barras2019,Story of Most Murderous People of All Time Revealed in Ancient DNA,12,0.432732,87
-171,hofmann2016,Keep on Walking: The Role of Migration in Linearbandkeramik Life,13,0.570893,87
-171,guidi1996,Nationalism without a Nation: The Italian Case,14,0.485951,87
-171,barras2018,Was Ancient Briton Dark-Skinned?,15,0.414227,87
-292,svestad1995,Oldsakenes orden. Om tilkomsten av arkeologi,1,0.206457,87
-292,holmberg2008,Natural resources in sub-Saharan Africa. Assets and vulnerabilities. Current African Issues 38. The Nordic Africa Institute,2,0.627513,87
-292,nussbaum1999,Sex and Social Justice,3,0.661058,87
-292,skolimowski1974,Problems of Rationality in Biology,4,0.68729,87
-292,nummedal1912,Bjørneremsfundet. Det Kgl. Norske Videnskabers Selskabs Skrifter,5,0.575091,87
-292,latour1993,We Have Never Been Modern. Harvester Wheatsheaf,6,0.635289,87
-292,kirshenblattgimblett1994,Spaces of dispersal,7,0.667195,87
-292,todorov1993,"On Human Diversity. Nationalism, Racism, and Exoticism in French Thought",8,0.469442,87
-292,grosjean2007,Ice-borne prehistoric finds in the Swiss Alps reflect Holocene glacier fluctuations,9,0.659953,87
-292,fraser2001,Recognition without ethics? Theory,10,0.577591,87
-292,weisman2007,The World Without Us,11,0.488653,87
-292,terrill2008,Climate change. How should the World Heritage Convention respond?,12,0.486405,87
-292,piotrowski2006,Auschwitz vs. Auschwitz,13,0.591428,87
-292,latour2005h,Making Things Public. Atmospheres of Democracy,14,0.579991,87
-292,samuel1994,Theatres of Memory,15,0.487538,87
-11,solberg1986,Lite påaktede gjenstandsgrupper i vestnorsk yngre steinalder,1,0.139883,86
-11,barth1976,Anlegg for massefangst av villrein i rondaneområdet,2,0.528792,86
-11,johansen1981,Kulturtilknytning og forutsetninger for en marginalekspansjon,3,0.505076,86
-11,fredriksen1983,Samer i Trysil?,4,0.480692,86
-11,grandell1986,Kredithandel med tilhjälp av karvstock. en epok i mänsklighetens historia,5,0.586406,86
-11,stenvik1988,Steinkøller med skaftfure,6,0.468335,86
-11,scheen1979,En Typologisk-Kronologisk Analyse,7,0.475239,86
-11,grimbe2013,Rapport från arkeologisk registrering i forbindelse med planarbete vid bullmuseet på gnr,8,0.376383,86
-11,bull2002,Vàrjjat sàmi musea čàllosat / varanger samiske museers skrifter 1. varangerbotn: varanger samiske museum,9,0.307423,86
-11,odner2000,"Tradition and Transmission. Bantu, Indo-European and Circumpolar Great Traditions",10,0.397253,86
-11,gustavsen2014,Geofysiske undersøkelser ved Høie Mellem,11,0.351044,86
-11,zachrisson2015,Samiska väskor på svenska örlogsskepp,12,0.40089,86
-11,apel2001,"Daggers, Knowledge and Power: The Social Aspects of Flint Dagger Technology in Scandinavia 2350 -1500 cal BC. Coast to Coast-Book 3",13,0.378581,86
-11,braseth2014,Samer sør for Midnattssole,14,0.470989,86
-11,spangen2010,Guder-makter-mennesker-ting. om deponering av sølv som offer,15,0.496076,86
-39,schlesinger1965,Über germanisches Heerkönigtum,1,0.171825,86
-39,ljungkvist2017,Two Workshops with Garnet Crafts in Gamla Uppsala,2,0.554555,86
-39,bergsveinn2007,New Perspectives on the Composition of the Ynglingatal,3,0.532425,86
-39,collis1995,The first towns,4,0.44375,86
-39,schnetz1990,"Ravennatis Anonymi cosmographia et Guidonis geographica. Itineraria Romana, 2",5,0.521744,86
-39,ellmers1985,Die Bedeutung der Friesen für die Handelsverbindungen des Ostseeraumes,6,0.495986,86
-39,etchingham2014,Names for the Vikings in Irish annals,7,0.397182,86
-39,sundqvist2018,"Kultpelare, rituellt hägn och religiösa processioner",8,0.388207,86
-39,bradley1991,Anglo-Saxon poetry. An anthology of Old English poems in prose translation,9,0.459926,86
-39,myrvoll2014,Distribusjon av metriske og språklege drag i høve til tradisjonell datering og attribuering. unpublished phd thesis,10,0.435821,86
-39,wood1977,"Kings, Kingdoms and Consent",11,0.41802,86
-39,sorensen1982,Nye arkaeologiske udgravninger i Gl,12,0.419579,86
-39,sawyer1991,När Sverige blev Sverige,13,0.421815,86
-39,hardh2002,Central Places in the Migration and Merovingian Periods,14,0.342752,86
-39,talbot1954,"Being the lives of S.S. Willibrord, Boniface, Sturm, Leoba and Lebuin, together with the Hodoeporicon of St. Willibald and a selection from the correspondence of St",15,0.392677,86
-43,nedoma1988,Die bildlichen und schriftlichen Denkmäler der Wielandsage,1,0.104032,86
-43,faulkes1989,Edda,2,0.748891,86
-43,oehrl2019,Re-interpretations of Gotlandic picture stones based on the reflectance transformation imaging method (RTI): Some examples,3,0.624149,86
-43,north2001,Loki's Gender: Or why Skaði Laughed,4,0.5442,86
-43,meyernd,Eine Untersuchung,5,0.563184,86
-43,quast2009,"Communication, migration, mobility, and trade. Explanatory models for exchange processes from the Roman Iron Age to the Viking Age",6,0.503684,86
-43,neckel1983,"A hall she saw standing far from the sun, on corpsestrand; its doors look north; poison-drops fall in through the roofvents, the hall is woven of serpent's spines. there she saw wading in turbid streams false-oaths swearers and murderers, and the seducer of another man's close confidante",7,0.510406,86
-43,hauck1982,Zum zweiten Band der Sutton Hoo-Edition,8,0.486512,86
-43,andreeff2014,Med hjärta och hjärna: En vänbok till professor Elisabeth Arwill-Nordbladh,9,0.456237,86
-43,faulkes1987,"Snorri Sturluson. Edda: Skâldskaparmâl, I-II",10,0.364196,86
-43,imer2001,Gotlandske billedsten -dateringen af Lindqvists gruppe C og D [Gotlandic picture stonesthe dating of Lindqvist's group C and D],11,0.317501,86
-43,hultgard1987,"Old Norse and Finnish Religions and Cultic Place-Names. Based on Papers Read at the Symposium on Encounters Between Religions in Old Nordic Times and on Cultic Place-Names Held at Åbo, Finland, on the 19th-21st of August",12,0.386508,86
-43,ellisdavidson1950,Gods and Heroes in Stone,13,0.430404,86
-43,north2003,Vǫluspá and the Book of Revelation,14,0.41683,86
-43,mundal1998,Androgyny as an Image of Chaos in Old Norse Mythology. Maal och Minne,15,0.32488,86
-49,kaland2008,Children and society in the Viking Age,1,0.190842,86
-49,haapasalo2000,Exercise-induced bone gain is due to enlargement in bone size without a change in volumetric bone density: a peripheral quantitative computed tomography study of the upper arms of male tennis players,2,0.995093,86
-49,tacitus1999a,Agricola and Germany,3,0.773256,86
-49,hooper2001,"Manly States: Masculinities, International Relations, and Gender Politics",4,0.51652,86
-49,preston2014,Summary: Identifying the Victims,5,0.560255,86
-49,soderberg2017,Några nyfynd ur museets magasin,6,0.556165,86
-49,weisner1977,My Brother's Keeper: Child and Sibling Caretaking,7,0.578355,86
-49,smallwood2007,Saltwater Slavery: A Middle Passage from Africa to American Diaspora,8,0.524188,86
-49,orchard2011,The Elder Edda,9,0.584577,86
-49,gilligan1990,Making connections: the relational worlds of adolescent girls at Emma Willard School,10,0.49983,86
-49,varney2000,"Playing with ""war fare",11,0.604499,86
-49,worldhealthorganization2018,Adverse Childhood Experiences International Questionnaire (ACE-IQ),12,0.59218,86
-49,honwana2006,Child soldiers in Africa,13,0.590185,86
-49,knusel2000,Activity-related skeletal change. In Blood red roses: the archaeology of a mass grave from the Battle of Towton AD 1461. Veronica Fiorato,14,0.502058,86
-49,keith2005,Childhood Learning and Distribution of Knowledge in Foraging Societies,15,0.532174,86
+community_id,name,title,rank,within_cluster_degree,cluster_size
+101,barrett2010,Rounding up the usual suspects: Causation and the Viking Age diaspora,1,87,88
+101,barrett2008,Detecting the Medieval Cod Trade: A New Method and First Results,2,87,88
+101,hughes1994,"Was there a 'Medieval Warm Period', and if so, where and when?",3,2,88
+101,dumville2002,The North Atlantic Monastic Thalassocracy: Sailing to the Desert in Early Medieval Insular Spirituality,4,2,88
+101,wallace2003,L'Anse aux Meadows and Vinland: an abandoned experiment,5,2,88
+101,nondier2002,"Le mythe viking en Normandie et ses paradoxes, in L'Héritage Maritime des Vikings en",6,2,88
+101,warner1976,Scottish Silver Arm-Rings: An Analysis of Weights,7,2,88
+101,brooks1971,The Development of Military Obligations in Eighth-and Ninth-Century England,8,2,88
+101,dyer2002,Making a living in the Middle Ages,9,2,88
+101,montgomery2003,"The Mineralization, Preservation and Sampling of Teeth: Strategies to Optimise Comparative Study and Minimise Age-Related Change for Lead and Strontium Analysis",10,2,88
+14,anchukaitis2017,"Last millennium Northern Hemisphere summer temperatures from tree rings: Part II, spatially resolved reconstructions",1,88,87
+14,swingedouw2010,Natural Forcing of Climate During the Last Millennium: Fingerprint of Solar Variability,2,1,87
+14,raspopov2008,The Influence of the De Vries (~200-Year) Solar Cycle on Climate Variations: Results From the Central Asian Mountains and Their Global Link,3,1,87
+14,schweingruber1978,The X-Ray Technique as Applied to Dendroclimatology,4,1,87
+14,stott1998,Scale-Dependent Detection of Climate Change,5,1,87
+14,bjorklund2014,"Blue Intensity and Density From Northern Fennoscandian Tree Rings, Exploring the Potential to Improve Summer Temperature Reconstructions with Earlywood Information",6,1,87
+14,stenchikov2006,Arctic Oscillation response to volcanic eruptions in the IPCC AR4 climate models,7,1,87
+14,melvin2004,Historical Growth Rates and Changing Climatic Sensitivity of Boreal Conifers,8,1,87
+14,torrence1998,A Practical Guide to Wavelets,9,1,87
+14,wang2015,Fragility of Reconstructed Temperature Patterns over the Common Era: Implications for Model Evaluation,10,1,87
+67,hartman2017,"Medieval Iceland, Greenland, and the New Human Condition: A case study in integrated environmental humanities",1,86,87
+67,halldorsson1978,Graenland í Miðaldaritum,2,1,87
+67,gudmundsson2008,Volcanic hazards in Iceland,3,1,87
+67,ogilvie2005,Local Knowledge and Travellers' Tales: A Selection of Climatic Observations in Iceland,4,1,87
+67,ogilvie1991,Climatic changes in Iceland AD. c. 865 to 1598,5,1,87
+67,hambrecht2015,The first European colonization of the North Atlantic,6,1,87
+67,pfister1998,Winter air temperature variations in Western Europe during the early and middle ages (AD 750-1300),7,1,87
+67,ludlow2010,The Utility of the Irish Annals as a Source for the Reconstruction of Climate,8,1,87
+67,hartman2015,Unpacking the Black Box: The Need for Integrated Environmental Humanities,9,1,87
+67,vanengelen2001,"A Millennium of Weather, Winds and Water in the Low Countries",10,1,87
+86,croix2019,"Single Context, Metacontext, and High Definition Archaeology: Integrating New Standards of Stratigraphic Excavation and Recording",1,86,87
+86,opitz2015,Three Dimensional Field Recording in Archaeology: An Example From Gabii,2,1,87
+86,carver2012,How to Archaeologize with a Hammer,3,1,87
+86,kimball2016,3d Delineation: A Modernisation of Drawing Methodology for Field Archaeology,4,1,87
+86,rimbert1961,"Vita Anskarii, in Quellen des 9. und 11. Jahrhunderts zur Geschichte der hamburgischen Kirche und des Reiches",5,1,87
+86,feveile2008,Series X and coin circulation in Ribe: two decades of discovery,6,1,87
+86,ottaway1970,Ribe ironworks,7,1,87
+86,orfanou2018,"Viking-age metals and urbanisation: the case of Ribe in Denmark, in Urban Network Evolutions. Towards a high-definition archaeology",8,1,87
+86,wouters2019,A Biographical Approach to Urban Communities From a Geoarchaeological Perspective: High-Definition Applications and Case Studies,9,1,87
+86,kraling2014,Digitale Dokumentation: Die Weiterentwicklung der Lübecker Archäologie,10,1,87
+171,frieman2019,"Present pasts in the archaeology of genetics, identity, and migration in europe: a critical essay",1,86,87
+171,james1999,"Excavations of a medieval cemetery at Skaill House, and a cist in the Bay of Skaill",2,1,87
+171,trigger1984,"Alternative Archaeologies: Nationalist, Colonialist, Imperialist",3,1,87
+171,eisenmann2018,Reconciling Material Cultures in Archaeology with Genetic Data: The Nomenclature of Clusters Emerging from Archaeogenomic Research,4,1,87
+171,mathieson2018,The Genomic History of Southeastern Europe,5,1,87
+171,wailoo2012,Genetic Claims and Credibility: Revisiting History and Remaking Race,6,1,87
+171,szecsenyinagy2014,Ancient DNA Evidence for a Homogenous Maternal Gene Pool in Sixth Millennium Cal BC Hungary and the Central European LBK,7,1,87
+171,champion1996,Three Nations or One? Britain and the National Use of the Past,8,1,87
+171,bonacchi2018,The Heritage of Brexit: Roles of the past in the Construction of Identities through Social Media,9,1,87
+171,shennan2013,Regional Population Collapse Followed Initial Agriculture Booms in Mid-Holocene Europe,10,1,87
+292,solli2011,The archaeology of ice. Finds from the Frozen Past. Exhibition in Historical Museum,1,86,87
+292,olsen1986,Norwegian Archaeology and the People Without (pre-) History. or How to Create a Myth of a Uniform Past,2,1,87
+292,watson1971,Explanation in Archaeology. An Explicitly Scientific Approach,3,1,87
+292,oestigaard2007,Political Archaeology and Holy Nationalism. Archaeological Battles over the Bible and Land in Israel and Palestine from 1967-2000,4,1,87
+292,sanden2008,Veøy gamle kirke. Romsdalsmuseets Årbok,5,1,87
+292,white1949,The Science of Culture,6,1,87
+292,partner2009,Narrative Persistence. the Postmodern Life of Narrative Theory,7,1,87
+292,smail2007,On Deep History and the Brain,8,1,87
+292,moberg1977,Den långa stubinen. miljarder människor -miljoner år,9,1,87
+292,waterton2006,The utility of discourse analysis to heritage studies. The Burra Charter and social inclusion,10,1,87
+11,amundsen2017,Changing histories and ethnicities in a Sámi and Norse borderland,1,87,86
+11,schanche1985,Var de alle nordmenn? En etnopolitisk kritikk av norsk arkeologi In Arkeologi og etnisitet. Ams-Varia 15,2,1,86
+11,bakka1976,"Arktisk og nordisk i bronsealderen i Nordskandinavia. Miscellanea 25, Det Kongelige norske videnskabers selskab",3,1,86
+11,sommerseth2011,Archaeology and the Debate on the Transition from Reindeer Hunting to Pastoralism,4,1,86
+11,gjessing1945,To Hamrer Til Samiske Runebommer,5,1,86
+11,brendalsmo2003,"Kirker, høvdinger og storbønder i Elvedalene",6,1,86
+11,skjolsvold1981,En tidlig romertids grav i rendalsfjellene og noen tanker omkring den eldste jernalderbosetning i sydnorske innlandsstrøk,7,1,86
+11,smith2006,Uses of Heritage,8,1,86
+11,amundsen2015,"Different Bronze Ages -The Emergence of Diverging Cultural Traditions in the Southern Inland, Norway",9,1,86
+11,grandell1986,Kredithandel med tilhjälp av karvstock. en epok i mänsklighetens historia,10,1,86
+39,skre2019,"Rulership in 1st to 14th Century Scandinavia: Royal Graves and Sites at Avaldsnes and Beyond, Ergänzungsbände zum Reallexikon der Germanischen Altertumskunde",1,85,86
+39,reichert1990,Lexikon der altgermanischen Namen,2,1,86
+39,bergsveinn2007,New Perspectives on the Composition of the Ynglingatal,3,1,86
+39,mundal2018,Avaldsnes and Kormt in Old Norse Written Sources,4,1,86
+39,fulk2014,Beowulf and Language History,5,1,86
+39,wolfram2008,Terminologisches,6,1,86
+39,ljungkvist2017,Two Workshops with Garnet Crafts in Gamla Uppsala,7,1,86
+39,neidorf2017,"The transmission of Beowulf. Language, culture, and scribal behavior",8,1,86
+39,andren2014,"Tracing Old Norse Cosmology: The World Tree, Middle Earth, and the Sun from Archaeological Perspectives",9,1,86
+39,wood1994,The Merovingian kingdoms 450-751,10,1,86
+43,oehrl2019,Re-interpretations of Gotlandic picture stones based on the reflectance transformation imaging method (RTI): Some examples,1,85,86
+43,oehrl2017,Der göttliche Schiffsbegleiter mit dem 'Hörnerhelm'. Ein bislang unbekanntes wikingerzeitliches Bildsteinfragment aus St. Valle im Kirchspiel Rute auf Gotland,2,70,86
+43,schreiner2000,"Märtyrer, Schlachtenhelfer, Friedensstifter. Krieg und Frieden im Spiegel mittelalterlicher und frühneuzeitlicher Heiligenverehrung. Otto-von-Freising-Vorlesungen der Katholischen Universität Eichstätt",3,2,86
+43,ellmers1970,Zur Ikonographie nordischer Goldbrakteaten,4,2,86
+43,blindheim1972,Sigurds Saga i middelalderens billedkunst: Utstilling i Universitets Oldsaksamling 1972-1973,5,2,86
+43,quast2009,"Communication, migration, mobility, and trade. Explanatory models for exchange processes from the Roman Iron Age to the Viking Age",6,2,86
+43,olrik1922,Ragnarök. Die Sagen vom Weltuntergang. Übertragen von Wilhelm Ranisch,7,2,86
+43,faulkes1987,"Snorri Sturluson. Edda: Skâldskaparmâl, I-II",8,2,86
+43,devries1933,The Problem of Loki. FF Communications No. 110. Helsinki: Suomalainen Tiedeakatemia,9,2,86
+43,holmqvist1939,Kunstprobleme der Merowingerzeit,10,2,86
+49,raffield2019,"Playing Vikings: Militarism, hegemonic masculinities, and childhood enculturation in Viking Age Scandinavia",1,85,86
+49,grahamcampbell2001h,"Vikings and the Danelaw: Select Papers from the Proceedings of the Thirteenth Viking Congress, Nottingham and York, 21-30 August 1997",2,1,86
+49,worldhealthorganization2018,Adverse Childhood Experiences International Questionnaire (ACE-IQ),3,1,86
+49,mellor2014,Seeing the Medieval Child: Evidence From Household and Craft,4,1,86
+49,shimahara1970,Enculturation-a Reconsideration,5,1,86
+49,whitehouse2017,The Weapons Make the Man? a Re-Analysis of Early Anglo-Saxon Weapon Burial and Interpretation,6,1,86
+49,kamp2015,Children and Their Childhoods: Retrospectives and Prospectives,7,1,86
+49,blackmore2011,"How to Queer the past Without Sex: Queer Theory, Feminisms and the Archaeology of Identity",8,1,86
+49,reynolds1991,Dance civet cat: child labour in the Zambezi,9,1,86
+49,hadley2016a,Children and Migration,10,1,86
+222,knudson2012,Migration and Viking Dublin: Paleomobility and paleodiet through isotopic analyses,1,87,86
+222,sillen1989,Diagenesis of the Inorganic Phase of Cortical Bone,2,1,86
+222,muller2003,Die Kleidung nach Quellen des frühen Mittelalters,3,1,86
+222,bowen2002,Spatial Distribution of {delta} 18 O in Meteoric Precipitation,4,1,86
+222,sexton1998,A Little History of Irish Food,5,1,86
+222,wright2005,"Identifying Immigrants to Tikal, Guatemala: Defining Local Variability in Strontium Isotope Ratios of Human Tooth Enamel",6,1,86
+222,wallace1994,Sr isotope data for the tertiary lavas of northern ireland: evidence for open system petrogenesis,7,1,86
+222,linderholm2011,Stable Isotope Analysis of a Medieval Skeletal Sample Indicative of Systemic Disease From Sigtuna Sweden,8,1,86
+222,shaw2009,"The use of strontium isotopes as an indicator of migration in human and pig Lapita populations in the Bismarck archipelago, Papua New Guinea",9,1,86
+222,schoeninger1979,Diet and Status at Chalcatzingo: Some Empirical and Technical Aspects of Strontium Analysis,10,1,86
+277,brewer2018,Cultural Heritage and Climate Adaptation: A Cultural Evolutionary Perspective for the Anthropocene,1,85,86
+277,scott1999,Seeing like A State: How Certain Schemes to Improve the Human Condition Have Failed,2,1,86
+277,sugiyama2008,Information Is the Stuff of Narrative,3,1,86
+277,pancost2017,Climate Change Narratives,4,1,86
+277,riede2017,From Crisis to Collapse in Hunter-Gatherer Societies. A Comparative Investigation of the Cultural Impacts of Three Large Volcanic Eruptions on past Hunter-Gatherers,5,1,86
+277,ellis2015,Ecology in an Anthropogenic Biosphere,6,1,86
+277,adger2006,Vulnerability,7,1,86
+277,boogert2006,The Implications of Niche Construction and Ecosystem Engineering for Conservation Biology,8,1,86
+277,wrangham2010,Human Adaptation to the Control of Fire,9,1,86
+277,larson2013,Exapting Exaptation,10,1,86
+287,andren2000,Re-Reading Embodied Texts: An Interpretation of Rune-Stones,1,85,86
+287,lindkvist1988,"Plundring, skatter och den feodala statens fi an&värrt. organisatoriska tendense& i sve&i ge ande& ö ve& gå n gen flå n vilingatid till tidig medeltid",2,1,86
+287,gustavson1988,Jarlabanke och hundaret. ett arkeologiskt/runologiskt bidrag till lösningen av ett historiskt tolkningsproblem. namn och bygd 76,3,1,86
+287,runinskrifter1984,All other figures are based on figures in Sna:sdal Brink k,4,1,86
+287,lindstrom1992,"Senvilingatida runstenar i Skandinavien, Kristna eller arvsrä ttsliga dokument? En jämförelse mellan Södern&anland och Skåne. Duplicated seminar paper",5,1,86
+287,moltke1974,The Jelling Monument in the Light of the Runic Inscriptions,6,1,86
+287,svenbro1975,Phrasikleia. An anthropology of reading in ancient Greece,7,1,86
+287,hubler1996,Schwedische Runendichtung der Wikingerzeit,8,1,86
+287,lindblad1992,Ko&sbandhstena&. en Inonologisk studie. Duplicated seminar paper,9,1,86
+287,marcus1992,"Mesoamerican IJtriting Systems. Propaganda, Myth, and History in Four Ancient Civilisations",10,1,86
+172,milek2012,"Floor Formation Processes and the Interpretation of Site Activity Areas: An Ethnoarchaeological Study of Turf Buildings at Thvera, Northeast Iceland",1,86,85
+172,magnusson1972,Sögualdarbyggð í Hvítárholti. Árbók Hins íslenska fornleifafélags,2,1,85
+172,iceland1985,Det går i spin: forsøk på klassifikasjon av spinnehjul i rogaland,3,1,85
+172,agnarsdottir1983,Þraelahald á þjóðveldisöld,4,1,85
+172,kobylinski1997,Settlement Structures in Central Europe at the Beginning of the Middle Ages,5,1,85
+172,magnusson1973,Sögualdarbyggð í Hvítárholti,6,1,85
+172,gudrun2008,The finds from the Viking Age area and the wet meadow,7,1,85
+172,bartram1991,Variability in Camp Structure and Bone Food Refuse Patterning at Kua San Hunter-Gatherer Camps,8,1,85
+172,gronlie2006,"Íslendingabók, Kristni Saga: The Book of Icelanders, the Story of the Conversion",9,1,85
+172,taylor1956,Pre-Scientific Industrial Chemistry,10,1,85
+149,nilsen1990,Trelleborg. Aarbøger for Nordisk Oldkyndighed Og Historie,1,0,85
+149,hohenberg1995,The Making of Urban Europe 1000-1994,2,0,85
+149,juel2010,"Obm8935 hjulby (kampagne 2009), nyborg landsogn. arkaeologisk udgravning af vaerkstedsplads med grubehuse og kulturlag fra yngre germansk jernalder-tidlig middelalder samt bebyggelse fra yngre jernalder. arkaeologisk rapport nr",3,0,85
+149,pagh2016,Tamdrup. Kongsgård og mindekirke i nyt lys,4,0,85
+149,jacobsson2003,"Trelleborg and the southern plain during the iron age. A study of a coastal area in South-West Scania, Sweden",5,0,85
+149,bertelsen1992,Urnesfibler i Danmark. Aarbøger for Nordisk Oldkyndighed Og Historie,6,0,85
+149,lauritsen1974,Volden omkring vikingetidens Odense,7,0,85
+149,jacobsen2000,Vor Skjulte Kulturarv. Arkaeologien Under Overfladen,8,0,85
+149,mathiesen1927,Middelalderlige byer. Beliggenhed og baggrund,9,0,85
+149,harnow2005,Odense havn og kanal gennem 200 år,10,0,85
+9,price2018,Multi-Isotope Proveniencing of Human Remains from a Bronze Age Battlefield in the Tollense Valley in Northeast Germany,1,83,82
+9,hermann2017,After Collapse: the Regeneration of Complex Societies,2,1,82
+9,weihed2005,Precambrian geodynamics and ore formation: The Fennoscandian Shield,3,1,82
+9,thomas2010,Islanders: the Pacific in the Age of Empire,4,1,82
+9,nironen1997,The Svecofennian Orogen: a tectonic model,5,1,82
+9,lightfoot2016,"On the Use of Biomineral Oxygen Isotope Data to Identify Human Migrants in the Archaeological Record: Intra-Sample Variation, Statistical Methods and Geographical Considerations",6,1,82
+9,bentley2007,"Seascapes: Maritime Histories, Littoral Cultures, and Transoceanic Exchanges",7,1,82
+9,redknap2004b,"Land, Sea and Home: Viking-period Settlement",8,1,82
+9,stolpendc,Ett och annat på Björkö,9,1,82
+9,ratnagar2001,The Bronze Age: Unique Instance of a Pre- Industrial World System? Current Anthropology 42,10,1,82
+52,bill2019,5. The Ship Graves on Kormt – and Beyond,1,81,82
+52,crosman1980,Do readers make meaning?,2,1,82
+52,ringstad2004,Datering av storhauger,3,1,82
+52,bill1991,Vikingeskibe som experimentelt arbejdsområde,4,1,82
+52,north2007,Image and ascendancy in Úlfr's 'Húsdrápa,5,1,82
+52,fulk2012,Therese 2011: skånes vikingatida skeppssättningar. en undersökning med vätterydsgravfältet som utgångspunkt,6,1,82
+52,lindow1997,Murder and vengeance among the gods. Baldr in Scandinavian mythology,7,1,82
+52,bill2015,Et faelles hav -Skagerrak og Kattegat i vikingetiden,8,1,82
+52,bratt2004,Anundshöget maktcentrum i västmanland under yngre järnåldern,9,1,82
+52,leontev2017,Osteuropäische Verkehrswege und Handelsbeziehungen vom Ende des 8. bis zum 10. Jahrhundert,10,1,82
+110,star2017,Ancient DNA reveals the Arctic origin of Viking Age cod from Haithabu,1,83,82
+110,jackson2001,Historical Overfishing and the Recent Collapse of Coastal Ecosystems,2,1,82
+110,selkoe2016,A Decade of Seascape Genetics: Contributions to Basic and Applied Marine Connectivity,3,1,82
+110,wickler2014,Tracing the development of fishing settlement from the Iron Age to the Modern Period in northern Norway: A case study from Borgvaer in the Lofoten Islands,4,1,82
+110,sundby2008,Spatial Shifts in Spawning Habitats of Arcto-Norwegian Cod Related to Multidecadal Climate Oscillations and Climate Change,5,1,82
+110,sodeland2016,"Islands of Divergence"" in the Atlantic Cod Genome Represent Polymorphic Chromosomal Rearrangements",6,1,82
+110,lotze2009,Historical Baselines for Large Marine Animals,7,1,82
+110,knutsen2010,Are Low but Statistically Significant Levels of Genetic Differentiation in Marine Fishes 'biologically Meaningful'? a Case Study of Coastal Atlantic Cod,8,1,82
+110,schmolcke2006,Die Tierknochen aus dem Hafen von Haithabu-Schlämmfunde. Bericht über die Ausgrabungen in Haithabu 35,9,1,82
+110,barrett1999,Archaeo-ichthyological evidence for long-term socioeconomic trends in Northern Scotland: 3500 BC to AD 1500,10,1,82
+282,furholt2018,Massive migrations? The impact of recent aDNA studies on our view of third millennium Europe,1,81,82
+282,smith2017,"How Can Archaeologists Identify Early Cities: Definitions, Types, and Attributes",2,1,82
+282,brettell2014,Migration Theory: Talking across Disciplines,3,1,82
+282,ohara2014,Austerity Bites: A Journey to the Sharp End of Cuts in the UK,4,1,82
+282,vanderlinden2012,The Importance of Being Insular: Britain and Ireland in their North-western European Context During the 3rd Millennium BC,5,1,82
+282,jones2017,The Neolithic Transition in the Baltic Was Not Driven by admixture with Early European Farmers,6,1,82
+282,pemberton2012,Genomic Patterns of Homozygosity in Worldwide Human Populations,7,1,82
+282,gunther2016,Genes Mirror Migrations and Cultures in Prehistoric Europe: A Population Genomic Perspective,8,1,82
+282,schadelindig2010,Woher kommt Flomborn? Keramikimporte und Nachahmungen in der bandkeramischen Siedlung Bad Nauheim-Nieder-Mörlen 'auf dem Hempler,9,1,82
+282,heyd2017,Kossinna's Smile,10,1,82
+8,croix2015,"The Vikings, Victims of their Own Success? A Selective View on Viking Research and its Dissemination",1,80,81
+8,feveile2009,"Vikingetidsgravpladsen ved hunderup -15 jordfae stegrave omkring en storstensgrav fra stenalderen. by, marsk og geest 21",2,3,81
+8,mcdonald2014,The Viking Age: A Reader,3,1,81
+8,talvio2014,The Viking Age in Finland. Numismatic Aspects,4,1,81
+8,gardela2014,Scandinavian Amulets in Viking Age Poland,5,1,81
+8,feveile2010,Mayen Lava Quern Stones from the Ribe Excavations 1970-1976,6,1,81
+8,ingstad1977,The discovery of Norse settlement in America: excavations at L'Anse aux Meadows,7,1,81
+8,sedov1985,Srednevekovaja Ladoga: Novye Archeologicheskie Otkrytija I Issledovanija,8,1,81
+8,bencard1979,Ribe Excavations,9,1,81
+8,schalin2014,Scandinavian-Finnish Language Contact in the Viking Age in the Light of Borrowed Names,10,1,81
+216,baastrup2014,Continental and insular import in Viking Age Denmark: Distribution and circulation,1,80,81
+216,birkedahlchristensen1924,En Handelsplads fra Yngre Jernalder og Vikingetid ved Sebbersund,2,1,81
+216,ryan1987,Some Aspects of Sequence and Style in the Metalwork of the Derrynaflan Hoard,3,1,81
+216,kleingartner2010,Trade Contacts as Reflected in Archaeological Finds: Costume Accessories,4,1,81
+216,ulriksen1970,Non-Agrarian Settlements and Integrated Survey and Excavation Strategy,5,1,81
+216,hyvass1986,Da Klinger i Muld... 25 Års Arkeologi i Danmark,6,1,81
+216,grahamcampbell1991,The Anglo-Saxons,7,1,81
+216,wilson1960a,Anglo-Saxon Art from the Seventh Century to the Norman Conquest,8,1,81
+216,ryan1997,The Derrynaflan Hoard and Early Irish Art,9,1,81
+216,frick1992,Karolingisch-Ottonische Scheibenfibeln des Nördlichen Formenkreises,10,1,81
+68,jackson2018,"Disequilibrium, adaptation, and the Norse settlement of Greenland",1,75,76
+68,sandvik2005,Laws,2,1,76
+68,zeder2016,Domestication as a Model System for Niche Construction Theory,3,1,76
+68,howardjohnston1993,"Arkeologiske data og kulturhistorisk tolkning. I Festskrift til Anders Hagen,redigert av Svein Indrelid",4,1,76
+68,keller1989,The Eastern Settlement Reconsidered. Some analyses of Norse Medieval Greenland,5,1,76
+68,kuijpers2014,Impact of Medieval Fjord Hydrography and Climate on the Western and Eastern Settlements in Norse Greenland,6,1,76
+68,mason2007,North American bows and quivers,7,1,76
+68,scott2008,Tooth-tool use and yarn production in Norse Greenland,8,1,76
+68,lynnerup2014,Viking Settlers of the North Atlantic: An Isotopic Approach,9,1,76
+68,park2005,Growing up north: Exploring the archaeology of childhood in Thule and Dorset cultures of Arctic Canada,10,1,76
+146,stott2019,Searching for Viking Age Fortresses with Automatic Landscape Classification and Feature Detection,1,75,76
+146,hesse2010,LiDAR-derived local relief models e a new tool for archaeological prospection,2,1,76
+146,thurston2002,"Landscapes of Power, Landscapes of Conflict. State Formation in the South Scandinavian Iron Age",3,1,76
+146,bryant1987,Ramparted ground ice depressions in Britain and Ireland,4,1,76
+146,davis2019,Object-Based Image Analysis: A Review of Developments and Future Directions of Automated Feature Detection in Landscape Archaeology,5,1,76
+146,lambers2016,Automated Detection in Remote Sensing Archaeology: A Reading List,6,1,76
+146,french2018,"The Periglacial Environment, 4th",7,1,76
+146,zhu2006,Fusion of Multisensor Multitemporal Satellite Data for Land Cover Mapping,8,1,76
+146,zhang2018,Automatic Identification of Center Pivot Irrigation Systems from Landsat Images Using Convolutional Neural Networks,9,1,76
+146,cowley2012,Historic Aerial Photographic Archives for European Archaeology,10,1,76
+151,keller2016,The northern frontier -North Atlantic farming during the Viking and Middle Ages,1,75,76
+151,arge1991,The landnám in the Faroes,2,1,76
+151,lambin2005,"Conditions for Sustainability of Humanenvironment Systems: Information, Motivation, and Capacity",3,1,76
+151,hansen1990,Samisk fangstsamfunn og norsk høvdingeøkonomi,4,1,76
+151,thomson2005,Sustainable rangeland grazing in Norse Faroe,5,1,76
+151,hermannsson1929,Icelandic Manuscripts,6,1,76
+151,arneborg2004,Grønlands Forhistorie,7,1,76
+151,skardi1970,Faroese Cultivating and Peat Spades,8,1,76
+151,mairs2007,Islands and Human Impact: Under What Circumstances Do People Put Unsustainable Demands on Island Environments? Evidenence From the North Atlantic,9,1,76
+151,mcgovern1986,The Paleoeconomy of Norse Greenland: Adaption and Extinction in a Tightly Bound Ecosystem,10,1,76
+87,hennius2018,Whalebone gaming pieces: Aspects of marine mammal exploitation in Vendel and Viking Age Scandinavia,1,74,75
+87,lundkoksvik2010,Spill I Middelalderens Bysamfunn,2,1,75
+87,duczko1996,"Uppsalahögarna som symboler och arkeologiska källor. Duczko, W. (red.) Arkeologi och miljögeologi i Gamla Uppsala. Volym II. Occasional papers in archaeology 7",3,1,75
+87,kristensen2007,Brettspilletjernalderkrigerens virtuelle arena: strategispill i sørøstnorsk jernalder,4,1,75
+87,konsa2013,"Tallinn: National Heritage Board, Tallinn Culture and Heritage Department",5,1,75
+87,skrede2005,Shielings and Landscape in Western Norway-Research Traditions and Recent Trends,6,1,75
+87,nilsen2014,Den nordlige jernalder: Kulturminner og funn fraa Malangen til Loppa. Tromsö: Nordtroms Museum,7,1,75
+87,riddler2014,The Archaeology of the Anglo-Saxon Whale,8,1,75
+87,sjovold1966,Whale-Bone Tools in the Iron Age of North Norway,9,1,75
+87,szabo2008,Monstrous Fishes and the Mead-Dark Sea: Whaling in the Medieval North Atlantic,10,1,75
+281,rundkvist2010,"Domed oblong brooches of Vendel period Scandinavia: Ørsnes types N and O and similar brooches, including transitional types surviving into the early Viking period",1,74,75
+281,jensen2006,Kastrup-Fundet ved Gram i Sønderjylland: En Fyrstelig Grav fra Ældre Romersk Jernalder?,2,1,75
+281,spirgis2007,Cultural interaction between east and west. Stockholm Studies in Archaeology 44,3,1,75
+281,ambrosiani1956,Fyrisleden,4,1,75
+281,rydh1936,"Förhistoriska undersökningar på Adelsö, Kungliga Vitterhets Historie och Antikvitets Akademien, Almqvist & Wiksell",5,1,75
+281,worsaaenda,Nordiske oldsager. Det kongelige museum i Kjöbenhavn,6,1,75
+281,beskowsjoberg1987a,Funerary Rites and Artefacts in Island Communities,7,1,75
+281,nerman1929,Die Verbindungen zwischen Skandinavien und dem Ostbaltikum in der jüngeren Eisenzeit,8,1,75
+281,schonbeck2002,De vikingatida båtgravarna vid valsgärde -relativ kronologi. fornvännen 97,9,1,75
+281,wamers1999,Zwischen Salzburg und Oseberg. Zu Ursprung und Ikonographie des nordischen Greiftierstils,10,1,75
+33,raffield2018,"Polygyny, concubinage and the social lives of women in Viking Age Scandinavia",1,73,74
+33,broude1976,Cross-Cultural Codes on Twenty Sexual Attitudes or Practices,2,1,74
+33,lunde1983,Ibn Fadlān and the Land of Darkness,3,1,74
+33,karras1992,Servitude and Sexuality,4,1,74
+33,omariba2007,Family Structure and Child Mortality in Sub-Saharan Africa: Cross-National Effects of Polygyny,5,1,74
+33,audur2008,Women and Sexual Politics,6,1,74
+33,einarol1934,Laxdœla Saga,7,1,74
+33,caldwell1998,"The Construction of Adolescence in a Changing World: Implications for Sexuality, Reproduction, and Marriage",8,1,74
+33,barry1981,Female Sexual Slavery: Understanding the International Dimensions of Women's Oppression,9,1,74
+33,sigfusson1940,"Björn Sigfússon (útg.), Ljósvetninga saga með ϸáttum. Reykdoela saga ok Víga-Skútu. Hreiðars ϸáttr (Íslenzk Fornrit 10)",10,1,74
+80,raffield2016,Male-Biased Operational Sex Ratios and the Viking Phenomenon: An Evolutionary Anthropological Perspective on Late Iron Age Scandinavian Raiding,1,74,73
+80,geake1997,The Use of Grave-Goods in Conversion-Period England,2,1,73
+80,coleman2015,Kvinner i vikingtid,3,1,73
+80,montgomery2008,Arabic sources on the Vikings,4,1,73
+80,jochens1991,The illicit love visit: an archaeology of Old Norse sexuality,5,1,73
+80,lundraffield1989,Allies of God or Man? The Viking Expansion in a European Context,6,1,73
+80,opdahl2003,Familie-og slektskapsstrukturer -en innfallsvinkel til studier av sosiale relasjoner i eldre jernalder,7,1,73
+80,baker1997,From Military Geography to Militarism's Geographies: Disciplinary Engagements with the Geographies of Militarism and Military Activities,8,1,73
+80,karras1990,Concubinage and Slavery in the Viking Age,9,1,73
+80,williams1983,Raiding and Warfare in the North Sea and Baltic: The Impact of the Viking Age,10,1,73
+123,rasmussen2014,Securing Cultural Heritage Objects and Fencing Stolen Goods? a Case Study on Museums and Metal Detecting in Norway,1,72,73
+123,troim1999,Arkeologisk forskning og det lovregulerte fornminnevernet: en studie av fornminnevernets utvikling i perioden 1905-1978,2,1,73
+123,fabech2012,Metallsökning inom uppdragsarkeologin: en angelagen diskussion,3,1,73
+123,mahdy2006,Den egyptiske samling i kulturhistorisk museum ved universitetet i oslo: en studie av gjenstandenes historie og drøfting av spørsmål om tilbakeføring,4,1,73
+123,hougen1961,Fra samling til museum: opprinnelsen til samlingen af nordiske oldsager,5,1,73
+123,kallman2007,Brott under ytan: en undersökning om fornminnesbrott: en BRÅ-rapport i samarbete med Riksantikvarieämbetet och Länsstyrelsen på Gotland,6,1,73
+123,kersel2012,The Value of a Looted Object: Stakeholder Perceptions in the Antiquities Trade,7,1,73
+123,lewis2012,The Portable Antiquities Scheme annual report,8,1,73
+123,kvale1997,Det Kvalitative Forskningsintervju,9,1,73
+123,silverman1993,"Interpreting Qualitative Data: Methods for Analyzing Talk, Text and Interaction",10,1,73
+150,devos2013,A Soil Micromorphological Study on the Origins of the Early Medi eval Trading Centre of Antwerp (Belgium),1,54,73
+150,wouters2016,Geoarchaeological and Micromorphological Approaches to the Formation and Biographies of Early Medieval Towns in Northwest Europe,2,38,73
+150,milek2007,Soils and Sediments in the Settlement and Harbour at Kaupang,3,2,73
+150,nicosia2012,Medi eval Dark Earth in an Active Alluvial Setting from the Uffizi Gallery Complex,4,2,73
+150,gebhardt1999,"Micromorphological Study of Construction Mater ials and Living Floors in the Medi eval Motte of Werken (West Flanders, Belgium)",5,2,73
+150,tys2010,The Scheldt Estuary as a Framework for Early Medi eval Settlement Development,6,2,73
+150,macphail2003,"The experimental earthwork at Wareham, Dorset after 33 years: changes to the buried LFH and Ah horizon",7,2,73
+150,bullock1985,Handbook for Soil Thin Section Description,8,2,73
+150,borderie2011,"L'espace urbain entre antiquité et moyen âge, analyse géoarchéologique des terres noires, étude de cas",9,2,73
+150,verhaeghe2005,Urban developments in the age of Charlemagne,10,2,73
+158,schneidhofer2017,"Palaeoenvironmental analysis of large-scale, high-resolution GPR and magnetometry data sets: The Viking Age site of Gokstad in Norway",1,72,73
+158,howard2008,Archaeological Resource Modelling in Temperate River Valleys: A Case Study From the Trent Valley,2,1,73
+158,kneisel2008,Advances in geophysical methods for permafrost investigations,3,1,73
+158,tamura2012,"Luminescence Dating of Beach Ridges for Characterizing Multi-Decadal to Centennial Deltaic Shoreline Changes During Late Holocene, Mekong River Delta",4,1,73
+158,burke2008,"Controls on the sedimentary architecture of a single event englacial esker: skeiðarárjökull, iceland",5,1,73
+158,hodgson1976,Soil Survey Field Handbook: Describing and Sampling Soil Profiles,6,1,73
+158,linford2006,The Application of Geophysical Methods to Archaeological Prospection,7,1,73
+158,armstrong1953,Archaeological Geophysical Prospection in Peatland Environments,8,1,73
+158,butzer1982,Predictive Modelling of Multiperiod Geoarchaeological Resources at a River Confluence: A Case Study From the Trent-Soar,9,1,73
+158,komar1998,"Beach Processes and Sedimentation, 2nd Edn",10,1,73
+251,reiter2019,Interpreting past Human Mobility Patterns: A Model,1,72,73
+251,kelly1992,"Mobility/Sedentism: Concepts, Archaeological Measures and Effects",2,1,73
+251,haak2008,"Ancient DNA, strontium isotopes, and osteological analyses shed light on social and kinship organization of the later Stone Age",3,1,73
+251,heberle1938,The Causes of Rural-Urban Migration: A Survey of German Theories,4,1,73
+251,scharlotta2018,"Differentiating Mobility and Migration in Middle Holocene Cis-Baikal, Siberia",5,1,73
+251,jockenhovel1994,Bronzezeit in Deutschland,6,1,73
+251,stewart2017,Sex Determination Using Peptides from Tooth Enamel,7,1,73
+251,plomp2017,TIMS Analysis of Neodymium Isotopes in Human Tooth Enamel Using 1013 Ω Amplifiers,8,1,73
+251,lee1966,A Theory of Migration,9,1,73
+251,frobeniusnda,Die Naturwissenschaftliche Culturlehre,10,1,73
+1,lund2021,Crossing the Maelstrom: New Departures in Viking Archaeology,1,71,72
+1,gossler2018,"Wikinger und Balten an der Memel, Die Ausgrabungen des frühgeschichtlichen Gräberfeldes von Linkuhnen in Ostpreußen 1928-1939",2,1,72
+1,toplak2016,Das wikingerzeitliche Gräberfeld von Kopparsvik auf Gotland: Studien zu neuen Konzepten sozialer Identitäten am Übergang zum christlichen Mittelalter,3,1,72
+1,kershaw2019,"Silver, Butter, Cloth: Monetary and Social Economies in the Viking Age",4,1,72
+1,gruszczynski2018,"Silver, Hoards and Containers: The Archaeological and Historical Context of Viking-Age Silver Coin Deposits in the Baltic c",5,1,72
+1,lemm2013,Die frühmittelalterlichen ringwa lle im westlichen und mittleren holstein,6,1,72
+1,mcanany2010,"Questioning Collapse: Human Resilience, Ecological Vulnerability, and the Aftermath of Empire",7,1,72
+1,eriksson2018,Gamla Uppsala: Människor och makterna i högarnas skugga,8,1,72
+1,mikhaylov2016,Elitarnyy pogrebalnyy obryad Drevney Rusi: Kamernyye pogrebeniya IX -Nachala XI veka v kontekste severoyevropeyskikh analogiy / Elite Funeral Rite of Ancient Russia: Chamber-graves of the Late 9th -Early 11th Centuries in the Context of North European Analogies,9,1,72
+1,jennbert2015,Animals and Humans: Recurrent Symbiosis in Archaeology and Old Norse Religion,10,1,72
+81,price2019,Vikings in Russia: Origins of the medieval inhabitants of Staraya Ladoga,1,70,71
+81,unmarknylen1981,Vikingatidens ABC,2,1,71
+81,alqahtani2010,Brief Communication: The London Atlas of Human Tooth Development and Eruption,3,1,71
+81,roesdahl2016,"The Vikings, 3rd edn",4,1,71
+81,dowson2006,"Archaeologists, Feminists and Queers: Sexual Politics in the Construction of the Past",5,1,71
+81,sorensen1983,The Unmanly Man: Concepts of Sexual Defamation in Early Northern Society,6,1,71
+81,stolpe2019,"Twenty volumes plus six manuscripts and plans, stored in the Antiquarian Topographical Archives in Stockholm",7,1,71
+81,platonova1996,In elaboration of dating of the cemetery on Zemlyanoe Gorodishche of the Staraya Ladoga,8,1,71
+81,ghisleni2016,Binary Binds': Deconstructing Sex and Gender Dichotomies in Archaeological Practice,9,1,71
+81,raffensperger2014,The place of Rus' in medieval Europe,10,1,71
+142,catlin2016,"Archaeology for the Anthropocene: Scale, Soil, and the Settlement of Iceland",1,70,69
+142,streeter2015,The onset of the palaeoanthropocene in iceland: changes in complex natural systems,2,1,69
+142,bolender2008,Unsettled Landscapes: Settlement Patterns and the Development of Social Inequality in Northern Iceland,3,1,69
+142,wilson1989,Alterations to Ridge and Furrow: Some Examples Illustrated,4,1,69
+142,rockman2012,The Necessary Roles of Archaeology in Climate Change Mitigation and Adaptation,5,1,69
+142,catlin2013,Second nature: icelandic landscapes of social inequality. 112th Annual Meeting of the American Anthropological Association,6,1,69
+142,melville1990,Environmental and social change in the Valle del Mezquital,7,1,69
+142,kennett2013,Archeological and Environmental Lessons for the Anthropocene From the Classic Maya Collapse,8,1,69
+142,streeter2013,Anticipating Land Surface Change,9,1,69
+142,costanza2007,Sustainability or Collapse: What Can We Learn from Integrating the History of Humans and the Rest of Nature?,10,1,69
+240,burstrom2014,Things in the Eye of the Beholder: A Humanistic Perspective on Archaeological Object Biographies,1,66,67
+240,epstein1991,Contesting the Subject: Essays in the Postmodern Theory and Practice of Biography and Biographical Criticism,2,1,67
+240,tilley1996,An Ethnography of the Neolithic: Early Prehistoric Societies in Southern Scandinavia,3,1,67
+240,dionysiusnd,The Adventures of a Hackney Coach or the Adventures of a Pen,4,1,67
+240,gilchrist2000,"Archaeological Biographies: Realizing Human Lifecycles, -Courses and -Histories",5,1,67
+240,nevett1999,Abandoned but Not Forgotten: Gerritsen on the Domestic Lifecycle,6,1,67
+240,vellinga1999,Merits and Limits of the Biographic Approach,7,1,67
+240,polkey1999,"Women's Lives into Print: The Theory, Practice and Writing of Feminist Auto/biography",8,1,67
+240,barthes1971,"Sade, Fourier, Loyola",9,1,67
+240,jonsson1997,Frihet eller determinism: principiella problem i den idéhistoriska biografins genre,10,1,67
+32,lund2015,Living places or animated objects? sámi sacrificial places with metal objects and their south scandinavian parallels,1,46,66
+32,lund2017,Connectedness with Things. Animated objects of Viking Age Scandinavia and Early Medieval Europe. Archaeological dialogues,2,40,66
+32,gosden2005,What Do Objects Want?,3,2,66
+32,bradley2000,Body Metaphors and Technologies of Transformation in the English Middle and Late Bronze Age,4,2,66
+32,descola1992,Societies of Nature and the Nature of Society,5,2,66
+32,brightman2012,"Animism in rainforest and tundra. personhood, animals, plants and things in contemporary amazonia and siberia",6,2,66
+32,davidson1962,The Northern Sword in the British Isles and Beyond: A Study of the Occurrence and Typology of Swords from the 8th to the 10th Century AD,7,2,66
+32,hoskins1998,Biographical Objects: How Things Tell the Stories of People's Lives,8,2,66
+32,descola2013,Beyond Nature and Culture,9,2,66
+32,jordan2003,Material Culture and Sacred Landscape: The Anthropology of the Siberian Khanty,10,2,66
+58,hilberg2013,Hedeby's demise in the late Viking Age and the shift to Schleswig,1,65,66
+58,loveluck2013,"Northwest Europe in the Early Middle Ages, c. AD 600-1150. A Comparative Archaeology",2,1,66
+58,filipowiak2008,"He Identity of a Town: Wolin, Town-State -9 Th -12 Th Centuries",3,1,66
+58,meyer1998,Keramik der Zeit um 1100 aus dem Hafenviertel von Schleswig,4,1,66
+58,steuer1974,Die Südsiedlung von Haithabu. Studien zur frühmittelalterlichen Keramik im Nordseeküstenbereich und in Schleswig-Holstein,5,1,66
+58,carelli2012,Lunds Historia -staden och omlandet,6,1,66
+58,englert2015,Large Cargo Ships in Danish Waters 1000-1250. Evidence of specialised merchant seafaring prior to the Hanseatic Period. Ships and Boats of the North 7,7,1,66
+58,birkebaek1992,Roskilde Bys Historie -Tiden Indtil 1536,8,1,66
+58,pedersen1996,Weapon and Riding Gear in Burials. Evidence of Military and Social Rank in 10th Century Denmark?,9,1,66
+58,bagge2009,Der frühmittelalterliche Staat -europäische Perspektiven. Forschungen zur Geschichte des Mittelalters 16,10,1,66
+184,rogers2020,Non-ferrous metalworking networks in Scandinavian-influenced towns of Britain and Ireland,1,65,66
+184,dickens2009,"The Anglo- Saxon Settlement and Cemetery at Bloodmoor Hill, Carlton Colville, Suffolk",2,1,66
+184,tweddle1986,Finds from Parliament Street and Other Sites in the City Centre,3,1,66
+184,grahamcampbell1987,Western penannular brooches and their Viking Age copies in Norway: a new classification,4,1,66
+184,griffiths2007,"Meols, The Archaeology of the North Wirral Coast",5,1,66
+184,hinton1996,"The Gold, Silver and Other Non-Ferrous Alloy Objects from Hamwic",6,1,66
+184,waterman1959,"Late Saxon, Viking and early medieval finds from York",7,1,66
+184,addyman1981,The attackers return,8,1,66
+184,sindbaek2003,Varaegiske vinterruter: slaedetransport i rusland og spørgsma ˚let om den tidlige vikingetids orientalske import i nordeuropa,9,1,66
+184,omeadhra1979,"Viking and Romanesque Art, 1. An Illustrated and Descriptive Catalogue of the So-called Artists Trial-pieces from c. 5th-12th Centuries AD, Found in Ireland, c. 1830-1973",10,1,66
+202,draganits2014,The late Nordic Iron Age and Viking Age royal burial site of Borre in Norway: ALS- and GPR-based landscape reconstruction and harbour location at an uplifting coastal area,1,67,66
+202,ackermann1999,Airborne Laser Scanning: Present Status and Future Expectations,2,1,66
+202,bird2008,Coastal Geomorphology e an Introduction,3,1,66
+202,keller1994,Noen tanker om Borre-haugenes beliggenhet,4,1,66
+202,ostigard2009,Vikingtiden på Borre. Hvordan har fortiden blitt brukt og formidlet?,5,1,66
+202,bill2010,Viking Age ships and seafaring in the West,6,1,66
+202,stular2012,Visualization of Lidar-Derived Relief Models for Detection of Archaeological Features,7,1,66
+202,morhange2010,Paleo-Hazards in Coastal Mediterranean: A Geoarchaeological Approach,8,1,66
+202,gansum2009,"Den urbane underskog: strandsteder, utvekslingssteder og smabyer i vikingtid, middelalder og tidlig nytid",9,1,66
+202,persson2008,Nauen 5.2 e stenåldersboplatser och fossil åkermark,10,1,66
+22,zachrissonnd,De heliga platsernas arkeologimateriell kultur och miljöer i järnålderns mellansverige,1,63,64
+22,brereton1987,Sacred space,2,1,64
+22,stjernquist1962,"Ett svenskt praktfynd med sydeuropeiska bronser"". I: P. Hamberg (red.), Proxima Thule. Sverige och Europa under forntid och medeltid",3,1,64
+22,victor2005,"Kammargravar från folkvandringstid i Lilla Sylta RAÄ 91, en gravplats använd under brons-och järnålder. Norrortsleden. Uppland, Fresta socken",4,1,64
+22,yrwing1951,"Gotlandskyrkan i äldre tiď, in visby stijt i ord och bild",5,1,64
+22,lamm1995,Guldhalskragen från Ålleberg,6,1,64
+22,calissendorff1966,"Folklandstingstad och en gammal färdled"". I: Fornvännen 61",7,1,64
+22,karlsson2007,Makt och offer. röster om centralmaktens utveckling i tiden före historien. stockholm: riksantikvarieämbetets förlag,8,1,64
+22,hines1993,"Clasps, Hektespenner, Agraffen. Anglo-Scandinavian clasps of classes A-C of the 3rd to 6th centuries A.D. Typology, diffusion and function",9,1,64
+22,lindstromnd,Anteckningar om Gotlands medeltid 2,10,1,64
+29,lund2008,"Åsted og vadested. deponeringer, genstandsbiografier og rumlig strukturering som kilde til vikingetidens kognitive landskaber",1,42,64
+29,lund2010,At the water's edge,2,41,64
+29,jorgensen1995,he warrior aristocracy of Gudme: he emergence of landed aristocracy in Late Iron Age Denmark?,3,2,64
+29,bradley1990,The Passages of Arms: An Archaeological Analysis of Prehistoric Hoards and Votive Deposits,4,2,64
+29,geisslinger1967,"Horte als geschichtquelle, dargestellt an den völkerwanderungs-und merowingerzeitlichen funden des südwestlichen ostseeraumes",5,2,64
+29,hedeager2003,Kognitiv Topografi : !Edelmetalldepoter I Landskapet. Universitetets Oldsaksamlings Skrifter,6,2,64
+29,gosden1999,The Cultural Biography of Objects,7,2,64
+29,needham2001,When Expediency Broaches Ritual Intention: The Flow of Metal between Systemic and Buried Domains,8,2,64
+29,jorgensen2002,Kongsgård -kultsted -marked: overvejelser omkring tissøkompleksets struktur og funktion,9,2,64
+29,staecker2004,"Hjältar, kungar och gudar. Berggren, Å. et al. (red.). Minne och myt. Konsten att skapa det förflutna",10,2,64
+66,smith2018,"Dorset, Norse, or Thule? Technological transfers, marine mammal contamination, and AMS dating of spun yarn and textiles from the Eastern Canadian Arctic",1,63,64
+66,buonasera2015,Lipid biomarkers and compound specific δ13C analysis indicate early development of a dual-economic system for the Arctic Small Tool tradition in Northern Alaska,2,1,64
+66,sinding2017,"Unmatched DNA preservation proves Arctic hare and sheep wool in Norse Greenlandic textiles from the ""The Farm Beneath the Sand",3,1,64
+66,smith2016,"Burgundian"" hat from Herjolfsnes, Greenland: New discoveries, new dates",4,1,64
+66,nilsen2016,Marine Mammal Train Oil Production Methods: Experimental Reconstructions of Norwegian Iron Age Slab-Lined Pits,5,1,64
+66,ledger2016,"Dating and digging stratified archaeology in circumpolar North America: A view from Nunalleq, Southwestern Alaska",6,1,64
+66,jull1996,Factors that Affect the Apparent Radiocarbon Age of Textiles,7,1,64
+66,tremayne2016,The Oxford Handbook of the Prehistoric Arctic,8,1,64
+66,stuiver1986,Radiocarbon age calibration of marine samples back to 9000 cal yr BP,9,1,64
+66,fitzhugh2004,Cordage and wood from the Avayalik Dorset site in northern Labrador,10,1,64
+47,gardela2018,Amazons of the North? Armed females in Viking archaeology and medieval literature,1,64,63
+47,jakobsson2001,Perilous Women in Hálfs saga and Hrólfs saga kraka,2,1,63
+47,mayor2014,"Goddesses, Amazons, and Male Gods: The Mythology of Sexuality",3,1,63
+47,hansson1938,En attehög i Brannkyrka,4,1,63
+47,carroll2014,The Vikings in Britain and Ireland,5,1,63
+47,kalinke1986,The Mysogamous Maiden Kings of Icelandic Romance,6,1,63
+47,jonsson1944,"Fornaldarsögur norðurlanda, Reykjavík",7,1,63
+47,sorheim2011,Three Prominent Norwegian Ladies with British Connections,8,1,63
+47,rudzinski2009,tarcza we wczesnośredniowiecznej Polsce na tle europejskim. Od plemienia do państwa' (The Shield in Early Medieval Poland and its European Context. From tribe to State),9,1,63
+47,eniosova2009,"Novye nahodki skandinavskih amuletov v Gnëzdove' (New Finds of Scandinavian Amulets at Gnëzdovo), in Horošie dni: Pamâti Aleksandra Stepanoviča Horoševa",10,1,63
+186,skre2017,Monetary practices in early medieval western Scandinavia (5th-10th centuries AD),1,64,63
+186,hedeager1994,Warrior economy and trading economy in Viking Age Scandinavia,2,1,63
+186,munksgaard1956,"Late-Antique scrap silver found in Denmark: the Hardenberg, Høstentorp and Simmersted hoards",3,1,63
+186,hagland1994,Frostatingslova,4,1,63
+186,klang2013,Guldfynd på gotland: en jämnförande studie av guldfynden från folkvandringstiden,5,1,63
+186,innes1913,What is money?,6,1,63
+186,steuer2013,Münzen und Geldwagen? Zur Praxis des Zahlungvorganges während der Merowingerzeit,7,1,63
+186,boe1923,"Norske guldfund fra folkevandringstiden, Bergen Museums Aarbok 1920-21. Historiskantikvarisk raekke nr 2",8,1,63
+186,andren1991a,Guld och makt -en tolkning av de skandinaviska guld brak teaternas funktion,9,1,63
+186,grierson1986,"Medieval European Coinage with a Catalogue of the Coins in the Fitzwilliam Museum, Cambridge 1",10,1,63
+34,zoega2017,An Archeology of Moments: Christian Conversion and Practice in a Medieval Household Cemetery,1,61,62
+34,frioriksson2013,La Place du mort. Les Tombes Vikings dans le Paysage Culturel Islandais Ecole doctorale IV,2,1,62
+34,kristjansdottir2004,The Awakening of Christianity in Iceland. Discovery of Timber Church and Graveyard at Þo´rarinsstaôir in Seyôisfjo¨rôur,3,1,62
+34,sewell1996,Historical Events as Structural Transformations: Inventing Revolution at the Bastille,4,1,62
+34,sellevold2008,Child Burials and Children's Status in Medieval Norway,5,1,62
+34,gillespie2001,"Personhood, Agency, and Mortuary Ritual: A Case Study From the Ancient Maya",6,1,62
+34,gilchrist2005,Requiem: The Medieval Monastic Cemetery in Britain,7,1,62
+34,boddington1996,"Raunds Furnells. The Anglo-Saxon church and churchyard, Raunds Area Project",8,1,62
+34,byock2005,A Viking-age valley in Iceland: the Mosfell archaeological project,9,1,62
+34,zoega2010,Skagfirska kirkjurannso´knin [The Skagafjo¨rôur Church Project]. A ´rbo´k hinz ıślenska fornleifafe´lags,10,1,62
+106,raninen2014,Finland as a part of the 'Viking World',1,61,62
+106,roeckhansen1995,Change and Continuity: Land-Use in Åland from the Late Iron Age to the 18 th Century,2,1,62
+106,raninen2010,Sodankäynti ja soturit rautakaudella,3,1,62
+106,herrgard2005,Fornminnen i Österbotten: Från neandertalare till sockenbor,4,1,62
+106,lehtosalohilander2001,Viikinkejä Eurassa? Pohjoismaisia näkökulmia Suomen esihistoriaan. Eura: Euran muinaispukutoimikunta,5,1,62
+106,wickholm2004,Pörnullbacken: ett brandgravfält eller brandgropsgravar? muinaistutkija 2003,6,1,62
+106,taavitsainen1999,Wilderness Commerce and the Development of Boat Types: The Remains of the Hartola Boat,7,1,62
+106,poutiainen2008,Päijät-hämeen rautakautiset aarre-ja korukätkölöydöt,8,1,62
+106,nordman1944,Svenskarna i Finlands järnålder,9,1,62
+106,orrman1993,Where Source Criticism Fails,10,1,62
+114,sindbaek2016,"Steatite Vessels and the Viking Diaspora: Migrants, Travellers, and Cultural Change in Early Medieval Britain and Ireland",1,61,62
+114,rollason2004,Anglo-Scandinavian York: the evidence of historical sources,2,1,62
+114,wallace1981,Dublin's waterfront at Wood Quay: 900-1317,3,1,62
+114,beresford1987,Goltho. the Development of an Early Medieval Manor C. 850-1150,4,1,62
+114,williams1979,"Northampton, Northamptonshire (Excavation Report)",5,1,62
+114,oriordain1971,Excavations at High Street and Winetavern Street,6,1,62
+114,carver2008,"Portmahomack, monastery of the Picts",7,1,62
+114,emery2007a,"Norwich, Norfolk (Excavation Report)",8,1,62
+114,maclaren1974,"A Norse house on Drimore Machair, South Uist",9,1,62
+114,sheehan2001,"A Viking Age maritime haven: a reassessment of the island settlement at Beginish, Co. Kerry",10,1,62
+170,furholt2019,Re-integrating Archaeology: A Contribution to aDNA Studies and the Migration Discourse on the 3rd Millennium BC in Europe,1,63,62
+170,schultrich2019,Das Jungneolithikum in Schleswig-Holstein,2,1,62
+170,shennan1989,Introduction: Archaeological Approaches to Cultural Identity,3,1,62
+170,suter2017,Um 2700 v. Chr. Wandel und Kontinuität in den Ufersiedlungen am Bielersee,4,1,62
+170,hofmann2015,What Have Genetics Ever Done for Us? the Implications of aDNA Data for Interpreting Identity in Early Neolithic Central Europe,5,1,62
+170,haak2015,Massive Migration from the Steppe Was a Source for Indo-European Languages in Europe,6,1,62
+170,muller2013,Aktuelle Forschungen zur Gründung einer Metropole zwischen Wikinger-und Hansazeit,7,1,62
+170,strahm2001,Tradition und Wandel der sozialen Strukturen vom 3. zum 2. vorchristlichen Jahrtausend,8,1,62
+170,strahm1971,Die Gliederung der Schnurkeramischen Kultur in der Schweiz,9,1,62
+170,fischer1956,Die Gräber der Steinzeit im Saalegebiet. Studien über neolithische und frühbronzezeitliche Bestattungsformen in Sachsen-Thüringen,10,1,62
+256,roslund2017,"Bringing ""the periphery"" into focus: Social interaction between Baltic Finns and the Svear in the Viking Age and Crusade period (c. 800 to 1200)",1,61,62
+256,callmer1986,Verbindungen zwischen Ostskandinavien und dem Balticum vor der Wikingerzeit und das Rus'-problem,2,1,62
+256,martin1986,Treasure of the Land of Darkness: The Fur Trade and Its Significance for Medieval Russia,3,1,62
+256,lind2009,Mobilisation of the European Periphery against the Mongols: Innocent iv's All-European Policy in its Baltic Context: A Recantation,4,1,62
+256,hirviluoto1986,Finland's Cultural Ties with the Kama Region in the Late Iron Age Especially in the Light of Pottery Finds,5,1,62
+256,silliman2005,Culture Contact or Colonialism? Challenges in the Archaeology of Native North America,6,1,62
+256,kaks1969,Ett ryttareldstål,7,1,62
+256,pimenov1965,Vepsy: Ocherk Etnicheskoi Istorii I Genezisa Kul'tury,8,1,62
+256,syse1987,Uppsala,9,1,62
+256,broberg1990,Bönder och samhälle i statsbildningstid: en bebyggelsearkeologisk studie av agrarsamhället i norra roden 700-1350. rapporter från barknåreprojektet iii,10,1,62
