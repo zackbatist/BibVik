@@ -4970,9 +4970,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="sindbaek2007" label="2007a. he Small World of the Vikings: Networks in Early Medieval Communication and Exchange">
+      <node id="sindbaek2007" label="The Small World of the Vikings: Networks in Early Medieval Communication and Exchange">
         <attvalues>
-          <attvalue for="0" value="2007a. he Small World of the Vikings: Networks in Early Medieval Communication and Exchange"/>
+          <attvalue for="0" value="The Small World of the Vikings: Networks in Early Medieval Communication and Exchange"/>
           <attvalue for="1" value="2007"/>
           <attvalue for="2" value="F1"/>
           <attvalue for="3" value="article"/>
@@ -33992,9 +33992,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="bill2019" label="5. The Ship Graves on Kormt – and Beyond">
+      <node id="bill2019" label="The Ship Graves on Kormt – and Beyond">
         <attvalues>
-          <attvalue for="0" value="5. The Ship Graves on Kormt – and Beyond"/>
+          <attvalue for="0" value="The Ship Graves on Kormt – and Beyond"/>
           <attvalue for="1" value="2019"/>
           <attvalue for="2" value="F1"/>
           <attvalue for="3" value="misc"/>
@@ -145166,9 +145166,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="arentoft1993" label="1993. I vikingernes vold">
+      <node id="arentoft1993" label="I vikingernes vold">
         <attvalues>
-          <attvalue for="0" value="1993. I vikingernes vold"/>
+          <attvalue for="0" value="I vikingernes vold"/>
           <attvalue for="1" value="1993"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
@@ -176722,31 +176722,17 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="sovso2014" label="Ansgars Kirche in Ribe">
+      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
         <attvalues>
-          <attvalue for="0" value="Ansgars Kirche in Ribe"/>
-          <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="article"/>
-          <attvalue for="4" value="Søvsø Morten"/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
-          <attvalue for="8" value="0"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="puskina2017" label="Der archäologische Komplex von Gnezdovo">
-        <attvalues>
-          <attvalue for="0" value="Der archäologische Komplex von Gnezdovo"/>
-          <attvalue for="1" value="2017"/>
+          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
+          <attvalue for="1" value="2015"/>
           <attvalue for="2" value="F1"/>
           <attvalue for="3" value="incollection"/>
-          <attvalue for="4" value="Puškina T. A."/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.833"/>
+          <attvalue for="4" value="Åhfeldt L Kitzler"/>
+          <attvalue for="5" value="10.1515/9783110417685-014"/>
+          <attvalue for="6" value="0.917"/>
           <attvalue for="7" value="1"/>
-          <attvalue for="8" value="0"/>
+          <attvalue for="8" value="87"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -176764,59 +176750,17 @@
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
-      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
-        <attvalues>
-          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="1"/>
-          <attvalue for="8" value="193"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="pushkina2017" label="Der archäologische Komplex von Gnezdovo">
+      <node id="puskina2017" label="Der archäologische Komplex von Gnezdovo">
         <attvalues>
           <attvalue for="0" value="Der archäologische Komplex von Gnezdovo"/>
           <attvalue for="1" value="2017"/>
           <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value="Pushkina Tamara"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Puškina T. A."/>
           <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.0"/>
+          <attvalue for="6" value="0.833"/>
           <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
-        <attvalues>
-          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="1"/>
-          <attvalue for="8" value="45"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
-        <attvalues>
-          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
-          <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value="Skorokhod A."/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.75"/>
-          <attvalue for="7" value="1"/>
-          <attvalue for="8" value="9"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -176834,17 +176778,73 @@
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
-      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
+      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
         <attvalues>
-          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
-          <attvalue for="1" value="2015"/>
+          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
+          <attvalue for="1" value=""/>
           <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="incollection"/>
-          <attvalue for="4" value="Åhfeldt L Kitzler"/>
-          <attvalue for="5" value="10.1515/9783110417685-014"/>
-          <attvalue for="6" value="0.917"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="1"/>
-          <attvalue for="8" value="87"/>
+          <attvalue for="8" value="193"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
+        <attvalues>
+          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="1"/>
+          <attvalue for="8" value="45"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="pushkina2017" label="Der archäologische Komplex von Gnezdovo">
+        <attvalues>
+          <attvalue for="0" value="Der archäologische Komplex von Gnezdovo"/>
+          <attvalue for="1" value="2017"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value="Pushkina Tamara"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.0"/>
+          <attvalue for="7" value="1"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="sovso2014" label="Ansgars Kirche in Ribe">
+        <attvalues>
+          <attvalue for="0" value="Ansgars Kirche in Ribe"/>
+          <attvalue for="1" value="2014"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="article"/>
+          <attvalue for="4" value="Søvsø Morten"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.833"/>
+          <attvalue for="7" value="2"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
+        <attvalues>
+          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
+          <attvalue for="1" value="2020"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value="Skorokhod A."/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.75"/>
+          <attvalue for="7" value="1"/>
+          <attvalue for="8" value="9"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -199364,16 +199364,16 @@
       <edge id="22511" source="sindbaek2007" target="herrmann2005a"/>
       <edge id="22512" source="sindbaek2007" target="andersson1994"/>
       <edge id="22513" source="raffield2019" target="tacitus1999a"/>
-      <edge id="22514" source="lund2021" target="sovso2014"/>
-      <edge id="22515" source="imer2014" target="sovso2014"/>
+      <edge id="22514" source="lund2021" target="ahfeldt2015"/>
+      <edge id="22515" source="lund2021" target="NOAUTHOR21"/>
       <edge id="22516" source="lund2021" target="puskina2017"/>
-      <edge id="22517" source="lund2021" target="NOAUTHOR21"/>
+      <edge id="22517" source="lund2021" target="NOAUTHOR18"/>
       <edge id="22518" source="lund2021" target="NOAUTHOR28"/>
-      <edge id="22519" source="lund2021" target="pushkina2017"/>
-      <edge id="22520" source="lund2021" target="NOAUTHOR33"/>
-      <edge id="22521" source="lund2021" target="skorokhod2020"/>
-      <edge id="22522" source="lund2021" target="NOAUTHOR18"/>
-      <edge id="22523" source="lund2021" target="ahfeldt2015"/>
+      <edge id="22519" source="lund2021" target="NOAUTHOR33"/>
+      <edge id="22520" source="lund2021" target="pushkina2017"/>
+      <edge id="22521" source="lund2021" target="sovso2014"/>
+      <edge id="22522" source="imer2014" target="sovso2014"/>
+      <edge id="22523" source="lund2021" target="skorokhod2020"/>
     </edges>
   </graph>
 </gexf>

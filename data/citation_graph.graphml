@@ -4260,7 +4260,7 @@
       <data key="d9">false</data>
     </node>
     <node id="sindbaek2007">
-      <data key="d0">2007a. he Small World of the Vikings: Networks in Early Medieval Communication and Exchange</data>
+      <data key="d0">The Small World of the Vikings: Networks in Early Medieval Communication and Exchange</data>
       <data key="d1">2007</data>
       <data key="d2">F1</data>
       <data key="d3">article</data>
@@ -29136,7 +29136,7 @@
       <data key="d9">false</data>
     </node>
     <node id="bill2019">
-      <data key="d0">5. The Ship Graves on Kormt – and Beyond</data>
+      <data key="d0">The Ship Graves on Kormt – and Beyond</data>
       <data key="d1">2019</data>
       <data key="d2">F1</data>
       <data key="d3">misc</data>
@@ -124428,7 +124428,7 @@
       <data key="d9">false</data>
     </node>
     <node id="arentoft1993">
-      <data key="d0">1993. I vikingernes vold</data>
+      <data key="d0">I vikingernes vold</data>
       <data key="d1">1993</data>
       <data key="d2">F2</data>
       <data key="d3">article</data>
@@ -151475,28 +151475,16 @@
       <data key="d8">0</data>
       <data key="d9">false</data>
     </node>
-    <node id="sovso2014">
-      <data key="d0">Ansgars Kirche in Ribe</data>
-      <data key="d1">2014</data>
-      <data key="d2">F1</data>
-      <data key="d3">article</data>
-      <data key="d4">Søvsø Morten</data>
-      <data key="d5"/>
-      <data key="d6">0.833</data>
-      <data key="d7">2</data>
-      <data key="d8">0</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="puskina2017">
-      <data key="d0">Der archäologische Komplex von Gnezdovo</data>
-      <data key="d1">2017</data>
+    <node id="ahfeldt2015">
+      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
+      <data key="d1">2015</data>
       <data key="d2">F1</data>
       <data key="d3">incollection</data>
-      <data key="d4">Puškina T. A.</data>
-      <data key="d5"/>
-      <data key="d6">0.833</data>
+      <data key="d4">Åhfeldt L Kitzler</data>
+      <data key="d5">10.1515/9783110417685-014</data>
+      <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">0</data>
+      <data key="d8">87</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR21">
@@ -151511,52 +151499,16 @@
       <data key="d8">14</data>
       <data key="d9">true</data>
     </node>
-    <node id="NOAUTHOR28">
-      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">1</data>
-      <data key="d8">193</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="pushkina2017">
+    <node id="puskina2017">
       <data key="d0">Der archäologische Komplex von Gnezdovo</data>
       <data key="d1">2017</data>
       <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4">Pushkina Tamara</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Puškina T. A.</data>
       <data key="d5"/>
-      <data key="d6">0.0</data>
+      <data key="d6">0.833</data>
       <data key="d7">1</data>
       <data key="d8">0</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR33">
-      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">1</data>
-      <data key="d8">45</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="skorokhod2020">
-      <data key="d0">Staraya Ladoga in northwestern Russia</data>
-      <data key="d1">2020</data>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4">Skorokhod A.</data>
-      <data key="d5"/>
-      <data key="d6">0.75</data>
-      <data key="d7">1</data>
-      <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR18">
@@ -151571,16 +151523,64 @@
       <data key="d8">21</data>
       <data key="d9">true</data>
     </node>
-    <node id="ahfeldt2015">
-      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
-      <data key="d1">2015</data>
+    <node id="NOAUTHOR28">
+      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
+      <data key="d1"/>
       <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Åhfeldt L Kitzler</data>
-      <data key="d5">10.1515/9783110417685-014</data>
-      <data key="d6">0.917</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
       <data key="d7">1</data>
-      <data key="d8">87</data>
+      <data key="d8">193</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="NOAUTHOR33">
+      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">1</data>
+      <data key="d8">45</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="pushkina2017">
+      <data key="d0">Der archäologische Komplex von Gnezdovo</data>
+      <data key="d1">2017</data>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4">Pushkina Tamara</data>
+      <data key="d5"/>
+      <data key="d6">0.0</data>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="sovso2014">
+      <data key="d0">Ansgars Kirche in Ribe</data>
+      <data key="d1">2014</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Søvsø Morten</data>
+      <data key="d5"/>
+      <data key="d6">0.833</data>
+      <data key="d7">2</data>
+      <data key="d8">0</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="skorokhod2020">
+      <data key="d0">Staraya Ladoga in northwestern Russia</data>
+      <data key="d1">2020</data>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4">Skorokhod A.</data>
+      <data key="d5"/>
+      <data key="d6">0.75</data>
+      <data key="d7">1</data>
+      <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="lund2021" target="aannestad2015"/>
@@ -174097,15 +174097,15 @@
     <edge id="e22511" source="sindbaek2007" target="herrmann2005a"/>
     <edge id="e22512" source="sindbaek2007" target="andersson1994"/>
     <edge id="e22513" source="raffield2019" target="tacitus1999a"/>
-    <edge id="e22514" source="lund2021" target="sovso2014"/>
-    <edge id="e22515" source="imer2014" target="sovso2014"/>
+    <edge id="e22514" source="lund2021" target="ahfeldt2015"/>
+    <edge id="e22515" source="lund2021" target="NOAUTHOR21"/>
     <edge id="e22516" source="lund2021" target="puskina2017"/>
-    <edge id="e22517" source="lund2021" target="NOAUTHOR21"/>
+    <edge id="e22517" source="lund2021" target="NOAUTHOR18"/>
     <edge id="e22518" source="lund2021" target="NOAUTHOR28"/>
-    <edge id="e22519" source="lund2021" target="pushkina2017"/>
-    <edge id="e22520" source="lund2021" target="NOAUTHOR33"/>
-    <edge id="e22521" source="lund2021" target="skorokhod2020"/>
-    <edge id="e22522" source="lund2021" target="NOAUTHOR18"/>
-    <edge id="e22523" source="lund2021" target="ahfeldt2015"/>
+    <edge id="e22519" source="lund2021" target="NOAUTHOR33"/>
+    <edge id="e22520" source="lund2021" target="pushkina2017"/>
+    <edge id="e22521" source="lund2021" target="sovso2014"/>
+    <edge id="e22522" source="imer2014" target="sovso2014"/>
+    <edge id="e22523" source="lund2021" target="skorokhod2020"/>
   </graph>
 </graphml>
