@@ -22,6 +22,12 @@ Some clusters will not fit the process cleanly regardless of how well it perform
 
 None of this guarantees that the resulting labels are correct. What it guarantees is that each label results from an accountable process: that it reflects what was actually done with the evidence provided, and that where a cluster proved genuinely difficult to characterize, that difficulty is visible rather than obscured by an assured-sounding description.
 
+## Why not a word-frequency topic model (NMF/LDA)
+
+These entries' only reliably-available text is `title` (13,760 of 14,328 active entries have a usable title; `abstract` exists on only 232 F1 entries, 1.6% of the corpus, so any method that depends on abstract text cannot be applied corpus-wide). Titles here average 10.8 words, and the corpus is genuinely multilingual: titles appear in at least Danish, Norwegian, Swedish, German, English, Russian, Polish, Icelandic, and Ukrainian. Word-frequency methods (NMF, LDA) find structure by detecting words that co-occur within and across documents; at this document length, after stopword removal a title typically contributes 5 to 7 content words, which is thin for establishing reliable co-occurrence statistics, and titles on the same real subject in different languages share no tokens at all ("gravskik" and "burial customs" carry the same meaning but no lexical overlap a word-frequency method can use). This is a structural mismatch between what the method needs (redundant word co-occurrence across many documents in a shared vocabulary) and what a corpus of short, cross-linguistic titles can supply, not a tuning problem correctable by better stopword lists or a different choice of *k*.
+
+**Method actually used: citation-based ranking, not embeddings or word-frequency.** For each cluster, the papers most cited by other members of that same cluster are selected as its representative sample: this is a citation-structure signal, not a text-similarity or word-overlap one, so it sidesteps the multilingual mismatch above without needing to embed anything. Since Girvan-Newman clusters by citation in the first place, the papers a cluster's own members cite most are the ones actually holding that cluster together, whether or not their titles happen to read similarly. A prior embedding-based design (multilingual sentence embeddings, centroid-distance sampling) was built, tested, and superseded by this approach; see "Earlier method (superseded)" below for that history and why it was replaced, including a real case where citation and topic diverged directly.
+
 ## How it works
 
 Two scripts: `select_representatives.py` picks which papers to show the LLM, `label_clusters.py` turns them into a label.
@@ -35,13 +41,17 @@ Two scripts: `select_representatives.py` picks which papers to show the LLM, `la
 
 **`label_clusters.py`**
 
-1. Send every cluster's selected titles into one LLM call (not one call per cluster).
-2. The prompt states the corpus's own shared baseline directly and instructs the model that a label reducible to it has failed.
+1. Split the corpus into batches of `--batch-size` clusters (default 10) and label each batch with its own LLM call, merging results afterward, not one call for every cluster. Confirmed necessary: five consecutive attempts at labeling 50 clusters in a single call all failed at nearly the same point regardless of `--num-predict`/`--num-ctx`, on two different machines including a dedicated 24GB GPU; checking the serving container's own logs directly confirmed the model completed generation cleanly and stopped on its own, not a resource limit being hit.
+2. Within a batch, the prompt states the corpus's own shared baseline directly and instructs the model that a label reducible to it has failed.
 3. The model sorts every title it was given into named groups, before writing anything.
-4. The label and description come from whichever group is largest.
-5. A second group becomes `secondary_label` only if it has at least 3 titles; anything smaller goes into `unaccounted_titles`.
-6. `titles_missing_from_groups` compares every title actually given to the model against everything in its output, and flags any title absent from every group.
-7. `secondary_group_size` recomputes each secondary label's actual title count and flags any below the 3-title floor.
+4. The response format is one JSON object per line (JSONL), one line per cluster, each line a complete and independently parseable object, not one JSON object wrapping the whole batch. This is the direct fix for the same failure in point 1: when a batch's generation stopped early, the single-object format made the entire batch's JSON invalid, discarding every cluster in it even when most had already been written correctly. JSONL means an incomplete final line only loses that one cluster.
+5. The label and description come from whichever group is largest.
+6. A second group becomes `secondary_label` only if it has at least 3 titles, derived by rank directly from the model's own `groups` output; anything smaller goes into `unaccounted_titles`.
+7. `titles_missing_from_groups` compares every title actually given to the model against everything in its output, and flags any title absent from every group.
+8. `secondary_group_size` recomputes each secondary label's actual title count and flags any below the 3-title floor.
+9. If a line still fails to parse after all of this, an automatic repair pass checks for a second, distinct, confirmed failure: a title containing its own literal double-quote character, copied into the JSON string without escaping it, which breaks that string and everything after it in the line even though the response is otherwise complete and correct. The repair rebuilds the line with internal quotes properly escaped and re-parses; if that still fails, the line is treated as genuinely lost.
+10. If a batch still comes back with clusters missing after steps 4-9, the remaining clusters are split in half and each half is labeled with its own call, recursively, rather than retrying the same request unchanged; a smaller task is a genuinely different, easier request, not a repeat of the one that just failed.
+11. Once every batch has run, a cross-batch check compares every finished label against every other and flags any two that look similar (same word-overlap heuristic as `--second-model`, same limits). This exists specifically because batching removes the single-call design's own protection against two different batches independently giving unrelated clusters the same generic label.
 
 ## Outputs and outcomes
 
@@ -64,6 +74,8 @@ Two scripts: `select_representatives.py` picks which papers to show the LLM, `la
 - Produced by: `label_clusters.py`.
 - Read by: no other file or script right now.
 
+Rebuilt from the full merged label set on every run, not just the current run's newly-labeled clusters: a `--only-clusters` run that only labels 2 clusters still writes out node rows for every cluster that has a label, old or new (see `cluster_labels.csv` below).
+
 | Column | Description |
 |---|---|
 | `node_id` | Citekey of an individual paper; every member of a labeled cluster gets a row, not just the sampled titles above. |
@@ -75,7 +87,7 @@ Two scripts: `select_representatives.py` picks which papers to show the LLM, `la
 - Produced by: `label_clusters.py`.
 - Read by: `02_network_structure.qmd`.
 
-`label_clusters.py` builds this from `representatives.csv`. The graph and its tooltips show a real label when one exists, falling back to "Community N" otherwise.
+`label_clusters.py` builds this from `representatives.csv`. The graph and its tooltips show a real label when one exists, falling back to "Community N" otherwise. If the file already exists, a run merges into it rather than overwriting it wholesale: existing rows for clusters not touched this run are preserved, and rows for clusters labeled this run are added or replaced. This is what makes `--only-clusters` (see Usage) safe to use for filling in specific clusters a previous run missed, without redoing or losing the rest.
 
 | Column | Description |
 |---|---|
@@ -102,7 +114,7 @@ python select_representatives.py \
     ../../data/bibliography.json \
     ../../data/citation_edgelist.csv \
     results/ \
-    --top-n 10 --max-clusters 25
+    --top-n 10 --max-clusters 50
 
 ollama serve   # in a separate terminal, if not already running
 
@@ -127,6 +139,41 @@ one to `label_clusters.py`.
 `--max-clusters` scopes to the N largest clusters (by member count),
 for a faster first pass before running against the full set.
 
+**Running against a remote/GPU Ollama instance instead of local.**
+`--base-url` accepts any reachable Ollama server, not just
+`http://localhost:11434`. Useful when local hardware struggles with
+larger cluster counts (see "Status" above, this is exactly the
+situation that motivated using a cluster GPU): start an Ollama
+instance on the remote machine, open an SSH tunnel to its port, then
+point `--base-url` at the tunnel:
+
+```bash
+# on the remote machine
+ollama pull qwen3.5:35b   # or whatever launch script the remote uses
+
+# on your local machine, in a separate terminal, left running
+ssh -L 11450:localhost:11450 user@remote-host
+
+# then run label_clusters.py locally as normal, pointed at the tunnel
+python label_clusters.py \
+    results/representatives.csv \
+    ../gn_analysis/results/multi_cut/communities_round_<N>.csv \
+    results/ \
+    --model qwen3.5:35b --base-url http://localhost:11450
+```
+
+**`--batch-size`** (default 10) controls how many clusters go into
+each LLM call; labeling more clusters than this runs as multiple
+sequential calls, merged afterward; see "How it works" above for why
+one call for the whole corpus doesn't work reliably.
+
+**`--only-clusters 110,22`** labels only the listed cluster IDs and
+merges the result into whatever's already in `cluster_labels.csv` /
+`node_labels.csv`, rather than relabeling everything. Built for
+filling in the small number of clusters a full run doesn't recover on
+its own (see "Status" above for real examples) without rerunning or
+losing the rest.
+
 Model name is whatever is actually pulled locally (`ollama list`); double-check the exact tag exists before running; published model
 names don't always match what's shown in general documentation
 (`qwen3:35b` does not exist as a tag on this system, `qwen3.5:35b`
@@ -140,7 +187,10 @@ Confirmed by hand, checking real output against real titles, not a systematic au
 - Sort-first `groups` fixed every gap it was tested against: a missed hub paper, a dropped theory title, a buried secondary theme.
 - The 3-title floor on `secondary_label` was added after 45% of secondary labels on one 25-cluster run were backed by only 1-2 titles. A written prompt instruction alone did not fix it (re-run: 19 of 25 clusters still got a secondary label, 5 with only 2-title support). Code-level enforcement did: `secondary_label`/`secondary_description` are now derived directly from `groups` by rank rather than trusted from the model's own text, discarding the model's own writing entirely. Verified against a real 25-cluster run: every one of the 12 clusters that got a secondary label had `secondary_group_size` ≥3, every one of the 13 that didn't had <3, a full, exact match with no exceptions.
 - The earlier, separate embedding-based method (see "Earlier method" below) was audited once: roughly 14 of 25 clusters fully accurate, 6 with a silently-dropped outlier, 4 with a missed second theme, 2 genuinely incoherent.
-- A recurring sorting gap (see "Sort-first labeling" above) has now missed the same transliterated-Russian title across multiple separate runs, with the self-count instruction active every time. Worth noting: every recurring miss (this title; "Nordnorske spillsaker" in cluster 87 on one run) sits in a multilingual title list; the same cluster is also hub-dominated, Danish/Swedish/Russian/English titles mixed together, several with garbled OCR-style text. This looks less like a sorting-logic gap and more like a model comprehension limit on non-English, non-Scandinavian-script titles specifically, though not investigated further.
+- One call for 50 clusters failed five separate times regardless of `--num-predict`/`--num-ctx`, on both a local M2 and a dedicated 24GB cluster GPU. Checking the serving container's own logs directly (not inferred) confirmed generation completed cleanly (HTTP 200, no truncation flag) but the model itself stopped mid-structure, a model-reliability-at-task-length problem, not a resource limit. Batching (10 clusters/call) plus the JSONL format fixed this: a real 50-cluster run completed all 5 batches, losing only 2 of 50 clusters to the model's own early stopping, both isolated to their batch's last line rather than taking down the whole batch.
+- Of those 2 initially-lost clusters, both were traced to specific, now-fixed causes rather than accepted as unexplained loss. One cluster's title contained its own literal double-quote character, which the model copied into the JSON response without escaping it, breaking that line's JSON syntax despite the response being otherwise complete and correct; confirmed by manually reproducing the exact failing line and testing a repair pass against it, which recovered all 10 of the cluster's titles intact. The other resolved on a second `--only-clusters` attempt of that one cluster alone. Both are now part of `cluster_labels.csv` for a real 50-cluster run with 50 of 50 clusters present.
+- The cross-batch duplicate-label check found real, substantive overlaps on the first batched 50-cluster run: 18 flagged pairs, several looking like genuine near-duplicates rather than surface word-overlap noise (e.g. two labels both organized around "Viking Age... urbanization/settlement" content). This is the real, visible cost of batching that single-call labeling didn't have; worth a manual look at flagged pairs before trusting the full label set, not yet done systematically.
+- Retry-at-the-same-size was tried and removed: reasoned through directly, retrying an unchanged batch after a failure only has a chance of working because of generation randomness (temperature 0.3), which was judged too weak a mechanism to justify keeping once JSONL made partial-batch recovery possible on its own. The system now goes straight from "clusters missing after one call" to splitting the remainder into smaller batches, which is a genuinely different, easier task rather than a repeat of the same request.
 
 Not yet done:
 
@@ -152,23 +202,34 @@ Not yet done:
   two final label strings via a coarse word-overlap heuristic
   (`check_agreement()`). Not removed, but not part of the default
   workflow going forward.
+- The 18 cross-batch duplicate-label flags from the real 50-cluster
+  run have not been manually reviewed; some look like genuine
+  near-duplicates worth relabeling, not yet confirmed which.
 - Only tested at 5, 25, and 50 clusters so far, never the full ~315
-  qualifying / ~800 total corpus. One call for the full corpus is
-  unlikely to work at all; batching/reconciliation (tried once
-  earlier, inconclusively, and removed) would need to be rebuilt for
-  that scale. In practice, full corpus coverage may not be needed:
-  `02_network_structure.qmd` only individually visualizes the top
-  `gn_top_n` (currently 20) communities by size; everything else
-  renders as grey "Other" regardless of whether it has a label.
-- `--top-n` (10) and `--hub-ratio-threshold` (5.0) both match
-  reasonable defaults (the paper's own top-N; a plausible dominance
-  cutoff) but neither has been independently tuned against
-  alternatives on this corpus.
+  qualifying / ~800 total corpus. Batching now makes this plausible in
+  principle (no single-call size ceiling), but has not actually been
+  run at that scale, real per-batch failure rate at 5 batches (50
+  clusters) was 2/50; whether that rate holds, worsens, or improves
+  across ~30+ batches is unknown. In practice, full corpus coverage
+  may not be needed: `02_network_structure.qmd` only individually
+  visualizes the top `gn_top_n` (currently 20) communities by size;
+  everything else renders as grey "Other" regardless of whether it
+  has a label.
+- `--top-n` (10), `--hub-ratio-threshold` (5.0), and `--batch-size`
+  (10) all match reasonable defaults but none has been independently
+  tuned against alternatives on this corpus.
 - No systematic accuracy check across more than a handful of clusters,
   every verification described above was done by hand, cluster by
   cluster, checking real titles against real output. The accuracy
   figures elsewhere in this file (14/25 accurate, etc.) describe the
   earlier embedding-based method's output, not this one.
+- The quote-escaping repair pass's character-by-character boundary
+  heuristic has been verified against exactly one real failing case
+  (the one that motivated building it) and one small set of synthetic
+  cases (a genuinely truncated line, correctly left unrepaired). Not
+  yet tested against a broader range of real titles containing
+  quotes, apostrophes, or other punctuation that could plausibly
+  confuse the boundary heuristic.
 
 ---
 
