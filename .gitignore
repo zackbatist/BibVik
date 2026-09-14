@@ -91,13 +91,8 @@ scratchpad.html
 ########################################
 
 analysis/gn_analysis/results/state.rds
-analysis/gn_analysis/results/modularity_trace.csv
-analysis/gn_analysis/results/removal_log.csv
 analysis/gn_analysis/results/dendrogram/gn_dendrogram.rds
 analysis/gn_analysis/results/dendrogram/split_events.csv
-analysis/gn_analysis/results/communities.csv
-analysis/gn_analysis/results/multi_cut/communities_round_*.csv
-analysis/gn_analysis/results/multi_cut/multi_cut_summary.csv
 analysis/gn_analysis/results/subclusters/subcluster_summary.csv
 analysis/gn_analysis/results/subclusters/community_*_tree.png
 analysis/gn_analysis/results/interactive/gn_interactive.json
