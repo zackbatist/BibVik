@@ -1,57 +1,36 @@
-# Cluster labelling: standalone
+# Cluster labelling
 
-Girvan-Newman groups papers into clusters based on citation structure: which papers cite each other, not based on what they're about. That leaves every cluster needing a human-readable name before anyone can actually use it: "Community 101" tells you nothing; "Viking Age Diaspora and Migration" does. This pipeline generates that name automatically, using a local LLM to read each cluster's most representative titles and write a short label and description.
+Girvan-Newman groups papers into clusters based on which papers cite each other, not based on what they are about. Clusters therefore need to be assigned human-readable names to assist with interpretation. It is common for an interpreter to characterize a cluster as having to do with a given topic by reading the their nodes' attributes, even if these interpretations are casual, temporary and unrecorded. In a similar fashion, this pipeline systematically generates names for clusters, using a local LLM to read each cluster's most representative titles and write a short label and description.
 
-It has no dependency on the annotation codebook (the F1 topic/method/source coding from `01_annotation.qmd`); labels come entirely from the citation graph and paper titles, so they stand as an independent description of what a cluster actually contains. Comparing these labels against the codebook is a separate, later step (`03_joined_descriptions.qmd`), not something this pipeline does itself.
+As of right now, it has no dependency on the manual annotations (the F1 topic/method/source coding from `01_annotation.qmd`); labels come entirely from the citation graph and paper titles, so they stand as an independent description of what a cluster actually contains. Comparing these labels against the codebook is a separate, later step (`03_joined_descriptions.qmd`), not something this pipeline does itself.
 
-Not part of the Quarto render chain, same convention as `gn_analysis/`: running an LLM over every cluster is slow and this whole pipeline lives outside the document's render chain for that reason.
+This is not part of the mainline Quarto render chain due to the computational complexity and duration required, and its reliance on external resources. However, its outputs feedback into analytical toolchain.
 
-Independent of any specific partition. Takes any `node_id,community_id` CSV as input: Girvan-Newman's `communities.csv`, or Louvain/Leiden membership exported from `02_network_structure.qmd`. Nothing here cares which method produced the grouping being described.
-
-## Rationale
-
-Girvan-Newman groups papers by citation. A cluster is a group of papers closely connected in the citation graph, papers that cite each other or are cited by the same others, not a group defined by subject or topic. Because that connection is structural, a cluster can be made up of papers about entirely different things, and there's nothing in the grouping itself that tells a reader what unites them. Someone still has to work out what each cluster is about.
-
-A language model was chosen for this task because, given the papers most central to a cluster, it can sort them into groups by shared subject matter and produce a specific written label and description grounded in that grouping. A systematic process gives every cluster the same fixed steps, so results are consistent, mistakes are traceable, and the whole thing can be checked and fixed at once.
-
-The design addresses each of these limitations directly rather than assuming they will not arise. The model is shown only the papers most central to a cluster by citation, not whatever it might infer independently from the titles. It is required to record its grouping of a cluster's papers before producing a label, so the label follows from that grouping rather than from an initial impression. And any claim it makes about its own grouping is subsequently checked against the grouping itself, rather than accepted as given.
-
-This check applies uniformly across clusters, regardless of whether a label appears self-evidently correct, since the model's apparent confidence is not evidence that its output is grounded.
-
-Some clusters will not fit the process cleanly regardless of how well it performs. A single paper's disproportionate influence can obscure the rest of a cluster. A genuine secondary theme may be too minor to warrant separate mention. A cluster may simply resist reduction to a single throughline. The process is intended to surface these cases rather than conceal them behind a label more confident than the evidence supports.
-
-None of this guarantees that the resulting labels are correct. What it guarantees is that each label results from an accountable process: that it reflects what was actually done with the evidence provided, and that where a cluster proved genuinely difficult to characterize, that difficulty is visible rather than obscured by an assured-sounding description.
-
-## Why not a word-frequency topic model (NMF/LDA)
-
-These entries' only reliably-available text is `title` (13,760 of 14,328 active entries have a usable title; `abstract` exists on only 232 F1 entries, 1.6% of the corpus, so any method that depends on abstract text cannot be applied corpus-wide). Titles here average 10.8 words, and the corpus is genuinely multilingual: titles appear in at least Danish, Norwegian, Swedish, German, English, Russian, Polish, Icelandic, and Ukrainian. Word-frequency methods (NMF, LDA) find structure by detecting words that co-occur within and across documents; at this document length, after stopword removal a title typically contributes 5 to 7 content words, which is thin for establishing reliable co-occurrence statistics, and titles on the same real subject in different languages share no tokens at all ("gravskik" and "burial customs" carry the same meaning but no lexical overlap a word-frequency method can use). This is a structural mismatch between what the method needs (redundant word co-occurrence across many documents in a shared vocabulary) and what a corpus of short, cross-linguistic titles can supply, not a tuning problem correctable by better stopword lists or a different choice of *k*.
-
-**Method actually used: citation-based ranking, not embeddings or word-frequency.** For each cluster, the papers most cited by other members of that same cluster are selected as its representative sample: this is a citation-structure signal, not a text-similarity or word-overlap one, so it sidesteps the multilingual mismatch above without needing to embed anything. Since Girvan-Newman clusters by citation in the first place, the papers a cluster's own members cite most are the ones actually holding that cluster together, whether or not their titles happen to read similarly. A prior embedding-based design (multilingual sentence embeddings, centroid-distance sampling) was built, tested, and superseded by this approach; see "Earlier method (superseded)" below for that history and why it was replaced, including a real case where citation and topic diverged directly.
+This tool may operate in a similar manner for any partitioning method, including Girvan-Newman, Louvain, or Leiden; it will take any `node_id,community_id` CSV as input.
 
 ## How it works
 
-Two scripts: `select_representatives.py` picks which papers to show the LLM, `label_clusters.py` turns them into a label.
+This pipeline comprises two scripts: `select_representatives.py` picks which papers to show the LLM, and `label_clusters.py` turns them into a label.
 
 **`select_representatives.py`**
 
 1. For each cluster, build the subgraph induced by just that cluster's own members (an edge only counts if both endpoints are in the cluster).
-2. Rank papers by degree within that subgraph: how many other papers in the *same* cluster cite them or are cited by them.
+2. Rank papers by degree within that subgraph: how many other papers in the same cluster cite them or are cited by them.
 3. Keep the top `--top-n` (default 10).
 4. If the top-ranked paper's degree is at least `--hub-ratio-threshold` (default 5.0) times the second-ranked paper's, fill the remaining slots preferring papers with no direct citation edge to that top paper, falling back to its satellites only once independent papers run out.
 
 **`label_clusters.py`**
 
-1. Split the corpus into batches of `--batch-size` clusters (default 10) and label each batch with its own LLM call, merging results afterward, not one call for every cluster. Confirmed necessary: five consecutive attempts at labeling 50 clusters in a single call all failed at nearly the same point regardless of `--num-predict`/`--num-ctx`, on two different machines including a dedicated 24GB GPU; checking the serving container's own logs directly confirmed the model completed generation cleanly and stopped on its own, not a resource limit being hit.
+1. Split the corpus into batches of `--batch-size` clusters (default 10) and label each batch with its own LLM call. Results will be merged afterward.
 2. Within a batch, the prompt states the corpus's own shared baseline directly and instructs the model that a label reducible to it has failed.
 3. The model sorts every title it was given into named groups, before writing anything.
-4. The response format is one JSON object per line (JSONL), one line per cluster, each line a complete and independently parseable object, not one JSON object wrapping the whole batch. This is the direct fix for the same failure in point 1: when a batch's generation stopped early, the single-object format made the entire batch's JSON invalid, discarding every cluster in it even when most had already been written correctly. JSONL means an incomplete final line only loses that one cluster.
-5. The label and description come from whichever group is largest.
-6. A second group becomes `secondary_label` only if it has at least 3 titles, derived by rank directly from the model's own `groups` output; anything smaller goes into `unaccounted_titles`.
-7. `titles_missing_from_groups` compares every title actually given to the model against everything in its output, and flags any title absent from every group.
-8. `secondary_group_size` recomputes each secondary label's actual title count and flags any below the 3-title floor.
-9. If a line still fails to parse after all of this, an automatic repair pass checks for a second, distinct, confirmed failure: a title containing its own literal double-quote character, copied into the JSON string without escaping it, which breaks that string and everything after it in the line even though the response is otherwise complete and correct. The repair rebuilds the line with internal quotes properly escaped and re-parses; if that still fails, the line is treated as genuinely lost.
-10. If a batch still comes back with clusters missing after steps 4-9, the remaining clusters are split in half and each half is labeled with its own call, recursively, rather than retrying the same request unchanged; a smaller task is a genuinely different, easier request, not a repeat of the one that just failed.
-11. Once every batch has run, a cross-batch check compares every finished label against every other and flags any two that look similar (same word-overlap heuristic as `--second-model`, same limits). This exists specifically because batching removes the single-call design's own protection against two different batches independently giving unrelated clusters the same generic label.
+   - The label and description come from whichever group is largest.
+   - A second group becomes `secondary_label` only if it has at least 3 titles, derived by rank directly from the model's own `groups` output; anything smaller goes into `unaccounted_titles`.
+5. `titles_missing_from_groups` compares every title actually given to the model against everything in its output, and flags any title absent from every group.
+6. `secondary_group_size` recomputes each secondary label's actual title count and flags any below the 3-title floor.
+7. If a line still fails to parse after all of this, an automatic repair pass checks for potential reasons for failure and attempts to correct them. Checks and resolutions for failure modes are added iteratively, as new ones are discovered.
+8.  If a batch still comes back with clusters missing, the remaining clusters are split in half and each half is labeled with its own call, recursively, rather than retrying the same request unchanged; a smaller task is a genuinely different, easier request, not a repeat of the one that just failed.
+9.  Once every batch has run, a cross-batch check compares every finished label against every other and flags any two that look similar. This exists specifically because batching removes the potential to run single calls to the LLM, which, in prior tests, enable protection against two different batches independently giving unrelated clusters the same generic label.
 
 ## Outputs and outcomes
 
@@ -87,7 +66,7 @@ Rebuilt from the full merged label set on every run, not just the current run's 
 - Produced by: `label_clusters.py`.
 - Read by: `02_network_structure.qmd`.
 
-`label_clusters.py` builds this from `representatives.csv`. The graph and its tooltips show a real label when one exists, falling back to "Community N" otherwise. If the file already exists, a run merges into it rather than overwriting it wholesale: existing rows for clusters not touched this run are preserved, and rows for clusters labeled this run are added or replaced. This is what makes `--only-clusters` (see Usage) safe to use for filling in specific clusters a previous run missed, without redoing or losing the rest.
+`label_clusters.py` builds this from `representatives.csv`. If the file already exists, a run merges into it rather than overwriting it wholesale: existing rows for clusters not touched this run are preserved, and rows for clusters labeled this run are added or replaced. This is what makes `--only-clusters` safe to use for filling in specific clusters a previous run missed, without redoing or losing the rest.
 
 | Column | Description |
 |---|---|
@@ -103,7 +82,7 @@ Rebuilt from the full merged label set on every run, not just the current run's 
 
 ## Usage
 
-`select_representatives.py` needs `data/bibliography.json` (titles) and `data/citation_edgelist.csv` (the citation graph). The partition file is found automatically (the fragmentation-onset cut under `../gn_analysis/results/multi_cut/`, same logic `02_network_structure.qmd` uses for `gn_earliest`) unless `--partition-csv` is given explicitly.
+`select_representatives.py` needs to access titles from `data/bibliography.json` and the overall citation graph from `data/citation_edgelist.csv`. `select_representatives.py` finds the partition file itself by detecting the smallest-round `communities_round_<N>.csv` under `../gn_analysis/results/multi_cut/` (same logic as `gn_earliest` in `02_network_structure.qmd`), unless `--partition-csv` is given explicitly. As such, this whole process should run after `gn_analysis/`.
 
 ```bash
 cd analysis/cluster_labelling
@@ -125,27 +104,11 @@ python label_clusters.py \
     --model qwen3.5:35b
 ```
 
-`select_representatives.py` finds the partition file itself:
-auto-detects the smallest-round `communities_round_<N>.csv` under
-`../gn_analysis/results/multi_cut/`, the same fragmentation-onset cut
-`02_network_structure.qmd` uses as `gn_earliest`. Pass
-`--partition-csv <path>` to use a different one, or if that directory
-doesn't exist yet (run `gn_analysis/` first). `label_clusters.py`
-still takes the partition CSV as an explicit argument (to expand
-labels out to every member node); check the terminal output from
-`select_representatives.py` for which file it picked and pass the same
-one to `label_clusters.py`.
+`label_clusters.py` still takes the partition CSV as an explicit argument (to expand labels out to every member node); check the terminal output from `select_representatives.py` for which file it picked and pass the same one to `label_clusters.py`.
 
-`--max-clusters` scopes to the N largest clusters (by member count),
-for a faster first pass before running against the full set.
+`--max-clusters` scopes to the N largest clusters (by member count), for a faster first pass before running against the full set.
 
-**Running against a remote/GPU Ollama instance instead of local.**
-`--base-url` accepts any reachable Ollama server, not just
-`http://localhost:11434`. Useful when local hardware struggles with
-larger cluster counts (see "Status" above, this is exactly the
-situation that motivated using a cluster GPU): start an Ollama
-instance on the remote machine, open an SSH tunnel to its port, then
-point `--base-url` at the tunnel:
+**Running against a remote/GPU Ollama instance instead of local:** `--base-url` accepts any reachable Ollama server, not just `http://localhost:11434`. Useful when local hardware struggles with larger cluster counts. Start an Ollama instance on the remote machine, open an SSH tunnel to its port, then point `--base-url` at the tunnel:
 
 ```bash
 # on the remote machine
@@ -162,104 +125,17 @@ python label_clusters.py \
     --model qwen3.5:35b --base-url http://localhost:11450
 ```
 
-**`--batch-size`** (default 10) controls how many clusters go into
-each LLM call; labeling more clusters than this runs as multiple
-sequential calls, merged afterward; see "How it works" above for why
-one call for the whole corpus doesn't work reliably.
+**`--batch-size`** (default 10) controls how many clusters go into each LLM call. Labeling more clusters than this runs as multiple sequential calls, merged afterward.
 
-**`--only-clusters 110,22`** labels only the listed cluster IDs and
-merges the result into whatever's already in `cluster_labels.csv` /
-`node_labels.csv`, rather than relabeling everything. Built for
-filling in the small number of clusters a full run doesn't recover on
-its own (see "Status" above for real examples) without rerunning or
-losing the rest.
+**`--only-clusters [x],[y],[z]`** labels only the listed cluster IDs and merges the result into whatever's already in `cluster_labels.csv` / `node_labels.csv`, rather than relabeling everything. Built for filling in the small number of clusters a full run doesn't recover on its own without rerunning or losing the rest.
 
-Model name is whatever is actually pulled locally (`ollama list`); double-check the exact tag exists before running; published model
-names don't always match what's shown in general documentation
-(`qwen3:35b` does not exist as a tag on this system, `qwen3.5:35b`
-does, a different model family, not a typo).
+**`--model [tag]`** refers to whatever is actually pulled locally (check via `ollama list`). Double-check the exact tag exists before running.
 
-## Status
+## Earlier methods (superseded)
 
-Confirmed by hand, checking real output against real titles, not a systematic audit:
+This pipeline went through several elaborate designs before settling on its current shape. Some mechanisms include per-cluster mode with multi-model stability checks, hierarchical/reconciliation for scaling past one call, self-critique, few-shot examples, per-title outlier flagging, and automated cluster-splitting detection. Each of these were tested, and the results are maintained below for posterity. The raw label output from every test referenced below is also preserved as individual CSVs in `results/test_runs/`.
 
-- Hub-independence rule changed a real cluster's sample and its label on a real 25-cluster run. At 50 clusters, 44 of 50 (88%) were hub-dominated by the `--hub-ratio-threshold` measure: the fix is active on most of what gets labeled at this scale, not a rare edge case.
-- Sort-first `groups` fixed every gap it was tested against: a missed hub paper, a dropped theory title, a buried secondary theme.
-- The 3-title floor on `secondary_label` was added after 45% of secondary labels on one 25-cluster run were backed by only 1-2 titles. A written prompt instruction alone did not fix it (re-run: 19 of 25 clusters still got a secondary label, 5 with only 2-title support). Code-level enforcement did: `secondary_label`/`secondary_description` are now derived directly from `groups` by rank rather than trusted from the model's own text, discarding the model's own writing entirely. Verified against a real 25-cluster run: every one of the 12 clusters that got a secondary label had `secondary_group_size` ≥3, every one of the 13 that didn't had <3, a full, exact match with no exceptions.
-- The earlier, separate embedding-based method (see "Earlier method" below) was audited once: roughly 14 of 25 clusters fully accurate, 6 with a silently-dropped outlier, 4 with a missed second theme, 2 genuinely incoherent.
-- One call for 50 clusters failed five separate times regardless of `--num-predict`/`--num-ctx`, on both a local M2 and a dedicated 24GB cluster GPU. Checking the serving container's own logs directly (not inferred) confirmed generation completed cleanly (HTTP 200, no truncation flag) but the model itself stopped mid-structure, a model-reliability-at-task-length problem, not a resource limit. Batching (10 clusters/call) plus the JSONL format fixed this: a real 50-cluster run completed all 5 batches, losing only 2 of 50 clusters to the model's own early stopping, both isolated to their batch's last line rather than taking down the whole batch.
-- Of those 2 initially-lost clusters, both were traced to specific, now-fixed causes rather than accepted as unexplained loss. One cluster's title contained its own literal double-quote character, which the model copied into the JSON response without escaping it, breaking that line's JSON syntax despite the response being otherwise complete and correct; confirmed by manually reproducing the exact failing line and testing a repair pass against it, which recovered all 10 of the cluster's titles intact. The other resolved on a second `--only-clusters` attempt of that one cluster alone. Both are now part of `cluster_labels.csv` for a real 50-cluster run with 50 of 50 clusters present.
-- The cross-batch duplicate-label check found real, substantive overlaps on the first batched 50-cluster run: 18 flagged pairs, several looking like genuine near-duplicates rather than surface word-overlap noise (e.g. two labels both organized around "Viking Age... urbanization/settlement" content). This is the real, visible cost of batching that single-call labeling didn't have; worth a manual look at flagged pairs before trusting the full label set, not yet done systematically.
-- Retry-at-the-same-size was tried and removed: reasoned through directly, retrying an unchanged batch after a failure only has a chance of working because of generation randomness (temperature 0.3), which was judged too weak a mechanism to justify keeping once JSONL made partial-batch recovery possible on its own. The system now goes straight from "clusters missing after one call" to splitting the remainder into smaller batches, which is a genuinely different, easier task rather than a repeat of the same request.
-
-Not yet done:
-
-- `--second-model` (a second full LLM run for cross-model label
-  disagreement checking, built earlier) has not been re-tested against
-  the sort-first version. Current assessment: likely lower priority
-  than before; the `groups` field now gives a much more specific,
-  directly-readable way to check a label's reasoning than comparing
-  two final label strings via a coarse word-overlap heuristic
-  (`check_agreement()`). Not removed, but not part of the default
-  workflow going forward.
-- The 18 cross-batch duplicate-label flags from the real 50-cluster
-  run have not been manually reviewed; some look like genuine
-  near-duplicates worth relabeling, not yet confirmed which.
-- Only tested at 5, 25, and 50 clusters so far, never the full ~315
-  qualifying / ~800 total corpus. Batching now makes this plausible in
-  principle (no single-call size ceiling), but has not actually been
-  run at that scale, real per-batch failure rate at 5 batches (50
-  clusters) was 2/50; whether that rate holds, worsens, or improves
-  across ~30+ batches is unknown. In practice, full corpus coverage
-  may not be needed: `02_network_structure.qmd` only individually
-  visualizes the top `gn_top_n` (currently 20) communities by size;
-  everything else renders as grey "Other" regardless of whether it
-  has a label.
-- `--top-n` (10), `--hub-ratio-threshold` (5.0), and `--batch-size`
-  (10) all match reasonable defaults but none has been independently
-  tuned against alternatives on this corpus.
-- No systematic accuracy check across more than a handful of clusters,
-  every verification described above was done by hand, cluster by
-  cluster, checking real titles against real output. The accuracy
-  figures elsewhere in this file (14/25 accurate, etc.) describe the
-  earlier embedding-based method's output, not this one.
-- The quote-escaping repair pass's character-by-character boundary
-  heuristic has been verified against exactly one real failing case
-  (the one that motivated building it) and one small set of synthetic
-  cases (a genuinely truncated line, correctly left unrepaired). Not
-  yet tested against a broader range of real titles containing
-  quotes, apostrophes, or other punctuation that could plausibly
-  confuse the boundary heuristic.
-
----
-
-## Earlier method (superseded)
-
-Before the citation-ranking method above, this pipeline used sentence embeddings: `embed_titles.py` embedded every title, `select_representatives.py` picked titles by embedding distance to the cluster centroid (or by farthest-point sampling for spread, `--sampling diverse`/`centroid`), and `label_clusters.py` used a custom single-pass batch prompt (no groups-based sorting, no secondary-label floor). Multiple additional mechanisms were tried on top of that method and abandoned after direct testing: per-cluster mode with multi-model stability checks, hierarchical/reconciliation for scaling past one call, self-critique, few-shot examples, per-title outlier flagging, and automated cluster-splitting detection. Each is documented with its actual test result in "What was tried, tested, and removed" below; kept because a future pass on this project could otherwise reinvent one of these and hit the same wall.
-
-A manual audit of that method's output (25 largest clusters, before dual-label support existed) found roughly 14 of 25 clusters fully accurate, ~6 with one silently-ignored outlier title, ~4 with a real second theme the label dropped, and 2 genuinely incoherent grab-bag clusters. One of those incoherent cases was traced to a real structural cause, not a labeling failure: two topically unrelated titles (`grosjean2007`, on Holocene glacier archaeology in the Swiss Alps, and `piotrowski2006`, on Holocaust memory studies) turned out to share no direct citation link at all, but both cited the same third paper: a multi-author interdisciplinary piece on "The Archaeology of Ice" (`solli2011`). Girvan-Newman had correctly grouped them by real citation-graph proximity; they simply aren't about the same thing. No amount of prompt tuning fixes a cluster whose coherence comes from one shared bridging citation rather than a shared topic; the "within-cluster betweenness centrality" idea (surfacing which paper in a cluster is structurally bridging otherwise-unrelated content, so the model can name that explicitly) was proposed as a way to handle this but was never built. This finding is structural, not tied to which selection method is used, and likely still applies to the current citation-ranking method too; not yet checked.
-
-## What was tried, tested, and removed
-
-This pipeline went through several more elaborate designs before
-settling on its current shape. Recorded here with actual specifics,
-not just "several things were tried," since a future pass on this
-project could easily reinvent one of these and hit the same wall.
-
-The raw label output from every test referenced below is also
-preserved as individual CSVs in `results/test_runs/`
-(reconstructed from what was pasted into the development conversation;
-the actual run outputs only ever existed on the machine that
-generated them). The full label-by-label comparison across every test
-is below, so the claims in this section can be checked directly
-against what each test actually produced, not just taken on faith.
-
-### Label comparison across all reconstructed tests
-
-Rows ordered by test coverage — clusters tested across the most
-runs sit at the top. Empty cell = cluster not included in that
-test's scope (T0's 3 unstable exclusions — 22, 49, 292 — are also
-empty for T0 specifically, even though 49/292 appear in later tests).
+In the following summary table, rows are ordered by test coverage. Clusters tested across the most runs sit at the top. Empty cells represent clusters not included in that test's scope (testing was somewhat casual and iterative).
 
 | Cluster | Tests covered | T0 Original per-cluster | T2 Critique | T3 Hierarchical | T4 Diverse | T5 Diverse+Outlier | T6 25-cluster | T7 Dual v1 (empty) | T8 Dual v2 (fixed) |
 |---|---|---|---|---|---|---|---|---|---|
@@ -289,24 +165,13 @@ empty for T0 specifically, even though 49/292 appear in later tests).
 | 292 | 3 | — | — | — | — | — | Archaeological Theory and Ethics | Theory and Philosophy of Science | Theory of Science and Materiality |
 | 222 | 2 | — | — | — | — | — | Stable Isotope Analysis in Bioarchaeology | Stable Isotope Analysis in Bioarchaeology | — |
 
-Notice cluster 171 shifting from "migration histories/debates"
-(centroid sampling, T0/T2/T3) to explicitly naming ethics/identity
-content once diverse sampling was introduced (T4 onward) — this is
-the concrete evidence behind "diverse sampling surfaces real content
-centroid sampling was hiding," not just an assertion. Also notice T0's
-row for clusters 8, 52, and 216 (not shown in the truncated view above
-unless scrolled to) — all three converged on "Viking Age Archaeology
-and Culture" or near-identical phrasing under the original per-cluster
-mode, the concrete duplicate-label problem that motivated the move to
-batch mode.
-
 ### Individual test tables (full label + description text)
 
-Each test's complete output, for the clusters it actually covered.
-Descriptions included in full — these are the primary evidence
-behind every claim made in the narrative above.
+Each test's complete output for the clusters it actually covered.
 
-#### T0 Original per-cluster (`results/test_runs/test0_ORIGINAL_percluster_25clusters_22accepted.csv`)
+#### T0 Original per-cluster
+
+The genuine first full pipeline run of the whole session — predates every other file here. Original per-cluster mode (before the rebuild to batch mode): one LLM call per cluster, run across `qwen3.5:35b` and `qwen3:8b` at multiple temperature/seed combinations, auto-accepted only if every run agreed. Scoped to 25 clusters. Result: 22 of 25 accepted (stable), 3 flagged unstable and excluded — clusters 22, 49, and 292 are absent from this file for that reason (22's identity wasn't retained elsewhere; 49 and 292 both reappear labeled successfully in later batch-mode tests). This is the run where three separate clusters (8, 52, 216) each converged on "Viking Age Archaeology[...]" — the concrete duplicate-label problem that motivated moving to batch mode in the first place.
 
 | community_id | label | description | n_runs_agreeing |
 |---|---|---|---|
@@ -333,7 +198,13 @@ behind every claim made in the narrative above.
 | 151 | Viking Age and Medieval North Atlantic Settlements | The titles explore archaeological and historical aspects of Viking and medieval settlements in the North Atlantic, focusing on regions like Iceland, the Faroe Islands, and Northern Norway. They highlight themes such as farming practices, shielings, and environmental interactions during these periods. | 8 |
 | 87 | Prehistoric and Early Historic Archaeology | The titles focus on archaeological studies from prehistoric and early historic periods, covering various regions in Scandinavia and Northern Europe. They explore topics such as burial practices, material culture, and settlement patterns, often integrating archaeological findings with environmental and historical contexts. | 8 |
 
-#### T2 Critique (`results/test_runs/test2_batch_critique_centroid.csv`)
+#### T1 — Missing,
+
+The first labeling test using the REBUILT batch-mode pipeline (after per-cluster mode above was abandoned for the duplicate-label problem): 5 clusters (101, 14, 67, 86, 171), plain batch mode, centroid sampling, no critique, no few-shot. Its full CSV (with descriptions) was never pasted into the chat in one complete block the way every later test was — only its label text survives, embedded in later comparison tables built during the session. Not reconstructed as a file because a labels-only version without descriptions would be a materially incomplete copy, not a faithful one. If needed, the label text alone can be pulled from the "Test 1 (centroid)" column of later comparison tables in the chat history.
+
+#### T2 Critique
+
+5 clusters (101, 14, 67, 86, 171). Batch mode + `--critique` second pass. Centroid sampling. Result: 0 of 5 labels revised by the critique pass — inconclusive, the set was already clean going in.
 
 | community_id | label | description | revised |
 |---|---|---|---|
@@ -343,7 +214,9 @@ behind every claim made in the narrative above.
 | 86 | Archaeological Excavation Methodologies | These titles share a focus on the technical and theoretical frameworks of archaeological practice, including stratigraphy, site recording, microstratigraphy, and the management of residuality and spatial data during fieldwork. | False |
 | 171 | Archaeogenetics and Migration Histories | This cluster is defined by the application of genetic data, specifically ancient DNA, to resolve questions regarding population movements, identity, and migration patterns across Neolithic and European history. | False |
 
-#### T3 Hierarchical (`results/test_runs/test3_hierarchical_centroid.csv`)
+#### T3 Hierarchical
+
+Same 5 clusters, split into two sub-batches (3+2) to force hierarchical mode's cross-batch reconciliation pass to actually run. Centroid sampling. Result: 0 collisions found or fixed — inconclusive, same reason as test2.
 
 | community_id | label | description | revised |
 |---|---|---|---|
@@ -353,7 +226,9 @@ behind every claim made in the narrative above.
 | 86 | Excavation Methodologies and Stratigraphic Recording | This cluster is organized around the technical frameworks, theoretical debates, and practical procedures for archaeological excavation and data recording. The titles collectively address specific systems like single-context and microstratigraphy, alongside digital delineation, geoarchaeological approaches, and the reflexive nature of fieldwork rather than specific artifacts or historical periods. | False |
 | 171 | Archaeogenetics and Migration Debates | This cluster is defined by the intersection of ancient DNA analysis and the theoretical discourse on population movements in European prehistory. The titles examine the application of genetic data to reconstruct migration histories, the persistence of typological thinking, and the critical reconciliation of genomic findings with archaeological material cultures and identity narratives. | False |
 
-#### T4 Diverse (`results/test_runs/test4_batch_diverse.csv`)
+#### T4 Diverse
+
+Same 5 clusters. Plain batch mode, no critique, no outlier flagging — first test using `--sampling diverse` instead of centroid. This is the run that first showed diverse sampling surfacing real content centroid sampling had been missing (cluster 171's label shifted from migration-focused to explicitly naming ethics/identity content).
 
 | community_id | label | description |
 |---|---|---|
@@ -363,7 +238,9 @@ behind every claim made in the narrative above.
 | 86 | Archaeological Methods and Material Analysis | The unifying axis is the technical methodology of archaeological investigation, ranging from field recording and soil profile description to laboratory techniques like Micro-XRF and diatom analysis. It includes studies on specific material cultures, such as ironworks and horse gear, and theoretical approaches to urbanization and residuality in the archaeological record. |
 | 171 | Genetic Genealogy and Bioarchaeological Ethics | This cluster centers on the application of ancient DNA (aDNA) and population genetics to reconstruct past demographics and migration, while critically engaging with the ethics, marketing, and social implications of these technologies. It includes debates on the construction of identity, the demonization of historical groups, and the methodological challenges of using genetic markers as population proxies. |
 
-#### T5 Diverse+Outlier (`results/test_runs/test5_batch_diverse_outlier.csv`)
+#### T5 Diverse+Outlier
+
+Same 5 clusters, diverse sampling, plus the (later-removed) per-title outlier-flagging mechanism, v2 (nearest-other-selected-title distance, not centroid distance). Descriptions explicitly name which titles were flagged as possibly not fitting.
 
 | community_id | label | description |
 |---|---|---|
@@ -373,7 +250,9 @@ behind every claim made in the narrative above.
 | 86 | Archaeological Methods and Material Analysis | The unifying theme is the technical application of archaeological science and fieldwork methods, ranging from soil profile description and micro-XRF analysis to the study of specific artifacts like ironworks and horse gear. Although the cluster includes titles on theoretical approaches to urbanization and residuality, the flagged title on diatoms and the one on 'Le geste et la parole' appear to be methodological or linguistic outliers that do not fit the core focus on material analysis and field techniques. |
 | 171 | Ancient DNA and Population Genetics | This cluster is defined by the use of genetic data to reconstruct population histories, migration routes, and biological traits in prehistoric and medieval Europe. The titles discuss aDNA research, kinship, and the intersection of genetics with social identity, while the flagged titles on the 'maritime mode of production' and the 'manufacture of knowledge' appear to be theoretical or sociological works that do not fit the specific genetic analysis theme. |
 
-#### T6 25-cluster (`results/test_runs/test6_batch_diverse_25clusters.csv`)
+#### T6 25-cluster
+
+First full-scale test: 25 clusters (the corpus's largest, by member count), diverse sampling, plain batch mode — the "clean five-step design" after the full pipeline rebuild that stripped out critique, hierarchical, outlier-flagging, and split-detection. No secondary_label column yet (built before dual-label support existed).
 
 | community_id | label | description |
 |---|---|---|
@@ -403,7 +282,9 @@ behind every claim made in the narrative above.
 | 151 | Island Environments and Resilience | The focus is on the specific challenges and adaptations of island societies, analyzing environmental impacts, agricultural models, and the resilience of North Atlantic settlements. |
 | 87 | Archaeological Chemistry and Material Science | This group applies chemical and physical analysis techniques, such as GC-MS and FTIR, to identify organic residues, production methods, and the composition of archaeological materials. |
 
-#### T7 Dual v1 (empty) (`results/test_runs/test7_batch_25clusters_duallabel_v1_empty.csv`)
+#### T7 Dual v1 (empty)
+
+Same 25 clusters, same settings as test6, but with the FIRST version of the dual-label prompt instruction added. Every secondary_label/ secondary_description cell is empty — this version of the instruction produced zero dual labels, including on clusters where the model's own description text showed it had noticed a second theme but folded it into a subordinate clause instead of using the field. This result is what triggered rewriting the instruction.
 
 | community_id | label | description | secondary_label | secondary_description |
 |---|---|---|---|---|
@@ -433,7 +314,9 @@ behind every claim made in the narrative above.
 | 151 | Climate Change and Societal Resilience | Titles examine the impact of climate change, particularly the Little Ice Age, on societal resilience and adaptation in the North Atlantic. It includes studies of land management, grazing models, and the conversion of societies to Christianity. |  |  |
 | 87 | Archaeological Chemistry and Material Science | This cluster focuses on the chemical and physical analysis of archaeological materials, including organic residues, glues, and biomarkers. It covers techniques like GC-MS and FTIR to understand production processes and material use in prehistory. |  |  |
 
-#### T8 Dual v2 (fixed) (`results/test_runs/test8_batch_10clusters_duallabel_v2_fixed.csv`)
+#### T8 Dual v2 (fixed)
+
+10 clusters (the corpus's largest 10, a superset overlap with the 5-cluster tests), same batch settings, but with the REWRITTEN dual-label instruction that explicitly names the "but/while/also clause" failure pattern and disallows it as a substitute for using the field. Result: 9 of 10 clusters received a secondary label. Four (101, 86, 171, 292) were checked directly against real titles and confirmed accurate. Four (11, 39, 43, 49) were not independently re-verified with the same rigor. One (14) correctly stayed single — independently confirmed clean on every prior test all session.
 
 | community_id | label | description | secondary_label | secondary_description |
 |---|---|---|---|---|
@@ -448,17 +331,3 @@ behind every claim made in the narrative above.
 | 43 | Old Norse Mythology and Iconography | This cluster is dedicated to the interpretation of Old Norse mythology, including the Edda, the Wieland legend, and the gender dynamics of gods like Loki. It heavily features the analysis of Gotlandic picture stones and their dating using advanced imaging techniques. | Comparative Religion and Textual Analysis | The cluster also includes comparative studies of Old Norse and Finnish religions, cultic place-names, and the intertextual relationship between the Vǫluspá and the Book of Revelation. |
 | 49 | Childhood, Gender, and Social Roles | The cluster examines the social roles of children and adolescents in the Viking Age and other foraging societies, including sibling caretaking and the distribution of knowledge. It also explores the construction of masculinity and gender politics in international relations and historical contexts. | Forensic and Skeletal Analysis | A secondary theme involves the technical analysis of skeletal remains, including exercise-induced bone changes, adverse childhood experiences, and the identification of victims in mass graves, distinct from the social role focus. |
 
-
-## Known limitations (earlier embedding-based method)
-
-The earlier method's scaling limit and remaining open questions, never resolved: no built-in way to split work across multiple calls and reconcile labels for a cluster count too large for one call's context window (hierarchical mode attempted this once, inconclusively, and isn't in the current code); final embedding model choice, and whether to also embed `author` or `booktitle`/`journaltitle` alongside `title`; whether `--sampling diverse` actually improved label quality relative to `centroid` beyond the hand-checks noted above; whether `--top-n 15` was the right sample size for that method.
-
-## Keep out of git
-
-```
-analysis/cluster_labelling/results/title_embeddings.npz
-```
-
-(Large binary, regenerable from `data/bibliography.json` at any time.
-`representatives.csv` and `cluster_labels.csv` are small and fine to
-commit.)
