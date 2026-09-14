@@ -91,7 +91,17 @@ def format_completeness(entry):
     score = c.get("score")
     label = c.get("label", "")
     score_str = f"{score:.2f}" if isinstance(score, (int, float)) else ""
-    missing = c.get("required_missing", []) + c.get("recommended_missing", [])
+    
+    # Safely handle missing definitions that map to raw strings instead of lists
+    req_missing = c.get("required_missing") or []
+    rec_missing = c.get("recommended_missing") or []
+    
+    if isinstance(req_missing, str):
+        req_missing = [req_missing]
+    if isinstance(rec_missing, str):
+        rec_missing = [rec_missing]
+        
+    missing = req_missing + rec_missing
     detail = f"{label}" + (f" (missing: {', '.join(missing)})" if missing else "")
     return score_str, detail
 
@@ -226,7 +236,7 @@ def write_xlsx(rows, columns, output_path):
                 cell.fill = reviewer_fill
 
     ws.freeze_panes = "A2"
-    ws.row_dimensions[1].height = 30
+    ws.row_dimensions.height = 30
     for row_idx in range(2, len(rows) + 2):
         ws.row_dimensions[row_idx].height = 45
 
