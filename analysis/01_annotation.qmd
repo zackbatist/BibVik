@@ -1,5 +1,4 @@
 ---
-title: "BibVik — Part 1: Annotation descriptives"
 format:
   html:
     toc: true
@@ -18,14 +17,6 @@ text-align: justify !important;
 ```
 
 # Part 1 — Annotation descriptives
-
-Strategy and reasoning for this analysis: see `00_plan.qmd`.
-
-This section computes the annotation cross-tab entirely independently of
-the graph work above — no reference to citation structure, communities, or
-centrality. Per the no-baseline stance, this is not a check against Part 1;
-it stands on its own, and Part 3 (below) is where the two are placed
-side by side.
 
 ```{r}
 #| label: annotation-libraries
@@ -111,9 +102,6 @@ roll_sum3 <- function(x) {
 n_per_year <- df %>% count(publication_year, name = "n_papers_year")
 n_total_papers <- n_distinct(df$cite_key)
 ```
-
-Corpus size, date range, and the publications-per-year chart moved to
-`00_overview.qmd`.
 
 ## Gender
 
@@ -1643,3 +1631,8 @@ ggplot(region_counts, aes(label = Region, size = n_scaled, color = n)) +
 - Semantic similarity matching against a reference gazetteer (e.g.
   Pleiades, https://pleiades.stoa.us) could consolidate variant place
   names and add coordinates for a map. Not started.
+
+### Other
+
+- **Per-F2-node citer profiles.** For F2 works cited by multiple F1 papers, characterize the citer set using annotation data that exists only on the F1 side: gender composition, topic/method diversity, and whether the citer set is itself structurally clustered or scattered. Does not require resolving the community-detection method question and is tractable immediately once prioritized. Speaks to a genuinely different citational-politics phenomenon than the corpus-wide cross-tab: whether particular sources function as shared/foundational touchstones cited across the field's internal divisions, or as in-group markers cited mainly within one part of it.
+- **Direct citation homophily.** Do papers (or, at the author level — see "alternative units" below — authors) disproportionately cite others sharing their coded gender/topic/method characteristics? A direct join of two already-independent descriptions (citation edges, annotation data) with no algorithmic mediation in between. Likely the most immediately tractable of the not-yet-built analyses.

@@ -1,5 +1,4 @@
 ---
-title: "BibVik — Part 2: Citation graph, structural descriptions"
 format:
   html:
     toc: true
@@ -154,10 +153,11 @@ between other works — brokers between sub-literatures. Betweenness is
 expensive to compute on large graphs; both normalized and raw values are
 reported. Normalized divides by the theoretical maximum for a graph this
 size (roughly (n-1)(n-2) for a directed graph), so on a graph with over
-12,000 nodes even a genuinely high-betweenness work normalizes to a very
-small fraction — small in absolute terms, not because the work is
-unimportant. Raw values, not rescaled, are more intuitively legible for
-comparing works directly against each other.
+`r format(vcount(g), big.mark = ",")` nodes even a genuinely
+high-betweenness work normalizes to a very small fraction — small in
+absolute terms, not because the work is unimportant. Raw values, not
+rescaled, are more intuitively legible for comparing works directly
+against each other.
 
 PageRank assigns authority based on incoming links weighted by the
 authority of the linking node — conceptually similar to being cited by
@@ -1471,6 +1471,96 @@ The largest dots in the core, whichever cluster colour they carry, are
 the corpus's genuine structural bridges: the size channel now carries
 real information about what the core actually contains, not just
 that it's crowded.
+
+**Community-level structure: how the top clusters actually relate to
+each other.** Every plot above shows individual nodes coloured by
+community; none of them show which communities are strongly connected
+to which others, since edges are drawn identically whether they cross
+community boundaries or stay within one. This collapses each of the
+top `r gn_top_n` clusters to a single node, sized by its real
+membership count, with an edge between two cluster-nodes weighted by
+the real number of citation edges crossing between them in the
+original graph — the genuine inter-community structure, not
+individual-node detail.
+
+```{r}
+#| label: gn-community-level-graph
+#| eval: !expr gn_has_communities
+#| fig-width: 14
+#| fig-height: 12
+if (!requireNamespace("ggrepel", quietly = TRUE)) {
+  install.packages("ggrepel")
+}
+library(ggrepel)
+
+gn_comm_nodes <- gn_static_nodes |>
+  filter(community_gn_highlight != "other") |>
+  count(community_gn_highlight, community_label, name = "size")
+
+gn_comm_edges <- as_tibble(edges) |>
+  left_join(node_table |> select(name, community_gn), by = c("source" = "name")) |>
+  rename(community_source = community_gn) |>
+  left_join(node_table |> select(name, community_gn), by = c("target" = "name")) |>
+  rename(community_target = community_gn) |>
+  # community_gn on node_table is not guaranteed to already be the
+  # same type as gn_comm_nodes' community_gn_highlight
+  # (as.character()-cast, built separately above) — cast explicitly
+  # here rather than rely on %in%'s implicit coercion, which would
+  # silently match nothing (not error) if the two sides were numeric
+  # vs. character.
+  mutate(community_source = as.character(community_source),
+         community_target = as.character(community_target)) |>
+  filter(
+    community_source %in% gn_comm_nodes$community_gn_highlight,
+    community_target %in% gn_comm_nodes$community_gn_highlight,
+    community_source != community_target
+  ) |>
+  count(community_source, community_target, name = "weight") |>
+  # Undirected for this summary: A-B and B-A collapsed into one real
+  # crossing count, since the question here is "how connected are
+  # these two communities," not citation direction between them.
+  mutate(pair_key = paste(pmin(community_source, community_target),
+                           pmax(community_source, community_target))) |>
+  group_by(pair_key) |>
+  summarise(
+    community_source = first(community_source),
+    community_target = first(community_target),
+    weight = sum(weight),
+    .groups = "drop"
+  ) |>
+  select(-pair_key)
+
+g_comm <- graph_from_data_frame(gn_comm_edges, directed = FALSE, vertices = gn_comm_nodes)
+tg_comm <- as_tbl_graph(g_comm)
+
+ggraph(tg_comm, layout = "fr") +
+  geom_edge_link(aes(width = weight), alpha = 0.4, colour = "steelblue") +
+  scale_edge_width(name = "Cross-community\ncitation edges", range = c(0.2, 4)) +
+  geom_node_point(aes(size = size, colour = community_label), alpha = 0.9) +
+  geom_node_text(aes(label = community_label), repel = TRUE, size = 3,
+                 max.overlaps = 20) +
+  scale_colour_manual(values = gn_label_colours, guide = "none") +
+  scale_size_continuous(name = "Cluster size\n(real membership)", range = c(3, 16)) +
+  theme_graph() +
+  labs(
+    title = paste0(
+      "How the top ", gn_top_n, " Girvan-Newman clusters actually relate to each other"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "Edge width is the real count of citation edges crossing between ",
+      "two clusters; isolated clusters (no edges above) share no real ",
+      "citation ties with any other top-", gn_top_n, " cluster."
+    )
+  )
+```
+
+A real edge here means real papers in one cluster actually cite, or
+are cited by, real papers in the other; its width is that count, not
+an estimate. A cluster with no edges at all in this plot is real too:
+it means none of the top `r gn_top_n` clusters share a direct citation
+tie with it, whatever thematic similarity a reader might expect from
+the labels alone.
 
 ### Internal structure of individual communities [TO BE COMPLETED]
 
