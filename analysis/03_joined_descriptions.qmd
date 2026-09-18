@@ -1,5 +1,4 @@
 ---
-title: "BibVik — Part 3: Joining structural and annotation descriptions"
 format:
   html:
     toc: true
@@ -13,15 +12,7 @@ execute:
 
 # Part 3 — Joining structural and annotation descriptions
 
-Strategy and reasoning for this analysis: see `00_plan.qmd`. Reads outputs
-of `01_annotation.qmd` and `02_network_structure.qmd`. Does not recompute
-either.
-
-Everything in Part 1 describes the annotation data on its own terms;
-everything in Part 2 describes the graph on its own terms. Neither is a
-baseline the other is checked against. This section places them side by
-side and reads the relationship, which is where the actual analytical
-content of this project lives.
+Everything in Part 1 describes the annotation data on its own terms; everything in Part 2 describes the graph on its own terms. Neither is a baseline the other is checked against. This section places them side by side and reads the relationship, which is where the actual analytical content of this project lives.
 
 ```{r}
 #| label: setup

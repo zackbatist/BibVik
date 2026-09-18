@@ -1,5 +1,4 @@
 ---
-title: "BibVik — Part 2: Citation graph, structural descriptions"
 format:
   html:
     toc: true
@@ -63,7 +62,14 @@ bib <- bib[!sapply(bib, function(e) isTRUE(e[["_deleted"]]))]
 node_attrs <- tibble(
   name            = names(bib),
   title           = map_chr(bib, ~ .x$title %||% ""),
-  year            = map_chr(bib, ~ .x$date %||% .x$year %||% ""),
+  # year prefers the already-clean year field; date (a full string like
+  # "2021-05-15") is only used as a fallback, and then only its leading
+  # year digits, so a table column named "year" never shows a full date.
+  year            = map_chr(bib, ~ coalesce(
+    if (!is.null(.x$year) && nzchar(.x$year)) .x$year,
+    str_extract(.x$date %||% "", "^\\d{4}"),
+    ""
+  )),
   generation      = map_chr(bib, ~ .x$generation %||% ""),
   entry_type      = map_chr(bib, ~ .x$entry_type %||% ""),
   resolution      = map_chr(bib, ~ .x[["_resolution_method"]] %||% "grobid"),
@@ -147,10 +153,11 @@ between other works — brokers between sub-literatures. Betweenness is
 expensive to compute on large graphs; both normalized and raw values are
 reported. Normalized divides by the theoretical maximum for a graph this
 size (roughly (n-1)(n-2) for a directed graph), so on a graph with over
-12,000 nodes even a genuinely high-betweenness work normalizes to a very
-small fraction — small in absolute terms, not because the work is
-unimportant. Raw values, not rescaled, are more intuitively legible for
-comparing works directly against each other.
+`r format(vcount(g), big.mark = ",")` nodes even a genuinely
+high-betweenness work normalizes to a very small fraction — small in
+absolute terms, not because the work is unimportant. Raw values, not
+rescaled, are more intuitively legible for comparing works directly
+against each other.
 
 PageRank assigns authority based on incoming links weighted by the
 authority of the linking node — conceptually similar to being cited by
@@ -481,6 +488,63 @@ that dominance is complete: every node belongs to a single weakly
 connected component of `r format(vcount(g), big.mark = ",")` nodes, with
 no isolated fragments.
 
+**With the seed paper removed.** `lund2021`, the paper this corpus was
+built outward from (`generation == "P"`), is one node among
+`r format(vcount(g), big.mark = ",")`. Removing it here, from a
+filtered copy of the graph used only for this one comparison, tests
+whether the rest of the corpus depends on it for connectivity, or
+whether it's simply one well-connected node like any other.
+
+```{r}
+#| label: seed-removed-components
+#| echo: false
+g_no_seed <- delete_vertices(g, "lund2021")
+wcc_no_seed <- components(g_no_seed, mode = "weak")
+
+seed_is_cut_vertex <- wcc_no_seed$no > wcc$no
+```
+
+Without `lund2021`, the graph has
+`r format(vcount(g_no_seed), big.mark = ",")` nodes across
+`r format(wcc_no_seed$no, big.mark = ",")` weakly connected component(s),
+against `r format(wcc$no, big.mark = ",")` before removal. `lund2021`
+`r if (seed_is_cut_vertex) "is" else "is not"` a cut vertex on this
+corpus: removing it `r if (seed_is_cut_vertex) paste0("splits the graph into ", format(wcc_no_seed$no, big.mark = ","), " pieces") else "leaves every remaining node in one connected component, exactly as before"`.
+Since this corpus was built outward from `lund2021` (`generation ==
+"P"`), the fragments this reveals are papers included in the corpus
+specifically because of their relationship to the seed paper, with no
+other citation link into the rest of the network: their inclusion
+depends entirely on it.
+
+```{r}
+#| label: seed-removed-fragments
+#| echo: false
+#| eval: !expr seed_is_cut_vertex
+gn_giant_component_id <- which.max(wcc_no_seed$csize)
+stranded_papers <- tibble(
+  name = names(wcc_no_seed$membership),
+  component = wcc_no_seed$membership
+) |>
+  filter(component != gn_giant_component_id) |>
+  left_join(node_attrs |> select(name, title, year), by = "name")
+
+n_stranded <- nrow(stranded_papers)
+```
+
+```{r}
+#| label: seed-removed-stranded-table
+#| echo: false
+#| eval: !expr seed_is_cut_vertex
+stranded_papers |>
+  arrange(year) |>
+  transmute(Year = year, Title = title) |>
+  knitr::kable()
+```
+
+All `r format(n_stranded, big.mark = ",")` stranded papers: what
+`lund2021` cites that nothing else in this corpus cites or is cited by
+in turn.
+
 ## K-core decomposition
 
 The k-core of a graph is the maximal subgraph in which every node has at
@@ -561,14 +625,18 @@ the graph divides, not a single answer to be triangulated. Louvain
 densely interconnected than a random graph with the same degree sequence
 would predict," a notion formalized as modularity [@newman2006].
 Girvan-Newman [@girvan2002] asks "which edges, if removed, disconnect
-otherwise-separate parts of the network." These are genuinely different
-questions; neither validates the other. K-means, below, adds a third,
-differently-grounded description again: not by graph structure at all,
-but by each work's centrality profile, grouping works that occupy
+otherwise-separate parts of the network." K-means asks a third,
+differently-grounded question again: not about graph structure at all,
+but about each work's centrality profile, grouping works that occupy
 similar structural positions, for example highly-cited authorities vs.
 high-betweenness brokers vs. peripheral works.
 
-### Louvain
+::: {.callout-note}
+Louvain, Leiden, and K-means are computed below with no visible
+output. The code (chunks `louvain`, `leiden`, `km`, and their disabled
+`-viz` counterparts) is kept for reference; toggle `eval: true` on any
+`-viz` chunk to render it again.
+:::
 
 ```{r}
 #| label: louvain
@@ -576,24 +644,11 @@ high-betweenness brokers vs. peripheral works.
 #| results: hide
 louvain <- cluster_louvain(g_undirected)
 V(g)$community_louvain <- membership(louvain)
-gn_louvain_n <- length(louvain)
-gn_louvain_modularity <- round(modularity(louvain), 4)
-```
-
-Louvain finds `r format(gn_louvain_n, big.mark = ",")` communities, at
-a modularity of `r gn_louvain_modularity`. The 20 largest:
-
-```{r}
-#| label: louvain-table
-#| echo: false
-tibble(community = seq_along(sizes(louvain)), size = sizes(louvain)) |>
-  arrange(desc(size)) |>
-  head(20) |>
-  knitr::kable()
 ```
 
 ```{r}
 #| label: louvain-viz
+#| eval: false
 #| fig-width: 12
 #| fig-height: 12
 #| cache: true
@@ -608,11 +663,9 @@ ggraph(tg, layout = "drl") +
   theme_graph() +
   labs(title = "Citation graph — Louvain communities")
 
-ggsave("bibvik_louvain.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_louvain.pdf", width = 16, height = 16, device = cairo_pdf)
+ggsave(here("analysis", "bibvik_louvain.png"), width = 16, height = 16, dpi = 300)
+ggsave(here("analysis", "bibvik_louvain.pdf"), width = 16, height = 16, device = cairo_pdf)
 ```
-
-### Leiden
 
 ```{r}
 #| label: leiden
@@ -621,24 +674,11 @@ ggsave("bibvik_louvain.pdf", width = 16, height = 16, device = cairo_pdf)
 leiden <- cluster_leiden(g_undirected, objective_function = "modularity")
 leiden_membership <- as.integer(membership(leiden))
 V(g)$community_leiden <- leiden_membership
-gn_leiden_n <- length(leiden)
-gn_leiden_modularity <- round(modularity(g_undirected, leiden_membership), 4)
-```
-
-Leiden finds `r format(gn_leiden_n, big.mark = ",")` communities, at a
-modularity of `r gn_leiden_modularity`. The 20 largest:
-
-```{r}
-#| label: leiden-table
-#| echo: false
-tibble(community = seq_along(sizes(leiden)), size = sizes(leiden)) |>
-  arrange(desc(size)) |>
-  head(20) |>
-  knitr::kable()
 ```
 
 ```{r}
 #| label: leiden-viz
+#| eval: false
 #| fig-width: 12
 #| fig-height: 12
 #| cache: true
@@ -653,11 +693,9 @@ ggraph(tg, layout = "drl") +
   theme_graph() +
   labs(title = "Citation graph — Leiden communities")
 
-ggsave("bibvik_leiden.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_leiden.pdf", width = 16, height = 16, device = cairo_pdf)
+ggsave(here("analysis", "bibvik_leiden.png"), width = 16, height = 16, dpi = 300)
+ggsave(here("analysis", "bibvik_leiden.pdf"), width = 16, height = 16, device = cairo_pdf)
 ```
-
-### K-means clustering
 
 ```{r}
 #| label: km
@@ -677,6 +715,7 @@ V(g)$cluster_kmeans <- km$cluster
 
 ```{r}
 #| label: km-viz
+#| eval: false
 #| fig-width: 12
 #| fig-height: 12
 #| cache: true
@@ -691,25 +730,8 @@ ggraph(tg, layout = "drl") +
   theme_graph() +
   labs(title = "Citation graph — K-means clusters (by centrality profile)")
 
-ggsave("bibvik_kmeans.png", width = 16, height = 16, dpi = 300)
-ggsave("bibvik_kmeans.pdf", width = 16, height = 16, device = cairo_pdf)
-```
-
-#### Cluster profiles
-
-```{r}
-#| label: km-profiles
-centrality_df |>
-  group_by(cluster_kmeans) |>
-  summarise(
-    n                = n(),
-    mean_pagerank    = mean(pagerank, na.rm = TRUE),
-    mean_betweenness = mean(betweenness, na.rm = TRUE),
-    mean_authority   = mean(authority, na.rm = TRUE),
-    mean_in_degree   = mean(in_degree, na.rm = TRUE),
-  ) |>
-  arrange(desc(mean_in_degree)) |>
-  knitr::kable(digits = 5)
+ggsave(here("analysis", "bibvik_kmeans.png"), width = 16, height = 16, dpi = 300)
+ggsave(here("analysis", "bibvik_kmeans.pdf"), width = 16, height = 16, device = cairo_pdf)
 ```
 
 ```{r}
@@ -777,7 +799,7 @@ if (length(gn_cut_files) > 0) {
       "— run gn_analysis/generate_multi_cut_communities.R first. Skipping join.\n")
 }
 
-write_csv(node_table, "bibvik_node_table.csv")
+write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
 cat("Written bibvik_node_table.csv\n")
 cat("Rows:", nrow(node_table), "\n")
 
@@ -786,14 +808,6 @@ cat("Rows:", nrow(node_table), "\n")
 # quoting issues with !expr and string literals.
 gn_has_communities <- "community_gn" %in% colnames(node_table) && any(!is.na(node_table$community_gn))
 ```
-
-### Girvan-Newman
-
-This section covers a further way of dividing the graph into
-communities by its structure, alongside Louvain and Leiden above, and
-the specific problem that comes with it: unlike those two methods,
-Girvan-Newman does not return a single answer, and one has to be
-chosen from what it does produce.
 
 Louvain and Leiden each partition the graph once, at one resolution,
 and return a single result. Girvan-Newman [@girvan2002] instead removes
@@ -1086,8 +1100,469 @@ remaining `r format(gn_earliest$n_communities - gn_top_n, big.mark = ",")`
 are grey. Beyond roughly `r gn_top_n` colours, a reader cannot reliably
 distinguish them on the plot.
 
+**Layout trial: stress vs. drl.** `drl` (above) is a force-directed
+layout; on a graph this size it tends to compress most nodes into one
+dense central mass. `graphlayouts::layout_with_stress()` is a real,
+documented alternative for large graphs, benchmarked faster than
+`layout_with_drl()` and built to preserve actual graph-distance
+relationships rather than physical repulsion, which is the usual cause
+of a dense central blob in force-directed layouts at this scale. Same
+data, same colours, same F1 markers, for a direct comparison.
 
-#### Internal structure of individual communities [TO BE COMPLETED]
+```{r}
+#| label: gn-static-plot-stress-trial
+#| eval: false
+#| fig-width: 16
+#| fig-height: 14
+if (!requireNamespace("graphlayouts", quietly = TRUE)) {
+  install.packages("graphlayouts")
+}
+library(graphlayouts)
+
+ggraph(tg, layout = "stress") +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph, ", format(vcount(g), big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (stress layout)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "Black-ringed dots mark F1 papers (", gn_n_f1_highlighted, " within these clusters)."
+    )
+  )
+```
+
+This is a trial, not yet a replacement: compare both renders directly
+and decide which is more legible before the `drl` plot above is
+changed or removed.
+
+**With the seed paper removed.** Both layouts above are visibly
+dominated by one dense central mass, likely `lund2021` itself, cited
+directly by hundreds of F1 papers, pulling the whole layout into orbit
+around it. Same data, same colours, same both layouts, with
+`lund2021` filtered out of a local copy of `tg` used only for these
+two plots.
+
+```{r}
+#| label: gn-static-plot-no-seed-drl
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+tg_no_seed_trial <- tg |> activate(nodes) |> filter(name != "lund2021")
+
+ggraph(tg_no_seed_trial, layout = "drl") +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (drl layout)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), ")."
+    )
+  )
+```
+
+```{r}
+#| label: gn-static-plot-no-seed-stress
+#| eval: false
+#| fig-width: 16
+#| fig-height: 14
+ggraph(tg_no_seed_trial, layout = "stress") +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (stress layout)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), ")."
+    )
+  )
+```
+
+Two of the four plots above (both `stress`) are suppressed
+(`eval: false`): the concentric-ring pattern confirmed and rejected
+earlier is not worth the render time. Their code stays for reference.
+`drl` and `drl-without-seed` above are the two still rendering.
+
+**LGL: spring-electrical physics, built to scale.** `layout_with_lgl()`
+uses the same Fruchterman-Reingold-style attractive/repulsive forces
+as FR itself, but restricts repulsion to nearby vertices on a grid
+rather than every pair, the reason igraph avoids plain FR above 1,000
+vertices in the first place. Same seed-removed data as the two plots
+above.
+
+```{r}
+#| label: gn-static-plot-no-seed-lgl
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+# lgl places a handful of true outliers far from the rest, which
+# stretches the plot's default bounding box and leaves most of the
+# canvas empty. Computing the layout once, then zooming the view
+# (coord_cartesian, which crops the *view* only, not the data) to the
+# 1st-99th percentile of each axis keeps every real cluster fully
+# visible while dropping the wasted blank space the outliers cause.
+lgl_layout_no_seed <- create_layout(tg_no_seed_trial, layout = "lgl")
+lgl_x_range <- quantile(lgl_layout_no_seed$x, c(0.01, 0.99))
+lgl_y_range <- quantile(lgl_layout_no_seed$y, c(0.01, 0.99))
+
+ggraph(lgl_layout_no_seed) +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  coord_cartesian(xlim = lgl_x_range, ylim = lgl_y_range) +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (lgl layout)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "View cropped to the 1st-99th percentile of the layout; a handful ",
+      "of far outliers are placed outside this range and not shown."
+    )
+  )
+```
+
+Three real plots now render (drl, drl-without-seed, lgl-without-seed);
+two more (both stress) are suppressed above but kept in the file.
+
+**LGL, repulserad tuned higher.** `layout_with_lgl()`'s default
+`repulserad` (cancellation radius for node repulsion) is
+`area * vcount(graph)`; doubling it should push nodes apart more
+aggressively and may reduce the remaining central crowding in the
+plot above. A real, untested trial, not a confirmed improvement.
+
+```{r}
+#| label: gn-static-plot-no-seed-lgl-tuned
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+lgl_area_tuned <- vcount(tg_no_seed_trial)^2
+lgl_layout_tuned <- create_layout(
+  tg_no_seed_trial, layout = "igraph", algorithm = "lgl",
+  area = lgl_area_tuned,
+  repulserad = 2 * lgl_area_tuned * vcount(tg_no_seed_trial)
+)
+lgl_tuned_x_range <- quantile(lgl_layout_tuned$x, c(0.01, 0.99))
+lgl_tuned_y_range <- quantile(lgl_layout_tuned$y, c(0.01, 0.99))
+
+ggraph(lgl_layout_tuned) +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  coord_cartesian(xlim = lgl_tuned_x_range, ylim = lgl_tuned_y_range) +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (lgl, repulserad x2)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "View cropped to the 1st-99th percentile; repulserad doubled from ",
+      "layout_with_lgl()'s default."
+    )
+  )
+```
+
+Compare this directly against the untuned `lgl` plot above. The
+periphery spread out more; the inner core is still dense. `repulserad`
+controls the distance at which repulsion stops acting, not its
+strength, so it may not be the right lever for core density
+specifically.
+
+**LGL, coolexp lowered.** `coolexp` (default 1.5) sets how quickly the
+simulated annealing cools; a lower value keeps the system "hot," and
+moving, for longer before settling, a genuinely different lever from
+`repulserad`. Also untested.
+
+```{r}
+#| label: gn-static-plot-no-seed-lgl-coolexp
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+lgl_layout_coolexp <- create_layout(
+  tg_no_seed_trial, layout = "igraph", algorithm = "lgl",
+  coolexp = 0.5
+)
+lgl_coolexp_x_range <- quantile(lgl_layout_coolexp$x, c(0.01, 0.99))
+lgl_coolexp_y_range <- quantile(lgl_layout_coolexp$y, c(0.01, 0.99))
+
+ggraph(lgl_layout_coolexp) +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  coord_cartesian(xlim = lgl_coolexp_x_range, ylim = lgl_coolexp_y_range) +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (lgl, coolexp 0.5)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "View cropped to the 1st-99th percentile; coolexp lowered from ",
+      "layout_with_lgl()'s default of 1.5."
+    )
+  )
+```
+
+**LGL with the seed paper included.** Untuned parameters, the seed
+left in, to check whether `lund2021` recreates the hub-domination
+problem `drl` and `stress` both showed earlier with the seed present.
+
+```{r}
+#| label: gn-static-plot-with-seed-lgl
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+lgl_layout_with_seed <- create_layout(tg, layout = "lgl")
+lgl_ws_x_range <- quantile(lgl_layout_with_seed$x, c(0.01, 0.99))
+lgl_ws_y_range <- quantile(lgl_layout_with_seed$y, c(0.01, 0.99))
+
+ggraph(lgl_layout_with_seed) +
+  geom_edge_link(alpha = 0.05, colour = "grey70") +
+  geom_node_point(aes(colour = community_label, size = community_gn_highlight != "other"),
+                   alpha = 0.85) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.6, size = 3
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_manual(values = c("TRUE" = 1.6, "FALSE" = 0.6), guide = "none") +
+  coord_cartesian(xlim = lgl_ws_x_range, ylim = lgl_ws_y_range) +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph, ", format(vcount(g), big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters highlighted (lgl layout, seed included)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "View cropped to the 1st-99th percentile."
+    )
+  )
+```
+
+Four real lgl variants now: untuned no-seed, repulserad x2 no-seed,
+coolexp 0.5 no-seed, and untuned with-seed. Compare all four directly
+before any is promoted.
+
+**A core that means something: real betweenness, not a binary
+top-20/other split.** The dense core is dense because the graph
+genuinely is densely interconnected there — that's real structure, not
+a layout artifact, and no layout parameter changes what the core *is*.
+What can change is whether a reader can tell, inside that density,
+which nodes actually matter: sizing every node by its real betweenness
+centrality (computed on the full graph `g`, seed included, and reused
+here as-is; not recalculated for this seed-removed subgraph, so
+`lund2021`'s own effect on other nodes' shortest paths is still baked
+into these values) means the core's largest, most visually prominent
+dots are the corpus's genuine structural bridges, not an arbitrary,
+same-sized crowd. Coolexp 0.5, no seed, the clearest layout confirmed
+so far.
+
+```{r}
+#| label: gn-static-plot-no-seed-lgl-coolexp-betweenness
+#| eval: !expr gn_has_communities
+#| fig-width: 16
+#| fig-height: 14
+lgl_layout_bw <- create_layout(
+  tg_no_seed_trial, layout = "igraph", algorithm = "lgl",
+  coolexp = 0.5
+)
+lgl_bw_x_range <- quantile(lgl_layout_bw$x, c(0.01, 0.99))
+lgl_bw_y_range <- quantile(lgl_layout_bw$y, c(0.01, 0.99))
+
+ggraph(lgl_layout_bw) +
+  geom_edge_link(alpha = 0.04, colour = "grey75") +
+  geom_node_point(aes(colour = community_label, size = betweenness),
+                   alpha = 0.8) +
+  geom_node_point(
+    data = ~ dplyr::filter(.x, is_f1),
+    shape = 21, colour = "black", fill = NA, stroke = 0.5,
+    size = 1.5
+  ) +
+  scale_colour_manual(values = gn_label_colours, name = "Cluster",
+                       guide = guide_legend(ncol = 1)) +
+  scale_size_continuous(name = "Betweenness\n(real, computed on g)",
+                         range = c(0.3, 6)) +
+  coord_cartesian(xlim = lgl_bw_x_range, ylim = lgl_bw_y_range) +
+  theme_graph() +
+  theme(legend.text = element_text(size = 8)) +
+  labs(
+    title = paste0(
+      "Full citation graph without lund2021, ", format(vcount(g) - 1, big.mark = ","), " nodes — ",
+      gn_top_n, " largest Girvan-Newman clusters, sized by real betweenness (lgl, coolexp 0.5)"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "View cropped to the 1st-99th percentile. Node size is real ",
+      "betweenness centrality, not the top-20/other split used above."
+    )
+  )
+```
+
+The largest dots in the core, whichever cluster colour they carry, are
+the corpus's genuine structural bridges: the size channel now carries
+real information about what the core actually contains, not just
+that it's crowded.
+
+**Community-level structure: how the top clusters actually relate to
+each other.** Every plot above shows individual nodes coloured by
+community; none of them show which communities are strongly connected
+to which others, since edges are drawn identically whether they cross
+community boundaries or stay within one. This collapses each of the
+top `r gn_top_n` clusters to a single node, sized by its real
+membership count, with an edge between two cluster-nodes weighted by
+the real number of citation edges crossing between them in the
+original graph — the genuine inter-community structure, not
+individual-node detail.
+
+```{r}
+#| label: gn-community-level-graph
+#| eval: !expr gn_has_communities
+#| fig-width: 14
+#| fig-height: 12
+if (!requireNamespace("ggrepel", quietly = TRUE)) {
+  install.packages("ggrepel")
+}
+library(ggrepel)
+
+gn_comm_nodes <- gn_static_nodes |>
+  filter(community_gn_highlight != "other") |>
+  count(community_gn_highlight, community_label, name = "size")
+
+gn_comm_edges <- as_tibble(edges) |>
+  left_join(node_table |> select(name, community_gn), by = c("source" = "name")) |>
+  rename(community_source = community_gn) |>
+  left_join(node_table |> select(name, community_gn), by = c("target" = "name")) |>
+  rename(community_target = community_gn) |>
+  # community_gn on node_table is not guaranteed to already be the
+  # same type as gn_comm_nodes' community_gn_highlight
+  # (as.character()-cast, built separately above) — cast explicitly
+  # here rather than rely on %in%'s implicit coercion, which would
+  # silently match nothing (not error) if the two sides were numeric
+  # vs. character.
+  mutate(community_source = as.character(community_source),
+         community_target = as.character(community_target)) |>
+  filter(
+    community_source %in% gn_comm_nodes$community_gn_highlight,
+    community_target %in% gn_comm_nodes$community_gn_highlight,
+    community_source != community_target
+  ) |>
+  count(community_source, community_target, name = "weight") |>
+  # Undirected for this summary: A-B and B-A collapsed into one real
+  # crossing count, since the question here is "how connected are
+  # these two communities," not citation direction between them.
+  mutate(pair_key = paste(pmin(community_source, community_target),
+                           pmax(community_source, community_target))) |>
+  group_by(pair_key) |>
+  summarise(
+    community_source = first(community_source),
+    community_target = first(community_target),
+    weight = sum(weight),
+    .groups = "drop"
+  ) |>
+  select(-pair_key)
+
+g_comm <- graph_from_data_frame(gn_comm_edges, directed = FALSE, vertices = gn_comm_nodes)
+tg_comm <- as_tbl_graph(g_comm)
+
+ggraph(tg_comm, layout = "fr") +
+  geom_edge_link(aes(width = weight), alpha = 0.4, colour = "steelblue") +
+  scale_edge_width(name = "Cross-community\ncitation edges", range = c(0.2, 4)) +
+  geom_node_point(aes(size = size, colour = community_label), alpha = 0.9) +
+  geom_node_text(aes(label = community_label), repel = TRUE, size = 3,
+                 max.overlaps = 20) +
+  scale_colour_manual(values = gn_label_colours, guide = "none") +
+  scale_size_continuous(name = "Cluster size\n(real membership)", range = c(3, 16)) +
+  theme_graph() +
+  labs(
+    title = paste0(
+      "How the top ", gn_top_n, " Girvan-Newman clusters actually relate to each other"
+    ),
+    subtitle = paste0(
+      "(fragmentation-onset cut, round ", format(gn_earliest$round, big.mark = ","), "). ",
+      "Edge width is the real count of citation edges crossing between ",
+      "two clusters; isolated clusters (no edges above) share no real ",
+      "citation ties with any other top-", gn_top_n, " cluster."
+    )
+  )
+```
+
+A real edge here means real papers in one cluster actually cite, or
+are cited by, real papers in the other; its width is that count, not
+an estimate. A cluster with no edges at all in this plot is real too:
+it means none of the top `r gn_top_n` clusters share a direct citation
+tie with it, whatever thematic similarity a reader might expect from
+the labels alone.
+
+### Internal structure of individual communities [TO BE COMPLETED]
 
 The round-`r format(gn_earliest$round, big.mark = ",")` partition and the whole-graph dendrogram above both
 describe the corpus at a single level: `r format(gn_earliest$n_communities, big.mark = ",")` communities, and one tree
@@ -1221,27 +1696,34 @@ title/annotation check; whichever community shows the smaller-piece-
 stays-intact anomaly is the strongest candidate for a different kind
 of check. Neither has been carried out against this corpus's partition.
 
-#### Cluster labeling
+## Cluster labeling
 
 This section identifies each cluster's most-cited papers by
 within-cluster citation degree, then has a language model write a
 label and description from their titles, independent of the F1
-annotation codebook. The pipeline takes a partition as input,
-from any community-detection method at any cut, not just the
-Girvan-Newman partition used above; it is documented here because this
-is where a labeled partition currently exists to show. Comparison
-against the codebook is `03_joined_descriptions.qmd`: a separate, later
-step, so the two stay apart until then. Implemented as a standalone
-pipeline in `cluster_labelling/` (same convention as `gn_analysis/`:
-not part of this document's render chain).
+annotation codebook. Comparing these labels against the codebook
+happens separately, in `03_joined_descriptions.qmd`.
 
-For each cluster, the papers most cited by other members of that same
-cluster are ranked and sampled, then labeled by an LLM: rationale, the
-full step-by-step method, output format, and known limitations are all
-in `cluster_labelling/README.md`, kept current there rather than
-duplicated here.
+For each cluster, `select_representatives.py` ranks the cluster's own
+papers by how many other members of that cluster cite them, and takes
+the top few as a representative sample. `label_clusters.py` sends
+those titles to a language model, which sorts them into named groups
+and writes a label and description from the largest group; a second
+label is written only when a real second group exists with enough
+titles behind it. Full detail on both steps, including the
+hub-independence rule and the mechanical checks run on the model's
+output, is in `cluster_labelling/README.md`.
 
-**Results.**
+Each row is one cluster.
+
+| Column | Meaning |
+|---|---|
+| Cluster ID | Girvan-Newman community ID at the working partition |
+| Size | Cluster size |
+| Shape | `Hub-dominated` (top paper's within-cluster citation degree ≥ 5× the next-highest, `--hub-ratio-threshold` per the README), `Distributed` (otherwise), or `n/a` (no data for this cluster) |
+| Label | From the language model's primary group for this cluster |
+| Description | From the language model's primary group for this cluster |
+| Secondary label | From a real second group, where one exists; blank otherwise |
 
 ```{r}
 #| label: cluster-labels-table
@@ -1294,15 +1776,6 @@ gn_cluster_labels_full |>
   ) |>
   knitr::kable()
 ```
-
-Every currently-labeled cluster, sorted largest first. Shape is
-"Hub-dominated" where one paper's within-cluster citation degree is at
-least 5 times the next-highest (`--hub-ratio-threshold`, per the
-README), "Distributed" otherwise; "n/a" where `representatives.csv`
-does not have this cluster's data. `unaccounted_titles`,
-`groups_json`, and `titles_missing_from_groups`, internal verification
-columns explained in the README, are omitted here; see the raw CSVs in
-`cluster_labelling/results/` for those directly.
 
 ## References
 

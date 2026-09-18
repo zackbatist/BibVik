@@ -18,14 +18,18 @@ p {
 }
 ```
 
-This document renders the full analysis by including each stage in
-sequence. Each stage is also a standalone `.qmd` and can be read, edited,
-or rendered independently. See `00_overview.qmd`, `00_plan.qmd`,
-`01_annotation.qmd`, `02_network_structure.qmd`,
-`03_joined_descriptions.qmd`. Girvan-Newman runs separately, outside
-this chain entirely — see `gn_analysis/README.md`.
+This document renders a full analysis by including each stage in sequence.
+It is executed through a series of included files::
 
-<!-- {{< include 00_plan.qmd >}} -->
+- `00_overview.qmd` — general information about the dataset that serves as the basis for analysis
+- `01_annotation.qmd` — annotation cross-tab (F1 corpus), independent of the citation graph
+- `02_network_structure.qmd` — degree, centrality, k-core, components, Louvain, Leiden, k-means on centrality profiles (GN excluded — see below)
+- `03_joined_descriptions.qmd` — integrates the annotation and network analysis strands
+
+The analysis also depends on a few toolsets that operate outside the Quarto render chain:
+
+- `gn_analysis/` — Girvan-Newman community detection runs standalone due to the relatively long duration required to complete
+- `cluster_labelling/` - Derives cluster names and descriptions from the titles of papers in each Girvan-Newman group
 
 {{< include 00_overview.qmd >}}
 
@@ -34,3 +38,23 @@ this chain entirely — see `gn_analysis/README.md`.
 {{< include 02_network_structure.qmd >}}
 
 {{< include 03_joined_descriptions.qmd >}}
+
+
+# Future work
+
+## Considering alternative units of analysis
+
+Everything in this document treats the paper as the unit of the graph (papers cite papers). This is one particular projection of a richer structure, not the only one, and is worth extending in future work — not resolved or prioritized now, but recorded so it isn't lost:
+
+- **Author-level graphs.** Collapsing papers into authors changes what centrality means (a prolific author becomes a hub independent of any single paper's standing) and makes author-to-author citation homophily a more natural unit than paper-to-paper for gender-citation questions. Co-authorship itself becomes an additional structural question: do co-authorships cross or reinforce whatever divisions appear elsewhere.
+
+- **Venue-level graphs** (journal, edited volume, conference proceedings, grey literature/excavation report). Likely to reveal institutional or disciplinary structure rather than intellectual structure directly, and could complicate a purely topic/gender reading — a "camp" might partly reflect which kind of venue a sub-field mostly publishes in, particularly given the corpus's substantial non-English, non-journal material (excavation reports, conference proceedings).
+
+- **Kind-of-work as a unit** (monograph vs. article vs. excavation report vs. edited-volume chapter). Related to venue but not identical; may track disciplinary/generational norms that could explain or cross-cut part of any gender/topic pattern rather than sitting alongside it as a fully independent axis.
+
+Each alternative unit would be, again, an independent description rather than a more "real" or authoritative one. A useful way to stress-test any finding at the paper level is to check whether it persists, sharpens, or dissolves when re-aggregated to authors or venues — if a division only appears at one level of aggregation, that is itself informative about whether the division is fundamentally about individual works, about people, or about where people publish.
+
+## Citation functions
+
+- Analysis of the context surrounding citations to ascertain their functions
+- Analysis of citation groups to ascertain how authors represent others' work in relation to each other
