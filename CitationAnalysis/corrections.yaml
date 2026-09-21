@@ -56769,3 +56769,10 @@
   value: []
   note: Excluded from corpus (deleted F1 entry). Clearing cited_by so no citer edges
     point to this ghost node in exports - true exclusion, not just tombstoning.
+- action: set
+  citekey: pushkina2017
+  field: cited_by
+  value: []
+  note: Duplicate of puskina2017 (same work, misspelled citekey, both F1, sole citer
+    lund2021). Excluded from corpus alongside puskina2017. Clearing cited_by so no
+    citer edges point to this ghost node in exports.

@@ -1,5 +1,5 @@
 citekey,title,year,generation,entry_type,first_author,doi,completeness,in_degree,out_degree,is_ghost
-lund2021,Crossing the Maelstrom: New Departures in Viking Archaeology,2021,P,article,Lund Julie,10.1007/s10814-021-09163-3,1.0,0,565,False
+lund2021,Crossing the Maelstrom: New Departures in Viking Archaeology,2021,P,article,Lund Julie,10.1007/s10814-021-09163-3,1.0,0,564,False
 aannestad2015,Transformasjoner: Omforming og Bruk av Importerte Gjenstander i Vikingetid,2015,F1,book,Aannestad Hanne,,0.778,6,0,False
 aannestad2018,"Charisma, violence and weapons: The broken swords of the Vikings",2018,F1,incollection,Aannestad Hanne,,0.833,1,88,False
 ahola2014,"Fibula, Fabula, Fact: The Viking Age in Finland",2014,F1,book,,10.21435/sfh.18,0.556,1,0,False
@@ -12621,12 +12621,12 @@ schoknecht1977a,Menzlin (Excavation Report),1977,F2,misc,Schoknecht U.,,0.5,1,0,
 herrmann2005a,Ralswiek on Rügen (Excavation Report),2005,F2,misc,Herrmann J.,,0.5,1,0,False
 andersson1994,Tools for Textile Production from Birka and Hedeby,2003,F2,misc,Andersson E.,,0.5,1,0,False
 tacitus1999a,Agricola and Germany,1999,F2,misc,Tacitus,,0.5,1,0,False
-pushkina2017,Der archäologische Komplex von Gnezdovo,2017,F1,misc,Pushkina Tamara,,0.0,1,0,True
-NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,1,21,True
-ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,1,87,True
-NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,1,45,True
-sovso2014,Ansgars Kirche in Ribe,2014,F1,article,Søvsø Morten,,0.833,0,0,True
-NOAUTHOR21,New Horizons in the Archaeology of the Viking Age,,F1,misc,,,0.25,1,14,True
-puskina2017,Der archäologische Komplex von Gnezdovo,2017,F1,incollection,Puškina T. A.,,0.833,0,0,True
-NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,1,193,True
 skorokhod2020,Staraya Ladoga in northwestern Russia,2020,F1,misc,Skorokhod A.,,0.75,1,9,True
+puskina2017,Der archäologische Komplex von Gnezdovo,2017,F1,incollection,Puškina T. A.,,0.833,0,0,True
+pushkina2017,Der archäologische Komplex von Gnezdovo,2017,F1,misc,Pushkina Tamara,,0.0,0,0,True
+NOAUTHOR21,New Horizons in the Archaeology of the Viking Age,,F1,misc,,,0.25,1,14,True
+ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,1,87,True
+sovso2014,Ansgars Kirche in Ribe,2014,F1,article,Søvsø Morten,,0.833,0,0,True
+NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,1,45,True
+NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,1,21,True
+NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,1,193,True
