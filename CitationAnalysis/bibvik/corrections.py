@@ -380,6 +380,7 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
             bib[discard]["_deleted"]         = True
             bib[discard]["_merged_into"]     = keep
             bib[discard]["_correction_note"] = note
+            bib[discard]["cited_by"]         = []
 
             logger.info("Merged %r into %r", discard, keep)
             counts["merge"] += 1
@@ -397,6 +398,7 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
 
             bib[citekey]["_deleted"]         = True
             bib[citekey]["_correction_note"] = note
+            bib[citekey]["cited_by"]         = []
 
             # Same cleanup as merge — see _strip_candidate_flag_references.
             _strip_candidate_flag_references(bib, citekey)
