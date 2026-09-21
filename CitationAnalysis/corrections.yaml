@@ -56776,3 +56776,133 @@
   note: Duplicate of puskina2017 (same work, misspelled citekey, both F1, sole citer
     lund2021). Excluded from corpus alongside puskina2017. Clearing cited_by so no
     citer edges point to this ghost node in exports.
+- action: set
+  citekey: smith2020
+  field: cited_by
+  value: []
+  note: Clearing misplaced cited_by list. These 96 citers were meant for kitzlerahfeldt2013
+    (a rename-remap fix incorrectly targeted this already-deleted entry instead) —
+    see next correction.
+- action: set
+  citekey: kitzlerahfeldt2013
+  field: cited_by
+  value:
+  - halstadmcguire2010
+  - gardeland
+  - gullbekk2014
+  - smith2018
+  - gustin2017
+  - graslundnd
+  - hadley2016
+  - hartman2017
+  - imer2014
+  - heenpettersen2018
+  - helama2017
+  - henriksen2017
+  - jessen2014
+  - hilberg2014
+  - hillerdal2010
+  - kershaw2016
+  - jarman2018
+  - ingvardson2012
+  - linderholm2008
+  - jackson2018
+  - jorgensennd
+  - kemmers2011
+  - lund2020
+  - kovalenko2013
+  - kelly2015
+  - kershaw2017
+  - lemm2014
+  - knudson2012
+  - myrberg2007
+  - larsson2007
+  - krzewinska2015
+  - naumann2014
+  - leslie2015
+  - lund2015
+  - lucas2007
+  - lund2019
+  - lund2006
+  - mainland2018
+  - pedersennd
+  - magnell2010
+  - lund2017
+  - lund2016
+  - pedersen2015
+  - mcleod2011
+  - lynnerupnd
+  - pilo2018
+  - milek2012
+  - macphail2013
+  - majchczack2018
+  - montgomery2014
+  - naum2007
+  - price2018
+  - magi2011
+  - raffield2014
+  - perry2019
+  - pedersen2006
+  - pollard2012
+  - oehrl2019
+  - raffield2016
+  - osullivan2015
+  - peschel2017
+  - price2010
+  - pilo2020
+  - perry2016
+  - price2020
+  - schmid2017
+  - raffield2019
+  - raninen2014
+  - richards2018
+  - price2008a
+  - sindbaek2014
+  - price2012
+  - price2019
+  - sheehannd
+  - raffield2015
+  - roslund2017
+  - raja2018
+  - tonning2020
+  - reiter2019
+  - rosvold2019
+  - sanmark2013
+  - skre2017
+  - skre2019
+  - solli2011
+  - skre2011b
+  - stott2019
+  - vesteinssonnd
+  - svendsen2019
+  - star2017
+  - williams2015
+  - tainter2006
+  - tummuscheitnd
+  - oye2014
+  - williams2016
+  - frei2015
+  note: Restoring the 96 citers originally intended for this entry - a prior rename-remap
+    fix mistakenly targeted the wrong (already-deleted) citekey, smith2020, instead
+    of this one. This entry currently has only 3 citers.
+- action: set
+  citekey: gowen2023
+  field: cited_by
+  value: []
+  note: Renamed from scally2023 (confirmed fabricated via chronological-impossibility
+    check). Retained a stale cited_by edge from before the rename-remap fix existed
+    - the code fix only prevents this going forward for future renames, not retroactively
+    for entries already renamed in a prior run.
+- action: set
+  citekey: heighway1964
+  field: cited_by
+  value: []
+  note: Renamed from gloucesterheighway1964 (not a real bibliography entry - gazetteer-table
+    fragment misidentified by GROBID). Same stale pre-rename cited_by edge issue as
+    gowen2023.
+- action: set
+  citekey: bakka1965a
+  field: cited_by
+  value: []
+  note: Renamed from moa1965 (not a real bibliography entry - gazetteer-table fragment
+    misidentified by GROBID). Same stale pre-rename cited_by edge issue as gowen2023.

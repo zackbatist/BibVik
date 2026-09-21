@@ -200,10 +200,14 @@ def _rename_citekey(bib: dict, old_citekey: str, new_citekey: str, note: str) ->
     entry["_rename_note"] = note
     bib[new_citekey] = entry
 
-    for other in bib.values():
-        cb_list = other.get("cited_by", [])
-        if old_citekey in cb_list:
-            other["cited_by"] = [new_citekey if x == old_citekey else x for x in cb_list]
+    # Don't resurrect citation edges to a deleted (e.g. fabricated) entry —
+    # the remap below would otherwise repopulate cited_by that a prior
+    # delete correction deliberately cleared.
+    if not entry.get("_deleted"):
+        for other in bib.values():
+            cb_list = other.get("cited_by", [])
+            if old_citekey in cb_list:
+                other["cited_by"] = [new_citekey if x == old_citekey else x for x in cb_list]
 
     logger.info("Renamed %r to %r", old_citekey, new_citekey)
 
