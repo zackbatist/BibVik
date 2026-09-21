@@ -56906,3 +56906,23 @@
   value: []
   note: Renamed from moa1965 (not a real bibliography entry - gazetteer-table fragment
     misidentified by GROBID). Same stale pre-rename cited_by edge issue as gowen2023.
+- action: set
+  citekey: norderang2004
+  field: cited_by
+  value: []
+  note: Original merge target widerstrom2004 does not exist in the corpus (never extracted,
+    or removed without the merge correction being updated) - no valid duplicate to
+    merge into. Clearing cited_by directly since a merge cannot apply.
+- action: set
+  citekey: norrman2008
+  field: cited_by
+  value: []
+  note: Original merge target normann2008 does not exist in the corpus - no valid
+    duplicate to merge into. Clearing cited_by directly since a merge cannot apply.
+- action: set
+  citekey: blifel1977a
+  field: cited_by
+  value: []
+  note: Original merge target blifel1977 does not exist in the corpus (blifel1977a
+    and blifel1977b are both already-deleted, titleless fragments) - no valid duplicate
+    to merge into. Clearing cited_by directly since a merge cannot apply.
