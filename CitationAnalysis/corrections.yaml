@@ -56757,3 +56757,15 @@
   note: 'Title had leading year-duplicate artifact ''2000: '' matching entry''s own
     date/year field; author field also appears corrupted (separate issue, not addressed
     here)'
+- action: set
+  citekey: puskina2017
+  field: cited_by
+  value: []
+  note: Excluded from corpus (deleted F1 entry). Clearing cited_by so no citer edges
+    point to this ghost node in exports - true exclusion, not just tombstoning.
+- action: set
+  citekey: sovso2014
+  field: cited_by
+  value: []
+  note: Excluded from corpus (deleted F1 entry). Clearing cited_by so no citer edges
+    point to this ghost node in exports - true exclusion, not just tombstoning.
