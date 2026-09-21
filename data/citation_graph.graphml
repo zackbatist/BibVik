@@ -20,7 +20,7 @@
       <data key="d5">10.1007/s10814-021-09163-3</data>
       <data key="d6">1.0</data>
       <data key="d7">0</data>
-      <data key="d8">558</data>
+      <data key="d8">557</data>
       <data key="d9">false</data>
     </node>
     <node id="aannestad2015">
@@ -1784,7 +1784,7 @@
       <data key="d5">10.1017/S0003581516000718</data>
       <data key="d6">1.0</data>
       <data key="d7">7</data>
-      <data key="d8">64</data>
+      <data key="d8">65</data>
       <data key="d9">false</data>
     </node>
     <node id="hadley2018">
@@ -1856,7 +1856,7 @@
       <data key="d5">10.1163/9789042030879_010</data>
       <data key="d6">0.917</data>
       <data key="d7">3</data>
-      <data key="d8">20</data>
+      <data key="d8">21</data>
       <data key="d9">false</data>
     </node>
     <node id="hansen2017">
@@ -1952,7 +1952,7 @@
       <data key="d5">10.1016/j.jas.2018.06.005</data>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">103</data>
+      <data key="d8">104</data>
       <data key="d9">false</data>
     </node>
     <node id="hedjakobsson2003">
@@ -2096,7 +2096,7 @@
       <data key="d5">10.1080/00766097.2018.1451522</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">102</data>
+      <data key="d8">103</data>
       <data key="d9">false</data>
     </node>
     <node id="helama2017">
@@ -2108,7 +2108,7 @@
       <data key="d5">10.1038/ngeo2926</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">68</data>
+      <data key="d8">69</data>
       <data key="d9">false</data>
     </node>
     <node id="helmbrecht2011">
@@ -2144,7 +2144,7 @@
       <data key="d5">10.1080/21662282.2017.1293397</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">44</data>
+      <data key="d8">45</data>
       <data key="d9">false</data>
     </node>
     <node id="hilberg2013">
@@ -2180,7 +2180,7 @@
       <data key="d5">10.1484/m.cursor-eb.1.102223</data>
       <data key="d6">1.0</data>
       <data key="d7">7</data>
-      <data key="d8">94</data>
+      <data key="d8">95</data>
       <data key="d9">false</data>
     </node>
     <node id="hillerdal2009">
@@ -2204,7 +2204,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">67</data>
+      <data key="d8">68</data>
       <data key="d9">false</data>
     </node>
     <node id="n2017">
@@ -2336,7 +2336,7 @@
       <data key="d5">10.1080/21662282.2015.1104905</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">38</data>
+      <data key="d8">39</data>
       <data key="d9">false</data>
     </node>
     <node id="ingvardson2012">
@@ -2348,7 +2348,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">53</data>
+      <data key="d8">54</data>
       <data key="d9">false</data>
     </node>
     <node id="iversen2013">
@@ -2492,7 +2492,7 @@
       <data key="d5">10.1080/00293652.2014.921239</data>
       <data key="d6">1.0</data>
       <data key="d7">6</data>
-      <data key="d8">38</data>
+      <data key="d8">39</data>
       <data key="d9">false</data>
     </node>
     <node id="jones1997">
@@ -2624,7 +2624,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">4</data>
-      <data key="d8">34</data>
+      <data key="d8">35</data>
       <data key="d9">false</data>
     </node>
     <node id="kershaw2013">
@@ -2648,7 +2648,7 @@
       <data key="d5">10.15184/aqy.2016.193</data>
       <data key="d6">1.0</data>
       <data key="d7">3</data>
-      <data key="d8">25</data>
+      <data key="d8">26</data>
       <data key="d9">false</data>
     </node>
     <node id="kershaw2019">
@@ -2696,7 +2696,7 @@
       <data key="d5">10.1016/j.jas.2011.09.014</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">154</data>
+      <data key="d8">155</data>
       <data key="d9">false</data>
     </node>
     <node id="kovalenko2013">
@@ -2708,7 +2708,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">46</data>
+      <data key="d8">47</data>
       <data key="d9">false</data>
     </node>
     <node id="kristjansdottir2015">
@@ -2732,7 +2732,7 @@
       <data key="d5">10.1098/rstb.2013.0384</data>
       <data key="d6">1.0</data>
       <data key="d7">3</data>
-      <data key="d8">55</data>
+      <data key="d8">56</data>
       <data key="d9">false</data>
     </node>
     <node id="krzewinska2018">
@@ -2756,7 +2756,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">16</data>
-      <data key="d8">55</data>
+      <data key="d8">56</data>
       <data key="d9">false</data>
     </node>
     <node id="lemm2014">
@@ -2768,7 +2768,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">42</data>
+      <data key="d8">43</data>
       <data key="d9">false</data>
     </node>
     <node id="leonard2011">
@@ -2792,7 +2792,7 @@
       <data key="d5">10.1038/nature14230</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">31</data>
+      <data key="d8">32</data>
       <data key="d9">false</data>
     </node>
     <node id="lia2002">
@@ -2900,7 +2900,7 @@
       <data key="d5">10.1177/1461957108091480</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">66</data>
+      <data key="d8">67</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2005">
@@ -2924,7 +2924,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">8</data>
-      <data key="d8">68</data>
+      <data key="d8">69</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2008">
@@ -2984,7 +2984,7 @@
       <data key="d5">10.1080/08003831.2015.1029846</data>
       <data key="d6">1.0</data>
       <data key="d7">3</data>
-      <data key="d8">108</data>
+      <data key="d8">109</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2020">
@@ -2996,7 +2996,7 @@
       <data key="d5">10.7146/dja.v9i0.110949</data>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">94</data>
+      <data key="d8">95</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2016">
@@ -3008,7 +3008,7 @@
       <data key="d5">10.1080/14619571.2016.1193979</data>
       <data key="d6">1.0</data>
       <data key="d7">3</data>
-      <data key="d8">115</data>
+      <data key="d8">116</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2019">
@@ -3020,7 +3020,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">72</data>
+      <data key="d8">73</data>
       <data key="d9">false</data>
     </node>
     <node id="macphail2013">
@@ -3032,7 +3032,7 @@
       <data key="d5">10.1016/j.quaint.2013.05.051</data>
       <data key="d6">0.917</data>
       <data key="d7">5</data>
-      <data key="d8">52</data>
+      <data key="d8">53</data>
       <data key="d9">false</data>
     </node>
     <node id="macphail2016">
@@ -3068,7 +3068,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">61</data>
+      <data key="d8">62</data>
       <data key="d9">false</data>
     </node>
     <node id="magi2015">
@@ -3116,7 +3116,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">4</data>
-      <data key="d8">70</data>
+      <data key="d8">71</data>
       <data key="d9">false</data>
     </node>
     <node id="mainland2018">
@@ -3128,7 +3128,7 @@
       <data key="d5">10.1080/00438243.2019.1578260</data>
       <data key="d6">1.0</data>
       <data key="d7">1</data>
-      <data key="d8">82</data>
+      <data key="d8">83</data>
       <data key="d9">false</data>
     </node>
     <node id="majchczack2018">
@@ -3140,7 +3140,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">25</data>
+      <data key="d8">26</data>
       <data key="d9">false</data>
     </node>
     <node id="mannering2013">
@@ -3164,7 +3164,7 @@
       <data key="d5">10.1111/j.1468-0254.2011.00323.x332-353</data>
       <data key="d6">1.0</data>
       <data key="d7">6</data>
-      <data key="d8">35</data>
+      <data key="d8">36</data>
       <data key="d9">false</data>
     </node>
     <node id="mehler2015">
@@ -3224,7 +3224,7 @@
       <data key="d5">10.1016/j.jaa.2011.11.001</data>
       <data key="d6">1.0</data>
       <data key="d7">9</data>
-      <data key="d8">153</data>
+      <data key="d8">154</data>
       <data key="d9">false</data>
     </node>
     <node id="milek2013">
@@ -3296,7 +3296,7 @@
       <data key="d5">10.3721/037.002.sp705</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">96</data>
+      <data key="d8">97</data>
       <data key="d9">false</data>
     </node>
     <node id="mozdzioch2013">
@@ -3356,7 +3356,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">7</data>
+      <data key="d8">8</data>
       <data key="d9">false</data>
     </node>
     <node id="naum2007">
@@ -3368,7 +3368,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">23</data>
+      <data key="d8">24</data>
       <data key="d9">false</data>
     </node>
     <node id="naum2008">
@@ -3392,7 +3392,7 @@
       <data key="d5">10.1016/j.jas.2013.08.022</data>
       <data key="d6">0.917</data>
       <data key="d7">4</data>
-      <data key="d8">62</data>
+      <data key="d8">63</data>
       <data key="d9">false</data>
     </node>
     <node id="neiss2016">
@@ -3536,7 +3536,7 @@
       <data key="d5">10.2307/j.ctvh1dm0t.6</data>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">34</data>
+      <data key="d8">35</data>
       <data key="d9">false</data>
     </node>
     <node id="paterson2014">
@@ -3620,7 +3620,7 @@
       <data key="d5"/>
       <data key="d6">1.0</data>
       <data key="d7">7</data>
-      <data key="d8">72</data>
+      <data key="d8">73</data>
       <data key="d9">false</data>
     </node>
     <node id="pedersen2016">
@@ -3656,7 +3656,7 @@
       <data key="d5">10.1080/00766097.2016.1147788</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">68</data>
+      <data key="d8">69</data>
       <data key="d9">false</data>
     </node>
     <node id="perry2019">
@@ -3668,7 +3668,7 @@
       <data key="d5">10.1017/s0003581519000040</data>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">4</data>
+      <data key="d8">5</data>
       <data key="d9">false</data>
     </node>
     <node id="peschel2017">
@@ -3680,7 +3680,7 @@
       <data key="d5">10.1016/j.jasrep.2017.03.049</data>
       <data key="d6">0.917</data>
       <data key="d7">5</data>
-      <data key="d8">69</data>
+      <data key="d8">70</data>
       <data key="d9">false</data>
     </node>
     <node id="pilo2005">
@@ -3704,7 +3704,7 @@
       <data key="d5">10.1098/rsos.171738</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">60</data>
+      <data key="d8">61</data>
       <data key="d9">false</data>
     </node>
     <node id="pilo2020">
@@ -3716,7 +3716,7 @@
       <data key="d5">10.15184/aqy.2020.2</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">54</data>
+      <data key="d8">55</data>
       <data key="d9">false</data>
     </node>
     <node id="pluskowski2010">
@@ -3740,7 +3740,7 @@
       <data key="d5">10.1111/j.1468-0092.2011.00380.x</data>
       <data key="d6">1.0</data>
       <data key="d7">6</data>
-      <data key="d8">23</data>
+      <data key="d8">24</data>
       <data key="d9">false</data>
     </node>
     <node id="poulsen2011">
@@ -3812,7 +3812,7 @@
       <data key="d5">10.1179/174581710X12790370815779</data>
       <data key="d6">1.0</data>
       <data key="d7">26</data>
-      <data key="d8">106</data>
+      <data key="d8">107</data>
       <data key="d9">false</data>
     </node>
     <node id="price2014">
@@ -3836,7 +3836,7 @@
       <data key="d5">10.1007/s12520-017-0529-y</data>
       <data key="d6">0.917</data>
       <data key="d7">8</data>
-      <data key="d8">163</data>
+      <data key="d8">164</data>
       <data key="d9">false</data>
     </node>
     <node id="price2019">
@@ -3848,7 +3848,7 @@
       <data key="d5">10.1007/s12520-019-00897-2</data>
       <data key="d6">1.0</data>
       <data key="d7">5</data>
-      <data key="d8">167</data>
+      <data key="d8">168</data>
       <data key="d9">false</data>
     </node>
     <node id="price2012">
@@ -3860,7 +3860,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">15</data>
-      <data key="d8">64</data>
+      <data key="d8">65</data>
       <data key="d9">false</data>
     </node>
     <node id="price2016">
@@ -3884,7 +3884,7 @@
       <data key="d5">10.1016/j.jaa.2020.101149</data>
       <data key="d6">0.917</data>
       <data key="d7">3</data>
-      <data key="d8">61</data>
+      <data key="d8">62</data>
       <data key="d9">false</data>
     </node>
     <node id="raffield2014">
@@ -3896,7 +3896,7 @@
       <data key="d5">10.1179/1461957114y.0000000066</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">99</data>
+      <data key="d8">100</data>
       <data key="d9">false</data>
     </node>
     <node id="raffield2016">
@@ -3908,7 +3908,7 @@
       <data key="d5">10.1111/emed.12154</data>
       <data key="d6">1.0</data>
       <data key="d7">9</data>
-      <data key="d8">160</data>
+      <data key="d8">161</data>
       <data key="d9">false</data>
     </node>
     <node id="raffield2019">
@@ -3920,7 +3920,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">258</data>
+      <data key="d8">259</data>
       <data key="d9">false</data>
     </node>
     <node id="raffield2017">
@@ -3956,7 +3956,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">6</data>
+      <data key="d8">7</data>
       <data key="d9">false</data>
     </node>
     <node id="rasmussen2014">
@@ -4004,7 +4004,7 @@
       <data key="d5">10.1080/00766097.2018.1535382</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">65</data>
+      <data key="d8">66</data>
       <data key="d9">false</data>
     </node>
     <node id="richards2012">
@@ -4100,7 +4100,7 @@
       <data key="d5">10.1016/j.jasrep.2019.05.025</data>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">53</data>
+      <data key="d8">54</data>
       <data key="d9">false</data>
     </node>
     <node id="rundberget2017">
@@ -4184,7 +4184,7 @@
       <data key="d5">10.1179/1461957113y.0000000035</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">108</data>
+      <data key="d8">109</data>
       <data key="d9">false</data>
     </node>
     <node id="schietzel2014">
@@ -4208,7 +4208,7 @@
       <data key="d5">10.1016/j.quageo.2016.08.002</data>
       <data key="d6">0.917</data>
       <data key="d7">1</data>
-      <data key="d8">57</data>
+      <data key="d8">58</data>
       <data key="d9">false</data>
     </node>
     <node id="schneidhofer2017">
@@ -4352,7 +4352,7 @@
       <data key="d5">10.4324/9781315548197-1</data>
       <data key="d6">1.0</data>
       <data key="d7">8</data>
-      <data key="d8">97</data>
+      <data key="d8">98</data>
       <data key="d9">false</data>
     </node>
     <node id="skre2019">
@@ -4364,7 +4364,7 @@
       <data key="d5"/>
       <data key="d6">0.889</data>
       <data key="d7">2</data>
-      <data key="d8">146</data>
+      <data key="d8">147</data>
       <data key="d9">false</data>
     </node>
     <node id="soderberg2005">
@@ -4412,7 +4412,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">153</data>
+      <data key="d8">154</data>
       <data key="d9">false</data>
     </node>
     <node id="spangen2006">
@@ -4472,7 +4472,7 @@
       <data key="d5">10.1073/pnas.1710186114</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">97</data>
+      <data key="d8">98</data>
       <data key="d9">false</data>
     </node>
     <node id="steinforth2015">
@@ -4520,7 +4520,7 @@
       <data key="d5">10.3390/rs11161881</data>
       <data key="d6">1.0</data>
       <data key="d7">1</data>
-      <data key="d8">88</data>
+      <data key="d8">89</data>
       <data key="d9">false</data>
     </node>
     <node id="sutherland2009">
@@ -4568,7 +4568,7 @@
       <data key="d5">10.1007/s11127-019-00707-2</data>
       <data key="d6">1.0</data>
       <data key="d7">1</data>
-      <data key="d8">51</data>
+      <data key="d8">52</data>
       <data key="d9">false</data>
     </node>
     <node id="svensson2018">
@@ -4616,7 +4616,7 @@
       <data key="d5">10.15184/aqy.2019.211</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">52</data>
+      <data key="d8">53</data>
       <data key="d9">false</data>
     </node>
     <node id="toplak2015">
@@ -4880,7 +4880,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">7</data>
-      <data key="d8">38</data>
+      <data key="d8">39</data>
       <data key="d9">false</data>
     </node>
     <node id="williams2020">
@@ -4904,7 +4904,7 @@
       <data key="d5">10.1080/14619571.2016.1186882</data>
       <data key="d6">1.0</data>
       <data key="d7">5</data>
-      <data key="d8">79</data>
+      <data key="d8">80</data>
       <data key="d9">false</data>
     </node>
     <node id="wilson2018">
@@ -5288,7 +5288,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">3</data>
-      <data key="d8">14</data>
+      <data key="d8">15</data>
       <data key="d9">false</data>
     </node>
     <node id="gustafsson2013">
@@ -5324,7 +5324,7 @@
       <data key="d5">10.1163/9789004328471_010</data>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">127</data>
+      <data key="d8">128</data>
       <data key="d9">false</data>
     </node>
     <node id="smith2013">
@@ -5372,7 +5372,7 @@
       <data key="d5">10.1016/j.gloenvcha.2018.05.006</data>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">125</data>
+      <data key="d8">126</data>
       <data key="d9">false</data>
     </node>
     <node id="kemmers2011">
@@ -5384,7 +5384,7 @@
       <data key="d5">10.1017/s1380203811000146</data>
       <data key="d6">1.0</data>
       <data key="d7">1</data>
-      <data key="d8">79</data>
+      <data key="d8">80</data>
       <data key="d9">false</data>
     </node>
     <node id="kershaw2009">
@@ -5408,7 +5408,7 @@
       <data key="d5">10.15184/aqy.2016.249</data>
       <data key="d6">1.0</data>
       <data key="d7">4</data>
-      <data key="d8">35</data>
+      <data key="d8">36</data>
       <data key="d9">false</data>
     </node>
     <node id="laroche1997">
@@ -5444,7 +5444,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">12</data>
-      <data key="d8">37</data>
+      <data key="d8">38</data>
       <data key="d9">false</data>
     </node>
     <node id="lund2004">
@@ -5564,7 +5564,7 @@
       <data key="d5"/>
       <data key="d6">0.833</data>
       <data key="d7">2</data>
-      <data key="d8">75</data>
+      <data key="d8">76</data>
       <data key="d9">false</data>
     </node>
     <node id="price2006">
@@ -5600,7 +5600,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">3</data>
-      <data key="d8">84</data>
+      <data key="d8">85</data>
       <data key="d9">false</data>
     </node>
     <node id="ratican2020">
@@ -5624,7 +5624,7 @@
       <data key="d5">10.1017/eaa.2019.35</data>
       <data key="d6">1.0</data>
       <data key="d7">1</data>
-      <data key="d8">84</data>
+      <data key="d8">85</data>
       <data key="d9">false</data>
     </node>
     <node id="roesdahl2009">
@@ -5672,7 +5672,7 @@
       <data key="d5">10.1163/9789004328471_009</data>
       <data key="d6">0.917</data>
       <data key="d7">2</data>
-      <data key="d8">86</data>
+      <data key="d8">87</data>
       <data key="d9">false</data>
     </node>
     <node id="rundkvist2010">
@@ -5744,7 +5744,7 @@
       <data key="d5"/>
       <data key="d6">1.0</data>
       <data key="d7">8</data>
-      <data key="d8">46</data>
+      <data key="d8">47</data>
       <data key="d9">false</data>
     </node>
     <node id="sindbaek2016">
@@ -5804,7 +5804,7 @@
       <data key="d5">10.1146/annurev.anthro.35.081705.123136</data>
       <data key="d6">1.0</data>
       <data key="d7">2</data>
-      <data key="d8">43</data>
+      <data key="d8">44</data>
       <data key="d9">false</data>
     </node>
     <node id="toplak2018">
@@ -12344,7 +12344,7 @@
       <data key="d5"/>
       <data key="d6">0.917</data>
       <data key="d7">14</data>
-      <data key="d8">20</data>
+      <data key="d8">21</data>
       <data key="d9">false</data>
     </node>
     <node id="rydh1969">
@@ -56324,7 +56324,7 @@
       <data key="d5"/>
       <data key="d6">0.25</data>
       <data key="d7">1</data>
-      <data key="d8">80</data>
+      <data key="d8">81</data>
       <data key="d9">false</data>
     </node>
     <node id="borys1985">
@@ -62192,7 +62192,7 @@
       <data key="d5"/>
       <data key="d6">0.667</data>
       <data key="d7">3</data>
-      <data key="d8">35</data>
+      <data key="d8">36</data>
       <data key="d9">false</data>
     </node>
     <node id="johnson2002">
@@ -62876,7 +62876,7 @@
       <data key="d5"/>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">32</data>
+      <data key="d8">33</data>
       <data key="d9">false</data>
     </node>
     <node id="arne1934">
@@ -63392,7 +63392,7 @@
       <data key="d5">10.1016/j.gloplacha.2017.04.007</data>
       <data key="d6">0.75</data>
       <data key="d7">1</data>
-      <data key="d8">152</data>
+      <data key="d8">153</data>
       <data key="d9">false</data>
     </node>
     <node id="abulughod1981">
@@ -71696,7 +71696,7 @@
       <data key="d5">10.1038/srep10431</data>
       <data key="d6">1.0</data>
       <data key="d7">5</data>
-      <data key="d8">73</data>
+      <data key="d8">74</data>
       <data key="d9">false</data>
     </node>
     <node id="hermansen1938">
@@ -82448,7 +82448,7 @@
       <data key="d5"/>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">62</data>
+      <data key="d8">63</data>
       <data key="d9">false</data>
     </node>
     <node id="st2008">
@@ -85268,7 +85268,7 @@
       <data key="d5">10.1017/s1380203817000058</data>
       <data key="d6">0.778</data>
       <data key="d7">3</data>
-      <data key="d8">113</data>
+      <data key="d8">114</data>
       <data key="d9">false</data>
     </node>
     <node id="malafouris2013">
@@ -96320,7 +96320,7 @@
       <data key="d5"/>
       <data key="d6">0.25</data>
       <data key="d7">1</data>
-      <data key="d8">55</data>
+      <data key="d8">56</data>
       <data key="d9">false</data>
     </node>
     <node id="capelle2003">
@@ -98648,7 +98648,7 @@
       <data key="d5">10.3721/037.002.sp702</data>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">26</data>
+      <data key="d8">27</data>
       <data key="d9">false</data>
     </node>
     <node id="benedictow1992">
@@ -120236,7 +120236,7 @@
       <data key="d5">10.1080/00438243.2015.1100548</data>
       <data key="d6">0.75</data>
       <data key="d7">1</data>
-      <data key="d8">82</data>
+      <data key="d8">83</data>
       <data key="d9">false</data>
     </node>
     <node id="byock1998">
@@ -120680,7 +120680,7 @@
       <data key="d5">10.1163/9789004534001_043</data>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">51</data>
+      <data key="d8">52</data>
       <data key="d9">false</data>
     </node>
     <node id="lucas1966">
@@ -138332,7 +138332,7 @@
       <data key="d5"/>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">51</data>
+      <data key="d8">52</data>
       <data key="d9">false</data>
     </node>
     <node id="adam1917">
@@ -143864,7 +143864,7 @@
       <data key="d5">10.23914/odj.v1i0.253</data>
       <data key="d6">0.5</data>
       <data key="d7">1</data>
-      <data key="d8">39</data>
+      <data key="d8">40</data>
       <data key="d9">false</data>
     </node>
     <node id="beckerchristensen1981">
@@ -147872,7 +147872,7 @@
       <data key="d5"/>
       <data key="d6">0.0</data>
       <data key="d7">1</data>
-      <data key="d8">54</data>
+      <data key="d8">55</data>
       <data key="d9">false</data>
     </node>
     <node id="skre2011a">
@@ -147896,7 +147896,7 @@
       <data key="d5"/>
       <data key="d6">0.0</data>
       <data key="d7">1</data>
-      <data key="d8">62</data>
+      <data key="d8">63</data>
       <data key="d9">false</data>
     </node>
     <node id="zachrisson2004a">
@@ -149623,7 +149623,7 @@
       <data key="d4">Kitzler Åhfeldt Laila</data>
       <data key="d5"/>
       <data key="d6">0.833</data>
-      <data key="d7">3</data>
+      <data key="d7">95</data>
       <data key="d8">26</data>
       <data key="d9">false</data>
     </node>
@@ -151475,6 +151475,18 @@
       <data key="d8">0</data>
       <data key="d9">false</data>
     </node>
+    <node id="NOAUTHOR18">
+      <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">0</data>
+      <data key="d8">21</data>
+      <data key="d9">true</data>
+    </node>
     <node id="NOAUTHOR33">
       <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
       <data key="d1"/>
@@ -151499,18 +151511,6 @@
       <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
-    <node id="puskina2017">
-      <data key="d0">Der archäologische Komplex von Gnezdovo</data>
-      <data key="d1">2017</data>
-      <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Puškina T. A.</data>
-      <data key="d5"/>
-      <data key="d6">0.833</data>
-      <data key="d7">0</data>
-      <data key="d8">0</data>
-      <data key="d9">true</data>
-    </node>
     <node id="NOAUTHOR21">
       <data key="d0">New Horizons in the Archaeology of the Viking Age</data>
       <data key="d1"/>
@@ -151523,8 +151523,8 @@
       <data key="d8">14</data>
       <data key="d9">true</data>
     </node>
-    <node id="NOAUTHOR18">
-      <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
+    <node id="NOAUTHOR28">
+      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
       <data key="d1"/>
       <data key="d2">F1</data>
       <data key="d3">misc</data>
@@ -151532,7 +151532,7 @@
       <data key="d5"/>
       <data key="d6">0.25</data>
       <data key="d7">0</data>
-      <data key="d8">21</data>
+      <data key="d8">193</data>
       <data key="d9">true</data>
     </node>
     <node id="ahfeldt2015">
@@ -151544,19 +151544,7 @@
       <data key="d5">10.1515/9783110417685-014</data>
       <data key="d6">0.917</data>
       <data key="d7">0</data>
-      <data key="d8">87</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR28">
-      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">193</data>
+      <data key="d8">86</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="lund2021" target="aannestad2015"/>
@@ -173842,236 +173830,328 @@
     <edge id="e22280" source="eriksen2017" target="sofaerderevenski2000a"/>
     <edge id="e22281" source="raffield2019" target="sofaerderevenski2000a"/>
     <edge id="e22282" source="arwillnordbladh2007" target="tringham1994"/>
-    <edge id="e22283" source="lund2021" target="kitzlerahfeldt2013"/>
-    <edge id="e22284" source="oehrl2019" target="kitzlerahfeldt2013"/>
-    <edge id="e22285" source="ahfeldt2015" target="kitzlerahfeldt2013"/>
-    <edge id="e22286" source="fahlander2016" target="brinchpetersen2006"/>
-    <edge id="e22287" source="sanmarkndb" target="brinchpetersen2006"/>
-    <edge id="e22288" source="feveile2017" target="harck1997"/>
-    <edge id="e22289" source="hedenstiernajonson2015" target="ahlinsundman2012"/>
-    <edge id="e22290" source="larsson2007" target="adamofbremen1959"/>
-    <edge id="e22291" source="price2012" target="adamofbremen1959"/>
-    <edge id="e22292" source="kovalenko2013" target="sawyer2006"/>
-    <edge id="e22293" source="krzewinska2015" target="dersarkissian2013"/>
-    <edge id="e22294" source="mulk2007" target="mulk1991"/>
-    <edge id="e22295" source="oehrl2017" target="kitzlerahfeldt2012"/>
-    <edge id="e22296" source="oehrl2019" target="kitzlerahfeldt2012"/>
-    <edge id="e22297" source="osullivan2015" target="stummannhansen2003"/>
-    <edge id="e22298" source="price2008a" target="price2008b"/>
-    <edge id="e22299" source="raffield2019" target="smallwood2007"/>
-    <edge id="e22300" source="raffield2019" target="downham2017"/>
-    <edge id="e22301" source="raffield2019" target="braconi2005"/>
-    <edge id="e22302" source="raffield2019" target="hadley2016a"/>
-    <edge id="e22303" source="raffield2019" target="worldhealthorganization2018"/>
-    <edge id="e22304" source="lund2021" target="roesdahlnd"/>
-    <edge id="e22305" source="knappett2025" target="benedictow1996"/>
-    <edge id="e22306" source="sindbaek2016" target="addyman1969"/>
-    <edge id="e22307" source="sindbaek2016" target="addyman1972"/>
-    <edge id="e22308" source="vonholstein2014" target="ballinsmith1994"/>
-    <edge id="e22309" source="bergstol2004" target="wallerstrom1997"/>
-    <edge id="e22310" source="bergstol2004" target="ostmo2000"/>
-    <edge id="e22311" source="arwillnordbladh2012" target="fridriksdottir1991"/>
-    <edge id="e22312" source="croix2015" target="fridriksdottir1991"/>
-    <edge id="e22313" source="fabech2013" target="fridriksdottir1991"/>
-    <edge id="e22314" source="croix2019" target="fridriksdottir1991"/>
-    <edge id="e22315" source="gardela2018" target="fridriksdottir1991"/>
-    <edge id="e22316" source="gustafssonnd" target="fridriksdottir1991"/>
-    <edge id="e22317" source="hardhnd" target="fridriksdottir1991"/>
-    <edge id="e22318" source="lund2020" target="fridriksdottir1991"/>
-    <edge id="e22319" source="osullivan2015" target="fridriksdottir1991"/>
-    <edge id="e22320" source="rundkvist2010" target="fridriksdottir1991"/>
-    <edge id="e22321" source="rohdesloth2012" target="fridriksdottir1991"/>
-    <edge id="e22322" source="williams2015" target="brondsted1962"/>
-    <edge id="e22323" source="perry2016" target="adamsgilmour2010"/>
-    <edge id="e22324" source="andren2000" target="baeksted1952"/>
-    <edge id="e22325" source="andren2000" target="snaedalbrink1984"/>
-    <edge id="e22326" source="zoega2017" target="morris1892"/>
-    <edge id="e22327" source="baastrup2014" target="grandtnielsen1974"/>
-    <edge id="e22328" source="baastrup2014" target="norgardjorgensen2011"/>
-    <edge id="e22329" source="dobat2013" target="norgardjorgensen2011"/>
-    <edge id="e22330" source="gustafssonnd" target="norgardjorgensen2011"/>
-    <edge id="e22331" source="tonning2020" target="norgardjorgensen2011"/>
-    <edge id="e22332" source="zachrisson2014a" target="norgardjorgensen2011"/>
-    <edge id="e22333" source="baastrup2014" target="latour1984"/>
-    <edge id="e22334" source="glorstad2017" target="latour1984"/>
-    <edge id="e22335" source="schmid2017" target="latour1984"/>
-    <edge id="e22336" source="baastrup2014" target="ofloinn2001"/>
-    <edge id="e22337" source="rogers2020" target="ofloinn2001"/>
-    <edge id="e22338" source="baastrup2014" target="birkedahlchristensen1924"/>
-    <edge id="e22339" source="baastrup2014" target="henriksen1982"/>
-    <edge id="e22340" source="baastrup2014" target="rispling2000"/>
-    <edge id="e22341" source="baastrup2014" target="mollerhansen2000"/>
-    <edge id="e22342" source="baastrup2014" target="roesdahl1986"/>
-    <edge id="e22343" source="baastrup2014" target="wamers1997a"/>
-    <edge id="e22344" source="baastrup2014" target="back1963"/>
-    <edge id="e22345" source="baastrup2014" target="helgesson1987"/>
-    <edge id="e22346" source="baastrup2014" target="jorgensen1980"/>
-    <edge id="e22347" source="baastrup2014" target="jorgensen1980a"/>
-    <edge id="e22348" source="baastrup2014" target="wilson1960a"/>
-    <edge id="e22349" source="baastrup2014" target="brondsted1924a"/>
-    <edge id="e22350" source="baastrup2014" target="christiansen1948"/>
-    <edge id="e22351" source="baastrup2014" target="christensen1992a"/>
-    <edge id="e22352" source="baastrup2014" target="klaesoe1994"/>
-    <edge id="e22353" source="baastrup2014" target="klaesoe1995"/>
-    <edge id="e22354" source="baastrup2014" target="klaesoe2002"/>
-    <edge id="e22355" source="baastrup2014" target="kleingartner2010"/>
-    <edge id="e22356" source="baastrup2014" target="mullerwille2005"/>
-    <edge id="e22357" source="baastrup2014" target="odell1959"/>
-    <edge id="e22358" source="baastrup2014" target="schulke1992"/>
-    <edge id="e22359" source="baastrup2014" target="sindbaek2012a"/>
-    <edge id="e22360" source="baastrup2014" target="steuer2010"/>
-    <edge id="e22361" source="baastrup2014" target="lundhansen1987"/>
-    <edge id="e22362" source="sindbaek2017" target="lundhansen1987"/>
-    <edge id="e22363" source="baastrup2014" target="vraengmosejensen2008"/>
-    <edge id="e22364" source="baastrup2014" target="mullerwille1978a"/>
-    <edge id="e22365" source="baastrup2014" target="ocorrain2001"/>
-    <edge id="e22366" source="baug2019" target="ocorrain2001"/>
-    <edge id="e22367" source="montgomery2014" target="ocorrain2001"/>
-    <edge id="e22368" source="oehrl2017" target="norderang2004a"/>
-    <edge id="e22369" source="wicker2012" target="norderang2004a"/>
-    <edge id="e22370" source="kitzlerahfeldt2013" target="norderang2004a"/>
-    <edge id="e22371" source="ahfeldt2015" target="norderang2004a"/>
-    <edge id="e22372" source="sindbaek2007" target="denooy2005"/>
-    <edge id="e22373" source="knappett2025" target="denooy2005"/>
-    <edge id="e22374" source="price2008a" target="snorristurluson1964"/>
-    <edge id="e22375" source="sanmarkndb" target="snorristurluson1964"/>
-    <edge id="e22376" source="zachrisson2017" target="snorristurluson1964"/>
-    <edge id="e22377" source="androshchuk2010" target="larsson1873"/>
-    <edge id="e22378" source="glorstad2012" target="larsson1873"/>
-    <edge id="e22379" source="pedersennd" target="larsson1873"/>
-    <edge id="e22380" source="zachrisson2014a" target="larsson1873"/>
-    <edge id="e22381" source="gardela2018" target="carroll2014"/>
-    <edge id="e22382" source="gardela2018" target="coleman2014a"/>
-    <edge id="e22383" source="price2019" target="coleman2014a"/>
-    <edge id="e22384" source="raffield2018" target="coleman2014a"/>
-    <edge id="e22385" source="moen2020" target="coleman2014a"/>
-    <edge id="e22386" source="gardela2018" target="henriksen2013a"/>
-    <edge id="e22387" source="hennius2018" target="henriksen2013a"/>
-    <edge id="e22388" source="NOAUTHOR28" target="henriksen2013a"/>
-    <edge id="e22389" source="gardela2018" target="leahy1997a"/>
-    <edge id="e22390" source="kershaw2009" target="leahy1997a"/>
-    <edge id="e22391" source="graslundnd" target="fischer2008a"/>
-    <edge id="e22392" source="hilberg2018" target="arents2010a"/>
-    <edge id="e22393" source="hilberg2018" target="voncarnapbornheim2007a"/>
-    <edge id="e22394" source="price2012" target="voncarnapbornheim2007a"/>
-    <edge id="e22395" source="voncarnapbornheim2014" target="voncarnapbornheim2007a"/>
-    <edge id="e22396" source="holst2013" target="christensen1991a"/>
-    <edge id="e22397" source="holst2013" target="jacobsen1942a"/>
-    <edge id="e22398" source="kalmring2017" target="ambrosiani1994a"/>
-    <edge id="e22399" source="kalmring2017" target="goodman2013a"/>
-    <edge id="e22400" source="rundkvist2014" target="goodman2013a"/>
-    <edge id="e22401" source="kalmring2017" target="holmquist2015"/>
-    <edge id="e22402" source="kalmring2018" target="holmquist2015"/>
-    <edge id="e22403" source="price2018" target="holmquist2015"/>
-    <edge id="e22404" source="kalmring2017" target="jeppesen1988"/>
-    <edge id="e22405" source="kalmring2017" target="risberg1997"/>
-    <edge id="e22406" source="kalmring2017" target="vickers1975"/>
-    <edge id="e22407" source="rundkvist2014" target="vickers1975"/>
-    <edge id="e22408" source="jorgensennd" target="hardh2001a"/>
-    <edge id="e22409" source="price2016" target="hardh2001a"/>
-    <edge id="e22410" source="sindbaek2014" target="hardh2001a"/>
-    <edge id="e22411" source="jorgensennd" target="jeppesen1997a"/>
-    <edge id="e22412" source="jorgensennd" target="nielsen1999"/>
-    <edge id="e22413" source="rundkvist2010" target="nielsen1999"/>
-    <edge id="e22414" source="knudson2012" target="iaea2006"/>
-    <edge id="e22415" source="price2019" target="iaea2006"/>
-    <edge id="e22416" source="ljungkvist2011a" target="bonnier1991"/>
-    <edge id="e22417" source="ljungkvist2011a" target="anund1998"/>
-    <edge id="e22418" source="ljungkvist2011a" target="bonnier1990"/>
-    <edge id="e22419" source="ljungkvist2011a" target="fagerlund2005a"/>
-    <edge id="e22420" source="ljungkvist2011a" target="fagerlund1993a"/>
-    <edge id="e22421" source="ljungkvist2011a" target="konigsson1993"/>
-    <edge id="e22422" source="ljungkvist2011a" target="schutz2007"/>
-    <edge id="e22423" source="pedersennd" target="hammarberg1976"/>
-    <edge id="e22424" source="ulriksen2018" target="gansum1998"/>
-    <edge id="e22425" source="pedersennd" target="andersen1970a"/>
-    <edge id="e22426" source="ulriksen2011a" target="andersen1970a"/>
-    <edge id="e22427" source="abrams2012" target="englert2009"/>
-    <edge id="e22428" source="gardela2015" target="englert2009"/>
-    <edge id="e22429" source="gustafssonnd" target="englert2009"/>
-    <edge id="e22430" source="hilberg2014" target="englert2009"/>
-    <edge id="e22431" source="arneborg2012" target="ambrose1999"/>
-    <edge id="e22432" source="dugmore2007" target="ambrose1999"/>
-    <edge id="e22433" source="keller2016" target="ambrose1999"/>
-    <edge id="e22434" source="jarman2018" target="ambrose1999"/>
-    <edge id="e22435" source="bitzthorsen2018" target="robinson2006"/>
-    <edge id="e22436" source="gotfredsen2013" target="robinson2006"/>
-    <edge id="e22437" source="thend" target="robinson2006"/>
-    <edge id="e22438" source="rohdesloth2012" target="robinson2006"/>
-    <edge id="e22439" source="gardelanda" target="norrman2008a"/>
-    <edge id="e22440" source="smith2013" target="norrman2008a"/>
-    <edge id="e22441" source="raffield2018" target="norrman2008a"/>
-    <edge id="e22442" source="gardela2018" target="norrman2008a"/>
-    <edge id="e22443" source="eriksen2013" target="karnell2012a"/>
-    <edge id="e22444" source="oehrl2019" target="karnell2012a"/>
-    <edge id="e22445" source="williams2014" target="karnell2012a"/>
-    <edge id="e22446" source="androshchuk2010" target="jansson2007"/>
-    <edge id="e22447" source="croix2015" target="jansson2007"/>
-    <edge id="e22448" source="magi2015" target="macane2001"/>
-    <edge id="e22449" source="magi2011" target="macane2001"/>
-    <edge id="e22450" source="toplak2015" target="vonamira1933"/>
-    <edge id="e22451" source="NOAUTHOR33" target="vonamira1933"/>
-    <edge id="e22452" source="sindbaek2007" target="pestell2003"/>
-    <edge id="e22453" source="sindbaek2017" target="pestell2003"/>
-    <edge id="e22454" source="andren2000" target="hanks1989"/>
-    <edge id="e22455" source="burstrom2014" target="knappett2008a"/>
-    <edge id="e22456" source="burstrom2014" target="rhiel1996"/>
-    <edge id="e22457" source="ljungkvist2015" target="dahlback1984"/>
-    <edge id="e22458" source="sindbaek2007" target="lundqvist1997a"/>
-    <edge id="e22459" source="roesdahlnd" target="jensen1995"/>
-    <edge id="e22460" source="oehrl2017" target="faulkes1998"/>
-    <edge id="e22461" source="lindholm2016" target="ingold1988"/>
-    <edge id="e22462" source="mulk2007" target="pahlsson1984"/>
-    <edge id="e22463" source="hartman2017" target="hauksson1972"/>
-    <edge id="e22464" source="milek2012" target="roberts2005"/>
-    <edge id="e22465" source="furholt2018" target="bickle2013a"/>
-    <edge id="e22466" source="anchukaitis2017" target="bjorklund2015"/>
-    <edge id="e22467" source="anchukaitis2017" target="bjorklund2014"/>
-    <edge id="e22468" source="krzewinska2018" target="ilumae2016"/>
-    <edge id="e22469" source="krzewinska2018" target="backstrom2016a"/>
-    <edge id="e22470" source="schmid2017" target="zoega2013"/>
-    <edge id="e22471" source="majchczack2018" target="mauritsen1982"/>
-    <edge id="e22472" source="buckberry2014" target="richards2000a"/>
-    <edge id="e22473" source="montgomery2014" target="richards2000a"/>
-    <edge id="e22474" source="raffield2014" target="richards2000a"/>
-    <edge id="e22475" source="price2008a" target="richards2000a"/>
-    <edge id="e22476" source="richards2018" target="richards2000a"/>
-    <edge id="e22477" source="hedenstiernajonson2017" target="gunther2015"/>
-    <edge id="e22478" source="krzewinska2018" target="gunther2015"/>
-    <edge id="e22479" source="kovalenko2013" target="blifeld1977a"/>
-    <edge id="e22480" source="raffield2018" target="blifeld1977a"/>
-    <edge id="e22481" source="skorokhod2020" target="blifeld1977a"/>
-    <edge id="e22482" source="christiansen2019" target="hellesolesen1992a"/>
-    <edge id="e22483" source="larsson2007" target="snorristurluson1997"/>
-    <edge id="e22484" source="leonard2011" target="rcahms2011"/>
-    <edge id="e22485" source="anchukaitis2017" target="harrison2016"/>
-    <edge id="e22486" source="roesdahlnd" target="mullermertens1999"/>
-    <edge id="e22487" source="steinforth2015" target="grahamcampbell1995a"/>
-    <edge id="e22488" source="sindbaek2016" target="rogerson1995"/>
-    <edge id="e22489" source="sindbaek2016" target="wademartins1980"/>
-    <edge id="e22490" source="sindbaek2016" target="williams1979"/>
-    <edge id="e22491" source="sindbaek2016" target="emery2007a"/>
-    <edge id="e22492" source="sindbaek2016" target="hall1989a"/>
-    <edge id="e22493" source="sindbaek2016" target="dodd2003"/>
-    <edge id="e22494" source="sindbaek2016" target="cunliffe1977"/>
-    <edge id="e22495" source="sindbaek2016" target="audouy2009"/>
-    <edge id="e22496" source="sindbaek2016" target="king1978"/>
-    <edge id="e22497" source="sindbaek2016" target="cabot2004a"/>
-    <edge id="e22498" source="sindbaek2016" target="carver1978"/>
-    <edge id="e22499" source="sindbaek2016" target="coggins1983"/>
-    <edge id="e22500" source="sindbaek2016" target="tylor2005"/>
-    <edge id="e22501" source="sindbaek2016" target="carver1981"/>
-    <edge id="e22502" source="sindbaek2016" target="mahony1982"/>
-    <edge id="e22503" source="sindbaek2016" target="gardiner1990"/>
-    <edge id="e22504" source="sindbaek2016" target="rogerson1984a"/>
-    <edge id="e22505" source="sindbaek2016" target="hurst1983"/>
-    <edge id="e22506" source="sindbaek2016" target="dalwood1992"/>
-    <edge id="e22507" source="sindbaek2016" target="mainman2000a"/>
-    <edge id="e22508" source="sindbaek2016" target="loveluck2007a"/>
-    <edge id="e22509" source="sindbaek2016" target="gould1967"/>
-    <edge id="e22510" source="sindbaek2007" target="schoknecht1977a"/>
-    <edge id="e22511" source="sindbaek2007" target="herrmann2005a"/>
-    <edge id="e22512" source="sindbaek2007" target="andersson1994"/>
-    <edge id="e22513" source="raffield2019" target="tacitus1999a"/>
+    <edge id="e22283" source="halstadmcguire2010" target="kitzlerahfeldt2013"/>
+    <edge id="e22284" source="gardeland" target="kitzlerahfeldt2013"/>
+    <edge id="e22285" source="gullbekk2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22286" source="smith2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22287" source="gustin2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22288" source="graslundnd" target="kitzlerahfeldt2013"/>
+    <edge id="e22289" source="hadley2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22290" source="hartman2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22291" source="imer2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22292" source="heenpettersen2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22293" source="helama2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22294" source="henriksen2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22295" source="jessen2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22296" source="hilberg2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22297" source="hillerdal2010" target="kitzlerahfeldt2013"/>
+    <edge id="e22298" source="kershaw2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22299" source="jarman2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22300" source="ingvardson2012" target="kitzlerahfeldt2013"/>
+    <edge id="e22301" source="linderholm2008" target="kitzlerahfeldt2013"/>
+    <edge id="e22302" source="jackson2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22303" source="jorgensennd" target="kitzlerahfeldt2013"/>
+    <edge id="e22304" source="kemmers2011" target="kitzlerahfeldt2013"/>
+    <edge id="e22305" source="lund2020" target="kitzlerahfeldt2013"/>
+    <edge id="e22306" source="kovalenko2013" target="kitzlerahfeldt2013"/>
+    <edge id="e22307" source="kelly2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22308" source="kershaw2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22309" source="lemm2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22310" source="knudson2012" target="kitzlerahfeldt2013"/>
+    <edge id="e22311" source="myrberg2007" target="kitzlerahfeldt2013"/>
+    <edge id="e22312" source="larsson2007" target="kitzlerahfeldt2013"/>
+    <edge id="e22313" source="krzewinska2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22314" source="naumann2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22315" source="leslie2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22316" source="lund2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22317" source="lucas2007" target="kitzlerahfeldt2013"/>
+    <edge id="e22318" source="lund2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22319" source="lund2006" target="kitzlerahfeldt2013"/>
+    <edge id="e22320" source="mainland2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22321" source="pedersennd" target="kitzlerahfeldt2013"/>
+    <edge id="e22322" source="magnell2010" target="kitzlerahfeldt2013"/>
+    <edge id="e22323" source="lund2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22324" source="lund2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22325" source="pedersen2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22326" source="mcleod2011" target="kitzlerahfeldt2013"/>
+    <edge id="e22327" source="lynnerupnd" target="kitzlerahfeldt2013"/>
+    <edge id="e22328" source="pilo2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22329" source="milek2012" target="kitzlerahfeldt2013"/>
+    <edge id="e22330" source="macphail2013" target="kitzlerahfeldt2013"/>
+    <edge id="e22331" source="majchczack2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22332" source="montgomery2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22333" source="naum2007" target="kitzlerahfeldt2013"/>
+    <edge id="e22334" source="price2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22335" source="magi2011" target="kitzlerahfeldt2013"/>
+    <edge id="e22336" source="raffield2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22337" source="perry2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22338" source="pedersen2006" target="kitzlerahfeldt2013"/>
+    <edge id="e22339" source="pollard2012" target="kitzlerahfeldt2013"/>
+    <edge id="e22340" source="oehrl2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22341" source="raffield2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22342" source="osullivan2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22343" source="peschel2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22344" source="price2010" target="kitzlerahfeldt2013"/>
+    <edge id="e22345" source="pilo2020" target="kitzlerahfeldt2013"/>
+    <edge id="e22346" source="perry2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22347" source="price2020" target="kitzlerahfeldt2013"/>
+    <edge id="e22348" source="schmid2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22349" source="raffield2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22350" source="raninen2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22351" source="richards2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22352" source="price2008a" target="kitzlerahfeldt2013"/>
+    <edge id="e22353" source="sindbaek2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22354" source="price2012" target="kitzlerahfeldt2013"/>
+    <edge id="e22355" source="price2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22356" source="sheehannd" target="kitzlerahfeldt2013"/>
+    <edge id="e22357" source="raffield2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22358" source="roslund2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22359" source="raja2018" target="kitzlerahfeldt2013"/>
+    <edge id="e22360" source="tonning2020" target="kitzlerahfeldt2013"/>
+    <edge id="e22361" source="reiter2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22362" source="rosvold2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22363" source="sanmark2013" target="kitzlerahfeldt2013"/>
+    <edge id="e22364" source="skre2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22365" source="skre2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22366" source="solli2011" target="kitzlerahfeldt2013"/>
+    <edge id="e22367" source="skre2011b" target="kitzlerahfeldt2013"/>
+    <edge id="e22368" source="stott2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22369" source="vesteinssonnd" target="kitzlerahfeldt2013"/>
+    <edge id="e22370" source="svendsen2019" target="kitzlerahfeldt2013"/>
+    <edge id="e22371" source="star2017" target="kitzlerahfeldt2013"/>
+    <edge id="e22372" source="williams2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22373" source="tainter2006" target="kitzlerahfeldt2013"/>
+    <edge id="e22374" source="tummuscheitnd" target="kitzlerahfeldt2013"/>
+    <edge id="e22375" source="oye2014" target="kitzlerahfeldt2013"/>
+    <edge id="e22376" source="williams2016" target="kitzlerahfeldt2013"/>
+    <edge id="e22377" source="frei2015" target="kitzlerahfeldt2013"/>
+    <edge id="e22378" source="fahlander2016" target="brinchpetersen2006"/>
+    <edge id="e22379" source="sanmarkndb" target="brinchpetersen2006"/>
+    <edge id="e22380" source="feveile2017" target="harck1997"/>
+    <edge id="e22381" source="hedenstiernajonson2015" target="ahlinsundman2012"/>
+    <edge id="e22382" source="larsson2007" target="adamofbremen1959"/>
+    <edge id="e22383" source="price2012" target="adamofbremen1959"/>
+    <edge id="e22384" source="kovalenko2013" target="sawyer2006"/>
+    <edge id="e22385" source="krzewinska2015" target="dersarkissian2013"/>
+    <edge id="e22386" source="mulk2007" target="mulk1991"/>
+    <edge id="e22387" source="oehrl2017" target="kitzlerahfeldt2012"/>
+    <edge id="e22388" source="oehrl2019" target="kitzlerahfeldt2012"/>
+    <edge id="e22389" source="osullivan2015" target="stummannhansen2003"/>
+    <edge id="e22390" source="price2008a" target="price2008b"/>
+    <edge id="e22391" source="raffield2019" target="smallwood2007"/>
+    <edge id="e22392" source="raffield2019" target="downham2017"/>
+    <edge id="e22393" source="raffield2019" target="braconi2005"/>
+    <edge id="e22394" source="raffield2019" target="hadley2016a"/>
+    <edge id="e22395" source="raffield2019" target="worldhealthorganization2018"/>
+    <edge id="e22396" source="lund2021" target="roesdahlnd"/>
+    <edge id="e22397" source="knappett2025" target="benedictow1996"/>
+    <edge id="e22398" source="sindbaek2016" target="addyman1969"/>
+    <edge id="e22399" source="sindbaek2016" target="addyman1972"/>
+    <edge id="e22400" source="vonholstein2014" target="ballinsmith1994"/>
+    <edge id="e22401" source="bergstol2004" target="wallerstrom1997"/>
+    <edge id="e22402" source="bergstol2004" target="ostmo2000"/>
+    <edge id="e22403" source="arwillnordbladh2012" target="fridriksdottir1991"/>
+    <edge id="e22404" source="croix2015" target="fridriksdottir1991"/>
+    <edge id="e22405" source="fabech2013" target="fridriksdottir1991"/>
+    <edge id="e22406" source="croix2019" target="fridriksdottir1991"/>
+    <edge id="e22407" source="gardela2018" target="fridriksdottir1991"/>
+    <edge id="e22408" source="gustafssonnd" target="fridriksdottir1991"/>
+    <edge id="e22409" source="hardhnd" target="fridriksdottir1991"/>
+    <edge id="e22410" source="lund2020" target="fridriksdottir1991"/>
+    <edge id="e22411" source="osullivan2015" target="fridriksdottir1991"/>
+    <edge id="e22412" source="rundkvist2010" target="fridriksdottir1991"/>
+    <edge id="e22413" source="rohdesloth2012" target="fridriksdottir1991"/>
+    <edge id="e22414" source="williams2015" target="brondsted1962"/>
+    <edge id="e22415" source="perry2016" target="adamsgilmour2010"/>
+    <edge id="e22416" source="andren2000" target="baeksted1952"/>
+    <edge id="e22417" source="andren2000" target="snaedalbrink1984"/>
+    <edge id="e22418" source="zoega2017" target="morris1892"/>
+    <edge id="e22419" source="baastrup2014" target="grandtnielsen1974"/>
+    <edge id="e22420" source="baastrup2014" target="norgardjorgensen2011"/>
+    <edge id="e22421" source="dobat2013" target="norgardjorgensen2011"/>
+    <edge id="e22422" source="gustafssonnd" target="norgardjorgensen2011"/>
+    <edge id="e22423" source="tonning2020" target="norgardjorgensen2011"/>
+    <edge id="e22424" source="zachrisson2014a" target="norgardjorgensen2011"/>
+    <edge id="e22425" source="baastrup2014" target="latour1984"/>
+    <edge id="e22426" source="glorstad2017" target="latour1984"/>
+    <edge id="e22427" source="schmid2017" target="latour1984"/>
+    <edge id="e22428" source="baastrup2014" target="ofloinn2001"/>
+    <edge id="e22429" source="rogers2020" target="ofloinn2001"/>
+    <edge id="e22430" source="baastrup2014" target="birkedahlchristensen1924"/>
+    <edge id="e22431" source="baastrup2014" target="henriksen1982"/>
+    <edge id="e22432" source="baastrup2014" target="rispling2000"/>
+    <edge id="e22433" source="baastrup2014" target="mollerhansen2000"/>
+    <edge id="e22434" source="baastrup2014" target="roesdahl1986"/>
+    <edge id="e22435" source="baastrup2014" target="wamers1997a"/>
+    <edge id="e22436" source="baastrup2014" target="back1963"/>
+    <edge id="e22437" source="baastrup2014" target="helgesson1987"/>
+    <edge id="e22438" source="baastrup2014" target="jorgensen1980"/>
+    <edge id="e22439" source="baastrup2014" target="jorgensen1980a"/>
+    <edge id="e22440" source="baastrup2014" target="wilson1960a"/>
+    <edge id="e22441" source="baastrup2014" target="brondsted1924a"/>
+    <edge id="e22442" source="baastrup2014" target="christiansen1948"/>
+    <edge id="e22443" source="baastrup2014" target="christensen1992a"/>
+    <edge id="e22444" source="baastrup2014" target="klaesoe1994"/>
+    <edge id="e22445" source="baastrup2014" target="klaesoe1995"/>
+    <edge id="e22446" source="baastrup2014" target="klaesoe2002"/>
+    <edge id="e22447" source="baastrup2014" target="kleingartner2010"/>
+    <edge id="e22448" source="baastrup2014" target="mullerwille2005"/>
+    <edge id="e22449" source="baastrup2014" target="odell1959"/>
+    <edge id="e22450" source="baastrup2014" target="schulke1992"/>
+    <edge id="e22451" source="baastrup2014" target="sindbaek2012a"/>
+    <edge id="e22452" source="baastrup2014" target="steuer2010"/>
+    <edge id="e22453" source="baastrup2014" target="lundhansen1987"/>
+    <edge id="e22454" source="sindbaek2017" target="lundhansen1987"/>
+    <edge id="e22455" source="baastrup2014" target="vraengmosejensen2008"/>
+    <edge id="e22456" source="baastrup2014" target="mullerwille1978a"/>
+    <edge id="e22457" source="baastrup2014" target="ocorrain2001"/>
+    <edge id="e22458" source="baug2019" target="ocorrain2001"/>
+    <edge id="e22459" source="montgomery2014" target="ocorrain2001"/>
+    <edge id="e22460" source="oehrl2017" target="norderang2004a"/>
+    <edge id="e22461" source="wicker2012" target="norderang2004a"/>
+    <edge id="e22462" source="kitzlerahfeldt2013" target="norderang2004a"/>
+    <edge id="e22463" source="ahfeldt2015" target="norderang2004a"/>
+    <edge id="e22464" source="sindbaek2007" target="denooy2005"/>
+    <edge id="e22465" source="knappett2025" target="denooy2005"/>
+    <edge id="e22466" source="price2008a" target="snorristurluson1964"/>
+    <edge id="e22467" source="sanmarkndb" target="snorristurluson1964"/>
+    <edge id="e22468" source="zachrisson2017" target="snorristurluson1964"/>
+    <edge id="e22469" source="androshchuk2010" target="larsson1873"/>
+    <edge id="e22470" source="glorstad2012" target="larsson1873"/>
+    <edge id="e22471" source="pedersennd" target="larsson1873"/>
+    <edge id="e22472" source="zachrisson2014a" target="larsson1873"/>
+    <edge id="e22473" source="gardela2018" target="carroll2014"/>
+    <edge id="e22474" source="gardela2018" target="coleman2014a"/>
+    <edge id="e22475" source="price2019" target="coleman2014a"/>
+    <edge id="e22476" source="raffield2018" target="coleman2014a"/>
+    <edge id="e22477" source="moen2020" target="coleman2014a"/>
+    <edge id="e22478" source="gardela2018" target="henriksen2013a"/>
+    <edge id="e22479" source="hennius2018" target="henriksen2013a"/>
+    <edge id="e22480" source="NOAUTHOR28" target="henriksen2013a"/>
+    <edge id="e22481" source="gardela2018" target="leahy1997a"/>
+    <edge id="e22482" source="kershaw2009" target="leahy1997a"/>
+    <edge id="e22483" source="graslundnd" target="fischer2008a"/>
+    <edge id="e22484" source="hilberg2018" target="arents2010a"/>
+    <edge id="e22485" source="hilberg2018" target="voncarnapbornheim2007a"/>
+    <edge id="e22486" source="price2012" target="voncarnapbornheim2007a"/>
+    <edge id="e22487" source="voncarnapbornheim2014" target="voncarnapbornheim2007a"/>
+    <edge id="e22488" source="holst2013" target="christensen1991a"/>
+    <edge id="e22489" source="holst2013" target="jacobsen1942a"/>
+    <edge id="e22490" source="kalmring2017" target="ambrosiani1994a"/>
+    <edge id="e22491" source="kalmring2017" target="goodman2013a"/>
+    <edge id="e22492" source="rundkvist2014" target="goodman2013a"/>
+    <edge id="e22493" source="kalmring2017" target="holmquist2015"/>
+    <edge id="e22494" source="kalmring2018" target="holmquist2015"/>
+    <edge id="e22495" source="price2018" target="holmquist2015"/>
+    <edge id="e22496" source="kalmring2017" target="jeppesen1988"/>
+    <edge id="e22497" source="kalmring2017" target="risberg1997"/>
+    <edge id="e22498" source="kalmring2017" target="vickers1975"/>
+    <edge id="e22499" source="rundkvist2014" target="vickers1975"/>
+    <edge id="e22500" source="jorgensennd" target="hardh2001a"/>
+    <edge id="e22501" source="price2016" target="hardh2001a"/>
+    <edge id="e22502" source="sindbaek2014" target="hardh2001a"/>
+    <edge id="e22503" source="jorgensennd" target="jeppesen1997a"/>
+    <edge id="e22504" source="jorgensennd" target="nielsen1999"/>
+    <edge id="e22505" source="rundkvist2010" target="nielsen1999"/>
+    <edge id="e22506" source="knudson2012" target="iaea2006"/>
+    <edge id="e22507" source="price2019" target="iaea2006"/>
+    <edge id="e22508" source="ljungkvist2011a" target="bonnier1991"/>
+    <edge id="e22509" source="ljungkvist2011a" target="anund1998"/>
+    <edge id="e22510" source="ljungkvist2011a" target="bonnier1990"/>
+    <edge id="e22511" source="ljungkvist2011a" target="fagerlund2005a"/>
+    <edge id="e22512" source="ljungkvist2011a" target="fagerlund1993a"/>
+    <edge id="e22513" source="ljungkvist2011a" target="konigsson1993"/>
+    <edge id="e22514" source="ljungkvist2011a" target="schutz2007"/>
+    <edge id="e22515" source="pedersennd" target="hammarberg1976"/>
+    <edge id="e22516" source="ulriksen2018" target="gansum1998"/>
+    <edge id="e22517" source="pedersennd" target="andersen1970a"/>
+    <edge id="e22518" source="ulriksen2011a" target="andersen1970a"/>
+    <edge id="e22519" source="abrams2012" target="englert2009"/>
+    <edge id="e22520" source="gardela2015" target="englert2009"/>
+    <edge id="e22521" source="gustafssonnd" target="englert2009"/>
+    <edge id="e22522" source="hilberg2014" target="englert2009"/>
+    <edge id="e22523" source="arneborg2012" target="ambrose1999"/>
+    <edge id="e22524" source="dugmore2007" target="ambrose1999"/>
+    <edge id="e22525" source="keller2016" target="ambrose1999"/>
+    <edge id="e22526" source="jarman2018" target="ambrose1999"/>
+    <edge id="e22527" source="bitzthorsen2018" target="robinson2006"/>
+    <edge id="e22528" source="gotfredsen2013" target="robinson2006"/>
+    <edge id="e22529" source="thend" target="robinson2006"/>
+    <edge id="e22530" source="rohdesloth2012" target="robinson2006"/>
+    <edge id="e22531" source="gardelanda" target="norrman2008a"/>
+    <edge id="e22532" source="smith2013" target="norrman2008a"/>
+    <edge id="e22533" source="raffield2018" target="norrman2008a"/>
+    <edge id="e22534" source="gardela2018" target="norrman2008a"/>
+    <edge id="e22535" source="eriksen2013" target="karnell2012a"/>
+    <edge id="e22536" source="oehrl2019" target="karnell2012a"/>
+    <edge id="e22537" source="williams2014" target="karnell2012a"/>
+    <edge id="e22538" source="androshchuk2010" target="jansson2007"/>
+    <edge id="e22539" source="croix2015" target="jansson2007"/>
+    <edge id="e22540" source="magi2015" target="macane2001"/>
+    <edge id="e22541" source="magi2011" target="macane2001"/>
+    <edge id="e22542" source="toplak2015" target="vonamira1933"/>
+    <edge id="e22543" source="NOAUTHOR33" target="vonamira1933"/>
+    <edge id="e22544" source="sindbaek2007" target="pestell2003"/>
+    <edge id="e22545" source="sindbaek2017" target="pestell2003"/>
+    <edge id="e22546" source="andren2000" target="hanks1989"/>
+    <edge id="e22547" source="burstrom2014" target="knappett2008a"/>
+    <edge id="e22548" source="burstrom2014" target="rhiel1996"/>
+    <edge id="e22549" source="ljungkvist2015" target="dahlback1984"/>
+    <edge id="e22550" source="sindbaek2007" target="lundqvist1997a"/>
+    <edge id="e22551" source="roesdahlnd" target="jensen1995"/>
+    <edge id="e22552" source="oehrl2017" target="faulkes1998"/>
+    <edge id="e22553" source="lindholm2016" target="ingold1988"/>
+    <edge id="e22554" source="mulk2007" target="pahlsson1984"/>
+    <edge id="e22555" source="hartman2017" target="hauksson1972"/>
+    <edge id="e22556" source="milek2012" target="roberts2005"/>
+    <edge id="e22557" source="furholt2018" target="bickle2013a"/>
+    <edge id="e22558" source="anchukaitis2017" target="bjorklund2015"/>
+    <edge id="e22559" source="anchukaitis2017" target="bjorklund2014"/>
+    <edge id="e22560" source="krzewinska2018" target="ilumae2016"/>
+    <edge id="e22561" source="krzewinska2018" target="backstrom2016a"/>
+    <edge id="e22562" source="schmid2017" target="zoega2013"/>
+    <edge id="e22563" source="majchczack2018" target="mauritsen1982"/>
+    <edge id="e22564" source="buckberry2014" target="richards2000a"/>
+    <edge id="e22565" source="montgomery2014" target="richards2000a"/>
+    <edge id="e22566" source="raffield2014" target="richards2000a"/>
+    <edge id="e22567" source="price2008a" target="richards2000a"/>
+    <edge id="e22568" source="richards2018" target="richards2000a"/>
+    <edge id="e22569" source="hedenstiernajonson2017" target="gunther2015"/>
+    <edge id="e22570" source="krzewinska2018" target="gunther2015"/>
+    <edge id="e22571" source="kovalenko2013" target="blifeld1977a"/>
+    <edge id="e22572" source="raffield2018" target="blifeld1977a"/>
+    <edge id="e22573" source="skorokhod2020" target="blifeld1977a"/>
+    <edge id="e22574" source="christiansen2019" target="hellesolesen1992a"/>
+    <edge id="e22575" source="larsson2007" target="snorristurluson1997"/>
+    <edge id="e22576" source="leonard2011" target="rcahms2011"/>
+    <edge id="e22577" source="anchukaitis2017" target="harrison2016"/>
+    <edge id="e22578" source="roesdahlnd" target="mullermertens1999"/>
+    <edge id="e22579" source="steinforth2015" target="grahamcampbell1995a"/>
+    <edge id="e22580" source="sindbaek2016" target="rogerson1995"/>
+    <edge id="e22581" source="sindbaek2016" target="wademartins1980"/>
+    <edge id="e22582" source="sindbaek2016" target="williams1979"/>
+    <edge id="e22583" source="sindbaek2016" target="emery2007a"/>
+    <edge id="e22584" source="sindbaek2016" target="hall1989a"/>
+    <edge id="e22585" source="sindbaek2016" target="dodd2003"/>
+    <edge id="e22586" source="sindbaek2016" target="cunliffe1977"/>
+    <edge id="e22587" source="sindbaek2016" target="audouy2009"/>
+    <edge id="e22588" source="sindbaek2016" target="king1978"/>
+    <edge id="e22589" source="sindbaek2016" target="cabot2004a"/>
+    <edge id="e22590" source="sindbaek2016" target="carver1978"/>
+    <edge id="e22591" source="sindbaek2016" target="coggins1983"/>
+    <edge id="e22592" source="sindbaek2016" target="tylor2005"/>
+    <edge id="e22593" source="sindbaek2016" target="carver1981"/>
+    <edge id="e22594" source="sindbaek2016" target="mahony1982"/>
+    <edge id="e22595" source="sindbaek2016" target="gardiner1990"/>
+    <edge id="e22596" source="sindbaek2016" target="rogerson1984a"/>
+    <edge id="e22597" source="sindbaek2016" target="hurst1983"/>
+    <edge id="e22598" source="sindbaek2016" target="dalwood1992"/>
+    <edge id="e22599" source="sindbaek2016" target="mainman2000a"/>
+    <edge id="e22600" source="sindbaek2016" target="loveluck2007a"/>
+    <edge id="e22601" source="sindbaek2016" target="gould1967"/>
+    <edge id="e22602" source="sindbaek2007" target="schoknecht1977a"/>
+    <edge id="e22603" source="sindbaek2007" target="herrmann2005a"/>
+    <edge id="e22604" source="sindbaek2007" target="andersson1994"/>
+    <edge id="e22605" source="raffield2019" target="tacitus1999a"/>
   </graph>
 </graphml>

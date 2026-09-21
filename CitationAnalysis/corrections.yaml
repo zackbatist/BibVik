@@ -56926,3 +56926,10 @@
   note: Original merge target blifel1977 does not exist in the corpus (blifel1977a
     and blifel1977b are both already-deleted, titleless fragments) - no valid duplicate
     to merge into. Clearing cited_by directly since a merge cannot apply.
+- action: set
+  citekey: karpukhin2001a
+  field: cited_by
+  value: []
+  note: Sole citer puskina2017 is itself deleted, so this edge could never appear
+    in any export - clearing purely for internal consistency of the deleted-entry
+    bookkeeping.
