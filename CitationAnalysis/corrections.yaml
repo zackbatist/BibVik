@@ -59798,3 +59798,89 @@
   note: Adding price2014c as citer - recovered from the already-extracted reference
     list of the newly-created F1 entry, whose citations were processed by GROBID but
     never connected back as outgoing edges until now.
+- action: create
+  citekey: price2018a
+  entry:
+    title: 'Viking Phenomena: Current Archaeologies of the Early Medieval Scandinavians'
+    author:
+    - family: Price
+      given: Neil
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: The SAA Archaeological Record
+    volume: '18'
+    number: '3'
+    pages: 10-14
+  note: Created from Zotero seed library data. PDF header extraction pulled an internal
+    section heading (NEW HORIZONS IN THE ARCHAEOLOGY OF THE VIKING AGE) instead of
+    the real title, with no author or date. All fields taken from BibVik_seed.csv.
+- action: create
+  citekey: price2018b
+  entry:
+    title: Isotopes and human burials at Viking Age Birka and the Mälaren region,
+      east central Sweden
+    author:
+    - family: Price
+      given: T. Douglas
+    - family: Arcini
+      given: Caroline
+    - family: Gustin
+      given: Ingrid
+    - family: Drenzel
+      given: Leena
+    - family: Kalmring
+      given: Sven
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: Journal of Anthropological Archaeology
+    volume: '49'
+    pages: 19-38
+    doi: 10.1016/j.jaa.2017.10.002
+  note: Created from verified extraction header (correct title, author, month-level
+    date) plus Zotero for journal/volume/pages/DOI. Discovered during audit that the
+    existing price2018 entry is a different, unrelated paper (Tollense Valley Bronze
+    Age battlefield) - this is the real Viking-Age Price 2018 paper the annotation
+    was likely referring to.
+- action: create
+  citekey: price2018c
+  entry:
+    title: Polynesians of the Atlantic? Precedents, potentials, and pitfalls in Oceanic
+      analogies of the Vikings
+    author:
+    - family: Price
+      given: Neil
+    - family: Ljungkvist
+      given: John
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: Danish Journal of Archaeology
+    volume: '7'
+    number: '2'
+    pages: 133-138
+    doi: 10.1080/21662282.2018.1498567
+  note: Created from verified extraction header (correct title, authors, date) plus
+    Zotero for journal/volume/pages/DOI.
+- action: create
+  citekey: price2018d
+  entry:
+    title: 'Distant Vikings: A Manifesto'
+    author:
+    - family: Price
+      given: Neil
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: Acta Archaeologica
+    volume: '89'
+    number: '1'
+    pages: 113-132
+    doi: 10.1111/j.1600-0390.2018.12195.x
+  note: Created from verified extraction header (correct title, author, date) plus
+    Zotero for journal/volume/pages/DOI.

@@ -10,7 +10,6 @@ lund2021,ahola2014
 lund2021,ambrosiani2013
 ambrosiani2015,ambrosiani2013
 croix2015,ambrosiani2013
-price2018,ambrosiani2013
 vonholstein2014,ambrosiani2013
 warmlander2015,ambrosiani2013
 lund2021,ambrosiani2015
@@ -26,7 +25,6 @@ dobat2006,andersson2004
 gustafsson2011a,andersson2004
 larsson2007,andersson2004
 price2006,andersson2004
-price2018,andersson2004
 zachrisson2017,andersson2004
 lund2021,andersson2016
 fahlander2016,andersson2016
@@ -34,7 +32,6 @@ lund2021,andersson2008
 strand2011,andersson2008
 eriksen2013,andersson2008
 fabech2013,andersson2008
-price2018,andersson2008
 lund2021,andren2000
 andren2013a,andren2000
 lund2008,andren2000
@@ -458,7 +455,6 @@ fredriksen2014,fredriksen2014
 lund2021,frei2012
 frei2012,frei2012
 henriksen2017,frei2012
-price2018,frei2012
 price2014,frei2012
 price2012,frei2012
 lund2021,frieman2019
@@ -650,7 +646,6 @@ lund2016,hedeager2011
 price2014,hedeager2011
 osullivan2015,hedeager2011
 raffield2016,hedeager2011
-price2018,hedeager2011
 raffield2019,hedeager2011
 williams2016,hedeager2011
 moen2020,hedeager2011
@@ -737,7 +732,6 @@ carver2015,hodges2012
 croix2019,hodges2012
 gullbekk2014,hodges2012
 hilberg2018,hodges2012
-price2018,hodges2012
 sindbaek2017,hodges2012
 frei2015,hodges2012
 lund2021,holmquist2013
@@ -792,7 +786,6 @@ heenpettersen2019,jesch2015
 heenpettersen2018,jesch2015
 jackson2018,jesch2015
 price2019,jesch2015
-price2018,jesch2015
 raffield2018,jesch2015
 raffield2019,jesch2015
 sindbaek2017,jesch2015
@@ -844,13 +837,10 @@ lund2021,kalmring2010
 ashby2015,kalmring2010
 lund2021,kalmring2012
 jessen2016,kalmring2012
-price2018,kalmring2012
 lund2021,kalmring2018
 lund2021,kalmring2013
 hilberg2014,kalmring2013
-price2018,kalmring2013
 lund2021,kalmring2017
-price2018,kalmring2017
 lund2021,kastholmhansen2015
 lund2021,keller2016
 lund2021,kelly2015
@@ -902,7 +892,6 @@ hennius2018,larsson2007
 hedeager2010,larsson2007
 hillerdal2010,larsson2007
 kalmring2018,larsson2007
-price2018,larsson2007
 poulsen2011,larsson2007
 price2014a,larsson2007
 price2020,larsson2007
@@ -928,7 +917,6 @@ holst2013,ljungkvist2006
 lindholm2016,ljungkvist2006
 odeback2018,ljungkvist2006
 price2019,ljungkvist2006
-price2018,ljungkvist2006
 lund2021,ljungkvist2018
 lund2021,ljungkvist2015
 ellingsen2019,ljungkvist2015
@@ -995,7 +983,6 @@ lund2015,lund2009
 lund2013,lund2009
 lund2016,lund2009
 lund2017,lund2009
-price2018,lund2009
 spangen2009,lund2009
 skre2019,lund2009
 lund2021,lund2010
@@ -1053,7 +1040,6 @@ osullivan2015,mcleod2011
 moen2020,mcleod2011
 lund2021,mehler2015
 lund2021,melheim2016
-price2018,melheim2016
 lund2021,merkel2016
 hrnjic2018,merkel2016
 kalmring2018,merkel2016
@@ -1089,7 +1075,6 @@ lund2021,mulk2007
 lund2021,myhre2015
 bill2017,myhre2015
 raffield2016,myhre2015
-price2018,myhre2015
 raffield2019,myhre2015
 tonning2020,myhre2015
 skre2019,myhre2015
@@ -1272,7 +1257,6 @@ price2011,price2002
 price2019,price2002
 price2008a,price2002
 raffield2018,price2002
-price2018,price2002
 price2012,price2002
 raffield2019,price2002
 rosengren2010,price2002
@@ -1323,7 +1307,6 @@ odeback2018,price2010
 price2014a,price2010
 price2011,price2010
 price2019,price2010
-price2018,price2010
 raffield2018,price2010
 toplak2018,price2010
 zoega2017,price2010
@@ -1343,7 +1326,6 @@ williams2016,price2014
 lund2021,price2018
 carver2015,price2018
 krzewinska2018,price2018
-price2018,price2018
 price2020,price2018
 price2019,price2018
 reiter2019,price2018
@@ -1358,7 +1340,6 @@ frei2012,price2012
 henriksen2017,price2012
 krzewinska2018,price2012
 price2014,price2012
-price2018,price2012
 peschel2017,price2012
 price2020,price2012
 price2012,price2012
@@ -1370,7 +1351,6 @@ baug2019,price2016
 heenpettersen2019,price2016
 hedenstiernajonson2017,price2016
 hennius2018,price2016
-price2018,price2016
 odeback2018,price2016
 raffield2016,price2016
 price2020,price2016
@@ -1572,7 +1552,6 @@ ellingsen2019,skre2017
 loftsgarden2019,skre2017
 pilo2020,skre2017
 raffield2019,skre2017
-price2018,skre2017
 skre2017,skre2017
 lund2021,skre2019
 gullbekk2014,skre2019
@@ -1747,7 +1726,6 @@ hilberg2018,wickham2005
 holst2014,wickham2005
 holst2010,wickham2005
 poulsen2011,wickham2005
-price2018,wickham2005
 sindbaek2011,wickham2005
 sindbaek2017,wickham2005
 frei2015,wickham2005
@@ -1761,7 +1739,6 @@ hadley2018,williams2014
 harris2017,williams2014
 kershaw2017,williams2014
 lund2016,williams2014
-price2018,williams2014
 williams2016,williams2014
 lund2021,williams2015
 aannestad2018,williams2015
@@ -1888,7 +1865,6 @@ gustafsson2016,gustafsson2013
 lund2021,gustavsson2015
 hennius2018,gustavsson2015
 lund2021,gustin2017
-price2018,gustin2017
 lund2021,smith2013
 lund2017,smith2013
 lund2021,helmbrecht2012
@@ -1918,7 +1894,6 @@ helama2017,linderholm2008
 krzewinska2018,linderholm2008
 knudson2012,linderholm2008
 naumann2014,linderholm2008
-price2018,linderholm2008
 pollard2012,linderholm2008
 lund2021,lund2004
 androshchuk2010,lund2004
@@ -1967,7 +1942,6 @@ abrams2012,price2015
 gardela2018,price2015
 hedenstiernajonson2017,price2015
 krzewinska2018,price2015
-price2018,price2015
 raffield2016,price2015
 price2020,price2015
 price2019,price2015
@@ -1982,7 +1956,6 @@ lund2021,roesdahl2009
 lund2021,rosengren2010
 lund2021,roslund2005
 lund2021,roslund2017
-price2018,roslund2017
 lund2021,rundkvist2010
 christiansen2019,rundkvist2010
 heenpettersen2019,rundkvist2010
@@ -2045,7 +2018,6 @@ hedenstiernajonson2015,ambrosiani2001
 helmbrecht2012,ambrosiani2001
 ambrosiani2015,graslund1984
 lund2006,graslund1984
-price2018,graslund1984
 ambrosiani2015,hraundal2013
 raffield2018,hraundal2013
 warmlander2015,hraundal2013
@@ -2157,7 +2129,6 @@ hillerdal2010,gustin2004
 kalmring2010,gustin2004
 kershaw2017,gustin2004
 lund2006,gustin2004
-price2018,gustin2004
 roslund2015,gustin2004
 sindbaek2007,gustin2004
 roslund2017,gustin2004
@@ -2223,7 +2194,6 @@ aannestad2018,krag1994
 kershaw2009,krag1994
 aannestad2018,kristiansen2005
 glorstad2012,kristiansen2005
-price2018,kristiansen2005
 oye2016,kristiansen2005
 aannestad2018,maran2012
 croix2015,maran2012
@@ -2284,7 +2254,6 @@ lund2013,solli1995
 aannestad2018,thomas1991
 burstrom2014,thomas1991
 lund2017,thomas1991
-price2018,thomas1991
 aannestad2018,waller1982
 aannestad2018,wamers1985
 barrett2008,wamers1985
@@ -3033,7 +3002,6 @@ hedenstiernajonson2015,kjellstrom2012
 androshchuk2018,kjellstrom2013
 hedenstiernajonson2017,kjellstrom2013
 hedenstiernajonson2015,kjellstrom2013
-price2018,kjellstrom2013
 androshchuk2018,koktvedgaardzeiten1997
 christensen2013,koktvedgaardzeiten1997
 gardela2018,koktvedgaardzeiten1997
@@ -3055,7 +3023,6 @@ kristjansdottir2015,andren2007
 price2010,andren2007
 williams2014,andren2007
 andren2013,back2012
-price2018,back2012
 osullivan2015,back2012
 andren2013,bandmann1951
 andren2013,baudou1989
@@ -3085,7 +3052,6 @@ lund2005,fabech1991
 larsson2007,fabech1991
 lund2010,fabech1991
 magnell2010,fabech1991
-price2018,fabech1991
 andren2013,fehring1991
 andren2013a,fehring1991
 andren2013,gotfredsen1988
@@ -3206,7 +3172,6 @@ larsson2007,olsen1966
 lund2013,olsen1966
 lund2017,olsen1966
 pedersen2006,olsen1966
-price2018,olsen1966
 zoega2017,olsen1966
 andren2013,olsen1972
 andren2013,pedersen2006
@@ -3247,7 +3212,6 @@ kalmring2017,vikstrand2001
 magnell2010,vikstrand2001
 price2014,vikstrand2001
 myrberg2008,vikstrand2001
-price2018,vikstrand2001
 skre2019,vikstrand2001
 zachrisson2014a,vikstrand2001
 andren2013,devries1957
@@ -3489,7 +3453,6 @@ roesdahl2011,brink2008
 poulsen2011,brink2008
 raffield2019,brink2008
 price2019,brink2008
-price2018,brink2008
 sindbaek2014,brink2008
 sindbaek2013a,brink2008
 skre2019,brink2008
@@ -4061,7 +4024,6 @@ hennius2018,bately2007
 hilberg2014,bately2007
 lindholm2016,bately2007
 price2010,bately2007
-price2018,bately2007
 sindbaek2011,bately2007
 skre2019,bately2007
 sindbaek2017,bately2007
@@ -4140,7 +4102,6 @@ bill2017a,hodges1982
 croix2015,hodges1982
 carver2015,hodges1982
 gullbekk2014,hodges1982
-price2018,hodges1982
 sindbaek2007,hodges1982
 sindbaek2011,hodges1982
 wouters2016,hodges1982
@@ -4647,7 +4608,6 @@ sindbaek2007,hodges2006
 sindbaek2013a,hodges2006
 barrett2008,hodges1983
 barrett2010,hodges1983
-price2018,hodges1983
 tainter2006,hodges1983
 barrett2008,holm1986
 barrett2010,holm1986
@@ -4689,7 +4649,6 @@ carver2015,mccormick2001
 fontaine2017,mccormick2001
 hilberg2018,mccormick2001
 sindbaek2007,mccormick2001
-price2018,mccormick2001
 sindbaek2013a,mccormick2001
 sindbaek2018,mccormick2001
 sindbaek2011,mccormick2001
@@ -4939,7 +4898,6 @@ heenpettersen2019,sindbaek2005
 hilberg2014,sindbaek2005
 price2011,sindbaek2005
 sindbaek2007,sindbaek2005
-price2018,sindbaek2005
 skre2016,sindbaek2005
 svendsen2016,sindbaek2005
 sindbaek2011,sindbaek2005
@@ -5068,11 +5026,9 @@ grupe2013,ambrose1993
 linderholm2008,ambrose1993
 knudson2012,ambrose1993
 naumann2014,ambrose1993
-price2018,ambrose1993
 price2014,ambrose1993
 price2012,ambrose1993
 becker2012,ayliffe1990
-price2018,ayliffe1990
 becker2012,balasse2003
 becker2012,batey1998
 glorstad2012,batey1998
@@ -5167,7 +5123,6 @@ chenery2014,sjogren2009
 frei2012,sjogren2009
 krzewinska2018,sjogren2009
 knudson2012,sjogren2009
-price2018,sjogren2009
 nielsen2011,sjogren2009
 peschel2017,sjogren2009
 price2014,sjogren2009
@@ -6002,7 +5957,6 @@ skre2017,kilger2008
 skre2011b,kilger2008
 bill2017a,kleingartner2014
 hilberg2018,kleingartner2014
-price2018,kleingartner2014
 bill2017a,larsen2011
 tummuscheit2014,larsen2011
 oye2016,larsen2011
@@ -6475,7 +6429,6 @@ beck2018,komber1999
 tonning2020,komber1999
 beck2018,krieger1944
 beck2018,kristensen2015
-price2018,kristensen2015
 beck2018,lucas2014
 beck2018,lucas2016
 beck2018,martens2005
@@ -6564,7 +6517,6 @@ hillerdal2010,graslund1980
 linderholm2008,graslund1980
 kalmring2010,graslund1980
 kalmring2012,graslund1980
-price2018,graslund1980
 price2010,graslund1980
 price2019,graslund1980
 ulriksen2018,graslund1980
@@ -6597,7 +6549,6 @@ williams2014,carver2000
 borake2018,christensen2016
 kalmring2017,christensen2016
 tonning2020,christensen2016
-price2018,crumlinpedersen1991
 hillerdal2010,crumlinpedersen1997
 kalmring2010,crumlinpedersen1997
 roesdahl2011,crumlinpedersen1997
@@ -6614,7 +6565,6 @@ fredriksen2014,hedeager2000
 glorstad2012,hedeager2000
 larsson2007,hedeager2000
 odeback2018,hedeager2000
-price2018,hedeager2000
 dobat2013,helgesson2004
 fabech2013,helgesson2004
 mannering2013,helgesson2004
@@ -6906,7 +6856,6 @@ bill2016,nordland1951
 bill2016,price2013
 gardela2018,price2013
 price2014,price2013
-price2018,price2013
 price2014a,price2013
 price2020,price2013
 raffield2016,price2013
@@ -7056,7 +7005,6 @@ croix2021,richards2010
 raffield2016,richards2010
 croix2019,roesdahl1996
 croix2021,roesdahl1996
-price2018,roesdahl1996
 roesdahl2011,roesdahl1996
 sindbaek2011,roesdahl1996
 croix2019,roesdahl1992
@@ -7365,7 +7313,6 @@ borake2018,christensen2014
 borake2018,crumley1976
 borake2018,dam2015
 borake2018,earle2015
-price2018,earle2015
 borake2018,fabech1998
 christiansen2019,fabech1998
 lund2005,fabech1998
@@ -7435,7 +7382,6 @@ peschel2017,ericson1985
 buckberry2014,evans2006
 chenery2014,evans2006
 knudson2012,evans2006
-price2018,evans2006
 sindbaek2007,evans2006
 reiter2019,evans2006
 buckberry2014,evans2010
@@ -7919,7 +7865,6 @@ osullivan2015,osullivan2013
 carver2015,skre2012
 glorstad2015,skre2012
 krzewinska2018,skre2012
-price2018,skre2012
 carver2015,soderberg2004
 borake2018,christaller1968
 burstrom2015,arbman1943
@@ -7931,7 +7876,6 @@ linderholm2008,arbman1943
 kalmring2017,arbman1943
 kalmring2012,arbman1943
 lund2013,arbman1943
-price2018,arbman1943
 odeback2018,arbman1943
 price2006,arbman1943
 price2019,arbman1943
@@ -8057,7 +8001,6 @@ eriksen2017,eriksen2015
 eriksen2016,eriksen2015
 griffiths2019,eriksen2015
 raffield2018,eriksen2015
-price2018,eriksen2015
 williams2016,eriksen2015
 eriksen2017,gamble2007
 eriksen2017,gejvall1955
@@ -9434,7 +9377,6 @@ henriksen2017,nielsen2002
 jessen2016,nielsen2002
 rundkvist2010,nielsen2002
 sindbaek2007,nielsen2002
-price2018,aberg1995
 price2019,aberg1995
 knudson2012,blum2000
 price2012,blum2000
@@ -9445,7 +9387,6 @@ knudson2012,faure1986
 peschel2017,faure1986
 frei2012,frei2009
 henriksen2017,frei2009
-price2018,frei2009
 grupe2013,grupe1997
 gustafsson2011a,gustafsson2000
 gotfredsen2014,horwitz1992
@@ -9490,7 +9431,6 @@ lund2008,kristjansson2007
 gustin2017,kyhlberg1980
 linderholm2008,kyhlberg1980
 kalmring2017,kyhlberg1980
-price2018,kyhlberg1980
 skre2017,kyhlberg1980
 ulriksen2018,motz1996
 lund2008,price2005
@@ -9498,7 +9438,6 @@ knudson2012,price2005
 lund2017,price2005
 raffield2016,price2005
 price2014a,price2005
-price2018,price2005
 raffield2019,price2005
 hedeager2010,raudvere2003
 price2006,ringquist1969
@@ -9900,7 +9839,6 @@ frei2012,price2011
 gotfredsen2014,price2011
 gardela2015,price2011
 montgomery2014,price2011
-price2018,price2011
 peschel2017,price2011
 price2014,price2011
 lund2021,price2011
@@ -9908,7 +9846,6 @@ price2020,price2011
 price2012,price2011
 price2019,price2011
 reiter2019,price2011
-price2018,furholt2017
 reiter2019,knipper2017
 fischer2011,arrhenius1973
 gustafsson2011,arrhenius1973
@@ -10238,7 +10175,6 @@ hayeursmith2018a,gronnow2017
 hayeursmith2018a,hajdas2014
 hayeursmith2018a,harritt1995
 hayeursmith2018a,smith2012
-price2018,smith2012
 hayeursmith2018a,smith2014
 jackson2018,smith2014
 williams2016,smith2014
@@ -10594,21 +10530,17 @@ gustin2017,ginters1984
 gustin2017,gosden2001
 kristjansdottir2015,gosden2001
 gustin2017,gustin2010
-price2018,gustin2010
 gustin2017,gustin2015
-price2018,gustin2015
 gustin2017,hagerman2006
 gustin2017,hall1990
 henriksen2017,hall1990
 gustin2017,hall2010
 gustin2017,hardh1984
 kershaw2009,hardh1984
-price2018,hardh1984
 gustin2017,holmquistolausson1993
 hillerdal2010,holmquistolausson1993
 kalmring2017,holmquistolausson1993
 kalmring2012,holmquistolausson1993
-price2018,holmquistolausson1993
 odeback2018,holmquistolausson1993
 gustin2017,fuglesang1992
 lund2006,fuglesang1992
@@ -11156,7 +11088,6 @@ kalmring2012,arbman1939
 kalmring2017,arbman1939
 kalmring2018,arbman1939
 linderholm2008,arbman1939
-price2018,arbman1939
 price2019,arbman1939
 hilberg2016,asmus2012
 hilberg2016,bagge2009
@@ -11482,7 +11413,6 @@ imer2014,cour1951
 tummuscheit2019,cour1951
 imer2014,lerchenielse1993
 imer2014,lund2014
-price2018,lund2014
 imer2014,moltke1952
 imer2014,moltke1976
 imer2014,moltke1985
@@ -11533,7 +11463,6 @@ krzewinska2018,brothwell1981
 hedenstiernajonson2017,brotherton2007
 hedenstiernajonson2017,buikstra1994
 krzewinska2018,buikstra1994
-price2018,buikstra1994
 peschel2017,buikstra1994
 price2020,buikstra1994
 price2016,buikstra1994
@@ -11543,7 +11472,6 @@ hedenstiernajonson2017,durand2011
 krzewinska2018,durand2011
 hedenstiernajonson2017,eriksson2016
 krzewinska2018,eriksson2016
-price2018,eriksson2016
 hedenstiernajonson2017,gamba2014
 krzewinska2018,gamba2014
 star2017,gamba2014
@@ -11554,7 +11482,6 @@ hedenstiernajonson2017,helgessonarcini1996
 hedenstiernajonson2017,keller2012
 hedenstiernajonson2017,kircher2012
 krzewinska2018,kircher2012
-price2018,kircher2012
 hedenstiernajonson2017,lampa2013
 krzewinska2018,lampa2013
 hedenstiernajonson2017,lindstreurom2011
@@ -12136,7 +12063,6 @@ holst2014,besteman1999
 holst2014,bjork1957
 holst2014,brandt1996
 holst2014,brink1997
-price2018,brink1997
 skre2019,brink1997
 holst2014,carnapbornheim1996
 holst2014,egeberghansen1988
@@ -12342,7 +12268,6 @@ keller2016,thorarinsson1970
 sindbaek2014,almgren1955
 rundkvist2010,almgren1955
 linderholm2008,ambrosiani2002
-price2018,ambrosiani2002
 sindbaek2007,ambrosiani2002
 skre2011b,ambrosiani2002
 poulsen2011,anglert1999
@@ -12362,7 +12287,6 @@ sindbaek2011,metcalf1996
 roslund2015,noonan1984
 pedersen2009a,pedersen1999a
 kalmring2010,rispling2004
-price2018,rispling2004
 roslund2015,rispling2004
 lund2015,serning1956
 spangen2009,serning1956
@@ -12565,7 +12489,6 @@ krzewinska2018,maurer2012
 krzewinska2018,neumann1974
 krzewinska2018,asch2003
 krzewinska2018,lofvendahl1990
-price2018,lofvendahl1990
 price2012,lofvendahl1990
 price2019,lofvendahl1990
 krzewinska2018,hillson2005
@@ -12658,7 +12581,6 @@ linderholm2008,hedenstiernajonson2001
 linderholm2008,hedenstiernajonson2002
 linderholm2008,holmquistolausson1998
 kalmring2018,holmquistolausson1998
-price2018,holmquistolausson1998
 odeback2018,holmquistolausson1998
 price2019,holmquistolausson1998
 linderholm2008,liden1997
@@ -13233,7 +13155,6 @@ zori2013,magnusson1972
 kristjansdottir2015,nilsson1994
 zoega2017,nilsson1994
 kristjansdottir2015,nordeide2013
-price2018,nordeide2013
 kristjansdottir2015,prescott2011
 kristjansdottir2015,jones2003
 kristjansdottir2015,runarsdottir2006
@@ -13340,7 +13261,6 @@ lund2020,oebynielsen2005
 lund2010,oebynielsen2005
 kalmring2012,ambrosiani1982
 kalmring2012,arwidsson1984a
-price2018,arwidsson1984a
 price2019,arwidsson1984a
 kalmring2012,bengtzon2000
 kalmring2012,blomqvist2009
@@ -13660,7 +13580,6 @@ naumann2014,minagawa1984
 knudson2012,muldner2011
 reiter2019,muldner2011
 knudson2012,negrel2003
-price2018,negrel2003
 price2019,negrel2003
 knudson2012,nehlich2009
 reiter2019,nehlich2009
@@ -15122,7 +15041,6 @@ montgomery2014,woolf2005
 lund2021,pricenda
 price2014c,bagge1998
 price2014c,chenery2012
-price2018,chenery2012
 price2019,chenery2012
 price2020,chenery2012
 price2014c,harrison2003
@@ -15186,39 +15104,18 @@ magi2016,vassar1975
 magi2016,welinder2009
 magi2011,zarina2006
 magi2016,zarina2006
-price2018,aberg1990
 price2020,aberg1990
 price2019,aberg1990
-price2018,ambrosiani2005
 sindbaek2014,ambrosiani2005
-price2018,ambrosiani2016
-price2018,backstrom2016
 price2019,backstrom2016
-price2018,blauer2013
 price2019,blauer2013
-price2018,burgman1987
 price2020,burgman1987
 price2019,burgman1987
-price2018,fennomuyingo2000
-price2018,gustin2016
-price2018,harvig2014
-price2018,kaislaniem2011
 price2019,kaislaniem2011
-price2018,kalmring2016
-price2018,lama2015
-price2018,leciejewicz1956
-price2018,lightfoot2016
-price2018,nironen1997
 price2019,nironen1997
-price2018,pellegrini2016
-price2018,stolpendc
 kalmring2012,stolpendc
-price2018,tuross2017
-price2018,weihed2005
-price2018,wilhelmson2017
 price2020,wilhelmson2017
 price2019,wilhelmson2017
-price2018,yurtsever1980
 nosov2018,nepomniashchii2012
 nosov2018,gaidukov1994
 nosov2018,kuzmin1997
@@ -15344,7 +15241,6 @@ raffield2014,c2006b
 raffield2014,arbman1969
 raffield2014,blair1994
 raffield2014,brink2001
-price2018,brink2001
 raffield2014,cameron1988
 raffield2014,carver1988
 raffield2014,carver2001
@@ -16037,40 +15933,11 @@ rohdesloth2012,nielsen1990
 price2011,petersen1989
 price2011,roesdahl1975
 price2011,thordeman1939
-price2018,anderson2010
-price2018,bayman2013
-price2018,bentley2007
-price2018,brink2014
 zachrisson2017,brink2014
-price2018,buck1938
-price2018,erikson2015
-price2018,hauofa2008
-price2018,heyerdahl1938
-price2018,kane1997
-price2018,king2003
-price2018,kirch2010
-price2018,kirch2012
-price2018,kirch2014
-price2018,kirch2017
-price2018,kirch2007
 vesteinsson2012,kirch2007
-price2018,kirch1992
-price2018,ljungstrom2004
-price2018,ravn1993
-price2018,ravn2011
-price2018,ravn2018
-price2018,salmond2010
-price2018,schjodt2017
-price2018,smith2010
 raninen2014,smith2010
 williams2016,smith2010
-price2018,spriggs2008
-price2018,spriggs2016
-price2018,stolpendd
 kalmring2017,stolpendd
-price2018,thomas1997
-price2018,thomas2010
-price2018,wawn2000
 raffield2018,wawn2000
 raffield2019,wawn2000
 sindbaek2013a,wawn2000
@@ -16368,32 +16235,6 @@ roslund2005,moreland1991
 roslund2005,sorensen1989
 roslund2005,verhaeghe1994
 roslund2005,wiessner1939
-price2018,desha2000
-price2018,honolulu1991
-price2018,dining1980
-price2018,athens2017
-price2018,oxfordroutledge2016
-price2018,graeber2017
-price2018,redknap2004b
-price2018,amkreutz2004
-price2018,lewis1972
-price2018,mattes2016
-price2018,mattes2008
-price2018,comacchio1983
-price2018,whitehouse1983
-price2018,hooper2006
-price2018,kirch1985
-price2018,kristiansen1998
-price2018,space2015
-price2018,rainbird2015
-price2018,ratnagar2001
-price2018,jp2010
-price2018,sherratt1993
-price2018,clark2008
-price2018,valeri1985
-price2018,malarlandskapen1993
-price2018,wallin1993
-price2018,westerdahl1992
 sindbaek2014,jankuhn1975
 sindbaek2014,ramskou1999
 sindbaek2014,rundkvist2001
@@ -16541,7 +16382,6 @@ rundkvist2010,tillvaxten1909
 rundkvist2010,vangpetersen1991b
 rundkvist2010,vedelnda
 rundkvist2010,worsaaenda
-price2018,hermann2017
 stene2017,bagge2010
 rohdesloth2012,hansen1977
 star2017,lie1988
@@ -18674,7 +18514,6 @@ sindbaek2014,ambrosiani1996a
 sindbaek2014,plather2011
 kalmring2018,ljungkvist2008a
 price2014a,ljungkvist2008a
-price2018,ljungkvist2008a
 kalmring2018,steuer2002a
 kalmring2018,pedersen2014a
 raffield2019,pedersen2014a
@@ -18694,7 +18533,6 @@ majchczack2018,segschneider2016
 griffiths2019,harrison2014a
 heenpettersen2018,harrison2014a
 montgomery2014,harrison2014a
-price2018,vanderlinden2016a
 boyd2013,waltonrogers1997b
 price2019,price2019a
 milek2012,simms1998
@@ -18767,7 +18605,6 @@ macphail2013,kitzlerahfeldt2013
 majchczack2018,kitzlerahfeldt2013
 montgomery2014,kitzlerahfeldt2013
 naum2007,kitzlerahfeldt2013
-price2018,kitzlerahfeldt2013
 magi2011,kitzlerahfeldt2013
 raffield2014,kitzlerahfeldt2013
 perry2019,kitzlerahfeldt2013
@@ -18916,7 +18753,6 @@ kalmring2017,ambrosiani1994a
 kalmring2017,goodman2013a
 kalmring2017,holmquist2015
 kalmring2018,holmquist2015
-price2018,holmquist2015
 kalmring2017,jeppesen1988
 kalmring2017,risberg1997
 kalmring2017,vickers1975

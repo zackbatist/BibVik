@@ -151547,28 +151547,64 @@
       <data key="d8">11</data>
       <data key="d9">false</data>
     </node>
-    <node id="skorokhod2020">
-      <data key="d0">Staraya Ladoga in northwestern Russia</data>
-      <data key="d1">2020</data>
+    <node id="price2018a">
+      <data key="d0">Viking Phenomena: Current Archaeologies of the Early Medieval Scandinavians</data>
+      <data key="d1">2018</data>
       <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4">Skorokhod A.</data>
+      <data key="d3">article</data>
+      <data key="d4">Price Neil</data>
       <data key="d5"/>
-      <data key="d6">0.75</data>
+      <data key="d6"/>
       <data key="d7">0</data>
-      <data key="d8">9</data>
-      <data key="d9">true</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
     </node>
-    <node id="NOAUTHOR28">
-      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
-      <data key="d1"/>
+    <node id="price2018b">
+      <data key="d0">Isotopes and human burials at Viking Age Birka and the Mälaren region, east central Sweden</data>
+      <data key="d1">2018</data>
       <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
+      <data key="d3">article</data>
+      <data key="d4">Price T. Douglas</data>
+      <data key="d5">10.1016/j.jaa.2017.10.002</data>
+      <data key="d6"/>
       <data key="d7">0</data>
-      <data key="d8">193</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="price2018c">
+      <data key="d0">Polynesians of the Atlantic? Precedents, potentials, and pitfalls in Oceanic analogies of the Vikings</data>
+      <data key="d1">2018</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Price Neil</data>
+      <data key="d5">10.1080/21662282.2018.1498567</data>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="price2018d">
+      <data key="d0">Distant Vikings: A Manifesto</data>
+      <data key="d1">2018</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Price Neil</data>
+      <data key="d5">10.1111/j.1600-0390.2018.12195.x</data>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="ahfeldt2015">
+      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
+      <data key="d1">2015</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Åhfeldt L Kitzler</data>
+      <data key="d5">10.1515/9783110417685-014</data>
+      <data key="d6">0.917</data>
+      <data key="d7">0</data>
+      <data key="d8">86</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR18">
@@ -151583,20 +151619,8 @@
       <data key="d8">21</data>
       <data key="d9">true</data>
     </node>
-    <node id="ahfeldt2015">
-      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
-      <data key="d1">2015</data>
-      <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Åhfeldt L Kitzler</data>
-      <data key="d5">10.1515/9783110417685-014</data>
-      <data key="d6">0.917</data>
-      <data key="d7">0</data>
-      <data key="d8">86</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR33">
-      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
+    <node id="NOAUTHOR28">
+      <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
       <data key="d1"/>
       <data key="d2">F1</data>
       <data key="d3">misc</data>
@@ -151604,7 +151628,7 @@
       <data key="d5"/>
       <data key="d6">0.25</data>
       <data key="d7">0</data>
-      <data key="d8">45</data>
+      <data key="d8">193</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR21">
@@ -151617,6 +151641,30 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">14</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="skorokhod2020">
+      <data key="d0">Staraya Ladoga in northwestern Russia</data>
+      <data key="d1">2020</data>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4">Skorokhod A.</data>
+      <data key="d5"/>
+      <data key="d6">0.75</data>
+      <data key="d7">0</data>
+      <data key="d8">9</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="NOAUTHOR33">
+      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">0</data>
+      <data key="d8">45</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="lund2021" target="aannestad2015"/>
