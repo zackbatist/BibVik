@@ -13783,7 +13783,7 @@
   field: cited_by
   value:
   - gotfredsen2014
-  - smith2018
+  - hayeursmith2018a
   - heenpettersen2019
   - goodchild2017
   - henriksen2014
@@ -13802,7 +13802,7 @@
   - halstadmcguire2010
   - gardeland
   - gullbekk2014
-  - smith2018
+  - hayeursmith2018a
   - gustin2017
   - graslundnd
   - hadley2016
@@ -17600,7 +17600,7 @@
   - halstadmcguire2010
   - gardeland
   - gullbekk2014
-  - smith2018
+  - hayeursmith2018a
   - gustin2017
   - graslundnd
   - hadley2016
@@ -40127,7 +40127,7 @@
   - halstadmcguire2010
   - gardeland
   - gullbekk2014
-  - smith2018
+  - hayeursmith2018a
   - gustin2017
   - graslundnd
   - hadley2016
@@ -47712,7 +47712,7 @@
   - halstadmcguire2010
   - gardeland
   - gullbekk2014
-  - smith2018
+  - hayeursmith2018a
   - gustin2017
   - graslundnd
   - hadley2016
@@ -56790,7 +56790,7 @@
   - halstadmcguire2010
   - gardeland
   - gullbekk2014
-  - smith2018
+  - hayeursmith2018a
   - gustin2017
   - graslundnd
   - hadley2016
@@ -56941,3 +56941,12 @@
     own citations extracted). kitzlerahfeld2015a (F2) was correctly identified as
     the real citer here, but F2-to-F2 citation edges are outside the pipelines scope
     - clearing to maintain the F1-only-source invariant.
+- action: set
+  citekey: hayeursmith2018a
+  field: cited_by
+  value:
+  - lund2021
+  note: Restoring cited_by after tonight rename-chain error. hayeursmith2018a is the
+    correct, widely-referenced citekey for this paper (Hayeur Smith et al. 2018) across
+    ~100 other entries citer lists. Its own cited_by (who cites it) is lund2021, per
+    the original smith2018 extraction.
