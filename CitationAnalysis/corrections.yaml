@@ -56950,3 +56950,551 @@
     correct, widely-referenced citekey for this paper (Hayeur Smith et al. 2018) across
     ~100 other entries citer lists. Its own cited_by (who cites it) is lund2021, per
     the original smith2018 extraction.
+- action: set
+  citekey: arwillnordbladhnd
+  field: year
+  value: '2013'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: arwillnordbladhnd
+  field: date
+  value: '2013'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: arwillnordbladhnd
+  field: author
+  value:
+  - family: Arwill-Nordbladh
+    given: Elisabeth
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: andrennd
+  field: year
+  value: '2013'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: andrennd
+  field: date
+  value: '2013'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: andrennd
+  field: author
+  value:
+  - family: Andrén
+    given: Anders
+    affiliation:
+      institution: Stockholm University
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: billnd
+  field: year
+  value: '2017'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: billnd
+  field: date
+  value: '2017'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: billnd
+  field: author
+  value:
+  - family: Bill
+    given: Jan
+  - family: Rødsrud
+    given: Christian Løchsen
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: cannellnd
+  field: year
+  value: '2016'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: cannellnd
+  field: date
+  value: '2016'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: cannellnd
+  field: author
+  value:
+  - family: Cannell
+    given: Rebecca J S
+  - family: Cheetham
+    given: Paul N
+  - family: Welham
+    given: Kate
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: gardeland
+  field: year
+  value: '2014'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: gardeland
+  field: date
+  value: '2014'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: gardeland
+  field: author
+  value:
+  - family: Gardela
+    given: Leszek
+    affiliation:
+      department: Institute of Archaeology
+      institution: University of Rzeszo6w
+      country: POLAND
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: gustafssonnd
+  field: year
+  value: '2011'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: gustafssonnd
+  field: date
+  value: '2011'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: gustafssonnd
+  field: author
+  value:
+  - family: Gustafsson
+    given: Ny Björn
+    affiliation:
+      department: Department of Archaeology and Classical Studies
+      laboratory: Archaeological Research Laboratory
+      institution: Stockholm University
+      settlement: Wallenberglaboratoriet Stockholm
+      country: Sweden
+      postCode: SE-106 91
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: graslundnd
+  field: year
+  value: '2011'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: graslundnd
+  field: date
+  value: '2011'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: graslundnd
+  field: author
+  value:
+  - family: Gräslund
+    given: Anne-Sofie
+  - family: Ljungkvist
+    given: John
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: hardhnd
+  field: year
+  value: '2010'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: hardhnd
+  field: date
+  value: '2010'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: hardhnd
+  field: author
+  value:
+  - family: Hårdh
+    given: Birgitta
+    affiliation:
+      department: Department of Archaeology and Ancient History
+      institution: University of Lund
+      settlement: Lund
+      postCode: SE-223 50
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: iversennd
+  field: year
+  value: '2015'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: iversennd
+  field: date
+  value: '2015'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: iversennd
+  field: author
+  value:
+  - family: Iversen
+    given: Frode
+    affiliation:
+      department: Museum of Cultural History
+      institution: University of Oslo
+      settlement: Oslo
+      country: Norway;
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: olend
+  field: year
+  value: '2015'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: olend
+  field: date
+  value: '2015'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: olend
+  field: author
+  value:
+  - family: Ole
+    given: Af
+  - family: Kastholm
+    given: Thirup
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: jorgensennd
+  field: year
+  value: '2009'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: jorgensennd
+  field: date
+  value: '2009'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: jorgensennd
+  field: author
+  value:
+  - family: Jørgensen
+    given: Lars
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: lundborgnd
+  field: year
+  value: '2006'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: lundborgnd
+  field: date
+  value: '2006'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: lundborgnd
+  field: author
+  value:
+  - family: Lundborg
+    given: Maria Domeij
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: pedersennd
+  field: year
+  value: '2009'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: pedersennd
+  field: date
+  value: '2009'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: pedersennd
+  field: author
+  value:
+  - family: Pedersen
+    given: Anne
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: lynnerupnd
+  field: year
+  value: '2014'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: lynnerupnd
+  field: date
+  value: '2014'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: lynnerupnd
+  field: author
+  value:
+  - family: Lynnerup
+    given: Niels
+    affiliation:
+      laboratory: Laboratory of Biological Anthropology
+      institution: The Panum Institute
+      settlement: Copenhagen
+      country: Denmark;
+      postCode: DK-2200 N
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: pricend
+  field: year
+  value: '2005'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: pricend
+  field: date
+  value: '2005'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: pricend
+  field: author
+  value:
+  - family: Price
+    given: N. S.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: pluskowskind
+  field: year
+  value: '2010'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: pluskowskind
+  field: date
+  value: '2010'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: pluskowskind
+  field: author
+  value:
+  - family: Pluskowski
+    given: Aleks
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: skrend
+  field: year
+  value: '2011'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: skrend
+  field: date
+  value: '2011'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: skrend
+  field: author
+  value:
+  - family: Skre
+    given: Dagfinn
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: thend
+  field: year
+  value: '2017'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: thend
+  field: date
+  value: '2017'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: thend
+  field: author
+  value:
+  - family: The
+    given: West-Scandinavian
+  - family: Case
+    given: ''
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: sanmarknd
+  field: year
+  value: '2008'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: sanmarknd
+  field: date
+  value: '2008'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: sanmarknd
+  field: author
+  value:
+  - family: Sanmark
+    given: Alexandra
+  - family: Semple
+    given: Sarah
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: spangennd
+  field: year
+  value: '2009'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: spangennd
+  field: date
+  value: '2009'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: spangennd
+  field: author
+  value:
+  - family: Spangen
+    given: Marte
+    affiliation:
+      institution: The Museum of Cultural History
+      settlement: Oslo
+      country: Norway
+      postCode: N-0130
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: sheehannd
+  field: year
+  value: '2013'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: sheehannd
+  field: date
+  value: '2013'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: sheehannd
+  field: author
+  value:
+  - family: Sheehan
+    given: John
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: sindbaeknd
+  field: year
+  value: '2013'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: sindbaeknd
+  field: date
+  value: '2013'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: sindbaeknd
+  field: author
+  value:
+  - family: Sindbaek
+    given: Søren M.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: staeckernd
+  field: year
+  value: '2004'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: staeckernd
+  field: date
+  value: '2004'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: staeckernd
+  field: author
+  value:
+  - family: Staecker
+    given: Jörn
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: vesteinssonnd
+  field: year
+  value: '2014'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: vesteinssonnd
+  field: date
+  value: '2014'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: vesteinssonnd
+  field: author
+  value:
+  - family: Vésteinsson
+    given: Orri
+  - family: Church
+    given: Mike J.
+    affiliation:
+      department: CuNY. Department of Anthropology and Northern Science and Education
+        Center research
+      institution: ^ university of Edinburgh
+  - family: Dugmoret
+    given: Andrew
+  - family: Mcgovern°a
+    given: Homas H
+  - family: Newtonĵ
+    given: Nthony
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: zachrissonnd
+  field: year
+  value: '2014'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: zachrissonnd
+  field: date
+  value: '2014'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: zachrissonnd
+  field: author
+  value:
+  - family: Zachrisson
+    given: Torun
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: tummuscheitnd
+  field: year
+  value: '2019'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: tummuscheitnd
+  field: date
+  value: '2019'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: tummuscheitnd
+  field: author
+  value:
+  - family: Tummuscheit
+    given: Astrid
+  - family: Witte
+    given: Frauke
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: set
+  citekey: roesdahlnd
+  field: year
+  value: '2011'
+  note: Recovered publication year from source PDF filename.
+- action: set
+  citekey: roesdahlnd
+  field: date
+  value: '2011'
+  note: Recovered publication date from source PDF filename.
+- action: set
+  citekey: roesdahlnd
+  field: author
+  value:
+  - family: Roesdahl
+    given: E.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
