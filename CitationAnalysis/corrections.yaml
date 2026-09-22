@@ -57695,3 +57695,34 @@
     trace under any name variant. This entry has no citations of its own extracted
     (no source PDF to process), unlike the other create corrections tonight where
     the PDF was processed but the self-entry failed.
+- action: set
+  citekey: hilberg2016
+  field: _source_pdf
+  value: Hilberg et al  2016 - Hedeby’s Demise in the Late Viking Age and the Shift
+    to Schleswig.pdf
+  note: Linking the created entry to its actual, already-processed source PDF (confirmed
+    present in _graph_state.json processed_papers) - omitted when the entry was first
+    created.
+- action: set
+  citekey: ravn2019
+  field: _source_pdf
+  value: Ravn et al  2019 - Erritsø - new investigations of an aristocratic, early
+    Viking Age manor in Western Denmark c. 700-85.pdf
+  note: Linking the created entry to its actual, already-processed source PDF (confirmed
+    present in _graph_state.json processed_papers) - omitted when the entry was first
+    created.
+- action: set
+  citekey: magi2016
+  field: _source_pdf
+  value: Mägi 2016 - Bound for the Eastern Baltic Trade and Centres AD 800–1200.pdf
+  note: Linking the created entry to its actual, already-processed source PDF (confirmed
+    present in _graph_state.json processed_papers) - omitted when the entry was first
+    created.
+- action: set
+  citekey: croix2021
+  field: _source_pdf
+  value: Croix and IJssennagger-van derPluijm 2021 - Cultures without borders Approaching
+    the cultural continuum in the Danish-Frisian coastal areas in.pdf
+  note: Linking the created entry to its actual, already-processed source PDF (confirmed
+    present in _graph_state.json processed_papers) - omitted when the entry was first
+    created.
