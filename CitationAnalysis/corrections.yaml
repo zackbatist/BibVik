@@ -3125,7 +3125,7 @@
   - croix2019
   - christiansen2019
   - gustin2017
-  - hardhnd
+  - hardh2010a
   - kalmring2010
   - kershaw2009
   - kalmring2018
@@ -3151,7 +3151,7 @@
   - gardela2018
   - hedenstiernajonson2015
   - jagodzinski2014
-  - hardhnd
+  - hardh2010a
   - kalmring2010
   - linderholm2008
   - kershaw2009
@@ -3178,7 +3178,7 @@
   value:
   - ambrosiani2015
   - gustin2017
-  - hardhnd
+  - hardh2010a
   - kovalenko2013
   - roslund2017
   - warmlander2015
@@ -3193,7 +3193,7 @@
   value:
   - abrams2012
   - croix2015
-  - gustafssonnd
+  - gustafsson2011a
   - harrison2015
   - ijssennagger2013
   - kershaw2009
@@ -3240,8 +3240,8 @@
   - fabech2013
   - croix2019
   - gardela2018
-  - gustafssonnd
-  - hardhnd
+  - gustafsson2011a
+  - hardh2010a
   - lund2020
   - osullivan2015
   - rundkvist2010
@@ -3267,7 +3267,7 @@
   citekey: callmer1977
   field: cited_by
   value:
-  - billnd
+  - bill2017a
   - glorstad2017
   - heenpettersen2019
   - gustin2017
@@ -3290,14 +3290,14 @@
   - glorstad2012
   - hrnjic2018
   - ijssennagger2015
-  - hardhnd
+  - hardh2010a
   - kershaw2018
   - ingvardson2012
   - NOAUTHOR18
   - pedersen2017
   - raninen2014
-  - skrend
-  - spangennd
+  - skre2011
+  - spangen2009
   - sindbaek2011
   - skre2017
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
@@ -3328,7 +3328,7 @@
   - NOAUTHOR8
   - gardela2018
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hedenstiernajonson2017
   - hedenstiernajonson2015
   - hillerdal2010
@@ -3378,7 +3378,7 @@
   value:
   - christiansen2019
   - glorstad2015
-  - graslundnd
+  - graslund2011
   - rundkvist2010
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
@@ -3435,7 +3435,7 @@
   - pedersen2017
   - axelsen2014
   - rundkvist2010
-  - spangennd
+  - spangen2009
   - sindbaeknda
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
@@ -3460,7 +3460,7 @@
   - furholt2018
   - furholt2019
   - hillerdal2010
-  - hardhnd
+  - hardh2010a
   - pedersen2015
   - axelsen2014
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
@@ -3484,11 +3484,11 @@
   value:
   - gardela2018
   - gullbekk2014
-  - hardhnd
+  - hardh2010a
   - ingvardson2012
   - lund2008
   - pedersennda
-  - spangennd
+  - spangen2009
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -3499,7 +3499,7 @@
   field: cited_by
   value:
   - gardela2018
-  - spangennd
+  - spangen2009
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -3513,7 +3513,7 @@
   - price2020
   - price2016
   - rundkvist2010
-  - spangennd
+  - spangen2009
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -3609,11 +3609,11 @@
   citekey: serning1956
   field: cited_by
   value:
-  - hardhnd
+  - hardh2010a
   - lund2015
   - pedersennda
   - axelsen2014
-  - spangennd
+  - spangen2009
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -9243,7 +9243,7 @@
   citekey: muller1987
   field: cited_by
   value:
-  - sheehannd
+  - sheehan2013a
   - ulriksen2018
   - toplak2018
   - NOAUTHOR36
@@ -9626,7 +9626,7 @@
   citekey: nosov1992
   field: cited_by
   value:
-  - spangennd
+  - spangen2009
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -9654,7 +9654,7 @@
   citekey: nosov2001
   field: cited_by
   value:
-  - sindbaeknd
+  - sindbaek2013a
   note: Removing pushkina2017 from cited_by. pushkina2017 (deleted, kept as ghost
     node for edge preservation) absorbed the entire shared bibliography of its 20-author
     source volume rather than its own chapters real, much smaller reference list -
@@ -13458,7 +13458,7 @@
   - baug2017
   - carver2015
   - croix2019
-  - downham2015
+  - downham2016
   - glorstad2017
   - hennius2018
   - holst2014
@@ -13475,9 +13475,9 @@
   - raninen2014
   - sindbaek2014
   - svendsen2016
-  - sindbaeknd
+  - sindbaek2013a
   - NOAUTHOR28
-  - skre2015
+  - skre2016
   - knappett2025
   - vonholstein2014
   - sindbaeknda
@@ -13493,7 +13493,7 @@
   value:
   - lund2021
   - tummuscheit2014
-  - tummuscheitnd
+  - tummuscheit2019
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
     incorrectly attributed to this one 10-page chapter).
@@ -13513,7 +13513,7 @@
   - lund2010
   - lund2006
   - lund2017
-  - spangennd
+  - spangen2009
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
     incorrectly attributed to this one 10-page chapter).
@@ -13584,7 +13584,7 @@
   field: cited_by
   value:
   - baastrup2014
-  - hardhnd
+  - hardh2010a
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
     incorrectly attributed to this one 10-page chapter).
@@ -13608,8 +13608,8 @@
   - lemm2014
   - majchczack2018
   - sindbaek2007
-  - skrend
-  - thend
+  - skre2011
+  - the2017
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
     incorrectly attributed to this one 10-page chapter).
@@ -13671,11 +13671,11 @@
   citekey: steuer1997
   field: cited_by
   value:
-  - billnd
+  - bill2017a
   - hilberg2013
   - heenpettersen2014
   - jagodzinski2014
-  - hardhnd
+  - hardh2010a
   - lemm2014
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
@@ -13773,7 +13773,7 @@
   value:
   - furholt2018
   - furholt2019
-  - sheehannd
+  - sheehan2013a
   - NOAUTHOR28
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
@@ -13800,11 +13800,11 @@
   field: cited_by
   value:
   - halstadmcguire2010
-  - gardeland
+  - gardela2014a
   - gullbekk2014
   - hayeursmith2018a
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hadley2016
   - hartman2017
   - imer2014
@@ -13819,7 +13819,7 @@
   - ingvardson2012
   - linderholm2008
   - jackson2018
-  - jorgensennd
+  - jorgensen2009a
   - kemmers2011
   - lund2020
   - kovalenko2013
@@ -13838,13 +13838,13 @@
   - lund2019
   - lund2006
   - mainland2018
-  - pedersennd
+  - pedersen2009a
   - magnell2010
   - lund2017
   - lund2016
   - pedersen2015
   - mcleod2011
-  - lynnerupnd
+  - lynnerup2014a
   - pilo2018
   - milek2012
   - macphail2013
@@ -13873,7 +13873,7 @@
   - sindbaek2014
   - price2012
   - price2019
-  - sheehannd
+  - sheehan2013a
   - raffield2015
   - roslund2017
   - raja2018
@@ -13886,12 +13886,12 @@
   - solli2011
   - skre2011b
   - stott2019
-  - vesteinssonnd
+  - vesteinsson2014a
   - svendsen2019
   - star2017
   - williams2015
   - tainter2006
-  - tummuscheitnd
+  - tummuscheit2019
   - oye2014
   - NOAUTHOR36
   - williams2016
@@ -14118,7 +14118,7 @@
   citekey: hoffman1990
   field: cited_by
   value:
-  - sanmarknd
+  - sanmark2008a
   note: Removing sovso2014a from cited_by - not a real citation edge. See sovso2014a
     own delete-correction note for full explanation (shared exhibition-catalogue bibliography
     incorrectly attributed to this one 10-page chapter).
@@ -17532,7 +17532,7 @@
   - gardela2018
   - hedenstiernajonson2015
   - jagodzinski2014
-  - hardhnd
+  - hardh2010a
   - kalmring2010
   - linderholm2008
   - kershaw2009
@@ -17559,8 +17559,8 @@
   - fabech2013
   - croix2019
   - gardela2018
-  - gustafssonnd
-  - hardhnd
+  - gustafsson2011a
+  - hardh2010a
   - lund2020
   - osullivan2015
   - rundkvist2010
@@ -17576,7 +17576,7 @@
   - edberg2019
   - gardela2018
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hedenstiernajonson2017
   - hedenstiernajonson2015
   - hillerdal2010
@@ -17598,11 +17598,11 @@
   field: cited_by
   value:
   - halstadmcguire2010
-  - gardeland
+  - gardela2014a
   - gullbekk2014
   - hayeursmith2018a
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hadley2016
   - hartman2017
   - imer2014
@@ -17617,7 +17617,7 @@
   - ingvardson2012
   - linderholm2008
   - jackson2018
-  - jorgensennd
+  - jorgensen2009a
   - kemmers2011
   - lund2020
   - kovalenko2013
@@ -17635,13 +17635,13 @@
   - lund2019
   - lund2006
   - mainland2018
-  - pedersennd
+  - pedersen2009a
   - magnell2010
   - lund2017
   - lund2016
   - pedersen2015
   - mcleod2011
-  - lynnerupnd
+  - lynnerup2014a
   - pilo2018
   - milek2012
   - macphail2013
@@ -17670,7 +17670,7 @@
   - sindbaek2014
   - price2012
   - price2019
-  - sheehannd
+  - sheehan2013a
   - raffield2015
   - roslund2017
   - raja2018
@@ -17683,12 +17683,12 @@
   - solli2011
   - skre2011b
   - stott2019
-  - vesteinssonnd
+  - vesteinsson2014a
   - svendsen2019
   - star2017
   - williams2015
   - tainter2006
-  - tummuscheitnd
+  - tummuscheit2019
   - oye2014
   - williams2016
   - ahfeldt2013
@@ -17701,7 +17701,7 @@
   citekey: muller1987
   field: cited_by
   value:
-  - sheehannd
+  - sheehan2013a
   - ulriksen2018
   - toplak2018
   note: Stripped stale pre-rename citekeys ['NOAUTHOR36'] from cited_by — these citekeys
@@ -18210,7 +18210,7 @@
   field: cited_by
   value:
   - toplak2018
-  - gardeland
+  - gardela2014a
   - price2014
   note: Merged cited_by from the duplicate cf2008 entry (price2014) into the surviving
     entry.
@@ -33165,7 +33165,7 @@
   citekey: mannerfelt1936
   field: cited_by
   value:
-  - sanmarknd
+  - sanmark2008a
   note: Repointing to sanmarknd, the correct existing F1 entry for this source PDF,
     missed earlier due to its non-standard citekey pattern.
 - action: set
@@ -40071,11 +40071,11 @@
   - lund2005
   - lund2015
   - lund2013
-  - lundborgnd
+  - lundborg2006a
   - lund2010
   - lund2017
   - raffield2014
-  - spangennd
+  - spangen2009
   - zachrisson2017
   - zachrisson2004a
   note: Removing a stale citer reference to a placeholder entry already deleted in
@@ -40089,10 +40089,10 @@
   - gardela2018
   - ijssennagger2015
   - ingvardson2012
-  - pedersennd
+  - pedersen2009a
   - lund2017
   - runge2018
-  - spangennd
+  - spangen2009
   note: Removing a stale citer reference to a placeholder entry already deleted in
     a prior session as a non-citation extraction artifact. This entry has other real,
     valid citers.
@@ -40125,11 +40125,11 @@
   field: cited_by
   value:
   - halstadmcguire2010
-  - gardeland
+  - gardela2014a
   - gullbekk2014
   - hayeursmith2018a
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hadley2016
   - hartman2017
   - imer2014
@@ -40144,7 +40144,7 @@
   - ingvardson2012
   - linderholm2008
   - jackson2018
-  - jorgensennd
+  - jorgensen2009a
   - kemmers2011
   - lund2020
   - kovalenko2013
@@ -40162,13 +40162,13 @@
   - lund2019
   - lund2006
   - mainland2018
-  - pedersennd
+  - pedersen2009a
   - magnell2010
   - lund2017
   - lund2016
   - pedersen2015
   - mcleod2011
-  - lynnerupnd
+  - lynnerup2014a
   - pilo2018
   - milek2012
   - macphail2013
@@ -40197,7 +40197,7 @@
   - sindbaek2014
   - price2012
   - price2019
-  - sheehannd
+  - sheehan2013a
   - raffield2015
   - roslund2017
   - raja2018
@@ -40210,12 +40210,12 @@
   - solli2011
   - skre2011b
   - stott2019
-  - vesteinssonnd
+  - vesteinsson2014a
   - svendsen2019
   - star2017
   - williams2015
   - tainter2006
-  - tummuscheitnd
+  - tummuscheit2019
   - oye2014
   - williams2016
   - ahfeldt2013
@@ -47710,11 +47710,11 @@
   field: cited_by
   value:
   - halstadmcguire2010
-  - gardeland
+  - gardela2014a
   - gullbekk2014
   - hayeursmith2018a
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hadley2016
   - hartman2017
   - imer2014
@@ -47729,7 +47729,7 @@
   - ingvardson2012
   - linderholm2008
   - jackson2018
-  - jorgensennd
+  - jorgensen2009a
   - kemmers2011
   - lund2020
   - kovalenko2013
@@ -47747,13 +47747,13 @@
   - lund2019
   - lund2006
   - mainland2018
-  - pedersennd
+  - pedersen2009a
   - magnell2010
   - lund2017
   - lund2016
   - pedersen2015
   - mcleod2011
-  - lynnerupnd
+  - lynnerup2014a
   - pilo2018
   - milek2012
   - macphail2013
@@ -47782,7 +47782,7 @@
   - sindbaek2014
   - price2012
   - price2019
-  - sheehannd
+  - sheehan2013a
   - raffield2015
   - roslund2017
   - raja2018
@@ -47795,12 +47795,12 @@
   - solli2011
   - skre2011b
   - stott2019
-  - vesteinssonnd
+  - vesteinsson2014a
   - svendsen2019
   - star2017
   - williams2015
   - tainter2006
-  - tummuscheitnd
+  - tummuscheit2019
   - oye2014
   - williams2016
   - kitzlerahfeldt2013
@@ -49921,7 +49921,7 @@
   - andren2000
   - bonde2016
   - keller2016
-  - roesdahlnd
+  - roesdahl2011
   - price2020
   - sindbaek2011
   - moen2020
@@ -56788,11 +56788,11 @@
   field: cited_by
   value:
   - halstadmcguire2010
-  - gardeland
+  - gardela2014a
   - gullbekk2014
   - hayeursmith2018a
   - gustin2017
-  - graslundnd
+  - graslund2011
   - hadley2016
   - hartman2017
   - imer2014
@@ -56807,7 +56807,7 @@
   - ingvardson2012
   - linderholm2008
   - jackson2018
-  - jorgensennd
+  - jorgensen2009a
   - kemmers2011
   - lund2020
   - kovalenko2013
@@ -56825,13 +56825,13 @@
   - lund2019
   - lund2006
   - mainland2018
-  - pedersennd
+  - pedersen2009a
   - magnell2010
   - lund2017
   - lund2016
   - pedersen2015
   - mcleod2011
-  - lynnerupnd
+  - lynnerup2014a
   - pilo2018
   - milek2012
   - macphail2013
@@ -56860,7 +56860,7 @@
   - sindbaek2014
   - price2012
   - price2019
-  - sheehannd
+  - sheehan2013a
   - raffield2015
   - roslund2017
   - raja2018
@@ -56873,12 +56873,12 @@
   - solli2011
   - skre2011b
   - stott2019
-  - vesteinssonnd
+  - vesteinsson2014a
   - svendsen2019
   - star2017
   - williams2015
   - tainter2006
-  - tummuscheitnd
+  - tummuscheit2019
   - oye2014
   - williams2016
   - frei2015
@@ -57498,3 +57498,79 @@
     given: E.
   note: Re-setting author (unchanged) to trigger citekey regeneration now that year
     is set.
+- action: set
+  citekey: benderjorgensen2009
+  field: year
+  value: '2012'
+  note: Corrected year to match source PDF filename - GROBID extracted an incorrect
+    (one year early) publication date from this paper header.
+- action: set
+  citekey: benderjorgensen2009
+  field: date
+  value: '2012'
+  note: See year field correction.
+- action: set
+  citekey: benderjorgensen2009
+  field: author
+  value:
+  - family: Bender Jørgensen
+    given: L.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is corrected.
+- action: set
+  citekey: downham2015
+  field: year
+  value: '2016'
+  note: Corrected year to match source PDF filename - GROBID extracted an incorrect
+    (one year early) publication date from this paper header.
+- action: set
+  citekey: downham2015
+  field: date
+  value: '2016'
+  note: See year field correction.
+- action: set
+  citekey: downham2015
+  field: author
+  value:
+  - family: Downham
+    given: Clare
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is corrected.
+- action: set
+  citekey: skre2015
+  field: year
+  value: '2016'
+  note: Corrected year to match source PDF filename - GROBID extracted an incorrect
+    (one year early) publication date from this paper header.
+- action: set
+  citekey: skre2015
+  field: date
+  value: '2016'
+  note: See year field correction.
+- action: set
+  citekey: skre2015
+  field: author
+  value:
+  - family: Skre
+    given: Dagfinn
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is corrected.
+- action: set
+  citekey: wicker2012
+  field: year
+  value: '2013'
+  note: Corrected year to match source PDF filename - GROBID extracted an incorrect
+    (one year early) publication date from this paper header.
+- action: set
+  citekey: wicker2012
+  field: date
+  value: '2013'
+  note: See year field correction.
+- action: set
+  citekey: wicker2012
+  field: author
+  value:
+  - family: Wicker
+    given: Nancy L.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is corrected.
