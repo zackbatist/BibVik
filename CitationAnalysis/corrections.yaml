@@ -57663,38 +57663,6 @@
     the extracted PDF header had a truncated version. The papers own annotation record
     separately noted "the PDF-file lacks a name", consistent with a file-naming/metadata
     problem in this specific PDF.
-- action: create
-  citekey: lia2004
-  entry:
-    title: Vikingetidsgravenes rituelle kompleksitet
-    author:
-    - family: Lia
-      given: Øystein
-    year: '2004'
-    date: '2004'
-    generation: F1
-    entry_type: incollection
-    booktitle: 'Mellom himmel og jord: Foredrag fra et seminar om religionsarkeologi,
-      Isegran'
-    editor:
-    - family: Melheim
-      given: Lene
-    - family: Hedeager
-      given: Lotte
-    - family: Oma
-      given: Kristin
-    pages: 292-319
-    series: Oslo arkeologiske serie
-    number: '2'
-    publisher: University of Oslo
-    location: Oslo
-  note: Created from the projects own Zotero seed library (BibVik_seed.csv), which
-    is authoritative. No PDF exists for this entry in the seed folder or the Zotero
-    record itself (file field empty) - confirmed by exhaustive search of the corpus
-    (bibliography, raw reference text, git history, title/author search) finding no
-    trace under any name variant. This entry has no citations of its own extracted
-    (no source PDF to process), unlike the other create corrections tonight where
-    the PDF was processed but the self-entry failed.
 - action: set
   citekey: hilberg2016
   field: _source_pdf
@@ -59459,3 +59427,24 @@
     manual review against Mägi 2016 before that entry existed - genuine resolution
     requires checking the actual magi2016 reference list against this corrupted entry,
     not automatable safely tonight.
+- action: set
+  citekey: ysteinliand
+  field: year
+  value: '2004'
+  note: Year recovered from the projects own Zotero seed library (BibVik_seed.csv),
+    which is authoritative - extraction failed to capture a date.
+- action: set
+  citekey: ysteinliand
+  field: date
+  value: '2004'
+  note: See year field correction.
+- action: set
+  citekey: ysteinliand
+  field: author
+  value:
+  - family: Lia
+    given: Øystein
+  note: 'Author field was garbled by extraction: family/given swapped and the O-slash
+    in Øystein dropped, producing family=Ystein Lia, given=@. Corrected against the
+    projects own Zotero seed library (BibVik_seed.csv), which gives the real author
+    as Lia, Øystein. This will trigger a citekey rename now that year is set.'

@@ -1904,9 +1904,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="grahamcampbell2013" label="grahamcampbell2013">
+      <node id="grahamcampbell2013" label="Viking Art">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Viking Art"/>
           <attvalue for="1" value="2013"/>
           <attvalue for="2" value="F1"/>
           <attvalue for="3" value="misc"/>
@@ -8512,9 +8512,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="jenkins2008" label="jenkins2008">
+      <node id="jenkins2008" label="Rethinking Ethnicity">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Rethinking Ethnicity"/>
           <attvalue for="1" value="2008"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -10010,9 +10010,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="lavrsen1960" label="lavrsen1960">
+      <node id="lavrsen1960" label="Kuml 1960">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kuml 1960"/>
           <attvalue for="1" value="1960"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -18018,9 +18018,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="miillernd" label="miillernd">
+      <node id="miillernd" label="Dyreornamentiken i Norden.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Dyreornamentiken i Norden."/>
           <attvalue for="1" value="1880"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -19740,9 +19740,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="vikingatidens1995a" label="vikingatidens1995a">
+      <node id="vikingatidens1995a" label="Vikingatidens ABC">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Vikingatidens ABC"/>
           <attvalue for="1" value="1995"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -21644,9 +21644,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="slavi1997" label="slavi1997">
+      <node id="slavi1997" label="cultural contacts in the area of the Gulf of Finland in the 9th-13th centuries">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="cultural contacts in the area of the Gulf of Finland in the 9th-13th centuries"/>
           <attvalue for="1" value="1997"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -22680,9 +22680,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="rnregestanorvegica1989" label="rnregestanorvegica1989">
+      <node id="rnregestanorvegica1989" label="RN = Regesta Norvegica I">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="RN = Regesta Norvegica I"/>
           <attvalue for="1" value="1989"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -28308,9 +28308,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="gudmundsson1965" label="gudmundsson1965">
+      <node id="gudmundsson1965" label="Orkneyinga Saga">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Orkneyinga Saga"/>
           <attvalue for="1" value="1965"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -33054,9 +33054,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="gram2006" label="gram2006">
+      <node id="gram2006" label="SBM 949 Godthåb etape III. Bygherrerapport">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="SBM 949 Godthåb etape III. Bygherrerapport"/>
           <attvalue for="1" value="2006"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -33222,9 +33222,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="jensen1987" label="jensen1987">
+      <node id="jensen1987" label="Overgangshuset">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Overgangshuset"/>
           <attvalue for="1" value="1987"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -34342,9 +34342,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="engevik2011" label="engevik2011">
+      <node id="engevik2011" label="Myklebustskipet">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Myklebustskipet"/>
           <attvalue for="1" value="2011"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -34356,9 +34356,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="englund1979" label="englund1979">
+      <node id="englund1979" label="Uppgarde i Vallstena">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Uppgarde i Vallstena"/>
           <attvalue for="1" value="1979"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -34706,9 +34706,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="lawson1981" label="lawson1981">
+      <node id="lawson1981" label="The Barrows of East Anglia">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The Barrows of East Anglia"/>
           <attvalue for="1" value="1981"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -35266,9 +35266,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="shetelig1929" label="shetelig1929">
+      <node id="shetelig1929" label="Kvalsundfundet og andre norske Myrfund av Fartøier">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kvalsundfundet og andre norske Myrfund av Fartøier"/>
           <attvalue for="1" value="1929"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -36302,9 +36302,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="reitz2012" label="reitz2012">
+      <node id="reitz2012" label="Environmental Archaeology">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Environmental Archaeology"/>
           <attvalue for="1" value="2012"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -44170,9 +44170,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="cuslrg2013" label="cuslrg2013">
+      <node id="cuslrg2013" label="Global Mean Sea Level Time Series (Seasonal Signals Removed)">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Global Mean Sea Level Time Series (Seasonal Signals Removed)"/>
           <attvalue for="1" value="2013"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -47376,9 +47376,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="bell1992" label="bell1992">
+      <node id="bell1992" label="Ritual theory, ritual practice">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Ritual theory, ritual practice"/>
           <attvalue for="1" value="1992"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -48048,9 +48048,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="sander1997" label="sander1997">
+      <node id="sander1997" label="Cemetery 116, Stockholm (Excavations at Helgö XIII)">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Cemetery 116, Stockholm (Excavations at Helgö XIII)"/>
           <attvalue for="1" value="1997"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -48230,9 +48230,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="unwin2007" label="unwin2007">
+      <node id="unwin2007" label="Doorway">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Doorway"/>
           <attvalue for="1" value="2007"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -51282,9 +51282,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="brondsted1979" label="brondsted1979">
+      <node id="brondsted1979" label="Vikingerne">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Vikingerne"/>
           <attvalue for="1" value="1979"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -51716,9 +51716,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="stockmann2015" label="stockmann2015">
+      <node id="stockmann2015" label="Danske vikinger på nye togter">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Danske vikinger på nye togter"/>
           <attvalue for="1" value="2015"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -55888,9 +55888,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="johnson2004" label="johnson2004">
+      <node id="johnson2004" label="Viking Age Dublin">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Viking Age Dublin"/>
           <attvalue for="1" value="2004"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -58016,9 +58016,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="holmsen1976" label="holmsen1976">
+      <node id="holmsen1976" label="Nye studier i gammel historie">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Nye studier i gammel historie"/>
           <attvalue for="1" value="1976"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -58044,9 +58044,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="jensenius2018" label="jensenius2018">
+      <node id="jensenius2018" label="Stavkirke.info">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Stavkirke.info"/>
           <attvalue for="1" value="2018"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -58800,9 +58800,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="vesteinn2003" label="vesteinn2003">
+      <node id="vesteinn2003" label="String">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="String"/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -59234,9 +59234,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="wallis2000" label="wallis2000">
+      <node id="wallis2000" label="ology">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="ology"/>
           <attvalue for="1" value="2000"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -66654,9 +66654,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="faulkes1995" label="faulkes1995">
+      <node id="faulkes1995" label="Snorri Sturluson Edda">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Snorri Sturluson Edda"/>
           <attvalue for="1" value="1995"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -71554,9 +71554,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="clarke1993" label="clarke1993">
+      <node id="clarke1993" label="Vikingastäder">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Vikingastäder"/>
           <attvalue for="1" value="1993"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -71610,9 +71610,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="kidd1980" label="kidd1980">
+      <node id="kidd1980" label="The Vikings">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The Vikings"/>
           <attvalue for="1" value="1980"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -75656,9 +75656,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="drjacobsen1942" label="drjacobsen1942">
+      <node id="drjacobsen1942" label="Danmarks Runeindskrifter">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Danmarks Runeindskrifter"/>
           <attvalue for="1" value="1942"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -76860,9 +76860,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="martensson1970" label="martensson1970">
+      <node id="martensson1970" label="Lundafynd. En bilderbok.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Lundafynd. En bilderbok."/>
           <attvalue for="1" value="1970"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -85092,9 +85092,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="carnapbornheim1996" label="carnapbornheim1996">
+      <node id="carnapbornheim1996" label="Die Prachtausrüstungen.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Die Prachtausrüstungen."/>
           <attvalue for="1" value="1996"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -86184,9 +86184,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="arnalds1997" label="arnalds1997">
+      <node id="arnalds1997" label="Soil Erosion in Iceland">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Soil Erosion in Iceland"/>
           <attvalue for="1" value="1997"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -86282,9 +86282,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="christiansen1987" label="christiansen1987">
+      <node id="christiansen1987" label="Kornavl på Faerøerne.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kornavl på Faerøerne."/>
           <attvalue for="1" value="1987"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -86478,9 +86478,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="grove1988" label="grove1988">
+      <node id="grove1988" label="The Little Ice Age">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The Little Ice Age"/>
           <attvalue for="1" value="1988"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -89838,9 +89838,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="kalmar1991" label="kalmar1991">
+      <node id="kalmar1991" label="Runstenar">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Runstenar"/>
           <attvalue for="1" value="1991"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -91504,9 +91504,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="junker2003" label="junker2003">
+      <node id="junker2003" label="-Das neue">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="-Das neue"/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -91518,9 +91518,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="berlin2003" label="berlin2003">
+      <node id="berlin2003" label="Archäologisches Nachrichtenblatt">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Archäologisches Nachrichtenblatt"/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -95326,9 +95326,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="archaeologica2005" label="archaeologica2005">
+      <node id="archaeologica2005" label="Acta Archaeologica Lundensia, Series in 8°, No. 28">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Acta Archaeologica Lundensia, Series in 8°, No. 28"/>
           <attvalue for="1" value="2005"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -95970,9 +95970,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="st2008" label="st2008">
+      <node id="st2008" label="Kongeligt? Skalk 2008,1, 3 -10.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kongeligt? Skalk 2008,1, 3 -10."/>
           <attvalue for="1" value="2008"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -96992,9 +96992,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="olesen2015" label="olesen2015">
+      <node id="olesen2015" label="Luftarkaeologi i Danmark">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Luftarkaeologi i Danmark"/>
           <attvalue for="1" value="2015"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -97020,9 +97020,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="palm1937" label="palm1937">
+      <node id="palm1937" label="Wendisches Kultstätten">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Wendisches Kultstätten"/>
           <attvalue for="1" value="1937"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -97650,9 +97650,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="merleauponty1944" label="merleauponty1944">
+      <node id="merleauponty1944" label="Phenomenology of perception">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Phenomenology of perception"/>
           <attvalue for="1" value="1944"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -99582,9 +99582,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="odelberg1974" label="odelberg1974">
+      <node id="odelberg1974" label="Birka">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Birka"/>
           <attvalue for="1" value="1974"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -100674,9 +100674,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="marwick1952" label="marwick1952">
+      <node id="marwick1952" label="Orkney Farm-Names">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Orkney Farm-Names"/>
           <attvalue for="1" value="1952"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -102284,9 +102284,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="geologicalsurvey2010" label="geologicalsurvey2010">
+      <node id="geologicalsurvey2010" label="Bedrock Geology">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Bedrock Geology"/>
           <attvalue for="1" value="2010"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -105028,9 +105028,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ritchie1993" label="ritchie1993">
+      <node id="ritchie1993" label="Viking Scotland">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Viking Scotland"/>
           <attvalue for="1" value="1993"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -108724,9 +108724,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="nylen2003" label="nylen2003">
+      <node id="nylen2003" label="Bildstenar">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Bildstenar"/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -110124,9 +110124,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="holmolsen1975" label="holmolsen1975">
+      <node id="holmolsen1975" label="Edda-dikt. Oversat af Ludvig Holm-Olsen">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Edda-dikt. Oversat af Ludvig Holm-Olsen"/>
           <attvalue for="1" value="1975"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -110264,9 +110264,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ofloinn1994" label="ofloinn1994">
+      <node id="ofloinn1994" label="Irish shrines &amp; reliquaries of the Middle Ages">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Irish shrines &amp; reliquaries of the Middle Ages"/>
           <attvalue for="1" value="1994"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -112140,9 +112140,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="nasman1942" label="nasman1942">
+      <node id="nasman1942" label="Zeiten">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Zeiten"/>
           <attvalue for="1" value="1942"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -112182,9 +112182,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="axboe2007" label="axboe2007">
+      <node id="axboe2007" label="Brakteatstudier">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Brakteatstudier"/>
           <attvalue for="1" value="2007"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -112966,9 +112966,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="gudmundssonnd" label="gudmundssonnd">
+      <node id="gudmundssonnd" label="Privatboligen på Island i Sagatiden">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Privatboligen på Island i Sagatiden"/>
           <attvalue for="1" value="1889"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -116340,9 +116340,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="beseler1982" label="beseler1982">
+      <node id="beseler1982" label="Kunst-Topographie Schleswig-Holstein">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kunst-Topographie Schleswig-Holstein"/>
           <attvalue for="1" value="1982"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -122822,9 +122822,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="collins2016" label="collins2016">
+      <node id="collins2016" label="Intersectionality">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Intersectionality"/>
           <attvalue for="1" value="2016"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -123774,9 +123774,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="gragas2000" label="gragas2000">
+      <node id="gragas2000" label="Laws of Early Iceland">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Laws of Early Iceland"/>
           <attvalue for="1" value="2000"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -124488,9 +124488,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="lamm2003" label="lamm2003">
+      <node id="lamm2003" label="Nr. 215.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Nr. 215."/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -124502,9 +124502,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="lamm2003a" label="lamm2003a">
+      <node id="lamm2003a" label="Nr. 126.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Nr. 126."/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -124740,9 +124740,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="lamm2003b" label="lamm2003b">
+      <node id="lamm2003b" label="Bildstenar">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Bildstenar"/>
           <attvalue for="1" value="2003"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -125006,9 +125006,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="hougen1931" label="hougen1931">
+      <node id="hougen1931" label="Studier i Gokstadfunnet">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Studier i Gokstadfunnet"/>
           <attvalue for="1" value="1931"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -125048,9 +125048,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ryghnde" label="ryghnde">
+      <node id="ryghnde" label="Norske Oldsager">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Norske Oldsager"/>
           <attvalue for="1" value="1885"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -125762,9 +125762,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="buzon2013" label="buzon2013">
+      <node id="buzon2013" label="Strontium isotope ( 87 Sr/ 86">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Strontium isotope ( 87 Sr/ 86"/>
           <attvalue for="1" value="2013"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -125972,9 +125972,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="magnusson1980a" label="magnusson1980a">
+      <node id="magnusson1980a" label="Vikings!">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Vikings!"/>
           <attvalue for="1" value="1980"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -126364,9 +126364,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="tesch2005" label="tesch2005">
+      <node id="tesch2005" label="Vyer från medeltidens Sigtuna">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Vyer från medeltidens Sigtuna"/>
           <attvalue for="1" value="2005"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -128828,9 +128828,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ellisdavidson1967" label="ellisdavidson1967">
+      <node id="ellisdavidson1967" label="Pagan Scandinavia">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Pagan Scandinavia"/>
           <attvalue for="1" value="1967"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -128870,9 +128870,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="jansson1963" label="jansson1963">
+      <node id="jansson1963" label="String">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="String"/>
           <attvalue for="1" value="1963"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -130858,9 +130858,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="fell1995" label="fell1995">
+      <node id="fell1995" label="Paganism in Beowulf: A Semantic Fairy-Tale">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Paganism in Beowulf: A Semantic Fairy-Tale"/>
           <attvalue for="1" value="1995"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -131222,9 +131222,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="yalden1999" label="yalden1999">
+      <node id="yalden1999" label="The History of British Mammals">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The History of British Mammals"/>
           <attvalue for="1" value="1999"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -132286,9 +132286,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="starigardoldeburg1991" label="starigardoldeburg1991">
+      <node id="starigardoldeburg1991" label="Starigard-Oldeburg">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Starigard-Oldeburg"/>
           <attvalue for="1" value="1991"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -132300,9 +132300,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="stro1984" label="stro1984">
+      <node id="stro1984" label="66. Mecklenburg">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="66. Mecklenburg"/>
           <attvalue for="1" value="1984"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -139832,9 +139832,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="kongesagaer1979" label="kongesagaer1979">
+      <node id="kongesagaer1979" label="Snorres Kongesagaer">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Snorres Kongesagaer"/>
           <attvalue for="1" value="1979"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -139888,9 +139888,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="stenberger1971" label="stenberger1971">
+      <node id="stenberger1971" label="Detforntida Sverige">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Detforntida Sverige"/>
           <attvalue for="1" value="1971"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -140000,9 +140000,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="dcms2002" label="dcms2002">
+      <node id="dcms2002" label="Treasure Annual Report 2002">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Treasure Annual Report 2002"/>
           <attvalue for="1" value="2002"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -140714,9 +140714,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="chagnon1992" label="chagnon1992">
+      <node id="chagnon1992" label="Yanomamö">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Yanomamö"/>
           <attvalue for="1" value="1992"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -142030,9 +142030,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="sturlasson1964" label="sturlasson1964">
+      <node id="sturlasson1964" label="Kongesagaer">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kongesagaer"/>
           <attvalue for="1" value="1964"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -142772,9 +142772,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="zakharov2004" label="zakharov2004">
+      <node id="zakharov2004" label="Drevnerusskii gorod Beloozero">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Drevnerusskii gorod Beloozero"/>
           <attvalue for="1" value="2004"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -143080,9 +143080,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="facebook2014a" label="facebook2014a">
+      <node id="facebook2014a" label="Metalldetektor i Norge">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Metalldetektor i Norge"/>
           <attvalue for="1" value="2014"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -144102,9 +144102,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="brondsted1960" label="brondsted1960">
+      <node id="brondsted1960" label="The Vikings">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The Vikings"/>
           <attvalue for="1" value="1960"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -144984,9 +144984,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="og2001" label="og2001">
+      <node id="og2001" label="Fortid Og Nutid">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Fortid Og Nutid"/>
           <attvalue for="1" value="2001"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -147686,9 +147686,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="vsnd" label="vsnd">
+      <node id="vsnd" label="Femte Bog.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Femte Bog."/>
           <attvalue for="1" value="1687"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -147784,9 +147784,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="frostatingslova1994" label="frostatingslova1994">
+      <node id="frostatingslova1994" label="Frostatingslova">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Frostatingslova"/>
           <attvalue for="1" value="1994"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -152936,9 +152936,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="eriksson1991" label="eriksson1991">
+      <node id="eriksson1991" label="Runstenar">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Runstenar"/>
           <attvalue for="1" value="1991"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -153244,9 +153244,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="sturluson1995" label="sturluson1995">
+      <node id="sturluson1995" label="Edda">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Edda"/>
           <attvalue for="1" value="1995"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -160636,9 +160636,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="hobbesnd" label="hobbesnd">
+      <node id="hobbesnd" label="Leviathan">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Leviathan"/>
           <attvalue for="1" value="1651"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -164892,9 +164892,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="widengren1969" label="widengren1969">
+      <node id="widengren1969" label="Religionsphänomenologie">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Religionsphänomenologie"/>
           <attvalue for="1" value="1969"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -165172,9 +165172,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ambrosiani1957" label="ambrosiani1957">
+      <node id="ambrosiani1957" label="Ett diskussionsinlägg">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Ett diskussionsinlägg"/>
           <attvalue for="1" value="1957"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -166152,9 +166152,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="beretninger1997" label="beretninger1997">
+      <node id="beretninger1997" label="Beretninger ved S.A. Sørensen 1997 og L.L. Sørensen 1998 og 1999.">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Beretninger ved S.A. Sørensen 1997 og L.L. Sørensen 1998 og 1999."/>
           <attvalue for="1" value="1997"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -166236,9 +166236,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="beretningved1998" label="beretningved1998">
+      <node id="beretningved1998" label="Beretning ved L.L.Sørensen">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Beretning ved L.L.Sørensen"/>
           <attvalue for="1" value="1998"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -166460,9 +166460,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="hansen2009" label="hansen2009">
+      <node id="hansen2009" label="Stolpeskibe">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Stolpeskibe"/>
           <attvalue for="1" value="2009"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -166978,9 +166978,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="halvorsen2008" label="halvorsen2008">
+      <node id="halvorsen2008" label="The oldest Christianity laws from East Norway">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="The oldest Christianity laws from East Norway"/>
           <attvalue for="1" value="2008"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -170520,9 +170520,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="wilson1999" label="wilson1999">
+      <node id="wilson1999" label="Roman Designs">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Roman Designs"/>
           <attvalue for="1" value="1999"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -171612,9 +171612,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="smiarowski2013" label="smiarowski2013">
+      <node id="smiarowski2013" label="Preliminary Report on the 2012 Archaeofauna from E47 Gardar in the Eastern Settlement, Greenland">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Preliminary Report on the 2012 Archaeofauna from E47 Gardar in the Eastern Settlement, Greenland"/>
           <attvalue for="1" value="2013"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -171780,9 +171780,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="coleman2014" label="coleman2014">
+      <node id="coleman2014" label="Kvinner i vikingtid">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Kvinner i vikingtid"/>
           <attvalue for="1" value="2014"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -175378,9 +175378,9 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="andersen1970a" label="andersen1970a">
+      <node id="andersen1970a" label="Zeiten 1997, 68 -99">
         <attvalues>
-          <attvalue for="0" value=""/>
+          <attvalue for="0" value="Zeiten 1997, 68 -99"/>
           <attvalue for="1" value="1970"/>
           <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
@@ -176778,62 +176778,6 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
-        <attvalues>
-          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
-          <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value="Skorokhod A."/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.75"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="9"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="NOAUTHOR21" label="New Horizons in the Archaeology of the Viking Age">
-        <attvalues>
-          <attvalue for="0" value="New Horizons in the Archaeology of the Viking Age"/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="14"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
-        <attvalues>
-          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="193"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="NOAUTHOR18" label="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was wr">
-        <attvalues>
-          <attvalue for="0" value="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you"/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="21"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
       <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
         <attvalues>
           <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
@@ -176859,6 +176803,62 @@
           <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
           <attvalue for="8" value="45"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
+        <attvalues>
+          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="193"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="NOAUTHOR21" label="New Horizons in the Archaeology of the Viking Age">
+        <attvalues>
+          <attvalue for="0" value="New Horizons in the Archaeology of the Viking Age"/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="14"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="NOAUTHOR18" label="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was wr">
+        <attvalues>
+          <attvalue for="0" value="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you"/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="21"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
+        <attvalues>
+          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
+          <attvalue for="1" value="2020"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value="Skorokhod A."/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.75"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="9"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
