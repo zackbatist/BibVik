@@ -57726,3 +57726,1736 @@
   note: Linking the created entry to its actual, already-processed source PDF (confirmed
     present in _graph_state.json processed_papers) - omitted when the entry was first
     created.
+- action: set
+  citekey: alper2003
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: arbman1939
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hillerdal2010
+  - kalmring2012
+  - kalmring2017
+  - kalmring2018
+  - linderholm2008
+  - price2018
+  - price2019
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: asmus2012
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bagge2009
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bartels2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bartlett1996
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: baumgartner2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: birkebaek1992
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bolton2009
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bompaire1997
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: brather2010
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: brather2012
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - jagodzinski2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: callmer1994
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - hillerdal2010
+  - jagodzinski2014
+  - kalmring2013
+  - price2008a
+  - price2010
+  - raninen2014
+  - sindbaek2007
+  - skre2011b
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: carelli2012
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: christensen2000
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: dobat2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - holst2014
+  - lemm2014
+  - lund2010
+  - price2011
+  - tummuscheit2019
+  - voncarnapbornheim2014
+  - williams2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: drjacobsen1942
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: eisenschmidt2003
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - ulriksen2011a
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: filipowiak2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: gelting2007
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - jessen2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: gilomen2014
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: grahamcampbell1991a
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hatz1974
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - skre2011b
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hauptmeyer1997
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: henricson2006
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: herrmann1994
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hilberg2009b
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - voncarnapbornheim2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hilberg2010
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - voncarnapbornheim2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hinton2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hodges2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - sindbaek2013a
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hofmann1984
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - kalmring2010
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: hybel2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: ilisch1988
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: jankuhn1937
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2014
+  - hilberg2016
+  - jagodzinski2014
+  - tummuscheit2019
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: jonsson1989
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: juraske2010
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kalmring2010e
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - hennius2018
+  - hilberg2013
+  - hilberg2014
+  - hilberg2016
+  - hilberg2018
+  - kalmring2010
+  - kalmring2012
+  - kalmring2013
+  - kalmring2018
+  - raffield2019
+  - ravn2012a
+  - voncarnapbornheim2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: keller2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: klappauf2011
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: klappauf2008
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: leimus2007
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - kershaw2018
+  - magi2011
+  - roslund2015
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: loveluck2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  - pilo2020
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: ludtke1985
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: ludtke2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - voncarnapbornheim2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lund1991
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2014
+  - hilberg2016
+  - lund2004
+  - roesdahl2011
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: makeler2005
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: metcalf1998
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: meyer1998
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: moesgaard2006
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - ingvardson2012
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: noonan1994
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - peschel2017
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: radtke2002
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: roesdahl2006
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - imer2014
+  - roesdahl2011
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: rundberg2000
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sawyer2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - sheehan2013a
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sawyer2002
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - jessen2014
+  - skre2019
+  - zachrisson2017
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: scheel1940
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: schledermann1966
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: schwantes1932
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: gratuze2011
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sindbaek2012
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - krzewinska2018
+  - pilo2020
+  - rogers2020
+  - sindbaek2014
+  - sindbaek2016
+  - warmlander2015
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: spuford1988
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: steppuhn1998
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2014
+  - hilberg2016
+  - sindbaek2007
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: stieldorf2012
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: stoklund2000
+  field: cited_by
+  value:
+  - hardh2010a
+  - hilberg2013
+  - hilberg2016
+  - imer2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: tummuscheit2010
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - tummuscheit2014
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: tummuscheit2013
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - hilberg2018
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: verhulst2000
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: wehner2007
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: wiechmann2002
+  field: cited_by
+  value:
+  - hardh2010a
+  - hilberg2013
+  - hilberg2016
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: williams1997
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2016
+  - pedersen2006
+  note: Adding citer(s) ['hilberg2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: christensen2012
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: engberg2002
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: rieck1992
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sigurdsson2012
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: skre2005
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: soderberg1966
+  field: cited_by
+  value:
+  - pedersen2019
+  - ravn2019
+  note: Adding citer(s) ['ravn2019'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: balodis1940
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bogucki2006
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: brundage1991
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: carlsson1998
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: christoffersen1996
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: crumlinpedersen1989
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: crumlinpedersen1996
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - magi2015
+  - magi2016
+  - price2014
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: crumlinpedersen1998
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  - sindbaek2007
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: ehrensvard1991
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: filipowiak1998
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: griciuviene2005
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: haak2004
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kiaupa2000
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kochkurkina1961
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lang1996
+  field: cited_by
+  value:
+  - magi2011
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lang2004
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lehtosalohilander1984
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  - raninen2014
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: limbo2004
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lougas1994
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2002
+  field: cited_by
+  value:
+  - magi2011
+  - magi2015
+  - magi2016
+  - wickholm2006
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2004
+  field: cited_by
+  value:
+  - magi2011
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2005
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2007
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2009
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi2013
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: magi1989
+  field: cited_by
+  value:
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: petrenko1995
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: radins1999
+  field: cited_by
+  value:
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: radins2006
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: rebkowski1998
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sedov1974
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: shepherd1999
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sindbaek2003
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  - rogers2020
+  - williams2015
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vijups1997
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: spingis2008
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: stankus1995
+  field: cited_by
+  value:
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: tvauri1998
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vaitkunskiene1995
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vasks2008
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vassar1939
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vassar1975
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: welinder2009
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: zarina2006
+  field: cited_by
+  value:
+  - magi2011
+  - magi2015
+  - magi2016
+  note: Adding citer(s) ['magi2016'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: adams2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - lund2005
+  - lund2010
+  - lund2016
+  - lund2020
+  - mainland2018
+  - zori2013
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: arndt2007
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: andersen2017
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - lund2013
+  - skre2019
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bagge2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bagge2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: bauduin2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: callmer2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - rogers2020
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: corrochano2014
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: curta2011
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - martin2020
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: deckers2017
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: deckers2012
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: dobat2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: eisenschmidt2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - feveile2011
+  - hardh2010a
+  - price2014
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: fried1994
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: garipzanov2008
+  field: cited_by
+  value:
+  - croix2015
+  - croix2019
+  - croix2021
+  - hillerdal2010
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: gazzoli2011
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: henstra2012
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - ijssennagger2013
+  - ijssennagger2015
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: ijssennaggervanderpluijm2017
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: jansson1997
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - gustin2017
+  - hillerdal2010
+  - linderholm2008
+  - magi2011
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: jesch2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - ijssennagger2013
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: juul2017
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kleiminger1993
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - kastholm2016
+  - lund2005
+  - lund2013
+  - ulriksen2011a
+  - ulriksen2018
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: knol2001
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: knol1993
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: knol1999
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - ijssennagger2013
+  - ijssennagger2015
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kramer2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: kramer1996
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: baume1952
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - majchczack2018
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lebecq1983
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - ijssennagger2013
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lund1990
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: lund2003
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - larsson2007
+  - lund2004
+  - lund2005
+  - lund2006
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: mcleod2007
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: nelson2008
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - hedenstiernajonson2017
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: nicolay2014
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: nijdam2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: nasman2006
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - fabech2013
+  - hardh2010a
+  - holst2014
+  - pedersen2019
+  - skre2019
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: price2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - price2014a
+  - pricenda
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: prummel2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: prummel2001
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: pohl1998
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - gustin2017
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: reimitz2008
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: reuter1991
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: richards2010
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - raffield2016
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: roesdahl1996
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - price2018
+  - roesdahl2011
+  - sindbaek2011
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: roesdahl1992
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: roxburgh2013
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: samplonius1998
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - ijssennagger2013
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sindbaek2008
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2015
+  - croix2019
+  - croix2021
+  - downham2016
+  - holst2014
+  - lund2019
+  - osullivan2015
+  - pedersen2019
+  - sindbaek2016
+  - vesteinsson2016
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: steuer1974
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - hilberg2013
+  - hilberg2018
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: tummuscheit2018
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  - skre2019
+  - tummuscheit2019
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: urbanczyk2009
+  field: cited_by
+  value:
+  - croix2015
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: wawn2002
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: zettel1977
+  field: cited_by
+  value:
+  - croix2019
+  - croix2021
+  note: Adding citer(s) ['croix2021'] - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: stankus1995
+  field: cited_by
+  value: []
+  note: magi2016 citation redirected to stankus1995b (the correctly split-out entry
+    for this same paper - Banduziu kapinynas, Stankus 1995) rather than the deleted
+    original.
+- action: set
+  citekey: stankus1995b
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  note: Adding magi2016 as a citer alongside the existing magi2015 - both correctly
+    cite this paper (Banduziu kapinynas), which was already split from the deleted
+    stankus1995 duplicate.
+- action: set
+  citekey: magi1989
+  field: cited_by
+  value: []
+  note: Clearing dangling citer reference. This entry is flagged as corrupted (title
+    field contains an unrelated citation, Nasman 1991) and was already marked for
+    manual review against Mägi 2016 before that entry existed - genuine resolution
+    requires checking the actual magi2016 reference list against this corrupted entry,
+    not automatable safely tonight.
+- action: set
+  citekey: radins1999
+  field: cited_by
+  value: []
+  note: Clearing dangling citer reference. This entry is flagged as corrupted (two
+    real Radins citations concatenated into one title) and was already marked for
+    manual review against Mägi 2016 before that entry existed - genuine resolution
+    requires checking the actual magi2016 reference list against this corrupted entry,
+    not automatable safely tonight.
