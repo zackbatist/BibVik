@@ -59672,3 +59672,129 @@
   note: Adding price2014b as citer - recovered from the already-extracted reference
     list of the newly-created F1 entry, whose citations were processed by GROBID but
     never connected back as outgoing edges until now.
+- action: create
+  citekey: price2014c
+  entry:
+    title: 'The Peopling of the North Atlantic: Isotopic Results from Norway'
+    author:
+    - family: Price
+      given: T. Douglas
+    - family: Naumann
+      given: Elise
+    year: '2014'
+    date: '2014'
+    generation: F1
+    entry_type: article
+    journaltitle: Journal of the North Atlantic
+    volume: '7'
+    pages: 88-102
+    doi: 10.3721/037.002.sp706
+  note: Created from verified Zotero seed library data (BibVik_seed.csv). PDF was
+    processed but header extraction returned the wrong title (journal name Journal
+    of the North Atlantic instead of the papers own title), a duplicated/garbled author
+    (T. Douglas Price split into two entries), and no usable date. All fields corrected
+    against the projects own Zotero record.
+- action: set
+  citekey: bagge1998
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: chenery2012
+  field: cited_by
+  value:
+  - price2014c
+  - price2018
+  - price2019
+  - price2020
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: harrison2003
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  - sindbaek2017
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: johansen1986
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: reed1998
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sellevold1991
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sellevold1996
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sellevold2001
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  - zoega2017
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: sullivan1981
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: tauber1981
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
+- action: set
+  citekey: vandermerwe1978
+  field: cited_by
+  value:
+  - price2014c
+  - pricenda
+  note: Adding price2014c as citer - recovered from the already-extracted reference
+    list of the newly-created F1 entry, whose citations were processed by GROBID but
+    never connected back as outgoing edges until now.
