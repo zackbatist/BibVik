@@ -410,6 +410,77 @@ def apply_corrections(bib: dict, corrections: list[dict]) -> dict:
             logger.info("Deleted %r", citekey)
             counts["delete"] += 1
 
+        elif action == "rename":
+            old_key = corr.get("old", "")
+            new_key = corr.get("new", "")
+
+            if not old_key or not new_key:
+                logger.warning("Correction %d (rename): missing old or new", i)
+                counts["skipped"] += 1
+                continue
+            if old_key not in bib:
+                logger.debug("Correction %d (rename): %r already absent", i, old_key)
+                continue
+            if new_key in bib:
+                target = bib[new_key]
+                if target.get("_deleted"):
+                    # Target slot is occupied by a dead/garbage entry —
+                    # safe to discard it and take the slot.
+                    del bib[new_key]
+                    logger.info(
+                        "Correction %d (rename): discarding deleted entry at target %r to make room",
+                        i, new_key,
+                    )
+                else:
+                    logger.error(
+                        "Correction %d (rename): target %r already exists and is not "
+                        "deleted — refusing to overwrite a live entry", i, new_key,
+                    )
+                    counts["skipped"] += 1
+                    continue
+
+            _rename_citekey(bib, old_key, new_key, note)
+            bib[new_key]["citekey"] = new_key
+            counts["rename"] = counts.get("rename", 0) + 1
+
+        elif action == "create":
+            citekey = corr.get("citekey", "")
+            entry   = corr.get("entry", {})
+
+            if not citekey or not entry:
+                logger.warning("Correction %d (create): missing citekey or entry", i)
+                counts["skipped"] += 1
+                continue
+            if citekey in bib:
+                logger.warning(
+                    "Correction %d (create): citekey %r already exists — "
+                    "refusing to overwrite. Use set to modify an existing entry.",
+                    i, citekey,
+                )
+                counts["skipped"] += 1
+                continue
+            if not entry.get("title") or not entry.get("author") or not entry.get("year"):
+                logger.warning(
+                    "Correction %d (create): entry for %r missing required "
+                    "field (title, author, or year) — refusing to create an "
+                    "incomplete bibliography entry",
+                    i, citekey,
+                )
+                counts["skipped"] += 1
+                continue
+
+            new_entry = dict(entry)
+            new_entry["citekey"] = citekey
+            new_entry.setdefault("cited_by", [])
+            new_entry.setdefault("entry_type", "article")
+            new_entry["_correction_note"] = note
+            new_entry["_created_via_correction"] = True
+
+            bib[citekey] = new_entry
+
+            logger.info("Created %r", citekey)
+            counts["create"] = counts.get("create", 0) + 1
+
         elif action == "set":
             citekey = corr.get("citekey", "")
             field   = corr.get("field", "")

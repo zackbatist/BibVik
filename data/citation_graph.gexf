@@ -176708,6 +176708,90 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
+      <node id="hilberg2016" label="Hedeby's Demise in the Late Viking Age and the Shift to Schleswig">
+        <attvalues>
+          <attvalue for="0" value="Hedeby's Demise in the Late Viking Age and the Shift to Schleswig"/>
+          <attvalue for="1" value="2016"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="article"/>
+          <attvalue for="4" value="Hilberg Volker"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value=""/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="false"/>
+        </attvalues>
+      </node>
+      <node id="ravn2019" label="Erritsø - new investigations of an aristocratic, early Viking Age manor in Western Denmark c. 700-850 AD">
+        <attvalues>
+          <attvalue for="0" value="Erritsø - new investigations of an aristocratic, early Viking Age manor in Western Denmark c. 700-850 AD"/>
+          <attvalue for="1" value="2019"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="article"/>
+          <attvalue for="4" value="Ravn Mads"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value=""/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="false"/>
+        </attvalues>
+      </node>
+      <node id="magi2016" label="Bound for the Eastern Baltic: Trade and Centres AD 800-1200">
+        <attvalues>
+          <attvalue for="0" value="Bound for the Eastern Baltic: Trade and Centres AD 800-1200"/>
+          <attvalue for="1" value="2016"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Mägi Marika"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value=""/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="false"/>
+        </attvalues>
+      </node>
+      <node id="croix2021" label="Cultures without borders? Approaching the cultural continuum in the Danish-Frisian coastal areas in the early Viking Age">
+        <attvalues>
+          <attvalue for="0" value="Cultures without borders? Approaching the cultural continuum in the Danish-Frisian coastal areas in the early Viking Age"/>
+          <attvalue for="1" value="2021"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="article"/>
+          <attvalue for="4" value="Croix Sarah"/>
+          <attvalue for="5" value="10.1080/03468755.2019.1687332"/>
+          <attvalue for="6" value=""/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="false"/>
+        </attvalues>
+      </node>
+      <node id="lia2004" label="Vikingetidsgravenes rituelle kompleksitet">
+        <attvalues>
+          <attvalue for="0" value="Vikingetidsgravenes rituelle kompleksitet"/>
+          <attvalue for="1" value="2004"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Lia Øystein"/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value=""/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="0"/>
+          <attvalue for="9" value="false"/>
+        </attvalues>
+      </node>
+      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
+        <attvalues>
+          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
+          <attvalue for="1" value="2015"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Åhfeldt L Kitzler"/>
+          <attvalue for="5" value="10.1515/9783110417685-014"/>
+          <attvalue for="6" value="0.917"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="86"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
       <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
         <attvalues>
           <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
@@ -176722,6 +176806,20 @@
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
+      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
+        <attvalues>
+          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="45"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
       <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
         <attvalues>
           <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
@@ -176733,20 +176831,6 @@
           <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
           <attvalue for="8" value="193"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
-        <attvalues>
-          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
-          <attvalue for="1" value="2015"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="incollection"/>
-          <attvalue for="4" value="Åhfeldt L Kitzler"/>
-          <attvalue for="5" value="10.1515/9783110417685-014"/>
-          <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="86"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -176775,20 +176859,6 @@
           <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
           <attvalue for="8" value="21"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
-        <attvalues>
-          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="45"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>

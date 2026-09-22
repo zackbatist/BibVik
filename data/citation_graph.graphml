@@ -151463,6 +151463,78 @@
       <data key="d8">25</data>
       <data key="d9">false</data>
     </node>
+    <node id="hilberg2016">
+      <data key="d0">Hedeby's Demise in the Late Viking Age and the Shift to Schleswig</data>
+      <data key="d1">2016</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Hilberg Volker</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="ravn2019">
+      <data key="d0">Erritsø - new investigations of an aristocratic, early Viking Age manor in Western Denmark c. 700-850 AD</data>
+      <data key="d1">2019</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Ravn Mads</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="magi2016">
+      <data key="d0">Bound for the Eastern Baltic: Trade and Centres AD 800-1200</data>
+      <data key="d1">2016</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Mägi Marika</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="croix2021">
+      <data key="d0">Cultures without borders? Approaching the cultural continuum in the Danish-Frisian coastal areas in the early Viking Age</data>
+      <data key="d1">2021</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Croix Sarah</data>
+      <data key="d5">10.1080/03468755.2019.1687332</data>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="lia2004">
+      <data key="d0">Vikingetidsgravenes rituelle kompleksitet</data>
+      <data key="d1">2004</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Lia Øystein</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="ahfeldt2015">
+      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
+      <data key="d1">2015</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Åhfeldt L Kitzler</data>
+      <data key="d5">10.1515/9783110417685-014</data>
+      <data key="d6">0.917</data>
+      <data key="d7">0</data>
+      <data key="d8">86</data>
+      <data key="d9">true</data>
+    </node>
     <node id="skorokhod2020">
       <data key="d0">Staraya Ladoga in northwestern Russia</data>
       <data key="d1">2020</data>
@@ -151475,6 +151547,18 @@
       <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
+    <node id="NOAUTHOR33">
+      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">0</data>
+      <data key="d8">45</data>
+      <data key="d9">true</data>
+    </node>
     <node id="NOAUTHOR28">
       <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
       <data key="d1"/>
@@ -151485,18 +151569,6 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">193</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="ahfeldt2015">
-      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
-      <data key="d1">2015</data>
-      <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Åhfeldt L Kitzler</data>
-      <data key="d5">10.1515/9783110417685-014</data>
-      <data key="d6">0.917</data>
-      <data key="d7">0</data>
-      <data key="d8">86</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR21">
@@ -151521,18 +151593,6 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">21</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR33">
-      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">45</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="lund2021" target="aannestad2015"/>

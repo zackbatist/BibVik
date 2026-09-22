@@ -57574,3 +57574,124 @@
     given: Nancy L.
   note: Re-setting author (unchanged) to trigger citekey regeneration now that year
     is corrected.
+- action: create
+  citekey: hilberg2016
+  entry:
+    title: Hedeby's Demise in the Late Viking Age and the Shift to Schleswig
+    author:
+    - family: Hilberg
+      given: Volker
+    year: '2016'
+    date: '2016'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction data. PDF was processed (reference list extracted,
+    confirmed by 74 F2 entries citing this source_pdf), but the papers own header
+    date extraction returned None, so no self-entry was ever created. Title and author
+    recovered from the papers own extracted header. Year confirmed both by source
+    PDF filename and an independent external citation search (matching title and 2016
+    date found in another papers bibliography).
+- action: create
+  citekey: ravn2019
+  entry:
+    title: Erritsø - new investigations of an aristocratic, early Viking Age manor
+      in Western Denmark c. 700-850 AD
+    author:
+    - family: Ravn
+      given: Mads
+    - family: Juel
+      given: Christian
+    - family: Lindblom
+      given: Charlotta
+    - family: Pedersen
+      given: Anne
+    year: '2019'
+    date: '2019'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction data. PDF was processed (reference list extracted,
+    confirmed by 9 F2 entries citing this source_pdf), but the papers own header date
+    extraction returned None. The PDF itself was found to have entirely blank embedded
+    metadata (author/title/date all empty), likely resaved by Ghostscript at some
+    point, losing original metadata. Title and authors recovered from the papers own
+    extracted header. Year confirmed both by source PDF filename and an independent
+    external source (co-authors academic profile listing this exact paper with matching
+    title and 2019 date).
+- action: create
+  citekey: magi2016
+  entry:
+    title: 'Bound for the Eastern Baltic: Trade and Centres AD 800-1200'
+    author:
+    - family: Mägi
+      given: Marika
+    year: '2016'
+    date: '2016'
+    generation: F1
+    entry_type: incollection
+  note: Created from verified extraction data. PDF was processed (reference list extracted,
+    confirmed by 52 F2 entries citing this source_pdf), but the papers own header
+    date extraction returned None, and the author field was garbled (extracted as
+    family=Ma, given=Marika instead of the correct Mägi, Marika). Title recovered
+    from the papers own extracted header with the stray chapter-numbering prefix (chapter
+    4) removed. Author corrected to the real surname. Year from source PDF filename;
+    not independently externally cross-confirmed, but internally consistent (extracted
+    abstract is substantive, real research content matching the title and subject).
+- action: create
+  citekey: croix2021
+  entry:
+    title: Cultures without borders? Approaching the cultural continuum in the Danish-Frisian
+      coastal areas in the early Viking Age
+    author:
+    - family: Croix
+      given: Sarah
+    - family: IJssennagger-van der Pluijm
+      given: Nelleke
+    year: '2021'
+    date: '2021'
+    generation: F1
+    entry_type: article
+    journaltitle: Scandinavian Journal of History
+    volume: '46'
+    number: '3'
+    pages: 304-327
+    doi: 10.1080/03468755.2019.1687332
+  note: Created from the projects own Zotero seed library (BibVik_seed.csv), which
+    is authoritative. Confirms the real publication year is 2021 (Scandinavian Journal
+    of History, vol 46 issue 3), not 2019 as GROBID extracted from the PDF header
+    - the papers DOI contains 2019 (its online-first/registration date), which GROBID
+    likely mistook for the publication year. Full correct title recovered from Zotero;
+    the extracted PDF header had a truncated version. The papers own annotation record
+    separately noted "the PDF-file lacks a name", consistent with a file-naming/metadata
+    problem in this specific PDF.
+- action: create
+  citekey: lia2004
+  entry:
+    title: Vikingetidsgravenes rituelle kompleksitet
+    author:
+    - family: Lia
+      given: Øystein
+    year: '2004'
+    date: '2004'
+    generation: F1
+    entry_type: incollection
+    booktitle: 'Mellom himmel og jord: Foredrag fra et seminar om religionsarkeologi,
+      Isegran'
+    editor:
+    - family: Melheim
+      given: Lene
+    - family: Hedeager
+      given: Lotte
+    - family: Oma
+      given: Kristin
+    pages: 292-319
+    series: Oslo arkeologiske serie
+    number: '2'
+    publisher: University of Oslo
+    location: Oslo
+  note: Created from the projects own Zotero seed library (BibVik_seed.csv), which
+    is authoritative. No PDF exists for this entry in the seed folder or the Zotero
+    record itself (file field empty) - confirmed by exhaustive search of the corpus
+    (bibliography, raw reference text, git history, title/author search) finding no
+    trace under any name variant. This entry has no citations of its own extracted
+    (no source PDF to process), unlike the other create corrections tonight where
+    the PDF was processed but the self-entry failed.
