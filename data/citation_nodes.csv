@@ -8928,7 +8928,7 @@ vanderhorst1982,Im Originalformat der Handschrift 32 aus dem Besitz der Biblioth
 horst2010,Merlin und die Völva. Weissagungen im Altnordischen,2010,F2,article,Horst Simone,,0.75,1,0,False
 hultgard1987,"Old Norse and Finnish Religions and Cultic Place-Names. Based on Papers Read at the Symposium on Encounters Between Religions in Old Nordic Times and on Cultic Place-Names Held at Åbo, Finland, on the 19th-21st of August",1987,F2,article,Hultgård Anders,,0.667,1,0,False
 johansson2013,The Nordic Apocalypse. Approaches to Vǫluspá and Nordic Days of Judgement,2013,F2,article,Johansson Karl G,,0.833,1,0,False
-kitzlerahfeld2015a,Picture-Stone Workshops on Viking Age Gotland. A Study of Craftworkersʼ Traces,2015,F2,incollection,Kitzler Åhfeld Laila,10.1515/9783110417685-014,0.917,2,1,False
+kitzlerahfeld2015a,Picture-Stone Workshops on Viking Age Gotland. A Study of Craftworkersʼ Traces,2015,F2,incollection,Kitzler Åhfeld Laila,10.1515/9783110417685-014,0.917,2,0,False
 lamm2003b,,2003,F2,misc,Lamm Jan Peder,,0.5,1,0,False
 mckinnell1994,Both One and Many. Essays on Change and Variety in Late Norse Heathenism,1994,F2,article,Mckinnell John,,0.75,2,0,False
 mckinnell2008,Vǫluspá and the Feast of Easter. In Alvísmál,2008,F2,book,Mckinnell John,,0.667,1,0,False
@@ -12367,7 +12367,7 @@ radins2001b,"Daugmale, Jersika, Riga: The Development of Economic and Political 
 askvikresi1984,"Potassium-argon ages of schist honestones from the Viking Age sites at Kaupang (Norway), Aggersborg (Denmark), Hedeby (West Germany) and Wolin (Poland), and their archaeological implications",1984,F2,article,Mitchell J.G.,,0.75,1,0,False
 waterbolk1990,Het houten gebouw onder de St.-Walbrugkerk te Groningen,1990,F2,incollection,Waterbolk H.T.,,0.833,1,0,False
 schon2000,En modern svensk ekonomisk historia,2000,F2,book,Schön L.,,0.667,1,0,False
-holmqvist1977,Vår tidiga konst,1977,F2,book,Holmqvist Wilhelm,,0.556,1,0,False
+holmqvist1977,Vår tidiga konst,1977,F2,book,Holmqvist Wilhelm,,0.556,0,0,False
 kalmring2010f,Der Hafen von Haithabu: Die Ausgrabungen in Haithabu 14,2010,F2,book,Kalmring S.,,0.444,1,0,False
 kalmring2010g,Dorestad Hoogstraat from a Hedeby/Schleswig point of view,2010,F2,incollection,Kalmring S.,,0.444,1,0,False
 tomasson1996,Þórsmörk: Land og saga,1996,F2,article,Tómasson Þórdur,,0.75,1,0,False
@@ -12621,9 +12621,9 @@ schoknecht1977a,Menzlin (Excavation Report),1977,F2,misc,Schoknecht U.,,0.5,1,0,
 herrmann2005a,Ralswiek on Rügen (Excavation Report),2005,F2,misc,Herrmann J.,,0.5,1,0,False
 andersson1994,Tools for Textile Production from Birka and Hedeby,2003,F2,misc,Andersson E.,,0.5,1,0,False
 tacitus1999a,Agricola and Germany,1999,F2,misc,Tacitus,,0.5,1,0,False
-NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,0,21,True
 NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,0,45,True
-skorokhod2020,Staraya Ladoga in northwestern Russia,2020,F1,misc,Skorokhod A.,,0.75,0,9,True
+ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,0,86,True
+NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,0,21,True
 NOAUTHOR21,New Horizons in the Archaeology of the Viking Age,,F1,misc,,,0.25,0,14,True
 NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,0,193,True
-ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,0,86,True
+skorokhod2020,Staraya Ladoga in northwestern Russia,2020,F1,misc,Skorokhod A.,,0.75,0,9,True

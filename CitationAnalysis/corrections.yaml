@@ -56933,3 +56933,11 @@
   note: Sole citer puskina2017 is itself deleted, so this edge could never appear
     in any export - clearing purely for internal consistency of the deleted-entry
     bookkeeping.
+- action: set
+  citekey: holmqvist1977
+  field: cited_by
+  value: []
+  note: F2 entries never act as citation sources by design (only F1 papers have their
+    own citations extracted). kitzlerahfeld2015a (F2) was correctly identified as
+    the real citer here, but F2-to-F2 citation edges are outside the pipelines scope
+    - clearing to maintain the F1-only-source invariant.
