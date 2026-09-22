@@ -59448,3 +59448,40 @@
     in Øystein dropped, producing family=Ystein Lia, given=@. Corrected against the
     projects own Zotero seed library (BibVik_seed.csv), which gives the real author
     as Lia, Øystein. This will trigger a citekey rename now that year is set.'
+- action: set
+  citekey: gansum1998
+  field: cited_by
+  value:
+  - lia2004
+  - ulriksen2018
+  note: Adding lia2004 as citer - recovered from the already-extracted reference list
+    of the newly-created F1 entry, whose citations were processed by GROBID but never
+    connected back as outgoing edges until now.
+- action: set
+  citekey: heyerdahllarsen1995
+  field: cited_by
+  value:
+  - eriksen2013
+  - lia2004
+  note: Adding lia2004 as citer - recovered from the already-extracted reference list
+    of the newly-created F1 entry, whose citations were processed by GROBID but never
+    connected back as outgoing edges until now.
+- action: set
+  citekey: meulengrachtsorensen1980
+  field: cited_by
+  value:
+  - lia2004
+  - raffield2016
+  - raffield2019
+  note: Adding lia2004 as citer - recovered from the already-extracted reference list
+    of the newly-created F1 entry, whose citations were processed by GROBID but never
+    connected back as outgoing edges until now.
+- action: set
+  citekey: ryghnd
+  field: cited_by
+  value:
+  - gardela2018
+  - lia2004
+  note: Adding lia2004 as citer - recovered from the already-extracted reference list
+    of the newly-created F1 entry, whose citations were processed by GROBID but never
+    connected back as outgoing edges until now.
