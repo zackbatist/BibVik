@@ -113252,3 +113252,251 @@
   note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
     (not via this file) after locating and processing real PDFs for artelius2004a,
     arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: archaeologica2005
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: devlet2001
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: fedorova2001
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: hoj2005
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: hoj2011
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: kastholm1974
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: kommunikationsmedien2001
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: london1964
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: london2002
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: londonhelmbrecht2011
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: lundhansen1973
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: lundhansen1974
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: lundhansen1979
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: ostergard2008
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: seid2009
+  field: cited_by
+  value:
+  - kastholm2015
+  - kastholm2016
+  note: Adding citer kastholm2015 (Vindinge paper, discovered as the miscitekeyed
+    ole2015 entry) - written as a real correction, appended last, since earlier direct
+    bibliography.json edits for this were being overwritten by prior set cited_by
+    corrections for this same target that ran later in file order.
+- action: set
+  citekey: kastholm2015
+  field: _deleted
+  value: false
+  note: 'Un-deleting: this citekey was reused for the genuine Vindinge paper (renamed
+    from the miscitekeyed ole2015) after the original kastholm2015 stub was merged
+    into kastholm2016 earlier tonight. The stale _deleted flag from that merge never
+    got cleared, incorrectly excluding this real entry from edge export as a source.'
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - NOAUTHOR33
+  - aannestad2018
+  - amundsen2017
+  - arwillnordbladh2012
+  - arwillnordbladh2013
+  - arwillnordbladh2013a
+  - barrett2008
+  - barrett2010
+  - baug2019
+  - becker2012
+  - bergstol2004
+  - carver2015
+  - chenery2014
+  - edberg2019
+  - eriksen2013
+  - fahlander2016
+  - fahlander2018
+  - frei2011
+  - frei2012
+  - gardela2007
+  - gardela2014a
+  - gardela2018
+  - gardelanda
+  - gustin2017
+  - hardh2010a
+  - heenpettersen2018
+  - kalmring2010
+  - kastholm2016
+  - keller2016
+  - knudson2012
+  - kristjansdottir2015
+  - krzewinska2018
+  - larsson2007
+  - linderholm2008
+  - lucas2007
+  - lund2005
+  - lund2006
+  - lund2008
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2021
+  - milek2012
+  - moen2020
+  - odeback2018
+  - osullivan2015
+  - pedersen2009a
+  - peschel2017
+  - pluskowski2010a
+  - price2005a
+  - price2006
+  - price2008a
+  - price2010
+  - price2011
+  - price2012
+  - price2014
+  - price2014a
+  - price2018
+  - price2019
+  - price2020
+  - raffield2015
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  - roesdahl2011
+  - rosengren2010
+  - skre2019
+  - ulriksen2011a
+  - ulriksen2018
+  - wickholm2006
+  - williams2016
+  note: De-duplicating cited_by list - kastholm2016 appeared twice, likely from an
+    earlier merge/rename operation adding it redundantly.
+- action: set
+  citekey: christensen1983
+  field: cited_by
+  value:
+  - holst2010
+  - kastholm2016
+  - rosengren2010
+  - rundkvist2010
+  note: De-duplicating cited_by list - kastholm2016 appeared twice, likely from an
+    earlier merge/rename operation adding it redundantly.
