@@ -17362,7 +17362,7 @@
   note: Re-setting author (same value already present) to re-trigger citekey regeneration
     now that year is populated.
 - action: delete
-  citekey: NOAUTHOR1
+  citekey: arwillnordbladh2008a
   note: 'Entire record (title, author, date, entry_type, booktitle) produced by _resolution_method:
     llm_from_context with no _raw_citation anchoring any field - not a real extracted
     citation with a missing author, but a fully LLM-inferred guess from ambiguous
@@ -112570,3 +112570,685 @@
     which is correctly linked to its real source PDF.
   keep: kastholm2016
   discard: kastholm2015
+- action: merge
+  keep: arwillnordbladh2008b
+  discard: arwillnordbladh2008
+  note: arwillnordbladh2008 was an F2-extracted stub with no source PDF; arwillnordbladh2008a
+    is the newly processed, fully-linked entry for the same real paper (PDF located
+    and uploaded by user after extensive search).
+- action: merge
+  keep: barndon2005a
+  discard: barndon2005
+  note: barndon2005 was an F2-extracted stub with no source PDF; barndon2005a is the
+    newly processed, fully-linked entry for the same real paper (PDF located and uploaded
+    by user after extensive search).
+- action: merge
+  keep: artelius2004a
+  discard: artelius2004
+  note: artelius2004 was an F2-extracted stub with no source PDF; artelius2004a is
+    the newly processed, fully-linked entry for the same real paper (PDF located and
+    uploaded by user after extensive search).
+- action: set
+  citekey: anonym1901
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: arne1905
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: artelius1993
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: artelius2003
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: barraud1994
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: berger1966
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: birkeli1938
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: colpe1987
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: connelid1993
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: furingsten1986
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: geels1985
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: grislund2001
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: hansson1998
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: koepping1987
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: moberg1950
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: nyalssaga1981
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: nyalssaga2002
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: webernd
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: selinge1986
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: shepherd1987
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: stremberg1993
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sarlvik1976
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: trotzig2000
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: turner1982
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: vedelnd
+  field: cited_by
+  value:
+  - artelius2004a
+  note: Documenting citer(s) ['artelius2004a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: fran2006
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: arwillnordbladh2005
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: fernstal2004
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: grislund2002
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: grislund2005
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: gustavson2000
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: vanhouts2001
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: lykke2003
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: mckinnell2003
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: vonmiiller1956
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sundgvist1998
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sundqvist2005
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: ortnamnslexikon2003
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sorlin2001
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: widmark1995
+  field: cited_by
+  value:
+  - arwillnordbladh2008b
+  note: Documenting citer(s) ['arwillnordbladh2008a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: barndon1995
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: bjornstad2003
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: burford1972
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: brelstord1949
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: brown1995
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: childs1991
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: childs2005
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: cline1937
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: davidson1982
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: delcourt1957
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: dommasnes1997
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: englund1999
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: espclund2004
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: forbe1969
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: janson1969
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: gjeerdcr1949
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: jacobsen2003
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: hermundstad1995
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: hesio1984
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: hines2003
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: kriger1999
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: maret1980
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: marte2002
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: mcnaughton1988
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: munch1970
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: miillerwille1977
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: nodanskog2003
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: odner1969
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: pleiner1969
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: raudvere2004
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: oldeberg1943
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: randers1988
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: reid1995
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: roesdal1980
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: rundberget2002
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sasson1983
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: schmidt1997
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: sjolsvold1949
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: stigum1971
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: tveiten2005
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: todnem1999
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: vannoten1972
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
+- action: set
+  citekey: wertime1980
+  field: cited_by
+  value:
+  - barndon2005a
+  note: Documenting citer(s) ['barndon2005a'] added directly to bibliography.json
+    (not via this file) after locating and processing real PDFs for artelius2004a,
+    arwillnordbladh2008a, barndon2005a - recorded here for reproducibility.
