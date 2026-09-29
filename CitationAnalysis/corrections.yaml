@@ -113500,3 +113500,121 @@
   - rundkvist2010
   note: De-duplicating cited_by list - kastholm2016 appeared twice, likely from an
     earlier merge/rename operation adding it redundantly.
+- action: create
+  citekey: hammarberg1989
+  entry:
+    title: Byzantine coins found in Sweden. Commentationes de nummis saeculorum IX-XI
+      in Suecia repertis, Nova series 2
+    author:
+    - family: Hammarberg
+      given: I.
+    - family: Malmer
+      given: B.
+    - family: Zachrisson
+      given: T.
+    year: '1989'
+    date: '1989'
+    generation: F2
+    entry_type: book
+    location: Stockholm
+    cited_by:
+    - myrberg2009
+  note: 'Created from footnote 1 in Myrberg 2009 (myrberg2009), read directly from
+    the source PDF - GROBID and all fallback detection methods failed to extract this
+    papers footnotes entirely (reference_list: 0, llm_footnotes: 0), despite 9 real,
+    legible footnote citations being present in the actual text.'
+- action: create
+  citekey: kristiansennd
+  entry:
+    title: 'Ideology and material Culture: an archaeological perspective'
+    author:
+    - family: Kristiansen
+      given: K.
+    editor:
+    - family: Spriggs
+      given: M.
+    generation: F2
+    entry_type: incollection
+    cited_by:
+    - myrberg2009
+  note: Created from footnote 4 in Myrberg 2009 (myrberg2009), read directly from
+    the source PDF - same extraction failure as hammarberg1989. Year not visible in
+    the truncated footnote text captured.
+- action: set
+  citekey: myrberg2005
+  field: cited_by
+  value:
+  - eriksen2013
+  - fabech2013
+  - myrberg2009
+  note: Adding citer myrberg2009 - found in a footnote (read directly from the source
+    PDF) that the automated extraction pipeline failed to detect entirely.
+- action: set
+  citekey: arrhenius1995
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - barrett2008
+  - barrett2010
+  - glorstad2012
+  - lund2016
+  - myrberg2009
+  note: Adding citer myrberg2009 - found in a footnote (read directly from the source
+    PDF) that the automated extraction pipeline failed to detect entirely.
+- action: set
+  citekey: kristiansennd
+  field: title
+  value: 'Ideology and material Culture: an archaeological perspective'
+  note: retry
+- action: create
+  citekey: kristiansen1984
+  entry:
+    title: 'Ideology and material culture: an archaeological perspective'
+    author:
+    - family: Kristiansen
+      given: K.
+    year: '1984'
+    date: '1984'
+    generation: F2
+    entry_type: incollection
+    booktitle: Marxist Perspectives in Archaeology
+    editor:
+    - family: Spriggs
+      given: M.
+    publisher: Cambridge University Press
+    location: Cambridge
+    cited_by:
+    - myrberg2009
+  note: Created from footnote 4 in myrberg2009, read directly from source PDF; year/venue
+    supplied from the well-known publication (Spriggs ed., Marxist Perspectives in
+    Archaeology, 1984) since the footnote text captured did not include it.
+- action: set
+  citekey: myrberg2005
+  field: cited_by
+  value:
+  - eriksen2013
+  - fabech2013
+  - myrberg2009
+  note: Adding citer myrberg2009, found via manual PDF read after pipeline extraction
+    failure.
+- action: set
+  citekey: arrhenius1995
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - barrett2008
+  - barrett2010
+  - glorstad2012
+  - lund2016
+  - myrberg2009
+  note: Adding citer myrberg2009, found via manual PDF read after pipeline extraction
+    failure.
+- action: set
+  citekey: hammarberg1989
+  field: cited_by
+  value:
+  - myrberg2007
+  - myrberg2009
+  note: Adding citer myrberg2009 - this entry already existed (as a citation from
+    myrberg2007) before being independently found in myrberg2009s footnote 1 via manual
+    PDF read.
