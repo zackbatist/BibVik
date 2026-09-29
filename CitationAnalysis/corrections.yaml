@@ -113813,3 +113813,2011 @@
   note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
     read directly from the source PDF, after the automated grobid_id_to_citekey resolution
     step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: price2015
+  field: author
+  value:
+  - family: Price
+    given: Neil
+  - family: Gräslund
+    given: Bo
+  note: Correcting fabricated multi-author garble (author field had merged in names
+    from an unrelated Galgedil isotope-study paper) - Zotero confirms real authors
+    are Neil Price and Bo Gräslund.
+- action: set
+  citekey: NOAUTHOR21
+  field: author
+  value:
+  - family: Price
+    given: Neil
+  note: Setting author before year/citekey regen.
+- action: set
+  citekey: NOAUTHOR21
+  field: year
+  value: '2018'
+  note: 'Confirmed via Uppsala University Viking Phenomenon project publications list:
+    Price, N. (ed.) 2018. New Horizons in the Archaeology of the Viking Age. Special
+    issue of The Archaeological Record 18/3.'
+- action: set
+  citekey: NOAUTHOR21
+  field: date
+  value: '2018'
+  note: See year field.
+- action: set
+  citekey: andersson2016
+  field: cited_by
+  value:
+  - fahlander2016
+  - lund2021
+  - price2018b
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: jesch2015
+  field: cited_by
+  value:
+  - croix2015
+  - edberg2019
+  - heenpettersen2018
+  - heenpettersen2019
+  - jackson2018
+  - lund2021
+  - price2018
+  - price2018b
+  - price2019
+  - raffield2018
+  - raffield2019
+  - sindbaek2017
+  - williams2016
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: price2018
+  field: cited_by
+  value:
+  - carver2015
+  - krzewinska2018
+  - lund2021
+  - price2018b
+  - price2019
+  - price2020
+  - reiter2019
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: price2016
+  field: cited_by
+  value:
+  - aannestad2018
+  - baug2019
+  - bill2019
+  - hedenstiernajonson2017
+  - heenpettersen2019
+  - hennius2018
+  - lund2021
+  - odeback2018
+  - price2018
+  - price2018b
+  - price2020
+  - raffield2016
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: svanberg2003
+  field: cited_by
+  value:
+  - aannestad2018
+  - androshchuk2010
+  - barrett2008
+  - barrett2010
+  - croix2015
+  - croix2019
+  - eriksen2013
+  - eriksen2016
+  - gardela2014a
+  - gardela2015
+  - gardela2018
+  - gardelanda
+  - gustin2017
+  - halstadmcguire2010
+  - hardh2010a
+  - holst2014
+  - jahnsen2016
+  - kershaw2009
+  - kristjansdottir2015
+  - lucas2007
+  - lund2004
+  - lund2008
+  - lund2013
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2021
+  - moen2020
+  - pedersen2009a
+  - price2008a
+  - price2010
+  - price2014d
+  - price2018b
+  - price2019
+  - sindbaek2013a
+  - skre2011b
+  - skre2019
+  - toplak2018
+  - ulriksen2011a
+  - ulriksen2018
+  - williams2014
+  - williams2016
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: williams2014
+  field: cited_by
+  value:
+  - aannestad2018
+  - gardela2018
+  - hadley2018
+  - harris2017
+  - kershaw2017
+  - lund2016
+  - lund2021
+  - price2018
+  - price2018b
+  - raffield2015
+  - williams2016
+  - williams2017
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: glorstad2017
+  field: cited_by
+  value:
+  - lund2021
+  - moen2020
+  - pilo2020
+  - price2018b
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: price2015
+  field: cited_by
+  value:
+  - abrams2012
+  - gardela2018
+  - hedenstiernajonson2017
+  - krzewinska2018
+  - lund2021
+  - price2018
+  - price2018b
+  - price2019
+  - price2020
+  - pricenda
+  - raffield2016
+  - raffield2019
+  - reiter2019
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: brink2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - barrett2010
+  - baug2019
+  - boyd2013
+  - croix2015
+  - croix2019
+  - eriksen2016
+  - fabech2013
+  - fontaine2017
+  - griffiths2019
+  - hillerdal2010
+  - kalmring2010
+  - kalmring2018
+  - krzewinska2015
+  - leonard2011
+  - lund2016
+  - lund2020
+  - poulsen2011
+  - price2014
+  - price2014d
+  - price2018
+  - price2018b
+  - price2019
+  - raffield2015
+  - raffield2016
+  - raffield2019
+  - roesdahl2011
+  - sindbaek2013a
+  - sindbaek2014
+  - skre2019
+  - stene2017
+  - zachrisson2014a
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: peets2013
+  field: cited_by
+  value:
+  - bonde2016
+  - price2014
+  - price2014d
+  - price2016
+  - price2018b
+  - price2020
+  - raffield2015
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: eriksen2015
+  field: cited_by
+  value:
+  - eriksen2016
+  - eriksen2017
+  - griffiths2019
+  - price2018
+  - price2018b
+  - raffield2015
+  - raffield2018
+  - williams2016
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: andersson2016b
+  field: cited_by
+  value:
+  - price2018a
+  - price2018b
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: cambridge2017
+  field: cited_by
+  value:
+  - price2018a
+  - price2018b
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: hauptman2014
+  field: cited_by
+  value:
+  - price2018a
+  - price2018b
+  - price2019
+  - raffield2018
+  note: Redirecting stale NOAUTHOR21 reference to price2018b after author/year fix
+    triggered citekey regeneration.
+- action: set
+  citekey: andren1989
+  field: cited_by
+  value:
+  - andren2000
+  - arwillnordbladh2012
+  - eriksen2013
+  - lund2006
+  - lund2008
+  - oye2016
+  - price2010
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: arrhenius1961
+  field: cited_by
+  value:
+  - christensen2013
+  - gardela2018
+  - pedersen2009a
+  - rosengren2010
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: becker1973
+  field: cited_by
+  value:
+  - staecker2004a
+  - zachrisson2017a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: blindheim1973
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - lund2006
+  - lund2008
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: blomkvist2002
+  field: cited_by
+  value:
+  - andren2013
+  - fabech2013
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: bottgerniedenzu1982
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - helmbrecht2012
+  - oehrl2019
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: buisson1976
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - helmbrecht2012
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  - zachrisson2017a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: danbolt1989
+  field: cited_by
+  value:
+  - andren2000
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: eshleman1983
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: fuglesang1980
+  field: cited_by
+  value:
+  - abrams2012
+  - amundsen2017
+  - andren2000
+  - bergstol2004
+  - graslund2011
+  - hardh2010a
+  - lund2006
+  - lund2020
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: gunnes1976
+  field: cited_by
+  value:
+  - staecker2004a
+  - storli2010c
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: kermode1907
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: liepe1989
+  field: cited_by
+  value:
+  - price2010
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: olsen1941
+  field: cited_by
+  value:
+  - lund2005
+  - lund2020
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: ong1982
+  field: cited_by
+  value:
+  - andren2000
+  - andren2013a
+  - arwillnordbladh2007
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: souers1937
+  field: cited_by
+  value:
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: webster1999
+  field: cited_by
+  value:
+  - pedersen2009
+  - pedersenndb
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: set
+  citekey: staecker1990
+  field: cited_by
+  value:
+  - pedersen2009a
+  - staecker2004a
+  note: Re-adding citer staecker2004a after prior reconnection was lost in a bibliography.json/_graph_state.json
+    desync restore - manually matched from the paper source PDF footnotes/bibliography.
+- action: create
+  citekey: abbott2008
+  entry:
+    author:
+    - family: Abbott
+      given: D. H.
+    - family: Biscaye
+      given: P.
+    - family: Cole-Dai
+      given: Jihong
+    - family: Breger
+      given: D.
+    title: ABBOTT, D. H., BISCAYE, P., COLE-DAI, J. and BREGER, D. 2008. Magnetite
+      and silicate spherules from the GISP2 Core at the 536
+    date: '2008'
+    entry_type: misc
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2008'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: horizon2008
+  entry:
+    author:
+    - family: Horizon
+      given: A. D.
+    title: Fall Meeting
+    date: '2008'
+    volume: '41'
+    pages: '1454'
+    publisher: American Geophysical Union
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2008'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: andersen1994
+  entry:
+    author:
+    - family: Andersen
+      given: S. T.
+    - family: Berglund
+      given: Björn E.
+    title: Maps for terrestrial non-tree pollen (NAP) percentages in north and central
+      Europe 1800 and 1450 yr BP
+    journaltitle: Paldoklimaforschung
+    date: '1994'
+    volume: '12'
+    pages: 119--134
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1994'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: andren2012
+  entry:
+    author:
+    - family: Andren
+      given: A.
+    title: Fran solnedgang till solnedgang. en tolkning av de tidiga gotlandska bildstenarna
+    journaltitle: Gotlandskt Arkiv
+    date: '2012'
+    volume: '84'
+    pages: 49--58
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: arrhenius2013
+  entry:
+    author:
+    - family: Arrhenius
+      given: Birgit /
+    title: Helgé in the shadow of the dust veil
+    journaltitle: Journal of Archaeology and Ancient History
+    date: '2013'
+    volume: '5'
+    pages: '616030'
+    url: http://uu.diva-portal.org/smash/record.jsfepid=diva
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2013'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: axboe1999
+  entry:
+    author:
+    - family: Axboe
+      given: M.
+    title: The year 536 and the Scandinavian gold hoards
+    journaltitle: Medieval Archaeology
+    date: '1999'
+    volume: '43'
+    pages: 186--188
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1999'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: axboe2001
+  entry:
+    author:
+    - family: Axboe
+      given: M.
+    title: Amulet Pendants and a Darkened Sun
+    booktitle: Vitterhets-, historie-och antikvitetsakademien. PAST VULNERABILITY
+      AXBOE, M. 2004. Die Goldbrakteaten der Volk
+    editor:
+    - family: Magnus
+      given: Bente
+    date: '2001'
+    pages: 119--136
+    publisher: Herstellungsprobleme und Chronologie
+    eventtitle: Stockholm, Kungl; Berlin, de Gruyter
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2001'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: axboe2005
+  entry:
+    author:
+    - family: Axboe
+      given: M.
+    title: 'Ragnarok: Odins Verden'
+    editor:
+    - family: FISCHER
+      given: T. CAPELLE and C.
+    date: '2005'
+    pages: 41--56
+    location: Silkeborg, Silkeborg Museum
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2005'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie1994
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: Dendrochronology Raises Questions About the Nature of the Ad 536 Dust-Veil
+      Event
+    journaltitle: The Holocene
+    date: '1994'
+    volume: '4'
+    number: '94'
+    pages: 212--217
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1994'
+    doi: 10.1177/095968369400400211
+    publisher: SAGE Publications
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie1995
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: A Slice through Time. Dendochronology and Precision Dating
+    date: '1995'
+    location: London, Batsford
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1995'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie1997
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: Bronze Age myths expose archaeological shortcomings? A reply to
+    journaltitle: Antiquity
+    editor:
+    - family: Buckland
+      given: ''
+    date: '1997'
+    volume: '72'
+    pages: 425--427
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1997'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie1999
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: Exodus to Arthur. Catastrophic Encounters with Comets
+    date: '1999'
+    location: London, Batsford
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1999'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie2001
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: The AD 540 event
+    journaltitle: Current Archaeology
+    date: '2001'
+    volume: '15'
+    number: '6'
+    pages: 266--269
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2001'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie2006
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: Tree-Rings Indicate Global Environmental Downturns that Could Have Been
+      Caused by Comet Debris
+    booktitle: 'Comet/asteroid Impacts and Human Society: an Interdisciplinary Approach'
+    editor:
+    - family: Bo-Browsky
+      given: P.
+    - family: Rickman
+      given: H.
+    date: '2006'
+    pages: 105--122
+    publisher: Springer
+    eventtitle: Berlin, Heidelberg and New York
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2006'
+    doi: 10.1007/978-3-540-32711-0_5
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie2008
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: Proposed re-dating of the European ice core chronology by seven years prior
+      to the 7th century AD
+    journaltitle: Geophysical Research Letters
+    date: '2008'
+    volume: '35'
+    doi: 10.1029/2008GLO34755S
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2008'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: baillie2010
+  entry:
+    author:
+    - family: Baillie
+      given: Michael G L
+    title: 'Volcanoes, Ice-Cores and Tree-Rings: One Story or Two?'
+    journaltitle: Antiquity
+    date: '2010'
+    volume: '84'
+    pages: 202--215
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2010'
+    doi: 10.1017/s0003598x00099877
+    number: '323'
+    publisher: Cambridge University Press (CUP)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: barbante2012
+  entry:
+    author:
+    - family: Barbante
+      given: C.
+    - family: Kehrwald
+      given: N. M.
+    - family: Mari-Anelli
+      given: P.
+    - family: Vinther
+      given: B. M.
+    - family: Stef-Fensen
+      given: J. P.
+    - family: Cozzi
+      given: G.
+    - family: Hammer
+      given: C. U.
+    - family: Clausen
+      given: Henrik Brink
+    - family: ''
+      given: Siggaard-Anders-En
+    - family: ''
+      given: M.-L
+    title: Greenland ice core evidence of the 79 AD Vesuvius eruption
+    journaltitle: Climate of the Past
+    date: '2012'
+    volume: '8'
+    pages: 5429--5454
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+    doi: 10.5194/cpd-8-5429-2012
+    publisher: Copernicus GmbH
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: barnish1992
+  entry:
+    author:
+    - family: Barnish
+      given: S. J. B.
+    title: The Variae of Magnus Aurelius Cassiodorus Senator
+    date: '1992'
+    publisher: Liverpool University Press
+    location: Liverpool
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1992'
+    doi: 10.3828/978-0-85323-436-4
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: behre1996
+  entry:
+    author:
+    - family: Behre
+      given: K.-E
+    - family: Brande
+      given: A.
+    - family: Kuster
+      given: H.
+    - family: Rosch
+      given: M.
+    title: Germany
+    booktitle: Palaeoecological Events During the Last 15 000 Years
+    editor:
+    - family: Ber-Glund
+      given: B. E.
+    - family: Birks
+      given: J. B.
+    - family: Wiczowyv
+      given: M. Ralska-Jasie-Neil Price And Bo Graslund
+    date: '1996'
+    pages: 507--551
+    eventtitle: Chichester, Wiley
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1996'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: berglund1996
+  entry:
+    author:
+    - family: Berglund
+      given: Björn E.
+    - family: Birks
+      given: J. B.
+    - family: ''
+      given: Ralska-Jasiewiczowyv
+    - family: ''
+      given: M.
+    title: BERGLUND, B. E., BIRKS, J. B. and RALSKA- JASIEWICZOWYV, M. (eds) 1996.
+      Palaeoecologi- cal Events During the Last 15 000 Years. Chich- ester, Wiley.
+    date: '1996'
+    publisher: Wiley
+    entry_type: misc
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1996'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: bernhardsson2007
+  entry:
+    author:
+    - family: Bernhardsson
+      given: Haraldur
+    title: Old Icelandic ragnarok and ragnarokkr
+    booktitle: Verba docenti. Studies in Historical and Indo-European Linguistics
+      Presented to Jay H. Jasanoff by Students, Colleagues, and Friends
+    editor:
+    - family: Nuss-Baum
+      given: A. J.
+    date: '2007'
+    pages: 25--38
+    publisher: Beech Stave Press
+    eventtitle: Ann Arbor
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2007'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: bork1998
+  entry:
+    author:
+    - family: Bork
+      given: H. R.
+    - family: Bork
+      given: H. R.
+    - family: Dalchow
+      given: C.
+    - family: Faust
+      given: B.
+    - family: Pion
+      given: H. P.
+    - family: Schatz
+      given: T.
+    title: Landschaftsentwicklung in Mitteleuropa
+    booktitle: Wirkungen des Menschen auf Landschaften
+    date: '1998'
+    eventtitle: Gotha, Klett Perthes
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1998'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: bosley1989
+  entry:
+    author:
+    - family: Bosley
+      given: K. M.
+    title: The Kalevala
+    date: '1989'
+    publisher: Oxford University Press
+    location: Oxford
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1989'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: briffa1990
+  entry:
+    author:
+    - family: Briffa
+      given: Keith R.
+    - family: Bartholin
+      given: T. S.
+    - family: Eckstein
+      given: D.
+    - family: Jones
+      given: Philip D.
+    - family: Karlen
+      given: Wibjorn
+    - family: Schwein-Gruber
+      given: F. H.
+    - family: Zetterberg
+      given: P.
+    title: A 1400-Hundred Tree-Ring Record of Summer Temperatures in Fennoscandia
+    journaltitle: Nature
+    date: '1990'
+    volume: '346'
+    pages: 434--439
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1990'
+    doi: 10.1038/346434a0
+    number: '6283'
+    publisher: Springer Science and Business Media LLC
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: briffa1992
+  entry:
+    author:
+    - family: Briffa
+      given: Keith R.
+    - family: Jones
+      given: Philip D.
+    - family: Bartholin
+      given: T. S.
+    - family: Eckstein
+      given: D.
+    - family: Schweingruber
+      given: Fritz H
+    - family: Karlen
+      given: Wibjorn
+    - family: Zetterberg
+      given: P.
+    - family: Eronen
+      given: M.
+    title: 'Fennoscandian Summers From Ad 500: Temperature Changes on Short and Long
+      Time Scales'
+    journaltitle: Climatic Dynamics
+    date: '1992'
+    volume: '7'
+    pages: 111--119
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1992'
+    doi: 10.1007/bf00211153
+    number: '3'
+    publisher: Springer Science and Business Media LLC
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: buckland1997
+  entry:
+    author:
+    - family: Buckland
+      given: Paul C.
+    - family: Dugmore
+      given: Andrew J.
+    - family: ''
+      given: Ed-Wards
+    - family: ''
+      given: K. J.
+    title: Bronze Age myths? Volcanic activity and human response in the Mediterranean
+      and North Atlantic regions
+    journaltitle: Antiquity
+    date: '1997'
+    volume: '71'
+    pages: 581--593
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1997'
+    doi: 10.1017/s0003598x00085343
+    number: '273'
+    publisher: Cambridge University Press (CUP)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: p2012
+  entry:
+    author: []
+    title: 'Surviving Sudden Environmental Change: Answers from Archaeology'
+    editor:
+    - family: P.
+      given: COOPER, J. and SHEETS,
+    date: '2012'
+    publisher: University Press of Colorado
+    location: Boulder
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: doreler1992
+  entry:
+    author:
+    - family: Doreler
+      given: W.
+    title: Evaluation of Land Surfaces Cleared from Forests by Prehistoric Man in
+      Early Neolithic Times and the Time of Migrating Germanic Tribes
+    booktitle: Landscape development about 6500 B.P. and about 500 A.D. in Kosel
+    editor:
+    - family: Frenzel
+      given: B.
+    date: '1992'
+    volume: '3'
+    pages: 161--167
+    eventtitle: Schleswig-Holstein; Stuttgart, Jena and New York, Gustav Fischer
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1992'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: doreler2012
+  entry:
+    author:
+    - family: Doreler
+      given: W.
+    - family: Feeser
+      given: I.
+    - family: Van Den Bogaard
+      given: C.
+    - family: Driebrodt
+      given: S.
+    - family: Erlenkauser
+      given: H.
+    - family: Kleinmann
+      given: A.
+    - family: Merkt
+      given: J.
+    - family: Wiethold
+      given: J.
+    title: 'A High-Quality Annually Laminated Sequence From Lake Belau, Northern Germany:
+      Revised Chronology and Its Implications for Palynological and Tephrochronological
+      Studies'
+    journaltitle: The Holocene
+    date: '2012'
+    volume: '22'
+    number: '12'
+    pages: 1413--1426
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: dull2001
+  entry:
+    author:
+    - family: Dull
+      given: Robert A.
+    - family: Southon
+      given: John R.
+    - family: Sheets
+      given: Payson
+    title: 'Volcanism, ecology and culture: a reassessment of the Volcan Ilopango
+      TBJ eruption in the southern Maya realm'
+    journaltitle: Latin American Antiquity
+    date: '2001'
+    volume: '12'
+    number: '1'
+    pages: 25--44
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2001'
+    doi: 10.2307/971755
+    publisher: Cambridge University Press (CUP)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: dull2010
+  entry:
+    author:
+    - family: Dull
+      given: Robert A.
+    - family: Southon
+      given: John R.
+    - family: Kutterolf
+      given: S.
+    - family: Freundt
+      given: A.
+    - family: Wahl
+      given: D.
+    - family: Sheets
+      given: Payson
+    title: Did the TBJ Ilopango eruption cause the AD 536 event?
+    booktitle: Geophysical Union Fall Meeting Abstracts. Bibcode 2010AGUFM. V13C2370D
+    date: '2010'
+    publisher: American
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2010'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: eggum2007
+  entry:
+    author:
+    - family: Eggum
+      given: A.
+    title: Edvard Munch som maler
+    date: '2007'
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2007'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: fehr2011
+  entry:
+    author:
+    - family: Fehr
+      given: H.
+    - family: Rummel
+      given: P.
+    title: Die Vélkerwanderung
+    date: '2011'
+    eventtitle: Stuttgart, Theiss
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2011'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: gelling1969
+  entry:
+    author:
+    - family: Gelling
+      given: P.
+    - family: Ellis
+      given: H. E.
+    title: The Chariot of the Sun and Other Rites and Symbols of the Northern Bronze
+      Age
+    date: '1969'
+    location: London, Dent
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1969'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: graslund2009
+  entry:
+    author:
+    - family: Graslund
+      given: B.
+    title: Ekki nytr sdlar. nar himlen fargades réd av gudarnas blod
+    booktitle: A austrvega. Saga and East Scandinavia
+    editor:
+    - family: Ney
+      given: Agneta
+    - family: Williams
+      given: Howard
+    - family: Ljungqvist
+      given: Fredrik Charpentier
+    date: '2009'
+    volume: '9'
+    pages: 318--326
+    eventtitle: Uppsala; Uppsala, Uppsala University
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2009'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: graslund2012
+  entry:
+    author:
+    - family: Graslund
+      given: B.
+    - family: Price
+      given: N.
+    title: Twilight of the gods? The 'dust veil event' of AD 536 in critical perspective
+    journaltitle: Antiquity
+    date: '2012'
+    volume: '86'
+    pages: 428--443
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: grattan2007
+  entry:
+    author:
+    - family: Grattan
+      given: J.
+    - family: Torrence
+      given: Robin
+    title: 'Living Under the Shadow: the Cultural Impact of Volcanic Eruptions'
+    date: '2007'
+    publisher: Left Coast Press
+    location: Walnut Creek
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2007'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: grudd2006
+  entry:
+    author:
+    - family: Grudd
+      given: Håkan
+    title: Tree Rings as Sensitive Proxies of Past Climate Change
+    date: '2006'
+    location: Stockholm, Stockholm University
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2006'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: grudd2002
+  entry:
+    author:
+    - family: Grudd
+      given: Håkan
+    - family: Briffa
+      given: Keith R.
+    - family: Karlen
+      given: Wibjorn
+    - family: Bar-Tholin
+      given: Thomas S.
+    - family: Jones
+      given: Philip D.
+    - family: Kromer
+      given: Bernd
+    title: 'A 7400-Year Tree-Ring Chronology in Northern Swedish Lapland: Natural
+      Climatic Variability Expressed on Annual to Millennial Timescales'
+    journaltitle: The Holocene
+    date: '2002'
+    volume: '12'
+    number: '6'
+    pages: 657--665
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2002'
+    doi: 10.1191/0959683602hl578rp
+    publisher: SAGE Publications
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: gunnel2013
+  entry:
+    author:
+    - family: Gunnel
+      given: T.
+    - family: Lassen
+      given: Annette
+    title: 'The Nordic Apocalypse: Approaches to Voluspa and Nordic Days of Judgement'
+    date: '2013'
+    location: Turnhout, Brepols
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2013'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: vulnerabilityhalsall2003
+  entry:
+    author:
+    - family: Vulnerability Halsall
+      given: G.
+    title: Warfare and Society in the Barbarian West, 450-900
+    date: '2003'
+    publisher: Routledge
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2003'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: jansen2000
+  entry:
+    author:
+    - family: Jansen
+      given: Eystein
+    - family: Koc N
+      given: ''
+    title: Century to Decadal Scale Records of Norwegian Sea Surface Temperature Variations
+      of the past Two Millennia
+    journaltitle: PAGES Newsletter
+    date: '2000'
+    volume: '8'
+    number: '1'
+    pages: 13--14
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2000'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: kaul2004
+  entry:
+    author:
+    - family: Kaul
+      given: Flemming
+    title: 'Bronzealderens Religion: Studier af den Nordiske Bronzealders Ikonografi.
+      Copenhagen'
+    date: '2004'
+    publisher: Royal Society of Northern Antiquaries
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2004'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: keys1999
+  entry:
+    author:
+    - family: Keys
+      given: D.
+    title: 'Catastrophe: an Investigation into the Origins of the Modern World'
+    date: '1999'
+    location: London, Century
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1999'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: kutterolf2008
+  entry:
+    author:
+    - family: Kutterolf
+      given: S.
+    - family: Freundt
+      given: A.
+    - family: Perez
+      given: W.
+    title: 'Pacific Offshore Record of Plinian Arc Volcanism in Central America: 2.
+      Tephra Volumes and Erupted Masses'
+    journaltitle: Geochemistry Geophysics Geosystems
+    date: '2008'
+    volume: '9'
+    number: 2S02
+    doi: 10.1029/2007GC001791
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2008'
+    publisher: American Geophysical Union (AGU)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: lowenborg2010
+  entry:
+    author:
+    - family: Lowenborg
+      given: Daniel
+    title: 'Excavating the Digital Landscape: GIS Analyses of Social Relations in
+      Central Sweden in the Ist Millennium AD. Uppsala'
+    date: '2010'
+    publisher: University of Uppsala Press
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2010'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: n2010
+  entry:
+    author: []
+    title: 'Questioning Collapse: Human Resilience, Ecological Vulnerability and the
+      Aftermath of Empire'
+    editor:
+    - family: N.
+      given: McANANY, P. and YOFFEE,
+    date: '2010'
+    publisher: Cambridge University Press
+    location: Cambridge
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2010'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: nasman2012
+  entry:
+    author:
+    - family: Nasman
+      given: Ulf
+    title: 'An Iron Age shock doctrine: the 536-7 AD event as a trigger large-scale
+      social change in the Malaren valley area" by Daniel Lowenborg'
+    journaltitle: Journal of Archaeology and Ancient History
+    date: '2012'
+    volume: '4'
+    pages: 1--2
+    url: hetp://www.arkeologi.uu.se/digitalAs-sets/159/159808
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2012'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: nerman1963
+  entry:
+    author:
+    - family: Nerman
+      given: Birger
+    title: Véluspa 61:3 gullnor tofflor. Arkiv for Nordisk Filologi 78/1-4
+    date: '1963'
+    pages: '122'
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1963'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: oppenheimer2011
+  entry:
+    author:
+    - family: Oppenheimer
+      given: Clive
+    title: Eruptions that Shook the World
+    date: '2011'
+    publisher: Cambridge University Press
+    eventtitle: Cambridge
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2011'
+    doi: 10.1017/cbo9780511978012
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: pentikainen1989
+  entry:
+    author:
+    - family: Pentikainen
+      given: Juha
+    title: PENTIKAINEN, J.Y. 1989. Kalevala Mythology. Bloomington, Indiana University
+      Press.
+    date: '1989'
+    publisher: Indiana University Press
+    location: Bloomington
+    entry_type: misc
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1989'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: rampino1988
+  entry:
+    author:
+    - family: Rampino
+      given: M. R.
+    - family: Self
+      given: Stephen
+    - family: Stothers
+      given: R. B.
+    title: Volcanic winters
+    journaltitle: Annual Review of Earth Planetary Sciences
+    date: '1988'
+    number: '16'
+    pages: 73--99
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1988'
+    doi: 10.1146/annurev.earth.16.1.73
+    volume: '16'
+    publisher: Annual Reviews
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: rigby2004
+  entry:
+    author:
+    - family: Rigby
+      given: Emma
+    - family: Symonds
+      given: Melissa
+    - family: ''
+      given: Ward-Thomp-Son
+    - family: ''
+      given: D.
+    title: A comet impact in AD 536?
+    journaltitle: Astronomy and Geophysics
+    date: '2004'
+    volume: '45'
+    number: '1'
+    pages: 23--26
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2004'
+    doi: 10.1046/j.1468-4004.2003.45123.x
+    publisher: Oxford University Press (OUP)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: salzer2007
+  entry:
+    author:
+    - family: Salzer
+      given: Matthew W.
+    - family: Hughes
+      given: Malcolm K.
+    title: Bristlecone Pine Tree Rings and Volcanic Eruptions over the Last 5000 Yr
+    journaltitle: Quaternary Research
+    date: '2007'
+    volume: '67'
+    pages: 57--68
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2007'
+    doi: 10.1016/j.yqres.2006.07.004
+    number: '1'
+    publisher: Cambridge University Press (CUP)
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: stenberger1933
+  entry:
+    author:
+    - family: Stenberger
+      given: Marten
+    title: 'Oland under Aldre Jarndaldern: en Bebyggelsehistorisk Undersékning. Stockholm,
+      Kungl. Vitterhets-, historie-och antikvitetsakademien'
+    date: '1933'
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1933'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: stenberger1955
+  entry:
+    author:
+    - family: Stenberger
+      given: Marten
+    title: 'Vallhagar: a Migration Period Settlement on Gotland, Sweden. 2 vols'
+    date: '1955'
+    location: Copenhagen, Munksgaard
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1955'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: stothers1984
+  entry:
+    author:
+    - family: Stothers
+      given: R. B.
+    title: Mystery cloud of AD 536
+    journaltitle: Nature
+    date: '1984'
+    volume: '307'
+    pages: 344--345
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1984'
+    doi: 10.1038/307344a0
+    number: '5949'
+    publisher: Springer Science and Business Media LLC
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: stothers1983
+  entry:
+    author:
+    - family: Stothers
+      given: R. B.
+    - family: Rampino
+      given: M. R.
+    title: Volcanic eruptions in the Mediterranean before A. D. 630 from written and
+      archeological sources
+    journaltitle: Journal of Geophysical Research
+    date: '1983'
+    volume: '88'
+    pages: 6357--6371
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1983'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: textor2003
+  entry:
+    author:
+    - family: Textor
+      given: C.
+    - family: Graf
+      given: H-F
+    - family: Timmreck
+      given: Claudia
+    - family: Robock
+      given: Alan
+    title: Emissions From Volcanoes
+    booktitle: Emissions of Atmospheric Trace Compounds
+    editor:
+    - family: Granier
+      given: C.
+    - family: Artaxo
+      given: P.
+    - family: Reeves
+      given: C. E.
+    date: '2003'
+    pages: 269--303
+    eventtitle: Dordrecht, Kluwer
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2003'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: torrence2002
+  entry:
+    author:
+    - family: Torrence
+      given: Robin
+    - family: Grattan
+      given: J.
+    title: Natural Disasters and Cultural Change. London and
+    date: '2002'
+    publisher: Routledge
+    eventtitle: New York
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2002'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: traufetter2004
+  entry:
+    author:
+    - family: Traufetter
+      given: F.
+    - family: Oerter
+      given: H.
+    - family: Fischer
+      given: Hubertus
+    - family: Weller
+      given: R.
+    - family: Miller
+      given: H.
+    title: Spatiotemporal variability in volcanic sulphate EXCAVATING THE FIMBULWINTER?
+      131 deposition over the past 2 kyr in snow pits and firn cores from Amundsenisen
+    journaltitle: Antartica. Journal of Glaciology
+    date: '2004'
+    volume: '50'
+    pages: 137--146
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2004'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: vervruggen1996
+  entry:
+    author:
+    - family: Vervruggen
+      given: C.
+    - family: Denys
+      given: L.
+    - family: Kiden
+      given: Patrick
+    title: Palaeoecological Events During the last 15 000 Years
+    editor:
+    - family: Berglund
+      given: Björn E.
+    - family: Birks
+      given: J. B.
+    - family: Ralska-Jasiewiczowv
+      given: M.
+    date: '1996'
+    pages: 553--574
+    eventtitle: Belgium; Chichester, Wiley
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1996'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: vitaliano1968
+  entry:
+    author:
+    - family: Vitaliano
+      given: Dorothy B.
+    title: 'Geomythology: The Impact of Geological Events on History and Legend with
+      Special Reference to Atlantis'
+    journaltitle: Journal of the Folklore Institute
+    date: '1968'
+    volume: '1'
+    pages: 5--30
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1968'
+    doi: 10.2307/3813842
+    number: '1'
+    publisher: JSTOR
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: welinder1975
+  entry:
+    author:
+    - family: Welinder
+      given: Stig
+    title: Prehistoric Agriculture in Eastern Middle Sweden
+    date: '1975'
+    location: Lund, Gleerup
+    entry_type: book
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1975'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: wylie1989
+  entry:
+    author:
+    - family: Wylie
+      given: ALISON
+    title: 'Archaeological Cables and Tacking: The Implications of Practice for Bernstein''s
+      ''options Beyond Objectivism and Relativism'
+    journaltitle: Philosophy of the Social Sciences
+    date: '1989'
+    volume: '19'
+    pages: 1--18
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '1989'
+    doi: 10.1177/004839318901900101
+    number: '1'
+    publisher: SAGE Publications
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: vulnerabilityzachrisson2010
+  entry:
+    author:
+    - family: Vulnerability Zachrisson
+      given: T.
+    - family: Boye
+      given: L. ;. L.
+    - family: Ethelberg
+      given: Per
+    - family: Lutz
+      given: L Heidemann
+    - family: Kleingartner
+      given: Sunhild
+    - family: Kruse
+      given: P.
+    - family: ''
+      given: L.
+    title: Property and honoursocial change in central Sweden, 200-700 AD mirrored
+      in the area around Old Uppsala
+    booktitle: 'Arkeologi i Slesvig: det 61. Internationale Sachsensymposion'
+    editor:
+    - family: Matthes
+      given: A. B.
+    - family: Sorensen
+      given: ''
+    date: '2010'
+    pages: 141--156
+    eventtitle: Neumtinster, Wachholz
+    entry_type: incollection
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2010'
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).
+- action: create
+  citekey: zerefos2007
+  entry:
+    author:
+    - family: Zerefos
+      given: C. S.
+    - family: Gerogiannis
+      given: V. T.
+    - family: Balis
+      given: D.
+    - family: Zerefos
+      given: S. C.
+    - family: Kazantzidis
+      given: A.
+    title: Atmospheric Effects of Volcanic Eruptions as Seen by Famous Artists and
+      Depicted in Their Paintings
+    journaltitle: Atmospheric Chemistry and Physics
+    date: '2007'
+    volume: '7'
+    pages: 4027--4042
+    entry_type: article
+    generation: F2
+    cited_by:
+    - price2015
+    year: '2007'
+    doi: 10.5194/acp-7-4027-2007
+    number: '15'
+    publisher: Copernicus GmbH
+  note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
+    - real data recovered from _graph_state.json cache (original successful iterate-f1
+    extraction).

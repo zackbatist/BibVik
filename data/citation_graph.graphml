@@ -5476,11 +5476,11 @@
       <data key="d1">2015</data>
       <data key="d2">F1</data>
       <data key="d3">article</data>
-      <data key="d4">Price The Viking World, ed. Stefan Brink and Neil S.</data>
+      <data key="d4">Price Neil</data>
       <data key="d5">10.1080/21662282.2015.1056634</data>
       <data key="d6">1.0</data>
       <data key="d7">13</data>
-      <data key="d8">0</data>
+      <data key="d8">65</data>
       <data key="d9">false</data>
     </node>
     <node id="raninen2014">
@@ -152060,7 +152060,7 @@
       <data key="d5">10.1016/j.jaa.2017.10.002</data>
       <data key="d6">0.917</data>
       <data key="d7">0</data>
-      <data key="d8">21</data>
+      <data key="d8">35</data>
       <data key="d9">false</data>
     </node>
     <node id="price2018c">
@@ -153455,17 +153455,785 @@
       <data key="d8">0</data>
       <data key="d9">false</data>
     </node>
-    <node id="NOAUTHOR33">
-      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
+    <node id="abbott2008">
+      <data key="d0">ABBOTT, D. H., BISCAYE, P., COLE-DAI, J. and BREGER, D. 2008. Magnetite and silicate spherules from the GISP2 Core at the 536</data>
+      <data key="d1">2008</data>
+      <data key="d2">F2</data>
       <data key="d3">misc</data>
-      <data key="d4"/>
+      <data key="d4">Abbott D. H.</data>
       <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">45</data>
-      <data key="d9">true</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="horizon2008">
+      <data key="d0">Fall Meeting</data>
+      <data key="d1">2008</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Horizon A. D.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="andersen1994">
+      <data key="d0">Maps for terrestrial non-tree pollen (NAP) percentages in north and central Europe 1800 and 1450 yr BP</data>
+      <data key="d1">1994</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Andersen S. T.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="andren2012">
+      <data key="d0">Fran solnedgang till solnedgang. en tolkning av de tidiga gotlandska bildstenarna</data>
+      <data key="d1">2012</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Andren A.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="arrhenius2013">
+      <data key="d0">Helgé in the shadow of the dust veil</data>
+      <data key="d1">2013</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Arrhenius Birgit /</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="axboe1999">
+      <data key="d0">The year 536 and the Scandinavian gold hoards</data>
+      <data key="d1">1999</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Axboe M.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="axboe2001">
+      <data key="d0">Amulet Pendants and a Darkened Sun</data>
+      <data key="d1">2001</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Axboe M.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="axboe2005">
+      <data key="d0">Ragnarok: Odins Verden</data>
+      <data key="d1">2005</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Axboe M.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie1994">
+      <data key="d0">Dendrochronology Raises Questions About the Nature of the Ad 536 Dust-Veil Event</data>
+      <data key="d1">1994</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5">10.1177/095968369400400211</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie1995">
+      <data key="d0">A Slice through Time. Dendochronology and Precision Dating</data>
+      <data key="d1">1995</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie1997">
+      <data key="d0">Bronze Age myths expose archaeological shortcomings? A reply to</data>
+      <data key="d1">1997</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie1999">
+      <data key="d0">Exodus to Arthur. Catastrophic Encounters with Comets</data>
+      <data key="d1">1999</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie2001">
+      <data key="d0">The AD 540 event</data>
+      <data key="d1">2001</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie2006">
+      <data key="d0">Tree-Rings Indicate Global Environmental Downturns that Could Have Been Caused by Comet Debris</data>
+      <data key="d1">2006</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5">10.1007/978-3-540-32711-0_5</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie2008">
+      <data key="d0">Proposed re-dating of the European ice core chronology by seven years prior to the 7th century AD</data>
+      <data key="d1">2008</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5">10.1029/2008GLO34755S</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="baillie2010">
+      <data key="d0">Volcanoes, Ice-Cores and Tree-Rings: One Story or Two?</data>
+      <data key="d1">2010</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Baillie Michael G L</data>
+      <data key="d5">10.1017/s0003598x00099877</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="barbante2012">
+      <data key="d0">Greenland ice core evidence of the 79 AD Vesuvius eruption</data>
+      <data key="d1">2012</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Barbante C.</data>
+      <data key="d5">10.5194/cpd-8-5429-2012</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="barnish1992">
+      <data key="d0">The Variae of Magnus Aurelius Cassiodorus Senator</data>
+      <data key="d1">1992</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Barnish S. J. B.</data>
+      <data key="d5">10.3828/978-0-85323-436-4</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="behre1996">
+      <data key="d0">Germany</data>
+      <data key="d1">1996</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Behre K.-E</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="berglund1996">
+      <data key="d0">BERGLUND, B. E., BIRKS, J. B. and RALSKA- JASIEWICZOWYV, M. (eds) 1996. Palaeoecologi- cal Events During the Last 15 000 Years. Chich- ester, Wiley.</data>
+      <data key="d1">1996</data>
+      <data key="d2">F2</data>
+      <data key="d3">misc</data>
+      <data key="d4">Berglund Björn E.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="bernhardsson2007">
+      <data key="d0">Old Icelandic ragnarok and ragnarokkr</data>
+      <data key="d1">2007</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Bernhardsson Haraldur</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="bork1998">
+      <data key="d0">Landschaftsentwicklung in Mitteleuropa</data>
+      <data key="d1">1998</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Bork H. R.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="bosley1989">
+      <data key="d0">The Kalevala</data>
+      <data key="d1">1989</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Bosley K. M.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="briffa1990">
+      <data key="d0">A 1400-Hundred Tree-Ring Record of Summer Temperatures in Fennoscandia</data>
+      <data key="d1">1990</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Briffa Keith R.</data>
+      <data key="d5">10.1038/346434a0</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="briffa1992">
+      <data key="d0">Fennoscandian Summers From Ad 500: Temperature Changes on Short and Long Time Scales</data>
+      <data key="d1">1992</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Briffa Keith R.</data>
+      <data key="d5">10.1007/bf00211153</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="buckland1997">
+      <data key="d0">Bronze Age myths? Volcanic activity and human response in the Mediterranean and North Atlantic regions</data>
+      <data key="d1">1997</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Buckland Paul C.</data>
+      <data key="d5">10.1017/s0003598x00085343</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="doreler1992">
+      <data key="d0">Evaluation of Land Surfaces Cleared from Forests by Prehistoric Man in Early Neolithic Times and the Time of Migrating Germanic Tribes</data>
+      <data key="d1">1992</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Doreler W.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="doreler2012">
+      <data key="d0">A High-Quality Annually Laminated Sequence From Lake Belau, Northern Germany: Revised Chronology and Its Implications for Palynological and Tephrochronological Studies</data>
+      <data key="d1">2012</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Doreler W.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="dull2001">
+      <data key="d0">Volcanism, ecology and culture: a reassessment of the Volcan Ilopango TBJ eruption in the southern Maya realm</data>
+      <data key="d1">2001</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Dull Robert A.</data>
+      <data key="d5">10.2307/971755</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="dull2010">
+      <data key="d0">Did the TBJ Ilopango eruption cause the AD 536 event?</data>
+      <data key="d1">2010</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Dull Robert A.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="eggum2007">
+      <data key="d0">Edvard Munch som maler</data>
+      <data key="d1">2007</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Eggum A.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="fehr2011">
+      <data key="d0">Die Vélkerwanderung</data>
+      <data key="d1">2011</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Fehr H.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="gelling1969">
+      <data key="d0">The Chariot of the Sun and Other Rites and Symbols of the Northern Bronze Age</data>
+      <data key="d1">1969</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Gelling P.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="graslund2009">
+      <data key="d0">Ekki nytr sdlar. nar himlen fargades réd av gudarnas blod</data>
+      <data key="d1">2009</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Graslund B.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="graslund2012">
+      <data key="d0">Twilight of the gods? The 'dust veil event' of AD 536 in critical perspective</data>
+      <data key="d1">2012</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Graslund B.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="grattan2007">
+      <data key="d0">Living Under the Shadow: the Cultural Impact of Volcanic Eruptions</data>
+      <data key="d1">2007</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Grattan J.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="grudd2006">
+      <data key="d0">Tree Rings as Sensitive Proxies of Past Climate Change</data>
+      <data key="d1">2006</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Grudd Håkan</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="grudd2002">
+      <data key="d0">A 7400-Year Tree-Ring Chronology in Northern Swedish Lapland: Natural Climatic Variability Expressed on Annual to Millennial Timescales</data>
+      <data key="d1">2002</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Grudd Håkan</data>
+      <data key="d5">10.1191/0959683602hl578rp</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="gunnel2013">
+      <data key="d0">The Nordic Apocalypse: Approaches to Voluspa and Nordic Days of Judgement</data>
+      <data key="d1">2013</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Gunnel T.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="vulnerabilityhalsall2003">
+      <data key="d0">Warfare and Society in the Barbarian West, 450-900</data>
+      <data key="d1">2003</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Vulnerability Halsall G.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="jansen2000">
+      <data key="d0">Century to Decadal Scale Records of Norwegian Sea Surface Temperature Variations of the past Two Millennia</data>
+      <data key="d1">2000</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Jansen Eystein</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="kaul2004">
+      <data key="d0">Bronzealderens Religion: Studier af den Nordiske Bronzealders Ikonografi. Copenhagen</data>
+      <data key="d1">2004</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Kaul Flemming</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="keys1999">
+      <data key="d0">Catastrophe: an Investigation into the Origins of the Modern World</data>
+      <data key="d1">1999</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Keys D.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="kutterolf2008">
+      <data key="d0">Pacific Offshore Record of Plinian Arc Volcanism in Central America: 2. Tephra Volumes and Erupted Masses</data>
+      <data key="d1">2008</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Kutterolf S.</data>
+      <data key="d5">10.1029/2007GC001791</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="lowenborg2010">
+      <data key="d0">Excavating the Digital Landscape: GIS Analyses of Social Relations in Central Sweden in the Ist Millennium AD. Uppsala</data>
+      <data key="d1">2010</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Lowenborg Daniel</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="nasman2012">
+      <data key="d0">An Iron Age shock doctrine: the 536-7 AD event as a trigger large-scale social change in the Malaren valley area&quot; by Daniel Lowenborg</data>
+      <data key="d1">2012</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Nasman Ulf</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="nerman1963">
+      <data key="d0">Véluspa 61:3 gullnor tofflor. Arkiv for Nordisk Filologi 78/1-4</data>
+      <data key="d1">1963</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Nerman Birger</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="oppenheimer2011">
+      <data key="d0">Eruptions that Shook the World</data>
+      <data key="d1">2011</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Oppenheimer Clive</data>
+      <data key="d5">10.1017/cbo9780511978012</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="pentikainen1989">
+      <data key="d0">PENTIKAINEN, J.Y. 1989. Kalevala Mythology. Bloomington, Indiana University Press.</data>
+      <data key="d1">1989</data>
+      <data key="d2">F2</data>
+      <data key="d3">misc</data>
+      <data key="d4">Pentikainen Juha</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="rampino1988">
+      <data key="d0">Volcanic winters</data>
+      <data key="d1">1988</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Rampino M. R.</data>
+      <data key="d5">10.1146/annurev.earth.16.1.73</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="rigby2004">
+      <data key="d0">A comet impact in AD 536?</data>
+      <data key="d1">2004</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Rigby Emma</data>
+      <data key="d5">10.1046/j.1468-4004.2003.45123.x</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="salzer2007">
+      <data key="d0">Bristlecone Pine Tree Rings and Volcanic Eruptions over the Last 5000 Yr</data>
+      <data key="d1">2007</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Salzer Matthew W.</data>
+      <data key="d5">10.1016/j.yqres.2006.07.004</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="stenberger1933">
+      <data key="d0">Oland under Aldre Jarndaldern: en Bebyggelsehistorisk Undersékning. Stockholm, Kungl. Vitterhets-, historie-och antikvitetsakademien</data>
+      <data key="d1">1933</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Stenberger Marten</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="stenberger1955">
+      <data key="d0">Vallhagar: a Migration Period Settlement on Gotland, Sweden. 2 vols</data>
+      <data key="d1">1955</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Stenberger Marten</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="stothers1984">
+      <data key="d0">Mystery cloud of AD 536</data>
+      <data key="d1">1984</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Stothers R. B.</data>
+      <data key="d5">10.1038/307344a0</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="stothers1983">
+      <data key="d0">Volcanic eruptions in the Mediterranean before A. D. 630 from written and archeological sources</data>
+      <data key="d1">1983</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Stothers R. B.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="textor2003">
+      <data key="d0">Emissions From Volcanoes</data>
+      <data key="d1">2003</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Textor C.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="torrence2002">
+      <data key="d0">Natural Disasters and Cultural Change. London and</data>
+      <data key="d1">2002</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Torrence Robin</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="traufetter2004">
+      <data key="d0">Spatiotemporal variability in volcanic sulphate EXCAVATING THE FIMBULWINTER? 131 deposition over the past 2 kyr in snow pits and firn cores from Amundsenisen</data>
+      <data key="d1">2004</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Traufetter F.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="vervruggen1996">
+      <data key="d0">Palaeoecological Events During the last 15 000 Years</data>
+      <data key="d1">1996</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Vervruggen C.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="vitaliano1968">
+      <data key="d0">Geomythology: The Impact of Geological Events on History and Legend with Special Reference to Atlantis</data>
+      <data key="d1">1968</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Vitaliano Dorothy B.</data>
+      <data key="d5">10.2307/3813842</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="welinder1975">
+      <data key="d0">Prehistoric Agriculture in Eastern Middle Sweden</data>
+      <data key="d1">1975</data>
+      <data key="d2">F2</data>
+      <data key="d3">book</data>
+      <data key="d4">Welinder Stig</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="wylie1989">
+      <data key="d0">Archaeological Cables and Tacking: The Implications of Practice for Bernstein's 'options Beyond Objectivism and Relativism</data>
+      <data key="d1">1989</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Wylie ALISON</data>
+      <data key="d5">10.1177/004839318901900101</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="vulnerabilityzachrisson2010">
+      <data key="d0">Property and honoursocial change in central Sweden, 200-700 AD mirrored in the area around Old Uppsala</data>
+      <data key="d1">2010</data>
+      <data key="d2">F2</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Vulnerability Zachrisson T.</data>
+      <data key="d5"/>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
+    <node id="zerefos2007">
+      <data key="d0">Atmospheric Effects of Volcanic Eruptions as Seen by Famous Artists and Depicted in Their Paintings</data>
+      <data key="d1">2007</data>
+      <data key="d2">F2</data>
+      <data key="d3">article</data>
+      <data key="d4">Zerefos C. S.</data>
+      <data key="d5">10.5194/acp-7-4027-2007</data>
+      <data key="d6"/>
+      <data key="d7">1</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
     </node>
     <node id="NOAUTHOR28">
       <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
@@ -153479,16 +154247,16 @@
       <data key="d8">193</data>
       <data key="d9">true</data>
     </node>
-    <node id="ahfeldt2015">
-      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
-      <data key="d1">2015</data>
+    <node id="NOAUTHOR33">
+      <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
+      <data key="d1"/>
       <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Åhfeldt L Kitzler</data>
-      <data key="d5">10.1515/9783110417685-014</data>
-      <data key="d6">0.917</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
       <data key="d7">0</data>
-      <data key="d8">86</data>
+      <data key="d8">45</data>
       <data key="d9">true</data>
     </node>
     <node id="skorokhod2020">
@@ -153503,6 +154271,18 @@
       <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
+    <node id="ahfeldt2015">
+      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
+      <data key="d1">2015</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Åhfeldt L Kitzler</data>
+      <data key="d5">10.1515/9783110417685-014</data>
+      <data key="d6">0.917</data>
+      <data key="d7">0</data>
+      <data key="d8">86</data>
+      <data key="d9">true</data>
+    </node>
     <node id="NOAUTHOR18">
       <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
       <data key="d1"/>
@@ -153513,18 +154293,6 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">21</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR21">
-      <data key="d0">New Horizons in the Archaeology of the Viking Age</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">14</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="aannestad2018" target="aannestad2015"/>
@@ -153556,9 +154324,9 @@
     <edge id="e26" source="price2018" target="andersson2004"/>
     <edge id="e27" source="zachrisson2014b" target="andersson2004"/>
     <edge id="e28" source="zachrisson2017" target="andersson2004"/>
-    <edge id="e29" source="NOAUTHOR21" target="andersson2016"/>
-    <edge id="e30" source="fahlander2016" target="andersson2016"/>
-    <edge id="e31" source="lund2021" target="andersson2016"/>
+    <edge id="e29" source="fahlander2016" target="andersson2016"/>
+    <edge id="e30" source="lund2021" target="andersson2016"/>
+    <edge id="e31" source="price2018b" target="andersson2016"/>
     <edge id="e32" source="eriksen2013" target="andersson2008"/>
     <edge id="e33" source="fabech2013" target="andersson2008"/>
     <edge id="e34" source="jorgensen2009a" target="andersson2008"/>
@@ -154363,14 +155131,14 @@
     <edge id="e833" source="lund2021" target="jensen2010"/>
     <edge id="e834" source="raffield2019" target="jensen2010"/>
     <edge id="e835" source="tveiten2017" target="jensen2010"/>
-    <edge id="e836" source="NOAUTHOR21" target="jesch2015"/>
-    <edge id="e837" source="croix2015" target="jesch2015"/>
-    <edge id="e838" source="edberg2019" target="jesch2015"/>
-    <edge id="e839" source="heenpettersen2018" target="jesch2015"/>
-    <edge id="e840" source="heenpettersen2019" target="jesch2015"/>
-    <edge id="e841" source="jackson2018" target="jesch2015"/>
-    <edge id="e842" source="lund2021" target="jesch2015"/>
-    <edge id="e843" source="price2018" target="jesch2015"/>
+    <edge id="e836" source="croix2015" target="jesch2015"/>
+    <edge id="e837" source="edberg2019" target="jesch2015"/>
+    <edge id="e838" source="heenpettersen2018" target="jesch2015"/>
+    <edge id="e839" source="heenpettersen2019" target="jesch2015"/>
+    <edge id="e840" source="jackson2018" target="jesch2015"/>
+    <edge id="e841" source="lund2021" target="jesch2015"/>
+    <edge id="e842" source="price2018" target="jesch2015"/>
+    <edge id="e843" source="price2018b" target="jesch2015"/>
     <edge id="e844" source="price2019" target="jesch2015"/>
     <edge id="e845" source="raffield2018" target="jesch2015"/>
     <edge id="e846" source="raffield2019" target="jesch2015"/>
@@ -154980,10 +155748,10 @@
     <edge id="e1450" source="raffield2016" target="price2014"/>
     <edge id="e1451" source="williams2016" target="price2014"/>
     <edge id="e1452" source="zachrisson2017a" target="price2014"/>
-    <edge id="e1453" source="NOAUTHOR21" target="price2018"/>
-    <edge id="e1454" source="carver2015" target="price2018"/>
-    <edge id="e1455" source="krzewinska2018" target="price2018"/>
-    <edge id="e1456" source="lund2021" target="price2018"/>
+    <edge id="e1453" source="carver2015" target="price2018"/>
+    <edge id="e1454" source="krzewinska2018" target="price2018"/>
+    <edge id="e1455" source="lund2021" target="price2018"/>
+    <edge id="e1456" source="price2018b" target="price2018"/>
     <edge id="e1457" source="price2019" target="price2018"/>
     <edge id="e1458" source="price2020" target="price2018"/>
     <edge id="e1459" source="reiter2019" target="price2018"/>
@@ -155006,16 +155774,16 @@
     <edge id="e1476" source="price2020" target="price2012"/>
     <edge id="e1477" source="pricenda" target="price2012"/>
     <edge id="e1478" source="toplak2018" target="price2012"/>
-    <edge id="e1479" source="NOAUTHOR21" target="price2016"/>
-    <edge id="e1480" source="aannestad2018" target="price2016"/>
-    <edge id="e1481" source="baug2019" target="price2016"/>
-    <edge id="e1482" source="bill2019" target="price2016"/>
-    <edge id="e1483" source="hedenstiernajonson2017" target="price2016"/>
-    <edge id="e1484" source="heenpettersen2019" target="price2016"/>
-    <edge id="e1485" source="hennius2018" target="price2016"/>
-    <edge id="e1486" source="lund2021" target="price2016"/>
-    <edge id="e1487" source="odeback2018" target="price2016"/>
-    <edge id="e1488" source="price2018" target="price2016"/>
+    <edge id="e1479" source="aannestad2018" target="price2016"/>
+    <edge id="e1480" source="baug2019" target="price2016"/>
+    <edge id="e1481" source="bill2019" target="price2016"/>
+    <edge id="e1482" source="hedenstiernajonson2017" target="price2016"/>
+    <edge id="e1483" source="heenpettersen2019" target="price2016"/>
+    <edge id="e1484" source="hennius2018" target="price2016"/>
+    <edge id="e1485" source="lund2021" target="price2016"/>
+    <edge id="e1486" source="odeback2018" target="price2016"/>
+    <edge id="e1487" source="price2018" target="price2016"/>
+    <edge id="e1488" source="price2018b" target="price2016"/>
     <edge id="e1489" source="price2020" target="price2016"/>
     <edge id="e1490" source="raffield2016" target="price2016"/>
     <edge id="e1491" source="gardela2018" target="price2020"/>
@@ -155315,39 +156083,39 @@
     <edge id="e1785" source="hayeursmith2018a" target="sutherland2009"/>
     <edge id="e1786" source="lund2021" target="sutherland2009"/>
     <edge id="e1787" source="sutherland2015" target="sutherland2009"/>
-    <edge id="e1788" source="NOAUTHOR21" target="svanberg2003"/>
-    <edge id="e1789" source="aannestad2018" target="svanberg2003"/>
-    <edge id="e1790" source="androshchuk2010" target="svanberg2003"/>
-    <edge id="e1791" source="barrett2008" target="svanberg2003"/>
-    <edge id="e1792" source="barrett2010" target="svanberg2003"/>
-    <edge id="e1793" source="croix2015" target="svanberg2003"/>
-    <edge id="e1794" source="croix2019" target="svanberg2003"/>
-    <edge id="e1795" source="eriksen2013" target="svanberg2003"/>
-    <edge id="e1796" source="eriksen2016" target="svanberg2003"/>
-    <edge id="e1797" source="gardela2014a" target="svanberg2003"/>
-    <edge id="e1798" source="gardela2015" target="svanberg2003"/>
-    <edge id="e1799" source="gardela2018" target="svanberg2003"/>
-    <edge id="e1800" source="gardelanda" target="svanberg2003"/>
-    <edge id="e1801" source="gustin2017" target="svanberg2003"/>
-    <edge id="e1802" source="halstadmcguire2010" target="svanberg2003"/>
-    <edge id="e1803" source="hardh2010a" target="svanberg2003"/>
-    <edge id="e1804" source="holst2014" target="svanberg2003"/>
-    <edge id="e1805" source="jahnsen2016" target="svanberg2003"/>
-    <edge id="e1806" source="kershaw2009" target="svanberg2003"/>
-    <edge id="e1807" source="kristjansdottir2015" target="svanberg2003"/>
-    <edge id="e1808" source="lucas2007" target="svanberg2003"/>
-    <edge id="e1809" source="lund2004" target="svanberg2003"/>
-    <edge id="e1810" source="lund2008" target="svanberg2003"/>
-    <edge id="e1811" source="lund2013" target="svanberg2003"/>
-    <edge id="e1812" source="lund2016" target="svanberg2003"/>
-    <edge id="e1813" source="lund2017" target="svanberg2003"/>
-    <edge id="e1814" source="lund2019" target="svanberg2003"/>
-    <edge id="e1815" source="lund2021" target="svanberg2003"/>
-    <edge id="e1816" source="moen2020" target="svanberg2003"/>
-    <edge id="e1817" source="pedersen2009a" target="svanberg2003"/>
-    <edge id="e1818" source="price2008a" target="svanberg2003"/>
-    <edge id="e1819" source="price2010" target="svanberg2003"/>
-    <edge id="e1820" source="price2014d" target="svanberg2003"/>
+    <edge id="e1788" source="aannestad2018" target="svanberg2003"/>
+    <edge id="e1789" source="androshchuk2010" target="svanberg2003"/>
+    <edge id="e1790" source="barrett2008" target="svanberg2003"/>
+    <edge id="e1791" source="barrett2010" target="svanberg2003"/>
+    <edge id="e1792" source="croix2015" target="svanberg2003"/>
+    <edge id="e1793" source="croix2019" target="svanberg2003"/>
+    <edge id="e1794" source="eriksen2013" target="svanberg2003"/>
+    <edge id="e1795" source="eriksen2016" target="svanberg2003"/>
+    <edge id="e1796" source="gardela2014a" target="svanberg2003"/>
+    <edge id="e1797" source="gardela2015" target="svanberg2003"/>
+    <edge id="e1798" source="gardela2018" target="svanberg2003"/>
+    <edge id="e1799" source="gardelanda" target="svanberg2003"/>
+    <edge id="e1800" source="gustin2017" target="svanberg2003"/>
+    <edge id="e1801" source="halstadmcguire2010" target="svanberg2003"/>
+    <edge id="e1802" source="hardh2010a" target="svanberg2003"/>
+    <edge id="e1803" source="holst2014" target="svanberg2003"/>
+    <edge id="e1804" source="jahnsen2016" target="svanberg2003"/>
+    <edge id="e1805" source="kershaw2009" target="svanberg2003"/>
+    <edge id="e1806" source="kristjansdottir2015" target="svanberg2003"/>
+    <edge id="e1807" source="lucas2007" target="svanberg2003"/>
+    <edge id="e1808" source="lund2004" target="svanberg2003"/>
+    <edge id="e1809" source="lund2008" target="svanberg2003"/>
+    <edge id="e1810" source="lund2013" target="svanberg2003"/>
+    <edge id="e1811" source="lund2016" target="svanberg2003"/>
+    <edge id="e1812" source="lund2017" target="svanberg2003"/>
+    <edge id="e1813" source="lund2019" target="svanberg2003"/>
+    <edge id="e1814" source="lund2021" target="svanberg2003"/>
+    <edge id="e1815" source="moen2020" target="svanberg2003"/>
+    <edge id="e1816" source="pedersen2009a" target="svanberg2003"/>
+    <edge id="e1817" source="price2008a" target="svanberg2003"/>
+    <edge id="e1818" source="price2010" target="svanberg2003"/>
+    <edge id="e1819" source="price2014d" target="svanberg2003"/>
+    <edge id="e1820" source="price2018b" target="svanberg2003"/>
     <edge id="e1821" source="price2019" target="svanberg2003"/>
     <edge id="e1822" source="sindbaek2013a" target="svanberg2003"/>
     <edge id="e1823" source="skre2011b" target="svanberg2003"/>
@@ -155441,15 +156209,15 @@
     <edge id="e1911" source="lund2013" target="wickholm2006"/>
     <edge id="e1912" source="lund2016" target="wickholm2006"/>
     <edge id="e1913" source="lund2021" target="wickholm2006"/>
-    <edge id="e1914" source="NOAUTHOR21" target="williams2014"/>
-    <edge id="e1915" source="aannestad2018" target="williams2014"/>
-    <edge id="e1916" source="gardela2018" target="williams2014"/>
-    <edge id="e1917" source="hadley2018" target="williams2014"/>
-    <edge id="e1918" source="harris2017" target="williams2014"/>
-    <edge id="e1919" source="kershaw2017" target="williams2014"/>
-    <edge id="e1920" source="lund2016" target="williams2014"/>
-    <edge id="e1921" source="lund2021" target="williams2014"/>
-    <edge id="e1922" source="price2018" target="williams2014"/>
+    <edge id="e1914" source="aannestad2018" target="williams2014"/>
+    <edge id="e1915" source="gardela2018" target="williams2014"/>
+    <edge id="e1916" source="hadley2018" target="williams2014"/>
+    <edge id="e1917" source="harris2017" target="williams2014"/>
+    <edge id="e1918" source="kershaw2017" target="williams2014"/>
+    <edge id="e1919" source="lund2016" target="williams2014"/>
+    <edge id="e1920" source="lund2021" target="williams2014"/>
+    <edge id="e1921" source="price2018" target="williams2014"/>
+    <edge id="e1922" source="price2018b" target="williams2014"/>
     <edge id="e1923" source="raffield2015" target="williams2014"/>
     <edge id="e1924" source="williams2016" target="williams2014"/>
     <edge id="e1925" source="williams2017" target="williams2014"/>
@@ -155563,10 +156331,10 @@
     <edge id="e2033" source="lund2021" target="glorstad2010"/>
     <edge id="e2034" source="pedersen2017" target="glorstad2010"/>
     <edge id="e2035" source="stene2017" target="glorstad2010"/>
-    <edge id="e2036" source="NOAUTHOR21" target="glorstad2017"/>
-    <edge id="e2037" source="lund2021" target="glorstad2017"/>
-    <edge id="e2038" source="moen2020" target="glorstad2017"/>
-    <edge id="e2039" source="pilo2020" target="glorstad2017"/>
+    <edge id="e2036" source="lund2021" target="glorstad2017"/>
+    <edge id="e2037" source="moen2020" target="glorstad2017"/>
+    <edge id="e2038" source="pilo2020" target="glorstad2017"/>
+    <edge id="e2039" source="price2018b" target="glorstad2017"/>
     <edge id="e2040" source="eriksen2017" target="gotfredsen2014"/>
     <edge id="e2041" source="lund2021" target="gotfredsen2014"/>
     <edge id="e2042" source="mainland2018" target="gotfredsen2014"/>
@@ -155668,13 +156436,13 @@
     <edge id="e2138" source="roesdahl2011" target="price2006"/>
     <edge id="e2139" source="vesteinsson2012" target="price2006"/>
     <edge id="e2140" source="zachrisson2017a" target="price2006"/>
-    <edge id="e2141" source="NOAUTHOR21" target="price2015"/>
-    <edge id="e2142" source="abrams2012" target="price2015"/>
-    <edge id="e2143" source="gardela2018" target="price2015"/>
-    <edge id="e2144" source="hedenstiernajonson2017" target="price2015"/>
-    <edge id="e2145" source="krzewinska2018" target="price2015"/>
-    <edge id="e2146" source="lund2021" target="price2015"/>
-    <edge id="e2147" source="price2018" target="price2015"/>
+    <edge id="e2141" source="abrams2012" target="price2015"/>
+    <edge id="e2142" source="gardela2018" target="price2015"/>
+    <edge id="e2143" source="hedenstiernajonson2017" target="price2015"/>
+    <edge id="e2144" source="krzewinska2018" target="price2015"/>
+    <edge id="e2145" source="lund2021" target="price2015"/>
+    <edge id="e2146" source="price2018" target="price2015"/>
+    <edge id="e2147" source="price2018b" target="price2015"/>
     <edge id="e2148" source="price2019" target="price2015"/>
     <edge id="e2149" source="price2020" target="price2015"/>
     <edge id="e2150" source="pricenda" target="price2015"/>
@@ -157644,34 +158412,34 @@
     <edge id="e4114" source="arwillnordbladh2012" target="bragg1997"/>
     <edge id="e4115" source="arwillnordbladh2013" target="bragg1997"/>
     <edge id="e4116" source="arwillnordbladh2012" target="brink2008"/>
-    <edge id="e4117" source="baug2019" target="brink2008"/>
-    <edge id="e4118" source="barrett2010" target="brink2008"/>
+    <edge id="e4117" source="barrett2010" target="brink2008"/>
+    <edge id="e4118" source="baug2019" target="brink2008"/>
     <edge id="e4119" source="boyd2013" target="brink2008"/>
-    <edge id="e4120" source="croix2019" target="brink2008"/>
-    <edge id="e4121" source="croix2015" target="brink2008"/>
-    <edge id="e4122" source="fontaine2017" target="brink2008"/>
+    <edge id="e4120" source="croix2015" target="brink2008"/>
+    <edge id="e4121" source="croix2019" target="brink2008"/>
+    <edge id="e4122" source="eriksen2016" target="brink2008"/>
     <edge id="e4123" source="fabech2013" target="brink2008"/>
-    <edge id="e4124" source="eriksen2016" target="brink2008"/>
+    <edge id="e4124" source="fontaine2017" target="brink2008"/>
     <edge id="e4125" source="griffiths2019" target="brink2008"/>
     <edge id="e4126" source="hillerdal2010" target="brink2008"/>
     <edge id="e4127" source="kalmring2010" target="brink2008"/>
-    <edge id="e4128" source="lund2020" target="brink2008"/>
-    <edge id="e4129" source="kalmring2018" target="brink2008"/>
+    <edge id="e4128" source="kalmring2018" target="brink2008"/>
+    <edge id="e4129" source="krzewinska2015" target="brink2008"/>
     <edge id="e4130" source="leonard2011" target="brink2008"/>
-    <edge id="e4131" source="krzewinska2015" target="brink2008"/>
-    <edge id="e4132" source="lund2016" target="brink2008"/>
-    <edge id="e4133" source="price2014" target="brink2008"/>
-    <edge id="e4134" source="raffield2016" target="brink2008"/>
-    <edge id="e4135" source="roesdahl2011" target="brink2008"/>
-    <edge id="e4136" source="NOAUTHOR21" target="brink2008"/>
-    <edge id="e4137" source="poulsen2011" target="brink2008"/>
-    <edge id="e4138" source="price2014d" target="brink2008"/>
-    <edge id="e4139" source="raffield2019" target="brink2008"/>
-    <edge id="e4140" source="price2019" target="brink2008"/>
-    <edge id="e4141" source="price2018" target="brink2008"/>
-    <edge id="e4142" source="sindbaek2014" target="brink2008"/>
-    <edge id="e4143" source="raffield2015" target="brink2008"/>
-    <edge id="e4144" source="sindbaek2013a" target="brink2008"/>
+    <edge id="e4131" source="lund2016" target="brink2008"/>
+    <edge id="e4132" source="lund2020" target="brink2008"/>
+    <edge id="e4133" source="poulsen2011" target="brink2008"/>
+    <edge id="e4134" source="price2014" target="brink2008"/>
+    <edge id="e4135" source="price2014d" target="brink2008"/>
+    <edge id="e4136" source="price2018" target="brink2008"/>
+    <edge id="e4137" source="price2018b" target="brink2008"/>
+    <edge id="e4138" source="price2019" target="brink2008"/>
+    <edge id="e4139" source="raffield2015" target="brink2008"/>
+    <edge id="e4140" source="raffield2016" target="brink2008"/>
+    <edge id="e4141" source="raffield2019" target="brink2008"/>
+    <edge id="e4142" source="roesdahl2011" target="brink2008"/>
+    <edge id="e4143" source="sindbaek2013a" target="brink2008"/>
+    <edge id="e4144" source="sindbaek2014" target="brink2008"/>
     <edge id="e4145" source="skre2019" target="brink2008"/>
     <edge id="e4146" source="stene2017" target="brink2008"/>
     <edge id="e4147" source="zachrisson2014a" target="brink2008"/>
@@ -160301,10 +161069,10 @@
     <edge id="e6771" source="bill2019" target="opedal2005"/>
     <edge id="e6772" source="bonde2016" target="peets2013"/>
     <edge id="e6773" source="price2014" target="peets2013"/>
-    <edge id="e6774" source="NOAUTHOR21" target="peets2013"/>
-    <edge id="e6775" source="price2014d" target="peets2013"/>
-    <edge id="e6776" source="price2020" target="peets2013"/>
-    <edge id="e6777" source="price2016" target="peets2013"/>
+    <edge id="e6774" source="price2014d" target="peets2013"/>
+    <edge id="e6775" source="price2016" target="peets2013"/>
+    <edge id="e6776" source="price2018b" target="peets2013"/>
+    <edge id="e6777" source="price2020" target="peets2013"/>
     <edge id="e6778" source="raffield2015" target="peets2013"/>
     <edge id="e6779" source="bonde2016" target="reiersen2009"/>
     <edge id="e6780" source="bonde2016" target="roesdahl1994"/>
@@ -163420,13 +164188,13 @@
     <edge id="e9890" source="lund2016" target="eriksen2010"/>
     <edge id="e9891" source="rasmussen2014" target="eriksen2010"/>
     <edge id="e9892" source="ulriksen2011a" target="eriksen2010"/>
-    <edge id="e9893" source="eriksen2017" target="eriksen2015"/>
-    <edge id="e9894" source="eriksen2016" target="eriksen2015"/>
+    <edge id="e9893" source="eriksen2016" target="eriksen2015"/>
+    <edge id="e9894" source="eriksen2017" target="eriksen2015"/>
     <edge id="e9895" source="griffiths2019" target="eriksen2015"/>
-    <edge id="e9896" source="NOAUTHOR21" target="eriksen2015"/>
-    <edge id="e9897" source="raffield2018" target="eriksen2015"/>
-    <edge id="e9898" source="price2018" target="eriksen2015"/>
-    <edge id="e9899" source="raffield2015" target="eriksen2015"/>
+    <edge id="e9896" source="price2018" target="eriksen2015"/>
+    <edge id="e9897" source="price2018b" target="eriksen2015"/>
+    <edge id="e9898" source="raffield2015" target="eriksen2015"/>
+    <edge id="e9899" source="raffield2018" target="eriksen2015"/>
     <edge id="e9900" source="williams2016" target="eriksen2015"/>
     <edge id="e9901" source="eriksen2017" target="gamble2007"/>
     <edge id="e9902" source="eriksen2017" target="gejvall1955"/>
@@ -173937,12 +174705,12 @@
     <edge id="e20407" source="price2010" target="chapman1981"/>
     <edge id="e20408" source="price2010" target="miller2005"/>
     <edge id="e20409" source="price2010" target="nylen1987"/>
-    <edge id="e20410" source="NOAUTHOR21" target="andersson2016b"/>
-    <edge id="e20411" source="price2018a" target="andersson2016b"/>
-    <edge id="e20412" source="NOAUTHOR21" target="cambridge2017"/>
-    <edge id="e20413" source="price2018a" target="cambridge2017"/>
-    <edge id="e20414" source="NOAUTHOR21" target="hauptman2014"/>
-    <edge id="e20415" source="price2018a" target="hauptman2014"/>
+    <edge id="e20410" source="price2018a" target="andersson2016b"/>
+    <edge id="e20411" source="price2018b" target="andersson2016b"/>
+    <edge id="e20412" source="price2018a" target="cambridge2017"/>
+    <edge id="e20413" source="price2018b" target="cambridge2017"/>
+    <edge id="e20414" source="price2018a" target="hauptman2014"/>
+    <edge id="e20415" source="price2018b" target="hauptman2014"/>
     <edge id="e20416" source="price2019" target="hauptman2014"/>
     <edge id="e20417" source="raffield2018" target="hauptman2014"/>
     <edge id="e20418" source="pilo2020" target="aukrust1982"/>
@@ -178831,5 +179599,70 @@
     <edge id="e25301" source="lund2020" target="arwillnordbladh2008b"/>
     <edge id="e25302" source="lund2021" target="arwillnordbladh2008b"/>
     <edge id="e25303" source="myrberg2009" target="kristiansen1984"/>
+    <edge id="e25304" source="price2015" target="abbott2008"/>
+    <edge id="e25305" source="price2015" target="horizon2008"/>
+    <edge id="e25306" source="price2015" target="andersen1994"/>
+    <edge id="e25307" source="price2015" target="andren2012"/>
+    <edge id="e25308" source="price2015" target="arrhenius2013"/>
+    <edge id="e25309" source="price2015" target="axboe1999"/>
+    <edge id="e25310" source="price2015" target="axboe2001"/>
+    <edge id="e25311" source="price2015" target="axboe2005"/>
+    <edge id="e25312" source="price2015" target="baillie1994"/>
+    <edge id="e25313" source="price2015" target="baillie1995"/>
+    <edge id="e25314" source="price2015" target="baillie1997"/>
+    <edge id="e25315" source="price2015" target="baillie1999"/>
+    <edge id="e25316" source="price2015" target="baillie2001"/>
+    <edge id="e25317" source="price2015" target="baillie2006"/>
+    <edge id="e25318" source="price2015" target="baillie2008"/>
+    <edge id="e25319" source="price2015" target="baillie2010"/>
+    <edge id="e25320" source="price2015" target="barbante2012"/>
+    <edge id="e25321" source="price2015" target="barnish1992"/>
+    <edge id="e25322" source="price2015" target="behre1996"/>
+    <edge id="e25323" source="price2015" target="berglund1996"/>
+    <edge id="e25324" source="price2015" target="bernhardsson2007"/>
+    <edge id="e25325" source="price2015" target="bork1998"/>
+    <edge id="e25326" source="price2015" target="bosley1989"/>
+    <edge id="e25327" source="price2015" target="briffa1990"/>
+    <edge id="e25328" source="price2015" target="briffa1992"/>
+    <edge id="e25329" source="price2015" target="buckland1997"/>
+    <edge id="e25330" source="price2015" target="doreler1992"/>
+    <edge id="e25331" source="price2015" target="doreler2012"/>
+    <edge id="e25332" source="price2015" target="dull2001"/>
+    <edge id="e25333" source="price2015" target="dull2010"/>
+    <edge id="e25334" source="price2015" target="eggum2007"/>
+    <edge id="e25335" source="price2015" target="fehr2011"/>
+    <edge id="e25336" source="price2015" target="gelling1969"/>
+    <edge id="e25337" source="price2015" target="graslund2009"/>
+    <edge id="e25338" source="price2015" target="graslund2012"/>
+    <edge id="e25339" source="price2015" target="grattan2007"/>
+    <edge id="e25340" source="price2015" target="grudd2006"/>
+    <edge id="e25341" source="price2015" target="grudd2002"/>
+    <edge id="e25342" source="price2015" target="gunnel2013"/>
+    <edge id="e25343" source="price2015" target="vulnerabilityhalsall2003"/>
+    <edge id="e25344" source="price2015" target="jansen2000"/>
+    <edge id="e25345" source="price2015" target="kaul2004"/>
+    <edge id="e25346" source="price2015" target="keys1999"/>
+    <edge id="e25347" source="price2015" target="kutterolf2008"/>
+    <edge id="e25348" source="price2015" target="lowenborg2010"/>
+    <edge id="e25349" source="price2015" target="nasman2012"/>
+    <edge id="e25350" source="price2015" target="nerman1963"/>
+    <edge id="e25351" source="price2015" target="oppenheimer2011"/>
+    <edge id="e25352" source="price2015" target="pentikainen1989"/>
+    <edge id="e25353" source="price2015" target="rampino1988"/>
+    <edge id="e25354" source="price2015" target="rigby2004"/>
+    <edge id="e25355" source="price2015" target="salzer2007"/>
+    <edge id="e25356" source="price2015" target="stenberger1933"/>
+    <edge id="e25357" source="price2015" target="stenberger1955"/>
+    <edge id="e25358" source="price2015" target="stothers1984"/>
+    <edge id="e25359" source="price2015" target="stothers1983"/>
+    <edge id="e25360" source="price2015" target="textor2003"/>
+    <edge id="e25361" source="price2015" target="torrence2002"/>
+    <edge id="e25362" source="price2015" target="traufetter2004"/>
+    <edge id="e25363" source="price2015" target="vervruggen1996"/>
+    <edge id="e25364" source="price2015" target="vitaliano1968"/>
+    <edge id="e25365" source="price2015" target="welinder1975"/>
+    <edge id="e25366" source="price2015" target="wylie1989"/>
+    <edge id="e25367" source="price2015" target="vulnerabilityzachrisson2010"/>
+    <edge id="e25368" source="price2015" target="zerefos2007"/>
   </graph>
 </graphml>
