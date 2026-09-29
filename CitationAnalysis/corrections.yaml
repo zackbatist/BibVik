@@ -59884,3 +59884,1203 @@
     doi: 10.1111/j.1600-0390.2018.12195.x
   note: Created from verified extraction header (correct title, author, date) plus
     Zotero for journal/volume/pages/DOI.
+- action: create
+  citekey: skre2017a
+  entry:
+    title: Monetary Practices in Early Medieval Western Scandinavia (5th–10th Centuries
+      AD)
+    author:
+    - family: Skre
+      given: Dagfinn
+    year: '2017'
+    date: '2017'
+    generation: F1
+    entry_type: article
+  note: 'Created from verified extraction header. Discovered during a citekey-matching
+    audit: annotations.csv had two rows for skre2017, one for this paper and one for
+    the already-existing skre2017 entry (Viking-Age Economic Transformations), both
+    distinct real papers by the same author/year that a normalization script had incorrectly
+    merged onto one citekey.'
+- action: create
+  citekey: williams2014a
+  entry:
+    title: Coins and Currency in Viking England, AD 865-954
+    author:
+    - family: Williams
+      given: Gareth
+    year: '2014'
+    date: '2014'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: aannestad2018a
+  entry:
+    title: The Allure of the Foreign. The Social and Cultural Dimension of Imports
+      in Scandinavia in the Viking Age
+    author:
+    - family: Aannestad
+      given: Hanne Lovise
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: raffield2016a
+  entry:
+    title: Ingroup identification, identity fusion and the formation of Viking war
+      bands
+    author:
+    - family: Raffield
+      given: Ben
+    - family: Greenlow
+      given: Claire
+    - family: Price
+      given: N. S.
+    - family: Collard
+      given: Mark
+    year: '2016'
+    date: '2016'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: ashby2015a
+  entry:
+    title: 'Urban Networks and Arctic Outlands: Craft Specialists and Reindeer Antler
+      in Viking Towns'
+    author:
+    - family: Ashby
+      given: Steven P.
+    - family: Coutu
+      given: Ashley N.
+    - family: Sindbæk
+      given: Søren M.
+    year: '2015'
+    date: '2015'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: gotfredsen2014a
+  entry:
+    title: Birds in Subsistence and Culture at Viking Age Sites in Denmark
+    author:
+    - family: Gotfredsen
+      given: Anne Birgitte
+    year: '2014'
+    date: '2014'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: raffield2019a
+  entry:
+    title: 'The slave markets of the Viking world: comparative perspectives on an
+      invisible archaeology'
+    author:
+    - family: Raffield
+      given: Ben
+    year: '2019'
+    date: '2019'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: hennius2018a
+  entry:
+    title: Viking Age tar production and outland exploitation
+    author:
+    - family: Hennius
+      given: Andreas
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+  note: Created from verified extraction header. Same annotations.csv merge issue
+    as other entries in this batch.
+- action: create
+  citekey: runge2018a
+  entry:
+    title: 'The Origins of Odense: New Aspects of Early Urbanisation in Southern Scandinavia'
+    author:
+    - family: Runge
+      given: Mads
+    - family: Henriksen
+      given: Mogens Bo
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: Danish Journal of Archaeology
+    volume: '7'
+    number: '2'
+    pages: 2-68
+    doi: 10.1080/21662282.2018.1475891
+  note: 'Created from Zotero seed library data. PDF header extraction pulled unrelated
+    footnote text (about Kaupang) instead of the real title, with no author or date.
+    Discovered during citekey-matching audit: annotations.csv had two rows for runge2018,
+    one for this paper and one for the existing runge2018 entry (New Archaeological
+    Investigations at Nonnebakken), both distinct real papers by the same author/year
+    merged onto one citekey by a normalization script.'
+- action: create
+  citekey: myrberg2009a
+  entry:
+    title: 'The Hoarded Dead: Late Iron Age silver hoards as graves'
+    author:
+    - family: Myrberg
+      given: Nouschka
+    year: '2009'
+    date: '2009'
+    generation: F1
+    entry_type: incollection
+    booktitle: 'Döda Personers Sällskap: Gravmaterialens Identiteter Och Kulturella
+      Uttryck'
+    pages: 131-145
+    series: Stockholm Studies in Archaeology
+    location: Stockholm
+  note: Created from Zotero seed library data. PDF header extraction pulled a garbled
+    acknowledgments paragraph instead of the real title, with no author or date. Same
+    annotations.csv merge issue as runge2018a.
+- action: create
+  citekey: skre2017b
+  entry:
+    title: 'Viking-Age Economic Transformations: The West-Scandinavian Case'
+    author:
+    - family: Skre
+      given: Dagfinn
+    year: '2017'
+    date: '2017'
+    generation: F1
+    entry_type: incollection
+    booktitle: 'Viking-Age Transformations: Trade, Craft and Resources in Western
+      Scandinavia'
+    pages: 1-27
+    publisher: Routledge
+    location: London, UK
+  note: Created from verified extraction header (correct title) plus Zotero for the
+    rest - extraction garbled the author field, parsing the subtitle words "The West-Scandinavian"
+    and "Case" as two fake co-authors. Real author is Dagfinn Skre alone. Same annotations.csv
+    merge issue as runge2018a (skre2017 already correctly holds Monetary Practices,
+    a different paper by the same author/year).
+- action: set
+  citekey: aegidius1977
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: albrectsen1941
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: albrectsen1970
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: albrectsen1984
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: amt1992
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: andersen1971
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: andersen1987
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: andersen1998
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  - tummuscheit2019
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: andersson1972
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: andren1994
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: arentoft1984
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: arentoft1985
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: arentoft1993
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: arentoft1999
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bartholin1974
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bartholin1976
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: becker1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bertelsen1991
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bertelsen1992
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: binderup1996
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bjerregaard2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bjerregaard2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: christensen1975
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: christensen1977
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: christensen1999
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: christensen2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: elkjaer2001
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: fussel2008
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: gothche1995
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: grandtnielsen1971
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - baastrup2014
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: grandtnielsen1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: harnow2005
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: haupt2006
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: henrichsen1968
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: henriksen1988
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: henriksen2012
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: hoff2000
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: hohenberg1985
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: hohenberg1995
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: hojlundnielsen1987
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: jacobsen2000
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: jacobsson2003
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: jeppesen1981
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - oye2016
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: johannsen1995
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: jorgensennda
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: juel2010
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: kousgardsorensen1969
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: krongaardkristensen1998
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: krongaardkristensen2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: langkilde2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lauritsen1974
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lauritsennd
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: levinnielsen1968
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: linaa2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lindblom2013
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lundhansen1988
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lundo2012
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: madsen1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: madsen1991
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  - ulriksen2011a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: mathiesen1922
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: mathiesen1927
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: mejdahl1993
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: moesgard2015
+  field: cited_by
+  value:
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: moller2008
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: nasman1996
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: nielsen1984
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: nilsen1990
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: nilsson2015
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: norgaardjorgensen2002
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: nyberg1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: odman2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: og2001
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: olesen2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: olsen1969
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: pagh2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: petersen1987
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: porsmose1996
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: poulsen2015
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: riis1999
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: rindel2001
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: rosch2013
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: runge2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: runge2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: sanke2001
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  - sindbaek2007
+  - sindbaek2016
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: schorring2000
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: skaarup1997
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: skaarup2005
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: smed1962
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: sonderby1988
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: stenak2005
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: tarup1934
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: thrane1996
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: trap1957
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: ulriksen2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: ulriksen2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: vraengmosejensen2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: weber1958
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: zeeberg2000
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: zinglersen2004
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  note: Adding runge2018a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: gramsch2007
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  note: Adding myrberg2009a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: kopytoff1996
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  note: Adding myrberg2009a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: kristiansen1974
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  note: Adding myrberg2009a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: pfisterer2008
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  note: Adding myrberg2009a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: zachrisson1989
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  note: Adding myrberg2009a as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: bagge2010
+  field: cited_by
+  value:
+  - skre2017b
+  - stene2017
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: callmer1976
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: dalton1975
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: elster2007
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: englert2007c
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: finley1973
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: hansen1977
+  field: cited_by
+  value:
+  - rohdesloth2012
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: jansen2015
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: lie1988
+  field: cited_by
+  value:
+  - skre2017b
+  - star2017
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: mikkelsen2006
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: mitchell1984
+  field: cited_by
+  value:
+  - skre2017b
+  - sutherland2009
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: myrvoll1992
+  field: cited_by
+  value:
+  - rosvold2019
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: ostmo2011
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: pilo1990
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: polanyi1944
+  field: cited_by
+  value:
+  - sheehan2013a
+  - skre2016
+  - skre2017
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: rundberget2009
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: stenvik2003
+  field: cited_by
+  value:
+  - skre2017
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: swedberg2014
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: wiberg1977
+  field: cited_by
+  value:
+  - skre2017b
+  - the2017
+  note: Adding skre2017b as citer - recovered from the already-extracted reference
+    list.
+- action: set
+  citekey: moesgard2015
+  field: cited_by
+  value: []
+  note: runge2018a citation redirected to moesgaard2015 (the correctly spelled, surviving
+    entry) rather than the deleted spelling-variant duplicate.
+- action: set
+  citekey: moesgaard2015
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - lund2021
+  - runge2018
+  - runge2018a
+  note: Adding runge2018a as citer, redirected from the deleted spelling-variant duplicate
+    moesgard2015.
