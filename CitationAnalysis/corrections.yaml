@@ -61232,3 +61232,72 @@
   - sindbaek2011a
   - spangen2009
   note: Updated stale citekey reference sindbaeknda to its renamed form sindbaek2011a.
+- action: set
+  citekey: zachrisson2018
+  field: year
+  value: '2017'
+  note: 'Year corrected to match Zotero seed library (BibVik_seed.csv), which is authoritative
+    - GROBID extracted an incorrect year (2018) for this F1 paper. Discovered during
+    citekey-matching audit: this entry is the real match for the zachrisson2017a row
+    in annotations.csv.'
+- action: set
+  citekey: zachrisson2018
+  field: date
+  value: '2017'
+  note: See year field correction.
+- action: set
+  citekey: zachrisson2018
+  field: author
+  value:
+  - family: Zachrisson
+    given: Torun
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is corrected.
+- action: set
+  citekey: sanmarkndb
+  field: year
+  value: '2013'
+  note: 'Year recovered from Zotero seed library (BibVik_seed.csv), authoritative
+    for this F1 paper - header extraction returned no usable date, producing an nd
+    citekey. Discovered during citekey-matching audit: this entry is the real match
+    for the sanmark2013a row in annotations.csv, previously incorrectly merged onto
+    sanmark2013 by a normalization script.'
+- action: set
+  citekey: sanmarkndb
+  field: date
+  value: '2013'
+  note: See year field correction.
+- action: set
+  citekey: sanmarkndb
+  field: author
+  value:
+  - family: Sanmark
+    given: Alexandra
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: create
+  citekey: croix2019a
+  entry:
+    title: 'The réseau opératoire of Urbanization: Craft Collaborations and Organization
+      in an Early Medieval Workshop in Ribe, Denmark'
+    author:
+    - family: Croix
+      given: Sarah
+    - family: Neiß
+      given: Michael
+    - family: Sindbæk
+      given: Søren M.
+    year: '2019'
+    date: '2019'
+    generation: F1
+    entry_type: article
+    journaltitle: Cambridge Archaeological Journal
+    volume: '29'
+    number: '2'
+    pages: 345-364
+    doi: 10.1017/S0959774318000525
+  note: 'Created from verified extraction header. Discovered during citekey-matching
+    audit: annotations.csv had two rows for croix2019, one for this paper and one
+    for the existing croix2019 entry (Single Context, Metacontext...), both distinct
+    real papers by the same author/year merged onto one citekey by a normalization
+    script.'

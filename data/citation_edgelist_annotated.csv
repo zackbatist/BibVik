@@ -268,6 +268,7 @@ lund2021,beck2018
 lund2021,becker2012
 ashby2015,becker2012
 grupe2013,becker2012
+zachrisson2017a,becker2012
 lund2021,becket2013
 lund2021,bergstol2004
 amundsen2017,bergstol2004
@@ -895,6 +896,7 @@ kalmring2018,larsson2007
 poulsen2011,larsson2007
 price2014a,larsson2007
 price2020,larsson2007
+zachrisson2017a,larsson2007
 zachrisson2014a,larsson2007
 lund2021,lemm2014
 lund2021,leonard2011
@@ -1323,6 +1325,7 @@ lund2017,price2014
 raffield2016,price2014
 peschel2017,price2014
 price2019,price2014
+zachrisson2017a,price2014
 williams2016,price2014
 lund2021,price2018
 carver2015,price2018
@@ -1439,6 +1442,7 @@ mainland2018,sanmark2017
 zachrisson2017,sanmark2017
 lund2021,sanmark2013
 raffield2014,sanmark2013
+sanmark2013a,sanmark2013
 stene2017,sanmark2013
 lund2021,schietzel2014
 gardela2018,schietzel2014
@@ -1456,6 +1460,7 @@ kalmring2012,schultze2008
 voncarnapbornheim2014,schultze2008
 lund2021,semple2013
 lund2016,semple2013
+sanmark2013a,semple2013
 lund2021,sharples2020
 ashby2015,sindbaek2007
 barrett2008,sindbaek2007
@@ -1599,6 +1604,7 @@ lund2006,staecker2004
 oehrl2017,staecker2004
 lund2010,staecker2004
 oehrl2019,staecker2004
+zachrisson2017a,staecker2004
 lund2021,stanislawski2013
 croix2015,stanislawski2013
 gardela2015,stanislawski2013
@@ -1676,6 +1682,7 @@ fahlander2018,thate2007
 eriksen2016,thate2007
 fahlander2016,thate2007
 lund2016,thate2007
+sanmark2013a,thate2007
 zoega2017,thate2007
 williams2016,thate2007
 lund2021,tonning2020
@@ -1781,7 +1788,6 @@ zachrisson2014a,zachrisson2011
 lund2021,zachrisson2017
 fahlander2018,zachrisson2017
 skre2019,zachrisson2017
-lund2021,zachrisson2018
 lund2021,zori2014
 lund2021,zori2013
 mainland2018,zori2013
@@ -1917,6 +1923,7 @@ lund2021,morawiec2009
 gardela2015,morawiec2009
 lund2021,myrberg2008
 kemmers2011,myrberg2008
+sanmark2013a,myrberg2008
 sanmark2013,myrberg2008
 lund2021,naum2004
 price2012,naum2004
@@ -1938,6 +1945,7 @@ price2014,price2006
 roesdahl2011,price2006
 price2012,price2006
 vesteinsson2012,price2006
+zachrisson2017a,price2006
 lund2021,price2015
 abrams2012,price2015
 gardela2018,price2015
@@ -3136,6 +3144,7 @@ fabech2013,larsson2004
 helmbrecht2012,larsson2004
 larsson2007,larsson2004
 skre2019,larsson2004
+zachrisson2017a,larsson2004
 zachrisson2014a,larsson2004
 andren2013,liden1969
 fabech2013,liden1969
@@ -3213,6 +3222,7 @@ kalmring2017,vikstrand2001
 magnell2010,vikstrand2001
 price2014,vikstrand2001
 myrberg2008,vikstrand2001
+sanmark2013a,vikstrand2001
 skre2019,vikstrand2001
 zachrisson2014a,vikstrand2001
 andren2013,devries1957
@@ -3602,6 +3612,7 @@ hedeager2010,stolpe1912
 mannering2013,stolpe1912
 price2010,stolpe1912
 price2008a,stolpe1912
+zachrisson2017a,stolpe1912
 arwillnordbladh2012,sorensen1997
 arwillnordbladh2013,sorensen1997
 arwillnordbladh2012,thomson1997
@@ -3801,6 +3812,7 @@ lund2020,zachrisson1994
 raffield2016,zachrisson1994
 poulsen2011,zachrisson1994
 sindbaek2011,zachrisson1994
+sanmark2013a,zachrisson1994
 zachrisson2017,zachrisson1994
 skre2019,zachrisson1994
 zachrisson2014a,zachrisson1994
@@ -3989,6 +4001,7 @@ helmbrecht2012,wilson1995
 kershaw2009,wilson1995
 oehrl2017,wilson1995
 oehrl2019,wilson1995
+zachrisson2017a,wilson1995
 andren2000,wilson1994
 andren2000,zanker1988
 andren2000,runinskrifter1984
@@ -4922,6 +4935,7 @@ baug2015,skre2006
 fabech2013,skre2006
 baug2015,smith1999
 milek2012,smith1999
+sanmark2013a,smith1999
 baug2015,steensberg1964
 baug2015,steuer1987
 baug2017,steuer1987
@@ -5973,6 +5987,7 @@ glorstad2017,martens1988
 loftsgarden2019,martens1988
 tveiten2017,martens1988
 stene2017,martens1988
+zachrisson2017a,martens1988
 bill2017a,nicolaysennd
 bill2017a,oye2011
 baug2017,oye2011
@@ -6576,6 +6591,7 @@ fabech2013,helgesson2004
 mannering2013,helgesson2004
 larsson2007,helgesson2004
 rundkvist2010,helgesson2004
+zachrisson2017a,helgesson2004
 runge2018,henriksen2016
 gardela2018,holst2017
 christensen2013,imer2001
@@ -6599,6 +6615,7 @@ lund2013,lorangenda
 rundkvist2010,lorangenda
 sindbaek2011,malmer1966
 skre2019,marold2012
+zachrisson2017a,marold2012
 raffield2016,montgomery2000
 price2010,montgomery2000
 price2008a,montgomery2000
@@ -6632,6 +6649,7 @@ lund2020,spurkland2005
 skre2019,steinsland1991
 dobat2006,sundqvist2000
 raffield2019,sundqvist2000
+sanmark2013a,sundqvist2000
 skre2019,sundqvist2000
 bill2016,sorensen2006
 price2006,turvillepetre1964
@@ -7162,6 +7180,7 @@ hillerdal2010,herschend2009
 kalmring2017,herschend2009
 lindholm2016,herschend2009
 tonning2020,herschend2009
+sanmark2013a,herschend2009
 croix2015,hines1994
 heenpettersen2014,hines1994
 croix2015,hodges1988
@@ -7428,6 +7447,7 @@ buckberry2014,iscan1984
 buckberry2014,iscan1985
 buckberry2014,liden1994
 linderholm2008,liden1994
+zachrisson2017a,liden1994
 buckberry2014,longinelli1984
 chenery2014,longinelli1984
 knudson2012,longinelli1984
@@ -8348,6 +8368,7 @@ price2019,montgomery2010
 domeijlundborg2012,lundborg2006
 lund2010,lundborg2006
 lund2017,lundborg2006
+zachrisson2017a,lundborg2006
 edberg2019,almgren1967
 croix2015,almgren1967
 kovalenko2013,almgren1967
@@ -8852,6 +8873,7 @@ croix2019,sage1984
 croix2019,schortman2004
 croix2019,smith2009
 price2012,smith2009
+sanmark2013a,smith2009
 solli2011,smith2009
 croix2019,smith2017
 croix2019,trigger1986
@@ -9430,6 +9452,7 @@ raffield2018,ol1954
 gardela2018,faulkes1987
 oehrl2017,faulkes1987
 oehrl2019,faulkes1987
+sanmark2013a,faulkes1987
 raffield2019,palsson1972
 gardela2015,hollander2000
 halstadmcguire2010,ingstad1995
@@ -9739,6 +9762,7 @@ fallgren2008,sundqvist2002
 ljungkvist2015,sundqvist2002
 larsson2007,sundqvist2002
 raffield2019,sundqvist2002
+sanmark2013a,sundqvist2002
 zachrisson2017,sundqvist2002
 skre2019,sundqvist2002
 zachrisson2014a,sundqvist2002
@@ -9924,6 +9948,7 @@ sindbaek2011,gullbekk2009
 gullbekk2011,helle2001
 storli2010c,helle2001
 solli2018,helle2001
+sanmark2013a,helle2001
 zachrisson2017,helle2001
 sanmark2013,helle2001
 gullbekk2011,holt1998
@@ -10292,6 +10317,7 @@ glorstad2015,nylen1994
 gardela2018,nylen1994
 odeback2018,nylen1994
 rundkvist2010,nylen1994
+zachrisson2017a,nylen1994
 glorstad2015,petersen1905
 sindbaek2014,petersen1905
 glorstad2015,petersen1907
@@ -11688,6 +11714,7 @@ oehrl2019,bottgerniedenzu1982
 helmbrecht2012,buisson1976
 oehrl2017,buisson1976
 oehrl2019,buisson1976
+zachrisson2017a,buisson1976
 helmbrecht2012,eldjarn1956
 roesdahl2011,eldjarn1956
 helmbrecht2012,hagen1950
@@ -12194,6 +12221,7 @@ keller2016,fredskild1973
 keller2016,fridriksson1994
 lucas2007,fridriksson1994
 mainland2018,fridriksson1994
+sanmark2013a,fridriksson1994
 sanmark2013,fridriksson1994
 keller2016,gerrard1991
 keller2016,gjerland2009
@@ -12716,6 +12744,7 @@ jackson2018,scott1992
 jackson2018,smith2011a
 lund2017,smith2011a
 raninen2014,smith2011a
+sanmark2013a,smith2011a
 jackson2018,sveinbjarnardottir1991
 svensson2018,sveinbjarnardottir1991
 jackson2018,svenning2015
@@ -13731,6 +13760,7 @@ myrberg2008,brink2004d
 price2014,brink2004d
 roesdahl2011,brink2004d
 storli2010c,brink2004d
+sanmark2013a,brink2004d
 sanmark2013,brink2004d
 lund2005,dent1984
 lund2010,dent1984
@@ -14195,6 +14225,7 @@ oehrl2017,mundal1998
 oehrl2019,mundal1998
 oehrl2017,neckel1983
 oehrl2019,neckel1983
+zachrisson2017a,neckel1983
 oehrl2017,nedoma1988
 oehrl2019,nedoma1988
 oehrl2017,nordin1903
@@ -14414,8 +14445,10 @@ lund2010,sanmark2008
 lund2016,sanmark2008
 raffield2014,sanmark2008
 storli2010c,sanmark2008
+sanmark2013a,sanmark2008
 sanmark2013,sanmark2008
 lund2010,sanmark2010
+sanmark2013a,sanmark2010
 sanmark2013,sanmark2010
 lund2010,semple1998
 raffield2014,semple1998
@@ -15286,6 +15319,7 @@ raffield2019,karras1990
 raffield2018,karras1990
 raffield2014,knapp1999
 raffield2014,larrington1996a
+zachrisson2017a,larrington1996a
 moen2020,larrington1996a
 raffield2014,mcleod2013
 raffield2014,raffield2013a
@@ -15297,10 +15331,12 @@ raffield2014,randsborg1999
 raffield2014,sanmark2009
 roesdahl2011,sanmark2009
 storli2010c,sanmark2009
+sanmark2013a,sanmark2009
 sanmark2013,sanmark2009
 raffield2014,scarre2002
 raffield2014,scragg1991
 raffield2014,semple2010
+sanmark2013a,semple2010
 raffield2014,sheppard1939
 raffield2014,museum2012
 raffield2014,harkell2011
@@ -15821,6 +15857,7 @@ price2006,perkins2001
 price2006,price1969
 raffield2016,price1969
 price2006,salin1913
+zachrisson2017a,salin1913
 price2006,steinsland1936
 price2006,agrip1929
 price2006,hultgard2003
@@ -15966,6 +16003,7 @@ raffield2019,lewis2017
 raffield2019,karras1980
 raffield2019,larson1935
 raffield2018,larson1935
+sanmark2013a,larson1935
 sanmark2013,larson1935
 skre2017,larson1935
 raffield2019,lee1936
@@ -16576,6 +16614,7 @@ lund2021,raffield2015
 raffield2019,fox1974
 skre2017,fox1974
 storli2010c,pantos2004
+sanmark2013a,holmback1933
 skre2017,hedeager1994
 raffield2019,bagerius2001
 raffield2019,batey2012
@@ -16687,6 +16726,7 @@ storli2010c,petersen1937
 storli2010c,ronneseth1963
 storli2010c,ronneseth1966
 storli2010c,sandnes1997
+sanmark2013a,sandnes1997
 storli2010c,shanks1982
 storli2010c,sigurdsson1993
 storli2010c,slomann1958
@@ -16746,6 +16786,7 @@ roslund2017,taavitsainen2004
 roslund2017,tomantera1991
 roslund2017,tvauri2005
 roslund2017,zakharov2004
+zachrisson2017a,boe2012
 solli2018,fjell2005
 reiter2019,goffman1971
 tonning2020,grieg1943
@@ -17171,6 +17212,7 @@ ulriksen2018,fern2012
 ulriksen2018,kirkup2006
 ulriksen2018,nasstrom1999
 lund2021,sanmarknda
+sanmark2013a,sanmark2006
 sanmark2013,sanmark2006
 wickholm2006,koivisto1996
 wickholm2006,leppaaho1936
@@ -17283,13 +17325,49 @@ wouters2016,nicosia2014
 wouters2016,schiegl1996
 wouters2016,verslype2004
 wouters2016,wouters2013
-lund2021,sanmarkndb
+sanmark2013a,ballantyne1994
+sanmark2013a,ballantyne1999
 sanmark2013,ballantyne1999
+sanmark2013a,bauge1980
 zachrisson2017,bauge1980
+sanmark2013a,brandnd
+sanmark2013a,heggstad1975
+sanmark2013a,indrebo1936
+sanmark2013a,jakobsen1936
+sanmark2013a,mackie2002
+sanmark2013a,mccullough2000
+sanmark2013a,nymoen1995
+sanmark2013a,nymoen1997
+sanmark2013a,ogrady2008
 sanmark2013,ogrady2008
+sanmark2013a,paton2011
+sanmark2013a,palsson2003
+sanmark2013a,bruce1908
+sanmark2013a,cant1975
+sanmark2013a,cleasbynd
+sanmark2013a,js1914
+sanmark2013a,coolen2011
 sanmark2013,coolen2011
+sanmark2013a,crawford1984
+sanmark2013a,dodgson1972
+sanmark2013a,donaldson1958
+sanmark2013a,edmondstonnd
+sanmark2013a,fellowsjensen1996
+sanmark2013a,greignd
+sanmark2013a,stewart1987
+sanmark2013a,solvara2002
+sanmark2013a,waugh2005
+sanmark2013a,westerdahl2004
+sanmark2013a,westerdahl2004a
+sanmark2013a,zoega1910
 sanmark2013,zoega1910
+sanmark2013a,peel2009
+sanmark2013a,riisoy2013
+sanmark2013a,ringstad2006
+sanmark2013a,ritchie1997
+sanmark2013a,sanmark2011
 sanmark2013,sanmark2011
+sanmark2013a,schlyternd
 sindbaek2007,barabasi1999a
 steinforth2015,freke1992
 lund2021,knappett2025
@@ -17713,6 +17791,7 @@ toplak2018,pettersson1991
 toplak2018,duwel1995
 toplak2018,ernst1992
 toplak2015,ernst1992
+zachrisson2017a,becker1973
 stott2019,keay2014
 stott2019,evans2015
 stott2019,stott2018
@@ -18293,6 +18372,28 @@ oye2014,oye1986
 oye2014,oye2010
 oye2016,oye2010
 moen2020,oye2010
+zachrisson2017a,beckerlfred1973
+zachrisson2017a,rdh2007
+zachrisson2017a,hauckarl1970
+zachrisson2017a,bertil2004
+zachrisson2017a,hel2011
+zachrisson2017a,herschendrands1996
+zachrisson2017a,er2001
+zachrisson2017a,lars2015
+zachrisson2017a,lars2012
+zachrisson2017a,lars1998
+zachrisson2017a,lars2004
+zachrisson2017a,erle1994
+zachrisson2017a,vist1925
+zachrisson2017a,edith1966
+zachrisson2017a,martensir1988
+zachrisson2017a,sig2011
+zachrisson2017a,bernhard1913
+zachrisson2017a,von2000
+zachrisson2017a,derberg2005
+zachrisson2017a,stephenseorgend
+zachrisson2017a,sund2002
+zachrisson2017a,thunarknlnlena2006
 williams2014,klevnas2007
 williams2016,klevnas2007
 williams2014,rundkvist2007
@@ -18541,6 +18642,7 @@ vesteinsson2016,kjalnesingasaga1959
 eriksen2013,gulathinglaw1994
 eriksen2013,ibnfadlan2012
 zachrisson2017,price2006c
+zachrisson2017a,pricemortimer2014
 neiss2016,neiss2007
 baug2019,askvikresi1984
 holst2013,waterbolk1990
@@ -18627,6 +18729,7 @@ kalmring2017,zachrisson2012a
 dugmore2007,thorarinsson1981
 keller2016,thorarinsson1981
 fontaine2017,jankowiak2012
+zachrisson2017a,larsson2004a
 perry2016,orton1993
 sindbaek2016,orton1993
 perry2016,jones2003a
@@ -18724,6 +18827,7 @@ oye2014,kitzlerahfeldt2013
 williams2016,kitzlerahfeldt2013
 frei2015,kitzlerahfeldt2013
 fahlander2016,brinchpetersen2006
+sanmark2013a,brinchpetersen2006
 feveile2017,harck1997
 hedenstiernajonson2015,ahlinsundman2012
 larsson2007,adamofbremen1959
@@ -18806,6 +18910,7 @@ wicker2013,norderang2004a
 kitzlerahfeldt2013,norderang2004a
 sindbaek2007,denooy2005
 price2008a,snorristurluson1964
+sanmark2013a,snorristurluson1964
 zachrisson2017,snorristurluson1964
 androshchuk2010,larsson1873
 glorstad2012,larsson1873
@@ -18962,3 +19067,5 @@ eriksen2017,wicker2013
 raffield2018,wicker2013
 raffield2019,wicker2013
 lund2021,sindbaek2011a
+lund2021,zachrisson2017a
+lund2021,sanmark2013a
