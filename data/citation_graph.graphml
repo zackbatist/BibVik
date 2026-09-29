@@ -151751,6 +151751,18 @@
       <data key="d8">0</data>
       <data key="d9">false</data>
     </node>
+    <node id="frei2012a">
+      <data key="d0">Exploring the potential of the strontium isotope tracing system in Denmark</data>
+      <data key="d1">2012</data>
+      <data key="d2">F1</data>
+      <data key="d3">article</data>
+      <data key="d4">Frei Karin M.</data>
+      <data key="d5">10.1080/21662282.2012.760889</data>
+      <data key="d6"/>
+      <data key="d7">0</data>
+      <data key="d8">0</data>
+      <data key="d9">false</data>
+    </node>
     <node id="ahfeldt2015">
       <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
       <data key="d1">2015</data>
@@ -151763,30 +151775,6 @@
       <data key="d8">86</data>
       <data key="d9">true</data>
     </node>
-    <node id="NOAUTHOR18">
-      <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">21</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="NOAUTHOR21">
-      <data key="d0">New Horizons in the Archaeology of the Viking Age</data>
-      <data key="d1"/>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4"/>
-      <data key="d5"/>
-      <data key="d6">0.25</data>
-      <data key="d7">0</data>
-      <data key="d8">14</data>
-      <data key="d9">true</data>
-    </node>
     <node id="NOAUTHOR33">
       <data key="d0">‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo</data>
       <data key="d1"/>
@@ -151797,6 +151785,18 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">45</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="NOAUTHOR18">
+      <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">0</data>
+      <data key="d8">21</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR28">
@@ -151821,6 +151821,18 @@
       <data key="d6">0.75</data>
       <data key="d7">0</data>
       <data key="d8">9</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="NOAUTHOR21">
+      <data key="d0">New Horizons in the Archaeology of the Viking Age</data>
+      <data key="d1"/>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">0.25</data>
+      <data key="d7">0</data>
+      <data key="d8">14</data>
       <data key="d9">true</data>
     </node>
     <edge id="e0" source="lund2021" target="aannestad2015"/>
@@ -153473,7 +153485,7 @@
     <edge id="e1647" source="lund2016" target="semple2013"/>
     <edge id="e1648" source="sanmarkndb" target="semple2013"/>
     <edge id="e1649" source="lund2021" target="sharples2020"/>
-    <edge id="e1650" source="lund2021" target="sindbaek2007"/>
+    <edge id="e1650" source="NOAUTHOR28" target="sindbaek2007"/>
     <edge id="e1651" source="ashby2015" target="sindbaek2007"/>
     <edge id="e1652" source="barrett2008" target="sindbaek2007"/>
     <edge id="e1653" source="barrett2010" target="sindbaek2007"/>
@@ -153484,27 +153496,27 @@
     <edge id="e1658" source="glorstad2017" target="sindbaek2007"/>
     <edge id="e1659" source="hennius2018" target="sindbaek2007"/>
     <edge id="e1660" source="holst2014" target="sindbaek2007"/>
-    <edge id="e1661" source="kalmring2013" target="sindbaek2007"/>
-    <edge id="e1662" source="lund2008" target="sindbaek2007"/>
-    <edge id="e1663" source="jessen2016" target="sindbaek2007"/>
+    <edge id="e1661" source="jessen2016" target="sindbaek2007"/>
+    <edge id="e1662" source="kalmring2013" target="sindbaek2007"/>
+    <edge id="e1663" source="knappett2025" target="sindbaek2007"/>
     <edge id="e1664" source="kristjansdottir2015" target="sindbaek2007"/>
-    <edge id="e1665" source="lund2017" target="sindbaek2007"/>
+    <edge id="e1665" source="lund2008" target="sindbaek2007"/>
     <edge id="e1666" source="lund2016" target="sindbaek2007"/>
-    <edge id="e1667" source="pedersennda" target="sindbaek2007"/>
-    <edge id="e1668" source="osullivan2015" target="sindbaek2007"/>
-    <edge id="e1669" source="pedersen2017" target="sindbaek2007"/>
-    <edge id="e1670" source="sindbaek2007" target="sindbaek2007"/>
-    <edge id="e1671" source="raninen2014" target="sindbaek2007"/>
-    <edge id="e1672" source="sindbaek2014" target="sindbaek2007"/>
-    <edge id="e1673" source="svendsen2016" target="sindbaek2007"/>
-    <edge id="e1674" source="sindbaek2013a" target="sindbaek2007"/>
-    <edge id="e1675" source="NOAUTHOR28" target="sindbaek2007"/>
-    <edge id="e1676" source="skre2016" target="sindbaek2007"/>
-    <edge id="e1677" source="knappett2025" target="sindbaek2007"/>
-    <edge id="e1678" source="vonholstein2014" target="sindbaek2007"/>
-    <edge id="e1679" source="sindbaek2011a" target="sindbaek2007"/>
-    <edge id="e1680" source="sindbaek2017" target="sindbaek2007"/>
-    <edge id="e1681" source="svendsen2019" target="sindbaek2007"/>
+    <edge id="e1667" source="lund2017" target="sindbaek2007"/>
+    <edge id="e1668" source="lund2021" target="sindbaek2007"/>
+    <edge id="e1669" source="osullivan2015" target="sindbaek2007"/>
+    <edge id="e1670" source="pedersen2017" target="sindbaek2007"/>
+    <edge id="e1671" source="pedersennda" target="sindbaek2007"/>
+    <edge id="e1672" source="raninen2014" target="sindbaek2007"/>
+    <edge id="e1673" source="sindbaek2007" target="sindbaek2007"/>
+    <edge id="e1674" source="sindbaek2011a" target="sindbaek2007"/>
+    <edge id="e1675" source="sindbaek2013a" target="sindbaek2007"/>
+    <edge id="e1676" source="sindbaek2014" target="sindbaek2007"/>
+    <edge id="e1677" source="sindbaek2017" target="sindbaek2007"/>
+    <edge id="e1678" source="skre2016" target="sindbaek2007"/>
+    <edge id="e1679" source="svendsen2016" target="sindbaek2007"/>
+    <edge id="e1680" source="svendsen2019" target="sindbaek2007"/>
+    <edge id="e1681" source="vonholstein2014" target="sindbaek2007"/>
     <edge id="e1682" source="williams2015" target="sindbaek2007"/>
     <edge id="e1683" source="lund2021" target="sindbaek2011"/>
     <edge id="e1684" source="aannestad2018" target="sindbaek2011"/>
@@ -163212,21 +163224,21 @@
     <edge id="e11386" source="pedersennda" target="pedersen2010"/>
     <edge id="e11387" source="pedersen2017" target="pedersen2010"/>
     <edge id="e11388" source="axelsen2014" target="pedersen2010"/>
-    <edge id="e11389" source="glorstad2012" target="petersen1928"/>
-    <edge id="e11390" source="glorstad2014" target="petersen1928"/>
-    <edge id="e11391" source="glorstad2015" target="petersen1928"/>
-    <edge id="e11392" source="heenpettersen2019" target="petersen1928"/>
-    <edge id="e11393" source="gardela2018" target="petersen1928"/>
+    <edge id="e11389" source="axelsen2014" target="petersen1928"/>
+    <edge id="e11390" source="gardela2018" target="petersen1928"/>
+    <edge id="e11391" source="glorstad2012" target="petersen1928"/>
+    <edge id="e11392" source="glorstad2014" target="petersen1928"/>
+    <edge id="e11393" source="glorstad2015" target="petersen1928"/>
     <edge id="e11394" source="heenpettersen2014" target="petersen1928"/>
-    <edge id="e11395" source="jagodzinski2014" target="petersen1928"/>
+    <edge id="e11395" source="heenpettersen2019" target="petersen1928"/>
     <edge id="e11396" source="ijssennagger2015" target="petersen1928"/>
-    <edge id="e11397" source="kershaw2009" target="petersen1928"/>
+    <edge id="e11397" source="jagodzinski2014" target="petersen1928"/>
     <edge id="e11398" source="kastholm2016" target="petersen1928"/>
-    <edge id="e11399" source="pedersen2017" target="petersen1928"/>
-    <edge id="e11400" source="axelsen2014" target="petersen1928"/>
+    <edge id="e11399" source="kershaw2009" target="petersen1928"/>
+    <edge id="e11400" source="pedersen2017" target="petersen1928"/>
     <edge id="e11401" source="rundkvist2010" target="petersen1928"/>
-    <edge id="e11402" source="spangen2009" target="petersen1928"/>
-    <edge id="e11403" source="sindbaek2011a" target="petersen1928"/>
+    <edge id="e11402" source="sindbaek2011a" target="petersen1928"/>
+    <edge id="e11403" source="spangen2009" target="petersen1928"/>
     <edge id="e11404" source="glorstad2012" target="ryste2005"/>
     <edge id="e11405" source="glorstad2014" target="ryste2005"/>
     <edge id="e11406" source="lund2008" target="ryste2005"/>

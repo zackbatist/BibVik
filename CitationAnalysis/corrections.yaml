@@ -61149,3 +61149,86 @@
   note: Created from verified extraction header plus Zotero for journal/volume/pages/DOI.
     Same annotations.csv merge issue as gardela2018b (sindbaek2007 already correctly
     holds The Small World of the Vikings, a different paper by the same author/year).
+- action: create
+  citekey: frei2012a
+  entry:
+    title: Exploring the potential of the strontium isotope tracing system in Denmark
+    author:
+    - family: Frei
+      given: Karin M.
+    year: '2012'
+    date: '2012'
+    generation: F1
+    entry_type: article
+    journaltitle: Danish Journal of Archaeology
+    volume: '1'
+    number: '2'
+    pages: 113-122
+    doi: 10.1080/21662282.2012.760889
+  note: 'Created from verified extraction data (title, author, DOI all matching Zotero
+    exactly; real abstract and 33 references extracted) - header extraction returned
+    no usable date, so no entry was ever created despite full successful processing.
+    Confirmed via DOI, title and full-name search that this paper does not exist elsewhere
+    in the bibliography under any citekey. Discovered during citekey-matching audit:
+    annotations.csv had two rows for frei2012, one for this paper and one for the
+    existing frei2012 entry (Strontium Isotopes and Human Mobility in Prehistoric
+    Denmark, Frei and Price 2012), both distinct real papers by the same lead author/year
+    merged onto one citekey by a normalization script.'
+- action: set
+  citekey: sindbaek2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - barrett2008
+  - barrett2010
+  - baug2017
+  - carver2015
+  - croix2019
+  - downham2016
+  - glorstad2017
+  - hennius2018
+  - holst2014
+  - jessen2016
+  - kalmring2013
+  - knappett2025
+  - kristjansdottir2015
+  - lund2008
+  - lund2016
+  - lund2017
+  - lund2021
+  - osullivan2015
+  - pedersen2017
+  - pedersennda
+  - raninen2014
+  - sindbaek2007
+  - sindbaek2011a
+  - sindbaek2013a
+  - sindbaek2014
+  - sindbaek2017
+  - skre2016
+  - svendsen2016
+  - svendsen2019
+  - vonholstein2014
+  - williams2015
+  note: Updated stale citekey reference sindbaeknda to its renamed form sindbaek2011a.
+- action: set
+  citekey: petersen1928
+  field: cited_by
+  value:
+  - axelsen2014
+  - gardela2018
+  - glorstad2012
+  - glorstad2014
+  - glorstad2015
+  - heenpettersen2014
+  - heenpettersen2019
+  - ijssennagger2015
+  - jagodzinski2014
+  - kastholm2016
+  - kershaw2009
+  - pedersen2017
+  - rundkvist2010
+  - sindbaek2011a
+  - spangen2009
+  note: Updated stale citekey reference sindbaeknda to its renamed form sindbaek2011a.
