@@ -112209,3 +112209,67 @@
   - andren2002b
   - andren2013b
   note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: artelius2004
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: arwillnordbladh2008
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: barndon2005
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: cannell2016
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: kastholmhansen2015
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: price2015
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: sindbaek2013
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: steinforth2018
+  field: _source_pdf
+  value: ''
+  note: Clearing incorrect _source_pdf link (was pointing at lund2021, the F1 seed
+    papers own PDF, not this entrys real source) - this entry was extracted purely
+    as a reference from lund2021s bibliography and has no independently processed
+    PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
