@@ -352,7 +352,7 @@ semple2013,"Perceptions of the Prehistoric in Anglo-Saxon England: Religion, Rit
 sharples2020,A Norse Settlement in the Outer Hebrides: Excavations on Mounds 2 and 2A,2020,F1,book,Sharples N. M.,,0.778,1,0,False
 sindbaek2007,The Small World of the Vikings: Networks in Early Medieval Communication and Exchange,2007,F1,article,Sindbaek Søren Michael,10.1017/S0003598X00094886,1.0,32,107,False
 sindbaek2011,"Silver economies and social ties: Long-distance interaction, long-term investments -And why the Viking Age happened",2011,F1,incollection,Sindbaek Søren Michael,10.1484/M.TMC-EB.4.1006,0.917,21,71,False
-sindbaek2013,Broken Links and Black Boxes: Material Affiliations and Contextual Network Synthesis in the Viking World,2013,F1,incollection,Sindbaek Søren Michael,,0.917,3,0,False
+sindbaek2013,Broken Links and Black Boxes: Material Affiliations and Contextual Network Synthesis in the Viking World,2013,F1,incollection,Sindbaek Søren Michael,,0.917,3,32,False
 sindbaek2017,"Urbanism and exchange in the North Atlantic/Baltic, 600-1000 CE",2017,F1,incollection,Sindbaek Søren Michael,,0.917,4,55,False
 sindbaek2018,Northern Emporium: The archaeology of urban networks in Viking-Age Ribe,2018,F1,incollection,Sindbaek Søren Michael,,0.917,2,9,False
 skre2008,Dark Age Towns: The Kaupang Case. Reply to Przemysław Urbańczyk,2008,F1,article,Skre Dagfinn,,0.917,24,0,False
@@ -10839,38 +10839,38 @@ schlyternd,Corpus iuris sueo-gotorum antiqui. Samling af Sweriges gamla lagar,18
 barabasi1999a,The Emergence of Scaling in Random Networks,1999,F2,misc,Barabási Ási,,0.75,1,0,False
 freke1992,"Prehistoric, Viking, Medi eval, and Modern Manx",1992,F2,incollection,Freke David,,0.75,1,0,False
 knappett2025,Network Analysis in Archaeology,2025,F1,misc,Knappett Carl,,0.75,1,53,False
-omgard1980,Saedding (Stoumann 1980),1980,F2,incollection,Omgård (. L. C.,,0.75,1,0,False
-taebringmikkelsen1986,Trabjerg (Jørgensen and Eriksen,1986,F2,article,Taebring (mikkelsen,,0.833,1,0,False
-coggins1967,Cadbury Castle,1967,F2,incollection,Coggins,,0.917,1,0,False
-behrenlubchin1965,Gross Raden,1965,F2,article,Behren-Lübchin,,0.917,1,0,False
-ystadtankbaten1976,"Bjärred, Skåne (Pettersson and Brorson",1976,F2,incollection,Ystad-Tankbåten,,0.667,1,0,False
-brughmans1989,ʻconnecting the dots: towards archaeological network analysisʼ,1989,F2,article,Brughmans Tom,10.1111/j.1468-0092.2010.00349.x,1.0,1,0,False
-worldcatbuttler1991,ʻSteatite in the Norse North Atlanticʼ,1991,F2,article,Worldcat Buttler S. J.,,0.833,1,0,False
-cheng2006,Combinatorial Optimization in Communication Networks,2006,F2,incollection,Cheng Worldcat,10.1007/0-387-29026-5,0.75,1,0,False
-krause2000,Exploring Animal Social Networks,2000,F2,misc,Krause Johannes,,0.75,1,0,False
-dress2007,Combinatorial Optimization in Communication Networks,2006,F2,book,,,0.667,1,0,False
-fitzhugh2000a,Vikings. The North Atlantic Saga. London: Smithsonian and National Museum of Natural History,2000,F2,incollection,Fitzhugh William W,,0.917,3,0,False
-forster2006,The world of Orkneyinga Saga:ʻthe broad-cloth viking tripʼ. Kirkwall: Hatston Orcadian,2006,F2,book,Forster A. K.,,0.778,2,0,False
-gen2008,Network Models and Optimization: Multiobjective Genetic Algorithm,2008,F2,book,Gen M.,,0.889,1,0,False
-graham2006,"ʻnetworks, agent-based models and the antonine itineraries: implications for roman archaeologyʼ",2006,F2,article,Graham Shawn,10.1558/jmea.2006.19.1.45,1.0,1,0,False
-hage1991,Exchange in Oceania: a Graph Theoretic Analysis,1991,F2,incollection,Hage P.,,0.75,1,0,False
-isaksen2008,ʻthe application of network analysis to ancient transport geography: a case study of roman baeticaʼ,2008,F2,article,Isaksen Leif,10.16995/dm.20,0.917,1,0,False
-worldcatjohansen2004,ʻkamennye litejnye formochki v kollektsii ryurikova gorodishcha i steatitovye nakhodki na rusiʼ [small steatite moulds from the collection from ryurik gorodishche and other steatite finds in rus,2004,F2,article,Worldcat Johansen K. L.,10.1016/j.jaa.2003.10.002,1.0,1,0,False
-klincewicz1998,ʻhub location in backbone/tributary network design: a reviewʼ,1998,F2,article,Klincewicz John G,10.1016/S0966-8349(98)00042-4,1.0,1,0,False
-worldcatkorte2006,Combinatorial Optimization: Theory and Algorithms,2006,F2,book,Worldcat Korte B.,,0.889,1,0,False
-labianca2006,Connectivity in Antiquity: Globalization as a Long Term Historical Process,2006,F2,book,,,0.667,1,0,False
-lebecq2007,"ʻCommunication and exchange in northwest Europeʼ, in J",2007,F2,incollection,Lebecq Stéphane,,0.917,1,0,False
-minoux1989,"ʻnetwork synthesis and optimum network design problems: models, solution methods and applicationsʼ",1989,F2,article,Minoux M.,10.1002/net.3230190305,1.0,1,0,False
-crossrefmizoguchi2009,ʻnodes and edges: a network approach to hierarchisation and state formation in japanʼ,2009,F2,article,Crossref Mizoguchi K.,10.1016/j.jaa.2008.12.001,1.0,1,0,False
-batagelj2005,Exploratory Social Network Analysis with Pajek,2005,F2,incollection,Batagelj Vladimir,10.1017/cbo9780511806452,0.583,1,0,False
-randall2001,"ʻsolving network synthesis problems using ant colony optimisationʼ, in l",2001,F2,incollection,Randall Marcus,10.1007/3-540-45517-5_1,0.917,1,0,False
-randall1994,"ʻsocialøkonomiske aspekter ved vikingetidens klaeberstenshandel i sydskandinavienʼ, lag, 5: 115-69",1994,F2,misc,Randall Marcus,,0.75,1,0,False
-worldcatschofield2005,Medieval Towns: The Archaeology of British Towns in their,2005,F2,article,Worldcat Schofield J.,10.1558/isbn.9781845538354,0.75,1,0,False
-worldcatsindbaek2010,ʻRe-assembling regions. The social occasions of technological exchange in Viking Age Scandinaviaʼ,2010,F2,incollection,Worldcat Sindbaek S. M.,,0.917,1,0,False
-terrell2010,"ʻLanguage and material culture on the Sepik Coast of Papua New Guinea: using Social Network Analysis to simulate, graph, identify, and analyze social and cultural boundaries between communitiesʼ",2010,F2,article,Terrell John Edward,10.1080/15564890903142891,1.0,1,0,False
-young2006,A Corpus of Anglo-Saxon and Medieval Pottery from Lincoln,2006,F2,article,Young Jane,10.2307/j.ctt1w1vj94,0.833,1,0,False
-valente2005,ʻnetwork models and methods for studying the di usion of innovationsʼ,2005,F2,incollection,Valente Thomas W.,10.1017/cbo9780511811395.006,0.917,1,0,False
-vince2005,ʻCeramic petrology and the study of Anglo-Saxon and Later Medieval ceramicsʼ,2005,F2,article,Vince A. G.,10.1179/007660905x54099,1.0,1,0,False
+omgard1980,Saedding (Stoumann 1980),1980,F2,incollection,Omgård (. L. C.,,0.75,2,0,False
+taebringmikkelsen1986,Trabjerg (Jørgensen and Eriksen,1986,F2,article,Taebring (mikkelsen,,0.833,2,0,False
+coggins1967,Cadbury Castle,1967,F2,incollection,Coggins,,0.917,2,0,False
+behrenlubchin1965,Gross Raden,1965,F2,article,Behren-Lübchin,,0.917,2,0,False
+ystadtankbaten1976,"Bjärred, Skåne (Pettersson and Brorson",1976,F2,incollection,Ystad-Tankbåten,,0.667,2,0,False
+brughmans1989,ʻconnecting the dots: towards archaeological network analysisʼ,1989,F2,article,Brughmans Tom,10.1111/j.1468-0092.2010.00349.x,1.0,2,0,False
+worldcatbuttler1991,ʻSteatite in the Norse North Atlanticʼ,1991,F2,article,Worldcat Buttler S. J.,,0.833,2,0,False
+cheng2006,Combinatorial Optimization in Communication Networks,2006,F2,incollection,Cheng Worldcat,10.1007/0-387-29026-5,0.75,2,0,False
+krause2000,Exploring Animal Social Networks,2000,F2,misc,Krause Johannes,,0.75,2,0,False
+dress2007,Combinatorial Optimization in Communication Networks,2006,F2,book,,,0.667,2,0,False
+fitzhugh2000a,Vikings. The North Atlantic Saga. London: Smithsonian and National Museum of Natural History,2000,F2,incollection,Fitzhugh William W,,0.917,4,0,False
+forster2006,The world of Orkneyinga Saga:ʻthe broad-cloth viking tripʼ. Kirkwall: Hatston Orcadian,2006,F2,book,Forster A. K.,,0.778,3,0,False
+gen2008,Network Models and Optimization: Multiobjective Genetic Algorithm,2008,F2,book,Gen M.,,0.889,2,0,False
+graham2006,"ʻnetworks, agent-based models and the antonine itineraries: implications for roman archaeologyʼ",2006,F2,article,Graham Shawn,10.1558/jmea.2006.19.1.45,1.0,2,0,False
+hage1991,Exchange in Oceania: a Graph Theoretic Analysis,1991,F2,incollection,Hage P.,,0.75,2,0,False
+isaksen2008,ʻthe application of network analysis to ancient transport geography: a case study of roman baeticaʼ,2008,F2,article,Isaksen Leif,10.16995/dm.20,0.917,2,0,False
+worldcatjohansen2004,ʻkamennye litejnye formochki v kollektsii ryurikova gorodishcha i steatitovye nakhodki na rusiʼ [small steatite moulds from the collection from ryurik gorodishche and other steatite finds in rus,2004,F2,article,Worldcat Johansen K. L.,10.1016/j.jaa.2003.10.002,1.0,2,0,False
+klincewicz1998,ʻhub location in backbone/tributary network design: a reviewʼ,1998,F2,article,Klincewicz John G,10.1016/S0966-8349(98)00042-4,1.0,2,0,False
+worldcatkorte2006,Combinatorial Optimization: Theory and Algorithms,2006,F2,book,Worldcat Korte B.,,0.889,2,0,False
+labianca2006,Connectivity in Antiquity: Globalization as a Long Term Historical Process,2006,F2,book,,,0.667,2,0,False
+lebecq2007,"ʻCommunication and exchange in northwest Europeʼ, in J",2007,F2,incollection,Lebecq Stéphane,,0.917,2,0,False
+minoux1989,"ʻnetwork synthesis and optimum network design problems: models, solution methods and applicationsʼ",1989,F2,article,Minoux M.,10.1002/net.3230190305,1.0,2,0,False
+crossrefmizoguchi2009,ʻnodes and edges: a network approach to hierarchisation and state formation in japanʼ,2009,F2,article,Crossref Mizoguchi K.,10.1016/j.jaa.2008.12.001,1.0,2,0,False
+batagelj2005,Exploratory Social Network Analysis with Pajek,2005,F2,incollection,Batagelj Vladimir,10.1017/cbo9780511806452,0.583,2,0,False
+randall2001,"ʻsolving network synthesis problems using ant colony optimisationʼ, in l",2001,F2,incollection,Randall Marcus,10.1007/3-540-45517-5_1,0.917,2,0,False
+randall1994,"ʻsocialøkonomiske aspekter ved vikingetidens klaeberstenshandel i sydskandinavienʼ, lag, 5: 115-69",1994,F2,misc,Randall Marcus,,0.75,2,0,False
+worldcatschofield2005,Medieval Towns: The Archaeology of British Towns in their,2005,F2,article,Worldcat Schofield J.,10.1558/isbn.9781845538354,0.75,2,0,False
+worldcatsindbaek2010,ʻRe-assembling regions. The social occasions of technological exchange in Viking Age Scandinaviaʼ,2010,F2,incollection,Worldcat Sindbaek S. M.,,0.917,2,0,False
+terrell2010,"ʻLanguage and material culture on the Sepik Coast of Papua New Guinea: using Social Network Analysis to simulate, graph, identify, and analyze social and cultural boundaries between communitiesʼ",2010,F2,article,Terrell John Edward,10.1080/15564890903142891,1.0,2,0,False
+young2006,A Corpus of Anglo-Saxon and Medieval Pottery from Lincoln,2006,F2,article,Young Jane,10.2307/j.ctt1w1vj94,0.833,2,0,False
+valente2005,ʻnetwork models and methods for studying the di usion of innovationsʼ,2005,F2,incollection,Valente Thomas W.,10.1017/cbo9780511811395.006,0.917,2,0,False
+vince2005,ʻCeramic petrology and the study of Anglo-Saxon and Later Medieval ceramicsʼ,2005,F2,article,Vince A. G.,10.1179/007660905x54099,1.0,2,0,False
 bayley2007,Towards a Functional and Typological Classification of Crucibles,2007,F2,incollection,Bayley Justine,,0.917,1,0,False
 bech2011,Ash quality in Europe: Primary and secondary measures,2011,F2,incollection,Bech N.,,0.667,1,0,False
 edwards1999,The archaeology of Early Mediaeval Ireland,1999,F2,book,Edwards N.,,0.889,1,0,False
@@ -12697,9 +12697,9 @@ sanmark2013a,Patterns of Assembly: Norse Thing Sites in Shetland,2013,F1,article
 croix2019a,"The réseau opératoire of Urbanization: Craft Collaborations and Organization in an Early Medieval Workshop in Ribe, Denmark",2019,F1,article,Croix Sarah,10.1017/S0959774318000525,,0,48,False
 price2014d,From Ginnungagap to the Ragnarök. Archaeologies of the Viking worlds,2014,F1,misc,Price N. S.,,0.5,1,27,False
 andren2002b,Platsernas betydelse: Norrön ritual och kultplatskontinuitet,2002,F1,misc,Andrén Anders,,,1,47,False
-NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,0,193,True
-NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,0,45,True
 ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,0,86,True
-NOAUTHOR21,New Horizons in the Archaeology of the Viking Age,,F1,misc,,,0.25,0,14,True
-NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,0,21,True
 skorokhod2020,Staraya Ladoga in northwestern Russia,2020,F1,misc,Skorokhod A.,,0.75,0,9,True
+NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,0,45,True
+NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,0,193,True
+NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,0,21,True
+NOAUTHOR21,New Horizons in the Archaeology of the Viking Age,,F1,misc,,,0.25,0,14,True

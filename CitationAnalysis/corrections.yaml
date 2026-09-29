@@ -112273,3 +112273,275 @@
     papers own PDF, not this entrys real source) - this entry was extracted purely
     as a reference from lund2021s bibliography and has no independently processed
     PDF of its own in BibVik_seed. Its real PDF, if it exists, has not yet been located.
+- action: set
+  citekey: cannell2016
+  field: _source_pdf
+  value: Cannell et al  2016 - Geochemical analysis using portable x-ray fluorescence.pdf
+  note: Linking entry to its real, already-processed source PDF - confirmed present
+    in BibVik_seed with a Zotero PDF link. Discovered during final no-outdegree cleanup.
+- action: set
+  citekey: sindbaek2013
+  field: _source_pdf
+  value: Sindbæk 2013 - Broken Links and Black Boxes Material Affiliations and Contextual
+    Network Synthesis in the Viking W.pdf
+  note: Linking entry to its real, already-processed source PDF - confirmed present
+    in BibVik_seed with a Zotero PDF link. Discovered during final no-outdegree cleanup.
+- action: set
+  citekey: omgard1980
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: taebringmikkelsen1986
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: coggins1967
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: behrenlubchin1965
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: ystadtankbaten1976
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: brughmans1989
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: worldcatbuttler1991
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: cheng2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: krause2000
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: dress2007
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: fitzhugh2000a
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  - sindbaek2016
+  - sutherland2009
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: forster2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  - sindbaek2016
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: gen2008
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: graham2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: hage1991
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: isaksen2008
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: worldcatjohansen2004
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: klincewicz1998
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: worldcatkorte2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: labianca2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: lebecq2007
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: minoux1989
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: crossrefmizoguchi2009
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: batagelj2005
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: randall2001
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: randall1994
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: worldcatschofield2005
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: worldcatsindbaek2010
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: terrell2010
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: young2006
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: valente2005
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
+- action: set
+  citekey: vince2005
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2013
+  note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
+    lists.
