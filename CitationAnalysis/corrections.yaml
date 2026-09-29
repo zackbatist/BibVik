@@ -116078,3 +116078,49 @@
     editorial introduction to an edited volume, not a research article with its own
     bibliography), referencing Gitte Hansens own dissertation by name in the body
     text, read directly from the source PDF.
+- action: set
+  citekey: artelius2005
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  - tummuscheit2019
+  note: Adding citer lund2021 - genuinely resolved in the original grobid_id_to_citekey
+    cache but never reflected in the exported edgelist, found via a systematic corpus-wide
+    integrity check.
+- action: set
+  citekey: holmqvist1972
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - fabech2013
+  note: Adding citer fabech2013 - genuinely resolved in the original grobid_id_to_citekey
+    cache but never reflected in the exported edgelist, found via a systematic corpus-wide
+    integrity check.
+- action: set
+  citekey: lund2011
+  field: cited_by
+  value:
+  - lund2015
+  - skre2016
+  note: Adding citer lund2015 - genuinely resolved in the original grobid_id_to_citekey
+    cache but never reflected in the exported edgelist, found via a systematic corpus-wide
+    integrity check.
+- action: set
+  citekey: sorheim2011
+  field: cited_by
+  value:
+  - gardela2018
+  - jahnsen2016
+  note: Adding citer jahnsen2016 - genuinely resolved in the original grobid_id_to_citekey
+    cache but never reflected in the exported edgelist, found via a systematic corpus-wide
+    integrity check.
+- action: set
+  citekey: callmer1995
+  field: cited_by
+  value:
+  - borake2018
+  - skre2016
+  note: Adding citer borake2018 - genuinely resolved in the original grobid_id_to_citekey
+    cache but never reflected in the exported edgelist, found via a systematic corpus-wide
+    integrity check.
