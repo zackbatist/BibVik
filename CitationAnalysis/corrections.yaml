@@ -103553,3 +103553,585 @@
   note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
     cited_by list during an earlier reconnection batch tonight. Original legitimate
     citers preserved.
+- action: set
+  citekey: amundsen2017
+  field: cited_by
+  value:
+  - lund2019
+  - lund2021
+  - solli2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: anchukaitis2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: arneborg2012
+  field: cited_by
+  value:
+  - dugmore2012
+  - frei2015
+  - hartman2017
+  - hayeursmith2018a
+  - jackson2018
+  - lund2021
+  - lynnerup2014a
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: backdanielsson2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: catlin2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: devos2013
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  - wouters2016
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: dugmore2012
+  field: cited_by
+  value:
+  - hartman2017
+  - jackson2018
+  - lund2021
+  - mainland2018
+  - schmid2017
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: fahlander2016
+  field: cited_by
+  value:
+  - fahlander2018
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: feveile2009
+  field: cited_by
+  value:
+  - ashby2015
+  - croix2015
+  - lund2021
+  - ulriksen2011a
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: fredriksen2014
+  field: cited_by
+  value:
+  - lund2021
+  - martin2020
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: frei2012
+  field: cited_by
+  value:
+  - henriksen2017
+  - lund2021
+  - price2012
+  - price2014
+  - price2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: furholt2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: gardela2018
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: griffiths2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: hadley2016
+  field: cited_by
+  value:
+  - hadley2018
+  - jarman2018
+  - lund2021
+  - raffield2019
+  - richards2018
+  - rogers2020
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: knudson2012
+  field: cited_by
+  value:
+  - lund2021
+  - montgomery2014
+  - peschel2017
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: lucas2007
+  field: cited_by
+  value:
+  - lund2021
+  - mainland2018
+  - price2010
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: macphail2013
+  field: cited_by
+  value:
+  - cannell2016a
+  - lund2021
+  - macphail2016
+  - schneidhofer2017
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: mcleod2011
+  field: cited_by
+  value:
+  - gardela2018
+  - harris2017
+  - lund2021
+  - moen2020
+  - osullivan2015
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: milek2012
+  field: cited_by
+  value:
+  - croix2019
+  - devos2013
+  - ellingsen2019
+  - kristjansdottir2015
+  - lund2021
+  - macphail2016
+  - milek2013
+  - wouters2016
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: oehrl2017
+  field: cited_by
+  value:
+  - lund2021
+  - oehrl2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: pedersen2015
+  field: cited_by
+  value:
+  - christiansen2019
+  - croix2019
+  - lund2021
+  - pedersen2017
+  - pedersen2019
+  - pedersennda
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: perry2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: peschel2017
+  field: cited_by
+  value:
+  - hedenstiernajonson2017
+  - lund2021
+  - price2019
+  - price2020
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: price2018
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - carver2015
+  - krzewinska2018
+  - lund2021
+  - price2019
+  - price2020
+  - reiter2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: price2012
+  field: cited_by
+  value:
+  - fredriksen2014
+  - frei2012
+  - gardela2014a
+  - gardelanda
+  - henriksen2017
+  - krzewinska2018
+  - lund2021
+  - peschel2017
+  - price2014
+  - price2018
+  - price2019
+  - price2020
+  - pricenda
+  - toplak2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: raffield2016
+  field: cited_by
+  value:
+  - gardela2018
+  - griffiths2019
+  - hadley2018
+  - lund2021
+  - moen2020
+  - odeback2018
+  - raffield2018
+  - raffield2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: runge2018
+  field: cited_by
+  value:
+  - lund2021
+  - stott2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: sindbaek2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - barrett2008
+  - barrett2010
+  - baug2017
+  - carver2015
+  - croix2019
+  - downham2016
+  - glorstad2017
+  - hennius2018
+  - holst2014
+  - jessen2016
+  - kalmring2013
+  - knappett2025
+  - kristjansdottir2015
+  - lund2008
+  - lund2016
+  - lund2017
+  - lund2021
+  - osullivan2015
+  - pedersen2017
+  - pedersennda
+  - raninen2014
+  - sindbaek2011a
+  - sindbaek2013a
+  - sindbaek2014
+  - sindbaek2017
+  - skre2016
+  - svendsen2016
+  - svendsen2019
+  - vonholstein2014
+  - williams2015
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: skre2017
+  field: cited_by
+  value:
+  - ellingsen2019
+  - loftsgarden2019
+  - lund2021
+  - pilo2020
+  - price2018
+  - raffield2019
+  - sheehan2013a
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: star2017
+  field: cited_by
+  value:
+  - hennius2018
+  - lund2021
+  - pilo2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: steinforth2015
+  field: cited_by
+  value:
+  - hadley2016
+  - lund2021
+  - richards2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: svendsen2016
+  field: cited_by
+  value:
+  - lund2021
+  - svendsen2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: tonning2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: vesteinsson2012
+  field: cited_by
+  value:
+  - catlin2016
+  - lund2021
+  - lynnerup2014a
+  - schmid2017
+  - vesteinsson2014a
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: gotfredsen2014
+  field: cited_by
+  value:
+  - eriksen2017
+  - lund2021
+  - mainland2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: osullivan2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: frei2011
+  field: cited_by
+  value:
+  - becker2012
+  - buckberry2014
+  - chenery2014
+  - frei2012
+  - gotfredsen2014
+  - harris2017
+  - henriksen2017
+  - lund2021
+  - montgomery2014
+  - price2012
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: pentz2009
+  field: cited_by
+  value:
+  - christensen2013
+  - lund2021
+  - price2010
+  - price2014
+  - price2014d
+  - rohdesloth2012
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: draganits2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: gardela2014
+  field: cited_by
+  value:
+  - croix2015
+  - gardela2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: feveile2015
+  field: cited_by
+  value:
+  - feveile2017
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: gardela2007
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: price2005
+  field: cited_by
+  value:
+  - gardela2007
+  - knudson2012
+  - lund2008
+  - lund2017
+  - price2014a
+  - price2018
+  - raffield2016
+  - raffield2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: andren2006b
+  field: cited_by
+  value:
+  - eriksen2016
+  - glorstad2012
+  - jorgensen2009a
+  - lund2010
+  - mannering2013
+  - price2010
+  - raffield2014
+  - sindbaek2014
+  - zachrisson2014a
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: hayeursmith2013
+  field: cited_by
+  value:
+  - hartman2017
+  - jackson2018
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: sanmark2008
+  field: cited_by
+  value:
+  - lund2010
+  - lund2016
+  - raffield2014
+  - sanmark2013
+  - sanmark2013a
+  - storli2010c
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: graslund2012a
+  field: cited_by
+  value:
+  - pilo2018
+  - sindbaek2017
+  - skre2019
+  - tveiten2017
+  - zachrisson2017
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: kalmring2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - price2018
+  - price2018b
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: kitzlerahfeld2015a
+  field: cited_by
+  value:
+  - lund2021
+  - oehrl2019
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
+- action: set
+  citekey: williams2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing self-citation - papers own citekey was incorrectly included in its
+    cited_by list, likely a GROBID extraction artifact (self-reference, footer, or
+    in-press listing misread as an external citation).
