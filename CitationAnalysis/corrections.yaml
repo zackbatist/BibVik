@@ -97876,3 +97876,5680 @@
     (repeated running header/footer text mistaken for a reference, ironically matching
     the citing papers own DOI/pages) rather than a real separate citation - no real
     paper to redirect to.
+- action: set
+  citekey: aannestad2015
+  field: cited_by
+  value:
+  - aannestad2018
+  - heenpettersen2018
+  - heenpettersen2019
+  - lund2016
+  - lund2021
+  - moen2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: aannestad2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ahola2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ambrosiani2013
+  field: cited_by
+  value:
+  - ambrosiani2015
+  - croix2015
+  - lund2021
+  - price2018
+  - vonholstein2014
+  - warmlander2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ambrosiani2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: amundsen2017
+  field: cited_by
+  value:
+  - amundsen2017
+  - lund2019
+  - lund2021
+  - solli2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: anchukaitis2017
+  field: cited_by
+  value:
+  - anchukaitis2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andersson2004
+  field: cited_by
+  value:
+  - dobat2006
+  - fabech2013
+  - gustafsson2011a
+  - kalmring2013
+  - larsson2007
+  - lund2021
+  - price2006
+  - price2018
+  - zachrisson2014b
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andersson2016
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - fahlander2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andersson2008
+  field: cited_by
+  value:
+  - eriksen2013
+  - fabech2013
+  - jorgensen2009a
+  - jorgensenndb
+  - lund2021
+  - price2018
+  - strand2011
+  - zachrisson2014b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andren2000
+  field: cited_by
+  value:
+  - andren2013a
+  - lund2004
+  - lund2005
+  - lund2008
+  - lund2017
+  - lund2020
+  - lund2021
+  - lundborg2006a
+  - raffield2018
+  - williams2016
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andren2002
+  field: cited_by
+  value:
+  - andren2013
+  - andren2013a
+  - fabech2013
+  - glorstad2012
+  - jorgensen2009a
+  - larsson2007
+  - ljungkvist2011a
+  - lund2004
+  - lund2005
+  - lund2008
+  - lund2010
+  - lund2013
+  - lund2015
+  - lund2017
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andren2013
+  field: cited_by
+  value:
+  - jessen2016
+  - lund2016
+  - lund2020
+  - lund2021
+  - price2014d
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andren2004
+  field: cited_by
+  value:
+  - fabech2013
+  - jorgensen2009a
+  - larsson2007
+  - lund2013
+  - lund2016
+  - lund2017
+  - lund2021
+  - magnell2010
+  - mannering2013
+  - oehrl2017
+  - price2008a
+  - zachrisson2014a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2010
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2013
+  field: cited_by
+  value:
+  - gardela2018
+  - gustafsson2016
+  - lund2021
+  - raffield2018
+  - raffield2019
+  - warmlander2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2014
+  field: cited_by
+  value:
+  - androshchuk2018
+  - bill2017a
+  - bill2019
+  - burstrom2015
+  - gardela2018
+  - glorstad2017
+  - lund2021
+  - odeback2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2018
+  field: cited_by
+  value:
+  - edberg2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2012
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2018
+  - warmlander2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: androshchuk2016
+  field: cited_by
+  value:
+  - aannestad2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arents2010
+  field: cited_by
+  value:
+  - feveile2011
+  - gardelanda
+  - hedenstiernajonson2015
+  - hilberg2013
+  - hilberg2014
+  - hilberg2018
+  - kalmring2010
+  - lund2021
+  - ulriksen2011a
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: armbruster2010
+  field: cited_by
+  value:
+  - gustafsson2011a
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arneborg2012
+  field: cited_by
+  value:
+  - arneborg2012
+  - dugmore2012
+  - frei2015
+  - hartman2017
+  - hayeursmith2018a
+  - jackson2018
+  - lund2021
+  - lynnerup2014a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: artelius2004
+  field: cited_by
+  value:
+  - andren2013a
+  - artelius2005
+  - artelius2013
+  - arwillnordbladh2013a
+  - fahlander2016
+  - lund2016
+  - lund2020
+  - lund2021
+  - pedersen2006
+  - wickholm2006
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: artelius2013
+  field: cited_by
+  value:
+  - fahlander2016
+  - harris2017
+  - lund2016
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: artelius2005
+  field: cited_by
+  value:
+  - gardela2018
+  - tummuscheit2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: artelius2007
+  field: cited_by
+  value:
+  - artelius2013
+  - fahlander2016
+  - fahlander2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arwillnordbladh1998
+  field: cited_by
+  value:
+  - lund2019
+  - lund2021
+  - moen2020
+  - osullivan2015
+  - price2005a
+  - price2014d
+  - price2019
+  - raffield2016
+  - raffield2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arwillnordbladh2007
+  field: cited_by
+  value:
+  - arwillnordbladh2013a
+  - glorstad2012
+  - glorstad2015
+  - heenpettersen2018
+  - lund2016
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arwillnordbladh2008
+  field: cited_by
+  value:
+  - andren2013a
+  - arwillnordbladh2012
+  - arwillnordbladh2013a
+  - lund2016
+  - lund2020
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arwillnordbladh2012
+  field: cited_by
+  value:
+  - arwillnordbladh2013
+  - arwillnordbladh2013a
+  - lund2019
+  - lund2021
+  - raffield2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: arwillnordbladh2013
+  field: cited_by
+  value:
+  - heenpettersen2018
+  - lund2016
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ashby2014
+  field: cited_by
+  value:
+  - ashby2015
+  - lund2016
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ashby2015
+  field: cited_by
+  value:
+  - aannestad2018
+  - baug2019
+  - croix2019
+  - glorstad2017
+  - heenpettersen2018
+  - heenpettersen2019
+  - hennius2018
+  - loftsgarden2019
+  - lund2019
+  - lund2021
+  - perry2016
+  - pilo2020
+  - raffield2016
+  - raffield2019
+  - raja2018
+  - rosvold2019
+  - sindbaek2017
+  - sindbaek2018
+  - the2017
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: s2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: baastrup2014
+  field: cited_by
+  value:
+  - griffiths2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: backdanielsson2007
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - backdanielsson2016
+  - gardela2007
+  - gardela2018
+  - lund2019
+  - lund2021
+  - odeback2018
+  - price2014
+  - price2019
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: backdanielsson2016
+  field: cited_by
+  value:
+  - backdanielsson2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: barndon2005
+  field: cited_by
+  value:
+  - barndon2018
+  - lund2010
+  - lund2019
+  - lund2021
+  - pedersenndb
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: barrett2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - ashby2015
+  - barrett2010
+  - baug2019
+  - croix2015
+  - dugmore2012
+  - glorstad2012
+  - griffiths2019
+  - heenpettersen2019
+  - krzewinska2015
+  - lund2021
+  - moen2020
+  - montgomery2014
+  - naumann2014
+  - price2014a
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  - raninen2014
+  - sheehan2013a
+  - sindbaek2011
+  - sindbaek2013a
+  - star2017
+  - vonholstein2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: barrett2010
+  field: cited_by
+  value:
+  - ashby2015
+  - baug2019
+  - frei2015
+  - glorstad2012
+  - heenpettersen2019
+  - lund2021
+  - montgomery2014
+  - pilo2018
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ed2012
+  field: cited_by
+  value:
+  - downham2016
+  - griffiths2019
+  - lund2021
+  - mainland2018
+  - sindbaek2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: barth1969
+  field: cited_by
+  value:
+  - amundsen2017
+  - bergstol2004
+  - croix2019
+  - kemmers2011
+  - lund2021
+  - nielsen2011
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: e2014
+  field: cited_by
+  value:
+  - croix2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: baug2015
+  field: cited_by
+  value:
+  - baug2017
+  - glorstad2017
+  - loftsgarden2019
+  - lund2021
+  - rosvold2019
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: baug2017
+  field: cited_by
+  value:
+  - lund2021
+  - rosvold2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: baug2019
+  field: cited_by
+  value:
+  - bill2019
+  - griffiths2019
+  - heenpettersen2019
+  - loftsgarden2019
+  - lund2021
+  - rosvold2019
+  - skre2019
+  - svendsen2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: beck2017
+  field: cited_by
+  value:
+  - beck2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: beck2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: becker2012
+  field: cited_by
+  value:
+  - ashby2015
+  - grupe2013
+  - lund2021
+  - zachrisson2017a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: becket2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bergstol2004
+  field: cited_by
+  value:
+  - amundsen2017
+  - lund2019
+  - lund2021
+  - rasmussen2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bergstol2008
+  field: cited_by
+  value:
+  - amundsen2017
+  - glorstad2012
+  - jahnsen2016
+  - loftsgarden2019
+  - lund2019
+  - lund2021
+  - nielsen2011
+  - solli2018
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: beroniusjorpeland2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bhabha1994
+  field: cited_by
+  value:
+  - amundsen2017
+  - kristjansdottir2015
+  - lund2019
+  - lund2021
+  - nielsen2011
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bill2016
+  field: cited_by
+  value:
+  - bill2019
+  - fahlander2016
+  - fahlander2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bill2017
+  field: cited_by
+  value:
+  - bill2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bill2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bill2012
+  field: cited_by
+  value:
+  - axelsen2014
+  - bill2016
+  - bill2017
+  - bill2017a
+  - bill2019
+  - fredriksen2014
+  - gardelanda
+  - gullbekk2014
+  - lund2017
+  - lund2021
+  - macphail2013
+  - pedersen2015
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bjerg2013
+  field: cited_by
+  value:
+  - croix2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: blaszczyk2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: d2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bogucki2012
+  field: cited_by
+  value:
+  - croix2015
+  - gardela2015
+  - jagodzinski2014
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bonde2016
+  field: cited_by
+  value:
+  - baug2019
+  - bill2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: borake2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: borake2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: boyd2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: brather2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: brewer2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: brink2011
+  field: cited_by
+  value:
+  - iversen2015a
+  - lund2021
+  - sanmark2013
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: buckberry2014
+  field: cited_by
+  value:
+  - harris2017
+  - lund2021
+  - montgomery2014
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: buntgen2016
+  field: cited_by
+  value:
+  - anchukaitis2017
+  - helama2017
+  - lund2021
+  - pilo2018
+  - pilo2020
+  - skre2019
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: burstrom2014
+  field: cited_by
+  value:
+  - burstrom2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: burstrom2015
+  field: cited_by
+  value:
+  - aannestad2018
+  - eriksen2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: callmer2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: cannell2016
+  field: cited_by
+  value:
+  - bill2019
+  - ellingsen2019
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: carver2015
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  - price2010
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: catlin2016
+  field: cited_by
+  value:
+  - catlin2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: chenery2014
+  field: cited_by
+  value:
+  - jarman2018
+  - lund2021
+  - montgomery2014
+  - peschel2017
+  - raffield2015
+  - raffield2016
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: christensen2018
+  field: cited_by
+  value:
+  - lund2021
+  - stott2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: christensen2013
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  - ulriksen2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: christiansen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: clarke2017
+  field: cited_by
+  value:
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: croix2012
+  field: cited_by
+  value:
+  - croix2015
+  - lund2021
+  - pedersen2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: croix2015
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - croix2019
+  - lund2021
+  - sindbaek2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: croix2016
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: croix2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: croix2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: crumlinpedersen2010
+  field: cited_by
+  value:
+  - lund2021
+  - pedersen2019
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: devos2013
+  field: cited_by
+  value:
+  - croix2019
+  - devos2013
+  - lund2021
+  - wouters2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: diamond2005
+  field: cited_by
+  value:
+  - dugmore2007
+  - dugmore2012
+  - hartman2017
+  - jackson2018
+  - keller2016
+  - lund2021
+  - tainter2006
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dobat2006
+  field: cited_by
+  value:
+  - carver2015
+  - lund2021
+  - pluskowski2010a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dobat2013
+  field: cited_by
+  value:
+  - croix2019
+  - gardela2018
+  - lund2021
+  - rasmussen2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dobat2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - lund2021
+  - runge2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: domeijlundborg2004
+  field: cited_by
+  value:
+  - domeijlundborg2012
+  - lund2008
+  - lund2010
+  - lund2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: domeijlundborg2012
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: draganits2015
+  field: cited_by
+  value:
+  - lund2021
+  - schneidhofer2017
+  - skre2019
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dugmore2007
+  field: cited_by
+  value:
+  - barrett2008
+  - barrett2010
+  - dugmore2012
+  - frei2015
+  - hartman2017
+  - hayeursmith2018a
+  - jackson2018
+  - keller2016
+  - lund2021
+  - vesteinsson2014a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dugmore2012
+  field: cited_by
+  value:
+  - dugmore2012
+  - hartman2017
+  - jackson2018
+  - lund2021
+  - mainland2018
+  - schmid2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: edberg2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: englert2015
+  field: cited_by
+  value:
+  - hilberg2013
+  - lund2021
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksen2016
+  field: cited_by
+  value:
+  - beck2017
+  - eriksen2017
+  - heenpettersen2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksen2017
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2018
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksen1994
+  field: cited_by
+  value:
+  - bergstol2004
+  - lund2019
+  - lund2021
+  - spangen2009
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksson2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fahlander2016
+  field: cited_by
+  value:
+  - fahlander2016
+  - fahlander2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fahlander2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fallgren2008
+  field: cited_by
+  value:
+  - hillerdal2010
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: feveile2011
+  field: cited_by
+  value:
+  - christiansen2019
+  - dobat2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: feveile2009
+  field: cited_by
+  value:
+  - ashby2015
+  - croix2015
+  - feveile2009
+  - lund2021
+  - ulriksen2011a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: feveile2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fischer2011
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fontaine2017
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: forster2009
+  field: cited_by
+  value:
+  - baug2015
+  - baug2017
+  - lund2021
+  - sindbaek2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fredriksen2014
+  field: cited_by
+  value:
+  - fredriksen2014
+  - lund2021
+  - martin2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: frei2012
+  field: cited_by
+  value:
+  - frei2012
+  - henriksen2017
+  - lund2021
+  - price2012
+  - price2014
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: frieman2019
+  field: cited_by
+  value:
+  - furholt2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: frog2014
+  field: cited_by
+  value:
+  - croix2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: furholt2018
+  field: cited_by
+  value:
+  - frieman2019
+  - furholt2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: furholt2019
+  field: cited_by
+  value:
+  - furholt2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2008
+  field: cited_by
+  value:
+  - gardela2007
+  - gardela2018
+  - gardelanda
+  - lund2021
+  - milek2012
+  - ulriksen2011a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2013
+  field: cited_by
+  value:
+  - androshchuk2018
+  - edberg2019
+  - gardela2014a
+  - gardela2015
+  - gardela2018
+  - gardelanda
+  - harris2017
+  - hedenstiernajonson2017
+  - kastholm2016
+  - lund2021
+  - moen2020
+  - price2014
+  - price2019
+  - raffield2016
+  - raffield2019
+  - toplak2015
+  - toplak2018
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2012
+  field: cited_by
+  value:
+  - eriksen2013
+  - gardela2014a
+  - gardela2018
+  - gardelanda
+  - jackson2018
+  - lund2021
+  - price2014
+  - raffield2018
+  - raffield2019
+  - sanmark2013
+  - toplak2018
+  - ulriksen2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2015
+  field: cited_by
+  value:
+  - croix2015
+  - fahlander2018
+  - gardela2018
+  - kastholm2016
+  - lund2021
+  - toplak2015
+  - toplak2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2018
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gerds2015
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gjerpe2008
+  field: cited_by
+  value:
+  - forest2011
+  - lund2021
+  - rasmussen2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gjerpe2017
+  field: cited_by
+  value:
+  - lund2021
+  - moen2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: glorstad2012
+  field: cited_by
+  value:
+  - aannestad2018
+  - downham2016
+  - gustin2017
+  - lund2021
+  - pedersen2017
+  - peschel2017
+  - raffield2016
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: glorstad2014
+  field: cited_by
+  value:
+  - heenpettersen2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: glorstad2015
+  field: cited_by
+  value:
+  - aannestad2018
+  - ellingsen2019
+  - heenpettersen2018
+  - heenpettersen2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: goodchild2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - christensen2018
+  - lund2021
+  - stott2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gossler2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: grahamcampbell2013
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: grahamcampbell2011
+  field: cited_by
+  value:
+  - glorstad2012
+  - griffiths2019
+  - heenpettersen2014
+  - ijssennagger2015
+  - kershaw2017
+  - lund2021
+  - raffield2014
+  - rogers2020
+  - skre2017
+  - svendsen2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: graslund2007
+  field: cited_by
+  value:
+  - forest2011
+  - fredriksen2014
+  - gardela2018
+  - gustin2017
+  - lund2021
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: graslund2018
+  field: cited_by
+  value:
+  - bill2019
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: griffiths2019
+  field: cited_by
+  value:
+  - griffiths2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: griffiths2003
+  field: cited_by
+  value:
+  - griffiths2019
+  - lund2021
+  - mainland2018
+  - williams2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gruszczynski2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gullbekk2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gustafsson2011
+  field: cited_by
+  value:
+  - christiansen2019
+  - gustafsson2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gustafsson2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hadley2016
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - jarman2018
+  - lund2021
+  - raffield2019
+  - richards2018
+  - rogers2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hadley2018
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2019
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hadley2013
+  field: cited_by
+  value:
+  - lund2021
+  - mcleod2011
+  - perry2016
+  - raffield2016
+  - williams2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: halewood2001
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hall2014
+  field: cited_by
+  value:
+  - buckberry2014
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hallansstenholm2012
+  field: cited_by
+  value:
+  - beck2017
+  - fahlander2016
+  - fahlander2018
+  - lund2016
+  - lund2021
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: halstadmcguire2010
+  field: cited_by
+  value:
+  - leonard2011
+  - lund2021
+  - price2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hansen2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hansson2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hardh2010
+  field: cited_by
+  value:
+  - christiansen2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hardh2016
+  field: cited_by
+  value:
+  - hrnjic2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: harris2017
+  field: cited_by
+  value:
+  - lund2021
+  - odeback2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: harrison2015
+  field: cited_by
+  value:
+  - anchukaitis2017
+  - lund2021
+  - odeback2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: harrison2014
+  field: cited_by
+  value:
+  - aannestad2018
+  - catlin2016
+  - frei2015
+  - gardela2018
+  - griffiths2019
+  - harris2017
+  - harrison2015
+  - hartman2017
+  - kelly2015
+  - lund2021
+  - price2019
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedjakobsson2003
+  field: cited_by
+  value:
+  - barndon2018
+  - lund2006
+  - lund2021
+  - lundborg2006a
+  - pedersenndb
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedeager2003
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - domeijlundborg2012
+  - lund2008
+  - lund2010
+  - lund2017
+  - lund2020
+  - lund2021
+  - lundborg2006a
+  - pluskowski2010a
+  - spangen2009
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedeager2004
+  field: cited_by
+  value:
+  - barndon2018
+  - eriksen2013
+  - eriksen2016
+  - fabech2013
+  - hedeager2010
+  - kalmring2018
+  - larsson2007
+  - lund2015
+  - lund2017
+  - lund2021
+  - pedersenndb
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedeager2010
+  field: cited_by
+  value:
+  - eriksen2016
+  - fahlander2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedeager2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - arwillnordbladh2013a
+  - carver2015
+  - draganits2014
+  - eriksen2013
+  - fahlander2016
+  - fahlander2018
+  - fredriksen2014
+  - gardela2014a
+  - heenpettersen2018
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2021
+  - mannering2013
+  - moen2020
+  - osullivan2015
+  - price2014
+  - price2018
+  - raffield2016
+  - raffield2019
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedenstiernajonson2006
+  field: cited_by
+  value:
+  - ambrosiani2015
+  - axelsen2014
+  - bill2016
+  - domeijlundborg2012
+  - gardela2018
+  - gustin2017
+  - hedenstiernajonson2015
+  - kalmring2018
+  - linderholm2008
+  - lund2021
+  - odeback2018
+  - pedersen2015
+  - price2011
+  - price2019
+  - raffield2015
+  - raffield2019
+  - raninen2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedenstiernajonson2012
+  field: cited_by
+  value:
+  - kalmring2012
+  - kalmring2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedenstiernajonson2015
+  field: cited_by
+  value:
+  - eriksen2017
+  - lund2021
+  - raffield2019
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hedenstiernajonson2017
+  field: cited_by
+  value:
+  - androshchuk2018
+  - croix2019
+  - edberg2019
+  - gardela2018
+  - krzewinska2018
+  - lund2019
+  - lund2021
+  - mainland2018
+  - moen2020
+  - odeback2018
+  - price2019
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: heenpettersen2014
+  field: cited_by
+  value:
+  - baug2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: heenpettersen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: heenpettersen2018
+  field: cited_by
+  value:
+  - heenpettersen2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: helama2017
+  field: cited_by
+  value:
+  - lund2021
+  - pilo2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: helmbrecht2011
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - arwillnordbladh2013
+  - arwillnordbladh2013a
+  - croix2019
+  - domeijlundborg2012
+  - gardela2018
+  - helmbrecht2012
+  - lund2021
+  - mannering2013
+  - oehrl2017
+  - oehrl2019
+  - sindbaek2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hennius2018
+  field: cited_by
+  value:
+  - baug2019
+  - loftsgarden2019
+  - lund2021
+  - pilo2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: henriksen2017
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hilberg2013
+  field: cited_by
+  value:
+  - hilberg2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hilberg2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hilberg2014
+  field: cited_by
+  value:
+  - ashby2015
+  - hilberg2013
+  - hilberg2018
+  - lund2021
+  - sindbaek2017
+  - star2017
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hillerdal2009
+  field: cited_by
+  value:
+  - amundsen2017
+  - gardela2015
+  - gustin2017
+  - hillerdal2010
+  - lund2021
+  - moen2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hillerdal2010
+  field: cited_by
+  value:
+  - devos2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: n2017
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hodges2012
+  field: cited_by
+  value:
+  - ashby2015
+  - carver2015
+  - croix2019
+  - frei2015
+  - gullbekk2014
+  - hilberg2018
+  - lund2021
+  - price2018
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: holmquist2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: holst2010
+  field: cited_by
+  value:
+  - beck2017
+  - buckberry2014
+  - holst2013
+  - holst2014
+  - jessen2014
+  - lund2021
+  - pedersen2019
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: holst2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - buckberry2014
+  - lund2021
+  - pedersen2019
+  - the2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: holst2013
+  field: cited_by
+  value:
+  - beck2018
+  - bill2019
+  - jessen2014
+  - jessen2016
+  - lund2016
+  - lund2017
+  - lund2021
+  - pedersen2019
+  - tummuscheit2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: hrnjic2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ibsen2010
+  field: cited_by
+  value:
+  - croix2015
+  - jagodzinski2014
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ijssennagger2013
+  field: cited_by
+  value:
+  - baug2019
+  - croix2019
+  - ijssennagger2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ijssennagger2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: imer2014
+  field: cited_by
+  value:
+  - lund2020
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ingvardson2012
+  field: cited_by
+  value:
+  - lund2021
+  - price2012
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: iversen2013
+  field: cited_by
+  value:
+  - fredriksen2014
+  - iversen2015a
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: iversen2015
+  field: cited_by
+  value:
+  - furholt2019
+  - iversen2015a
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jackson2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jagodzinski2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jahnsen2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jankowiak2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: janowski2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jennbert2015
+  field: cited_by
+  value:
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jensen2010
+  field: cited_by
+  value:
+  - ellingsen2019
+  - gardela2018
+  - gardelanda
+  - lund2021
+  - raffield2019
+  - tveiten2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jesch2015
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - croix2015
+  - edberg2019
+  - heenpettersen2018
+  - heenpettersen2019
+  - jackson2018
+  - lund2021
+  - price2018
+  - price2019
+  - raffield2018
+  - raffield2019
+  - sindbaek2017
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jessen2016
+  field: cited_by
+  value:
+  - beck2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jessen2014
+  field: cited_by
+  value:
+  - bill2019
+  - bonde2016
+  - lund2021
+  - pedersen2019
+  - skre2019
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jones1997
+  field: cited_by
+  value:
+  - amundsen2017
+  - anchukaitis2017
+  - bergstol2004
+  - buckberry2014
+  - croix2019
+  - glorstad2012
+  - glorstad2014
+  - gustin2017
+  - helama2017
+  - jahnsen2016
+  - kemmers2011
+  - lund2010
+  - lund2019
+  - lund2021
+  - nielsen2011
+  - roslund2005
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jorgensen2009
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - andren2013
+  - baastrup2014
+  - ellingsen2019
+  - gotfredsen2013
+  - henriksen2014
+  - henriksen2017
+  - hillerdal2010
+  - holst2013
+  - holst2014
+  - kalmring2017
+  - lund2021
+  - pedersen2019
+  - runge2018
+  - skre2019
+  - zachrisson2014a
+  - zachrisson2014b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jorgensen2010
+  field: cited_by
+  value:
+  - borake2018
+  - carver2015
+  - gustafsson2011a
+  - kalmring2017
+  - loftsgarden2019
+  - lund2021
+  - pedersen2019
+  - skre2019
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kalmring2010
+  field: cited_by
+  value:
+  - ashby2015
+  - draganits2014
+  - gardela2014a
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kalmring2012
+  field: cited_by
+  value:
+  - jessen2016
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kalmring2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kalmring2013
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - hilberg2014
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kalmring2017
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kastholmhansen2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: keller2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kelly2015
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kershaw2013
+  field: cited_by
+  value:
+  - christiansen2019
+  - croix2015
+  - croix2019
+  - gardela2018
+  - hadley2016
+  - hadley2018
+  - ijssennagger2015
+  - kershaw2016
+  - kershaw2017
+  - lund2021
+  - moen2020
+  - osullivan2015
+  - pedersen2017
+  - raffield2018
+  - rasmussen2014
+  - richards2018
+  - rogers2020
+  - sindbaek2016
+  - sindbaek2017
+  - vesteinsson2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kershaw2016
+  field: cited_by
+  value:
+  - jarman2018
+  - lund2021
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kershaw2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kirpichnikov2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kleingartner2013
+  field: cited_by
+  value:
+  - croix2015
+  - kalmring2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: knudson2012
+  field: cited_by
+  value:
+  - knudson2012
+  - lund2021
+  - montgomery2014
+  - peschel2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kovalenko2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kristjansdottir2015
+  field: cited_by
+  value:
+  - lund2021
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: krzewinska2015
+  field: cited_by
+  value:
+  - kershaw2016
+  - krzewinska2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: krzewinska2018
+  field: cited_by
+  value:
+  - lund2021
+  - price2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: larsson2007
+  field: cited_by
+  value:
+  - bonde2016
+  - gustin2017
+  - hardh2010a
+  - hedeager2010
+  - hennius2018
+  - hillerdal2010
+  - kalmring2018
+  - lund2021
+  - poulsen2011
+  - price2014a
+  - price2018
+  - price2020
+  - raffield2015
+  - zachrisson2014a
+  - zachrisson2014b
+  - zachrisson2017a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lemm2014
+  field: cited_by
+  value:
+  - lund2021
+  - pedersen2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: leonard2011
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: leslie2015
+  field: cited_by
+  value:
+  - jarman2018
+  - kershaw2016
+  - lund2021
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lia2002
+  field: cited_by
+  value:
+  - bill2012
+  - lund2005
+  - lund2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lindholm2016
+  field: cited_by
+  value:
+  - baug2019
+  - gustavsson2015
+  - hennius2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ljungkvist2006
+  field: cited_by
+  value:
+  - androshchuk2010
+  - bill2019
+  - graslund2011
+  - holst2013
+  - lindholm2016
+  - lund2021
+  - odeback2018
+  - price2018
+  - price2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ljungkvist2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ljungkvist2015
+  field: cited_by
+  value:
+  - bill2019
+  - ellingsen2019
+  - kalmring2017
+  - ljungkvist2018
+  - lund2021
+  - skre2019
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ljungkvist2011
+  field: cited_by
+  value:
+  - heenpettersen2018
+  - jessen2014
+  - kalmring2012
+  - ljungkvist2015
+  - ljungkvist2018
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: loe2014
+  field: cited_by
+  value:
+  - chenery2014
+  - hedenstiernajonson2017
+  - lund2021
+  - odeback2018
+  - price2014d
+  - raffield2015
+  - raffield2016
+  - raffield2019
+  - toplak2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: loftsgarden2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lucas2007
+  field: cited_by
+  value:
+  - lucas2007
+  - lund2021
+  - mainland2018
+  - price2010
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2005
+  field: cited_by
+  value:
+  - backdanielsson2016
+  - eriksen2013
+  - lund2006
+  - lund2008
+  - lund2010
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2020
+  - lund2021
+  - raffield2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2006
+  field: cited_by
+  value:
+  - burstrom2015
+  - ijssennagger2013
+  - lund2008
+  - lund2010
+  - lund2015
+  - lund2021
+  - pedersenndb
+  - raffield2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2008
+  field: cited_by
+  value:
+  - bill2016
+  - lund2010
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2021
+  - raffield2014
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2009
+  field: cited_by
+  value:
+  - aannestad2018
+  - andren2013
+  - andren2013a
+  - bill2012
+  - burstrom2015
+  - eriksen2013
+  - heenpettersen2018
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2020
+  - lund2021
+  - price2018
+  - skre2019
+  - spangen2009
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2010
+  field: cited_by
+  value:
+  - burstrom2015
+  - lund2013
+  - lund2015
+  - lund2017
+  - lund2021
+  - raffield2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2013
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - aannestad2018
+  - barndon2018
+  - becket2013
+  - fahlander2016
+  - fahlander2018
+  - kristjansdottir2015
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2020
+  - lund2021
+  - price2014
+  - williams2016
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2015
+  field: cited_by
+  value:
+  - amundsen2017
+  - lund2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2016
+  field: cited_by
+  value:
+  - heenpettersen2018
+  - lund2020
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2019
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: macphail2013
+  field: cited_by
+  value:
+  - cannell2016a
+  - lund2021
+  - macphail2013
+  - macphail2016
+  - schneidhofer2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: macphail2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: madsen2010
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: magi2011
+  field: cited_by
+  value:
+  - lund2021
+  - magi2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: magi2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: magi2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: magi2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: magnell2010
+  field: cited_by
+  value:
+  - andren2013a
+  - gotfredsen2014
+  - lund2021
+  - mainland2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mainland2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: majchczack2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mannering2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mcleod2011
+  field: cited_by
+  value:
+  - gardela2018
+  - harris2017
+  - lund2021
+  - mcleod2011
+  - moen2020
+  - osullivan2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mehler2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: melheim2016
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: merkel2016
+  field: cited_by
+  value:
+  - hrnjic2018
+  - kalmring2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mikhaylov2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: milek2012
+  field: cited_by
+  value:
+  - croix2019
+  - devos2013
+  - ellingsen2019
+  - kristjansdottir2015
+  - lund2021
+  - macphail2016
+  - milek2012
+  - milek2013
+  - wouters2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: milek2013
+  field: cited_by
+  value:
+  - cannell2016a
+  - devos2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: moen2011
+  field: cited_by
+  value:
+  - gardelanda
+  - hedenstiernajonson2017
+  - lund2021
+  - moen2020
+  - odeback2018
+  - price2019
+  - raffield2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: moen2019
+  field: cited_by
+  value:
+  - lund2019
+  - lund2021
+  - moen2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: moen2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: moesgaard2015
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - lund2021
+  - runge2018
+  - runge2018a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: montgomery2014
+  field: cited_by
+  value:
+  - griffiths2019
+  - harris2017
+  - lund2021
+  - raffield2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mozdzioch2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mulk2007
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: myhre2015
+  field: cited_by
+  value:
+  - bill2017
+  - bill2019
+  - lund2021
+  - pedersen2019
+  - price2018
+  - raffield2016
+  - raffield2019
+  - sheehan2013a
+  - skre2019
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: myrberg2009
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - burstrom2014
+  - burstrom2015
+  - kemmers2011
+  - lund2016
+  - lund2017
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: myrberg2007
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: naum2007
+  field: cited_by
+  value:
+  - lund2021
+  - price2012
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: naum2008
+  field: cited_by
+  value:
+  - croix2015
+  - gardela2015
+  - glorstad2012
+  - gustin2017
+  - ingvardson2012
+  - lund2021
+  - price2012
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: naumann2014
+  field: cited_by
+  value:
+  - harris2017
+  - krzewinska2015
+  - lund2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: neiss2016
+  field: cited_by
+  value:
+  - lund2021
+  - warmlander2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: nielsen2011
+  field: cited_by
+  value:
+  - baastrup2014
+  - christiansen2019
+  - lund2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: nordahl2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: nordeide2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: norstein2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: nosov2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: odeback2018
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: oehrl2017
+  field: cited_by
+  value:
+  - lund2021
+  - oehrl2017
+  - oehrl2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: oehrl2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: opedal2010
+  field: cited_by
+  value:
+  - bill2017
+  - bill2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: oye2013
+  field: cited_by
+  value:
+  - jackson2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: oye2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: paterson2014
+  field: cited_by
+  value:
+  - harris2017
+  - harrison2015
+  - lund2021
+  - montgomery2014
+  - odeback2018
+  - osullivan2015
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pearson2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2004
+  field: cited_by
+  value:
+  - abrams2012
+  - artelius2013
+  - baastrup2014
+  - fahlander2016
+  - fahlander2018
+  - lund2008
+  - lund2015
+  - lund2017
+  - lund2021
+  - pedersen2006
+  - pedersen2009a
+  - roesdahl2011
+  - rogers2020
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2009
+  field: cited_by
+  value:
+  - gardela2018
+  - gustafsson2011a
+  - lund2021
+  - pedersennda
+  - price2011
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - aannestad2018
+  - christiansen2019
+  - gardela2018
+  - kalmring2018
+  - kastholm2016
+  - lund2019
+  - lund2021
+  - moen2020
+  - odeback2018
+  - price2019
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2019
+  field: cited_by
+  value:
+  - gullbekk2014
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2015
+  field: cited_by
+  value:
+  - christiansen2019
+  - croix2019
+  - lund2021
+  - pedersen2015
+  - pedersen2017
+  - pedersen2019
+  - pedersennda
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2019
+  - kalmring2018
+  - lund2021
+  - pedersen2017
+  - williams2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pedersen2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: perry2016
+  field: cited_by
+  value:
+  - hadley2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: perry2019
+  field: cited_by
+  value:
+  - lund2021
+  - perry2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: peschel2017
+  field: cited_by
+  value:
+  - hedenstiernajonson2017
+  - lund2021
+  - peschel2017
+  - price2019
+  - price2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pilo2005
+  field: cited_by
+  value:
+  - fredriksen2014
+  - lund2005
+  - lund2021
+  - milek2012
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pilo2018
+  field: cited_by
+  value:
+  - lund2019
+  - lund2021
+  - pilo2020
+  - solli2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pilo2020
+  field: cited_by
+  value:
+  - lund2021
+  - skre2011b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pluskowski2010
+  field: cited_by
+  value:
+  - kristjansdottir2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: pollard2012
+  field: cited_by
+  value:
+  - buckberry2014
+  - jarman2018
+  - lund2021
+  - montgomery2014
+  - raffield2016
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: poulsen2011
+  field: cited_by
+  value:
+  - borake2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2000
+  field: cited_by
+  value:
+  - barrett2008
+  - barrett2010
+  - frei2011
+  - gardela2007
+  - lund2015
+  - lund2021
+  - price2005a
+  - price2014d
+  - price2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - NOAUTHOR33
+  - aannestad2018
+  - amundsen2017
+  - arwillnordbladh2012
+  - arwillnordbladh2013
+  - arwillnordbladh2013a
+  - barrett2008
+  - barrett2010
+  - baug2019
+  - becker2012
+  - bergstol2004
+  - carver2015
+  - chenery2014
+  - edberg2019
+  - eriksen2013
+  - fahlander2016
+  - fahlander2018
+  - frei2011
+  - frei2012
+  - gardela2007
+  - gardela2014a
+  - gardela2018
+  - gardelanda
+  - gustin2017
+  - hardh2010a
+  - heenpettersen2018
+  - kalmring2010
+  - kastholm2016
+  - keller2016
+  - knudson2012
+  - kristjansdottir2015
+  - krzewinska2018
+  - larsson2007
+  - linderholm2008
+  - lucas2007
+  - lund2005
+  - lund2006
+  - lund2008
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2021
+  - milek2012
+  - moen2020
+  - odeback2018
+  - ole2015
+  - osullivan2015
+  - pedersen2009a
+  - peschel2017
+  - pluskowski2010a
+  - price2005a
+  - price2006
+  - price2008a
+  - price2010
+  - price2011
+  - price2012
+  - price2014
+  - price2014a
+  - price2018
+  - price2019
+  - price2020
+  - raffield2015
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  - roesdahl2011
+  - rosengren2010
+  - skre2019
+  - ulriksen2011a
+  - ulriksen2018
+  - wickholm2006
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2001
+  field: cited_by
+  value:
+  - frei2011
+  - gardela2007
+  - hillerdal2010
+  - knudson2012
+  - lund2008
+  - lund2021
+  - price2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2008
+  field: cited_by
+  value:
+  - barndon2018
+  - eriksen2013
+  - eriksen2016
+  - eriksen2017
+  - gardela2014a
+  - gardela2015
+  - gardelanda
+  - harrison2015
+  - leslie2015
+  - lund2013
+  - lund2016
+  - lund2019
+  - lund2020
+  - lund2021
+  - osullivan2015
+  - price2008a
+  - price2010
+  - price2014
+  - price2014a
+  - price2019
+  - raffield2016
+  - raninen2014
+  - roesdahl2011
+  - ulriksen2018
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2010
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - bill2019
+  - eriksen2013
+  - fahlander2016
+  - fahlander2018
+  - gardela2014a
+  - gardela2015
+  - gardela2018
+  - gardelanda
+  - harris2017
+  - harrison2015
+  - heenpettersen2018
+  - leonard2011
+  - lund2019
+  - lund2021
+  - odeback2018
+  - price2011
+  - price2014
+  - price2014a
+  - price2018
+  - price2019
+  - raffield2018
+  - toplak2018
+  - williams2014
+  - williams2016
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2014
+  field: cited_by
+  value:
+  - barndon2018
+  - baug2019
+  - bill2019
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2020
+  - lund2021
+  - peschel2017
+  - price2019
+  - raffield2015
+  - raffield2016
+  - williams2016
+  - zachrisson2017a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2018
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - carver2015
+  - krzewinska2018
+  - lund2021
+  - price2018
+  - price2019
+  - price2020
+  - reiter2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2019
+  field: cited_by
+  value:
+  - edberg2019
+  - lund2019
+  - lund2021
+  - raffield2016
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2012
+  field: cited_by
+  value:
+  - fredriksen2014
+  - frei2012
+  - gardela2014a
+  - gardelanda
+  - henriksen2017
+  - krzewinska2018
+  - lund2021
+  - peschel2017
+  - price2012
+  - price2014
+  - price2018
+  - price2019
+  - price2020
+  - pricenda
+  - toplak2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2016
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - aannestad2018
+  - baug2019
+  - bill2019
+  - hedenstiernajonson2017
+  - heenpettersen2019
+  - hennius2018
+  - lund2021
+  - odeback2018
+  - price2018
+  - price2020
+  - raffield2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2020
+  field: cited_by
+  value:
+  - gardela2018
+  - lund2021
+  - raffield2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raffield2014
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - lund2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raffield2016
+  field: cited_by
+  value:
+  - gardela2018
+  - griffiths2019
+  - hadley2018
+  - lund2021
+  - moen2020
+  - odeback2018
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raffield2019
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raffield2017
+  field: cited_by
+  value:
+  - baug2019
+  - lund2021
+  - raffield2016
+  - raffield2018
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raffield2018
+  field: cited_by
+  value:
+  - lund2021
+  - price2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raja2018
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rasmussen2014
+  field: cited_by
+  value:
+  - imer2014
+  - lund2021
+  - tummuscheit2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ravn2012
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rebkowski2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: richards2018
+  field: cited_by
+  value:
+  - hadley2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: richards2012
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - lund2021
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roesdahl2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - beck2018
+  - christensen2018
+  - christiansen2019
+  - feveile2017
+  - goodchild2017
+  - jessen2016
+  - lund2021
+  - pedersen2019
+  - stott2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rogers2020
+  field: cited_by
+  value:
+  - hilberg2014
+  - lund2021
+  - mcleod2011
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rohdesloth2012
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roslund2007
+  field: cited_by
+  value:
+  - bill2017a
+  - gardela2015
+  - gustin2017
+  - krzewinska2018
+  - lund2021
+  - raffield2019
+  - roslund2013
+  - roslund2015
+  - roslund2017
+  - skre2011b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roslund2013
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roslund2015
+  field: cited_by
+  value:
+  - hilberg2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rosvold2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rundberget2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rundkvist2015
+  field: cited_by
+  value:
+  - kalmring2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: runge2018
+  field: cited_by
+  value:
+  - lund2021
+  - runge2018
+  - stott2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: russel2014
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - kelly2015
+  - lund2021
+  - raffield2016
+  - rogers2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: said1978
+  field: cited_by
+  value:
+  - kristjansdottir2015
+  - lund2021
+  - nielsen2011
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sanmark2017
+  field: cited_by
+  value:
+  - lund2021
+  - mainland2018
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sanmark2013
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2014
+  - sanmark2013a
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: schietzel2014
+  field: cited_by
+  value:
+  - gardela2018
+  - hilberg2013
+  - hilberg2018
+  - lund2021
+  - odeback2018
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: schmid2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: schneidhofer2017
+  field: cited_by
+  value:
+  - bill2019
+  - lund2021
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: schultze2008
+  field: cited_by
+  value:
+  - croix2015
+  - hilberg2013
+  - hilberg2014
+  - hilberg2018
+  - kalmring2012
+  - lund2021
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: semple2013
+  field: cited_by
+  value:
+  - lund2016
+  - lund2021
+  - sanmark2013a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sharples2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - barrett2008
+  - barrett2010
+  - baug2017
+  - carver2015
+  - croix2019
+  - downham2016
+  - glorstad2017
+  - hennius2018
+  - holst2014
+  - jessen2016
+  - kalmring2013
+  - knappett2025
+  - kristjansdottir2015
+  - lund2008
+  - lund2016
+  - lund2017
+  - lund2021
+  - osullivan2015
+  - pedersen2017
+  - pedersennda
+  - raninen2014
+  - sindbaek2007
+  - sindbaek2011a
+  - sindbaek2013a
+  - sindbaek2014
+  - sindbaek2017
+  - skre2016
+  - svendsen2016
+  - svendsen2019
+  - vonholstein2014
+  - williams2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - ashby2015
+  - baug2019
+  - borake2018
+  - christiansen2019
+  - croix2015
+  - croix2019
+  - ellingsen2019
+  - glorstad2015
+  - gullbekk2014
+  - heenpettersen2019
+  - hennius2018
+  - hrnjic2018
+  - lund2021
+  - raffield2016
+  - raffield2018
+  - raninen2014
+  - sindbaek2017
+  - skre2017
+  - stene2017
+  - vesteinsson2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2013
+  field: cited_by
+  value:
+  - ashby2015
+  - croix2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2017
+  field: cited_by
+  value:
+  - baug2019
+  - croix2019
+  - lund2021
+  - sindbaek2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2018
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: skre2008
+  field: cited_by
+  value:
+  - baug2017
+  - bill2017a
+  - croix2015
+  - fabech2013
+  - gullbekk2014
+  - hadley2016
+  - hillerdal2010
+  - ingvardson2012
+  - lund2019
+  - lund2021
+  - pedersennda
+  - price2010
+  - raffield2019
+  - sheehan2013a
+  - sindbaek2011
+  - sindbaek2013a
+  - skre2011a
+  - skre2011b
+  - skre2011c
+  - skre2017
+  - skre2019
+  - stene2017
+  - the2017
+  - wouters2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: skre2011
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - aannestad2018
+  - baug2019
+  - bill2016
+  - bill2017a
+  - borake2018
+  - croix2015
+  - croix2019
+  - hilberg2014
+  - ijssennagger2013
+  - lund2021
+  - oye2014
+  - pedersennda
+  - richards2018
+  - skre2016
+  - skre2017
+  - smith2013
+  - the2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: skre2017
+  field: cited_by
+  value:
+  - ellingsen2019
+  - loftsgarden2019
+  - lund2021
+  - pilo2020
+  - price2018
+  - raffield2019
+  - sheehan2013a
+  - skre2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: skre2019
+  field: cited_by
+  value:
+  - gullbekk2014
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: soderberg2005
+  field: cited_by
+  value:
+  - andren2013
+  - borake2018
+  - ellingsen2019
+  - eriksen2013
+  - fabech2013
+  - fallgren2008
+  - forest2011
+  - holst2013
+  - jessen2016
+  - jorgensen2009a
+  - larsson2007
+  - lund2021
+  - osullivan2015
+  - pedersen2019
+  - poulsen2011
+  - rundkvist2014
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: solli2002
+  field: cited_by
+  value:
+  - amundsen2017
+  - arwillnordbladh2012
+  - arwillnordbladh2013
+  - bergstol2004
+  - christensen2013
+  - eriksen2013
+  - gardela2014a
+  - gardelanda
+  - heenpettersen2018
+  - jahnsen2016
+  - lund2013
+  - lund2015
+  - lund2016
+  - lund2017
+  - lund2021
+  - nielsen2011
+  - ole2015
+  - pedersenndb
+  - price2019
+  - spangen2009
+  - ulriksen2011a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: solli2018
+  field: cited_by
+  value:
+  - lund2021
+  - pilo2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: solli2011
+  field: cited_by
+  value:
+  - lund2021
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: spangen2006
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: staecker2004
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - lund2005
+  - lund2006
+  - lund2008
+  - lund2010
+  - lund2020
+  - lund2021
+  - oehrl2017
+  - oehrl2019
+  - zachrisson2017a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: stanislawski2013
+  field: cited_by
+  value:
+  - croix2015
+  - gardela2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: stanislawski2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: star2017
+  field: cited_by
+  value:
+  - hennius2018
+  - lund2021
+  - pilo2018
+  - star2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: steinforth2015
+  field: cited_by
+  value:
+  - hadley2016
+  - lund2021
+  - richards2018
+  - steinforth2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: stene2017
+  field: cited_by
+  value:
+  - loftsgarden2019
+  - lund2021
+  - pilo2018
+  - pilo2020
+  - rosvold2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: stidsing2014
+  field: cited_by
+  value:
+  - borake2018
+  - christiansen2019
+  - lund2021
+  - pedersen2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: stott2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sutherland2009
+  field: cited_by
+  value:
+  - hayeursmith2018a
+  - lund2021
+  - sutherland2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: svanberg2003
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - aannestad2018
+  - androshchuk2010
+  - barrett2008
+  - barrett2010
+  - croix2015
+  - croix2019
+  - eriksen2013
+  - eriksen2016
+  - gardela2014a
+  - gardela2015
+  - gardela2018
+  - gardelanda
+  - gustin2017
+  - halstadmcguire2010
+  - hardh2010a
+  - holst2014
+  - jahnsen2016
+  - kershaw2009
+  - kristjansdottir2015
+  - lucas2007
+  - lund2004
+  - lund2008
+  - lund2013
+  - lund2016
+  - lund2017
+  - lund2019
+  - lund2021
+  - moen2020
+  - pedersen2009a
+  - price2008a
+  - price2010
+  - price2014d
+  - price2019
+  - sindbaek2013a
+  - skre2011b
+  - skre2019
+  - toplak2018
+  - ulriksen2011a
+  - ulriksen2018
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: svendsen2016
+  field: cited_by
+  value:
+  - lund2021
+  - svendsen2016
+  - svendsen2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: svendsen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: svensson2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: svensson2009
+  field: cited_by
+  value:
+  - lund2021
+  - rasmussen2014
+  - sanmark2013
+  - zachrisson2014b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: thate2007
+  field: cited_by
+  value:
+  - andren2013
+  - andren2013a
+  - artelius2013
+  - beck2017
+  - eriksen2013
+  - eriksen2016
+  - fahlander2016
+  - fahlander2018
+  - gardelanda
+  - lund2016
+  - lund2021
+  - sanmark2013a
+  - williams2016
+  - zoega2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: tonning2020
+  field: cited_by
+  value:
+  - lund2021
+  - tonning2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: toplak2015
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - lund2021
+  - toplak2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: toplak2016
+  field: cited_by
+  value:
+  - lund2021
+  - toplak2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: trinks2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: tummuscheit2011
+  field: cited_by
+  value:
+  - lund2021
+  - tummuscheit2014
+  - tummuscheit2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: turner2006
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: tveiten2017
+  field: cited_by
+  value:
+  - barndon2018
+  - loftsgarden2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ulriksen2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ulriksen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vedeler2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vesteinsson2016
+  field: cited_by
+  value:
+  - hartman2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vesteinsson2012
+  field: cited_by
+  value:
+  - catlin2016
+  - lund2021
+  - lynnerup2014a
+  - schmid2017
+  - vesteinsson2012
+  - vesteinsson2014a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vesteinsson2014
+  field: cited_by
+  value:
+  - catlin2016
+  - hartman2017
+  - lund2021
+  - schmid2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: voncarnapbornheim2014
+  field: cited_by
+  value:
+  - croix2019
+  - hilberg2013
+  - hilberg2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vonholstein2014
+  field: cited_by
+  value:
+  - ashby2015
+  - heenpettersen2014
+  - heenpettersen2019
+  - lund2021
+  - rosvold2019
+  - the2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: vonholstein2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: wallace2016
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: warmlander2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: wickham2005
+  field: cited_by
+  value:
+  - ashby2015
+  - barrett2008
+  - barrett2010
+  - carver2015
+  - frei2015
+  - hardh2010a
+  - hilberg2018
+  - holst2010
+  - holst2014
+  - ljungkvist2011a
+  - lund2021
+  - poulsen2011
+  - price2018
+  - raja2018
+  - sindbaek2011
+  - sindbaek2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: wickholm2006
+  field: cited_by
+  value:
+  - lund2013
+  - lund2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: williams2014
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - aannestad2018
+  - gardela2018
+  - hadley2018
+  - harris2017
+  - kershaw2017
+  - lund2016
+  - lund2021
+  - price2018
+  - raffield2015
+  - williams2016
+  - williams2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: williams2015
+  field: cited_by
+  value:
+  - aannestad2018
+  - hadley2016
+  - hadley2018
+  - heenpettersen2018
+  - lund2021
+  - richards2018
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: williams2020
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2016
+  - williams2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: williams2016
+  field: cited_by
+  value:
+  - barndon2018
+  - hadley2018
+  - heenpettersen2018
+  - lund2020
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: wilson2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: wouters2016
+  field: cited_by
+  value:
+  - croix2019
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zachrisson2004
+  field: cited_by
+  value:
+  - amundsen2017
+  - andren2013
+  - baug2015
+  - eriksen2013
+  - fabech2013
+  - fischer2011
+  - heenpettersen2018
+  - larsson2007
+  - lund2013
+  - lund2015
+  - lund2021
+  - price2014
+  - zachrisson2014a
+  - zachrisson2014b
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zachrisson2011
+  field: cited_by
+  value:
+  - amundsen2017
+  - forest2011
+  - kalmring2017
+  - ljungkvist2015
+  - lund2016
+  - lund2021
+  - zachrisson2014a
+  - zachrisson2014b
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zachrisson2017
+  field: cited_by
+  value:
+  - fahlander2018
+  - lund2021
+  - skre2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zori2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zori2013
+  field: cited_by
+  value:
+  - lund2021
+  - mainland2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: abrams2012
+  field: cited_by
+  value:
+  - croix2015
+  - downham2016
+  - kristjansdottir2015
+  - lund2021
+  - osullivan2015
+  - raffield2016
+  - rasmussen2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: strand2011
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: strand2001
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: andren2014
+  field: cited_by
+  value:
+  - kristjansdottir2015
+  - lund2021
+  - oehrl2017
+  - oehrl2019
+  - skre2019
+  - williams2016
+  - zachrisson2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: barndon2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: birkett2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: bitzthorsen2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: brorsson2010
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: cooijmans2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: christiansen2014
+  field: cited_by
+  value:
+  - christiansen2019
+  - croix2019
+  - jessen2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: dobat2010
+  field: cited_by
+  value:
+  - axelsen2014
+  - christiansen2019
+  - croix2019
+  - jessen2016
+  - lemm2014
+  - lund2021
+  - pedersen2015
+  - price2011
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ellingsen2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: eriksen2013
+  field: cited_by
+  value:
+  - amundsen2017
+  - eriksen2016
+  - eriksen2017
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: fabech2013
+  field: cited_by
+  value:
+  - carver2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: feveile2012
+  field: cited_by
+  value:
+  - ashby2015
+  - croix2015
+  - croix2019
+  - feveile2009
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gardela2016
+  field: cited_by
+  value:
+  - gardela2018
+  - heenpettersen2018
+  - kastholm2016
+  - lund2021
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gjerde2009
+  field: cited_by
+  value:
+  - amundsen2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: glorstad2010
+  field: cited_by
+  value:
+  - aannestad2018
+  - burstrom2015
+  - ellingsen2019
+  - glorstad2012
+  - heenpettersen2014
+  - lund2019
+  - lund2021
+  - pedersen2017
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: glorstad2017
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - lund2021
+  - moen2020
+  - pilo2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gotfredsen2014
+  field: cited_by
+  value:
+  - eriksen2017
+  - gotfredsen2014
+  - lund2021
+  - mainland2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: graslund2010
+  field: cited_by
+  value:
+  - bill2019
+  - lund2021
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: grundvad2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: grupe2013
+  field: cited_by
+  value:
+  - lund2021
+  - voncarnapbornheim2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gullbekk2014
+  field: cited_by
+  value:
+  - kershaw2017
+  - lund2021
+  - skre2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gustafsson2013
+  field: cited_by
+  value:
+  - christiansen2019
+  - gustafsson2016
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gustavsson2015
+  field: cited_by
+  value:
+  - hennius2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: gustin2017
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: smith2013
+  field: cited_by
+  value:
+  - gardelanda
+  - lund2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: helmbrecht2012
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: henriksen2014
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: jackson2018
+  field: cited_by
+  value:
+  - brewer2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kemmers2011
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kershaw2009
+  field: cited_by
+  value:
+  - ijssennagger2015
+  - kershaw2016
+  - kershaw2017
+  - lund2021
+  - neiss2016
+  - osullivan2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: kershaw2017
+  field: cited_by
+  value:
+  - hadley2018
+  - lund2021
+  - mcleod2011
+  - richards2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: laroche1997
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lemm2013
+  field: cited_by
+  value:
+  - goodchild2017
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: linderholm2008
+  field: cited_by
+  value:
+  - arneborg2012
+  - chenery2014
+  - gustin2017
+  - hedenstiernajonson2015
+  - hedenstiernajonson2017
+  - helama2017
+  - knudson2012
+  - krzewinska2018
+  - lund2021
+  - naumann2014
+  - pollard2012
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lund2004
+  field: cited_by
+  value:
+  - androshchuk2010
+  - baastrup2014
+  - borake2018
+  - eriksen2017
+  - lund2005
+  - lund2006
+  - lund2008
+  - lund2010
+  - lund2013
+  - lund2015
+  - lund2017
+  - lund2021
+  - spangen2009
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: lynnerup2014
+  field: cited_by
+  value:
+  - jackson2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: martin2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: mcanany2010
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: morawiec2009
+  field: cited_by
+  value:
+  - gardela2015
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: myrberg2008
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - kemmers2011
+  - lund2021
+  - myrberg2007
+  - sanmark2013
+  - sanmark2013a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: naum2004
+  field: cited_by
+  value:
+  - lund2021
+  - price2012
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: nordeide2011
+  field: cited_by
+  value:
+  - heenpettersen2018
+  - kristjansdottir2015
+  - lund2021
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: olsson2004
+  field: cited_by
+  value:
+  - kalmring2012
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: osullivan2015
+  field: cited_by
+  value:
+  - lund2021
+  - osullivan2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2006
+  field: cited_by
+  value:
+  - frei2011
+  - frei2012
+  - gardela2007
+  - knudson2012
+  - lund2021
+  - montgomery2014
+  - peschel2017
+  - price2012
+  - price2014
+  - price2014d
+  - roesdahl2011
+  - vesteinsson2012
+  - zachrisson2017a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: price2015
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - abrams2012
+  - gardela2018
+  - hedenstiernajonson2017
+  - krzewinska2018
+  - lund2021
+  - price2018
+  - price2019
+  - price2020
+  - pricenda
+  - raffield2016
+  - raffield2019
+  - reiter2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: raninen2014
+  field: cited_by
+  value:
+  - croix2015
+  - lund2021
+  - roslund2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ratican2020
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: reiter2019
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roesdahl2009
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rosengren2010
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roslund2005
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: roslund2017
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rundkvist2010
+  field: cited_by
+  value:
+  - christiansen2019
+  - heenpettersen2018
+  - heenpettersen2019
+  - lemm2014
+  - lund2021
+  - sindbaek2011a
+  - sindbaek2014
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rundkvist2011
+  field: cited_by
+  value:
+  - lund2021
+  - rundkvist2014
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: rostad2016
+  field: cited_by
+  value:
+  - baug2019
+  - lund2021
+  - martin2020
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sheehan2013
+  field: cited_by
+  value:
+  - aannestad2018
+  - heenpettersen2018
+  - lund2021
+  - williams2015
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2009
+  field: cited_by
+  value:
+  - christiansen2019
+  - knappett2025
+  - lund2021
+  - osullivan2015
+  - raninen2014
+  - skre2019
+  - stene2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - beck2018
+  - christiansen2019
+  - croix2015
+  - goodchild2017
+  - kalmring2013
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sindbaek2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: steinforth2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sutherland2015
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: sveinbjarnardottir2016
+  field: cited_by
+  value:
+  - lund2021
+  - schmid2017
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: tainter2006
+  field: cited_by
+  value:
+  - brewer2018
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: toplak2018
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: tummuscheit2014
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2018
+  - lund2021
+  - tummuscheit2019
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: ulriksen2011
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - bill2019
+  - gardela2014a
+  - gardela2018
+  - gardelanda
+  - kastholm2016
+  - lund2021
+  - price2014
+  - price2014d
+  - ulriksen2018
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: williams2010
+  field: cited_by
+  value:
+  - axelsen2014
+  - gullbekk2014
+  - harris2017
+  - harrison2015
+  - leonard2011
+  - lund2021
+  - raffield2014
+  - raffield2016
+  - williams2014
+  - williams2016
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zachrisson2014
+  field: cited_by
+  value:
+  - amundsen2017
+  - baug2015
+  - baug2017
+  - gotfredsen2014
+  - lund2021
+  - zachrisson2014a
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
+- action: set
+  citekey: zoega2017
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing 35 contaminated citer(s) that were incorrectly merged into this entrys
+    cited_by list during an earlier reconnection batch tonight. Original legitimate
+    citers preserved.
