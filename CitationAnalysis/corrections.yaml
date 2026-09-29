@@ -112545,3 +112545,28 @@
   - sindbaek2013
   note: Adding citer(s) ['sindbaek2013'] - recovered from already-extracted reference
     lists.
+- action: set
+  citekey: kastholmhansen2015
+  field: author
+  value:
+  - family: Kastholm
+    given: Ole Thirup
+  note: Correcting fabricated compound surname (Kastholm Hansen) - Zotero confirms
+    the real author is Ole Thirup Kastholm, no Hansen.
+- action: set
+  citekey: kastholmhansen2015
+  field: year
+  value: '2016'
+  note: 'Correcting year - Zotero confirms 2016, not 2015, for this paper (Spydkvinden
+    og den myrdede: Gerdrupgraven 35 ar efter).'
+- action: set
+  citekey: kastholmhansen2015
+  field: date
+  value: '2016'
+  note: See year field correction.
+- action: merge
+  note: kastholm2015 was a duplicate F1 entry with no source_pdf link and an incorrect
+    year (2015 vs the correct 2016 confirmed by Zotero) for the same paper as kastholm2016,
+    which is correctly linked to its real source PDF.
+  keep: kastholm2016
+  discard: kastholm2015
