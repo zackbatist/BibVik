@@ -116066,3 +116066,15 @@
   note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
     section, read directly from the source PDF, after automated detection found 0
     references for this paper.
+- action: set
+  citekey: hansen2005
+  field: cited_by
+  value:
+  - andersson2008
+  - rohdesloth2012
+  - rosvold2019
+  - solli2018
+  note: Adding citer andersson2008 - the one real citation in this paper (a short
+    editorial introduction to an edited volume, not a research article with its own
+    bibliography), referencing Gitte Hansens own dissertation by name in the body
+    text, read directly from the source PDF.
