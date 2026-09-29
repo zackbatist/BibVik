@@ -61084,3 +61084,68 @@
   - runge2018a
   note: Adding runge2018a as citer, redirected from the deleted spelling-variant duplicate
     moesgard2015.
+- action: set
+  citekey: sindbaeknda
+  field: year
+  value: '2011'
+  note: 'Year recovered from the projects own Zotero seed library (BibVik_seed.csv),
+    which is authoritative and lists this F1 papers year directly - source PDF header
+    extraction returned no usable date anywhere on the entry, producing an nd citekey.
+    Discovered during citekey-matching audit: this entry is the real match for the
+    sindbaek2011a row in annotations.csv, previously incorrectly merged onto sindbaek2011
+    by a normalization script.'
+- action: set
+  citekey: sindbaeknda
+  field: date
+  value: '2011'
+  note: See year field correction.
+- action: set
+  citekey: sindbaeknda
+  field: author
+  value:
+  - family: Sindbaek
+    given: Søren Michael
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
+- action: create
+  citekey: gardela2018b
+  entry:
+    title: 'Miniature Shields in the Viking Age: A Reassessment'
+    author:
+    - family: Gardela
+      given: Leszek
+    - family: Odeback
+      given: Kerstin
+    year: '2018'
+    date: '2018'
+    generation: F1
+    entry_type: article
+    journaltitle: Viking and Medieval Scandinavia
+    volume: '14'
+    pages: 81-133
+    doi: 10.1484/J.VMS.5.116391
+  note: 'Created from verified extraction header plus Zotero for journal/volume/pages/DOI.
+    Discovered during citekey-matching audit: annotations.csv had two rows for gardela2018,
+    one for this paper and one for the existing gardela2018 entry (Amazons of the
+    North), both distinct real papers by the same author/year merged onto one citekey
+    by a normalization script.'
+- action: create
+  citekey: sindbaek2007a
+  entry:
+    title: 'Networks and nodal points: the emergence of towns in early Viking Age
+      Scandinavia'
+    author:
+    - family: Sindbaek
+      given: Søren M.
+    year: '2007'
+    date: '2007'
+    generation: F1
+    entry_type: article
+    journaltitle: Antiquity
+    volume: '81'
+    number: '311'
+    pages: 119-132
+    doi: 10.1017/S0003598X00094886
+  note: Created from verified extraction header plus Zotero for journal/volume/pages/DOI.
+    Same annotations.csv merge issue as gardela2018b (sindbaek2007 already correctly
+    holds The Small World of the Vikings, a different paper by the same author/year).
