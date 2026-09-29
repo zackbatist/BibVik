@@ -116264,3 +116264,32 @@
   - steinforth2018
   note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
     steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: cannell2016
+  field: title
+  value: Geochemical analysis using portable x-ray fluorescence
+  note: 'Correcting title - was incorrectly showing the parent edited volumes title
+    (Avaldsnes: A Sea-Kings Manor...) rather than this chapters own title, from a
+    citation-context resolution error. Real title taken from the source PDF filename
+    and confirmed against the papers own content read directly earlier.'
+- action: set
+  citekey: cannell2016
+  field: author
+  value:
+  - family: Cannell
+    given: R.J.S.
+  - family: Cheetham
+    given: P.N.
+  - family: Welham
+    given: K.
+  note: 'Setting real author list - confirmed via a citing papers bibliography (Handbook
+    of Archaeological Sciences) earlier tonight: Cannell, R.J.S., Cheetham, P.N.,
+    and Welham, K. (2018).'
+- action: set
+  citekey: cannell2016
+  field: _deleted
+  value: false
+  note: 'Un-deleting: this entry was briefly deleted by mistake (intended to remove
+    it from the F1 annotated seed set, not delete it as an F2 bibliography entry)
+    then the delete correction was removed from this file, but the _deleted flag already
+    baked into bibliography.json needed a direct correction to clear.'

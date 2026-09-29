@@ -1036,13 +1036,13 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="cannell2016" label="Avaldsnes: A Sea-Kings' Manor in First-Millennium Western Scandinavia">
+      <node id="cannell2016" label="Geochemical analysis using portable x-ray fluorescence">
         <attvalues>
-          <attvalue for="0" value="Avaldsnes: A Sea-Kings' Manor in First-Millennium Western Scandinavia"/>
+          <attvalue for="0" value="Geochemical analysis using portable x-ray fluorescence"/>
           <attvalue for="1" value="2016"/>
           <attvalue for="2" value="F1"/>
           <attvalue for="3" value="article"/>
-          <attvalue for="4" value=""/>
+          <attvalue for="4" value="Cannell R.J.S."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.667"/>
           <attvalue for="7" value="4"/>
@@ -180222,34 +180222,6 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
-        <attvalues>
-          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
-          <attvalue for="1" value="2015"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="incollection"/>
-          <attvalue for="4" value="Åhfeldt L Kitzler"/>
-          <attvalue for="5" value="10.1515/9783110417685-014"/>
-          <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="86"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
-      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
-        <attvalues>
-          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
-          <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value="Skorokhod A."/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.75"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="9"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
       <node id="NOAUTHOR18" label="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was wr">
         <attvalues>
           <attvalue for="0" value="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you"/>
@@ -180264,6 +180236,20 @@
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
+      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
+        <attvalues>
+          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
+          <attvalue for="1" value="2015"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Åhfeldt L Kitzler"/>
+          <attvalue for="5" value="10.1515/9783110417685-014"/>
+          <attvalue for="6" value="0.917"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="86"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
       <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
         <attvalues>
           <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
@@ -180275,6 +180261,20 @@
           <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
           <attvalue for="8" value="193"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="skorokhod2020" label="Staraya Ladoga in northwestern Russia">
+        <attvalues>
+          <attvalue for="0" value="Staraya Ladoga in northwestern Russia"/>
+          <attvalue for="1" value="2020"/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value="Skorokhod A."/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.75"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="9"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>

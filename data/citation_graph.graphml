@@ -888,11 +888,11 @@
       <data key="d9">false</data>
     </node>
     <node id="cannell2016">
-      <data key="d0">Avaldsnes: A Sea-Kings' Manor in First-Millennium Western Scandinavia</data>
+      <data key="d0">Geochemical analysis using portable x-ray fluorescence</data>
       <data key="d1">2016</data>
       <data key="d2">F1</data>
       <data key="d3">article</data>
-      <data key="d4"/>
+      <data key="d4">Cannell R.J.S.</data>
       <data key="d5"/>
       <data key="d6">0.667</data>
       <data key="d7">4</data>
@@ -154475,30 +154475,6 @@
       <data key="d8">0</data>
       <data key="d9">false</data>
     </node>
-    <node id="ahfeldt2015">
-      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
-      <data key="d1">2015</data>
-      <data key="d2">F1</data>
-      <data key="d3">incollection</data>
-      <data key="d4">Åhfeldt L Kitzler</data>
-      <data key="d5">10.1515/9783110417685-014</data>
-      <data key="d6">0.917</data>
-      <data key="d7">0</data>
-      <data key="d8">86</data>
-      <data key="d9">true</data>
-    </node>
-    <node id="skorokhod2020">
-      <data key="d0">Staraya Ladoga in northwestern Russia</data>
-      <data key="d1">2020</data>
-      <data key="d2">F1</data>
-      <data key="d3">misc</data>
-      <data key="d4">Skorokhod A.</data>
-      <data key="d5"/>
-      <data key="d6">0.75</data>
-      <data key="d7">0</data>
-      <data key="d8">9</data>
-      <data key="d9">true</data>
-    </node>
     <node id="NOAUTHOR18">
       <data key="d0">Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you</data>
       <data key="d1"/>
@@ -154511,6 +154487,18 @@
       <data key="d8">21</data>
       <data key="d9">true</data>
     </node>
+    <node id="ahfeldt2015">
+      <data key="d0">Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces</data>
+      <data key="d1">2015</data>
+      <data key="d2">F1</data>
+      <data key="d3">incollection</data>
+      <data key="d4">Åhfeldt L Kitzler</data>
+      <data key="d5">10.1515/9783110417685-014</data>
+      <data key="d6">0.917</data>
+      <data key="d7">0</data>
+      <data key="d8">86</data>
+      <data key="d9">true</data>
+    </node>
     <node id="NOAUTHOR28">
       <data key="d0">Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (</data>
       <data key="d1"/>
@@ -154521,6 +154509,18 @@
       <data key="d6">0.25</data>
       <data key="d7">0</data>
       <data key="d8">193</data>
+      <data key="d9">true</data>
+    </node>
+    <node id="skorokhod2020">
+      <data key="d0">Staraya Ladoga in northwestern Russia</data>
+      <data key="d1">2020</data>
+      <data key="d2">F1</data>
+      <data key="d3">misc</data>
+      <data key="d4">Skorokhod A.</data>
+      <data key="d5"/>
+      <data key="d6">0.75</data>
+      <data key="d7">0</data>
+      <data key="d8">9</data>
       <data key="d9">true</data>
     </node>
     <node id="NOAUTHOR33">
