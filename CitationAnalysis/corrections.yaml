@@ -61301,3 +61301,27 @@
     for the existing croix2019 entry (Single Context, Metacontext...), both distinct
     real papers by the same author/year merged onto one citekey by a normalization
     script.'
+- action: set
+  citekey: pricendb
+  field: year
+  value: '2014'
+  note: 'Year recovered from Zotero seed library (BibVik_seed.csv), authoritative
+    for this F1 paper - header extraction returned no usable date, producing an nd
+    citekey. Discovered during citekey-matching audit: this is the 5th real Price
+    2014 paper, previously missed, and is the real match for one of the two price2014
+    annotation rows in annotations.csv (row 4197, which has a single male author,
+    matching this papers sole authorship, unlike the 5-author Galgedil paper the other
+    row correctly matches).'
+- action: set
+  citekey: pricendb
+  field: date
+  value: '2014'
+  note: See year field correction.
+- action: set
+  citekey: pricendb
+  field: author
+  value:
+  - family: Price
+    given: N. S.
+  note: Re-setting author (unchanged) to trigger citekey regeneration now that year
+    is set.
