@@ -111829,3 +111829,383 @@
   value: []
   note: Clearing dangling citer reference from ulriksen2011 - entry is a corrupted/garbage
     fragment with no real merge target to redirect to.
+- action: set
+  citekey: andrennd
+  field: title
+  value: 'Platsernas betydelse: Norrön ritual och kultplatskontinuitet'
+  note: Correcting garbled OCR title (Norr6n, incorrect spacing) using verified Zotero
+    title.
+- action: set
+  citekey: andrennd
+  field: author
+  value:
+  - family: Andrén
+    given: Anders
+  note: Removing fabricated second author (OCR artifact from acknowledgments/credit
+    text) - Zotero confirms sole authorship.
+- action: set
+  citekey: andrennd
+  field: year
+  value: '2002'
+  note: Year recovered from Zotero seed library - header extraction returned no usable
+    date.
+- action: set
+  citekey: andrennd
+  field: date
+  value: '2002'
+  note: See year field correction.
+- action: set
+  citekey: andrennd
+  field: author
+  value:
+  - family: Andrén
+    given: Anders
+  note: Re-setting author (already correct) to trigger citekey regeneration now that
+    year/title are fixed directly in graph state.
+- action: create
+  citekey: andren2002b
+  entry:
+    title: 'Platsernas betydelse: Norrön ritual och kultplatskontinuitet'
+    author:
+    - family: Andrén
+      given: Anders
+    year: '2002'
+    date: '2002'
+    generation: F1
+    entry_type: incollection
+  note: 'Created after real extraction attempt hit a pipeline bug: the newly-extracted
+    entry (originally andrennd) never made it into bibliography.json despite existing
+    correctly in _graph_state.json - --postprocess reads/writes bibliography.json
+    directly and never touched it. Added directly to bibliography.json as andren2002b
+    (andren2002 already taken by a different real paper, the Vagar till Midgard volume
+    chapter) after confirming via Zotero and the papers own PDF that this is a real,
+    distinct paper.'
+- action: set
+  citekey: ahlback1990
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: hansen1979
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: andren1957
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: anglert1993
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: asad1993
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: backdanielsson1999
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: bergner1987
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: beskow1964
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: bostrem1995
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: dentz2000
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: dillman1997
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: duczko1993
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: edsman1967
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: eisenhofer1950
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: fehn1958
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: gallen1957
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: gjerlow1960
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: helander1974
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: helander1993
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: holmberg1991
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: hultgard1992
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: tregren1989
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: jansson1998
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: arkeologisk1981
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: holmbick1933
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: johansson1965
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: olsen1993
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: klackenberg1992
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: kousgardsorensen1989
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: lindgren1987
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: molland1976
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: nilsson1987
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: norberg1958
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: nasstrem1996
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: rentzhog1987
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: smith1987
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: steinsland1986
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: steinsland1998
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: strembick1935
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: sundqvist1998
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: sverdrup1942
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: sederberg2001
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: ullen1983
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: wessen1929
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: miiller1991
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: wikman1957
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
+- action: set
+  citekey: devries1970
+  field: cited_by
+  value:
+  - andren2002b
+  - andren2013b
+  note: Adding citer andren2002b - recovered from its own extracted reference list.
