@@ -115821,3 +115821,172 @@
   note: Recreating entry lost in bibliography.json/_graph_state.json desync restore
     - real data recovered from _graph_state.json cache (original successful iterate-f1
     extraction).
+- action: set
+  citekey: steinforthnd
+  field: title
+  value: '''That stepping-stone in the middle of the Irish Sea'': The Dublin Vikings
+    and the Isle of Man in the late ninth century'
+  note: Setting title from confirmed real source (Journal of Irish Archaeology XXVII,
+    2018, 81-97) and from Zotero record.
+- action: set
+  citekey: steinforthnd
+  field: year
+  value: '2018'
+  note: Confirmed via Zotero record MS7RRR6C.
+- action: set
+  citekey: steinforthnd
+  field: date
+  value: '2018'
+  note: See year field.
+- action: set
+  citekey: armstrong1917
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: batey1988
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: corrain2008
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: fowler1963
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: freke2002
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: g1983
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: hudson1998
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: jones1971
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: kermode1994
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: kruse2017
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: laing1987
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: megaw1938
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: miller1999
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: morris1980
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: muhr2002
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: olsen1954
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: oriordain1973
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: rhysnd
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
+- action: set
+  citekey: riordain1949
+  field: cited_by
+  value:
+  - steinforth2018
+  - steinforthnd
+  note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
+    resolution data.
