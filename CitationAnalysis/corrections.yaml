@@ -113618,3 +113618,198 @@
   note: Adding citer myrberg2009 - this entry already existed (as a citation from
     myrberg2007) before being independently found in myrberg2009s footnote 1 via manual
     PDF read.
+- action: set
+  citekey: andren1989
+  field: cited_by
+  value:
+  - andren2000
+  - arwillnordbladh2012
+  - eriksen2013
+  - lund2006
+  - lund2008
+  - oye2016
+  - price2010
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: arrhenius1961
+  field: cited_by
+  value:
+  - christensen2013
+  - gardela2018
+  - pedersen2009a
+  - rosengren2010
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: becker1973
+  field: cited_by
+  value:
+  - staecker2004a
+  - zachrisson2017a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: blindheim1973
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - lund2006
+  - lund2008
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: blomkvist2002
+  field: cited_by
+  value:
+  - andren2013
+  - fabech2013
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: bottgerniedenzu1982
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - helmbrecht2012
+  - oehrl2019
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: buisson1976
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - helmbrecht2012
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  - zachrisson2017a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: danbolt1989
+  field: cited_by
+  value:
+  - andren2000
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: eshleman1983
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - oehrl2017
+  - oehrl2019
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: fuglesang1980
+  field: cited_by
+  value:
+  - abrams2012
+  - amundsen2017
+  - andren2000
+  - bergstol2004
+  - graslund2011
+  - hardh2010a
+  - lund2006
+  - lund2020
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: gunnes1976
+  field: cited_by
+  value:
+  - staecker2004a
+  - storli2010c
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: kermode1907
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: liepe1989
+  field: cited_by
+  value:
+  - price2010
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: olsen1941
+  field: cited_by
+  value:
+  - lund2005
+  - lund2020
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: ong1982
+  field: cited_by
+  value:
+  - andren2000
+  - andren2013a
+  - arwillnordbladh2007
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: souers1937
+  field: cited_by
+  value:
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: webster1999
+  field: cited_by
+  value:
+  - pedersen2009
+  - pedersenndb
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
+- action: set
+  citekey: staecker1990
+  field: cited_by
+  value:
+  - pedersen2009a
+  - staecker2004a
+  note: Adding citer staecker2004a - manually matched from the papers footnotes/bibliography,
+    read directly from the source PDF, after the automated grobid_id_to_citekey resolution
+    step failed entirely (0 entries) despite 51 real references being extracted.
