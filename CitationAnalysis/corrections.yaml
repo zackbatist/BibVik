@@ -116124,3 +116124,143 @@
   note: Adding citer borake2018 - genuinely resolved in the original grobid_id_to_citekey
     cache but never reflected in the exported edgelist, found via a systematic corpus-wide
     integrity check.
+- action: merge
+  keep: steinforth2018
+  discard: steinforthnd
+  note: steinforthnd was the original F2 stub created when lund2021 first cited this
+    paper; steinforth2018 is the fully-processed version created later tonight from
+    the real located PDF. Same paper, found via a systematic author+year collision
+    check.
+- action: set
+  citekey: armstrong1917
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: batey1988
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: fowler1963
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: freke2002
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: hudson1998
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: jones1971
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: kermode1994
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: kruse2017
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: laing1987
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: g1983
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: megaw1938
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: miller1999
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: morris1980
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: muhr2002
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: corrain2008
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: olsen1954
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: oriordain1973
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: riordain1949
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).
+- action: set
+  citekey: rhysnd
+  field: cited_by
+  value:
+  - steinforth2018
+  note: De-duplicating cited_by list - steinforth2018 appeared twice after merging
+    steinforthnd into it (the merge did not deduplicate citer lists).

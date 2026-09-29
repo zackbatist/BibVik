@@ -1,5 +1,5 @@
 citekey,title,year,generation,entry_type,first_author,doi,completeness,in_degree,out_degree,is_ghost
-lund2021,Crossing the Maelstrom: New Departures in Viking Archaeology,2021,P,article,Lund Julie,10.1007/s10814-021-09163-3,1.0,0,559,False
+lund2021,Crossing the Maelstrom: New Departures in Viking Archaeology,2021,P,article,Lund Julie,10.1007/s10814-021-09163-3,1.0,0,558,False
 aannestad2015,Transformasjoner: Omforming og Bruk av Importerte Gjenstander i Vikingetid,2015,F1,book,Aannestad Hanne Lovise,,0.778,6,0,False
 aannestad2018,"Charisma, violence and weapons: The broken swords of the Vikings",2018,F1,incollection,Aannestad Hanne Lovise,,0.833,1,88,False
 ahola2014,"Fibula, Fabula, Fact: The Viking Age in Finland",2014,F1,book,,10.21435/sfh.18,0.556,1,0,False
@@ -469,7 +469,7 @@ sheehan2013,Early Medieval Art and Archaeology in the Northern World: Studies in
 sindbaek2009,"Open Access, Nodal points and Central Places. Maritime Communication and Locational Principles for Coastal Sites in Southern Scandinavia, c. AD 400-1200",2009,F1,article,Sindbaek Søren Michael,,0.917,7,0,False
 sindbaek2014,Crossbreeding Beasts: Christian and Non-Christian Imagery in Oval Brooches,2014,F1,article,Sindbaek Søren Michael,,0.833,8,47,False
 sindbaek2016,"Steatite Vessels and the Viking Diaspora: Migrants, Travellers, and Cultural Change in Early Medieval Britain and Ireland",2016,F1,incollection,Sindbaek Søren Michael,,0.917,1,94,False
-steinforth2018,That stepping-stone in the middle of the Irish Sea': The Dublin Vikings and the Isle of Man in the late ninth century,2018,F1,article,Steinforth Dirk H,,0.833,1,19,False
+steinforth2018,That stepping-stone in the middle of the Irish Sea': The Dublin Vikings and the Isle of Man in the late ninth century,2018,F1,article,Steinforth Dirk H,,0.833,1,41,False
 sutherland2015,Evidence of early metalworking in Arctic Canada,2015,F1,article,Sutherland Patricia D.,,0.833,1,28,False
 sveinbjarnardottir2016,Reykholt: The Church Excavations,2016,F1,book,Sveinbjarnardóttir Guðrún,,0.778,2,0,False
 tainter2006,Archaeology of Overshoot and Collapse,2006,F1,article,Tainter Joseph A.,10.1146/annurev.anthro.35.081705.123136,1.0,2,44,False
@@ -12786,26 +12786,25 @@ andren2002b,Platsernas betydelse: norrön ritual och kultplatskontinuitet,2002,F
 kastholm2015,EN HÅRRIVER FRA VIKINGETIDEN -Nyt fra udgravningerne i Vindinge,2015,F1,misc,Kastholm Ole Thirup,,0.75,0,15,False
 arwillnordbladh2008b,Aska och Rök: Om minne och materiell kultur i nordisk vikingatid,2008,F1,misc,Arwill-Nordbladh Elisabeth,,0.75,6,62,False
 kristiansen1984,Ideology and Material Culture: An Archaeological Perspective,1984,F2,incollection,Kristiansen Karsten,,0.917,1,0,False
-steinforthnd,'That stepping-stone in the middle of the Irish Sea': The Dublin Vikings and the Isle of Man in the late ninth century,2018,F1,misc,Steinforth Dirk H,,0.25,1,41,False
-armstrong1917,Cheek-pieces of bridle-bits in the museum of the Royal Irish Academy,1917,F2,article,Armstrong E.,,0.833,2,0,False
-batey1988,A Viking-age bell from Freswick Links,1988,F2,article,Batey Colleen E.,,0.833,2,0,False
-fowler1963,Celtic metalwork of the fifth and sixth centuries AD,1963,F2,article,Fowler E.,,0.833,2,0,False
-freke2002,"Excavations on St Patrick's Isle, Peel, Isle of Man, 1982-88. Prehistoric, Viking, medieval and later. Centre for Manx Studies Monographs 2",2002,F2,book,Freke David,,0.889,2,0,False
-hudson1998,The Scottish Chronicle,1998,F2,article,Hudson BENJAMIN T.,10.3366/shr.1998.77.2.129,1.0,2,0,False
-jones1971,Brenhinedd y Saesson or The Kings of the Saxons. Board of Celtic Studies,1971,F2,article,Jones T.,,0.583,2,0,False
-kermode1994,"Manx Crosses. Pinkfoot, Balgavies",1994,F2,book,Kermode Philip M C,,0.667,2,0,False
-kruse2017,The Norway to be: Laithlind and Avaldsnes,2017,F2,incollection,Kruse A.,,0.917,2,0,False
-laing1987,"The Early Christian period settlement at Ronaldsway, Isle of Man: a reappraisal",1987,F2,article,Laing Lloyd,,0.917,2,0,False
-g1983,The Annals of Ulster (to AD 1131). I: Text and translation,1983,F2,book,,,0.667,2,0,False
-megaw1938,"An ancient cemetery at Balldoyne, St John's",1938,F2,incollection,Megaw Basil R S,,0.667,2,0,False
-miller1999,Amlaíb trahens centum,1999,F2,article,Miller Melanie J.,,0.833,2,0,False
-morris1980,Nennius: British history and the Welsh annals,1980,F2,article,Morris James,,0.583,2,0,False
-muhr2002,Manx place-names: an Ulster view,2002,F2,incollection,Muhr K.,,0.917,2,0,False
-corrain2008,The Vikings and Ireland,2008,F2,incollection,Corráin D. Ó.,,0.833,2,0,False
-olsen1954,Viking antiquities in Great Britain and Ireland VI: civilisation of the Viking settlers in relation to their old and new countries,1954,F2,book,Olsen M.,,0.889,2,0,False
-oriordain1973,The High Street excavations,1973,F2,incollection,Ó Ríordáin B.,,0.917,2,0,False
-riordain1949,Lough Gur excavations: Carraig Aille and the 'Spectacles,1949,F2,article,Ríordáin S. P.,,0.833,2,0,False
-rhysnd,Note on Guriat,1897,F2,article,Rhŷs JOHN,10.1515/zcph.1897.1.1.52,1.0,2,0,False
+armstrong1917,Cheek-pieces of bridle-bits in the museum of the Royal Irish Academy,1917,F2,article,Armstrong E.,,0.833,1,0,False
+batey1988,A Viking-age bell from Freswick Links,1988,F2,article,Batey Colleen E.,,0.833,1,0,False
+fowler1963,Celtic metalwork of the fifth and sixth centuries AD,1963,F2,article,Fowler E.,,0.833,1,0,False
+freke2002,"Excavations on St Patrick's Isle, Peel, Isle of Man, 1982-88. Prehistoric, Viking, medieval and later. Centre for Manx Studies Monographs 2",2002,F2,book,Freke David,,0.889,1,0,False
+hudson1998,The Scottish Chronicle,1998,F2,article,Hudson BENJAMIN T.,10.3366/shr.1998.77.2.129,1.0,1,0,False
+jones1971,Brenhinedd y Saesson or The Kings of the Saxons. Board of Celtic Studies,1971,F2,article,Jones T.,,0.583,1,0,False
+kermode1994,"Manx Crosses. Pinkfoot, Balgavies",1994,F2,book,Kermode Philip M C,,0.667,1,0,False
+kruse2017,The Norway to be: Laithlind and Avaldsnes,2017,F2,incollection,Kruse A.,,0.917,1,0,False
+laing1987,"The Early Christian period settlement at Ronaldsway, Isle of Man: a reappraisal",1987,F2,article,Laing Lloyd,,0.917,1,0,False
+g1983,The Annals of Ulster (to AD 1131). I: Text and translation,1983,F2,book,,,0.667,1,0,False
+megaw1938,"An ancient cemetery at Balldoyne, St John's",1938,F2,incollection,Megaw Basil R S,,0.667,1,0,False
+miller1999,Amlaíb trahens centum,1999,F2,article,Miller Melanie J.,,0.833,1,0,False
+morris1980,Nennius: British history and the Welsh annals,1980,F2,article,Morris James,,0.583,1,0,False
+muhr2002,Manx place-names: an Ulster view,2002,F2,incollection,Muhr K.,,0.917,1,0,False
+corrain2008,The Vikings and Ireland,2008,F2,incollection,Corráin D. Ó.,,0.833,1,0,False
+olsen1954,Viking antiquities in Great Britain and Ireland VI: civilisation of the Viking settlers in relation to their old and new countries,1954,F2,book,Olsen M.,,0.889,1,0,False
+oriordain1973,The High Street excavations,1973,F2,incollection,Ó Ríordáin B.,,0.917,1,0,False
+riordain1949,Lough Gur excavations: Carraig Aille and the 'Spectacles,1949,F2,article,Ríordáin S. P.,,0.833,1,0,False
+rhysnd,Note on Guriat,1897,F2,article,Rhŷs JOHN,10.1515/zcph.1897.1.1.52,1.0,1,0,False
 abbott2008,"ABBOTT, D. H., BISCAYE, P., COLE-DAI, J. and BREGER, D. 2008. Magnetite and silicate spherules from the GISP2 Core at the 536",2008,F2,misc,Abbott D. H.,,,1,0,False
 horizon2008,Fall Meeting,2008,F2,book,Horizon A. D.,,,1,0,False
 andersen1994,Maps for terrestrial non-tree pollen (NAP) percentages in north and central Europe 1800 and 1450 yr BP,1994,F2,article,Andersen S. T.,,,1,0,False
@@ -12872,8 +12871,8 @@ wylie1989,Archaeological Cables and Tacking: The Implications of Practice for Be
 vulnerabilityzachrisson2010,"Property and honoursocial change in central Sweden, 200-700 AD mirrored in the area around Old Uppsala",2010,F2,incollection,Vulnerability Zachrisson T.,,,1,0,False
 zerefos2007,Atmospheric Effects of Volcanic Eruptions as Seen by Famous Artists and Depicted in Their Paintings,2007,F2,article,Zerefos C. S.,10.5194/acp-7-4027-2007,,1,0,False
 kuhl1999,Danevirke. Nordens største fortidsminde,1999,F2,book,Kühl Jørgen,,,1,0,False
-NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,0,45,True
+ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,0,86,True
 skorokhod2020,Staraya Ladoga in northwestern Russia,2020,F1,misc,Skorokhod A.,,0.75,0,9,True
 NOAUTHOR18,"Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you",,F1,misc,,,0.25,0,21,True
 NOAUTHOR28,"Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models (",,F1,misc,,,0.25,0,193,True
-ahfeldt2015,Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces,2015,F1,incollection,Åhfeldt L Kitzler,10.1515/9783110417685-014,0.917,0,86,True
+NOAUTHOR33,"‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo",,F1,misc,,,0.25,0,45,True

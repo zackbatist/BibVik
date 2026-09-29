@@ -24,7 +24,7 @@
           <attvalue for="5" value="10.1007/s10814-021-09163-3"/>
           <attvalue for="6" value="1.0"/>
           <attvalue for="7" value="0"/>
-          <attvalue for="8" value="559"/>
+          <attvalue for="8" value="558"/>
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
@@ -6604,7 +6604,7 @@
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
           <attvalue for="7" value="1"/>
-          <attvalue for="8" value="19"/>
+          <attvalue for="8" value="41"/>
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
@@ -179032,20 +179032,6 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="steinforthnd" label="'That stepping-stone in the middle of the Irish Sea': The Dublin Vikings and the Isle of Man in the late ninth century">
-        <attvalues>
-          <attvalue for="0" value="'That stepping-stone in the middle of the Irish Sea': The Dublin Vikings and the Isle of Man in the late ninth century"/>
-          <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value="Steinforth Dirk H"/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="1"/>
-          <attvalue for="8" value="41"/>
-          <attvalue for="9" value="false"/>
-        </attvalues>
-      </node>
       <node id="armstrong1917" label="Cheek-pieces of bridle-bits in the museum of the Royal Irish Academy">
         <attvalues>
           <attvalue for="0" value="Cheek-pieces of bridle-bits in the museum of the Royal Irish Academy"/>
@@ -179055,7 +179041,7 @@
           <attvalue for="4" value="Armstrong E."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179069,7 +179055,7 @@
           <attvalue for="4" value="Batey Colleen E."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179083,7 +179069,7 @@
           <attvalue for="4" value="Fowler E."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179097,7 +179083,7 @@
           <attvalue for="4" value="Freke David"/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.889"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179111,7 +179097,7 @@
           <attvalue for="4" value="Hudson BENJAMIN T."/>
           <attvalue for="5" value="10.3366/shr.1998.77.2.129"/>
           <attvalue for="6" value="1.0"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179125,7 +179111,7 @@
           <attvalue for="4" value="Jones T."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.583"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179139,7 +179125,7 @@
           <attvalue for="4" value="Kermode Philip M C"/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.667"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179153,7 +179139,7 @@
           <attvalue for="4" value="Kruse A."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179167,7 +179153,7 @@
           <attvalue for="4" value="Laing Lloyd"/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179181,7 +179167,7 @@
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.667"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179195,7 +179181,7 @@
           <attvalue for="4" value="Megaw Basil R S"/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.667"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179209,7 +179195,7 @@
           <attvalue for="4" value="Miller Melanie J."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179223,7 +179209,7 @@
           <attvalue for="4" value="Morris James"/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.583"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179237,7 +179223,7 @@
           <attvalue for="4" value="Muhr K."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179251,7 +179237,7 @@
           <attvalue for="4" value="Corráin D. Ó."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179265,7 +179251,7 @@
           <attvalue for="4" value="Olsen M."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.889"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179279,7 +179265,7 @@
           <attvalue for="4" value="Ó Ríordáin B."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.917"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179293,7 +179279,7 @@
           <attvalue for="4" value="Ríordáin S. P."/>
           <attvalue for="5" value=""/>
           <attvalue for="6" value="0.833"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -179307,7 +179293,7 @@
           <attvalue for="4" value="Rhŷs JOHN"/>
           <attvalue for="5" value="10.1515/zcph.1897.1.1.52"/>
           <attvalue for="6" value="1.0"/>
-          <attvalue for="7" value="2"/>
+          <attvalue for="7" value="1"/>
           <attvalue for="8" value="0"/>
           <attvalue for="9" value="false"/>
         </attvalues>
@@ -180236,17 +180222,17 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
+      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
         <attvalues>
-          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
-          <attvalue for="1" value=""/>
+          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
+          <attvalue for="1" value="2015"/>
           <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
+          <attvalue for="3" value="incollection"/>
+          <attvalue for="4" value="Åhfeldt L Kitzler"/>
+          <attvalue for="5" value="10.1515/9783110417685-014"/>
+          <attvalue for="6" value="0.917"/>
           <attvalue for="7" value="0"/>
-          <attvalue for="8" value="45"/>
+          <attvalue for="8" value="86"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -180292,17 +180278,17 @@
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
-      <node id="ahfeldt2015" label="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces">
+      <node id="NOAUTHOR33" label="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands ">
         <attvalues>
-          <attvalue for="0" value="Picture-stone workshops on Viking Age Gotland: A study of craftworkers' traces"/>
-          <attvalue for="1" value="2015"/>
+          <attvalue for="0" value="‛Deviant burials' und Bestattungen in Bauchlage als Teil der Norm Eine Fallstudie am Beispiel der Wikingerzeit Gotlands Auf einer Reihe von Gräberfeldern der skandinavischen Wikingerzeit wurdenabweichend von der sonst üblichen Bestattungssitte in Rücken-oder Seitenlagevereinzelt Tote auf dem Bauch liegend bestattet. Das Phänomen der Bestattungen in Bauchlage ist epochen-und kulturübergreifend bekannt 1 , die ersten Belege stammen aus dem Gravettien des Jungpaläolithikums 2 , die jüngsten Funde aus den Schützengräben des Ersten Weltkrieges 3 . In Mitteleuropa kommen Bestattungen in Bauchlage als eine regelhafte Bestattungssitte in einzelnen Kulturgruppen vermehrt ab der frühen römischen Kaiserzeit vor. Beispiele aus dem Zeitraum vom 1. zum 3. Jahrhundert finden sich im römischen Britannien 4 , in den beiden römischen Provinzen Germania inferior 5 und Germania superior 6 sowie auf mehreren gallo"/>
+          <attvalue for="1" value=""/>
           <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="incollection"/>
-          <attvalue for="4" value="Åhfeldt L Kitzler"/>
-          <attvalue for="5" value="10.1515/9783110417685-014"/>
-          <attvalue for="6" value="0.917"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
-          <attvalue for="8" value="86"/>
+          <attvalue for="8" value="45"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
@@ -183124,7 +183110,7 @@
       <edge id="2813" source="heenpettersen2014" target="fanning1994"/>
       <edge id="2814" source="knudson2012" target="fanning1994"/>
       <edge id="2815" source="rogers2020" target="fanning1994"/>
-      <edge id="2816" source="steinforthnd" target="fanning1994"/>
+      <edge id="2816" source="steinforth2018" target="fanning1994"/>
       <edge id="2817" source="abrams2012" target="sheehan1998"/>
       <edge id="2818" source="barrett2008" target="sheehan1998"/>
       <edge id="2819" source="barrett2010" target="sheehan1998"/>
@@ -183375,7 +183361,7 @@
       <edge id="3064" source="lund2010" target="petersen1919"/>
       <edge id="3065" source="lund2017" target="petersen1919"/>
       <edge id="3066" source="NOAUTHOR28" target="petersen1919"/>
-      <edge id="3067" source="steinforthnd" target="petersen1919"/>
+      <edge id="3067" source="steinforth2018" target="petersen1919"/>
       <edge id="3068" source="androshchuk2010" target="rydbeck1932"/>
       <edge id="3069" source="lund2017" target="rydbeck1932"/>
       <edge id="3070" source="androshchuk2010" target="schulzedorrlamm1987"/>
@@ -186785,7 +186771,7 @@
       <edge id="6474" source="barrett2010" target="corrain1998"/>
       <edge id="6475" source="montgomery2014" target="corrain1998"/>
       <edge id="6476" source="skre2019" target="corrain1998"/>
-      <edge id="6477" source="steinforthnd" target="corrain1998"/>
+      <edge id="6477" source="steinforth2018" target="corrain1998"/>
       <edge id="6478" source="baug2019" target="pilo2011a"/>
       <edge id="6479" source="baug2017" target="pilo2011a"/>
       <edge id="6480" source="croix2015" target="pilo2011a"/>
@@ -187107,7 +187093,7 @@
       <edge id="6796" source="lund2010" target="shetelig1940"/>
       <edge id="6797" source="raffield2014" target="shetelig1940"/>
       <edge id="6798" source="sheehan2013a" target="shetelig1940"/>
-      <edge id="6799" source="steinforthnd" target="shetelig1940"/>
+      <edge id="6799" source="steinforth2018" target="shetelig1940"/>
       <edge id="6800" source="bonde2016" target="sorensen2001"/>
       <edge id="6801" source="bill2012" target="sorensen2001"/>
       <edge id="6802" source="bill2019" target="sorensen2001"/>
@@ -187200,7 +187186,7 @@
       <edge id="6889" source="leonard2011" target="grahamcampbell1995"/>
       <edge id="6890" source="rogers2020" target="grahamcampbell1995"/>
       <edge id="6891" source="steinforth2015" target="grahamcampbell1995"/>
-      <edge id="6892" source="steinforthnd" target="grahamcampbell1995"/>
+      <edge id="6892" source="steinforth2018" target="grahamcampbell1995"/>
       <edge id="6893" source="barrett2010" target="grahamcampbell1998"/>
       <edge id="6894" source="becket2013" target="grahamcampbell1998"/>
       <edge id="6895" source="glorstad2012" target="grahamcampbell1998"/>
@@ -187214,7 +187200,7 @@
       <edge id="6903" source="steinforth2015" target="grahamcampbell1998"/>
       <edge id="6904" source="sindbaek2016" target="grahamcampbell1998"/>
       <edge id="6905" source="vonholstein2014" target="grahamcampbell1998"/>
-      <edge id="6906" source="steinforthnd" target="grahamcampbell1998"/>
+      <edge id="6906" source="steinforth2018" target="grahamcampbell1998"/>
       <edge id="6907" source="barrett2010" target="grahamcampbell2001"/>
       <edge id="6908" source="glorstad2015" target="grahamcampbell2001"/>
       <edge id="6909" source="harrison2015" target="grahamcampbell2001"/>
@@ -187534,7 +187520,7 @@
       <edge id="7223" source="becket2013" target="fentz1992"/>
       <edge id="7224" source="becket2013" target="grahamcampbell2002"/>
       <edge id="7225" source="steinforth2015" target="grahamcampbell2002"/>
-      <edge id="7226" source="steinforthnd" target="grahamcampbell2002"/>
+      <edge id="7226" source="steinforth2018" target="grahamcampbell2002"/>
       <edge id="7227" source="becket2013" target="grieg1940"/>
       <edge id="7228" source="harrison2015" target="grieg1940"/>
       <edge id="7229" source="osullivan2015" target="grieg1940"/>
@@ -187726,7 +187712,7 @@
       <edge id="7415" source="rogers2020" target="wilson2008"/>
       <edge id="7416" source="steinforth2015" target="wilson2008"/>
       <edge id="7417" source="ahfeldt2015" target="wilson2008"/>
-      <edge id="7418" source="steinforthnd" target="wilson2008"/>
+      <edge id="7418" source="steinforth2018" target="wilson2008"/>
       <edge id="7419" source="burstrom2014" target="witmore2007"/>
       <edge id="7420" source="burstrom2015" target="witmore2007"/>
       <edge id="7421" source="burstrom2014" target="woolf1967"/>
@@ -191733,12 +191719,12 @@
       <edge id="11422" source="downham2016" target="downham2009"/>
       <edge id="11423" source="price2014a" target="downham2009"/>
       <edge id="11424" source="steinforth2015" target="downham2009"/>
-      <edge id="11425" source="steinforthnd" target="downham2009"/>
+      <edge id="11425" source="steinforth2018" target="downham2009"/>
       <edge id="11426" source="downham2016" target="downham2010"/>
       <edge id="11427" source="price2014a" target="downham2010"/>
       <edge id="11428" source="downham2016" target="downham2012"/>
       <edge id="11429" source="montgomery2014" target="downham2012"/>
-      <edge id="11430" source="steinforthnd" target="downham2012"/>
+      <edge id="11430" source="steinforth2018" target="downham2012"/>
       <edge id="11431" source="downham2016" target="edmonds2009"/>
       <edge id="11432" source="rogers2020" target="edmonds2009"/>
       <edge id="11433" source="downham2016" target="edmonds2014"/>
@@ -193245,7 +193231,7 @@
       <edge id="12934" source="axelsen2014" target="capelle1968"/>
       <edge id="12935" source="sindbaek2011a" target="capelle1968"/>
       <edge id="12936" source="glorstad2014" target="grahamcampbell1990"/>
-      <edge id="12937" source="steinforthnd" target="grahamcampbell1990"/>
+      <edge id="12937" source="steinforth2018" target="grahamcampbell1990"/>
       <edge id="12938" source="glorstad2014" target="grahamcampbell1981"/>
       <edge id="12939" source="glorstad2014" target="lekberg2002"/>
       <edge id="12940" source="zachrisson2004a" target="lekberg2002"/>
@@ -193850,7 +193836,7 @@
       <edge id="13539" source="griffiths2019" target="griffiths2010"/>
       <edge id="13540" source="raffield2016" target="griffiths2010"/>
       <edge id="13541" source="rogers2020" target="griffiths2010"/>
-      <edge id="13542" source="steinforthnd" target="griffiths2010"/>
+      <edge id="13542" source="steinforth2018" target="griffiths2010"/>
       <edge id="13543" source="griffiths2019" target="ritchie1977"/>
       <edge id="13544" source="leonard2011" target="ritchie1977"/>
       <edge id="13545" source="mainland2018" target="ritchie1977"/>
@@ -193864,7 +193850,7 @@
       <edge id="13553" source="gustafsson2011" target="grahamcampbell1992"/>
       <edge id="13554" source="raffield2014" target="grahamcampbell1992"/>
       <edge id="13555" source="spangen2009" target="grahamcampbell1992"/>
-      <edge id="13556" source="steinforthnd" target="grahamcampbell1992"/>
+      <edge id="13556" source="steinforth2018" target="grahamcampbell1992"/>
       <edge id="13557" source="gustafsson2011" target="kleinglrtner2007"/>
       <edge id="13558" source="gustafsson2011" target="nordin1990"/>
       <edge id="13559" source="gustafsson2011" target="paulsen1937"/>
@@ -194058,11 +194044,11 @@
       <edge id="13747" source="perry2016" target="young1995"/>
       <edge id="13748" source="gardela2018" target="wilson2009"/>
       <edge id="13749" source="helama2017" target="wilson2009"/>
-      <edge id="13750" source="steinforthnd" target="wilson2009"/>
+      <edge id="13750" source="steinforth2018" target="wilson2009"/>
       <edge id="13751" source="gardela2018" target="worrell2003"/>
       <edge id="13752" source="griffiths2019" target="downham2017c"/>
       <edge id="13753" source="heenpettersen2019" target="downham2017c"/>
-      <edge id="13754" source="steinforthnd" target="downham2017c"/>
+      <edge id="13754" source="steinforth2018" target="downham2017c"/>
       <edge id="13755" source="gustafsson2011" target="baudou1963"/>
       <edge id="13756" source="gustafsson2011a" target="andersson2006"/>
       <edge id="13757" source="linderholm2008" target="andersson2006"/>
@@ -196390,7 +196376,7 @@
       <edge id="16079" source="montgomery2014" target="westness1980"/>
       <edge id="16080" source="hilberg2014" target="magnusson2000"/>
       <edge id="16081" source="price2019" target="magnusson2000"/>
-      <edge id="16082" source="steinforthnd" target="magnusson2000"/>
+      <edge id="16082" source="steinforth2018" target="magnusson2000"/>
       <edge id="16083" source="holst2013" target="ahrens2001"/>
       <edge id="16084" source="lemm2014" target="ahrens2001"/>
       <edge id="16085" source="holst2013" target="chronicon2001"/>
@@ -197770,7 +197756,7 @@
       <edge id="17459" source="leonard2011" target="crawford2006"/>
       <edge id="17460" source="lemm2014" target="crawford2006"/>
       <edge id="17461" source="leonard2011" target="fanning1983"/>
-      <edge id="17462" source="steinforthnd" target="fanning1983"/>
+      <edge id="17462" source="steinforth2018" target="fanning1983"/>
       <edge id="17463" source="leonard2011" target="firth1986"/>
       <edge id="17464" source="leonard2011" target="gammeltoft2006"/>
       <edge id="17465" source="leonard2011" target="garrow2005"/>
@@ -197828,7 +197814,7 @@
       <edge id="17517" source="montgomery2014" target="floinn1998"/>
       <edge id="17518" source="kelly2015" target="hayden1998"/>
       <edge id="17519" source="kelly2015" target="simpson2008"/>
-      <edge id="17520" source="steinforthnd" target="simpson2008"/>
+      <edge id="17520" source="steinforth2018" target="simpson2008"/>
       <edge id="17521" source="kalmring2012" target="lantmateriet2009"/>
       <edge id="17522" source="kastholm2016" target="ameziane2004"/>
       <edge id="17523" source="kastholm2016" target="arwillnordbladh2001"/>
@@ -198742,7 +198728,7 @@
       <edge id="18431" source="steinforth2015" target="wilson1998"/>
       <edge id="18432" source="solli2011" target="wilson1998"/>
       <edge id="18433" source="ahfeldt2015" target="wilson1998"/>
-      <edge id="18434" source="steinforthnd" target="wilson1998"/>
+      <edge id="18434" source="steinforth2018" target="wilson1998"/>
       <edge id="18435" source="oehrl2017" target="zimmermann2012"/>
       <edge id="18436" source="lund2019" target="petursdottir2007"/>
       <edge id="18437" source="lund2019" target="tonning2003"/>
@@ -199767,7 +199753,7 @@
       <edge id="19456" source="montgomery2014" target="sanchezchillon1994"/>
       <edge id="19457" source="montgomery2014" target="sellevold1999"/>
       <edge id="19458" source="montgomery2014" target="simpson2010a"/>
-      <edge id="19459" source="steinforthnd" target="simpson2010a"/>
+      <edge id="19459" source="steinforth2018" target="simpson2010a"/>
       <edge id="19460" source="montgomery2014" target="stephan2000"/>
       <edge id="19461" source="montgomery2014" target="toolis2008"/>
       <edge id="19462" source="montgomery2014" target="trickett2003"/>
@@ -202634,7 +202620,7 @@
       <edge id="22323" source="richards2012" target="higham1987"/>
       <edge id="22324" source="richards2012" target="hill1966"/>
       <edge id="22325" source="richards2012" target="loyn1977"/>
-      <edge id="22326" source="steinforthnd" target="loyn1977"/>
+      <edge id="22326" source="steinforth2018" target="loyn1977"/>
       <edge id="22327" source="richards2012" target="lucy1999"/>
       <edge id="22328" source="richards2012" target="metcalf1993"/>
       <edge id="22329" source="richards2012" target="naylor2005"/>
@@ -203038,7 +203024,7 @@
       <edge id="22727" source="rosvold2019" target="wandeler2007"/>
       <edge id="22728" source="steinforth2015" target="marstrander1932"/>
       <edge id="22729" source="steinforth2015" target="megaw1950"/>
-      <edge id="22730" source="steinforthnd" target="megaw1950"/>
+      <edge id="22730" source="steinforth2018" target="megaw1950"/>
       <edge id="22731" source="steinforth2015" target="moore1900"/>
       <edge id="22732" source="steinforth2015" target="shetelig1925"/>
       <edge id="22733" source="steinforth2015" target="shetelig1945"/>
@@ -205645,111 +205631,91 @@
       <edge id="25334" source="lund2020" target="arwillnordbladh2008b"/>
       <edge id="25335" source="lund2021" target="arwillnordbladh2008b"/>
       <edge id="25336" source="myrberg2009" target="kristiansen1984"/>
-      <edge id="25337" source="lund2021" target="steinforthnd"/>
-      <edge id="25338" source="steinforth2018" target="armstrong1917"/>
-      <edge id="25339" source="steinforthnd" target="armstrong1917"/>
-      <edge id="25340" source="steinforth2018" target="batey1988"/>
-      <edge id="25341" source="steinforthnd" target="batey1988"/>
-      <edge id="25342" source="steinforth2018" target="fowler1963"/>
-      <edge id="25343" source="steinforthnd" target="fowler1963"/>
-      <edge id="25344" source="steinforth2018" target="freke2002"/>
-      <edge id="25345" source="steinforthnd" target="freke2002"/>
-      <edge id="25346" source="steinforth2018" target="hudson1998"/>
-      <edge id="25347" source="steinforthnd" target="hudson1998"/>
-      <edge id="25348" source="steinforth2018" target="jones1971"/>
-      <edge id="25349" source="steinforthnd" target="jones1971"/>
-      <edge id="25350" source="steinforth2018" target="kermode1994"/>
-      <edge id="25351" source="steinforthnd" target="kermode1994"/>
-      <edge id="25352" source="steinforth2018" target="kruse2017"/>
-      <edge id="25353" source="steinforthnd" target="kruse2017"/>
-      <edge id="25354" source="steinforth2018" target="laing1987"/>
-      <edge id="25355" source="steinforthnd" target="laing1987"/>
-      <edge id="25356" source="steinforth2018" target="g1983"/>
-      <edge id="25357" source="steinforthnd" target="g1983"/>
-      <edge id="25358" source="steinforth2018" target="megaw1938"/>
-      <edge id="25359" source="steinforthnd" target="megaw1938"/>
-      <edge id="25360" source="steinforth2018" target="miller1999"/>
-      <edge id="25361" source="steinforthnd" target="miller1999"/>
-      <edge id="25362" source="steinforth2018" target="morris1980"/>
-      <edge id="25363" source="steinforthnd" target="morris1980"/>
-      <edge id="25364" source="steinforth2018" target="muhr2002"/>
-      <edge id="25365" source="steinforthnd" target="muhr2002"/>
-      <edge id="25366" source="steinforth2018" target="corrain2008"/>
-      <edge id="25367" source="steinforthnd" target="corrain2008"/>
-      <edge id="25368" source="steinforth2018" target="olsen1954"/>
-      <edge id="25369" source="steinforthnd" target="olsen1954"/>
-      <edge id="25370" source="steinforth2018" target="oriordain1973"/>
-      <edge id="25371" source="steinforthnd" target="oriordain1973"/>
-      <edge id="25372" source="steinforth2018" target="riordain1949"/>
-      <edge id="25373" source="steinforthnd" target="riordain1949"/>
-      <edge id="25374" source="steinforth2018" target="rhysnd"/>
-      <edge id="25375" source="steinforthnd" target="rhysnd"/>
-      <edge id="25376" source="price2015" target="abbott2008"/>
-      <edge id="25377" source="price2015" target="horizon2008"/>
-      <edge id="25378" source="price2015" target="andersen1994"/>
-      <edge id="25379" source="price2015" target="andren2012"/>
-      <edge id="25380" source="price2015" target="arrhenius2013"/>
-      <edge id="25381" source="price2015" target="axboe1999"/>
-      <edge id="25382" source="price2015" target="axboe2001"/>
-      <edge id="25383" source="price2015" target="axboe2005"/>
-      <edge id="25384" source="price2015" target="baillie1994"/>
-      <edge id="25385" source="price2015" target="baillie1995"/>
-      <edge id="25386" source="price2015" target="baillie1997"/>
-      <edge id="25387" source="price2015" target="baillie1999"/>
-      <edge id="25388" source="price2015" target="baillie2001"/>
-      <edge id="25389" source="price2015" target="baillie2006"/>
-      <edge id="25390" source="price2015" target="baillie2008"/>
-      <edge id="25391" source="price2015" target="baillie2010"/>
-      <edge id="25392" source="price2015" target="barbante2012"/>
-      <edge id="25393" source="price2015" target="barnish1992"/>
-      <edge id="25394" source="price2015" target="behre1996"/>
-      <edge id="25395" source="price2015" target="berglund1996"/>
-      <edge id="25396" source="price2015" target="bernhardsson2007"/>
-      <edge id="25397" source="price2015" target="bork1998"/>
-      <edge id="25398" source="price2015" target="bosley1989"/>
-      <edge id="25399" source="price2015" target="briffa1990"/>
-      <edge id="25400" source="price2015" target="briffa1992"/>
-      <edge id="25401" source="price2015" target="buckland1997"/>
-      <edge id="25402" source="price2015" target="doreler1992"/>
-      <edge id="25403" source="price2015" target="doreler2012"/>
-      <edge id="25404" source="price2015" target="dull2001"/>
-      <edge id="25405" source="price2015" target="dull2010"/>
-      <edge id="25406" source="price2015" target="eggum2007"/>
-      <edge id="25407" source="price2015" target="fehr2011"/>
-      <edge id="25408" source="price2015" target="gelling1969"/>
-      <edge id="25409" source="price2015" target="graslund2009"/>
-      <edge id="25410" source="price2015" target="graslund2012"/>
-      <edge id="25411" source="price2015" target="grattan2007"/>
-      <edge id="25412" source="price2015" target="grudd2006"/>
-      <edge id="25413" source="price2015" target="grudd2002"/>
-      <edge id="25414" source="price2015" target="gunnel2013"/>
-      <edge id="25415" source="price2015" target="vulnerabilityhalsall2003"/>
-      <edge id="25416" source="price2015" target="jansen2000"/>
-      <edge id="25417" source="price2015" target="kaul2004"/>
-      <edge id="25418" source="price2015" target="keys1999"/>
-      <edge id="25419" source="price2015" target="kutterolf2008"/>
-      <edge id="25420" source="price2015" target="lowenborg2010"/>
-      <edge id="25421" source="price2015" target="nasman2012"/>
-      <edge id="25422" source="price2015" target="nerman1963"/>
-      <edge id="25423" source="price2015" target="oppenheimer2011"/>
-      <edge id="25424" source="price2015" target="pentikainen1989"/>
-      <edge id="25425" source="price2015" target="rampino1988"/>
-      <edge id="25426" source="price2015" target="rigby2004"/>
-      <edge id="25427" source="price2015" target="salzer2007"/>
-      <edge id="25428" source="price2015" target="stenberger1933"/>
-      <edge id="25429" source="price2015" target="stenberger1955"/>
-      <edge id="25430" source="price2015" target="stothers1984"/>
-      <edge id="25431" source="price2015" target="stothers1983"/>
-      <edge id="25432" source="price2015" target="textor2003"/>
-      <edge id="25433" source="price2015" target="torrence2002"/>
-      <edge id="25434" source="price2015" target="traufetter2004"/>
-      <edge id="25435" source="price2015" target="vervruggen1996"/>
-      <edge id="25436" source="price2015" target="vitaliano1968"/>
-      <edge id="25437" source="price2015" target="welinder1975"/>
-      <edge id="25438" source="price2015" target="wylie1989"/>
-      <edge id="25439" source="price2015" target="vulnerabilityzachrisson2010"/>
-      <edge id="25440" source="price2015" target="zerefos2007"/>
-      <edge id="25441" source="tummuscheit2012" target="kuhl1999"/>
+      <edge id="25337" source="steinforth2018" target="armstrong1917"/>
+      <edge id="25338" source="steinforth2018" target="batey1988"/>
+      <edge id="25339" source="steinforth2018" target="fowler1963"/>
+      <edge id="25340" source="steinforth2018" target="freke2002"/>
+      <edge id="25341" source="steinforth2018" target="hudson1998"/>
+      <edge id="25342" source="steinforth2018" target="jones1971"/>
+      <edge id="25343" source="steinforth2018" target="kermode1994"/>
+      <edge id="25344" source="steinforth2018" target="kruse2017"/>
+      <edge id="25345" source="steinforth2018" target="laing1987"/>
+      <edge id="25346" source="steinforth2018" target="g1983"/>
+      <edge id="25347" source="steinforth2018" target="megaw1938"/>
+      <edge id="25348" source="steinforth2018" target="miller1999"/>
+      <edge id="25349" source="steinforth2018" target="morris1980"/>
+      <edge id="25350" source="steinforth2018" target="muhr2002"/>
+      <edge id="25351" source="steinforth2018" target="corrain2008"/>
+      <edge id="25352" source="steinforth2018" target="olsen1954"/>
+      <edge id="25353" source="steinforth2018" target="oriordain1973"/>
+      <edge id="25354" source="steinforth2018" target="riordain1949"/>
+      <edge id="25355" source="steinforth2018" target="rhysnd"/>
+      <edge id="25356" source="price2015" target="abbott2008"/>
+      <edge id="25357" source="price2015" target="horizon2008"/>
+      <edge id="25358" source="price2015" target="andersen1994"/>
+      <edge id="25359" source="price2015" target="andren2012"/>
+      <edge id="25360" source="price2015" target="arrhenius2013"/>
+      <edge id="25361" source="price2015" target="axboe1999"/>
+      <edge id="25362" source="price2015" target="axboe2001"/>
+      <edge id="25363" source="price2015" target="axboe2005"/>
+      <edge id="25364" source="price2015" target="baillie1994"/>
+      <edge id="25365" source="price2015" target="baillie1995"/>
+      <edge id="25366" source="price2015" target="baillie1997"/>
+      <edge id="25367" source="price2015" target="baillie1999"/>
+      <edge id="25368" source="price2015" target="baillie2001"/>
+      <edge id="25369" source="price2015" target="baillie2006"/>
+      <edge id="25370" source="price2015" target="baillie2008"/>
+      <edge id="25371" source="price2015" target="baillie2010"/>
+      <edge id="25372" source="price2015" target="barbante2012"/>
+      <edge id="25373" source="price2015" target="barnish1992"/>
+      <edge id="25374" source="price2015" target="behre1996"/>
+      <edge id="25375" source="price2015" target="berglund1996"/>
+      <edge id="25376" source="price2015" target="bernhardsson2007"/>
+      <edge id="25377" source="price2015" target="bork1998"/>
+      <edge id="25378" source="price2015" target="bosley1989"/>
+      <edge id="25379" source="price2015" target="briffa1990"/>
+      <edge id="25380" source="price2015" target="briffa1992"/>
+      <edge id="25381" source="price2015" target="buckland1997"/>
+      <edge id="25382" source="price2015" target="doreler1992"/>
+      <edge id="25383" source="price2015" target="doreler2012"/>
+      <edge id="25384" source="price2015" target="dull2001"/>
+      <edge id="25385" source="price2015" target="dull2010"/>
+      <edge id="25386" source="price2015" target="eggum2007"/>
+      <edge id="25387" source="price2015" target="fehr2011"/>
+      <edge id="25388" source="price2015" target="gelling1969"/>
+      <edge id="25389" source="price2015" target="graslund2009"/>
+      <edge id="25390" source="price2015" target="graslund2012"/>
+      <edge id="25391" source="price2015" target="grattan2007"/>
+      <edge id="25392" source="price2015" target="grudd2006"/>
+      <edge id="25393" source="price2015" target="grudd2002"/>
+      <edge id="25394" source="price2015" target="gunnel2013"/>
+      <edge id="25395" source="price2015" target="vulnerabilityhalsall2003"/>
+      <edge id="25396" source="price2015" target="jansen2000"/>
+      <edge id="25397" source="price2015" target="kaul2004"/>
+      <edge id="25398" source="price2015" target="keys1999"/>
+      <edge id="25399" source="price2015" target="kutterolf2008"/>
+      <edge id="25400" source="price2015" target="lowenborg2010"/>
+      <edge id="25401" source="price2015" target="nasman2012"/>
+      <edge id="25402" source="price2015" target="nerman1963"/>
+      <edge id="25403" source="price2015" target="oppenheimer2011"/>
+      <edge id="25404" source="price2015" target="pentikainen1989"/>
+      <edge id="25405" source="price2015" target="rampino1988"/>
+      <edge id="25406" source="price2015" target="rigby2004"/>
+      <edge id="25407" source="price2015" target="salzer2007"/>
+      <edge id="25408" source="price2015" target="stenberger1933"/>
+      <edge id="25409" source="price2015" target="stenberger1955"/>
+      <edge id="25410" source="price2015" target="stothers1984"/>
+      <edge id="25411" source="price2015" target="stothers1983"/>
+      <edge id="25412" source="price2015" target="textor2003"/>
+      <edge id="25413" source="price2015" target="torrence2002"/>
+      <edge id="25414" source="price2015" target="traufetter2004"/>
+      <edge id="25415" source="price2015" target="vervruggen1996"/>
+      <edge id="25416" source="price2015" target="vitaliano1968"/>
+      <edge id="25417" source="price2015" target="welinder1975"/>
+      <edge id="25418" source="price2015" target="wylie1989"/>
+      <edge id="25419" source="price2015" target="vulnerabilityzachrisson2010"/>
+      <edge id="25420" source="price2015" target="zerefos2007"/>
+      <edge id="25421" source="tummuscheit2012" target="kuhl1999"/>
     </edges>
   </graph>
 </gexf>
