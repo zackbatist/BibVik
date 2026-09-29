@@ -93502,3 +93502,4377 @@
   value: []
   note: Clearing dangling citer references picked up during the 52-paper reconnection
     batch - this entry is deleted/excluded and should carry no citers.
+- action: set
+  citekey: aannestad2018a
+  field: _source_pdf
+  value: Aannestad 2018 - The Allure of the Foreign The Social and Cultural Dimension
+    of Imports in Scandinavia in the Viking.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: ashby2015a
+  field: _source_pdf
+  value: Ashby et al  2015 - Urban Networks and Arctic Outlands Craft Specialists
+    and Reindeer Antler in Viking Towns.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: croix2019a
+  field: _source_pdf
+  value: Croix et al  2019 - The Réseau Opératoire of Urbanization Craft Collaborations
+    and Organization in an Early Medieval Wo.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: frei2012a
+  field: _source_pdf
+  value: Frei 2012 - Exploring the Potential of the Strontium Isotope Tracing System
+    in Denmark.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: gardela2018b
+  field: _source_pdf
+  value: Gardeła and Odebäck 2018 - Miniature Shields in the Viking Age A Reassessment.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: gotfredsen2014a
+  field: _source_pdf
+  value: Gotfredsen 2014 - Birds in Subsistence and Culture at Viking Age Sites in
+    Denmark.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: hennius2018a
+  field: _source_pdf
+  value: Hennius 2018 - Viking Age Tar Production and Outland Exploitation.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: price2018a
+  field: _source_pdf
+  value: Price 2018 - Viking Phenomena Current Archaeologies of the Early Medieval
+    Scandinavians.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: price2018b
+  field: _source_pdf
+  value: Price et al  2018 - Isotopes and Human Burials at Viking Age Birka and the
+    Mälaren Region, East Central Sweden.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: price2018c
+  field: _source_pdf
+  value: Price and Ljungkvist 2018 - Polynesians of the Atlantic Precedents, Potentials,
+    and Pitfalls in Oceanic Analogies of the Viking.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: price2018d
+  field: _source_pdf
+  value: Price 2018 - Distant Vikings A Manifesto.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: raffield2016a
+  field: _source_pdf
+  value: Raffield et al  2016 - Ingroup Identification, Identity Fusion and the Formation
+    of Viking War Bands.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: raffield2019a
+  field: _source_pdf
+  value: Raffield 2019 - The Slave Markets of the Viking World Comparative Perspectives
+    on an “Invisible Archaeology”.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: sindbaek2007a
+  field: _source_pdf
+  value: Sindbæk 2007 - Networks and Nodal Points The Emergence of Towns in Early
+    Viking Age Scandinavia.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: williams2014a
+  field: _source_pdf
+  value: Williams 2014 - Coins and Currency in Viking England, AD 865–954.pdf
+  note: Linking the created entry to its actual, already-processed source PDF - omitted
+    when the entry was first created.
+- action: set
+  citekey: aannestad2016
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: andren2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - toplak2018
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: baastrup2012
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - aannestad2018
+  - aannestad2018a
+  - croix2019
+  - dobat2013
+  - lund2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: baastrup2010
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baastrup2014
+  - lund2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bagge1991
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bakka1963
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bakka1961
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bakka1971
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - bonde2016
+  - oye2014
+  - rundkvist2010
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blackburn2002
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - hadley2016
+  - williams2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blindheim1973
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - lund2006
+  - lund2008
+  - oehrl2017
+  - oehrl2019
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blindheim1999
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - heenpettersen2014
+  - pedersennda
+  - price2010
+  - rundkvist2010
+  - skre2011b
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blindheim1995
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - eriksen2013
+  - lund2013
+  - lund2019
+  - price2010
+  - raffield2018
+  - skre2011b
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: boe1940
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - ellingsen2019
+  - harrison2015
+  - kelly2015
+  - rogers2020
+  - sindbaek2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: callmer1992
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - ashby2015
+  - gardela2014a
+  - poulsen2011
+  - price2008a
+  - price2010
+  - roslund2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: callmer2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - gustin2017
+  - roslund2017
+  - sindbaek2011a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cramp1997
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: downham2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - ijssennagger2015
+  - raffield2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dumville2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - heenpettersen2019
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ekengren2009
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - burstrom2014
+  - gustin2017
+  - heenpettersen2018
+  - kemmers2011
+  - lund2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gaut2001
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - heenpettersen2014
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gaut2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - axelsen2014
+  - croix2015
+  - pedersennda
+  - the2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: geber1991
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - burstrom2015
+  - heenpettersen2014
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gosden1999
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - burstrom2014
+  - burstrom2015
+  - fredriksen2014
+  - heenpettersen2018
+  - lund2008
+  - lund2010
+  - lund2015
+  - lund2016
+  - lund2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: grahamcampbell2000
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - sindbaek2011
+  - sindbaek2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gustin2004
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - arwillnordbladh2012
+  - arwillnordbladh2013a
+  - baug2017
+  - bill2017a
+  - glorstad2014
+  - gustin2017
+  - hardh2010a
+  - heenpettersen2014
+  - hillerdal2010
+  - kalmring2010
+  - kershaw2017
+  - lund2006
+  - price2018
+  - roslund2015
+  - roslund2017
+  - sindbaek2007
+  - sindbaek2011
+  - skre2011b
+  - skre2016
+  - the2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hahn2013
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hedeager2002
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - fabech2013
+  - larsson2007
+  - lund2004
+  - lund2005
+  - lund2006
+  - lund2010
+  - lund2020
+  - raffield2014
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hedeager1992
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - barrett2008
+  - barrett2010
+  - bergstol2004
+  - bill2012
+  - bill2019
+  - fredriksen2014
+  - glorstad2014
+  - mainland2018
+  - pedersen2017
+  - skre2019
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: helms1993
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - glorstad2012
+  - glorstad2014
+  - gustin2017
+  - lund2006
+  - lund2008
+  - lund2015
+  - lund2017
+  - pedersenndb
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: heyerdahllarsen1981
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hines1984
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baug2019
+  - bonde2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hodder1982
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - amundsen2017
+  - furholt2018
+  - furholt2019
+  - gustin2017
+  - kemmers2011
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hodder1986
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - gustin2017
+  - price2005a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hagg1974
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - burstrom2015
+  - kershaw2009
+  - mannering2013
+  - strand2011
+  - warmlander2015
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jansson1984
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - aannestad2018
+  - aannestad2018a
+  - christiansen2019
+  - croix2019
+  - gustin2017
+  - hardh2010a
+  - kalmring2010
+  - kalmring2018
+  - kershaw2009
+  - lemm2014
+  - lund2020
+  - neiss2016
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: vidar2010
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kopytoff2010
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: krag1994
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - gardela2014a
+  - kershaw2009
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kristiansen2005
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - frieman2019
+  - glorstad2012
+  - oye2016
+  - price2018
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: maran2012
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - croix2015
+  - downham2016
+  - eriksen2016
+  - furholt2019
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: marstrander1963
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mauss1950
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mikkelsen2002
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - glorstad2012
+  - heenpettersen2018
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: myhre1992
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baug2019
+  - bergstol2004
+  - bill2012
+  - bill2019
+  - bonde2016
+  - draganits2014
+  - eriksen2013
+  - eriksen2016
+  - forest2011
+  - gustin2017
+  - jahnsen2016
+  - schneidhofer2017
+  - sindbaek2011a
+  - storli2010c
+  - tonning2020
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: croinin1989
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: pedersen2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - axelsen2014
+  - bill2017a
+  - glorstad2017
+  - hadley2016
+  - moen2020
+  - odeback2018
+  - pedersen2017
+  - pedersennda
+  - pedersenndb
+  - skre2011a
+  - skre2011b
+  - skre2011c
+  - skre2017
+  - the2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: peets2012
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - bill2019
+  - gustavsson2015
+  - hennius2018
+  - odeback2018
+  - price2016
+  - price2020
+  - raffield2015
+  - raffield2016
+  - raffield2019
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: petersen1940
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baastrup2014
+  - heenpettersen2014
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: raven2005
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - barrett2008
+  - barrett2010
+  - glorstad2012
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rogers2006
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - kershaw2009
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: simonsen1981
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - ulriksen2011a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skaare1963
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skaare1976
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - gullbekk2011
+  - skre2017
+  - the2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: solli1995
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - lund2013
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thomas1991
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - burstrom2014
+  - lund2017
+  - price2018
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: waller1982
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wamers1985
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baastrup2014
+  - barrett2008
+  - barrett2010
+  - baug2019
+  - bonde2016
+  - glorstad2012
+  - glorstad2014
+  - hardh2010a
+  - heenpettersen2014
+  - heenpettersen2018
+  - heenpettersen2019
+  - ijssennagger2015
+  - sheehan2013a
+  - skre2011b
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wamers2011
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baug2019
+  - bill2017a
+  - croix2019
+  - heenpettersen2014
+  - ijssennagger2015
+  - pedersennda
+  - richards2018
+  - rogers2020
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: williams2008
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - baug2019
+  - hilberg2013
+  - odeback2018
+  - raffield2016
+  - williams2017
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wilson1984
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wilson2006
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - anchukaitis2017
+  - bill2017a
+  - hilberg2013
+  - pedersen2009a
+  note: Adding citer(s) ['aannestad2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: aarissorensen1988
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: aarissorensen2007
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ambrosiani1981
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - fischer2011
+  - milek2012
+  - trinks2014
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: arneborg1998
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - frei2015
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ashby2011
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - perry2016
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ashby2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - perry2016
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smith1995
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - barrett2008
+  - catlin2016
+  - jackson2018
+  - milek2012
+  - myrberg2008
+  - smith2013
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: barrett2011
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - mainland2018
+  - sindbaek2017
+  - star2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bately2007
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - baug2019
+  - hennius2018
+  - hilberg2014
+  - lindholm2016
+  - price2010
+  - price2018
+  - sindbaek2011
+  - sindbaek2017
+  - skre2011b
+  - skre2019
+  - star2017
+  - the2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bencard1990
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2015
+  - croix2019
+  - hardh2010a
+  - hennius2018
+  - osullivan2015
+  - sindbaek2011a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blaut1993
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - sindbaek2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: buchwald2006
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - loftsgarden2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: buckley2011
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: buckley2009
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - hennius2018
+  - vonholstein2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: buckley2014
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - frei2015
+  - hennius2018
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: callmer2002
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - carver2015
+  - croix2019
+  - gustafsson2011a
+  - pedersennda
+  - sindbaek2011
+  - sindbaek2011a
+  - sindbaek2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sachensymposium2001
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - sindbaek2007
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: callmer2003
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - hilberg2018
+  - rundkvist2010
+  - sindbaek2007
+  - sindbaek2011a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: childe1950
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: clarke1991
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - bill2017a
+  - croix2015
+  - croix2019
+  - draganits2014
+  - gustin2017
+  - hardh2010a
+  - jagodzinski2014
+  - kalmring2013
+  - knudson2012
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: coupland2010
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - ijssennagger2013
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: coupland2011
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cowgill2004
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2015
+  - croix2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: feveile2001
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - christiansen2019
+  - croix2015
+  - dobat2013
+  - sindbaek2011a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: feveile2006
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - axelsen2014
+  - baastrup2014
+  - baug2019
+  - bill2017a
+  - croix2015
+  - croix2019
+  - feveile2011
+  - griffiths2019
+  - hillerdal2010
+  - jessen2016
+  - kastholm2016
+  - ljungkvist2011a
+  - pedersennda
+  - pedersenndb
+  - rundkvist2010
+  - sindbaek2007
+  - sindbaek2011
+  - sindbaek2011a
+  - sindbaek2018
+  - skre2016
+  - the2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: fleming2009
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: galloway1981
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: henderson2005
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hodges1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - bill2017a
+  - carver2015
+  - croix2015
+  - gullbekk2014
+  - kalmring2013
+  - ljungkvist2011a
+  - price2018
+  - sheehan2013a
+  - sindbaek2007
+  - sindbaek2011
+  - skre2011b
+  - skre2011c
+  - the2017
+  - wouters2016
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hull2008
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jantzen2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: keller2010
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - frei2015
+  - hayeursmith2018a
+  - sindbaek2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirby2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: knappett2008
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - burstrom2014
+  - downham2016
+  - knappett2025
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lie1991
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - skre2016
+  - skre2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ling2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - reiter2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: loveluck2006
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - carver2015
+  - croix2019
+  - devos2013
+  - hennius2018
+  - hilberg2018
+  - ijssennagger2013
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: madsen1984
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - feveile2017
+  - pedersen2017
+  - pedersennda
+  - pedersenndb
+  - rundkvist2010
+  - sindbaek2011a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: madsen2004
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - fahlander2016
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: madsen2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - hartman2017
+  - jackson2018
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mahler2007
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - dugmore2012
+  - svensson2018
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mainman1999
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mattingly2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: miksic2000
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - kalmring2013
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: muller2012
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: nasman2000
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - barrett2008
+  - barrett2010
+  - baug2019
+  - croix2015
+  - croix2019
+  - kalmring2013
+  - larsson2007
+  - raffield2016
+  - sindbaek2007
+  - sindbaek2017
+  - svendsen2016
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: nasman2003
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - baug2019
+  - hilberg2014
+  - larsson2007
+  - lucas2007
+  - roesdahl2011
+  - skre2011b
+  - storli2010c
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: nesje2012
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - lund2019
+  - pilo2018
+  - solli2018
+  - stene2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rau2010
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - lemm2014
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: renfrew2008
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: riddler2003
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rieck2006
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: roesdahl2003
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - frei2015
+  - hayeursmith2018a
+  - kalmring2010
+  - lund2004
+  - skre2011b
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lewissimpson2000
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: roesdahl2001
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - dugmore2007
+  - frei2015
+  - price2006
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: schyman2012
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sinclair2012
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - frei2015
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skov1997
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skov1999
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - baug2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skov2006
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skov2010
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: skre2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - axelsen2014
+  - baug2017
+  - bill2017a
+  - bill2019
+  - croix2015
+  - croix2019
+  - devos2013
+  - dobat2013
+  - draganits2014
+  - ellingsen2019
+  - feveile2011
+  - glorstad2017
+  - heenpettersen2014
+  - jahnsen2016
+  - jessen2014
+  - jessen2016
+  - kalmring2012
+  - kalmring2013
+  - kershaw2017
+  - lemm2014
+  - ljungkvist2015
+  - lund2016
+  - lund2017
+  - macphail2013
+  - magi2015
+  - moen2020
+  - osullivan2015
+  - pedersen2017
+  - pedersennda
+  - poulsen2011
+  - price2010
+  - raffield2016
+  - sanmark2013
+  - sindbaek2017
+  - sindbaek2018
+  - skre2011b
+  - skre2016
+  - skre2019
+  - storli2010c
+  - the2017
+  - tonning2020
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smirnova2002
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - rosvold2019
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stephan1994
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stewart2013
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: strohalm2010
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: taylor2012
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - sindbaek2018
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: theuws2004
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - carver2015
+  - sindbaek2007
+  - skre2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: trigger2008
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ulbricht1978
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - croix2019
+  - hilberg2014
+  - the2017
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: vandoorn2014
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: verhulst1994
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: weber1995
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wigh2001
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  - lindholm2016
+  - magnell2010
+  - skre2011b
+  - the2017
+  - zachrisson2014b
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: yoffee2005
+  field: cited_by
+  value:
+  - ashby2015
+  - ashby2015a
+  note: Adding citer(s) ['ashby2015a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: barfod2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: callmer2001
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - hardh2010a
+  - holst2014
+  - poulsen2011
+  - sindbaek2011a
+  - skre2019
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: christophersen2015
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: clark2007
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - odeback2018
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: costin2001
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cotton1933
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dobres2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - naum2007
+  - pedersenndb
+  - roslund2013
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dobres2014
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: feveile2001c
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - knappett2025
+  - pedersen2017
+  - pedersennda
+  - pedersenndb
+  - sindbaek2007
+  - sindbaek2011a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: c2006a
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: feveile2008
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - hillerdal2010
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: flad2007
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gebers2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: henderson2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hodges2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - hilberg2014
+  - kalmring2013
+  - sindbaek2007
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: holback1999
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - gustafsson2011a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hybel2007
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - hilberg2013
+  - hilberg2014
+  - oye2016
+  - poulsen2011
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jacobs2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jankuhn1983
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jennings2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jervis2016
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: latham2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: latour2005
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - eriksen2016
+  - martin2020
+  - sindbaek2007
+  - sindbaek2011
+  - sindbaek2011a
+  - solli2011
+  - svensson2018
+  - zoega2017
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: leroigourhan1964
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: linaa2015
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - rosvold2019
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lonborg1992
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2019
+  - croix2019a
+  - pedersennda
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lonborg1998
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - pedersennda
+  - pedersenndb
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mainman2000
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - hilberg2014
+  - kershaw2009
+  - kershaw2017
+  - knappett2025
+  - richards2018
+  - rogers2020
+  - sindbaek2016
+  - skre2011b
+  - sutherland2009
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: neiss2012
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - neiss2016
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: oexle1992
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: oldeberg1966
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - pedersenndb
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: orfanou2018
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ottaway1970
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: parkinson2013
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: pirenne1927
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - wouters2016
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ramquist1992
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: renfrew1994
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - price2005a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rimbert1961
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sage1984
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: schortman2004
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smith2009
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2019
+  - croix2019a
+  - price2012
+  - sanmark2013a
+  - smith2013
+  - solli2011
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smith2017
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - furholt2018
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: trigger1986
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ur2014
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: voncarnapbornheim1996
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wailes1996
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wickham2009
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  - sindbaek2013a
+  - the2017
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wirth1938
+  field: cited_by
+  value:
+  - croix2019
+  - croix2019a
+  note: Adding citer(s) ['croix2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: attar1990
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: benson2006
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bergfjord2012
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: frei2010a
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: geus2004
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hald1950
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: heier2009
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  - henriksen2017
+  - montgomery2014
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kohn1999
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  - price2019
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mannering2011
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  - mannering2013
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: morita1986
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rosborg2003
+  field: cited_by
+  value:
+  - frei2012
+  - frei2012a
+  note: Adding citer(s) ['frei2012a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jonsson1944
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: palsson1962
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: arwidsson1986
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - odeback2018
+  - price2019
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jorpeland2013
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - jessen2014
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bersu1966
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - harris2017
+  - harrison2015
+  - pluskowski2010a
+  - price2008a
+  - price2010
+  - price2014
+  - raffield2015
+  - raffield2016
+  - steinforth2015
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dickinson1992
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - gardela2018
+  - gardela2018b
+  - ljungkvist2015
+  - odeback2018
+  - pluskowski2010a
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: duczko1989
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - gustin2017
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dundes1992
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - price2008a
+  - toplak2018
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: eniosova2009
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: fuglesang1989
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - pedersen2009a
+  - rosengren2010
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gardela2017
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - lund2019
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: grinsell1973
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gustafson1906
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - hedeager2010
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hansson1938
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: henriksen2013
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hildebrandnda
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hjardar2012
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - hilberg2013
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: harke1990
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - harrison2015
+  - odeback2018
+  - raffield2019
+  - toplak2015
+  - toplak2018
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hardh1976
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - gullbekk2014
+  - hardh2010a
+  - ingvardson2012
+  - lund2008
+  - pedersennda
+  - spangen2009
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jagodzinski2010
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kivikoski1946
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lorangendb
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: makarov2017
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mannering2017
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: meaney1981
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - gardela2018
+  - gardela2018b
+  - pluskowski2010a
+  - rosengren2010
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: melin2001
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: morck1900
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - moen2020
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: novikova1998
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: olsson1986
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: pestell2012
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: petersen1917
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: robb2001
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - odeback2018
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rudzinski2009
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ryghnd
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - lia2004
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: samdal1905
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: schnittger1920
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: simonsson1969
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - graslund2011
+  - odeback2018
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stenberger1947
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - spangen2009
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stenberger1953
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stenberger1956
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - holst2013
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thoren1994
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thunmarknylen2006
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  - gustafsson2016
+  - hardh2010a
+  - kalmring2018
+  - neiss2016
+  - osullivan2015
+  - price2010
+  - toplak2015
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wetzler2017
+  field: cited_by
+  value:
+  - gardela2018
+  - gardela2018b
+  note: Adding citer(s) ['gardela2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: albarella2004
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: albarella2001
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: degerbol1948
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dobney2001
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: enghoff2005
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: graslund2004
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014
+  - gotfredsen2014a
+  - graslund2011
+  - pluskowski2010a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hamiltondyer2002
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: zmbochenski2001
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hatting1998
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lepiksaar1966
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: makowiecki2001
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mlikovsky2005
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: muller1974
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: oggins2004
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: prummel1997
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: serjeantson2011
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: tomek2000
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: tyrberg2002
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  - price2016
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: vretemark2010
+  field: cited_by
+  value:
+  - gotfredsen2013
+  - gotfredsen2014a
+  note: Adding citer(s) ['gotfredsen2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: arbman1993
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: berggren2004
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - ljungkvist2011a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bergstrom1941
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bjorck2008
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: broberg1990
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - roslund2017
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: egenberg2003
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: fetisov2008
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: frostne2002
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hennius2016
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hennius2005
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - lindholm2016
+  - zachrisson2014a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: heron1989
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hiorth1908
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hjulstrom2006
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - zachrisson2014a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hvid2016
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: karlsson2002
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: konsa2013
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kupiec2015
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - lund2019
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kurzweil1998
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: landin2002
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lindeblad1994
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lindstrom2014
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: magnusson1986
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  - loftsgarden2019
+  - svensson2018
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: neveus1974
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: persson1994
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ravn2016
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stahre2012
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: svenssonhennius2017
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: villstrand1996
+  field: cited_by
+  value:
+  - hennius2018
+  - hennius2018a
+  note: Adding citer(s) ['hennius2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: andersson2016b
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - price2018a
+  note: Adding citer(s) ['price2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cambridge2017
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - price2018a
+  note: Adding citer(s) ['price2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hauptman2014
+  field: cited_by
+  value:
+  - NOAUTHOR21
+  - price2018a
+  - price2019
+  - raffield2018
+  note: Adding citer(s) ['price2018a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: aberg1990
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  - price2020
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ambrosiani2005
+  field: cited_by
+  value:
+  - kalmring2016
+  - pedersenndb
+  - price2018
+  - price2018b
+  - sindbaek2014
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ambrosiani2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: backstrom2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blauer2013
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: burgman1987
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  - price2020
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: fennomuyingo2000
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gustin2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: harvig2014
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kaislaniem2011
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kalmring2016
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lama2015
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: leciejewicz1956
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lightfoot2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: nironen1997
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: pellegrini2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stolpendc
+  field: cited_by
+  value:
+  - kalmring2012
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: tuross2017
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: weihed2005
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wilhelmson2017
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  - price2020
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: yurtsever1980
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  note: Adding citer(s) ['price2018b'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: anderson2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bayman2013
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bentley2007
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: brink2014
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  - zachrisson2017
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: buck1938
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: erikson2015
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hauofa2008
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: heyerdahl1938
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kane1997
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: king2003
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch2012
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch2014
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch2007
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  - vesteinsson2012
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch1992
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ljungstrom2004
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ravn1993
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ravn2011
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ravn2018
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: salmond2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: schjodt2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smith2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  - raninen2014
+  - williams2016
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: spriggs2008
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: spriggs2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stolpendd
+  field: cited_by
+  value:
+  - kalmring2017
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thomas1997
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thomas2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wawn2000
+  field: cited_by
+  value:
+  - price2018
+  - price2018c
+  - raffield2018
+  - raffield2019
+  - sindbaek2013a
+  note: Adding citer(s) ['price2018c'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: desha2000
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: honolulu1991
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dining1980
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: athens2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: oxfordroutledge2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: graeber2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: redknap2004b
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: amkreutz2004
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: NOAUTHOR26
+  field: cited_by
+  value:
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lewis1972
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mattes2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mattes2008
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: comacchio1983
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: whitehouse1983
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hooper2006
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirch1985
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kristiansen1998
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: space2015
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rainbird2015
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ratnagar2001
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jp2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sherratt1993
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: clark2008
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: valeri1985
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: malarlandskapen1993
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: wallin1993
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: westerdahl1992
+  field: cited_by
+  value:
+  - price2018
+  - price2018d
+  note: Adding citer(s) ['price2018d'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: byock1998
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: fox1974
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  - raffield2019
+  - skre2017
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: palsson1986
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: whitelock1976
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: alesina1999
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: coffe2006
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: dcms2002
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: doosje1995
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: eger2010
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ellemers1997
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ellisdavidson1976
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jans2015
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jansson1963a
+  field: cited_by
+  value:
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: stewart1991
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: korostelina2007
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lindeman1997
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lonnroth2008
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lund1985
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: maderer2014
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: mcdonald2012
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: petta1992
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: putnam2006
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: rhee1996
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sawyer1985a
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  - sheehan2013a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: schjodt2011
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: smith1997
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sosis2006
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: swann2009
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: swann2012
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: tajfel1971
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: thomas1999
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: tropp2001
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: whitehouse2012
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: whitehouse2014
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2016a
+  note: Adding citer(s) ['raffield2016a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: clauskrag1982
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ruth1988
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lindkvist2003
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: yuhl2013
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cameron2008
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: cameron2016
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lewis2017
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: karras1980
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: larson1935
+  field: cited_by
+  value:
+  - raffield2018
+  - raffield2019
+  - raffield2019a
+  - sanmark2013
+  - sanmark2013a
+  - skre2017
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lee1936
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: audr2001
+  field: cited_by
+  value:
+  - raffield2018
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: benraffield2017
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: see2012
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: reuter2012
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blili1996
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: somerville2014
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ch2011
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: michaelswanton2000
+  field: cited_by
+  value:
+  - raffield2015
+  - raffield2019
+  - raffield2019a
+  - skre2019
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: robinson1921
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: gothenburg2000
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: goodall1990
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: henning2012
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: warner2009
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: olsson2017
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: simpson2018
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ch2000
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lunde2012
+  field: cited_by
+  value:
+  - raffield2018
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jankowiak2016
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: lewis2016
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ostergren2008
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kankpeyeng2009
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: laird2010
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bodel2005
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: walz1977
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: daniel1992
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: morgan1998
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: warren1977
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: bodel2014
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ireland1952
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2019a
+  note: Adding citer(s) ['raffield2019a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: blinkhorn1999
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: brather1996
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: c2006d
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: filipowiak1993
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: soren2002
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jankuhn1956
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: janssen1987
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  - sindbaek2016
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: kirpichnikov1997
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: ohlsson1976
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: sawyer1977
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: warnke1992
+  field: cited_by
+  value:
+  - sindbaek2007
+  - sindbaek2007a
+  - sindbaek2011
+  note: Adding citer(s) ['sindbaek2007a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: hart1995
+  field: cited_by
+  value:
+  - williams2014a
+  - williams2017
+  note: Adding citer(s) ['williams2014a'] - recovered from already-extracted reference
+    lists, previously unlinked due to missing _source_pdf on the created entry.
+- action: set
+  citekey: jansson1963a
+  field: cited_by
+  value: []
+  note: raffield2016a citation redirected to jansson1963 (the surviving merged entry)
+    rather than the deleted duplicate.
+- action: set
+  citekey: jansson1963
+  field: cited_by
+  value:
+  - price2006
+  - raffield2015
+  - raffield2016a
+  note: Adding raffield2016a as citer, redirected from the deleted duplicate jansson1963a.
+- action: set
+  citekey: NOAUTHOR26
+  field: cited_by
+  value: []
+  note: Clearing dangling citer reference. This is a garbled PDF-artifact fragment
+    (repeated running header/footer text mistaken for a reference, ironically matching
+    the citing papers own DOI/pages) rather than a real separate citation - no real
+    paper to redirect to.
