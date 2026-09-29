@@ -115990,3 +115990,79 @@
   - steinforthnd
   note: Adding citer steinforth2018 - real citation reconnection from grobid_id_to_citekey
     resolution data.
+- action: create
+  citekey: kuhl1999
+  entry:
+    title: Danevirke. Nordens største fortidsminde
+    author:
+    - family: Kühl
+      given: Jørgen
+    - family: Hardt
+      given: Nis
+    year: '1999'
+    date: '1999'
+    generation: F2
+    entry_type: book
+    location: Herning
+    cited_by:
+    - tummuscheit2012
+  note: 'Created from Literaturauswahl (selected literature list) in tummuscheit2012,
+    read directly from source PDF - automated pipeline detection found 0 references
+    for this paper (merged_total: 0) despite a real, legible bibliography section
+    being present.'
+- action: set
+  citekey: andersen1998
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  - tummuscheit2012
+  - tummuscheit2019
+  note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
+    section, read directly from the source PDF, after automated detection found 0
+    references for this paper.
+- action: set
+  citekey: andersen2004
+  field: cited_by
+  value:
+  - heenpettersen2014
+  - hilberg2018
+  - jessen2014
+  - tummuscheit2012
+  - tummuscheit2019
+  - voncarnapbornheim2014
+  note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
+    section, read directly from the source PDF, after automated detection found 0
+    references for this paper.
+- action: set
+  citekey: brandt2012
+  field: cited_by
+  value:
+  - tummuscheit2012
+  - tummuscheit2014
+  - voncarnapbornheim2014
+  note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
+    section, read directly from the source PDF, after automated detection found 0
+    references for this paper.
+- action: set
+  citekey: jankuhn1937
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2014
+  - hilberg2016
+  - jagodzinski2014
+  - tummuscheit2012
+  - tummuscheit2019
+  note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
+    section, read directly from the source PDF, after automated detection found 0
+    references for this paper.
+- action: set
+  citekey: maixner2010
+  field: cited_by
+  value:
+  - tummuscheit2012
+  - wouters2016
+  note: Adding citer tummuscheit2012 - manually matched from the papers Literaturauswahl
+    section, read directly from the source PDF, after automated detection found 0
+    references for this paper.
