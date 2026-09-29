@@ -77559,6 +77559,7 @@
   - jorgensen2009
   - jorgensen2010
   - kalmring2010
+  - kastholm2015
   - kastholm2016
   - kastholmhansen2015
   - keller2016
@@ -77583,7 +77584,6 @@
   - moen2020
   - myrberg2009
   - odeback2018
-  - ole2015
   - osullivan2015
   - pedersen2009
   - pedersen2009a
@@ -80466,6 +80466,7 @@
   - jankowiak2018
   - jorgensen2009
   - jorgensen2010
+  - kastholm2015
   - kastholmhansen2015
   - ljungkvist2011
   - lund2013
@@ -80476,7 +80477,6 @@
   - lynnerup2014
   - myrberg2009
   - nielsen2011
-  - ole2015
   - pedersen2009
   - pedersenndb
   - price2015
@@ -92729,7 +92729,7 @@
   value:
   - feveile2015
   - feveile2017
-  - ole2015
+  - kastholm2015
   note: Adding citer(s) ['feveile2015'] - recovered from already-extracted reference
     lists that were never connected back as outgoing edges.
 - action: set
@@ -101424,6 +101424,7 @@
   - hardh2010a
   - heenpettersen2018
   - kalmring2010
+  - kastholm2015
   - kastholm2016
   - keller2016
   - knudson2012
@@ -101444,7 +101445,6 @@
   - milek2012
   - moen2020
   - odeback2018
-  - ole2015
   - osullivan2015
   - pedersen2009a
   - peschel2017
@@ -102192,13 +102192,13 @@
   - gardelanda
   - heenpettersen2018
   - jahnsen2016
+  - kastholm2015
   - lund2013
   - lund2015
   - lund2016
   - lund2017
   - lund2021
   - nielsen2011
-  - ole2015
   - pedersenndb
   - price2019
   - spangen2009
