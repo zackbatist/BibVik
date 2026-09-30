@@ -180416,3 +180416,138 @@
   field: language
   value: en
   note: Backfilling language field from _graph_state.json processing cache.
+- action: set
+  citekey: nosov2018
+  field: language
+  value: ru
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: skorokhod2020
+  field: language
+  value: uk
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: price2018d
+  field: _source_pdf
+  value: Price 2018 - Distant Vikings A Manifesto.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: price2018d
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: price2015
+  field: _source_pdf
+  value: Price and Gräslund - 2015 - Excavating the Fimbulwinter Archaeology, Geomythology
+    and the Climate Event(s) of AD 536.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: price2015
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: myrberg2009a
+  field: _source_pdf
+  value: Myrberg 2009 - The Hoarded Dead Late Iron Age silver hoards as graves.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: myrberg2009a
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: andren2002b
+  field: _source_pdf
+  value: Andrén - 2002 - Platsernas betydelse. Norrön ritual och kultplatskontinuitet.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: andren2002b
+  field: language
+  value: sv
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: lia2004
+  field: _source_pdf
+  value: Lia - 2004 - Vikingetidsgravenes rituelle kompleksitet.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: lia2004
+  field: language
+  value: nb
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: price2014b
+  field: _source_pdf
+  value: Price 2014 - Nine Paces from Hel Time and Motion in Old Norse Ritual Performance.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: price2014b
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: price2014c
+  field: _source_pdf
+  value: Price and Naumann 2014 - The Peopling of the North Atlantic Isotopic Results
+    from Norway.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: price2014c
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: runge2018a
+  field: _source_pdf
+  value: Runge and Henriksen 2018 - The Origins of Odense New Aspects of Early Urbanisation
+    in Southern Scandinavia.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: runge2018a
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: steinforth2018
+  field: _source_pdf
+  value: Steinforth-Thatsteppingstonemiddle-2018.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: steinforth2018
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
+- action: set
+  citekey: skre2017b
+  field: _source_pdf
+  value: Skre 2017 - Viking-Age Economic Transformations The West-Scandinavian Case.pdf
+  note: Relinking _source_pdf - real processed PDF data confirmed to still exist in
+    _graph_state.json cache under this filename.
+- action: set
+  citekey: skre2017b
+  field: language
+  value: en
+  note: Setting language, confirmed directly from the _graph_state.json processing
+    cache.
