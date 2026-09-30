@@ -685,9 +685,13 @@ not several dots scattered near it.
 ```{r}
 #| label: mixed-only-topic
 #| fig-cap: >
-#|   First-author gender within mixed-gender papers, by topic (green,
-#|   bottom axis). Every distinct mixed-team size for that topic, and
-#|   how many papers share it (tan, top axis). Dashed line at 50%.
+#|   Each topic has two overlaid series on the same row, using different
+#|   x-axes. Green dots (bottom axis): share of that topic's mixed-gender
+#|   papers with a woman first author, dot size is the number of mixed
+#|   papers behind that topic. Tan dots (top axis): every distinct
+#|   author-team size found among that topic's mixed papers, dot size is
+#|   how many papers have that size. Dashed vertical line marks 50% on
+#|   the green (bottom) axis only.
 #| fig-width: 11.5
 #| fig-height: 9.5
 mixed_topic_raw <- df %>%
@@ -1104,9 +1108,13 @@ averaging.
 ```{r}
 #| label: mixed-only-method
 #| fig-cap: >
-#|   First-author gender within mixed-gender papers, by method (navy,
-#|   bottom axis). Every distinct mixed-team size for that method, and
-#|   how many papers share it (tan, top axis). Dashed line at 50%.
+#|   Each method has two overlaid series on the same row, using different
+#|   x-axes. Navy dots (bottom axis): share of that method's mixed-gender
+#|   papers with a woman first author, dot size is the number of mixed
+#|   papers behind that method. Tan dots (top axis): every distinct
+#|   author-team size found among that method's mixed papers, dot size is
+#|   how many papers have that size. Dashed vertical line marks 50% on
+#|   the navy (bottom) axis only.
 #| fig-width: 11
 #| fig-height: 7
 mixed_method_raw <- df %>%
@@ -1523,10 +1531,13 @@ averaging.
 ```{r}
 #| label: mixed-only-source
 #| fig-cap: >
-#|   First-author gender within mixed-gender papers, by source of
-#|   evidence (red, bottom axis). Every distinct mixed-team size for
-#|   that source, and how many papers share it (tan, top axis).
-#|   Dashed line at 50%.
+#|   Each source of evidence has two overlaid series on the same row,
+#|   using different x-axes. Red dots (bottom axis): share of that
+#|   source's mixed-gender papers with a woman first author, dot size is
+#|   the number of mixed papers behind that source. Tan dots (top axis):
+#|   every distinct author-team size found among that source's mixed
+#|   papers, dot size is how many papers have that size. Dashed vertical
+#|   line marks 50% on the red (bottom) axis only.
 #| fig-width: 11
 #| fig-height: 6.5
 mixed_source_raw <- df %>%
@@ -1606,6 +1617,1340 @@ ggplot(region_counts, aes(label = Region, size = n_scaled, color = n)) +
   theme_minimal()
 ```
 
+### Matching to Wikidata
+
+Region is free text drawn directly from each paper, not a controlled
+vocabulary: spelling variants and mixed specificity (continent, country,
+named site) count as distinct terms in the word cloud above. Wikidata is
+used to consolidate these to real places with coordinates. Pleiades,
+Pelagios/Peripleo, and iDAI.gazetteer were considered and set aside: all
+three are institutionally anchored in Mediterranean/classical-world
+antiquity, with no confirmed non-trivial coverage of Viking-Age
+Scandinavia. Wikidata was used instead for its dense, well-curated
+coverage of Scandinavian archaeological sites and structured multilingual
+labels/aliases, which handle spelling variants (Danmark/Denmark) close to
+for free.
+
+The chunks below call Wikidata's SPARQL endpoint and so require outbound
+network access; they default to `eval: false` and do not run on a normal
+render of this document. Run them explicitly (flip `eval: true`) when the
+lookup table needs building or refreshing, then leave them off again —
+the rest of this section reads the resulting static CSV, same as Topic,
+Method, and Source read their own derived data.
+
+```{r}
+#| label: region-tokens
+# One row per (cite_key, region_token) pair, trimmed, blanks dropped.
+region_tokens <- df %>%
+  select(cite_key, Region) %>%
+  filter(!is.na(Region), Region != "") %>%
+  separate_rows(Region, sep = ",") %>%
+  mutate(Region = str_trim(Region)) %>%
+  filter(Region != "") %>%
+  # A trailing period on an entry ("Mälaren.") is a citation-formatting
+  # artifact, not part of the place name — strip it so it doesn't
+  # produce a separate, unmatched token alongside the real one.
+  mutate(Region = str_remove(Region, "\\.$"))
+
+# Known spelling/language variants, folded to one canonical form before
+# matching. Add to this list as more are found during review — this is
+# not exhaustive, just the duplicates visible in the corpus-wide token
+# frequency table.
+variant_map <- c(
+  "Danmark" = "Denmark"
+)
+
+region_tokens <- region_tokens %>%
+  mutate(Region_normalized = coalesce(variant_map[Region], Region))
+
+unique_tokens <- region_tokens %>%
+  distinct(Region_normalized) %>%
+  arrange(Region_normalized) %>%
+  pull(Region_normalized)
+```
+
+**Coverage probe.** Before matching all tokens, check hit rate on the
+most frequent ones — this is the actual empirical check for whether
+Wikidata is workable here, not an assumption.
+
+```{r}
+#| label: region-probe
+#| eval: false
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  install.packages("WikidataQueryServiceR", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  # CRAN install failed (blocked mirror, network issue, etc.) — fall back
+  # to installing directly from the package's GitHub source, which
+  # bypasses CRAN entirely.
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes", repos = "https://cloud.r-project.org")
+  }
+  remotes::install_github("bearloga/WikidataQueryServiceR")
+}
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  stop(
+    "WikidataQueryServiceR failed to install from both CRAN and GitHub. ",
+    "This points to an environment issue rather than a package issue — most ",
+    "likely no outbound network access at all from this machine. Run ",
+    "install.packages(\"WikidataQueryServiceR\", repos = \"https://cloud.r-project.org\") ",
+    "directly in the console (outside this render) to see the real underlying error."
+  )
+}
+library(WikidataQueryServiceR)
+library(httr)
+
+top_tokens <- region_tokens %>%
+  count(Region_normalized, sort = TRUE) %>%
+  slice_max(n, n = 40, with_ties = FALSE) %>%
+  pull(Region_normalized)
+
+# SPARQL: label or alias match (English, Swedish, Danish, Norwegian,
+# Icelandic — the languages a Scandinavian place name is most likely to
+# appear under in Wikidata), filtered to place-like classes: archaeological
+# site (Q839954), human settlement (Q486972), instance/subclass of
+# location (Q17334923) generally, island (Q23442), geographic region
+# (Q82794), and tumulus/burial mound (Q34023). The tumulus class was added
+# after an initial probe run missed Gokstad and Oseberg — both real,
+# well-known Viking Age ship burial sites — because Wikidata classifies
+# them as tumuli (Gokstad's actual item is "Gokstad Mound"), not as
+# archaeological sites or settlements under the original filter.
+# Deliberately broad on class, narrow on label match — better to
+# over-fetch candidates and filter in R than to miss a real match by
+# being too restrictive in SPARQL.
+probe_query_template <- '
+SELECT ?item ?itemLabel ?coord ?instanceOfLabel WHERE {
+  VALUES ?searchterm { "%s"@en "%s"@sv "%s"@da "%s"@nb "%s"@is }
+  ?item rdfs:label|skos:altLabel ?searchterm .
+  ?item wdt:P31/wdt:P279* ?instanceOf .
+  VALUES ?instanceOf { wd:Q839954 wd:Q486972 wd:Q17334923 wd:Q23442 wd:Q82794 wd:Q34023 }
+  OPTIONAL { ?item wdt:P625 ?coord . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+LIMIT 5
+'
+
+# Fallback for tokens with no exact label/alias match: a CONTAINS-style
+# substring match against English labels only. Slower (a full label scan,
+# not an index lookup) and lower-precision, so it only runs on tokens the
+# exact-match query already missed, and results from this path are
+# flagged separately rather than treated as equally confident. This is
+# what actually catches a case like "Gokstad": the real Wikidata item is
+# titled "Gokstad Mound", so an exact match on the bare token "Gokstad"
+# never hits, even with the right class included.
+#
+# A SPARQL CONTAINS scan was tried first and confirmed genuinely too slow
+# at Wikidata's scale, timing out even after restructuring the query to
+# apply the class filter before the string filter — SPARQL's CONTAINS
+# does an unindexed substring scan, and is documented as not built for
+# this kind of fuzzy lookup. Wikidata's own wbsearchentities REST API is
+# the purpose-built tool for partial/fuzzy label search (it is what
+# Wikidata's own search box uses), genuinely fast because it is backed
+# by a real search index. It cannot filter by entity class directly, so
+# the class check happens as a second step on each candidate it returns.
+search_entities <- function(token, limit = 5) {
+  res <- tryCatch(
+    httr::GET(
+      "https://www.wikidata.org/w/api.php",
+      query = list(
+        action = "wbsearchentities", search = token, language = "en",
+        type = "item", limit = limit, format = "json"
+      ),
+      httr::timeout(15)
+    ),
+    error = function(e) NULL
+  )
+  if (is.null(res) || httr::http_error(res)) return(tibble())
+  parsed <- tryCatch(httr::content(res, as = "parsed", type = "application/json"),
+                      error = function(e) NULL)
+  if (is.null(parsed) || length(parsed$search) == 0) return(tibble())
+  tibble(
+    qid = map_chr(parsed$search, ~ .x$id %||% NA_character_),
+    label = map_chr(parsed$search, ~ .x$label %||% NA_character_)
+  )
+}
+
+# Second step: for each candidate QID from search, check whether it is
+# actually one of the place-like classes used throughout this section —
+# wbsearchentities has no class filter of its own, so this keeps the
+# fallback path just as class-restricted as the exact-match SPARQL query.
+check_place_class <- function(qids) {
+  if (length(qids) == 0) return(tibble())
+  values_clause <- paste(paste0("wd:", qids), collapse = " ")
+  q <- sprintf('
+SELECT ?item ?itemLabel ?coord ?instanceOfLabel WHERE {
+  VALUES ?item { %s }
+  ?item wdt:P31/wdt:P279* ?instanceOf .
+  VALUES ?instanceOf { wd:Q839954 wd:Q486972 wd:Q17334923 wd:Q23442 wd:Q82794 wd:Q34023 }
+  OPTIONAL { ?item wdt:P625 ?coord . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}', values_clause)
+  tryCatch(query_wikidata(q), error = function(e) tibble())
+}
+
+probe_one <- function(token) {
+  cat("Querying:", token, "... ")
+  q <- sprintf(probe_query_template, token, token, token, token, token)
+  res <- tryCatch(
+    {
+      if (!requireNamespace("R.utils", quietly = TRUE)) {
+        install.packages("R.utils", repos = "https://cloud.r-project.org")
+      }
+      R.utils::withTimeout(query_wikidata(q), timeout = 20, onTimeout = "silent")
+    },
+    error = function(e) NULL
+  )
+  if (!is.null(res) && nrow(res) > 0) {
+    cat(nrow(res), "candidate(s) [exact]\n")
+    return(tibble(token = token, hit = TRUE, n_candidates = nrow(res), match_type = "exact"))
+  }
+
+  # Exact match failed — try wbsearchentities fallback before giving up.
+  candidates <- search_entities(token)
+  if (nrow(candidates) == 0) {
+    cat("no match\n")
+    return(tibble(token = token, hit = FALSE, n_candidates = 0, match_type = "none"))
+  }
+  res_c <- check_place_class(candidates$qid)
+  if (nrow(res_c) == 0) {
+    cat("no match (search hit, wrong class)\n")
+    return(tibble(token = token, hit = FALSE, n_candidates = 0, match_type = "none"))
+  }
+  cat(nrow(res_c), "candidate(s) [search]\n")
+  tibble(token = token, hit = TRUE, n_candidates = nrow(res_c), match_type = "search")
+}
+
+probe_results <- map_dfr(top_tokens, probe_one)
+cat("Coverage probe: ", sum(probe_results$hit), " / ", nrow(probe_results),
+    " of the top ", length(top_tokens), " tokens returned at least one candidate\n", sep = "")
+cat("  exact:", sum(probe_results$match_type == "exact"),
+    " | search fallback:", sum(probe_results$match_type == "search"),
+    " | no match:", sum(probe_results$match_type == "none"), "\n")
+print(probe_results, n = 50)
+```
+
+**Check `probe_results` before continuing.** If the hit rate on real,
+frequent Viking-Age placenames (Birka, Hedeby, Kaupang, Ribe, Uppåkra,
+Tissø, etc.) is low, the class filter above may be too narrow — Wikidata
+items for archaeological sites are not always tagged with exactly these
+`instance of` values — and the SPARQL query needs revising before running
+the full match. A high count under `contains fallback` is expected and
+fine — it means the class filter is right but the corpus token is a
+shortened form of the item's real label (e.g. "Gokstad" for "Gokstad
+Mound"), not a coverage problem.
+
+**Full match**, once the probe above confirms acceptable coverage. This
+single chunk matches every token, separates out macro-region terms that
+can't resolve to a point, and writes the resulting lookup table plus a
+manual-review export, all together (previously three separate chunks;
+merged into one so a single `eval` flag controls the whole matching-to-
+saved-file pipeline, since matching without saving the result was wasted
+work run for nothing):
+
+```{r}
+#| label: region-match
+#| eval: false
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  install.packages("WikidataQueryServiceR", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes", repos = "https://cloud.r-project.org")
+  }
+  remotes::install_github("bearloga/WikidataQueryServiceR")
+}
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  stop(
+    "WikidataQueryServiceR failed to install from both CRAN and GitHub. ",
+    "This points to an environment issue rather than a package issue — most ",
+    "likely no outbound network access at all from this machine. Run ",
+    "install.packages(\"WikidataQueryServiceR\", repos = \"https://cloud.r-project.org\") ",
+    "directly in the console (outside this render) to see the real underlying error."
+  )
+}
+library(WikidataQueryServiceR)
+library(httr)
+
+match_query_template <- '
+SELECT ?item ?itemLabel ?coord ?instanceOfLabel WHERE {
+  VALUES ?searchterm { "%s"@en "%s"@sv "%s"@da "%s"@nb "%s"@is }
+  ?item rdfs:label|skos:altLabel ?searchterm .
+  ?item wdt:P31/wdt:P279* ?instanceOf .
+  VALUES ?instanceOf { wd:Q839954 wd:Q486972 wd:Q17334923 wd:Q23442 wd:Q82794 wd:Q34023 }
+  OPTIONAL { ?item wdt:P625 ?coord . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+LIMIT 5
+'
+
+# Fallback for tokens with no exact label/alias match — see the probe
+# chunk above for the full rationale (catches cases like "Gokstad" vs.
+# the real item title "Gokstad Mound"). Flagged as match_method
+# "search_fallback" so it's visible which matches came from the
+# lower-precision path during manual review.
+#
+# Redefined here (identical to the probe chunk's versions) rather than
+# relying on them existing from a prior run of region-probe in the same
+# session — this chunk may be run on its own.
+search_entities <- function(token, limit = 5) {
+  res <- tryCatch(
+    httr::GET(
+      "https://www.wikidata.org/w/api.php",
+      query = list(
+        action = "wbsearchentities", search = token, language = "en",
+        type = "item", limit = limit, format = "json"
+      ),
+      httr::timeout(15)
+    ),
+    error = function(e) NULL
+  )
+  if (is.null(res) || httr::http_error(res)) return(tibble())
+  parsed <- tryCatch(httr::content(res, as = "parsed", type = "application/json"),
+                      error = function(e) NULL)
+  if (is.null(parsed) || length(parsed$search) == 0) return(tibble())
+  tibble(
+    qid = map_chr(parsed$search, ~ .x$id %||% NA_character_),
+    label = map_chr(parsed$search, ~ .x$label %||% NA_character_)
+  )
+}
+
+check_place_class <- function(qids) {
+  if (length(qids) == 0) return(tibble())
+  values_clause <- paste(paste0("wd:", qids), collapse = " ")
+  q <- sprintf('
+SELECT ?item ?itemLabel ?coord ?instanceOfLabel WHERE {
+  VALUES ?item { %s }
+  ?item wdt:P31/wdt:P279* ?instanceOf .
+  VALUES ?instanceOf { wd:Q839954 wd:Q486972 wd:Q17334923 wd:Q23442 wd:Q82794 wd:Q34023 }
+  OPTIONAL { ?item wdt:P625 ?coord . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}', values_clause)
+  tryCatch(query_wikidata(q), error = function(e) tibble())
+}
+#
+# Uses the same wbsearchentities + class-check pattern as the probe
+# chunk above, rather than a SPARQL CONTAINS scan, which was confirmed
+# to time out at Wikidata's scale even after restructuring the query —
+# see the probe chunk's comment for the full rationale. search_entities()
+# and check_place_class() are defined there; this chunk reuses them.
+
+match_one <- function(token) {
+  q <- sprintf(match_query_template, token, token, token, token, token)
+  res <- tryCatch(query_wikidata(q), error = function(e) NULL)
+
+  if (is.null(res) || nrow(res) == 0) {
+    # Exact match failed — try wbsearchentities fallback before giving up.
+    candidates <- search_entities(token)
+    res_c <- if (nrow(candidates) > 0) check_place_class(candidates$qid) else tibble()
+    if (nrow(res_c) == 0) {
+      return(tibble(
+        region_token = token, wikidata_qid = NA_character_,
+        normalized_label = NA_character_, lat = NA_real_, lon = NA_real_,
+        place_type = NA_character_, match_method = "no_match"
+      ))
+    }
+    res <- res_c
+    fallback_used <- TRUE
+  } else {
+    fallback_used <- FALSE
+  }
+
+  # Multiple candidates: prefer the one whose returned label exactly
+  # equals the token over an arbitrary first result, since an
+  # exact-label match among several candidates is a real signal, not
+  # a coin flip. Falls back to the first row only when no candidate's
+  # label matches the token exactly (that case still gets flagged
+  # ambiguous below, since the pick is genuinely uncertain).
+  exact_label_match <- which(str_to_lower(res$itemLabel) == str_to_lower(token))
+  best <- if (length(exact_label_match) > 0) res[exact_label_match[1], ] else res[1, ]
+  resolved_by_label <- length(exact_label_match) > 0
+
+  coord <- best$coord
+  lat <- NA_real_; lon <- NA_real_
+  if (!is.na(coord) && str_detect(coord, "^Point")) {
+    nums <- str_match(coord, "Point\\(([-0-9.]+) ([-0-9.]+)\\)")
+    lon <- as.numeric(nums[2]); lat <- as.numeric(nums[3])
+  }
+  is_ambiguous <- nrow(res) > 1 && !resolved_by_label
+  method <- if (fallback_used) {
+    if (is_ambiguous) "search_fallback_ambiguous" else "search_fallback"
+  } else {
+    if (is_ambiguous) "exact_ambiguous" else "exact"
+  }
+  tibble(
+    region_token = token,
+    wikidata_qid = str_extract(best$item, "Q[0-9]+$"),
+    normalized_label = best$itemLabel,
+    lat = lat, lon = lon,
+    place_type = best$instanceOfLabel,
+    match_method = method
+  )
+}
+
+region_matches <- map_dfr(unique_tokens, match_one)
+
+cat("Matched:", sum(region_matches$match_method != "no_match"), "/", nrow(region_matches), "\n")
+cat("Ambiguous (multiple candidates, first taken):",
+    sum(region_matches$match_method == "exact_ambiguous"), "\n")
+cat("No match:", sum(region_matches$match_method == "no_match"), "\n")
+
+unmatched <- region_matches %>% filter(match_method == "no_match") %>% pull(region_token)
+print(unmatched)
+
+# Write the raw lookup table. Manual corrections (known-bad matches) and
+# macro-region flagging are NOT applied here — they live in region-joined
+# below instead, which runs on every normal render (no network needed)
+# and reads straight from this file. That way, fixing a bad match or
+# adding a term to the macro-region list never requires re-running this
+# chunk (or its ~10 minutes of Wikidata queries) again — only editing
+# region-joined and re-rendering, which is instant.
+write_csv(region_matches, here("data", "region_lookup.csv"))
+cat("Written to data/region_lookup.csv:", nrow(region_matches), "rows\n")
+
+region_matches %>%
+  filter(match_method %in% c("exact_ambiguous", "search_fallback",
+                              "search_fallback_ambiguous", "no_match")) %>%
+  write_csv(here("data", "region_lookup_needs_review.csv"))
+```
+
+**Nesting (optional).** Every matched place is currently flat: "Birka,"
+"Vestfold," "Sweden," and "Scandinavia" are independent tokens with no
+recorded relationship between them, even though Birka is genuinely in
+Uppland, Sweden, Scandinavia. This chunk resolves three nesting levels
+for each matched place, each as its own column:
+
+- **`admin_region`** — the first `P131` ("located in the administrative
+  territorial entity") ancestor above the site itself, before reaching
+  the country: a county, province, or similar (e.g. Birka → Uppland).
+  Not every place has a clean single admin-region ancestor in Wikidata;
+  those are left `NA` rather than guessed.
+- **`country`** — walked further up `P131*` to the first ancestor that
+  is itself a country (Wikidata class Q6256).
+- **`super_region`** — not derived from Wikidata at all. Unlike country,
+  there is no single reliable Wikidata class for "super-region" in the
+  sense this corpus uses the term (Scandinavia, British Isles, Baltic
+  states); these are real, well-understood historical/cultural
+  groupings, not administrative ones, so this is a small, explicit,
+  hand-authored country → super-region mapping instead of an
+  automatically-derived one. Extend `super_region_map` below as more
+  countries appear in the resolved data.
+
+Like the matching chunks above, this calls Wikidata and needs network
+access; it stays off by default.
+
+Country resolution here runs on the raw matched coordinates, before the
+`known_bad_matches` correction is applied (that correction lives in
+region-joined below, and only nulls the bad matches' `lat`/`lon`/etc.
+there, not here). So resolving nesting right after this chunk can
+produce a real `country` value for a token later corrected to
+`no_match` — e.g. "Repton" resolving to "United States" here, even
+though `region-joined` clears it entirely downstream. That correction
+was extended to also null `admin_region`/`country`/`super_region` when
+present, so this is handled automatically as long as `region-joined`
+runs after nesting, which it always does on a normal render.
+
+```{r}
+#| label: region-nesting
+#| eval: false
+# This chunk runs independently of region-match above and does not
+# inherit its library load — confirmed the actual cause of every past
+# empty result: query_wikidata() was never defined here, so every batch
+# failed immediately with "could not find function" and silently
+# returned zero rows, which then looked like a query or network problem
+# rather than a missing library call.
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  install.packages("WikidataQueryServiceR", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("WikidataQueryServiceR", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes", repos = "https://cloud.r-project.org")
+  }
+  remotes::install_github("bearloga/WikidataQueryServiceR")
+}
+library(WikidataQueryServiceR)
+
+region_lookup_for_nesting <- read_csv(here("data", "region_lookup.csv"), show_col_types = FALSE) %>%
+  # Drop any nesting columns from a prior run before this one starts —
+  # otherwise left_join() below collides with them and produces
+  # admin_region.x/admin_region.y-style duplicates instead of clean
+  # single columns, compounding further on every re-run.
+  select(-any_of(c("admin_region", "country", "super_region")))
+
+# Apply the same manual overrides used in region-joined before resolving
+# nesting — without this, nesting would resolve admin_region/country/
+# super_region from the ORIGINAL wrong QIDs on disk (this file is the
+# raw match output; the override only ever lived in region-joined's
+# in-memory region_lookup, never written back here), producing correct
+# lat/lon downstream but stale, wrong country values for exactly the
+# nine tokens this override exists to fix. Kept in sync manually with
+# the table in region-joined below — if one changes, update the other.
+known_bad_match_overrides <- tibble::tribble(
+  ~region_token,   ~wikidata_qid,  ~normalized_label,          ~lat,      ~lon,       ~place_type,
+  "East Norway",   "Q216065",      "Eastern Norway (Østlandet)", 60.25,   10.67,      "region",
+  "Repton",        "Q1018787",     "Repton",                    52.83983, -1.55061,  "village",
+  "Baltic",        "Q545",         "Baltic Sea",                58,       20,         "sea",
+  "North Norway",  "Q214041",      "Northern Norway",           69.667,   19.0,       "region",
+  "Scotland",      "Q22",          "Scotland",                  56,       -4,         "country",
+  "Masham",        "Q2330678",     "Masham",                    54.22,   -1.656,      "town",
+  "West Sweden",   "Q4992082",     "West Sweden (Västsverige)", 57.558,   12.602,     "region",
+  "East Denmark",  "Q131281582",   "Eastern Denmark (general, administrative region est. 2027)", 55.44, 11.56, "region"
+)
+
+region_lookup_for_nesting <- region_lookup_for_nesting %>%
+  left_join(known_bad_match_overrides %>% select(region_token, wikidata_qid),
+            by = "region_token", suffix = c("", "_override")) %>%
+  mutate(wikidata_qid = coalesce(wikidata_qid_override, wikidata_qid)) %>%
+  select(-any_of("wikidata_qid_override"))
+
+qids_to_resolve <- region_lookup_for_nesting %>%
+  filter(!is.na(wikidata_qid)) %>%
+  distinct(wikidata_qid) %>%
+  pull(wikidata_qid)
+
+cat("Resolving nesting for", length(qids_to_resolve), "matched places...\n")
+
+# One query per batch resolves both levels at once: the immediate P131
+# parent (candidate admin_region, whatever it turns out to be) and the
+# walked-up-to-country ancestor (country). A batch item's admin_region
+# is only kept if it is NOT itself the country (i.e. the site has a real
+# intermediate level); otherwise left NA rather than duplicating the
+# country value into both columns.
+resolve_nesting_batch <- function(qids) {
+  values_clause <- paste(paste0("wd:", qids), collapse = " ")
+  # Both admin_region and country wrapped in OPTIONAL — some matched
+  # items (islands, ocean regions, and similar) have no P131 ancestor
+  # that is itself a country, and without OPTIONAL here those items
+  # would silently drop out of the result entirely rather than
+  # returning with country = NA, which could shrink the whole batch's
+  # result to zero rows and break the code downstream.
+  q <- sprintf('
+SELECT ?item ?adminLabel ?countryLabel WHERE {
+  VALUES ?item { %s }
+  OPTIONAL { ?item wdt:P131 ?admin . }
+  OPTIONAL {
+    ?item wdt:P131* ?countryCandidate .
+    ?countryCandidate wdt:P31 wd:Q6256 .
+    BIND(?countryCandidate AS ?country)
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}', values_clause)
+  res <- tryCatch(query_wikidata(q), error = function(e) tibble())
+  # Defensive check: an empty or malformed result (no "item" column)
+  # must not reach distinct()/transmute() downstream — return a
+  # correctly-shaped zero-row tibble instead so map_dfr can still bind
+  # it with real batches.
+  if (!"item" %in% names(res)) {
+    return(tibble(item = character(), adminLabel = character(), countryLabel = character()))
+  }
+  res
+}
+
+batch_size <- 20
+qid_batches <- split(qids_to_resolve, ceiling(seq_along(qids_to_resolve) / batch_size))
+
+nesting_results <- map_dfr(seq_along(qid_batches), function(i) {
+  batch <- qid_batches[[i]]
+  cat("  batch", i, "of", length(qid_batches), "...\n")
+  resolve_nesting_batch(batch)
+})
+
+if (nrow(nesting_results) == 0) {
+  cat("No nesting results returned at all — check network access and the query above directly.\n")
+  nesting_lookup <- tibble(wikidata_qid = character(), admin_region = character(), country = character())
+} else {
+  # Wikidata sometimes labels a country item with its formal name
+  # ("Kingdom of Denmark," "Kingdom of the Netherlands") rather than the
+  # common one ("Denmark," "Netherlands") — normalized here, once, at
+  # the source, so every downstream use (this column, super_region
+  # mapping, the country totals chart) sees one consistent value instead
+  # of two country labels for the same real country.
+  country_name_normalize <- c(
+    "Kingdom of Denmark" = "Denmark",
+    "Kingdom of the Netherlands" = "Netherlands",
+    "Kingdom of Sweden" = "Sweden",
+    "Kingdom of Norway" = "Norway",
+    "Republic of Ireland" = "Ireland",
+    "Kingdom of Belgium" = "Belgium"
+  )
+
+  nesting_lookup <- nesting_results %>%
+    distinct(item, .keep_all = TRUE) %>%
+    transmute(
+      wikidata_qid = str_extract(item, "Q[0-9]+$"),
+      admin_region = if_else(is.na(adminLabel) | is.na(countryLabel) | adminLabel == countryLabel,
+                              NA_character_, adminLabel),
+      country = coalesce(country_name_normalize[countryLabel], countryLabel)
+    )
+}
+
+cat("Resolved country for", sum(!is.na(nesting_lookup$country)), "/", length(qids_to_resolve), "matched places\n")
+cat("Resolved a distinct admin_region for", sum(!is.na(nesting_lookup$admin_region)), "of those\n")
+
+# Super-region: hand-authored, not derived from Wikidata — see the
+# rationale above. Extend as more countries show up in country above.
+# Keys are common country names only — formal-name variants (Kingdom of
+# Denmark, Kingdom of the Netherlands, etc.) are already normalized to
+# the common form in country_name_normalize above, before this map is
+# ever consulted.
+super_region_map <- c(
+  "Sweden" = "Scandinavia", "Norway" = "Scandinavia", "Denmark" = "Scandinavia",
+  "Iceland" = "Scandinavia", "Finland" = "Scandinavia", "Greenland" = "Scandinavia",
+  "United Kingdom" = "British Isles", "Ireland" = "British Isles",
+  "Russia" = "Eastern Europe", "Ukraine" = "Eastern Europe",
+  "Poland" = "Eastern Europe", "Lithuania" = "Baltic states",
+  "Latvia" = "Baltic states", "Estonia" = "Baltic states",
+  "Germany" = "Continental Europe", "Netherlands" = "Continental Europe",
+  "Belgium" = "Continental Europe",
+  "France" = "Continental Europe", "Canada" = "North Atlantic"
+)
+
+nesting_lookup <- nesting_lookup %>%
+  mutate(super_region = super_region_map[country])
+
+n_no_super_region <- sum(!is.na(nesting_lookup$country) & is.na(nesting_lookup$super_region))
+if (n_no_super_region > 0) {
+  cat(n_no_super_region, "resolved countries have no super_region mapping yet — add them to",
+      "super_region_map above:\n")
+  nesting_lookup %>% filter(!is.na(country) & is.na(super_region)) %>%
+    distinct(country) %>% print()
+}
+
+region_lookup_nested <- region_lookup_for_nesting %>%
+  left_join(nesting_lookup, by = "wikidata_qid")
+
+write_csv(region_lookup_nested, here("data", "region_lookup.csv"))
+cat("Written data/region_lookup.csv with admin_region, country, super_region columns added:",
+    nrow(region_lookup_nested), "rows\n")
+```
+
+```{r}
+#| label: region-joined
+region_lookup_path <- here("data", "region_lookup.csv")
+
+if (file.exists(region_lookup_path)) {
+  region_lookup <- read_csv(region_lookup_path, show_col_types = FALSE)
+
+  # Manual corrections, found during review: these tokens resolved (via
+  # exact match or search fallback) to a real Wikidata place that shares
+  # the corpus token's name but is a different, wrong place — a same-name
+  # town elsewhere, not the actual site the paper means. Each override
+  # below is a directly verified, real Wikidata QID and coordinate for
+  # what the token actually means in this corpus, checked individually
+  # (not guessed) before being hardcoded — see the region-match/
+  # region-joined commit history for the sourcing on each. Applied here
+  # rather than in region-match above, so fixing or adding a correction
+  # never requires re-running the ~10-minute network match — only
+  # editing this table and re-rendering, which is instant.
+  known_bad_match_overrides <- tibble::tribble(
+    ~region_token,   ~wikidata_qid,  ~normalized_label,          ~lat,      ~lon,       ~place_type,
+    "East Norway",   "Q216065",      "Eastern Norway (Østlandet)", 60.25,   10.67,      "region",
+    "Repton",        "Q1018787",     "Repton",                    52.83983, -1.55061,  "village",
+    "Baltic",        "Q545",         "Baltic Sea",                58,       20,         "sea",
+    "North Norway",  "Q214041",      "Northern Norway",           69.667,   19.0,       "region",
+    "Scotland",      "Q22",          "Scotland",                  56,       -4,         "country",
+    "Masham",        "Q2330678",     "Masham",                    54.22,   -1.656,      "town",
+    "West Sweden",   "Q4992082",     "West Sweden (Västsverige)", 57.558,   12.602,     "region",
+    "East Denmark",  "Q131281582",   "Eastern Denmark (general, administrative region est. 2027)", 55.44, 11.56, "region"
+  )
+
+  region_lookup <- region_lookup %>%
+    left_join(known_bad_match_overrides, by = "region_token", suffix = c("", "_override")) %>%
+    mutate(
+      wikidata_qid = coalesce(wikidata_qid_override, wikidata_qid),
+      normalized_label = coalesce(normalized_label_override, normalized_label),
+      lat = coalesce(lat_override, lat),
+      lon = coalesce(lon_override, lon),
+      place_type = coalesce(place_type_override, place_type),
+      match_method = if_else(!is.na(wikidata_qid_override), "manual_override", match_method)
+    ) %>%
+    select(-ends_with("_override"))
+
+  # The override above only replaces wikidata_qid/lat/lon/place_type —
+  # it does NOT touch admin_region/country/super_region, which (if
+  # region-nesting has already been run) were resolved from the
+  # *original wrong* coordinates and are now stale for these nine
+  # tokens. Left alone, this is exactly the same class of bug already
+  # fixed once for East Norway: a chart reading country directly would
+  # still show the old, wrong value even though lat/lon are now correct.
+  # Cleared here so they read as genuinely unresolved rather than
+  # silently wrong; re-run region-nesting to populate them correctly
+  # from the corrected coordinates if admin_region/country/super_region
+  # values are wanted for these nine.
+  region_lookup <- region_lookup %>%
+    mutate(across(any_of(c("admin_region", "country", "super_region")),
+                  ~ if_else(region_token %in% known_bad_match_overrides$region_token, NA, .)))
+
+  # "East Baltic" is a genuine exception: its Wikidata entry (Q5327781)
+  # is a disambiguation page, not a single resolvable place (it covers
+  # the eastern Baltic region generally, East Baltic languages, and a
+  # historical race classification, with no one coordinate that honestly
+  # represents all three) — moved to macro_region_terms below instead of
+  # given a fabricated single point.
+
+  # Macro-region terms: "Scandinavia," "North Atlantic," "Viking world,"
+  # "South Scandinavia," "East Baltic" (see note above), and similar will
+  # not resolve to a single sensible coordinate regardless of gazetteer —
+  # they describe a broad area or a genuinely ambiguous concept, not a
+  # point. Flagged here, also for the same instant-edit reason above,
+  # rather than force-matched to a single Wikidata item with a
+  # misleading coordinate. Extend this list after reviewing
+  # region_lookup_needs_review.csv.
+  macro_region_terms <- c(
+    "Scandinavia", "South Scandinavia", "North Atlantic", "North Europe",
+    "Northwest Europe", "East Europe", "Viking world", "British Isles",
+    "Scandinavian diaspora", "the North", "Arctic Canada", "Arctic Norway",
+    "Central East Europe", "Central East Sweden", "East Arctic",
+    "Middle Sweden", "North Norway and Sweden", "North Scandinavia",
+    "Northwest Slavic area", "Norway and Sweden", "Sami areas",
+    "Southeast Norway", "Southwest Norway", "Southwest Sweden",
+    "West Scandinavia", "West-Balts", "East Baltic"
+  )
+
+  region_lookup <- region_lookup %>%
+    mutate(is_macro_region = region_token %in% macro_region_terms)
+
+  # East Baltic must also be cleared of any coordinate it may carry from
+  # the raw match, now that it's flagged macro-region — the flag alone
+  # only excludes it from the point map, but a leftover coordinate would
+  # still count toward country/super_region rollups, which is exactly
+  # the same category of error the manual overrides above exist to fix.
+  region_lookup <- region_lookup %>%
+    mutate(across(any_of(c("wikidata_qid", "normalized_label", "lat", "lon", "place_type",
+                            "admin_region", "country", "super_region")),
+                  ~ if_else(region_token == "East Baltic", NA, .)),
+           match_method = if_else(region_token == "East Baltic", "no_match", match_method))
+
+  region_df <- region_tokens %>%
+    left_join(region_lookup, by = c("Region_normalized" = "region_token"))
+} else {
+  cat("data/region_lookup.csv not found yet — run region-match (eval: true) first.\n")
+}
+```
+
+Once `region_lookup.csv` exists, the resulting `region_df` joins region to
+gender, topic, method, source, and year the same way those variables
+already join to each other elsewhere in this document — by `cite_key`,
+using the same Wilson-interval and by-year machinery.
+
+### Where the corpus is set
+
+Most of the real signal in Region is simply where papers are concentrated
+geographically — a stacked gender-composition bar chart like the ones
+used for Topic, Method, and Source needs several well-populated
+categories to say anything real, and Region has one (Birka, 20 papers)
+with a steep drop to a long tail of 1-3-paper tokens, so that chart type
+doesn't suit this variable the way it suits the others. Two more direct
+views instead: where the named, point-matched places actually are, and
+how concentrated the corpus really is by raw count.
+
+**What the map includes.** A region token appears as a point only if it
+has a real matched coordinate, is not a macro-region term (Scandinavia,
+Viking world, East Baltic, and the rest of that list — excluded even
+when Wikidata does return a coordinate for the concept, since a single
+point can't honestly represent an area that broad), and falls within a
+fixed plotting bounding box (lat 25-80, lon -60 to 100) that excludes a
+couple of real but geographically irrelevant matches (Oceania, Pacific
+Ocean) which would otherwise force the whole map out to a global scale.
+Dot size is the number of papers carrying that exact region token — 20
+papers all tagged "Birka" produce one dot sized 20, not 20 separate
+dots. The map's crop is computed from the real spread of whatever points
+pass all three filters, with a fixed margin, so it always fits what's
+actually shown rather than a hardcoded guess.
+
+```{r}
+#| label: region-map
+#| fig-cap: >
+#|   Named places mentioned in the corpus, sized by number of papers.
+#|   Macro-region terms (Scandinavia, Viking world, and similar) are
+#|   excluded even when Wikidata returns a coordinate for them, since a
+#|   single point cannot honestly represent an area that broad — see the
+#|   totals chart below for those. Cropped to the real spread of the
+#|   remaining matched coordinates with a margin; a handful of correct
+#|   but far-flung matches (e.g. Oceania, Pacific Ocean — real tokens in
+#|   the corpus, real Wikidata matches) fall outside this crop and are
+#|   not shown on the map.
+#| fig-width: 11
+#| fig-height: 8
+if (!requireNamespace("rnaturalearth", quietly = TRUE)) {
+  install.packages("rnaturalearth", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("rnaturalearthdata", quietly = TRUE)) {
+  install.packages("rnaturalearthdata", repos = "https://cloud.r-project.org")
+}
+library(rnaturalearth)
+
+# is_macro_region must be excluded explicitly here — some macro-region
+# terms (Scandinavia among them) DO get a real Wikidata coordinate (the
+# country/concept item has one), but a single point still cannot
+# honestly represent an area that broad, which is the whole reason
+# these terms were flagged as macro-region in the first place. Filtering
+# only on !is.na(lat) is not enough; that flag has to be checked too.
+region_points <- region_df %>%
+  filter(!is.na(lat), !is.na(lon), !is_macro_region) %>%
+  count(region = Region_normalized, lat, lon, name = "n_papers")
+
+# A handful of matches are real but far outside the North Atlantic/
+# European scope this corpus is actually about (Oceania, Pacific Ocean —
+# genuine tokens, genuine Wikidata matches, just not relevant to a map of
+# this corpus's geography). Excluded from the crop calculation so they
+# don't force the whole map out to a near-global scale; still excluded
+# from the plotted points themselves for the same reason.
+region_points_mapped <- region_points %>%
+  filter(lat >= 25, lat <= 80, lon >= -60, lon <= 100)
+
+map_margin <- 8
+map_xlim <- c(min(region_points_mapped$lon) - map_margin, max(region_points_mapped$lon) + map_margin)
+map_ylim <- c(min(region_points_mapped$lat) - map_margin, max(region_points_mapped$lat) + map_margin)
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+ggplot() +
+  geom_sf(data = world, fill = "grey95", colour = "grey80", linewidth = 0.2) +
+  geom_point(data = region_points_mapped, aes(x = lon, y = lat, size = n_papers),
+             colour = "#bf616a", alpha = 0.7) +
+  coord_sf(xlim = map_xlim, ylim = map_ylim, expand = FALSE) +
+  scale_size_continuous(range = c(1.5, 10), name = "papers") +
+  theme_bw() +
+  labs(x = NULL, y = NULL)
+```
+
+```{r}
+#| label: region-totals
+#| fig-cap: >
+#|   Every region token with at least 3 tagged papers, point-matched
+#|   places and macro-region terms together, ranked by raw count.
+#| fig-width: 9
+#| fig-height: 8
+region_totals <- region_tokens %>%
+  count(region = Region_normalized, sort = TRUE) %>%
+  filter(n >= 3)
+
+ggplot(region_totals, aes(x = fct_reorder(region, n), y = n)) +
+  geom_col(fill = "#bf616a") +
+  geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
+  coord_flip() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+  theme_bw() +
+  labs(x = "", y = "Papers")
+```
+
+**By country (optional, requires country nesting).** The chart above
+keeps every region token flat, "Birka" and "Sweden" and "Scandinavia"
+are three separate bars even though Birka is in Sweden — deliberately,
+since the paper's own choice of a site-level or country-level term is
+itself part of what the data says, not noise to collapse away. This
+alternate view rolls site-level tags up to the country they're actually
+in, using the `country` column added by the region-nesting chunk above
+(only present once that chunk has been run). A paper tagged "Birka"
+counts toward Sweden here even if it was never separately tagged
+"Sweden." Macro-region terms (Scandinavia, Viking world) still have no
+single country and are excluded from this view.
+
+```{r}
+#| label: region-totals-by-country
+#| fig-cap: "Papers per country, site-level tags rolled up to their containing country."
+#| fig-width: 9
+#| fig-height: 6
+# Check for actual data, not just column presence — a prior failed or
+# empty region-nesting run can leave a "country" column that exists but
+# is entirely NA, which would otherwise reach fct_reorder() on an empty
+# vector and crash rather than print a useful message.
+has_country_data <- "country" %in% names(region_df) && any(!is.na(region_df$country))
+
+if (has_country_data) {
+  region_country_totals <- region_df %>%
+    filter(!is.na(country)) %>%
+    distinct(cite_key, country) %>%
+    count(country, sort = TRUE)
+
+  ggplot(region_country_totals, aes(x = fct_reorder(country, n), y = n)) +
+    geom_col(fill = "#5e81ac") +
+    geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
+    coord_flip() +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+    theme_bw() +
+    labs(x = "", y = "Papers")
+} else if ("country" %in% names(region_df)) {
+  cat("country column exists but has no non-NA values — region-nesting ran",
+      "but returned nothing. Check network access and the query directly.\n")
+} else {
+  cat("No country column yet — run region-nesting (eval: true) first.\n")
+}
+```
+
+### Topic, method, and source by region
+
+Same problem as gender composition above: most region tokens have too
+few papers to support a per-region proportion chart. Enrichment solves
+this differently — restricted to regions with at least 5 tagged papers,
+each cell shows that region's coverage of a topic/method/source divided
+by that category's own rate across the whole corpus (1.0x = corpus
+average), the same measure already used for cluster structure in Part 3.
+A region's low paper count still means less certainty behind its cells,
+but enrichment at least says something real about *direction* even on a
+modest sample, where a stacked-proportion chart on the same sample would
+mostly just show noise. All three heatmaps below share the same region
+row order, so a region's profile can be compared directly across tabs.
+
+::: {.panel-tabset}
+
+#### Topic
+
+```{r}
+#| label: region-topic-enrichment
+#| fig-cap: >
+#|   Topic enrichment by region (regions with 5+ tagged papers only).
+#|   White = topic at corpus average rate for that region; blue = above
+#|   average; red = below. Cell shows raw count behind the percentage.
+#|   Capped at 3x so a handful of extreme small-n ratios don't wash out
+#|   the rest of the scale.
+#| fig-width: 11
+#| fig-height: 9
+region_n_papers <- region_tokens %>%
+  distinct(cite_key, region = Region_normalized) %>%
+  count(region, name = "n_region_papers") %>%
+  filter(n_region_papers >= 5)
+
+# Fixed row order, computed once and shared across all three heatmaps
+# below, so the same region always sits at the same row whether looking
+# at topic, method, or source — the whole point of putting these in one
+# tabset is comparing a region's profile across the three, and that only
+# works if the rows don't silently reorder between tabs (fct_reorder on
+# each chart's own filtered subset can do exactly that if a region has
+# zero rows in one category but not another). Labels carry the paper
+# count behind each row's percentages directly — n_region_papers IS
+# the full count here (unlike the GN cluster heatmaps in Part 3, a
+# region has no separate "true size" beyond its own tagged-paper count,
+# so there is no annotated-vs-true-size gap to show).
+region_order_df <- region_n_papers %>% arrange(n_region_papers) %>%
+  mutate(region_label = paste0(region, " (n=", n_region_papers, ")"))
+region_order <- region_order_df$region_label
+region_label_lookup <- setNames(region_order_df$region_label, region_order_df$region)
+
+region_topic <- region_tokens %>%
+  select(cite_key, region = Region_normalized) %>%
+  left_join(
+    df %>% select(cite_key, contains("Topics")) %>%
+      pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+      filter(!is.na(count)) %>%
+      mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
+    by = "cite_key"
+  ) %>%
+  filter(!is.na(topic))
+
+region_topic_enrichment <- region_topic %>%
+  filter(region %in% region_n_papers$region) %>%
+  distinct(cite_key, region, topic) %>%
+  count(region, topic, name = "n") %>%
+  left_join(region_n_papers, by = "region") %>%
+  left_join(topic_corpus_rate, by = "topic") %>%
+  mutate(prop = n / n_region_papers, enrichment = prop / corpus_rate,
+         region = factor(region_label_lookup[region], levels = region_order)) %>%
+  # Drop topics with no coverage in any of the shown regions, so the
+  # chart doesn't carry empty columns for categories nobody here was
+  # coded with — same as the cluster-vs-topic heatmap in Part 3.
+  group_by(topic) %>%
+  filter(sum(n) > 0) %>%
+  ungroup()
+
+region_topic_heatmap <- ggplot(region_topic_enrichment, aes(x = topic, y = region, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 2.8) +
+  # Diverging scale capped at 3x, same as the cluster-vs-topic heatmap in
+  # Part 3 — a handful of extreme small-n ratios would otherwise wash
+  # out the rest of the scale.
+  scale_fill_gradient2(low = "#bf616a", mid = "white", high = "#5e81ac", midpoint = 1,
+                        limits = c(0, 3), oob = scales::squish,
+                        name = "Enrichment", labels = scales::label_number(suffix = "x")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "", y = "")
+region_topic_heatmap
+```
+
+#### Method
+
+```{r}
+#| label: region-method-enrichment
+#| fig-cap: >
+#|   Method enrichment by region (regions with 5+ tagged papers only).
+#|   Same reading as the topic heatmap above.
+#| fig-width: 11
+#| fig-height: 9
+region_method <- region_tokens %>%
+  select(cite_key, region = Region_normalized) %>%
+  left_join(
+    df %>% select(cite_key, contains("Methods")) %>%
+      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+      filter(!is.na(count)) %>%
+      mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
+    by = "cite_key"
+  ) %>%
+  filter(!is.na(method))
+
+region_method_enrichment <- region_method %>%
+  filter(region %in% region_n_papers$region) %>%
+  distinct(cite_key, region, method) %>%
+  count(region, method, name = "n") %>%
+  left_join(region_n_papers, by = "region") %>%
+  left_join(method_corpus_rate, by = "method") %>%
+  mutate(prop = n / n_region_papers, enrichment = prop / corpus_rate,
+         region = factor(region_label_lookup[region], levels = region_order)) %>%
+  group_by(method) %>%
+  filter(sum(n) > 0) %>%
+  ungroup()
+
+region_method_heatmap <- ggplot(region_method_enrichment, aes(x = method, y = region, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 2.8) +
+  scale_fill_gradient2(low = "#bf616a", mid = "white", high = "#5e81ac", midpoint = 1,
+                        limits = c(0, 3), oob = scales::squish,
+                        name = "Enrichment", labels = scales::label_number(suffix = "x")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "", y = "")
+region_method_heatmap
+```
+
+#### Source of evidence
+
+```{r}
+#| label: region-source-enrichment
+#| fig-cap: >
+#|   Source-of-evidence enrichment by region (regions with 5+ tagged
+#|   papers only). Same reading as the topic heatmap above.
+#| fig-width: 11
+#| fig-height: 9
+region_source <- region_tokens %>%
+  select(cite_key, region = Region_normalized) %>%
+  left_join(
+    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
+      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+      filter(!is.na(count)) %>%
+      mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
+    by = "cite_key"
+  ) %>%
+  filter(!is.na(source))
+
+region_source_enrichment <- region_source %>%
+  filter(region %in% region_n_papers$region) %>%
+  distinct(cite_key, region, source) %>%
+  count(region, source, name = "n") %>%
+  left_join(region_n_papers, by = "region") %>%
+  left_join(source_corpus_rate, by = "source") %>%
+  mutate(prop = n / n_region_papers, enrichment = prop / corpus_rate,
+         region = factor(region_label_lookup[region], levels = region_order)) %>%
+  group_by(source) %>%
+  filter(sum(n) > 0) %>%
+  ungroup()
+
+region_source_heatmap <- ggplot(region_source_enrichment, aes(x = source, y = region, fill = enrichment)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n), size = 2.8) +
+  scale_fill_gradient2(low = "#bf616a", mid = "white", high = "#5e81ac", midpoint = 1,
+                        limits = c(0, 3), oob = scales::squish,
+                        name = "Enrichment", labels = scales::label_number(suffix = "x")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "", y = "")
+region_source_heatmap
+```
+
+:::
+
+### Topic, method, and source by administrative level
+
+The tabset above groups by the raw region token as written in each
+paper, "Birka" and "Sweden" stay separate rows even though one is inside
+the other. This section repeats the same topic/method/source enrichment
+analysis, but grouped at each of the three nesting levels resolved by
+the region-nesting chunk above instead: admin region, country, and
+super-region. Requires that chunk to have been run at least once — each
+tab below checks for its column and explains what to do if it's missing.
+
+The enrichment baseline here is different from the tabset above, on
+purpose: each cell compares a group's rate against the rate among only
+the papers that resolved to *some* value at that nesting level, not
+against the whole 369-paper F1 corpus. The flat-token tabset above uses
+the whole-corpus rate, since every F1 paper is a fair comparison point
+for a raw region tag. Nesting-level resolution is a narrower subset
+(only papers whose region successfully resolved up to a country, say),
+so comparing against the whole corpus would dilute the baseline with
+papers that never entered this analysis at all and understate real
+enrichment within the resolved set. Enrichment numbers are therefore not
+directly comparable between the two tabsets, even when they group the
+same underlying papers.
+
+```{r}
+#| label: region-nesting-heatmap-fn
+# One reusable function instead of writing the topic/method/source
+# enrichment logic three more times per nesting level — takes the
+# grouping column name as a parameter and returns the three heatmaps
+# (or a message) for that level.
+make_nesting_heatmaps <- function(group_col, min_papers = 5) {
+  if (!group_col %in% names(region_df)) {
+    cat("No", group_col, "column yet — run region-nesting (eval: true) first.\n")
+    return(invisible(NULL))
+  }
+
+  nested <- region_df %>%
+    filter(!is.na(.data[[group_col]])) %>%
+    rename(group = all_of(group_col))
+
+  n_nested_papers <- n_distinct(nested$cite_key)
+
+  group_n_papers <- nested %>%
+    distinct(cite_key, group) %>%
+    count(group, name = "n_group_papers") %>%
+    filter(n_group_papers >= min_papers)
+
+  if (nrow(group_n_papers) == 0) {
+    cat("No", group_col, "value has at least", min_papers, "tagged papers — nothing to show.\n")
+    return(invisible(NULL))
+  }
+
+  group_order_df <- group_n_papers %>% arrange(n_group_papers) %>%
+    mutate(group_label = paste0(group, " (n=", n_group_papers, ")"))
+  group_order <- group_order_df$group_label
+  group_label_lookup <- setNames(group_order_df$group_label, group_order_df$group)
+
+  # Baseline for enrichment here is the rate among papers that actually
+  # have a value for this nesting level (n_nested_papers), not the whole
+  # 369-paper F1 corpus. The whole-corpus rate mixes in papers with no
+  # region tag at all, or a region tag that never resolved to this
+  # nesting level, which would understate enrichment for anything
+  # genuinely concentrated within the resolved subset. long_df is
+  # already restricted to nested's cite_keys by the caller, so the rate
+  # only needs recomputing against n_nested_papers, not whole-corpus
+  # corpus_rate_df.
+  make_one <- function(long_df, category_col, fill_label) {
+    category_rate <- long_df %>%
+      distinct(cite_key, .data[[category_col]]) %>%
+      count(.data[[category_col]], name = "n_subset_corpus") %>%
+      mutate(subset_corpus_rate = n_subset_corpus / n_nested_papers)
+
+    enrichment <- long_df %>%
+      filter(group %in% group_n_papers$group) %>%
+      distinct(cite_key, group, .data[[category_col]]) %>%
+      count(group, .data[[category_col]], name = "n") %>%
+      left_join(group_n_papers, by = "group") %>%
+      left_join(category_rate, by = category_col) %>%
+      mutate(prop = n / n_group_papers, enrichment = prop / subset_corpus_rate,
+             group = factor(group_label_lookup[group], levels = group_order)) %>%
+      group_by(.data[[category_col]]) %>%
+      filter(sum(n) > 0) %>%
+      ungroup()
+
+    ggplot(enrichment, aes(x = .data[[category_col]], y = group, fill = enrichment)) +
+      geom_tile(colour = "white") +
+      geom_text(aes(label = n), size = 2.8) +
+      scale_fill_gradient2(low = "#bf616a", mid = "white", high = "#5e81ac", midpoint = 1,
+                            limits = c(0, 3), oob = scales::squish,
+                            name = "Enrichment", labels = scales::label_number(suffix = "x")) +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      labs(x = "", y = "", title = fill_label)
+  }
+
+  topic_long <- nested %>%
+    select(cite_key, group) %>%
+    left_join(
+      df %>% select(cite_key, contains("Topics")) %>%
+        pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+        filter(!is.na(count)) %>%
+        mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
+      by = "cite_key"
+    ) %>% filter(!is.na(topic))
+
+  method_long <- nested %>%
+    select(cite_key, group) %>%
+    left_join(
+      df %>% select(cite_key, contains("Methods")) %>%
+        pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+        filter(!is.na(count)) %>%
+        mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
+      by = "cite_key"
+    ) %>% filter(!is.na(method))
+
+  source_long <- nested %>%
+    select(cite_key, group) %>%
+    left_join(
+      df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
+        pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+        filter(!is.na(count)) %>%
+        mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
+      by = "cite_key"
+    ) %>% filter(!is.na(source))
+
+  list(
+    topic = make_one(topic_long, "topic", paste(group_col, "x topic")),
+    method = make_one(method_long, "method", paste(group_col, "x method")),
+    source = make_one(source_long, "source", paste(group_col, "x source"))
+  )
+}
+```
+
+::: {.panel-tabset}
+
+#### By admin region
+
+```{r}
+#| label: region-nesting-admin
+#| fig-width: 11
+#| fig-height: 9
+h <- make_nesting_heatmaps("admin_region")
+if (!is.null(h)) h$topic
+```
+
+```{r}
+#| label: region-nesting-admin-method
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$method
+```
+
+```{r}
+#| label: region-nesting-admin-source
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$source
+```
+
+#### By country
+
+```{r}
+#| label: region-nesting-country
+#| fig-width: 11
+#| fig-height: 9
+h <- make_nesting_heatmaps("country")
+if (!is.null(h)) h$topic
+```
+
+```{r}
+#| label: region-nesting-country-method
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$method
+```
+
+```{r}
+#| label: region-nesting-country-source
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$source
+```
+
+#### By super-region
+
+```{r}
+#| label: region-nesting-superregion
+#| fig-width: 11
+#| fig-height: 9
+h <- make_nesting_heatmaps("super_region")
+if (!is.null(h)) h$topic
+```
+
+```{r}
+#| label: region-nesting-superregion-method
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$method
+```
+
+```{r}
+#| label: region-nesting-superregion-source
+#| fig-width: 11
+#| fig-height: 9
+if (!is.null(h)) h$source
+```
+
+:::
+
+### Change over time
+
+Does the corpus's geographic focus shift across the years covered, more
+Iceland/Greenland work recently versus more mainland Scandinavia
+earlier, or the reverse? Same problem as the other region breakdowns:
+most tokens have too few papers spread across too many years to support
+a real per-year trend. Restricted to regions with at least 8 tagged
+papers (a higher bar than the 5-paper threshold used for the
+topic/method/source heatmaps above, since splitting an already-small
+group by year further thins each cell), using the same Wilson-interval
+and enrichment machinery already defined for Topic, Method, and Source.
+
+```{r}
+#| label: region-over-time-setup
+region_min_shown_year <- 8
+
+region_n_papers_year_eligible <- region_tokens %>%
+  distinct(cite_key, region = Region_normalized) %>%
+  count(region, name = "n_region_papers") %>%
+  filter(n_region_papers >= region_min_shown_year)
+
+region_long_with_key <- region_tokens %>%
+  select(cite_key, region = Region_normalized) %>%
+  filter(region %in% region_n_papers_year_eligible$region) %>%
+  left_join(df %>% select(cite_key, publication_year), by = "cite_key")
+
+region_corpus_rate <- region_long_with_key %>%
+  distinct(cite_key, region) %>%
+  count(region, name = "n_corpus") %>%
+  mutate(corpus_rate = n_corpus / n_total_papers)
+
+region_year_wilson <- region_long_with_key %>%
+  distinct(cite_key, publication_year, region) %>%
+  count(publication_year, region, name = "n") %>%
+  complete(publication_year, region, fill = list(n = 0)) %>%
+  left_join(n_per_year, by = "publication_year") %>%
+  left_join(region_corpus_rate, by = "region") %>%
+  mutate(
+    prop = n / n_papers_year,
+    enrichment = prop / corpus_rate,
+    ci_lower = wilson_lower_bound(n, n_papers_year),
+    ci_upper = wilson_upper_bound(n, n_papers_year),
+    ci_width = ci_upper - ci_lower
+  ) %>%
+  arrange(region, publication_year)
+```
+
+```{r}
+#| label: region-over-time-count
+#| fig-cap: >
+#|   Papers per year, per region (regions with 8+ tagged papers only).
+#|   Faint bars: few papers that year.
+#| fig-width: 11
+#| fig-height: 7
+ggplot(region_year_wilson, aes(x = publication_year, y = n, alpha = -ci_width)) +
+  geom_col(fill = "#bf616a") +
+  facet_wrap(~ region, ncol = 4) +
+  scale_alpha_continuous(range = c(0.25, 1), guide = "none") +
+  labs(x = "", y = "Papers published that year", title = "Count") +
+  theme_bw() +
+  theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
+        plot.title = element_text(size = 11))
+```
+
+```{r}
+#| label: region-over-time-enrichment
+#| fig-cap: >
+#|   Enrichment per year, per region (regions with 8+ tagged papers
+#|   only) — that year's coverage of the region, divided by the region's
+#|   own average coverage across the whole corpus (1.0x, dashed line =
+#|   normal). Faint bars: few papers that year.
+#| fig-width: 11
+#| fig-height: 7
+ggplot(region_year_wilson, aes(x = publication_year, y = enrichment, alpha = -ci_width)) +
+  geom_col(fill = "#bf616a") +
+  geom_hline(yintercept = 1, linetype = "dashed", colour = "grey40", linewidth = 0.3) +
+  facet_wrap(~ region, ncol = 4) +
+  scale_alpha_continuous(range = c(0.25, 1), guide = "none") +
+  coord_cartesian(ylim = c(0, 4)) +
+  labs(x = "", y = "Enrichment vs. this region's own corpus-wide rate", title = "Enrichment") +
+  theme_bw() +
+  theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
+        plot.title = element_text(size = 11))
+```
+
 ## Not yet done
 
 ### Gender
@@ -1628,9 +2973,10 @@ ggplot(region_counts, aes(label = Region, size = n_scaled, color = n)) +
 - Word cloud from the free-text Region field, no normalization —
   spelling variants and different specificity levels for the same
   place count as distinct.
-- Semantic similarity matching against a reference gazetteer (e.g.
-  Pleiades, https://pleiades.stoa.us) could consolidate variant place
-  names and add coordinates for a map. Not started.
+- Wikidata matching chunks are written (see the Region section above)
+  but default to `eval: false`; the coverage probe has not yet been run
+  to confirm hit rate before committing to the full match, and
+  `data/region_lookup.csv` does not yet exist.
 
 ### Other
 
