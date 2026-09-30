@@ -116351,3 +116351,93 @@
   - skorokhod2020
   note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
     resolution data, after the entry was restored from an incorrect earlier deletion.
+- action: set
+  citekey: andren2002b
+  field: cited_by
+  value:
+  - lund2021
+  note: Andren 2002, Platsernas betydelse - exact match confirmed in seed text.
+- action: set
+  citekey: myrberg2009a
+  field: cited_by
+  value:
+  - lund2021
+  note: Myrberg 2009a, The hoarded dead - exact match confirmed in seed text.
+- action: set
+  citekey: williams2014a
+  field: cited_by
+  value:
+  - lund2021
+  note: Williams H. 2014, Memory through monuments - exact match confirmed in seed
+    text.
+- action: set
+  citekey: price2018d
+  field: cited_by
+  value:
+  - lund2021
+  note: Price 2018a, Distant Vikings - exact match confirmed in seed text.
+- action: set
+  citekey: price2018a
+  field: cited_by
+  value:
+  - lund2021
+  note: Price 2018b, Viking phenomena - exact match confirmed in seed text.
+- action: set
+  citekey: price2018b
+  field: cited_by
+  value:
+  - lund2021
+  note: Price, Arcini, Gustin, Drenzel, Kalmring 2018, Isotopes and human burials
+    - exact match confirmed in seed text.
+- action: merge
+  keep: skre2017
+  discard: skre2017a
+  note: Duplicate of skre2017 - Skre 2017a, Monetary practices, exact match confirmed
+    in seed text.
+- action: set
+  citekey: christensen2012
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: set
+  citekey: engberg2002
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: set
+  citekey: rieck1992
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: set
+  citekey: sigurdsson2012
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: set
+  citekey: skre2005
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: set
+  citekey: soderberg1966
+  field: cited_by
+  value:
+  - pedersen2019
+  note: Redirecting citer ravn2019 to pedersen2019 ahead of merge, preserving real
+    outgoing-citation data.
+- action: merge
+  keep: pedersen2019
+  discard: ravn2019
+  note: Duplicate of pedersen2019 - same paper (Erritso excavation report), confirmed
+    via exact match to seed text. Outgoing edges redirected above before this merge.
