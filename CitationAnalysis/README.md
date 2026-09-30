@@ -56,9 +56,7 @@ python run.py --coverage --email you@uni.edu  # Coverage + OA lookup
 
 Edit `config.yaml` to set paths to your seed paper and F1 PDF directory.
 
-## Graceful cancellation
-
-Press Ctrl-C during any long-running stage. The current bibliography state is saved to `output/_partial_bibliography.json` so no work is lost.
+**Graceful cancellation:** Press Ctrl-C during any long-running stage. The current bibliography state is saved to `output/_partial_bibliography.json` so no work is lost.
 
 ## Output
 
