@@ -185,6 +185,39 @@ internal reference IDs (e.g. `"b42"`) to the citekeys assigned during graph
 construction. Used by `context_extractor.py` to resolve `{{CITE:b42}}`
 placeholders back to citekeys when extracting citation contexts.
 
+### `_graph_state.json` can drift from the committed `bibliography.json`
+
+`--postprocess` rebuilds `bibliography.json` from `_graph_state.json`,
+not from git — the working `_graph_state.json` on the cluster is the real
+source of truth for what the next run produces, and the committed
+`data/bibliography.json` is only a snapshot of one run's output. If the two
+fall out of sync (an interrupted run, a manual edit to one file but not the
+other), the next `--postprocess` will silently reproduce whatever
+`_graph_state.json` actually has — including reverting a fix that's already
+committed and looks correct in git, with no warning that this happened.
+
+Observed 2026-09-22: a single entry's title had reverted to its pre-fix
+garbage value after an unrelated `--postprocess` run; checking found
+`_graph_state.json`'s `bibliography` key had 511 title mismatches against
+the committed export, not just the one noticed. The exact triggering run
+was not confirmed, but an interrupted `--iterate-f1` attempt (Ctrl+C during
+GROBID processing) is the leading suspect. Recovered by overwriting
+`_graph_state.json["bibliography"]` wholesale with `git show
+HEAD:data/bibliography.json`, after confirming the citekey sets matched
+exactly (nothing added or lost in the swap). Before trusting a
+`--postprocess` run's output for anything consequential, a quick title
+comparison between the two files catches this:
+
+```python
+import json
+committed = json.load(open("data/bibliography.json"))
+state = json.load(open(".../_graph_state.json"))["bibliography"]
+mismatches = sum(1 for k, e in committed.items()
+                  if state.get(k, {}).get("title") != e.get("title"))
+```
+
+See the Decision_log entry for 2026-09-22 for the full incident.
+
 ---
 
 ## What is not captured

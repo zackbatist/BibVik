@@ -2016,3 +2016,101 @@ genuinely unparseable fragments).
 **Status:** fixed and tested locally against synthetic cases; not yet
 deployed to the cluster or run against real data.
 
+
+## 2026-09-22 — delete/merge/rename left dangling cited_by edges; create action added; 370/370 annotated papers reconciled
+
+**Bug found:** `delete` and `merge` never cleared `cited_by` on the
+entry they removed, so a deleted or discarded citekey could still
+carry live citer references — a "ghost node" with outgoing-looking
+edges in every graph export. `_rename_citekey`'s reference-remap loop
+had a related issue: it ran even when the entry being renamed was
+`_deleted`, which could resurrect a citation edge that an earlier
+`delete` had deliberately cleared. Audit across the full corpus found
+**1,813 deleted entries with a non-empty `cited_by`**, two of them
+structurally significant (`smith2020`: 96 citers, `unesco2019`: 44).
+
+**Fix:** three corrections.py patches — `delete` and `merge` now set
+`cited_by: []` on the removed entry; `_rename_citekey`'s remap loop is
+skipped when the entry is `_deleted`. Retroactive cleanup (a mix of
+targeted `set` corrections and rerunning `--postprocess`, since the
+delete/merge fix reapplies on every full corrections replay) took the
+corpus-wide count from 1,813 to 0.
+
+**New `create` action added to corrections.py.** No existing action
+could add a brand-new bibliography entry; `set`/`merge`/`delete`/
+`rename`/`split` all require the target citekey to already exist.
+`create` takes `citekey` and `entry` (a full field dict), refuses to
+overwrite an existing citekey, and requires title/author/year present
+before writing — same completeness bar the rest of the pipeline
+enforces. Used tonight to add 5 F1 papers whose PDFs were processed
+(their reference lists exist as F2 entries citing back to them) but
+whose own self-entry was never created, because GROBID returned no
+usable date from their headers and `_is_reconstructible()` blocks an
+entry with no year.
+
+**370/370 papers in annotations.csv now resolve to a real
+bibliography entry** (up from 249 apparent matches at the start of
+this pass). The gap broke down as: ~50 suffix/hyphen-normalization
+drift (annotations.csv citekey vs. the pipeline's current
+disambiguation suffix), 4 partial-compound-surname mismatches
+(annotations.csv used only the second half of a compound surname —
+same root cause as the ahfeldt2013/kitzlerahfeldt2013 case below), 27
+F1 papers with a missing publication year producing an `nd` citekey
+(source PDF header parse failed; year recovered from the source PDF's
+own filename, which proved reliable in every case checked), 4 more
+F1 papers with a wrong year (GROBID extracted a date one year early,
+in one case from the paper's own DOI rather than its publication
+date), and 5 papers never given a self-entry at all — 4 recovered via
+`create` using their own already-extracted header data plus a
+filename- or externally-confirmed year, and the 5th
+(`lia2004`) had no PDF in the seed corpus at all; the person located
+and added the PDF, which then extracted cleanly through the normal
+`--iterate-f1` path.
+
+**Citations for the 5 `create`d papers were not automatically
+reconnected.** `create` writes the paper's own metadata but nothing
+retroactively adds it as a citer to whatever it cites — that
+data exists in `_graph_state.json`'s `processed_papers[pdf].
+grobid_id_to_citekey` map (built when the PDF was processed) but is
+never read again after that run. Reconnected manually: for each of
+the 5, cross-referenced its `grobid_id_to_citekey` map against live
+bibliography entries and added a `set cited_by` correction for each
+real target (172 edges across 4 papers with a processed PDF; 4 more
+once lia2004 was added). This surfaced a second, independent issue —
+see below.
+
+**`_graph_state.json` can silently diverge from the committed,
+exported `bibliography.json`.** Mid-session, `hayeursmith2018a`
+(fixed earlier the same night — correct title, cited_by restored)
+reverted to its pre-fix garbage state (title = the journal name, not
+the paper title) after an unrelated `--postprocess` run. Root cause:
+`_graph_state.json`'s own `bibliography` key had silently fallen out
+of sync with the committed `data/bibliography.json` at some earlier
+point this session (511 title mismatches found on a full comparison,
+not just this one entry) — `--postprocess` rebuilds from
+`_graph_state.json`, not from git, so a stale state file will
+silently undo prior fixes on the next run even though the
+git-committed export still looks correct. Recovered by overwriting
+`_graph_state.json["bibliography"]` wholesale with the git-committed
+version (`git show HEAD:data/bibliography.json`) rather than patching
+entry-by-entry — confirmed zero citekeys lost or added in that
+swap before trusting it. **Not yet root-caused**: which specific
+run or interruption caused the divergence; the interrupted
+`--iterate-f1` attempt (Ctrl+C during GROBID processing, before
+Ollama was running) is the leading suspect but wasn't confirmed.
+
+**Not yet done:** GN/multi-cut/dendrogram/cluster-labelling is stale
+relative to tonight's final corpus (edge count moved from the last
+labelled run's base by several hundred across all these fixes) — a
+fresh run was started at 2026-09-22 13:40 against
+`data/citation_edgelist_annotated.csv`, not yet complete as of this
+entry. 81 of 370 annotated papers have zero outgoing citations in the
+current graph but are confirmed correctly processed — they simply
+don't cite anything else within the 370-paper annotated set, which
+appears to be a genuine finding about the corpus rather than a
+pipeline gap.
+
+**Status:** all fixes applied and verified on the cluster;
+`corrections.py` patches, `corrections.yaml` entries, and regenerated
+`data/` exports committed and pushed across the session's commits
+(ending at `d2476bc`).

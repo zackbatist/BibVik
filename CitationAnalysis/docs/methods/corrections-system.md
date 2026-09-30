@@ -122,6 +122,49 @@ citation edge. Fields other than `citekey` and `citers` on an `into` item
 (e.g. `author`, `title`) are set on the target entry, whether it's newly
 created or already exists.
 
+### create
+
+An F1 paper's PDF was processed — its reference list exists as F2 entries
+whose `_source_pdf` names it — but no bibliography node for the paper
+itself exists, because `_is_reconstructible()` requires title, author,
+and year, and one of those was never successfully extracted (most often
+year: GROBID returned no usable date from the header). Unlike the
+title-mismatch incident below, where both entries already existed and only
+needed a field fixed, `create` is for when the entry was never written at
+all.
+
+```yaml
+- action: create
+  citekey: hilberg2016
+  entry:
+    title: "Hedeby's Demise in the Late Viking Age and the Shift to Schleswig"
+    author:
+      - family: Hilberg
+        given: Volker
+    year: "2016"
+    date: "2016"
+    generation: F1
+    entry_type: article
+  note: "PDF processed (74 F2 entries cite this source_pdf) but header date
+         extraction returned None, so no self-entry was ever created. Title
+         and author recovered from the paper's own extracted header; year
+         confirmed against the source PDF filename and an independent
+         external citation."
+```
+
+Refuses to run if `citekey` already exists (use `set` to modify an
+existing entry instead) or if `entry` is missing title, author, or year.
+
+**`create` does not reconnect the new entry's own outgoing citations.**
+The paper's already-extracted reference list lives in
+`_graph_state.json`'s `processed_papers[pdf].grobid_id_to_citekey` map
+(built when the PDF was processed) but nothing re-reads that map after
+`create` runs. If the created paper should show up as a citer of other
+entries, that needs a separate `set cited_by` correction per real target,
+built by cross-referencing `grobid_id_to_citekey` against the live
+bibliography — see the Decision_log entry for 2026-09-22 for a worked
+example (172 edges recovered across 4 papers this way).
+
 ---
 
 ## Workflow
