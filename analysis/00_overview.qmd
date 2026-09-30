@@ -21,8 +21,15 @@ text-align: justify !important;
 #| label: overview-load
 library(tidyverse)
 library(here)
+library(jsonlite)
 
 df <- read.csv(here("data/annotations.csv"), na.strings = "")
+
+bib <- fromJSON(here("data/bibliography.json"), simplifyVector = FALSE)
+bib_matched <- bib[names(bib) %in% df$cite_key]
+
+full_edgelist <- read.csv(here("data/citation_edgelist.csv"), stringsAsFactors = FALSE)
+n_seed_refs <- full_edgelist %>% filter(source == "lund2021") %>% nrow()
 
 df <- df %>%
   mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
@@ -43,9 +50,24 @@ cat("Date range:", year_range[1], "-", year_range[2], "\n")
 
 ## From seed paper to corpus
 
-The F1 corpus is built from the bibliography of the seed paper (Lund & Sindbæk 2022) — its cited references, treated as a first generation of descendant works. The seed paper's own reference list runs to over 500 works; the F1 corpus analyzed here holds 372.
+The F1 corpus is built from the bibliography of the seed paper (Lund & Sindbæk 2022) — its cited references, treated as a first generation of descendant works. The seed paper's own reference list resolves to `r n_seed_refs` works in the bibliography; the F1 corpus analyzed here holds `r n_papers`.
 
-Full books and edited volumes with consolidated bibliographies were excluded. A book's reference list is not comparable in scale or character to a journal article's, and including it as a single node alongside articles would distort network measures — centrality in particular — that depend on reference-list size.
+```{r}
+#| label: overview-selection-counts
+n_excluded <- n_seed_refs - n_papers
+cat("Seed paper's own resolved references:", n_seed_refs, "\n")
+cat("F1 corpus (included):", n_papers, "\n")
+cat("Excluded from F1:", n_excluded, "\n")
+```
+
+### Selection criteria
+
+Two exclusion criteria were applied when building the F1 set from the seed paper's reference list:
+
+- **Full books and edited volumes with consolidated bibliographies.** A book's reference list is not comparable in scale or character to a journal article's, and including it as a single node alongside articles would distort network measures — centrality in particular — that depend on reference-list size.
+- **Methodological/technical reports outside the study's interpretive scope**, judged case by case. One paper (Cannell et al. 2016, a geochemical pXRF methods chapter in an edited excavation volume) was excluded on this basis; it remains in the wider bibliography as a citation target for the papers that cite it, but was removed from the annotated F1 seed set.
+
+No other structured record of exclusion reasons for the remaining works in the seed's reference list currently exists — the count above (`r n_excluded`) has not yet been individually itemized and categorized beyond these two documented criteria.
 
 ## Publications by year
 
@@ -63,3 +85,155 @@ ggplot(data = pubyears, aes(x = publication_year, y = n)) +
   labs(x = "", y = "Count", title = "Publications by year")
 ```
 
+## Entry types
+
+```{r}
+#| label: overview-entry-types
+#| fig-cap: "Publication type across the analyzed corpus."
+entry_types <- map_chr(bib_matched, ~ .x$entry_type %||% NA_character_)
+
+entry_type_counts <- tibble(entry_type = entry_types) %>%
+  count(entry_type, sort = TRUE)
+
+ggplot(data = entry_type_counts, aes(x = fct_reorder(entry_type, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "", y = "Count", title = "Entry types")
+```
+
+## Authorship
+
+```{r}
+#| label: overview-author-counts
+#| fig-cap: "Number of authors per paper across the F1 corpus."
+gender_cols <- names(df)[str_starts(names(df), "Authors..Genders")]
+
+n_authors <- df %>%
+  select(cite_key, all_of(gender_cols)) %>%
+  pivot_longer(-cite_key, names_to = "author_slot", values_to = "gender") %>%
+  filter(!is.na(gender)) %>%
+  count(cite_key, name = "n_authors")
+
+ggplot(data = n_authors, aes(x = n_authors)) +
+  geom_histogram(binwidth = 1, fill = "#5e81ac", colour = "white") +
+  theme_bw() +
+  scale_x_continuous(breaks = scales::breaks_pretty()) +
+  labs(x = "Authors per paper", y = "Count", title = "Author count distribution")
+```
+
+## Publication venues
+
+```{r}
+#| label: overview-venues
+#| fig-cap: "Most frequent publication venues in the analyzed corpus."
+venues <- map_chr(bib_matched, ~ .x$journaltitle %||% .x$booktitle %||% .x$publisher %||% NA_character_)
+venues <- venues[!is.na(venues)]
+
+venue_counts <- tibble(venue = venues) %>%
+  count(venue, sort = TRUE)
+
+n_single_venue <- sum(venue_counts$n == 1)
+cat("Papers with an identifiable venue:", length(venues), "/", length(bib_matched), "\n")
+cat("Distinct venues:", nrow(venue_counts), "\n")
+cat("Venues appearing exactly once:", n_single_venue, "\n")
+
+venue_counts %>%
+  slice_max(n, n = 15) %>%
+  ggplot(aes(x = fct_reorder(venue, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "", y = "Count", title = "Top 15 publication venues")
+```
+
+The corpus is not concentrated in a small set of core journals: it draws on `r nrow(venue_counts)` distinct venues, over half of which (`r n_single_venue`) contribute only a single paper.
+
+## Language
+
+```{r}
+#| label: overview-language
+#| fig-cap: "Titles containing non-ASCII characters, as a proxy for non-English-language publications."
+titles <- map_chr(bib_matched, ~ .x$title %||% NA_character_)
+non_ascii_flag <- str_detect(titles, "[^\\x00-\\x7F]")
+
+n_non_ascii <- sum(non_ascii_flag, na.rm = TRUE)
+cat("Titles with non-ASCII characters:", n_non_ascii, "/", length(titles), "\n")
+```
+
+No structured language field is available in the bibliographic records. As a proxy, `r n_non_ascii` of `r length(titles)` titles (`r scales::percent(n_non_ascii / length(titles))`) contain non-ASCII characters, consistent with Scandinavian-language publications; the remainder are presumed English-language.
+
+A per-paper detected-language field does exist in the pipeline's processing cache (`_graph_state.json`), which is excluded from version control due to its size (100+ MB) and not available in this working copy. A more precise language breakdown than the ASCII-title proxy above would need to be generated from that cache directly on the processing machine.
+
+## Citation detection per F1 paper
+
+```{r}
+#| label: overview-citation-counts
+#| fig-cap: "Distribution of outgoing (resolved) citation counts across the F1 corpus."
+edgelist <- read.csv(here("data/citation_edgelist_annotated.csv"), stringsAsFactors = FALSE)
+
+out_counts <- edgelist %>%
+  filter(source %in% df$cite_key) %>%
+  count(source, name = "n_citations")
+
+out_counts_full <- tibble(source = df$cite_key) %>%
+  left_join(out_counts, by = "source") %>%
+  mutate(n_citations = replace_na(n_citations, 0))
+
+summary_stats <- out_counts_full %>%
+  summarise(
+    n = n(),
+    min = min(n_citations),
+    max = max(n_citations),
+    mean = round(mean(n_citations), 1),
+    median = median(n_citations),
+    sd = round(sd(n_citations), 1)
+  )
+knitr::kable(summary_stats, caption = "Outgoing citation count summary across F1 papers")
+
+ggplot(out_counts_full, aes(x = n_citations)) +
+  geom_histogram(binwidth = 10, fill = "#5e81ac", boundary = 0) +
+  theme_bw() +
+  labs(x = "Resolved outgoing citations", y = "Number of F1 papers",
+       title = "Distribution of citation counts per F1 paper")
+```
+
+Every F1 paper in the corpus has at least one resolved outgoing citation as of this writing; none are isolated nodes with zero outdegree, and the citation graph as a whole forms a single connected component. This was not the case throughout the corpus-building process — automated extraction passes repeatedly left individual F1 papers with no detected or resolved outgoing citations, most often because a paper's reference list used a format (footnote-embedded citations, a shared reference section for an edited volume, non-Latin or corrupted character encoding in the source PDF) that the primary extraction method did not handle, or because the same underlying work had independently been extracted twice under two different citekeys — one well-connected, one an orphaned duplicate. Each case was investigated individually against the original source PDF and either resolved (matching cited works to existing bibliography entries, creating new entries where a cited work did not yet exist, or merging duplicate records) or documented as a genuine structural case.
+
+### Detection method breakdown
+
+*Not yet available in this document.* The pipeline records, per paper, how many citations were found by each detection method (GROBID's structured reference-list parser, inline citation-marker matching, text-pattern matching, and LLM-based body-text and footnote scanning) in the same excluded processing cache noted above. A corpus-wide breakdown of detection-method contribution would need to be computed directly from that cache and added here as a generated table.
+
+## Normalization and deduplication
+
+The bibliography underwent substantial manual correction and deduplication work over the course of corpus construction, tracked in a running corrections file (`corrections.yaml`) rather than as edits to the raw pipeline output. As of this writing that file holds:
+
+```{r}
+#| label: overview-corrections-breakdown
+library(yaml)
+
+corrections_labels <- c(
+  set    = "set (field corrections: author, year, title, citer lists, etc.)",
+  delete = "delete (fabricated or unresolvable ghost entries removed)",
+  merge  = "merge (duplicate entries combined)",
+  create = "create (missing entries added from manually verified source data)",
+  reject = "reject (candidate merges/matches checked and confirmed distinct)",
+  split  = "split (single entries separated into multiple genuine works)"
+)
+
+corrections <- read_yaml(here("CitationAnalysis/corrections.yaml"))
+corrections_actions <- map_chr(corrections, ~ .x$action %||% NA_character_)
+
+corrections_summary <- tibble(action_raw = corrections_actions) %>%
+  count(action_raw, name = "count") %>%
+  mutate(action = coalesce(corrections_labels[action_raw], action_raw)) %>%
+  select(action, count) %>%
+  arrange(desc(count))
+
+knitr::kable(corrections_summary, caption = "Manual correction actions applied to the bibliography (corrections.yaml)")
+cat("Total correction actions:", sum(corrections_summary$count), "\n")
+```
+
+The great majority of `delete` actions removed "ghost" entries — records with no title and no raw citation text, produced when the extraction pipeline generated a placeholder entry it was never able to resolve to a real source. `merge` actions consolidated cases where the same underlying work had been independently created under two or more citekeys, most commonly because one version came from an automated reference-list extraction with no linked PDF and a second, fuller version was later created when the paper's own PDF was located and processed directly, or because the same source was independently extracted from two different citing papers' reference lists. `set` actions cover the bulk of routine field-level corrections: fixing fabricated or garbled author names, correcting mis-parsed years and titles, and adding real citation relationships (`cited_by` entries) that automated detection missed or failed to resolve on the first pass.
+
+One deletion in this file was subsequently confirmed incorrect and reversed: a genuine F1 paper had been marked fabricated across multiple earlier review passes despite being a real, verifiable source, and was restored with corrected metadata once checked directly against its source PDF. This is noted here as a reminder that `delete` corrections, like any other, should be treated as provisional until checked against a primary source rather than as settled fact on the strength of a confident-sounding note.
