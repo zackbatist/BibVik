@@ -364,6 +364,7 @@ class CitationGraph:
             "generation": "P",
             "cited_by": [],
             "_source_pdf": pdf_path.name,
+            "language": detect_language(paragraphs),
         }
 
         # Add GROBID bibliography entries as F1
@@ -861,6 +862,7 @@ class CitationGraph:
                     "generation": "F1",
                     "cited_by": [self.seed_citekey],
                     "_source_pdf": pdf_path.name,
+                    "language": detect_language(paragraphs),
                 })
 
             # Update citekey now that we know it
