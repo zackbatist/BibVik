@@ -2286,14 +2286,20 @@ if (file.exists(region_lookup_path)) {
   # historical race classification, with no one coordinate that honestly
   # represents all three) — moved to macro_region_terms below instead of
   # given a fabricated single point.
+  #
+  # "Eurasia" is a second, different exception: a real Wikidata match
+  # exists (50°N, 80°E — lands in Kazakhstan on a map), but the concept
+  # itself spans the whole landmass, so that single coordinate is
+  # coincidental placement, not a meaningful site — moved to
+  # macro_region_terms below for the same reason as East Baltic.
 
   # Macro-region terms: "Scandinavia," "North Atlantic," "Viking world,"
-  # "South Scandinavia," "East Baltic" (see note above), and similar will
-  # not resolve to a single sensible coordinate regardless of gazetteer —
-  # they describe a broad area or a genuinely ambiguous concept, not a
-  # point. Flagged here, also for the same instant-edit reason above,
-  # rather than force-matched to a single Wikidata item with a
-  # misleading coordinate. Extend this list after reviewing
+  # "South Scandinavia," "East Baltic," "Eurasia" (see notes above), and
+  # similar will not resolve to a single sensible coordinate regardless
+  # of gazetteer — they describe a broad area or a genuinely ambiguous
+  # concept, not a point. Flagged here, also for the same instant-edit
+  # reason above, rather than force-matched to a single Wikidata item
+  # with a misleading coordinate. Extend this list after reviewing
   # region_lookup_needs_review.csv.
   macro_region_terms <- c(
     "Scandinavia", "South Scandinavia", "North Atlantic", "North Europe",
@@ -2303,22 +2309,38 @@ if (file.exists(region_lookup_path)) {
     "Middle Sweden", "North Norway and Sweden", "North Scandinavia",
     "Northwest Slavic area", "Norway and Sweden", "Sami areas",
     "Southeast Norway", "Southwest Norway", "Southwest Sweden",
-    "West Scandinavia", "West-Balts", "East Baltic"
+    "West Scandinavia", "West-Balts", "East Baltic", "Eurasia",
+    # Second pass, found by checking every matched row for the same
+    # "genuine Wikidata match, but country/continent-scale concept
+    # plotted at a coincidental centroid" signature that caught Eurasia
+    # — country and continent-level terms, previously left plottable as
+    # single misleading points even though they are not site-level.
+    "Britain", "British isles", "Denmark", "England", "Europe",
+    "Finland", "Germany", "Norge", "Norway", "Northern Europe",
+    "Northern Hemisphere", "Oceania", "Pacific Ocean", "Poland",
+    "Russia", "South Norway", "South Sweden", "Southwest Finland",
+    "Sverige", "Sweden", "West Europe"
   )
 
   region_lookup <- region_lookup %>%
     mutate(is_macro_region = region_token %in% macro_region_terms)
 
-  # East Baltic must also be cleared of any coordinate it may carry from
-  # the raw match, now that it's flagged macro-region — the flag alone
-  # only excludes it from the point map, but a leftover coordinate would
+  # Every macro-region term must also be cleared of any coordinate it
+  # may carry from the raw match — the is_macro_region flag alone only
+  # excludes them from the point map, but a leftover coordinate would
   # still count toward country/super_region rollups, which is exactly
   # the same category of error the manual overrides above exist to fix.
+  # Real, confirmed example: "Eurasia" genuinely matched a real Wikidata
+  # item at 50°N, 80°E (landing in Kazakhstan on a map) — a real match,
+  # but for a continent-scale concept, so that coordinate is
+  # coincidental placement, not a meaningful site. The same logic
+  # applies to every other entry on the list above (country- and
+  # continent-level terms), not just the two found first.
   region_lookup <- region_lookup %>%
     mutate(across(any_of(c("wikidata_qid", "normalized_label", "lat", "lon", "place_type",
                             "admin_region", "country", "super_region")),
-                  ~ if_else(region_token == "East Baltic", NA, .)),
-           match_method = if_else(region_token == "East Baltic", "no_match", match_method))
+                  ~ if_else(is_macro_region, NA, .)),
+           match_method = if_else(is_macro_region, "no_match", match_method))
 
   region_df <- region_tokens %>%
     left_join(region_lookup, by = c("Region_normalized" = "region_token"))
