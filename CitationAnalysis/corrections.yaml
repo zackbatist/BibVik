@@ -116293,3 +116293,61 @@
     it from the F1 annotated seed set, not delete it as an F2 bibliography entry)
     then the delete correction was removed from this file, but the _deleted flag already
     baked into bibliography.json needed a direct correction to clear.'
+- action: set
+  citekey: skorokhod2020
+  field: _deleted
+  value: false
+  note: 'Un-deleting: this is a real, genuine F1 paper (Skorokhod & Blaszczyk 2020,
+    Studies of the Shestovytsia Barrows, DOI 10.15407/archaeologyua2020.02.094), confirmed
+    directly against the source PDF. Prior deletions across multiple sessions incorrectly
+    claimed no such paper existed; the real PDF proves otherwise.'
+- action: set
+  citekey: skorokhod2020
+  field: title
+  value: Studies of the Shestovytsia Barrows
+  note: Correcting title - was showing Staraya Ladoga in northwestern Russia, an unrelated
+    and incorrect title, confirmed wrong against the real source PDF.
+- action: set
+  citekey: skorokhod2020
+  field: author
+  value:
+  - family: Skorokhod
+    given: V. M.
+  - family: Blaszczyk
+    given: D.
+  note: Correcting author - confirmed real authors from the source PDF byline.
+- action: set
+  citekey: skorokhod2017
+  field: cited_by
+  value:
+  - skorokhod2020
+  note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
+    resolution data, after the entry was restored from an incorrect earlier deletion.
+- action: set
+  citekey: skorokhod2018
+  field: cited_by
+  value:
+  - skorokhod2020
+  note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
+    resolution data, after the entry was restored from an incorrect earlier deletion.
+- action: set
+  citekey: smolichev1926
+  field: cited_by
+  value:
+  - skorokhod2020
+  note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
+    resolution data, after the entry was restored from an incorrect earlier deletion.
+- action: set
+  citekey: stankevich1962
+  field: cited_by
+  value:
+  - skorokhod2020
+  note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
+    resolution data, after the entry was restored from an incorrect earlier deletion.
+- action: set
+  citekey: sytyi2006
+  field: cited_by
+  value:
+  - skorokhod2020
+  note: Adding citer skorokhod2020 - real citation reconnection from cached grobid_id_to_citekey
+    resolution data, after the entry was restored from an incorrect earlier deletion.
