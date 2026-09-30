@@ -1,8 +1,6 @@
 # Cluster Deployment
 
-This document describes how to run the BibVik citation analysis pipeline on a
-GPU cluster. The cluster setup separates compute-intensive tasks (GROBID, LLM
-inference) from the local development environment.
+This document describes how to run the BibVik citation analysis pipeline on a GPU cluster. The cluster setup separates compute-intensive tasks (GROBID, LLM inference) from the local development environment.
 
 ## Architecture
 
@@ -10,13 +8,11 @@ inference) from the local development environment.
 Laptop                          Cluster
 ──────                          ───────
 run.py ──── GROBID ────────────► grobid-server (Docker, CPU)
-       ──── LLM ──────────────►  ollama_bibvik_gpu* (Docker, GPU × N)
-       ◄─── results ────────────  /path/to/BibVik_output/
+       ──── LLM ───────────────► ollama_bibvik_gpu* (Docker, GPU × N)
+       ◄─── results ──────────── /path/to/BibVik_output/
 ```
 
-GROBID runs on CPU and is fast on native Linux x86 (no ARM emulation overhead).
-LLM inference runs on GPU via Ollama or llama-server. PDFs are stored on the
-cluster and processed there; output is written to a designated output directory.
+GROBID runs on CPU and is fast on native Linux x86 (no ARM emulation overhead). LLM inference runs on GPU via Ollama or llama-server. PDFs are stored on the cluster and processed there; output is written to a designated output directory.
 
 ## Prerequisites
 
@@ -119,12 +115,9 @@ bash launch_bibvik_llm.sh --gpu 6 --tensor 2 --backend llama_server
 bash launch_bibvik_llm.sh --stop
 ```
 
-The script assigns ports sequentially starting from the base port (default 11440).
-Five instances on GPUs 5, 6, 7, 8, 9 use ports 11440–11444.
+The script assigns ports sequentially starting from the base port (default 11440). Five instances on GPUs 5, 6, 7, 8, 9 use ports 11440–11444.
 
-The script pulls the model and runs a warm-up inference on each container before
-returning, so the model is loaded into VRAM and ready to serve requests immediately.
-`OLLAMA_KEEP_ALIVE=-1` is set so the model stays loaded indefinitely.
+The script pulls the model and runs a warm-up inference on each container before returning, so the model is loaded into VRAM and ready to serve requests immediately. `OLLAMA_KEEP_ALIVE=-1` is set so the model stays loaded indefinitely.
 
 After launching, update `config.yaml` with the assigned ports (see below).
 
@@ -140,10 +133,7 @@ docker logs -f bibvik_llm_ollama_gpu7  # Ollama log for GPU 7
 
 ### Model storage
 
-Ollama stores model weights in the configured models directory, shared across
-all instances. The first `pull` downloads the model; subsequent instances reuse
-the cached weights. With a NAS-mounted models directory this means one download,
-available to all containers.
+Ollama stores model weights in the configured models directory, shared across all instances. The first `pull` downloads the model; subsequent instances reuse the cached weights. With a NAS-mounted models directory this means one download, available to all containers.
 
 ## Configuration
 
@@ -179,7 +169,7 @@ llm:
 
 ## Running the Pipeline
 
-Always run inside a `screen` session so VPN drops don't interrupt the run:
+Always run inside a `screen` session so interrupted connections (such as VPN drops) don't interrupt the run:
 
 ```bash
 screen -S bibvik
@@ -218,8 +208,7 @@ scp user@cluster:/path/to/output/audit_report.html ~/Desktop/
 
 ## Multi-GPU Parallel Processing
 
-When `extra_urls` is set in `config.yaml`, the pipeline distributes papers
-across all LLM endpoints in parallel:
+When `extra_urls` is set in `config.yaml`, the pipeline distributes papers across all LLM endpoints in parallel:
 
 1. Papers are divided round-robin across workers before processing starts
 2. Each worker processes its own batch independently: GROBID then LLM per paper
@@ -235,8 +224,7 @@ With 5 GPUs and ~4 minutes per paper per worker, throughput is approximately 5×
 
 These estimates are based on actual runs with qwen2.5:7b and `detection_batch_size: 5`. Per-paper time varies significantly with paragraph count — short papers (20–30 paragraphs) take ~1 minute, long papers (100+ paragraphs) take 10+ minutes.
 
-**GPU access requirement:** Docker containers need GPU access via the nvidia
-container runtime. Your user must be in the `video` group:
+**GPU access requirement:** Docker containers need GPU access via the nvidia container runtime. Your user must be in the `video` group:
 
 ```bash
 groups  # should include "video"
@@ -260,8 +248,7 @@ ssh -L 11440:localhost:11440 \
 python3 run.py --iterate-f1 --limit 10 --remote
 ```
 
-Set `llm.remote_url` in your local `config.yaml` to `http://localhost:11440`
-and `llm.remote_backend` to `ollama`.
+Set `llm.remote_url` in your local `config.yaml` to `http://localhost:11440` and `llm.remote_backend` to `ollama`.
 
 ## Maintenance
 
@@ -318,5 +305,4 @@ Ask system administrator: apt install tesseract-ocr
 ```
 
 **Resuming an interrupted run**
-The pipeline saves state after each paper. Simply rerun — already-processed
-papers are skipped automatically via the cache in `_graph_state.json`.
+The pipeline saves state after each paper. Simply rerun. Already-processed papers are skipped automatically via the cache in `_graph_state.json`.
