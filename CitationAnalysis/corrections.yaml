@@ -260049,3 +260049,151 @@
   value: *id367
   note: Backfilling detection field from _graph_state.json processing cache - per-method
     citation detection counts, computed during extraction but never previously persisted.
+- action: set
+  citekey: aannestad2018a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Aannestad 2018, cited in-text and in reference list.'
+- action: set
+  citekey: ashby2015a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Ashby et al. 2015, cited in-text and in reference list.'
+- action: set
+  citekey: croix2019a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Croix and IJssennagger-Van Der Pluijm 2019, exact title match in reference list.'
+- action: set
+  citekey: croix2021
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Croix and IJssennagger-Van Der Pluijm 2019 in reference list - lund2021 cites
+    this work under 2019, bibliography.json records it as 2021.'
+- action: set
+  citekey: frei2012a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Frei and Price 2012, cited in-text and in reference list.'
+- action: set
+  citekey: gardela2018b
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Gardela and Odeback 2018, exact title match in reference list.'
+- action: set
+  citekey: gotfredsen2014a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Gotfredsen 2014, cited in-text and in reference list.'
+- action: set
+  citekey: hennius2018a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Hennius 2018, cited in-text and in reference list.'
+- action: set
+  citekey: hilberg2016
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Hilberg 2016, cited in-text and in reference list.'
+- action: set
+  citekey: kastholm2015
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Kastholm Hansen 2015, cited in reference list.'
+- action: set
+  citekey: lia2004
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Lia 2004, cited in-text and in reference list.'
+- action: set
+  citekey: price2014b
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    N. Price 2014, cited in-text and in reference list.'
+- action: set
+  citekey: price2014c
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Price and Naumann 2014, cited in-text and in reference list.'
+- action: set
+  citekey: price2018c
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    N. Price 2018, cited in-text.'
+- action: set
+  citekey: raffield2016a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Raffield et al. 2016 / Raffield 2016, cited in-text.'
+- action: set
+  citekey: raffield2019a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Raffield 2019a, cited in-text.'
+- action: set
+  citekey: runge2018a
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Runge and Henriksen 2018, cited in-text and in reference list.'
+- action: set
+  citekey: skorokhod2020
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Skorokhod and Blaszczyk 2020, cited in-text and in reference list.'
+- action: set
+  citekey: skre2017b
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Confirmed directly against lund2021''s own extracted reference-list text:
+    Skre 2017, cited in-text.'
+- action: set
+  citekey: magi2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Author surname found in lund2021's text, but no exact year match to this citekey
+    - treated as unconfirmed, not a verified citation.
+- action: set
+  citekey: sindbaek2007a
+  field: cited_by
+  value:
+  - lund2021
+  note: Author surname found in lund2021's text, but no exact year match to this citekey
+    - treated as unconfirmed, not a verified citation.
