@@ -48,7 +48,7 @@ load_graph_and_log <- function(edgelist_file, removal_log_file) {
 advance_to_round <- function(g, removal_log, from_round, to_round) {
   if (to_round <= from_round) return(g)
   batch <- removal_log[(from_round + 1):to_round, c("from", "to")]
-  eids <- get_edge_ids(g, as.vector(t(as.matrix(batch))))
+  eids <- get.edge.ids(g, as.vector(t(as.matrix(batch))))
   eids <- eids[eids > 0]
   if (length(eids) > 0) g <- delete_edges(g, eids)
   g
