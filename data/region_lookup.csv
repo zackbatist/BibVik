@@ -1,0 +1,187 @@
+region_token,wikidata_qid,normalized_label,lat,lon,place_type,match_method,is_macro_region,admin_region,country,super_region
+Antwerp,Q12892,Antwerp,51.221111111,4.399722222,region,exact,FALSE,Arrondissement of Antwerp,Belgium,Continental Europe
+Arctic Canada,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Arctic Norway,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Ardnamurchan,Q639680,Ardnamurchan,56.733333333,-5.983333333,region,exact,FALSE,Highland,United Kingdom,British Isles
+Aska,Q26253194,Aska,NA,NA,human settlement,exact,FALSE,Motala Municipality,Sweden,Scandinavia
+Avaldsnes,Q790084,Avaldsnes,59.3558,5.2779,region,exact,FALSE,Karmøy Municipality,Norway,Scandinavia
+Badjelánnda,Q692011,Padjelanta National Park,67.410021653,16.721859465,region,exact,FALSE,Jokkmokk Municipality,Sweden,Scandinavia
+Baltic,Q545,Baltic,40.4433,-81.7028,region,exact,FALSE,NA,NA,NA
+Baltic Sea,Q545,Baltic Sea,58,20,region,exact,FALSE,NA,NA,NA
+Birka,Q208177,Birka,59.336666666,17.545,region,exact,FALSE,Ekerö Municipality,Sweden,Scandinavia
+Björkö,Q2586650,Björkö,57.732212283,11.679159145,region,exact,FALSE,Öckerö Municipality,Sweden,Scandinavia
+Blekinge,Q675653,Blekinge,56.333333333,15.333333333,region,exact,FALSE,Blekinge County,Sweden,Scandinavia
+Bogøvej,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Borgring,Q18049231,Borgring,55.469714,12.121947,region,exact,FALSE,Køge Municipality,Denmark,Scandinavia
+Bornholm,Q769680,Bornholm,55.125,14.916666666,physical location,exact,FALSE,Bornholm regional municipality,Denmark,Scandinavia
+Borre,Q1135014,Borre,50.731388888,2.584166666,region,exact,FALSE,canton of Hazebrouck-Sud,France,Continental Europe
+Britain,Q23666,Great Britain,53.833333333,-2.416666666,physical location,exact_ambiguous,FALSE,NA,NA,NA
+British Isles,Q38272,British Isles,54,-4,region,exact,TRUE,NA,NA,NA
+British isles,Q38272,British Isles,54,-4,region,search_fallback,FALSE,NA,NA,NA
+Central East Europe,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Central East Sweden,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Cnoc nan Gall,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Danelaw,Q339271,Danelaw,54,-1,region,exact,FALSE,NA,NA,NA
+Danevirke,Q689454,Danevirke,54.4775,9.486666666,region,exact,FALSE,Schleswig-Holstein,Germany,Continental Europe
+Danish–Frisian,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Denmark,Q35,Denmark,56,10,region,exact,FALSE,NA,Denmark,Scandinavia
+Dublin,Q1761,Dublin,53.349722222,-6.260277777,region,exact,FALSE,Dublin City,Ireland,British Isles
+East Arctic,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+East Baltic,Q2881617,East Baltic,46.4333,-62.1667,human settlement,exact,FALSE,Kings County,Canada,North Atlantic
+East Denmark,Q131281582,East Denmark,43.9914598,-70.7736738,region,exact,FALSE,NA,Denmark,Scandinavia
+East England,Q48006,East of England,52.24,0.41,region,exact_ambiguous,FALSE,England,United Kingdom,British Isles
+East Europe,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+East Norway,Q216065,NA,NA,NA,NA,no_match,FALSE,NA,Norway,Scandinavia
+East Sweden,Q2036023,East Sweden,NA,NA,region,exact,FALSE,NA,Sweden,Scandinavia
+Eketorp,Q30182629,Eketorp,57.537654,14.619631,region,exact,FALSE,Nässjö Municipality,Sweden,Scandinavia
+Engerdal,Q35435381,Engerdal,58.65878,8.22371,region,exact,FALSE,Froland Municipality,Norway,Scandinavia
+England,Q21,England,53,-1,region,exact,FALSE,NA,United Kingdom,British Isles
+Eurasia,Q5401,Eurasia,50,80,region,exact,FALSE,NA,NA,NA
+Europe,Q46,Europe,53.5,15.5,region,exact,FALSE,NA,NA,NA
+Eyrarland,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Finland,Q33,Finland,65,27,region,exact,FALSE,NA,Finland,Scandinavia
+Flakstad,Q3073242,Flakstad,68.1055,13.3081,human settlement,exact,FALSE,Flakstad Municipality,Norway,Scandinavia
+Frisia,Q4492881,Frisia,53.084088758,5.661937033,region,exact,FALSE,Lower Saxony,Netherlands,Continental Europe
+Frösö,Q21595747,Frösö,63.178888888,14.52,region,exact,FALSE,Östersund Municipality,Sweden,Scandinavia
+Funen,Q26503,Funen,55.350278,10.355833,physical location,exact,FALSE,Southern Denmark,Denmark,Scandinavia
+Fyrkat,Q1478633,Fyrkat,56.623243171,9.770449976,region,exact,FALSE,Mariagerfjord Municipality,Denmark,Scandinavia
+Föhr,Q3127,Föhr,54.716666666,8.5,physical location,exact,FALSE,Föhr-Amrum,Germany,Continental Europe
+Gamle Uppsala,Q433032,Gamla Uppsala,59.894444444,17.638888888,region,exact_ambiguous,FALSE,Uppsala Municipality,Sweden,Scandinavia
+Gammel Lejre,Q1493231,Gammel Lejre,55.6173,11.9692,human settlement,exact,FALSE,Lejre Municipality,Denmark,Scandinavia
+Gerdrup,Q30150996,Q30150996,55.277558148,11.307955419,region,exact_ambiguous,FALSE,Slagelse Municipality,Denmark,Scandinavia
+Germany,Q183,Germany,51,10,region,exact,FALSE,NA,Germany,Continental Europe
+Gnista,Q10506480,Gnistan,59.33307,18.03139,physical location,search_fallback,FALSE,Stockholm Municipality,Sweden,Scandinavia
+Gokstad,Q11972326,Gokstad Mound,59.14075889,10.253125,archaeological site,search_fallback_ambiguous,FALSE,Sandefjord,Norway,Scandinavia
+Gotland,Q1027830,Gotland,57.5,18.55,physical location,exact,FALSE,Gotland County,Sweden,Scandinavia
+Greenland,Q223,Greenland,72,-40,island,exact,FALSE,NA,Denmark,Scandinavia
+Gudme,Q3414292,Gudme,55.15,10.716666666,human settlement,exact,FALSE,Svendborg Municipality,Denmark,Scandinavia
+Halland,Q626045,Halland,56.75,13,region,exact,FALSE,Halland County,Sweden,Scandinavia
+Hedeby,Q165414,Hedeby,54.491111111,9.565277777,region,exact,FALSE,Busdorf,Germany,Continental Europe
+Hedmark,Q50616,Hedmark,60.833333333,11.666666666,region,exact,FALSE,NA,Norway,Scandinavia
+Heimdalsjordet,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Helgö,Q1602468,Helgö,59.278511,17.680435,physical location,exact,FALSE,Ekerö Municipality,Sweden,Scandinavia
+Hofstaðir,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Häme,Q6304614,Häme,NA,NA,region,exact,FALSE,Päijät-Häme,Finland,Scandinavia
+Iceland,Q189,Iceland,65,-19,island,exact,FALSE,NA,Iceland,Scandinavia
+Ireland,Q27,Ireland,53,-8,island,exact,FALSE,NA,Ireland,British Isles
+Irish Sea,Q41735,Irish Sea,53.5,-5,region,exact,FALSE,NA,NA,NA
+Isle of Man,Q9676,Isle of Man,54.235,-4.525,region,exact,FALSE,NA,NA,NA
+Jelling,Q835708,Jelling,55.7558,9.4194,human settlement,exact,FALSE,Vejle Municipality,Denmark,Scandinavia
+Kaldárhöfði,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Kaliningrad,Q1829,Kaliningrad,54.716666666,20.5,region,exact,FALSE,Kaliningrad Urban Okrug,Russia,Eastern Europe
+Karmøy,Q3736226,Karmøy,59.25,5.25,physical location,exact,FALSE,Karmøy Municipality,Norway,Scandinavia
+Kaupang,Q1737156,Kaupang,59.03083333,10.1075,region,exact,FALSE,NA,NA,NA
+Kopparsvik,Q18291344,Kopparsvik,57.629444444,18.278611111,region,exact,FALSE,Region Gotland,Sweden,Scandinavia
+Korshamn,Q6432662,Korshamn,58.023,7.0023,human settlement,exact,FALSE,Lyngdal Municipality,Norway,Scandinavia
+Krókdalur,Q27003694,Q27003694,65.195277777,-17.399722222,region,exact,FALSE,NA,NA,NA
+Kyivan Rus,Q1108445,Kievan Rus',50.45,30.525,region,exact,FALSE,NA,NA,NA
+Lade,Q1020895,Lade,63.44555556,10.44722222,region,exact,FALSE,Trondheim municipality,Norway,Scandinavia
+Lejre,Q2689028,Lejre,55.604444444,11.975,human settlement,exact,FALSE,Lejre Municipality,Denmark,Scandinavia
+Lendbreen,Q34841805,Lendbreen,61.81878,8.31317,region,exact,FALSE,Skjåk Municipality,Norway,Scandinavia
+Limfjord,Q3801,Limfjord,56.942777777,9.075,region,exact,FALSE,North Denmark Region,Denmark,Scandinavia
+Lunda,Q10570705,Lunda,60.134763,18.024831,human settlement,exact,FALSE,Östhammar Municipality,Sweden,Scandinavia
+Masham,Q2330678,Masham,36.4492158,-96.8536472,human settlement,exact,FALSE,North Yorkshire,United Kingdom,British Isles
+Middle Sweden,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Mohovoe,Q4305106,"Mokhovoye, Voronezh Oblast",51.420833333,40.600833333,human settlement,search_fallback_ambiguous,FALSE,Q4324347,Russia,Eastern Europe
+Mosfell,Q1949239,Mosfellsheiði,64.14372,-21.4583,region,search_fallback_ambiguous,FALSE,NA,NA,NA
+Mälaren,Q184492,Mälaren,59.5,17.2,region,exact,FALSE,Södermanland County,Sweden,Scandinavia
+Mývatnssveit,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Namdalen,Q3335462,Namdalen,64.3667,12.9167,region,exact,FALSE,Trøndelag,Norway,Scandinavia
+Newfoundland,Q2003,Newfoundland and Labrador,53,-60,region,exact_ambiguous,FALSE,NA,Canada,North Atlantic
+Norden,Q492366,Norden,53.596666666,7.205555555,region,exact,FALSE,Aurich District,Germany,Continental Europe
+Nordheim,Q21602,Nordheim,48.635555555,7.509444444,region,exact,FALSE,Unterelsaß,France,Continental Europe
+Norge,Q20,Norway,59.933333333,10.683333333,region,exact_ambiguous,FALSE,NA,Norway,Scandinavia
+North Atlantic,Q350134,North Atlantic Ocean,47,-33,region,exact_ambiguous,TRUE,NA,NA,NA
+North Europe,Q27479,Northern Europe,57,14,region,exact,TRUE,NA,NA,NA
+North Jutland,Q21158,North Jutlandic Island,57.1,9.5,physical location,search_fallback_ambiguous,FALSE,North Denmark Region,Denmark,Scandinavia
+North Norway,Q214041,North Norway,44.2564578,-70.6347852,region,exact,FALSE,NA,Norway,Scandinavia
+North Norway and Sweden,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+North Scandinavia,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+North Sea,Q1693,North Sea,55,3,region,exact,FALSE,NA,NA,NA
+Northern Europe,Q27479,Northern Europe,57,14,region,exact,FALSE,NA,NA,NA
+Northern Hemisphere,Q39061,Northern Hemisphere,45,0,region,exact,FALSE,NA,NA,NA
+Northumbria,Q7059837,Northumbria,NA,NA,region,exact,FALSE,NA,NA,NA
+Northwest Europe,Q1414323,Northwestern Europe,53,7,region,exact,TRUE,NA,NA,NA
+Northwest Slavic area,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Norway,Q20,Norway,59.933333333,10.683333333,region,exact,FALSE,NA,Norway,Scandinavia
+Norway and Sweden,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Nørre Snede,Q12329674,Nørre Snede,55.9639,9.39861,human settlement,exact,FALSE,Ikast-Brande Municipality,Denmark,Scandinavia
+Oceania,Q55643,Oceania,-13.5,-176,region,exact,FALSE,NA,NA,NA
+Odense,Q25331,Odense,55.4,10.383333333,region,exact,FALSE,Odense Municipality,Denmark,Scandinavia
+Oppland,Q50617,Oppland,61.41,9.34,region,exact,FALSE,NA,Norway,Scandinavia
+Orkney,Q1248274,Orkney,NA,NA,region,exact,FALSE,Highlands and Islands,United Kingdom,British Isles
+Oseberg,Q352332,Oseberg tumulus,59.30972222,10.45297222,region,search_fallback_ambiguous,FALSE,Tønsberg,Norway,Scandinavia
+Pacific Ocean,Q98,Pacific Ocean,0,-160,region,exact,FALSE,NA,NA,NA
+Poland,Q36,Poland,52,19,region,search_fallback,FALSE,NA,Poland,Eastern Europe
+Pomerania,Q104520,Pomerania,54.29443,18.15312,region,exact,FALSE,NA,NA,NA
+Ramsund,Q2081841,Ramsund,68.492,16.5184,region,exact,FALSE,Tjeldsund,Norway,Scandinavia
+Rendalen,Q35252816,Rendalen,61.8225,11.13139,region,exact,FALSE,Rendalen Municipality,Norway,Scandinavia
+Repton,Q1018787,Repton,31.408991,-87.239326,human settlement,search_fallback,FALSE,South Derbyshire,United Kingdom,British Isles
+Reykjavik,Q1764,Reykjavík,64.1475,-21.935,region,exact_ambiguous,FALSE,Reykjavíkurborg,Iceland,Scandinavia
+Ribe,Q322361,Ribe,55.327222,8.763056,human settlement,exact,FALSE,Esbjerg Municipality,Denmark,Scandinavia
+Ridanäs,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Ridgeway Hill,Q7332823,Ridgeway Hill Viking burial pit,50.671,-2.466,region,search_fallback_ambiguous,FALSE,Weymouth,United Kingdom,British Isles
+Rolvsøy,Q3358546,Rolvsøy,70.95667,24.01086,physical location,exact,FALSE,Måsøy Municipality,Norway,Scandinavia
+Roskilde,Q26563,Roskilde,55.641666666,12.080833333,region,exact,FALSE,Roskilde Municipality,Denmark,Scandinavia
+Russia,Q159,Russia,66.416666666,94.25,region,exact,FALSE,NA,Russia,Eastern Europe
+Rällinge,Q1665917,Rällingeborg,59.45,16.816667,region,search_fallback_ambiguous,FALSE,Strängnäs Municipality,Sweden,Scandinavia
+Rök,Q2262155,Rök,58.29388889,14.78638889,region,exact,FALSE,Ödeshög Municipality,Sweden,Scandinavia
+Salme,Q517375,Salme,43.431944444,40.026666666,human settlement,exact,FALSE,NA,NA,NA
+Sami areas,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Scandinavia,Q21195,Scandinavia,64.779642,14.760936,region,exact,TRUE,NA,NA,NA
+Scandinavian Peninsula,Q73169,Scandinavian Peninsula,63,14,region,exact,FALSE,NA,NA,NA
+Scandinavian diaspora,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Scania,Q180756,Scania,55.8,13.61666667,region,exact,FALSE,Skåne County,Sweden,Scandinavia
+Scar,Q16897141,Scar,59.292,-2.58,human settlement,exact,FALSE,Orkney Islands,United Kingdom,British Isles
+Schleswig,Q501661,Schleswig,54.515277777,9.569722222,region,exact,FALSE,Schleswig-Flensburg District,Germany,Continental Europe
+Scotland,Q22,Scotland,32.0486,-82.8181,region,exact,FALSE,NA,United Kingdom,British Isles
+Setesdal,Q1421167,Setesdal,58.92025,7.720638888,region,exact,FALSE,Agder,Norway,Scandinavia
+Shestovytsia,Q4523400,Shestovytsia,51.385,31.191944444,region,exact,FALSE,Chernihiv Raion,Ukraine,Eastern Europe
+Shetland,Q47134,Shetland Islands,60.356666666,-1.260555555,region,exact_ambiguous,FALSE,Scotland,United Kingdom,British Isles
+Sigtuna,Q3183470,Sigtuna,59.61731,17.72361,region,exact,FALSE,Sigtuna Municipality,Sweden,Scandinavia
+Skamby,Q1827999,Skamby,55.5194,10.2731,human settlement,exact,FALSE,Nordfyn Municipality,Denmark,Scandinavia
+Skopintull,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Skåne,Q103659,Skåne County,55.995308888,13.441771944,region,exact_ambiguous,FALSE,NA,Sweden,Scandinavia
+"Slavonic ""homelands""",NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Sogn,Q975708,Sogn,61.18333333,6.8,region,exact,FALSE,Vestland,Norway,Scandinavia
+Sogndal,Q33490467,Sogndal,61.22908,7.09674,human settlement,exact,FALSE,Sogndal Municipality,Norway,Scandinavia
+South Norway,Q12718866,South Norway,61,9,region,exact,FALSE,NA,NA,NA
+South Scandinavia,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+South Sweden,Q7568605,South Sweden,55.9349,14.253,region,exact,FALSE,NA,Sweden,Scandinavia
+Southeast Norway,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Southwest Finland,Q5712,Southwest Finland,60.5,22.75,region,exact,FALSE,NA,Finland,Scandinavia
+Southwest Norway,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Southwest Sweden,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+St John’s College,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Staraya Ladoga,Q216794,Staraya Ladoga,59.998936,32.2958,human settlement,exact,FALSE,Staroladozhskoye rural settlement,Russia,Eastern Europe
+Sutton Hoo,Q503256,Sutton Hoo,52.089722222,1.338888888,region,exact,FALSE,Sutton,United Kingdom,British Isles
+Sverige,Q34,Sweden,61,15,region,exact_ambiguous,FALSE,NA,Sweden,Scandinavia
+Sweden,Q34,Sweden,61,15,region,exact,FALSE,NA,Sweden,Scandinavia
+Södermanland,Q626062,Södermanland,59,17,region,exact,FALSE,Södermanland County,Sweden,Scandinavia
+Texel,Q9966,Texel,53.066666666,4.8,region,exact,FALSE,North Holland,Netherlands,Continental Europe
+Tissø,Q11951950,Tissø,55.57591,11.29205,region,exact,FALSE,Kalundborg Municipality,Denmark,Scandinavia
+Toftum Næs,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Torksey,Q574397,Torksey,53.2986,-0.745252,region,exact,FALSE,West Lindsey,United Kingdom,British Isles
+Trelleborg,Q21192374,Trelleborg,55.376111111,13.151111111,region,exact,FALSE,Trelleborg Municipality,Sweden,Scandinavia
+Trøndelag,Q127676,Trøndelag,63.426944444,10.393055555,region,exact,FALSE,NA,Norway,Scandinavia
+Uppsala,Q25286,Uppsala,59.849760548,17.638946597,region,exact,FALSE,Uppsala Municipality,Sweden,Scandinavia
+Uppåkra,Q1760482,Uppåkra,55.667,13.1709,region,exact,FALSE,Staffanstorp Municipality,Sweden,Scandinavia
+Valsgärde,Q2096449,Valsgärde,59.92611111,17.62638889,region,exact,FALSE,Uppsala Municipality,Sweden,Scandinavia
+Vestfold,Q50619,Vestfold,59.31,10.22,region,exact,FALSE,Eastern Norway,Norway,Scandinavia
+Viking world,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Vindinge,Q2747076,Vindinge,55.3075,10.73,human settlement,exact,FALSE,Nyborg Municipality,Denmark,Scandinavia
+Vinjum,NA,NA,NA,NA,NA,no_match,FALSE,NA,NA,NA
+Volga-Kama,Q4123150,Volzhsko-Kamsky Nature Reserve,55.19,49.2,region,search_fallback_ambiguous,FALSE,Tatarstan,Russia,Eastern Europe
+Västergötland,Q213551,Västergötland,57.728,12.7,region,exact,FALSE,Västra Götaland County,Sweden,Scandinavia
+West Europe,Q27496,Western Europe,47.409273,2.536919,region,exact,FALSE,NA,NA,NA
+West Scandinavia,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+West Sweden,Q4992082,West Sweden,45.705833333,-92.496944444,region,exact,FALSE,NA,Sweden,Scandinavia
+West Zealand,Q12340835,West Zealand,NA,NA,region,exact,FALSE,NA,NA,NA
+West-Balts,NA,NA,NA,NA,NA,no_match,TRUE,NA,NA,NA
+Wiskiauten,Q992404,Mokhovoye,54.92416667,20.47944444,region,exact_ambiguous,FALSE,Zelenogradsky District,Russia,Eastern Europe
+York,Q42462,York,53.95,-1.083333333,region,exact,FALSE,City of York,United Kingdom,British Isles
+Zealand,Q25535,Zealand,55.57,11.89,physical location,exact,FALSE,NA,NA,NA
+the North,Q214102,Union,NA,NA,region,exact_ambiguous,TRUE,NA,NA,NA
+Åland,Q5689,Åland,60.25,20,region,exact,FALSE,NA,NA,NA
+Östergötland,Q214829,Östergötland,58.415833333,15.625277777,region,exact,FALSE,NA,Sweden,Scandinavia
+Ørland,Q108074087,Ørland,59.546,6.38,region,exact,FALSE,Suldal Municipality,Norway,Scandinavia

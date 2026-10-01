@@ -15,7 +15,7 @@ text-align: justify !important;
 }
 ```
 
-# Part 0 — Corpus overview
+# Part 0: Corpus overview
 
 ```{r}
 #| label: overview-load
@@ -30,6 +30,7 @@ bib_matched <- bib[names(bib) %in% df$cite_key]
 
 full_edgelist <- read.csv(here("data/citation_edgelist.csv"), stringsAsFactors = FALSE)
 n_seed_refs <- full_edgelist %>% filter(source == "lund2021") %>% nrow()
+n_live <- sum(map_lgl(bib, ~ !isTRUE(.x$`_deleted`)))
 
 df <- df %>%
   mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
@@ -38,38 +39,35 @@ df$publication_year <- factor(df$publication_year,
                               levels = as.character(seq(min(df$publication_year,
                                        na.rm = TRUE),
                                        max(df$publication_year, na.rm = TRUE), 1)))
-```
 
-```{r}
-#| label: overview-basic-facts
 n_papers <- n_distinct(df$cite_key)
 year_range <- range(as.numeric(as.character(df$publication_year)), na.rm = TRUE)
-cat("Papers:", n_papers, "\n")
-cat("Date range:", year_range[1], "-", year_range[2], "\n")
 ```
+
+The analyzed corpus holds `r n_papers` papers, published `r year_range[1]`–`r year_range[2]`.
 
 ## From seed paper to corpus
 
-The F1 corpus is built from the bibliography of the seed paper (Lund & Sindbæk 2022) — its cited references, treated as a first generation of descendant works. The seed paper's own reference list resolves to `r n_seed_refs` works in the bibliography; the F1 corpus analyzed here holds `r n_papers`.
-
-```{r}
-#| label: overview-selection-counts
-n_excluded <- n_seed_refs - n_papers
-cat("Seed paper's own resolved references:", n_seed_refs, "\n")
-cat("F1 corpus (included):", n_papers, "\n")
-cat("Excluded from F1:", n_excluded, "\n")
-```
+The F1 corpus is built from the bibliography of the seed paper (Lund & Sindbæk 2022): its cited references, treated as a first generation of descendant works. The seed paper's own reference list resolves to `r n_seed_refs` works in the bibliography; the F1 corpus analyzed here holds `r n_papers`, meaning `r n_seed_refs - n_papers` references were excluded.
 
 ### Selection criteria
 
 Two exclusion criteria were applied when building the F1 set from the seed paper's reference list:
 
-- **Full books and edited volumes with consolidated bibliographies.** A book's reference list is not comparable in scale or character to a journal article's, and including it as a single node alongside articles would distort network measures — centrality in particular — that depend on reference-list size.
+- **Full books and edited volumes with consolidated bibliographies.** A book's reference list is not comparable in scale or character to a journal article's, and including it as a single node alongside articles would distort network measures, centrality in particular, that depend on reference-list size.
 - **Methodological/technical reports outside the study's interpretive scope**, judged case by case. One paper (Cannell et al. 2016, a geochemical pXRF methods chapter in an edited excavation volume) was excluded on this basis; it remains in the wider bibliography as a citation target for the papers that cite it, but was removed from the annotated F1 seed set.
 
-No other structured record of exclusion reasons for the remaining works in the seed's reference list currently exists — the count above (`r n_excluded`) has not yet been individually itemized and categorized beyond these two documented criteria.
+No other structured record of exclusion reasons for the remaining works in the seed's reference list currently exists; this count has not yet been individually itemized and categorized beyond these two documented criteria.
 
-## Publications by year
+## Corpus composition
+
+The following sections describe the corpus by publication year, entry type, authorship, venue, and language. Each has a tab for the 369-paper F1 set and a tab for the full bibliography (`r scales::comma(n_live)` live entries).
+
+### Publications by year
+
+::: {.panel-tabset}
+
+#### F1
 
 ```{r}
 #| label: overview-pubyears
@@ -83,9 +81,44 @@ ggplot(data = pubyears, aes(x = publication_year, y = n)) +
   theme_bw() +
   scale_x_discrete(breaks = seq(2000, 2022, 1), drop = FALSE) +
   labs(x = "", y = "Count", title = "Publications by year")
+
+peak_year <- pubyears$publication_year[which.max(pubyears$n)]
+peak_n <- max(pubyears$n)
 ```
 
-## Entry types
+The corpus spans `r year_range[1]` to `r year_range[2]`. Publication counts rise over that range rather than sitting flat; `r peak_year` is the single busiest year, with `r peak_n` papers.
+
+#### Full corpus
+
+```{r}
+#| label: overview-pubyears-full
+#| fig-cap: "Papers published per year across the full bibliography."
+pubyears_full <- tibble(year = map_chr(bib, ~ as.character(.x$year %||% NA))) %>%
+  filter(!is.na(year), year != "", str_detect(year, "^\\d{4}$")) %>%
+  mutate(year = as.integer(year)) %>%
+  filter(year >= 1900, year <= 2026) %>%
+  count(year)
+
+ggplot(data = pubyears_full, aes(x = year, y = n)) +
+  geom_area(fill = "#5e81ac", alpha = 0.3) +
+  geom_line(colour = "#5e81ac", linewidth = 0.7) +
+  theme_bw() +
+  scale_x_continuous(breaks = scales::breaks_pretty(n = 10)) +
+  labs(x = "", y = "Count", title = "Publications by year, full bibliography")
+
+peak_year_full <- pubyears_full$year[which.max(pubyears_full$n)]
+peak_n_full <- max(pubyears_full$n)
+```
+
+The full bibliography spans `r min(pubyears_full$year)` to `r max(pubyears_full$year)`, at true year-by-year resolution; `r peak_year_full` is the single busiest year, with `r peak_n_full` entries.
+
+:::
+
+### Entry types
+
+::: {.panel-tabset}
+
+#### F1
 
 ```{r}
 #| label: overview-entry-types
@@ -97,12 +130,44 @@ entry_type_counts <- tibble(entry_type = entry_types) %>%
 
 ggplot(data = entry_type_counts, aes(x = fct_reorder(entry_type, n), y = n)) +
   geom_bar(stat = "identity", fill = "#5e81ac") +
+  geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
   coord_flip() +
+  scale_y_log10(expand = expansion(mult = c(0, 0.25))) +
   theme_bw() +
-  labs(x = "", y = "Count", title = "Entry types")
+  labs(x = "", y = "Count (log scale)", title = "Entry types")
 ```
 
-## Authorship
+`r nrow(entry_type_counts)` entry types appear in the corpus. The most common, `r entry_type_counts$entry_type[1]`, accounts for `r entry_type_counts$n[1]` of `r sum(entry_type_counts$n)` papers (`r scales::percent(entry_type_counts$n[1] / sum(entry_type_counts$n), accuracy = 1)`).
+
+#### Full corpus
+
+```{r}
+#| label: overview-entry-types-full
+#| fig-cap: "Entry type across the full bibliography."
+entry_types_full <- map_chr(bib, ~ .x$entry_type %||% NA_character_)
+
+entry_type_counts_full <- tibble(entry_type = entry_types_full) %>%
+  filter(!is.na(entry_type), !str_detect(entry_type, "\\|")) %>%
+  count(entry_type, sort = TRUE)
+
+ggplot(data = entry_type_counts_full, aes(x = fct_reorder(entry_type, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
+  coord_flip() +
+  scale_y_log10(expand = expansion(mult = c(0, 0.25))) +
+  theme_bw() +
+  labs(x = "", y = "Count (log scale)", title = "Entry types, full bibliography")
+```
+
+`r nrow(entry_type_counts_full)` entry types appear across the full bibliography. The most common, `r entry_type_counts_full$entry_type[1]`, accounts for `r entry_type_counts_full$n[1]` of `r sum(entry_type_counts_full$n)` entries (`r scales::percent(entry_type_counts_full$n[1] / sum(entry_type_counts_full$n), accuracy = 1)`).
+
+:::
+
+### Authorship
+
+::: {.panel-tabset}
+
+#### F1
 
 ```{r}
 #| label: overview-author-counts
@@ -115,55 +180,203 @@ n_authors <- df %>%
   filter(!is.na(gender)) %>%
   count(cite_key, name = "n_authors")
 
-ggplot(data = n_authors, aes(x = n_authors)) +
-  geom_histogram(binwidth = 1, fill = "#5e81ac", colour = "white") +
+n_authors %>%
+  count(n_authors, name = "n_papers") %>%
+  ggplot(aes(x = n_authors, y = n_papers)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  geom_text(aes(label = n_papers), vjust = -0.4, size = 3) +
   theme_bw() +
   scale_x_continuous(breaks = scales::breaks_pretty()) +
   labs(x = "Authors per paper", y = "Count", title = "Author count distribution")
+
+n_single_author <- sum(n_authors$n_authors == 1)
+max_authors <- max(n_authors$n_authors)
 ```
 
-## Publication venues
+`r n_single_author` of `r nrow(n_authors)` papers (`r scales::percent(n_single_author / nrow(n_authors), accuracy = 1)`) have a single author. One paper has `r max_authors`, the largest author count in the corpus.
+
+#### Full corpus
+
+```{r}
+#| label: overview-author-counts-full
+#| fig-cap: "Number of authors per entry across the full bibliography, counted from the author list on each record, capped at 10 for readability, with exact counts labelled."
+n_authors_full <- tibble(n_authors = map_int(bib, ~ length(.x$author %||% list())))
+n_authors_full <- n_authors_full %>% filter(n_authors > 0)
+
+axis_cap <- 10
+n_over_cap <- sum(n_authors_full$n_authors > axis_cap)
+
+n_authors_full %>%
+  mutate(n_authors_capped = pmin(n_authors, axis_cap)) %>%
+  count(n_authors_capped) %>%
+  ggplot(aes(x = n_authors_capped, y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  geom_text(aes(label = scales::comma(n)), vjust = -0.4, size = 3) +
+  scale_x_continuous(breaks = 1:axis_cap, labels = c(as.character(1:(axis_cap - 1)), paste0(axis_cap, "+"))) +
+  theme_bw() +
+  labs(x = "Authors per entry", y = "Count", title = "Author count distribution, full bibliography")
+
+n_single_author_full <- sum(n_authors_full$n_authors == 1)
+max_authors_full <- max(n_authors_full$n_authors)
+```
+
+This full-corpus count is taken directly from the length of each record's author list, not from the manually coded author-gender columns used for the F1 tab (those columns were only completed for the 369 F1 papers). `r n_single_author_full` of `r nrow(n_authors_full)` entries (`r scales::percent(n_single_author_full / nrow(n_authors_full), accuracy = 1)`) have a single listed author. The chart is capped at `r axis_cap` authors for readability; `r n_over_cap` entries exceed that, including the largest, with `r max_authors_full`.
+
+:::
+
+### Publication venues
+
+::: {.panel-tabset}
+
+#### F1
 
 ```{r}
 #| label: overview-venues
-#| fig-cap: "Most frequent publication venues in the analyzed corpus."
-venues <- map_chr(bib_matched, ~ .x$journaltitle %||% .x$booktitle %||% .x$publisher %||% NA_character_)
-venues <- venues[!is.na(venues)]
+#| fig-cap: "Journals and edited volumes with 3 or more F1 papers, by venue type."
+#| fig-width: 10
+#| fig-height: 7.5
+venue_types <- tibble(
+  journal = map_chr(bib_matched, ~ .x$journaltitle %||% NA_character_),
+  volume  = map_chr(bib_matched, ~ .x$booktitle %||% NA_character_)
+)
 
-venue_counts <- tibble(venue = venues) %>%
-  count(venue, sort = TRUE)
+venue_long <- bind_rows(
+  venue_types %>% filter(!is.na(journal)) %>% transmute(venue = journal, venue_type = "Journal"),
+  venue_types %>% filter(!is.na(volume)) %>% transmute(venue = volume, venue_type = "Edited volume / book")
+)
 
+venue_counts <- venue_long %>% count(venue_type, venue, sort = TRUE)
+min_shown <- 3
 n_single_venue <- sum(venue_counts$n == 1)
-cat("Papers with an identifiable venue:", length(venues), "/", length(bib_matched), "\n")
-cat("Distinct venues:", nrow(venue_counts), "\n")
-cat("Venues appearing exactly once:", n_single_venue, "\n")
+n_with_venue <- nrow(venue_long)
 
 venue_counts %>%
-  slice_max(n, n = 15) %>%
-  ggplot(aes(x = fct_reorder(venue, n), y = n)) +
-  geom_bar(stat = "identity", fill = "#5e81ac") +
+  filter(n >= min_shown) %>%
+  ggplot(aes(x = fct_reorder(venue, n), y = n, fill = venue_type)) +
+  geom_bar(stat = "identity") +
   coord_flip() +
   theme_bw() +
-  labs(x = "", y = "Count", title = "Top 15 publication venues")
+  scale_fill_manual(values = c("Journal" = "#5e81ac", "Edited volume / book" = "#a3be8c")) +
+  labs(x = "", y = "Count", fill = "", title = paste0("Venues with ", min_shown, "+ papers"))
 ```
 
-The corpus is not concentrated in a small set of core journals: it draws on `r nrow(venue_counts)` distinct venues, over half of which (`r n_single_venue`) contribute only a single paper.
+`r n_with_venue` of `r length(bib_matched)` papers are published in an identifiable journal or edited volume (publisher-only records, with neither, are excluded from this chart). The corpus draws on `r nrow(venue_counts)` distinct venues across both types, over half of which (`r n_single_venue`) contribute only a single paper.
 
-## Language
+#### Full corpus
+
+```{r}
+#| label: overview-venues-full
+#| fig-cap: "Journals and edited volumes with 25 or more entries in the full bibliography, by venue type."
+#| fig-width: 10
+#| fig-height: 6.5
+venue_types_full <- tibble(
+  journal = map_chr(bib, ~ .x$journaltitle %||% NA_character_),
+  volume  = map_chr(bib, ~ .x$booktitle %||% NA_character_)
+)
+
+venue_long_full <- bind_rows(
+  venue_types_full %>% filter(!is.na(journal)) %>% transmute(venue = journal, venue_type = "Journal"),
+  venue_types_full %>% filter(!is.na(volume)) %>% transmute(venue = volume, venue_type = "Edited volume / book")
+)
+
+venue_counts_full <- venue_long_full %>% count(venue_type, venue, sort = TRUE)
+min_shown_full <- 25
+n_single_venue_full <- sum(venue_counts_full$n == 1)
+n_with_venue_full <- nrow(venue_long_full)
+
+venue_counts_full %>%
+  filter(n >= min_shown_full) %>%
+  ggplot(aes(x = fct_reorder(venue, n), y = n, fill = venue_type)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  theme_bw() +
+  scale_fill_manual(values = c("Journal" = "#5e81ac", "Edited volume / book" = "#a3be8c")) +
+  labs(x = "", y = "Count", fill = "", title = paste0("Venues with ", min_shown_full, "+ entries, full bibliography"))
+```
+
+`r n_with_venue_full` of `r scales::comma(n_live)` entries are published in an identifiable journal or edited volume; a further `r scales::comma(sum(map_lgl(bib, ~ !is.null(.x$publisher) && is.null(.x$journaltitle) && is.null(.x$booktitle))))` have only a publisher recorded, typically standalone books, and are excluded from this chart since a publisher is not a comparable unit to a journal or volume title. The full bibliography draws on `r nrow(venue_counts_full)` distinct journals and volumes, `r n_single_venue_full` of which contribute only a single entry.
+
+:::
+
+### Language
+
+::: {.panel-tabset}
+
+#### F1
 
 ```{r}
 #| label: overview-language
-#| fig-cap: "Titles containing non-ASCII characters, as a proxy for non-English-language publications."
-titles <- map_chr(bib_matched, ~ .x$title %||% NA_character_)
-non_ascii_flag <- str_detect(titles, "[^\\x00-\\x7F]")
+#| fig-cap: "F1 papers by detected source-PDF language, excluding English."
+lang_labels <- c(
+  en = "English", sv = "Swedish", da = "Danish", nb = "Norwegian (Bokmål)",
+  nn = "Norwegian (Nynorsk)", de = "German", fr = "French",
+  ru = "Russian", uk = "Ukrainian", unknown = "Unknown script"
+)
 
-n_non_ascii <- sum(non_ascii_flag, na.rm = TRUE)
-cat("Titles with non-ASCII characters:", n_non_ascii, "/", length(titles), "\n")
+paper_langs <- map_chr(bib_matched, ~ .x$language %||% NA_character_)
+
+n_missing <- sum(is.na(paper_langs))
+n_unknown <- sum(paper_langs == "unknown", na.rm = TRUE)
+n_classified <- sum(!is.na(paper_langs) & paper_langs != "unknown")
+n_english <- sum(paper_langs == "en", na.rm = TRUE)
+
+lang_counts <- tibble(language = paper_langs) %>%
+  filter(!is.na(language)) %>%
+  count(language, sort = TRUE) %>%
+  mutate(pct = n / sum(n), language_label = coalesce(lang_labels[language], language))
+
+knitr::kable(
+  lang_counts %>% mutate(pct = scales::percent(pct, accuracy = 0.1)) %>% select(language_label, n, pct),
+  caption = "F1 papers by detected source-PDF language, including 'Unknown script'",
+  col.names = c("Language", "N", "%")
+)
+
+lang_counts %>%
+  filter(language != "en") %>%
+  ggplot(aes(x = fct_reorder(language_label, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  geom_text(aes(label = n), hjust = -0.3, size = 3.5) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "", y = "Count", title = "F1 papers by detected language, excluding English")
 ```
 
-No structured language field is available in the bibliographic records. As a proxy, `r n_non_ascii` of `r length(titles)` titles (`r scales::percent(n_non_ascii / length(titles))`) contain non-ASCII characters, consistent with Scandinavian-language publications; the remainder are presumed English-language.
+`r n_english` of `r n_classified` classified papers (`r scales::percent(n_english / n_classified, accuracy = 1)`) are English-language, which crowds out every other language on a shared axis, so the chart above excludes English and shows only the remaining `r n_classified - n_english + n_unknown` papers, where the real differences between languages are visible. The table gives exact counts and shares for all languages including English. `r n_unknown` papers are flagged "Unknown script" by the detector and `r n_missing` have no language recorded. The language field is recorded per paper by the extraction pipeline from its actual body text (using the `lingua` language-detection library, restricted to a known set of languages expected in this corpus: English, Norwegian, Swedish, Danish, German) and is persisted directly on each bibliography entry. "Unknown script" reflects papers written in a script the detector does not attempt to classify: confirmed for the two such cases in this corpus (Nosov 2018, Russian; Skorokhod & Blaszczyk 2020, Ukrainian), not a processing failure; both have real, correctly extracted content and citation data.
 
-A per-paper detected-language field does exist in the pipeline's processing cache (`_graph_state.json`), which is excluded from version control due to its size (100+ MB) and not available in this working copy. A more precise language breakdown than the ASCII-title proxy above would need to be generated from that cache directly on the processing machine.
+#### Full corpus
+
+```{r}
+#| label: overview-language-full
+#| fig-cap: "Full bibliography by detected source-PDF language, excluding English."
+paper_langs_full <- map_chr(bib, ~ .x$language %||% NA_character_)
+
+n_classified_full <- sum(!is.na(paper_langs_full) & paper_langs_full != "unknown")
+n_english_full <- sum(paper_langs_full == "en", na.rm = TRUE)
+n_unclassified_full <- sum(is.na(paper_langs_full) | paper_langs_full == "unknown")
+
+lang_counts_full <- tibble(language = paper_langs_full) %>%
+  mutate(language = ifelse(is.na(language) | language == "unknown", "unclassified", language)) %>%
+  count(language, sort = TRUE) %>%
+  mutate(pct = n / sum(n), language_label = coalesce(lang_labels[language], str_to_sentence(language)))
+
+knitr::kable(
+  lang_counts_full %>% mutate(pct = scales::percent(pct, accuracy = 0.1)) %>% select(language_label, n, pct),
+  caption = "Full bibliography by detected source-PDF language ('Unclassified' combines entries the detector flagged unknown and entries with no language recorded)",
+  col.names = c("Language", "N", "%")
+)
+
+lang_counts_full %>%
+  filter(language != "en") %>%
+  ggplot(aes(x = fct_reorder(language_label, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#5e81ac") +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "", y = "Count", title = "Full bibliography by detected language, excluding English")
+```
+
+`r n_english_full` of `r n_classified_full` classified entries (`r scales::percent(n_english_full / n_classified_full, accuracy = 1)`) are English-language. `r n_unclassified_full` entries are unclassified, either flagged `unknown` by the detector or carrying no language value at all.
+
+:::
 
 ## Citation detection per F1 paper
 
@@ -180,17 +393,6 @@ out_counts_full <- tibble(source = df$cite_key) %>%
   left_join(out_counts, by = "source") %>%
   mutate(n_citations = replace_na(n_citations, 0))
 
-summary_stats <- out_counts_full %>%
-  summarise(
-    n = n(),
-    min = min(n_citations),
-    max = max(n_citations),
-    mean = round(mean(n_citations), 1),
-    median = median(n_citations),
-    sd = round(sd(n_citations), 1)
-  )
-knitr::kable(summary_stats, caption = "Outgoing citation count summary across F1 papers")
-
 ggplot(out_counts_full, aes(x = n_citations)) +
   geom_histogram(binwidth = 10, fill = "#5e81ac", boundary = 0) +
   theme_bw() +
@@ -198,15 +400,67 @@ ggplot(out_counts_full, aes(x = n_citations)) +
        title = "Distribution of citation counts per F1 paper")
 ```
 
-Every F1 paper in the corpus has at least one resolved outgoing citation as of this writing; none are isolated nodes with zero outdegree, and the citation graph as a whole forms a single connected component. This was not the case throughout the corpus-building process — automated extraction passes repeatedly left individual F1 papers with no detected or resolved outgoing citations, most often because a paper's reference list used a format (footnote-embedded citations, a shared reference section for an edited volume, non-Latin or corrupted character encoding in the source PDF) that the primary extraction method did not handle, or because the same underlying work had independently been extracted twice under two different citekeys — one well-connected, one an orphaned duplicate. Each case was investigated individually against the original source PDF and either resolved (matching cited works to existing bibliography entries, creating new entries where a cited work did not yet exist, or merging duplicate records) or documented as a genuine structural case.
+```{r}
+#| label: overview-citation-zero-check-text
+n_zero_citations <- sum(out_counts_full$n_citations == 0)
+zero_citation_text <- if (n_zero_citations == 0) {
+  "Every F1 paper has at least one resolved outgoing citation, and the citation graph as a whole forms a single connected component."
+} else {
+  paste0(n_zero_citations, " F1 paper(s) have zero resolved outgoing citations: ",
+         paste(out_counts_full$source[out_counts_full$n_citations == 0], collapse = ", "), ".")
+}
+```
 
-### Detection method breakdown
+`r zero_citation_text` This was not the case throughout corpus construction: extraction passes repeatedly left individual F1 papers disconnected, most often from a reference-list format (footnote-embedded citations, a shared reference section for an edited volume, non-Latin or corrupted encoding) the primary extraction method did not handle, or from the same work being independently extracted twice under two citekeys. Each case was resolved against the original source PDF or documented as a genuine structural exception.
 
-*Not yet available in this document.* The pipeline records, per paper, how many citations were found by each detection method (GROBID's structured reference-list parser, inline citation-marker matching, text-pattern matching, and LLM-based body-text and footnote scanning) in the same excluded processing cache noted above. A corpus-wide breakdown of detection-method contribution would need to be computed directly from that cache and added here as a generated table.
+## From detection to resolved bibliography
 
-## Normalization and deduplication
+The citation graph is built in two stages: automated detection of candidate citations per paper, then manual correction and deduplication across the whole bibliography.
 
-The bibliography underwent substantial manual correction and deduplication work over the course of corpus construction, tracked in a running corrections file (`corrections.yaml`) rather than as edits to the raw pipeline output. As of this writing that file holds:
+```{r}
+#| label: overview-detection-methods
+method_labels <- c(
+  reference_list  = "Structured reference list (GROBID)",
+  inline_markers   = "Inline citation markers",
+  llm_body_scan    = "LLM body-text scan",
+  text_patterns    = "Text-pattern matching",
+  llm_bib_reparse  = "LLM bibliography reparse",
+  llm_footnotes    = "LLM footnote scan"
+)
+
+detection_totals <- tibble()
+merged_totals <- c()
+n_with_detection <- 0
+for (e in bib_matched) {
+  det <- e$detection
+  if (is.null(det)) next
+  n_with_detection <- n_with_detection + 1
+  merged_totals <- c(merged_totals, det$merged_total %||% NA)
+  for (method in names(det)) {
+    if (method == "merged_total") next
+    detection_totals <- bind_rows(detection_totals, tibble(method = method, count = det[[method]]))
+  }
+}
+
+detection_summary <- detection_totals %>%
+  group_by(method) %>%
+  summarise(total = sum(count), .groups = "drop") %>%
+  mutate(method_label = coalesce(method_labels[method], method)) %>%
+  arrange(desc(total))
+
+raw_total <- sum(detection_summary$total)
+merged_total <- sum(merged_totals, na.rm = TRUE)
+
+knitr::kable(
+  detection_summary %>% select(method_label, total),
+  caption = "Raw citation detections by method, before merging duplicate detections of the same citation",
+  col.names = c("Detection method", "Raw detections")
+)
+```
+
+Each paper's PDF is scanned by six independent methods: GROBID parsing its structured reference list, matching inline citation markers in the body text, text-pattern matching, and three LLM-based passes (a body-text scan, a bibliography reparse, and a footnote scan). A single real citation is frequently flagged by more than one method. The `r scales::comma(raw_total)` raw detections above merge down to `r scales::comma(merged_total)` deduplicated citations per-paper, which are then carried into the bibliography-wide correction process below. The structured reference list and inline-marker matching account for the large majority of raw detections; the LLM-based methods contribute the remainder, recovering citations the structured parser misses, most commonly footnote-embedded references and citations in non-standard or non-Latin formats. 1.16% of bibliography entries (167) have no title recorded: a paper in the corpus cites them, but the entry itself has no title or an incomplete author.
+
+Once detected, citations are carried into a single shared bibliography, where the same underlying work can be independently detected from multiple citing papers and needs consolidating into one record. This consolidation, along with other manual corrections, is tracked in a running corrections file (`corrections.yaml`) rather than as edits to the raw pipeline output.
 
 ```{r}
 #| label: overview-corrections-breakdown
@@ -222,18 +476,31 @@ corrections_labels <- c(
 )
 
 corrections <- read_yaml(here("CitationAnalysis/corrections.yaml"))
-corrections_actions <- map_chr(corrections, ~ .x$action %||% NA_character_)
+corrections_df <- tibble(
+  action = map_chr(corrections, ~ .x$action %||% NA_character_),
+  field  = map_chr(corrections, ~ .x$field %||% NA_character_)
+)
 
-corrections_summary <- tibble(action_raw = corrections_actions) %>%
-  count(action_raw, name = "count") %>%
-  mutate(action = coalesce(corrections_labels[action_raw], action_raw)) %>%
-  select(action, count) %>%
+bulk_fields <- c("language", "detection")
+is_bulk <- corrections_df$action == "set" & corrections_df$field %in% bulk_fields
+
+corrections_summary <- corrections_df %>%
+  filter(!is_bulk) %>%
+  count(action, name = "count") %>%
+  mutate(action_label = coalesce(corrections_labels[action], action)) %>%
+  select(action_label, count) %>%
   arrange(desc(count))
 
-knitr::kable(corrections_summary, caption = "Manual correction actions applied to the bibliography (corrections.yaml)")
-cat("Total correction actions:", sum(corrections_summary$count), "\n")
+bulk_summary <- corrections_df %>%
+  filter(is_bulk) %>%
+  count(field, name = "count") %>%
+  arrange(desc(count))
+
+knitr::kable(corrections_summary, caption = "Manual, individually-reasoned correction actions applied to the bibliography (corrections.yaml)", col.names = c("Action", "Count"))
 ```
 
-The great majority of `delete` actions removed "ghost" entries — records with no title and no raw citation text, produced when the extraction pipeline generated a placeholder entry it was never able to resolve to a real source. `merge` actions consolidated cases where the same underlying work had been independently created under two or more citekeys, most commonly because one version came from an automated reference-list extraction with no linked PDF and a second, fuller version was later created when the paper's own PDF was located and processed directly, or because the same source was independently extracted from two different citing papers' reference lists. `set` actions cover the bulk of routine field-level corrections: fixing fabricated or garbled author names, correcting mis-parsed years and titles, and adding real citation relationships (`cited_by` entries) that automated detection missed or failed to resolve on the first pass.
+Two bulk, mechanical field backfills are tracked in the same file but excluded from the table above: a `language` value was set on `r scales::comma(bulk_summary$count[bulk_summary$field == "language"])` entries and a `detection` value on `r scales::comma(bulk_summary$count[bulk_summary$field == "detection"])` entries, both copied wholesale from the pipeline's own processing cache rather than individually reasoned. Combined they account for more `set` actions than every other correction in the file put together, so are reported separately to avoid making the file's manual-correction volume look larger than it is.
+
+As of this writing the file holds `r sum(corrections_summary$count)` individually-reasoned correction actions, plus the `r scales::comma(sum(bulk_summary$count))` bulk field backfills noted above. The great majority of `delete` actions removed "ghost" entries: records with no title and no raw citation text, produced when the extraction pipeline generated a placeholder entry it was never able to resolve to a real source. `merge` actions consolidated cases where the same underlying work had been independently created under two or more citekeys, most commonly because one version came from an automated reference-list extraction with no linked PDF and a second, fuller version was later created when the paper's own PDF was located and processed directly, or because the same source was independently extracted from two different citing papers' reference lists, the cross-paper duplication this section exists to resolve. `set` actions in the table above cover routine field-level corrections: fixing fabricated or garbled author names, correcting mis-parsed years and titles, and adding real citation relationships (`cited_by` entries) that automated detection missed or failed to resolve on the first pass.
 
 One deletion in this file was subsequently confirmed incorrect and reversed: a genuine F1 paper had been marked fabricated across multiple earlier review passes despite being a real, verifiable source, and was restored with corrected metadata once checked directly against its source PDF. This is noted here as a reminder that `delete` corrections, like any other, should be treated as provisional until checked against a primary source rather than as settled fact on the strength of a confident-sounding note.

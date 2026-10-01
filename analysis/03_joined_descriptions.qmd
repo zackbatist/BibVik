@@ -557,6 +557,14 @@ all_peaks |>
   or bridging works within a cluster are disproportionately authored by
   one gender even when the cluster's dominant topic is not itself
   gender-skewed in the annotation data.
+- Self-citation: who cites themselves, broken down by gender, cluster,
+  and unique individuals. Whether rate of self-citation correlates with
+  centrality, or with prevalence across different clusters in the
+  network. Whether women-led work is cited more frequently in some
+  clusters than others — determined by calculating average out-degree
+  within each cluster, filtered by the author info of the recipient
+  node, and potentially further divided by the gender of the sending
+  node to assess uniformity of willingness to cite women-led work.
 - Direct citation homophily: whether papers (or, at a future author-level
   aggregation, authors) disproportionately cite others sharing their coded
   gender / topic / method characteristics. Computable directly from the
