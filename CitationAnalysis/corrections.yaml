@@ -298050,3 +298050,109 @@
   value:
   - lund2021
   note: 'Citers whose own reference lists cite a different work by the same author were moved: mainland2018 -> zori2013a'
+
+- action: set
+  citekey: gotfredsen2014
+  field: pages
+  value: 145--163
+  note: CrossRef (DOI 10.1080/21662282.2015.1084730) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: gotfredsen2014
+  field: volume
+  value: '3'
+  note: CrossRef (DOI 10.1080/21662282.2015.1084730) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: gotfredsen2014
+  field: journaltitle
+  value: Danish Journal of Archaeology
+  note: CrossRef (DOI 10.1080/21662282.2015.1084730) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: williams2010
+  field: pages
+  value: 1--24
+  note: CrossRef (DOI 10.1179/lan.2010.11.1.1) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: esper2007
+  field: volume
+  value: '34'
+  note: CrossRef (DOI 10.1029/2007gl030844) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: lewis2015
+  field: volume
+  value: '11'
+  note: CrossRef (DOI 10.5194/cp-11-1347-2015) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: shindell2001
+  field: volume
+  value: '106'
+  note: CrossRef (DOI 10.1029/2000jd900547) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: andersson1992
+  field: pages
+  value: 459--472
+  note: CrossRef (DOI 10.1016/0012-821x(92)90124-e) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: lie1991
+  field: pages
+  value: 219--235
+  note: CrossRef (DOI 10.2307/1388992) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: frei2011
+  field: volume
+  value: '26'
+  note: CrossRef (DOI 10.1016/j.apgeochem.2010.12.006) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: kilger2008
+  field: pages
+  value: 199--252
+  note: CrossRef (DOI 10.2307/jj.35529284.9) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: thomas2012
+  field: volume
+  value: '15'
+  note: CrossRef (DOI 10.1179/1461957112y.0000000018) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: hedges2007
+  field: pages
+  value: 808--816
+  note: CrossRef (DOI 10.1002/ajpa.20598) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: devos2011
+  field: pages
+  value: 51--76
+  note: CrossRef (DOI 10.1484/j.mmm.1.102776) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: dansgaard1964
+  field: pages
+  value: 436--468
+  note: CrossRef (DOI 10.1111/j.2153-3490.1964.tb00181.x) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: price2005
+  field: pages
+  value: 130--144
+  note: CrossRef (DOI 10.1017/s0003598x00093315) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: barrett2001
+  field: pages
+  value: 145--154
+  note: CrossRef (DOI 10.1017/s0003598x00052844) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: richards2002
+  field: pages
+  value: 205--210
+  note: CrossRef (DOI 10.1002/ajpa.10124) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: ambrose1999
+  field: volume
+  value: '41'
+  note: CrossRef (DOI 10.1017/s0033822200019512) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: lund2008a
+  field: pages
+  value: 53--72
+  note: CrossRef (DOI 10.1179/jwa.2008.8.1.53) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+- action: set
+  citekey: biddle1992a
+  field: volume
+  value: '66'
+  note: CrossRef (DOI 10.1017/s0003598x00081023) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
