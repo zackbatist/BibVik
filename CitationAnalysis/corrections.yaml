@@ -298156,3 +298156,999 @@
   field: volume
   value: '66'
   note: CrossRef (DOI 10.1017/s0003598x00081023) gives this value; the citing papers' own reference lists agree with CrossRef and not with the entry.
+
+- action: merge
+  keep: andren2007
+  discard: andren2005
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: andren2004a
+  discard: andren2006a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: bonde1982
+  discard: bonde1984
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: brather2013
+  discard: brather2012
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: brink2004d
+  discard: brink2004
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: christensen1991c
+  discard: christensen1993a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: feveile2009a
+  discard: feveile2012a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: gardela2018
+  discard: gardela2016a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: graslund2012a
+  discard: graslund2012
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: imer2004
+  discard: imer2001
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: jones2007
+  discard: jones2007a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: naum2008
+  discard: naum2008d
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: nielsen1980
+  discard: nielsen1979
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: rasmussen2001
+  discard: rasmussen2000
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: roesdahl1978
+  discard: roesdahl1976
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: skre2007
+  discard: skre2006
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: skre1998
+  discard: skre1996
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: toplak2015
+  discard: toplak2017
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: tummuscheit2014
+  discard: tummuscheit2013
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: gaut2001
+  discard: gaut2002
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: mauss1924
+  discard: mauss1923
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: mikkelsen1998
+  discard: mikkelsen1999
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: petersen1909
+  discard: petersen1908
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: skaare1976
+  discard: skaare1976a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: fuglesang1985
+  discard: fuglesang1987
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: gjessing1928
+  discard: gjessing1927
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: hougen1931
+  discard: hougen1934
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: arbman1969
+  discard: arbman1966
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: vikstrand2011
+  discard: vikstrand2009
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: waltonrogers1996
+  discard: waltonrogers1997b
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: barret2005
+  discard: barret2004
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: bratt2009
+  discard: bratt2010
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: sawyer2000
+  discard: sawyer2000b
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: sawyer2000
+  discard: sawyer2000a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: buggenda
+  discard: buggend
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: lindqvist1936
+  discard: lindqvist1936a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: skov1994
+  discard: skov1992
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: scholz1970
+  discard: scholz1972
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: woolf2017
+  discard: woolf2016
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: randers1981
+  discard: randers1982
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: sindbaek2005
+  discard: sindbaek2005a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: faure2004
+  discard: faure2005
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: hvass1980
+  discard: hvass1979
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: magnusson1973
+  discard: magnusson1972
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: magnusson1973
+  discard: magnusson1971
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: magnusson1997
+  discard: magnussonu1997
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: nicolaysennda
+  discard: nicolaysenndc
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: nicolaysennda
+  discard: nicolaysennd
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: nicolaysennda
+  discard: nicolaysenndi
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: wiker2006
+  discard: wiker2007
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: birgisson2008
+  discard: birgisson2007
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: einarsson1994
+  discard: einarsson1995a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: watt1985
+  discard: watt1984
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: stoklund1991
+  discard: stoklund1991a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: goodman2013
+  discard: goodman2013a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: kohl1995
+  discard: kohl1996
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: kivikoski1973
+  discard: kivikoski1971
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: kivikoski1964
+  discard: kivikoski1964a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: demaree2001
+  discard: demaree2001a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: smiarowski2017
+  discard: smiarowski2015
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: albrectsen1951
+  discard: albrectsen1950
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: hohenberg1995
+  discard: hohenberg1996
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: conyers2013
+  discard: conyers2012
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: stromback1969
+  discard: stromback1970
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: stalberg2000
+  discard: stalberg1999
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: luz1985
+  discard: luz1985a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: stamsomunch1970
+  discard: stamsomunch1970a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: fagerlund1993a
+  discard: fagerlund1993
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: backstrom2016
+  discard: backstrom2016a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: baxter2008
+  discard: baxter2005
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: blinkhorn2013
+  discard: blinkhorn2013a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: grandtnielsen1974
+  discard: grandtnielsen1971
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: cabot2004
+  discard: cabot2004a
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: ernst1989
+  discard: ernst1992
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: merge
+  keep: sparrevohn2006
+  discard: sparrevohn2008
+  note: Same work recorded twice (same first author, near-identical title, no conflicting DOI, pages, volume, container or second author). Kept the entry with the more complete metadata and the more central generation.
+- action: set
+  citekey: andren2007
+  field: cited_by
+  value:
+  - andren2013
+  - kristjansdottir2015
+  - price2010
+  - williams2014
+  - fabech2013
+  - lund2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: andren2004a
+  field: cited_by
+  value:
+  - mannering2013
+  - price2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: bonde1982
+  field: cited_by
+  value:
+  - bonde2016
+  - beck2018
+  - holst2013
+  - lund2005
+  - lund2004
+  - lund2006
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: brather2013
+  field: cited_by
+  value:
+  - lund2021
+  - hilberg2013
+  - hilberg2016
+  - jagodzinski2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: brink2004d
+  field: cited_by
+  value:
+  - lund2005
+  - magnell2010
+  - myrberg2008
+  - price2014
+  - sanmark2008a
+  - andren2013
+  - backdanielsson2016
+  - fabech2013
+  - jorgensen2009a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: christensen1991c
+  field: cited_by
+  value:
+  - fallgren2008
+  - henriksen2014
+  - hilberg2018
+  - holst2013
+  - lund2016
+  - tonning2020
+  - fabech2013
+  - holst2014
+  - jessen2014
+  - jessen2016
+  - lucas2007
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: feveile2009a
+  field: cited_by
+  value:
+  - lund2021
+  - ashby2015
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: gardela2018
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: graslund2012a
+  field: cited_by
+  value:
+  - pilo2018
+  - sindbaek2017
+  - skre2019
+  - tveiten2017
+  - zachrisson2017
+  - fredriksen2014
+  - price2015
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: imer2004
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - bill2016
+  - bill2019
+  - bill2020
+  - christensen2013
+  - gardela2007
+  - oehrl2017
+  - oehrl2019
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: jones2007
+  field: cited_by
+  value:
+  - eriksen2016
+  - lund2010
+  - lund2019
+  - andren2013a
+  - arwillnordbladh2013a
+  - backdanielsson2016
+  - harris2017
+  - heenpettersen2018
+  - lund2016
+  - lund2020
+  - williams2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: naum2008
+  field: cited_by
+  value:
+  - croix2015
+  - gardela2015
+  - glorstad2012
+  - gustin2017
+  - ingvardson2012
+  - lund2021
+  - price2012
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: nielsen1980
+  field: cited_by
+  value:
+  - beck2018
+  - ellingsen2019
+  - jessen2014
+  - holst2010
+  - holst2013
+  - majchczack2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: rasmussen2001
+  field: cited_by
+  value:
+  - christensen2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: roesdahl1978
+  field: cited_by
+  value:
+  - ulriksen2011a
+  - ulriksen2011
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: skre2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015
+  - ashby2015a
+  - axelsen2014
+  - baug2017
+  - bill2017a
+  - croix2015
+  - croix2019
+  - devos2013
+  - ellingsen2019
+  - feveile2011
+  - glorstad2017
+  - heenpettersen2014
+  - jahnsen2016
+  - jessen2016
+  - kershaw2017
+  - lund2016
+  - lund2017
+  - macphail2013
+  - moen2020
+  - pedersen2017
+  - poulsen2011
+  - raffield2016
+  - sanmark2013
+  - sindbaek2017
+  - sindbaek2018
+  - skre2011b
+  - skre2016
+  - skre2019
+  - storli2010c
+  - the2017
+  - tonning2020
+  - baug2015
+  - fabech2013
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: skre1998
+  field: cited_by
+  value:
+  - bergstol2004
+  - fallgren2008
+  - forest2011
+  - naumann2014
+  - lund2013
+  - pedersen2006
+  - poulsen2011
+  - storli2010c
+  - zachrisson2017
+  - skre2019
+  - stene2017
+  - oye2016
+  - lund2017
+  - lund2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: toplak2015
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - lund2021
+  - toplak2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: tummuscheit2014
+  field: cited_by
+  value:
+  - hilberg2013
+  - hilberg2018
+  - lund2021
+  - tummuscheit2019
+  - hilberg2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: gaut2001
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - heenpettersen2014
+  - barrett2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: mauss1924
+  field: cited_by
+  value:
+  - lund2015
+  - lund2010
+  - pedersen2017
+  - sheehan2013
+  - sheehan2013a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: mikkelsen1998
+  field: cited_by
+  value:
+  - holst2014
+  - baastrup2014
+  - fallgren2008
+  - holst2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: petersen1909
+  field: cited_by
+  value:
+  - holst2013
+  - kastholm2016
+  - sindbaek2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: skaare1976
+  field: cited_by
+  value:
+  - aannestad2018
+  - aannestad2018a
+  - the2017
+  - gullbekk2011
+  - skre2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: fuglesang1985
+  field: cited_by
+  value:
+  - christiansen2019
+  - pedersennda
+  - pedersen2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: gjessing1928
+  field: cited_by
+  value:
+  - jahnsen2016
+  - spangen2009
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: hougen1931
+  field: cited_by
+  value:
+  - pedersen2016b
+  - pedersen2017
+  - axelsen2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: arbman1969
+  field: cited_by
+  value:
+  - raffield2014
+  - androshchuk2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: vikstrand2011
+  field: cited_by
+  value:
+  - zachrisson2014
+  - zachrisson2014b
+  - zachrisson2014a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: waltonrogers1996
+  field: cited_by
+  value:
+  - strand2011
+  - boyd2013
+  - rogers2020
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: barret2005
+  field: cited_by
+  value:
+  - arneborg2012
+  - dugmore2007
+  - leonard2011
+  - barrett2010
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: bratt2009
+  field: cited_by
+  value:
+  - fischer2011
+  - forest2011
+  - iversen2013
+  - price2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: sawyer2000
+  field: cited_by
+  value:
+  - andren2013a
+  - bill2019
+  - holst2014
+  - imer2014
+  - lund2020
+  - price2005a
+  - barrett2008
+  - barrett2010
+  - poulsen2011
+  note: 'Pinned after merging 2 duplicate entries into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: buggenda
+  field: cited_by
+  value:
+  - kitzlerahfeld2015a
+  - oehrl2019
+  - oehrl2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: lindqvist1936
+  field: cited_by
+  value:
+  - lund2016
+  - burstrom2014
+  - gustavsson2015
+  - ljungkvist2011a
+  - ljungkvist2015
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: skov1994
+  field: cited_by
+  value:
+  - beck2018
+  - eriksen2013
+  - fallgren2008
+  - jessen2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: scholz1970
+  field: cited_by
+  value:
+  - barrett2008
+  - barrett2010
+  - tummuscheit2019
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: woolf2017
+  field: cited_by
+  value:
+  - raffield2019
+  - raffield2016
+  - raffield2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: randers1981
+  field: cited_by
+  value:
+  - oye2014
+  - oye2016
+  - baug2015
+  - baug2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: sindbaek2005
+  field: cited_by
+  value:
+  - baug2015
+  - baastrup2014
+  - baug2017
+  - bill2017a
+  - borake2018
+  - heenpettersen2019
+  - hilberg2014
+  - magi2015
+  - price2011
+  - sindbaek2007
+  - price2018
+  - the2017
+  - skre2016
+  - svendsen2016
+  - sindbaek2011
+  - knappett2025
+  - sindbaek2016
+  - skre2017
+  - skre2011b
+  - svendsen2019
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: faure2004
+  field: cited_by
+  value:
+  - price2020
+  - price2016
+  - price2012
+  - becker2012
+  - pedersen2015
+  - price2011
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: hvass1980
+  field: cited_by
+  value:
+  - beck2018
+  - jessen2014
+  - poulsen2011
+  - holst2013
+  - majchczack2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: magnusson1973
+  field: cited_by
+  value:
+  - milek2012
+  - kristjansdottir2015
+  - zori2013
+  - baug2017
+  note: 'Pinned after merging 2 duplicate entries into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: magnusson1997
+  field: cited_by
+  value:
+  - svensson2009
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: nicolaysennda
+  field: cited_by
+  value:
+  - axelsen2014
+  - bill2012
+  - macphail2013
+  - price2008a
+  - price2010
+  - schneidhofer2017
+  - bill2019
+  - bill2020
+  - gardela2018
+  - bill2017a
+  - pedersen2015
+  note: 'Pinned after merging 3 duplicate entries into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: wiker2006
+  field: cited_by
+  value:
+  - bill2017a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: birgisson2008
+  field: cited_by
+  value:
+  - bill2019
+  - bill2020
+  - skre2019
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: einarsson1994
+  field: cited_by
+  value:
+  - lucas2007
+  - milek2012
+  - zori2013
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: watt1985
+  field: cited_by
+  value:
+  - naum2007
+  - price2012
+  - ulriksen2011a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: stoklund1991
+  field: cited_by
+  value:
+  - imer2014
+  - lund2004
+  - lund2005
+  - lund2020
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: goodman2013
+  field: cited_by
+  value:
+  - rundkvist2014
+  - rundkvist2015
+  - kalmring2017
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: kohl1995
+  field: cited_by
+  value:
+  - frieman2019
+  - jahnsen2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: kivikoski1973
+  field: cited_by
+  value:
+  - gustin2017
+  - price2020
+  - price2016
+  - rundkvist2010
+  - spangen2009
+  - fischer2011
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: kivikoski1964
+  field: cited_by
+  value:
+  - gustin2017
+  - roslund2017
+  - raninen2014
+  - spangen2009
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: demaree2001
+  field: cited_by
+  value:
+  - hartman2017
+  - hayeursmith2013
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: smiarowski2017
+  field: cited_by
+  value:
+  - hartman2017
+  - hayeursmith2013
+  - jackson2018
+  - frei2015
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: albrectsen1951
+  field: cited_by
+  value:
+  - ulriksen2011
+  - ulriksen2011a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: hohenberg1995
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018a
+  - kalmring2013
+  - sindbaek2007
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: conyers2013
+  field: cited_by
+  value:
+  - kalmring2017
+  - rundkvist2014
+  - rundkvist2015
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: stromback1969
+  field: cited_by
+  value:
+  - lund2020
+  - lund2005
+  - staecker2004a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: stalberg2000
+  field: cited_by
+  value:
+  - kalmring2012
+  - trinks2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: luz1985
+  field: cited_by
+  value:
+  - knudson2012
+  - price2014
+  - price2020
+  - price2016
+  - price2012
+  - price2019
+  - buckberry2014
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: stamsomunch1970
+  field: cited_by
+  value:
+  - spangen2009
+  - barndon2005a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: fagerlund1993a
+  field: cited_by
+  value:
+  - ljungkvist2011a
+  - ljungkvist2011
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: backstrom2016
+  field: cited_by
+  value:
+  - kalmring2016
+  - price2018
+  - price2018b
+  - price2019
+  - krzewinska2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: baxter2008
+  field: cited_by
+  value:
+  - raffield2019
+  - ravn2012
+  - ravn2012a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: blinkhorn2013
+  field: cited_by
+  value:
+  - perry2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: grandtnielsen1974
+  field: cited_by
+  value:
+  - baastrup2014
+  - NOAUTHOR28
+  - runge2018a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: cabot2004
+  field: cited_by
+  value:
+  - knappett2025
+  - sindbaek2016
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: ernst1989
+  field: cited_by
+  value:
+  - toplak2015
+  - toplak2018
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: sparrevohn2006
+  field: cited_by
+  value:
+  - ulriksen2011
+  - ulriksen2011a
+  note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
