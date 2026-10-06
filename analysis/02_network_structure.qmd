@@ -1199,11 +1199,14 @@ gn_prepare <- function(key) {
   list(tg = tg, nodes = nodes, label_colours = label_colours, top = top)
 }
 
-# `lgl` places a handful of true outliers far from the rest, which stretches
-# the default bounding box and leaves most of the canvas empty. The view is
-# cropped (coord_cartesian crops the view only, not the data) to the 1st-99th
-# percentile of each axis, so every real cluster stays fully visible.
-gn_plot_partition <- function(key, layout = "lgl", layout_args = list(coolexp = 0.5), crop = TRUE) {
+# Force-directed layouts leave a handful of nodes far from the rest, which
+# stretches the default bounding box and leaves most of the canvas empty. The
+# view is cropped (coord_cartesian crops the view only, not the data) to the
+# 1st-99th percentile of each axis, so every real cluster stays fully visible.
+# `weights = NA` makes the layout ignore any edge weight attribute.
+gn_plot_partition <- function(key, layout = "fr",
+                              layout_args = list(niter = 500, grid = "grid", weights = NA),
+                              crop = TRUE) {
   d <- gn_prepare(key)
   tg <- d$tg |>
     activate(nodes) |>
@@ -1502,7 +1505,7 @@ gn_onset_table("seed_filtered")
 
 #### The working partition
 
-Only the top `r gn_top_n` clusters are individually coloured and the rest are grey, since beyond roughly `r gn_top_n` colours a reader cannot reliably distinguish them on the plot. F1 papers carry a black ring. Node size is each node's betweenness centrality in that graph, so the largest dots in the dense core are the corpus's structural bridges. The dense core is real structure and no layout parameter changes what it is. Every plot uses the `lgl` layout with `coolexp = 0.5`, the clearest of the layouts tried (see the appendix).
+Only the top `r gn_top_n` clusters are individually coloured and the rest are grey, since beyond roughly `r gn_top_n` colours a reader cannot reliably distinguish them on the plot. F1 papers carry a black ring. Node size is each node's betweenness centrality in that graph, so the largest dots in the dense core are the corpus's structural bridges. The dense core is real structure and no layout parameter changes what it is. Every plot uses the Fruchterman-Reingold layout, the clearest of the layouts tried (see the appendix).
 
 ::: {.panel-tabset}
 
@@ -1907,13 +1910,14 @@ gn$annotated$partition |>
 
 ## Appendix: layout trials
 
-The partition plots above use the `lgl` layout with `coolexp = 0.5`. The variants below were tried first and are kept for reference with `eval: false`. Each calls the same plotting function as the main plots, so any of them can be switched on one at a time and run on either graph.
+The partition plots above use the Fruchterman-Reingold layout (`fr`, 500 iterations, with igraph's grid speed-up). The layouts below were tried and are kept for reference with `eval: false`. Each calls the same plotting function as the main plots, so any of them can be switched on one at a time and run on either graph.
 
-- `drl` is force-directed and tends to compress most nodes into one dense central mass. In the Annotated graph the seed itself, cited directly by hundreds of F1 papers, pulls the whole layout into orbit around it.
+- `fr` spreads the papers that cite a hub around it, so each community reads as a region of the plot. It runs in seconds on either graph.
+- `lgl` with `coolexp` lowered to 0.5, the layout used before, stretches the graph into one diagonal band and leaves the highlighted communities overlapping through its middle. It is also far slower than `fr` on the seed-filtered graph.
+- `drl` stacks the papers that cite a hub on top of it, so every community collapses into a single dot and the plot shows nothing of its shape.
 - `stress` (`graphlayouts::layout_with_stress()`) is faster than `drl` and built to preserve graph distance. It produced a concentric-ring pattern and was rejected.
 - Untuned `lgl` places a handful of true outliers far from the rest. That is why the main plots crop the view to the 1st to 99th percentile.
 - `lgl` with `repulserad` doubled spread the periphery out and left the inner core dense. `repulserad` sets the distance at which repulsion stops acting and does not change its strength, so it is the wrong lever for core density.
-- `lgl` with `coolexp` lowered to 0.5 keeps the system moving for longer before it settles. It gave the clearest layout and is the one used above.
 
 ```{r}
 #| label: layout-trial-drl
@@ -1948,6 +1952,14 @@ gn_plot_partition("annotated", layout = "lgl", layout_args = list())
 lgl_area <- vcount(graphs$annotated)^2
 gn_plot_partition("annotated", layout = "lgl",
                   layout_args = list(area = lgl_area, repulserad = 2 * lgl_area * vcount(graphs$annotated)))
+```
+
+```{r}
+#| label: layout-trial-lgl-coolexp-annotated
+#| eval: false
+#| fig-width: 16
+#| fig-height: 14
+gn_plot_partition("annotated", layout = "lgl", layout_args = list(coolexp = 0.5))
 ```
 
 ```{r}
