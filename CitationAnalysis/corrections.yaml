@@ -299406,3 +299406,262 @@
   - androshchuk2010
   - lundborg2006a
   note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+
+- action: set
+  citekey: andren2004a
+  field: cited_by
+  value:
+  - mannering2013
+  - price2010
+  - raffield2014
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: andren2006b
+  field: cited_by
+  value:
+  - eriksen2016
+  - jorgensen2009a
+  - lund2010
+  - sindbaek2014
+  - zachrisson2014a
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: barrett2001
+  field: cited_by
+  value:
+  - knudson2012
+  - linderholm2008
+  - montgomery2014
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: barrett2004d
+  field: cited_by
+  value:
+  - glorstad2014
+  - sanmark2013
+  - sindbaek2017
+  - andren2006b
+  - glorstad2012
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: gansum1995
+  field: cited_by
+  value:
+  - bill2017a
+  - draganits2014
+  - forest2011
+  - schneidhofer2017
+  - moen2020
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: gansum1997
+  field: cited_by
+  value:
+  - axelsen2014
+  - draganits2014
+  - draganits2015
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: gardela2013
+  field: cited_by
+  value:
+  - edberg2019
+  - gardela2014a
+  - gardela2015
+  - harris2017
+  - kastholm2016
+  - moen2020
+  - price2014
+  - price2019
+  - raffield2016
+  - raffield2019
+  - toplak2018
+  - williams2016
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: gardela2013b
+  field: cited_by
+  value:
+  - toplak2015
+  - gardelanda
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: graslund2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - lund2013
+  - mainland2018
+  - roesdahl2011
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: graslund2008c
+  field: cited_by
+  value:
+  - osullivan2015
+  - graslund2011
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: hansen2004
+  field: cited_by
+  value:
+  - amundsen2017
+  - baug2019
+  - feveile2017
+  - holst2010
+  - iversen2015a
+  - lund2015
+  - nielsen2011
+  - pedersenndb
+  - spangen2009
+  - storli2010c
+  - solli2018
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: hansen2005
+  field: cited_by
+  value:
+  - andersson2008
+  - rosvold2019
+  - solli2018
+  - baug2015
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: harrison2007
+  field: cited_by
+  value:
+  - furholt2018
+  - hardh2010a
+  - price2014
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: harrison2007a
+  field: cited_by
+  value:
+  - williams2016
+  - harrison2015
+  - leonard2011
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: helmbrecht2004
+  field: cited_by
+  value:
+  - hilberg2018
+  - sindbaek2011a
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: helmbrecht2007
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - sindbaek2014
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: iversen1997
+  field: cited_by
+  value:
+  - oye2016
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: iversen1999
+  field: cited_by
+  value:
+  - barndon2018
+  - moen2020
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: jensen2004
+  field: cited_by
+  value:
+  - arwillnordbladh2012
+  - arwillnordbladh2013
+  - beck2018
+  - christensen2013
+  - dobat2013
+  - feveile2017
+  - hardh2010a
+  - helmbrecht2012
+  - holst2010
+  - jackson2018
+  - jorgensen2009a
+  - kastholm2016
+  - lemm2014
+  - lund2006
+  - lund2016
+  - zachrisson2014a
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: jensen2004b
+  field: cited_by
+  value:
+  - lund2013
+  - bill2019
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: oye2010
+  field: cited_by
+  value:
+  - oye2016
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: oye2010a
+  field: cited_by
+  value:
+  - oye2014
+  - moen2020
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: petursdottir2009a
+  field: cited_by
+  value:
+  - lund2019
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: petursdottir2012
+  field: cited_by
+  value:
+  - lund2020
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: sindbaek2001
+  field: cited_by
+  value:
+  - hardh2010
+  - hardh2010a
+  - rogers2020
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: sindbaek2003
+  field: cited_by
+  value:
+  - magi2015
+  - magi2016
+  - williams2015
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: voncarnapbornheim2011
+  field: cited_by
+  value:
+  - kalmring2012
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: voncarnapbornheim2012
+  field: cited_by
+  value:
+  - dobat2013
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: williams2005
+  field: cited_by
+  value:
+  - knudson2012
+  - pluskowski2010a
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+- action: set
+  citekey: williams2005b
+  field: cited_by
+  value:
+  - odeback2018
+  - osullivan2015
+  - wickholm2006
+  note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
