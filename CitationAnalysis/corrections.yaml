@@ -299160,3 +299160,73 @@
   - toplak2015
   - toplak2018
   note: 'Removed a repeated citer left by a merge: the merge replaced a merged duplicate with its keeper in an entry that already listed the keeper. The list is pinned so the repeat cannot reappear on replay.'
+
+- action: set
+  citekey: toplak2017
+  field: _deleted
+  value: false
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: toplak2017
+  field: _merged_into
+  value: ''
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: almgren1904
+  field: cited_by
+  value:
+  - toplak2015
+  - toplak2017
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: eibl2005
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - toplak2017
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: ernst1989
+  field: cited_by
+  value:
+  - toplak2017
+  - toplak2018
+  - toplak2015
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: faull1976
+  field: cited_by
+  value:
+  - toplak2017
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: toplak2015
+  field: cited_by
+  value:
+  - NOAUTHOR33
+  - lund2021
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: zielonka1957
+  field: cited_by
+  value:
+  - toplak2017
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: zydok2004
+  field: cited_by
+  value:
+  - toplak2017
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+- action: set
+  citekey: toplak2017
+  field: cited_by
+  value:
+  - toplak2018
+  note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
