@@ -1660,6 +1660,168 @@ it means none of the top `r gn_top_n` clusters share a direct citation
 tie with it, whatever thematic similarity a reader might expect from
 the labels alone.
 
+##### Relations between clusters
+
+```{r}
+#| label: cluster-relation-functions
+#| echo: false
+gn_cluster_shuffles <- 1000
+
+# For every ordered pair of the largest clusters, the citations that pass from papers in the
+# first to works in the second, against a shuffle that moves each citing paper to a random
+# cluster. A citing paper keeps its whole reference list, so one paper citing many works in
+# one cluster is not counted as many independent events, and the number of citing papers in
+# each cluster stays the same.
+gn_cluster_relations <- function(key) {
+  part <- gn[[key]]$partition
+  top <- part |> count(community_gn, sort = TRUE) |> slice_head(n = gn_top_n) |> pull(community_gn)
+  if (length(top) < 3) return(NULL)
+  e <- edges_list[[key]] |>
+    select(source, target) |>
+    left_join(transmute(part, source = node_id, from = community_gn), by = "source") |>
+    left_join(transmute(part, target = node_id, to = community_gn), by = "target") |>
+    filter(!is.na(from), !is.na(to))
+  papers <- sort(unique(e$source))
+  home <- part$community_gn[match(papers, part$node_id)]
+  S <- outer(home, top, "==") * 1
+  reach <- e |> filter(from != to, to %in% top) |> count(source, to)
+  D <- matrix(0, length(papers), length(top))
+  D[cbind(match(reach$source, papers), match(reach$to, top))] <- reach$n
+  obs_matrix <- crossprod(S, D)
+  paper_matrix <- crossprod(S, (D > 0) * 1)
+  null <- array(0, c(length(top), length(top), gn_cluster_shuffles))
+  set.seed(11)
+  for (b in seq_len(gn_cluster_shuffles)) null[, , b] <- crossprod(S[sample(nrow(S)), , drop = FALSE], D)
+  centre <- apply(null, c(1, 2), mean)
+  spread <- apply(null, c(1, 2), sd)
+  cells <- expand_grid(i = seq_along(top), j = seq_along(top)) |>
+    filter(i != j) |>
+    mutate(observed = obs_matrix[cbind(i, j)], expected = centre[cbind(i, j)], papers = paper_matrix[cbind(i, j)],
+           z = if_else(spread[cbind(i, j)] > 0, (observed - expected) / spread[cbind(i, j)], 0),
+           p = map2_dbl(i, j, function(a, b) (1 + sum(abs(null[a, b, ] - centre[a, b]) >= abs(obs_matrix[a, b] - centre[a, b]))) / (gn_cluster_shuffles + 1)),
+           citing = top[i], cited = top[j]) |>
+    filter(expected > 0 | observed > 0) |>
+    mutate(p_adj = p.adjust(p, method = "BH"))
+  list(top = top, cells = cells, n_pairs = length(top) * (length(top) - 1))
+}
+
+gn_has_cluster_relations <- function(key) !is.null(gn_cluster_rel[[key]])
+
+gn_cluster_relation_text <- function() {
+  one <- function(key) {
+    r <- gn_cluster_rel[[key]]
+    if (is.null(r)) return("no cluster relations are available")
+    paste0(sum(r$cells$observed), " citations pass between the clusters, and ", scales::percent(1 - sum(r$cells$observed > 0) / r$n_pairs, accuracy = 1),
+           " of the ", r$n_pairs, " ordered pairs have none. After correction, ", sum(r$cells$p_adj < 0.05 & r$cells$z > 0),
+           " pairs send more citations than the shuffle and ", sum(r$cells$p_adj < 0.05 & r$cells$z < 0), " send fewer")
+  }
+  paste0("In Annotated, ", one("annotated"), ". In Annotated, seed filtered, ", one("seed_filtered"), ".")
+}
+
+gn_cluster_relation_heatmap <- function(key) {
+  r <- gn_cluster_rel[[key]]
+  lookup <- gn_label_lookup(key)
+  labels <- paste0(seq_along(r$top), ". ", str_trunc(gn_label_or_id(r$top, lookup), 36))
+  cells <- r$cells |>
+    mutate(value = log2((observed + 0.5) / (expected + 0.5)), star = if_else(p_adj < 0.05, "*", ""))
+  ggplot(cells, aes(factor(j, levels = seq_along(r$top)), factor(i, levels = rev(seq_along(r$top))), fill = value)) +
+    geom_tile(colour = "white") +
+    geom_text(aes(label = star), size = 5, vjust = 0.75) +
+    scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick", midpoint = 0,
+                         limits = c(-3, 3), oob = scales::squish, na.value = "grey95",
+                         name = "Citations against\nthe shuffle\n(log2 ratio)") +
+    scale_y_discrete(labels = rev(labels)) +
+    labs(x = "Cited cluster, numbered as in the rows", y = "Citing cluster",
+         title = paste0(graph_labels[[key]], ": where the largest clusters' citations land, against a shuffle"),
+         subtitle = "Stars mark pairs that hold after correction.") +
+    theme_minimal() +
+    theme(panel.grid = element_blank(), axis.text.y = element_text(size = 8))
+}
+
+gn_cluster_relation_table <- function(key) {
+  r <- gn_cluster_rel[[key]]
+  lookup <- gn_label_lookup(key)
+  label_of <- setNames(paste0(seq_along(r$top), ". ", str_trunc(gn_label_or_id(r$top, lookup), 40)), seq_along(r$top))
+  r$cells |>
+    arrange(p, desc(observed)) |>
+    slice_head(n = 10) |>
+    transmute(`Citing cluster` = label_of[as.character(i)], `Cited cluster` = label_of[as.character(j)],
+              Direction = if_else(z > 0, "More than the shuffle", "Less than the shuffle"),
+              Citations = observed, `Citing papers` = papers, Expected = round(expected, 2),
+              p = signif(p, 2), `Adjusted p` = signif(p_adj, 2)) |>
+    knitr::kable()
+}
+```
+
+```{r}
+#| label: cluster-relation-compute
+#| echo: false
+gn_cluster_rel <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), function(k) {
+  if (!gn[[k]]$available) return(NULL)
+  tryCatch(gn_cluster_relations(k), error = function(e) {
+    warning("The cluster relations for ", k, " failed: ", conditionMessage(e))
+    NULL
+  })
+})
+```
+
+The graph above shows how many citations pass between clusters, and that count depends heavily on how large each cluster is. This test asks whether the citations from one cluster land in another cluster more or less often than chance would put them there, for the `r gn_top_n` clusters in the graph. Each citing paper keeps its whole reference list, so one paper citing many works in the same cluster is not counted as many independent events. The shuffle moves every citing paper to a randomly chosen cluster, keeps the number of citing papers in each cluster, and counts again, `r gn_cluster_shuffles` times. A pair is flagged when the difference holds after a Benjamini-Hochberg correction at 0.05. Each cell reads from the citing cluster in its row to the cited cluster in its column, so the matrix is not symmetric.
+
+`r gn_cluster_relation_text()`
+
+In the heatmap, red cells are pairs where the citing cluster sends more citations to the cited cluster than the shuffle expects, blue cells send fewer, and each step on the colour scale is a doubling. Half a citation is added to each count before the ratio is taken, so that empty cells can be drawn.
+
+::: {.panel-tabset}
+
+###### Annotated
+
+```{r}
+#| label: cluster-relation-heatmap-annotated
+#| echo: false
+#| fig-width: 11
+#| fig-height: 8.5
+#| eval: !expr gn_has_cluster_relations("annotated")
+gn_cluster_relation_heatmap("annotated")
+```
+
+###### Annotated, seed filtered
+
+```{r}
+#| label: cluster-relation-heatmap-seed-filtered
+#| echo: false
+#| fig-width: 11
+#| fig-height: 8.5
+#| eval: !expr gn_has_cluster_relations("seed_filtered")
+gn_cluster_relation_heatmap("seed_filtered")
+```
+
+:::
+
+The table lists the ten pairs with the smallest p-values, whether or not they hold after correction, with the number of citing papers behind each. A pair that rests on one or two citing papers shows one paper's bibliography and not a tendency among clusters.
+
+::: {.panel-tabset}
+
+###### Annotated
+
+```{r}
+#| label: cluster-relation-table-annotated
+#| echo: false
+#| eval: !expr gn_has_cluster_relations("annotated")
+gn_cluster_relation_table("annotated")
+```
+
+###### Annotated, seed filtered
+
+```{r}
+#| label: cluster-relation-table-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_cluster_relations("seed_filtered")
+gn_cluster_relation_table("seed_filtered")
+```
+
+:::
+
+
 #### Internal structure of individual communities
 
 The earliest cut leaves `r gn_ncomm_text("annotated")` communities in Annotated and `r gn_ncomm_text("seed_filtered")` in Annotated, seed filtered. A community can be taken further by replaying the removal log inside it from the cut onwards and recording each round where removing an edge divides it. Most divisions peel off one paper or a few, which is how any community comes apart and says little about its internal structure. A division counts as substantial here when its second-largest piece has at least `r gn_substantial_size` papers. The replay covers every community of `r gn_subcluster_min` or more papers.
@@ -2148,7 +2310,7 @@ gn_group_variants_table("seed_filtered")
 The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. Grey dots are clusters that form a group alone. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
 
 
-### Relations between groups
+#### Relations between groups
 
 ```{r}
 #| label: relation-functions
@@ -2302,7 +2464,7 @@ In the heatmap, red cells are pairs of groups that link more than the shuffle ex
 
 ::: {.panel-tabset}
 
-#### Annotated
+##### Annotated
 
 ```{r}
 #| label: relation-heatmap-annotated
@@ -2313,7 +2475,7 @@ In the heatmap, red cells are pairs of groups that link more than the shuffle ex
 gn_relation_heatmap("annotated")
 ```
 
-#### Annotated, seed filtered
+##### Annotated, seed filtered
 
 ```{r}
 #| label: relation-heatmap-seed-filtered
@@ -2330,7 +2492,7 @@ The table lists the pairs that hold after correction, strongest first. The ratio
 
 ::: {.panel-tabset}
 
-#### Annotated
+##### Annotated
 
 ```{r}
 #| label: relation-table-annotated
@@ -2339,7 +2501,7 @@ The table lists the pairs that hold after correction, strongest first. The ratio
 gn_relation_table("annotated")
 ```
 
-#### Annotated, seed filtered
+##### Annotated, seed filtered
 
 ```{r}
 #| label: relation-table-seed-filtered
