@@ -931,6 +931,8 @@ build_gn_dendrogram <- function(edgelist_file, removal_log_file, output_png,
 
 gn_subcluster_min <- 10L       # smallest community that is replayed
 gn_substantial_size <- 5L     # a division is substantial when its second piece has this many papers
+# Thresholds at which divisions are also counted, so the result can be checked against the choice above.
+gn_subcluster_thresholds <- sort(unique(c(2L, 3L, gn_substantial_size, 10L)))
 
 # Replays the removal log inside every community of gn_subcluster_min or more papers,
 # from the cut onwards, and records each round where removing an edge divides the piece
@@ -963,6 +965,7 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
     n_splits <- 0L
     n_substantial <- 0L
     largest_second <- 0L
+    seconds <- integer(0)
     first <- NULL
     for (i in seq_len(nrow(inside))) {
       eid <- get_edge_ids(live, c(inside$from[i], inside$to[i]))
@@ -985,6 +988,7 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
         n_splits <- n_splits + 1L
         second <- length(pieces[[2]])
         largest_second <- max(largest_second, second)
+        seconds <- c(seconds, second)
         if (second >= gn_substantial_size) {
           n_substantial <- n_substantial + 1L
           if (is.null(first)) first <- list(round = inside$round[i], pieces = pieces)
@@ -992,9 +996,12 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
       }
     }
     list(
-      row = data.frame(community_id = cid, size = length(members), n_splits = n_splits,
-                       n_substantial = n_substantial, largest_second_piece = largest_second,
-                       first_substantial_round = if (is.null(first)) NA_integer_ else first$round),
+      row = cbind(
+        data.frame(community_id = cid, size = length(members), n_splits = n_splits,
+                   n_substantial = n_substantial, largest_second_piece = largest_second,
+                   first_substantial_round = if (is.null(first)) NA_integer_ else first$round),
+        as.data.frame(setNames(lapply(gn_subcluster_thresholds, function(k) sum(seconds >= k)),
+                               paste0("n_split_ge", gn_subcluster_thresholds)))),
       pieces = if (is.null(first)) NULL else do.call(rbind, lapply(1:2, function(k) {
         p <- first$pieces[[k]]
         data.frame(community_id = cid, piece = k, size = length(p),
@@ -1043,7 +1050,8 @@ gn_subclusters_data <- function(key) {
   pieces_csv <- file.path(dir, "subcluster_pieces.csv")
   if (gn[[key]]$available) {
     stale <- !file.exists(splits_csv) || !file.exists(pieces_csv) ||
-      file.info(splits_csv)$mtime < file.info(gn[[key]]$cut_file)$mtime
+      file.info(splits_csv)$mtime < file.info(gn[[key]]$cut_file)$mtime ||
+      !all(paste0("n_split_ge", gn_subcluster_thresholds) %in% names(read.csv(splits_csv, nrows = 1)))
     if (stale) {
       dir.create(dir, recursive = TRUE, showWarnings = FALSE)
       tryCatch(
@@ -1262,6 +1270,24 @@ gn_subcluster_f1_text <- function() {
     paste0(sum(gen %in% c("F1", "P")), " of the ", nrow(p))
   }
   paste0("In Annotated, ", one("annotated"), " top papers are citing papers (F1), and in Annotated, seed filtered, ", one("seed_filtered"), " are.")
+}
+
+gn_multi_piece_text <- function() {
+  one <- function(key) {
+    if (!gn[[key]]$available) return("none are available until the run is in place")
+    sum(gn_subclusters_data(key)$splits$n_substantial >= 2)
+  }
+  paste0("With a threshold of ", gn_substantial_size, " papers, ", one("annotated"), " communities in Annotated and ", one("seed_filtered"),
+         " in Annotated, seed filtered have three or more viable pieces.")
+}
+
+# A division splits one piece into two, so a community needs two divisions to have three viable pieces.
+gn_subcluster_threshold_table <- function(key) {
+  s <- gn_subclusters_data(key)$splits
+  tibble(`Smallest viable piece (papers)` = gn_subcluster_thresholds,
+         `Communities with a division` = map_int(gn_subcluster_thresholds, ~ sum(s[[paste0("n_split_ge", .x)]] >= 1)),
+         `Communities with two or more divisions` = map_int(gn_subcluster_thresholds, ~ sum(s[[paste0("n_split_ge", .x)]] >= 2))) |>
+    knitr::kable()
 }
 
 # Every community that was replayed. A community that only sheds single papers sits at 1.
@@ -1640,7 +1666,29 @@ gn_subcluster_overview("seed_filtered")
 
 :::
 
-The table lists the communities with a substantial division, ordered by the size of the second piece. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined.
+Removing one edge divides a piece into two, so a community needs two substantial divisions to have three viable pieces. `r gn_multi_piece_text()` The table counts communities with at least one and at least two divisions when a viable piece is allowed to be smaller or required to be larger.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: subcluster-thresholds-annotated
+#| eval: !expr gn[["annotated"]]$available
+gn_subcluster_threshold_table("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: subcluster-thresholds-seed-filtered
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_subcluster_threshold_table("seed_filtered")
+```
+
+:::
+
+The next table lists the communities with a substantial division, ordered by the size of the second piece, and shows the first division of each. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined.
 
 ::: {.panel-tabset}
 
