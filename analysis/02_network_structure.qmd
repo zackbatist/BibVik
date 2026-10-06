@@ -64,7 +64,7 @@ graph_edgelists <- c(
 # contents:
 #   communities.csv, modularity_trace.csv, removal_log.csv, final_edgelist.csv
 #   multi_cut/    communities_round_<N>.csv and multi_cut_summary.csv
-#   dendrogram/   gn_dendrogram.png, split_events.csv
+#   dendrogram/   gn_dendrogram.png
 #   subclusters/  subcluster_summary.csv
 #   labels/       representatives.csv, cluster_labels.csv, node_labels.csv
 #
@@ -753,6 +753,323 @@ At the highest coreness (k = `r kcore_stats$annotated$kmax`), Annotated holds `r
 # Everything per-run in the Girvan-Newman sections goes through these, called
 # once per tab.
 
+# Rebuilds the Girvan-Newman dendrogram image from a run's removal log. The log
+# is replayed forward, recording every round where removing an edge splits a
+# component. Read backwards, those splits are merges, which gives an hclust tree
+# over whole pieces. max_round is the earliest cut round, so the tree ends where
+# the labelled partition begins. Height is merge order, since the real rounds are
+# spaced too unevenly for a linear axis.
+build_gn_dendrogram <- function(edgelist_file, removal_log_file, output_png,
+                                max_round, top_n_splits = 300L) {
+  edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
+  g <- igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE)
+  if (igraph::is_directed(g)) g <- as_undirected(g, mode = "collapse")
+
+  removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
+  removal_log <- removal_log[order(removal_log$round), ]
+  removal_log <- removal_log[removal_log$round <= max_round, ]
+
+  # Replay the removals, recording each split with the node names of its pieces.
+  # Components are tracked by an integer label per node.
+  node_names <- igraph::V(g)$name
+  comp_id <- rep(1L, length(node_names))
+  names(comp_id) <- node_names
+  next_comp_id <- 2L
+  g_live <- g
+  splits <- list()
+
+  for (i in seq_len(nrow(removal_log))) {
+    r <- removal_log$round[i]
+    from <- removal_log$from[i]
+    to <- removal_log$to[i]
+
+    eid <- get_edge_ids(g_live, c(from, to))
+    if (eid == 0) next
+    g_live <- igraph::delete_edges(g_live, eid)
+
+    # Only the component holding the removed edge can split.
+    parent_comp <- comp_id[[from]]
+    members <- names(comp_id)[comp_id == parent_comp]
+    sub_g <- igraph::induced_subgraph(g_live, vids = members)
+    sub_comp <- igraph::components(sub_g)
+
+    if (sub_comp$no > 1) {
+      pieces <- split(igraph::V(sub_g)$name, sub_comp$membership)
+      for (k in seq_along(pieces)) {
+        new_id <- if (k == 1) parent_comp else {
+          id <- next_comp_id
+          next_comp_id <- next_comp_id + 1L
+          id
+        }
+        comp_id[pieces[[k]]] <- new_id
+      }
+      splits[[length(splits) + 1]] <- list(round = r, pieces = pieces)
+    }
+  }
+  if (length(splits) == 0) {
+    stop("No split events found. Check that the removal log matches the edge list.")
+  }
+
+  # Build the merge tree from the earliest top_n_splits splits (the coarsest
+  # structure), walking them in decreasing round order. Read that way, each
+  # split merges its pieces back into the piece that existed just before it,
+  # which is what hclust's merge matrix needs. Each piece's hclust reference
+  # (negative for a leaf, positive for the row that produced it) is recorded
+  # when the piece is created.
+  splits_to_use <- if (top_n_splits > 0 && top_n_splits < length(splits)) {
+    splits[seq_len(top_n_splits)]
+  } else {
+    splits
+  }
+  splits_rev <- rev(splits_to_use)
+
+  next_id <- 1L
+  piece_size <- c()
+  name_to_id <- new.env()
+  is_leaf <- integer(0)
+  hclust_ref <- new.env()
+  leaf_counter <- 0L
+
+  register_leaf <- function(members) {
+    id <- next_id
+    next_id <<- next_id + 1L
+    piece_size[as.character(id)] <<- length(members)
+    is_leaf <<- c(is_leaf, id)
+    for (nm in members) assign(nm, id, envir = name_to_id)
+    leaf_counter <<- leaf_counter + 1L
+    assign(as.character(id), -leaf_counter, envir = hclust_ref)
+    id
+  }
+
+  # Every member is checked for an existing id. Checking only the first member
+  # fails because the large remaining component's first name changes each round.
+  get_id_any_member <- function(piece_members) {
+    for (nm in piece_members) {
+      v <- mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
+      if (!is.na(v)) return(v)
+    }
+    NA_integer_
+  }
+
+  merge_a <- integer(0)
+  merge_b <- integer(0)
+  heights <- numeric(0)
+  round_at_height <- integer(0)
+
+  for (s in splits_rev) {
+    ids_here <- integer(0)
+    for (p in s$pieces) {
+      id <- get_id_any_member(p)
+      if (is.na(id)) {
+        id <- register_leaf(p)
+      } else {
+        # Index members freshly separated off a lineage that is still shrinking.
+        for (nm in p) {
+          v <- mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
+          if (is.na(v)) assign(nm, id, envir = name_to_id)
+        }
+      }
+      ids_here <- c(ids_here, id)
+    }
+    ids_here <- unique(ids_here)
+    if (length(ids_here) < 2) next
+
+    while (length(ids_here) >= 2) {
+      a <- ids_here[1]
+      b <- ids_here[2]
+      parent_id <- next_id
+      next_id <- next_id + 1L
+      piece_size[as.character(parent_id)] <- piece_size[as.character(a)] + piece_size[as.character(b)]
+
+      merge_a <- c(merge_a, get(as.character(a), envir = hclust_ref))
+      merge_b <- c(merge_b, get(as.character(b), envir = hclust_ref))
+      # Height is merge order. Raw rounds put almost every merge at nearly the
+      # same height, because the splits in any window are a few hundred rounds
+      # apart in a run of tens of thousands.
+      heights <- c(heights, length(merge_a))
+      round_at_height <- c(round_at_height, s$round)
+      assign(as.character(parent_id), length(merge_a), envir = hclust_ref)
+
+      for (nm in ls(name_to_id)) {
+        v <- get(nm, envir = name_to_id)
+        if (v == a || v == b) assign(nm, parent_id, envir = name_to_id)
+      }
+      ids_here <- c(parent_id, ids_here[-c(1, 2)])
+    }
+  }
+  if (length(merge_a) == 0) {
+    stop("Could not build any merges from the selected splits.")
+  }
+
+  leaf_size_by_pos <- vapply(is_leaf, function(id) piece_size[as.character(id)], numeric(1))
+  leaf_pos_order <- vapply(is_leaf, function(id) -get(as.character(id), envir = hclust_ref), integer(1))
+  leaf_labels <- character(length(is_leaf))
+  leaf_labels[leaf_pos_order] <- sprintf("n=%d", leaf_size_by_pos)
+
+  # hc$order must follow the tree's branch structure and must be unnamed,
+  # because plot.hclust() rejects the names that order.dendrogram() inherits.
+  hc <- list(
+    merge = cbind(merge_a, merge_b),
+    height = heights,
+    order = seq_along(leaf_labels),
+    labels = leaf_labels,
+    method = "girvan-newman-divisive"
+  )
+  class(hc) <- "hclust"
+  hc$order <- unname(order.dendrogram(as.dendrogram(hc)))
+
+  grDevices::png(output_png, width = 4000, height = 2000, res = 200)
+  on.exit(grDevices::dev.off(), add = TRUE)
+  par(mar = c(5, 6, 4, 8))
+  plot(hc, labels = FALSE, hang = -1,
+       main = sprintf("Girvan-Newman dendrogram (top %d splits, %d leaves, rounds %d-%d)",
+                      length(splits_to_use), length(is_leaf),
+                      min(round_at_height), max(round_at_height)),
+       xlab = "", sub = "", ylab = "Merge order (evenly spaced steps)")
+  invisible(output_png)
+}
+
+# Replays the removal log inside each of the largest communities of one cut and
+# records what happens to each afterward. The starting groups come straight from
+# the cut's communities_round_N.csv, so the analysis cannot drift from the
+# partition. Each community is replayed to natural completion, and one row per
+# community is written to output_csv.
+build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, seed_round,
+                                 output_csv, min_community_size = 3L, max_trees = 20L) {
+  communities <- read.csv(cut_file, stringsAsFactors = FALSE)
+  if (!all(c("node_id", "community_id") %in% names(communities))) {
+    stop("Expected columns 'node_id' and 'community_id' in ", cut_file)
+  }
+  groups <- split(communities$node_id, communities$community_id)
+  group_sizes <- sapply(groups, length)
+  qualifying <- names(group_sizes)[group_sizes >= min_community_size]
+  qualifying <- qualifying[order(-group_sizes[qualifying])]
+  if (max_trees > 0 && length(qualifying) > max_trees) {
+    qualifying <- qualifying[seq_len(max_trees)]
+  }
+
+  removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
+  removal_log <- removal_log[order(removal_log$round), ]
+  removal_after <- removal_log[removal_log$round > seed_round, ]
+
+  edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
+  g <- igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE)
+  g <- as_undirected(g, mode = "collapse")
+
+  # Split events inside one community: each round where removing an edge divides
+  # the piece that held it, with the node names of the resulting pieces.
+  find_splits <- function(member_names) {
+    sub_edges <- removal_after[
+      removal_after$from %in% member_names & removal_after$to %in% member_names,
+    ]
+    if (nrow(sub_edges) == 0) return(list())
+
+    g_sub <- igraph::induced_subgraph(g, vids = member_names)
+    comp_id <- rep(1L, length(member_names))
+    names(comp_id) <- member_names
+    next_comp_id <- 2L
+    splits <- list()
+
+    for (i in seq_len(nrow(sub_edges))) {
+      r <- sub_edges$round[i]
+      from <- sub_edges$from[i]
+      to <- sub_edges$to[i]
+      eid <- get_edge_ids(g_sub, c(from, to))
+      if (eid == 0) next
+      g_sub <- igraph::delete_edges(g_sub, eid)
+
+      parent_comp <- comp_id[[from]]
+      members_here <- names(comp_id)[comp_id == parent_comp]
+      sub_g <- igraph::induced_subgraph(g_sub, vids = members_here)
+      sub_comp <- igraph::components(sub_g)
+
+      if (sub_comp$no > 1) {
+        pieces <- split(igraph::V(sub_g)$name, sub_comp$membership)
+        for (k in seq_along(pieces)) {
+          new_id <- if (k == 1) parent_comp else {
+            id <- next_comp_id
+            next_comp_id <- next_comp_id + 1L
+            id
+          }
+          comp_id[pieces[[k]]] <- new_id
+        }
+        splits[[length(splits) + 1]] <- list(round = r, pieces = pieces)
+      }
+    }
+    splits
+  }
+
+  # Leaves of the community's split tree: pieces that never divide again, plus
+  # members that no split touched. A piece's identity is resolved by checking
+  # every member for an existing id, because the large remaining piece changes
+  # its first member each round. Returns NULL when the community never divides.
+  count_leaves <- function(splits, all_members) {
+    if (length(splits) == 0) return(NULL)
+    next_id <- 1L
+    n_leaves <- 0L
+    n_merges <- 0L
+    name_to_id <- new.env()
+    lookup <- function(nm) mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
+    get_id_any_member <- function(piece_members) {
+      for (nm in piece_members) {
+        v <- lookup(nm)
+        if (!is.na(v)) return(v)
+      }
+      NA_integer_
+    }
+
+    for (s in rev(splits)) {
+      ids_here <- integer(0)
+      for (p in s$pieces) {
+        id <- get_id_any_member(p)
+        if (is.na(id)) {
+          id <- next_id
+          next_id <- next_id + 1L
+          n_leaves <- n_leaves + 1L
+          for (nm in p) assign(nm, id, envir = name_to_id)
+        } else {
+          for (nm in p) if (is.na(lookup(nm))) assign(nm, id, envir = name_to_id)
+        }
+        ids_here <- c(ids_here, id)
+      }
+      ids_here <- unique(ids_here)
+      while (length(ids_here) >= 2) {
+        a <- ids_here[1]
+        b <- ids_here[2]
+        parent_id <- next_id
+        next_id <- next_id + 1L
+        n_merges <- n_merges + 1L
+        for (nm in ls(name_to_id)) {
+          v <- get(nm, envir = name_to_id)
+          if (v == a || v == b) assign(nm, parent_id, envir = name_to_id)
+        }
+        ids_here <- c(parent_id, ids_here[-c(1, 2)])
+      }
+    }
+    n_leaves <- n_leaves + length(setdiff(all_members, ls(name_to_id)))
+    if (n_merges == 0) return(NULL)
+    n_leaves
+  }
+
+  rows <- lapply(qualifying, function(gid) {
+    member_names <- as.character(groups[[gid]])
+    splits <- find_splits(member_names)
+    n_leaves <- count_leaves(splits, member_names)
+    if (is.null(n_leaves)) {
+      return(data.frame(community_id = gid, size = length(member_names), n_splits = 0,
+                        n_leaves = 1, first_split_round = NA, first_split_sizes = NA))
+    }
+    data.frame(
+      community_id = gid, size = length(member_names), n_splits = length(splits),
+      n_leaves = n_leaves,
+      first_split_round = vapply(splits, function(s) s$round, integer(1))[1],
+      first_split_sizes = paste(sapply(splits[[1]]$pieces, length), collapse = "/")
+    )
+  })
+  write.csv(do.call(rbind, rows), output_csv, row.names = FALSE)
+  invisible(output_csv)
+}
+
 # The dendrogram and the subcluster summary are rebuilt from the run's removal
 # log when they are missing or older than the file they come from, so a fresh
 # GN run is reflected without a manual step, but re-rendering right after an
@@ -762,23 +1079,16 @@ gn_dendrogram_png <- function(key) {
   png <- file.path(dir, "gn_dendrogram.png")
   log <- gn_path(key, "removal_log.csv")
   if (gn[[key]]$available && file.exists(log)) {
-    stale <- !file.exists(png) || file.info(png)$mtime < file.info(log)$mtime
+    stale <- !file.exists(png) ||
+      file.info(png)$mtime < max(file.info(c(log, gn[[key]]$cut_file))$mtime)
     if (stale) {
       dir.create(dir, recursive = TRUE, showWarnings = FALSE)
-      status <- system2(
-        "Rscript",
-        args = c(
-          here("analysis", "gn_analysis", "build_dendrogram.R"),
-          graph_edgelists[[key]], log, dir,
-          "300", "0", "0",
-          gn_path(key, "modularity_trace.csv")
-        ),
-        stdout = FALSE
+      tryCatch(
+        build_gn_dendrogram(graph_edgelists[[key]], log, png, gn[[key]]$earliest$round),
+        error = function(e) {
+          warning("The dendrogram for ", key, " could not be built: ", conditionMessage(e))
+        }
       )
-      if (status != 0) {
-        warning("build_dendrogram.R exited with status ", status,
-                "; dendrogram figure may be missing or stale.")
-      }
     }
   }
   png
@@ -791,25 +1101,18 @@ gn_subclusters_csv <- function(key) {
     stale <- !file.exists(csv) || file.info(csv)$mtime < file.info(gn[[key]]$cut_file)$mtime
     if (stale) {
       dir.create(dir, recursive = TRUE, showWarnings = FALSE)
-      status <- system2(
-        "Rscript",
-        args = c(
-          here("analysis", "gn_analysis", "build_subcluster_trees.R"),
-          graph_edgelists[[key]],
-          gn_path(key, "removal_log.csv"),
-          gn[[key]]$cut_file,
-          as.character(gn[[key]]$earliest$round),
-          dir,
-          "3",                    # min_community_size, script's own default
-          as.character(gn_top_n)  # max_trees, tied to gn_top_n so the prose's
-                                  # "largest communities" matches what is computed
+      tryCatch(
+        build_gn_subclusters(
+          graph_edgelists[[key]], gn_path(key, "removal_log.csv"), gn[[key]]$cut_file,
+          gn[[key]]$earliest$round, csv,
+          min_community_size = 3L,
+          max_trees = gn_top_n  # tied to gn_top_n so the prose's "largest communities"
+                                # matches what is computed
         ),
-        stdout = FALSE
+        error = function(e) {
+          warning("The subcluster summary for ", key, " could not be built: ", conditionMessage(e))
+        }
       )
-      if (status != 0) {
-        warning("build_subcluster_trees.R exited with status ", status,
-                "; subcluster figures may be missing or stale.")
-      }
     }
   }
   csv
@@ -1276,12 +1579,12 @@ structure worth surfacing on its own, the same kind of check performed
 earlier (see "Choosing a stopping point") for two clusters against
 paper titles and annotation coding.
 
-`gn_analysis/build_subcluster_trees.R` addresses this directly: seeded from the real community membership of each graph's earliest cut (not a re-derived or arbitrary starting point), it replays `removal_log.csv` separately for
+The subcluster analysis addresses this directly: seeded from the real community membership of each graph's earliest cut (not a re-derived or arbitrary starting point), it replays `removal_log.csv` separately for
 each of the round's largest communities and records what happens to
 each one afterward, run below using that same round so it can't drift
 out of sync with the partition described above. An initial version
 capped this replay at a fixed number of split events; that cap was
-itself an arbitrary choice with no basis in the data, so the script
+itself an arbitrary choice with no basis in the data, so it
 now replays each community to natural completion (full fragmentation
 or the end of the log) by default.
 
@@ -1292,9 +1595,7 @@ further rounds, with no further balanced division anywhere in the
 sequence. Plotted as a dendrogram, this produces the same long
 single-branch shape for every community regardless of its size or its
 first split, differing only in length, so the per-community dendrogram
-plots turned out uninformative and are not included here (the script
-writes them only when run with `plot_trees = TRUE`; see
-`gn_analysis/README.md`).
+plots turned out uninformative and are not included here.
 
 The one real signal in this data is the size of the two pieces at each
 community's first split, plotted below. `r gn_first_split_text()` Any community whose two
