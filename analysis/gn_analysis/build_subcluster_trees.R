@@ -118,7 +118,7 @@ find_splits_within_group <- function(member_names, g_full, removal_log_after, ma
 
     r <- sub_edges$round[i]
     from <- sub_edges$from[i]; to <- sub_edges$to[i]
-    eid <- get_edge_ids(g_sub, c(from, to))
+    eid <- get.edge.ids(g_sub, c(from, to))
     if (eid == 0) next
     g_sub <- delete_edges(g_sub, eid)
 
