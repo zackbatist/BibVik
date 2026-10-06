@@ -299152,3 +299152,11 @@
   - ulriksen2011
   - ulriksen2011a
   note: 'Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates'' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.'
+
+- action: set
+  citekey: almgren1904
+  field: cited_by
+  value:
+  - toplak2015
+  - toplak2018
+  note: 'Removed a repeated citer left by a merge: the merge replaced a merged duplicate with its keeper in an entry that already listed the keeper. The list is pinned so the repeat cannot reappear on replay.'
