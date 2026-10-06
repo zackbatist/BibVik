@@ -929,145 +929,88 @@ build_gn_dendrogram <- function(edgelist_file, removal_log_file, output_png,
   invisible(output_png)
 }
 
-# Replays the removal log inside each of the largest communities of one cut and
-# records what happens to each afterward. The starting groups come straight from
-# the cut's communities_round_N.csv, so the analysis cannot drift from the
-# partition. Each community is replayed to natural completion, and one row per
-# community is written to output_csv.
-build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, seed_round,
-                                 output_csv, min_community_size = 3L, max_trees = 20L) {
+gn_subcluster_min <- 10L       # smallest community that is replayed
+gn_substantial_size <- 5L     # a division is substantial when its second piece has this many papers
+
+# Replays the removal log inside every community of gn_subcluster_min or more papers,
+# from the cut onwards, and records each round where removing an edge divides the piece
+# that held it. The starting groups come straight from the cut's communities_round_N.csv,
+# so the replay cannot drift from the partition. One row per community goes to splits_csv.
+# For each community with a substantial division, the two largest pieces of its first
+# one go to pieces_csv, with the paper that has the most citation ties inside the community.
+build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_round,
+                                 splits_csv, pieces_csv) {
   communities <- read.csv(cut_file, stringsAsFactors = FALSE)
   if (!all(c("node_id", "community_id") %in% names(communities))) {
     stop("Expected columns 'node_id' and 'community_id' in ", cut_file)
   }
   groups <- split(communities$node_id, communities$community_id)
-  group_sizes <- sapply(groups, length)
-  qualifying <- names(group_sizes)[group_sizes >= min_community_size]
-  qualifying <- qualifying[order(-group_sizes[qualifying])]
-  if (max_trees > 0 && length(qualifying) > max_trees) {
-    qualifying <- qualifying[seq_len(max_trees)]
-  }
-
+  groups <- groups[lengths(groups) >= gn_subcluster_min]
   removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
-  removal_log <- removal_log[order(removal_log$round), ]
-  removal_after <- removal_log[removal_log$round > seed_round, ]
-
+  removal_after <- removal_log[removal_log$round > cut_round, ]
+  removal_after <- removal_after[order(removal_after$round), ]
   edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
-  g <- igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE)
-  g <- as_undirected(g, mode = "collapse")
+  g <- as_undirected(igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE),
+                     mode = "collapse")
 
-  # Split events inside one community: each round where removing an edge divides
-  # the piece that held it, with the node names of the resulting pieces.
-  find_splits <- function(member_names) {
-    sub_edges <- removal_after[
-      removal_after$from %in% member_names & removal_after$to %in% member_names,
-    ]
-    if (nrow(sub_edges) == 0) return(list())
-
-    g_sub <- igraph::induced_subgraph(g, vids = member_names)
-    comp_id <- rep(1L, length(member_names))
-    names(comp_id) <- member_names
-    next_comp_id <- 2L
-    splits <- list()
-
-    for (i in seq_len(nrow(sub_edges))) {
-      r <- sub_edges$round[i]
-      from <- sub_edges$from[i]
-      to <- sub_edges$to[i]
-      eid <- get_edge_ids(g_sub, c(from, to))
+  replay <- function(cid) {
+    members <- as.character(groups[[cid]])
+    inside <- removal_after[removal_after$from %in% members & removal_after$to %in% members, ]
+    live <- igraph::induced_subgraph(g, members)
+    ties <- igraph::degree(live)
+    comp_id <- setNames(rep(1L, length(members)), members)
+    next_id <- 2L
+    n_splits <- 0L
+    n_substantial <- 0L
+    largest_second <- 0L
+    first <- NULL
+    for (i in seq_len(nrow(inside))) {
+      eid <- get_edge_ids(live, c(inside$from[i], inside$to[i]))
       if (eid == 0) next
-      g_sub <- igraph::delete_edges(g_sub, eid)
-
-      parent_comp <- comp_id[[from]]
-      members_here <- names(comp_id)[comp_id == parent_comp]
-      sub_g <- igraph::induced_subgraph(g_sub, vids = members_here)
-      sub_comp <- igraph::components(sub_g)
-
-      if (sub_comp$no > 1) {
-        pieces <- split(igraph::V(sub_g)$name, sub_comp$membership)
+      live <- igraph::delete_edges(live, eid)
+      parent <- comp_id[[inside$from[i]]]
+      piece <- igraph::induced_subgraph(live, names(comp_id)[comp_id == parent])
+      parts <- igraph::components(piece)
+      if (parts$no > 1) {
+        pieces <- split(igraph::V(piece)$name, parts$membership)
+        pieces <- pieces[order(-lengths(pieces))]
         for (k in seq_along(pieces)) {
-          new_id <- if (k == 1) parent_comp else {
-            id <- next_comp_id
-            next_comp_id <- next_comp_id + 1L
+          new_id <- if (k == 1) parent else {
+            id <- next_id
+            next_id <- next_id + 1L
             id
           }
           comp_id[pieces[[k]]] <- new_id
         }
-        splits[[length(splits) + 1]] <- list(round = r, pieces = pieces)
-      }
-    }
-    splits
-  }
-
-  # Leaves of the community's split tree: pieces that never divide again, plus
-  # members that no split touched. A piece's identity is resolved by checking
-  # every member for an existing id, because the large remaining piece changes
-  # its first member each round. Returns NULL when the community never divides.
-  count_leaves <- function(splits, all_members) {
-    if (length(splits) == 0) return(NULL)
-    next_id <- 1L
-    n_leaves <- 0L
-    n_merges <- 0L
-    name_to_id <- new.env()
-    lookup <- function(nm) mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
-    get_id_any_member <- function(piece_members) {
-      for (nm in piece_members) {
-        v <- lookup(nm)
-        if (!is.na(v)) return(v)
-      }
-      NA_integer_
-    }
-
-    for (s in rev(splits)) {
-      ids_here <- integer(0)
-      for (p in s$pieces) {
-        id <- get_id_any_member(p)
-        if (is.na(id)) {
-          id <- next_id
-          next_id <- next_id + 1L
-          n_leaves <- n_leaves + 1L
-          for (nm in p) assign(nm, id, envir = name_to_id)
-        } else {
-          for (nm in p) if (is.na(lookup(nm))) assign(nm, id, envir = name_to_id)
+        n_splits <- n_splits + 1L
+        second <- length(pieces[[2]])
+        largest_second <- max(largest_second, second)
+        if (second >= gn_substantial_size) {
+          n_substantial <- n_substantial + 1L
+          if (is.null(first)) first <- list(round = inside$round[i], pieces = pieces)
         }
-        ids_here <- c(ids_here, id)
-      }
-      ids_here <- unique(ids_here)
-      while (length(ids_here) >= 2) {
-        a <- ids_here[1]
-        b <- ids_here[2]
-        parent_id <- next_id
-        next_id <- next_id + 1L
-        n_merges <- n_merges + 1L
-        for (nm in ls(name_to_id)) {
-          v <- get(nm, envir = name_to_id)
-          if (v == a || v == b) assign(nm, parent_id, envir = name_to_id)
-        }
-        ids_here <- c(parent_id, ids_here[-c(1, 2)])
       }
     }
-    n_leaves <- n_leaves + length(setdiff(all_members, ls(name_to_id)))
-    if (n_merges == 0) return(NULL)
-    n_leaves
-  }
-
-  rows <- lapply(qualifying, function(gid) {
-    member_names <- as.character(groups[[gid]])
-    splits <- find_splits(member_names)
-    n_leaves <- count_leaves(splits, member_names)
-    if (is.null(n_leaves)) {
-      return(data.frame(community_id = gid, size = length(member_names), n_splits = 0,
-                        n_leaves = 1, first_split_round = NA, first_split_sizes = NA))
-    }
-    data.frame(
-      community_id = gid, size = length(member_names), n_splits = length(splits),
-      n_leaves = n_leaves,
-      first_split_round = vapply(splits, function(s) s$round, integer(1))[1],
-      first_split_sizes = paste(sapply(splits[[1]]$pieces, length), collapse = "/")
+    list(
+      row = data.frame(community_id = cid, size = length(members), n_splits = n_splits,
+                       n_substantial = n_substantial, largest_second_piece = largest_second,
+                       first_substantial_round = if (is.null(first)) NA_integer_ else first$round),
+      pieces = if (is.null(first)) NULL else do.call(rbind, lapply(1:2, function(k) {
+        p <- first$pieces[[k]]
+        data.frame(community_id = cid, piece = k, size = length(p),
+                   top_paper = p[which.max(ties[p])], members = paste(p, collapse = ";"))
+      }))
     )
-  })
-  write.csv(do.call(rbind, rows), output_csv, row.names = FALSE)
-  invisible(output_csv)
+  }
+  results <- lapply(names(groups), replay)
+  write.csv(do.call(rbind, lapply(results, `[[`, "row")), splits_csv, row.names = FALSE)
+  pieces_all <- do.call(rbind, lapply(results, `[[`, "pieces"))
+  if (is.null(pieces_all)) {
+    pieces_all <- data.frame(community_id = character(), piece = integer(), size = integer(),
+                             top_paper = character(), members = character())
+  }
+  write.csv(pieces_all, pieces_csv, row.names = FALSE)
+  invisible(c(splits_csv, pieces_csv))
 }
 
 # The dendrogram and the subcluster summary are rebuilt from the run's removal
@@ -1094,28 +1037,26 @@ gn_dendrogram_png <- function(key) {
   png
 }
 
-gn_subclusters_csv <- function(key) {
+gn_subclusters_data <- function(key) {
   dir <- gn_path(key, "subclusters")
-  csv <- file.path(dir, "subcluster_summary.csv")
+  splits_csv <- file.path(dir, "subcluster_splits.csv")
+  pieces_csv <- file.path(dir, "subcluster_pieces.csv")
   if (gn[[key]]$available) {
-    stale <- !file.exists(csv) || file.info(csv)$mtime < file.info(gn[[key]]$cut_file)$mtime
+    stale <- !file.exists(splits_csv) || !file.exists(pieces_csv) ||
+      file.info(splits_csv)$mtime < file.info(gn[[key]]$cut_file)$mtime
     if (stale) {
       dir.create(dir, recursive = TRUE, showWarnings = FALSE)
       tryCatch(
-        build_gn_subclusters(
-          graph_edgelists[[key]], gn_path(key, "removal_log.csv"), gn[[key]]$cut_file,
-          gn[[key]]$earliest$round, csv,
-          min_community_size = 3L,
-          max_trees = gn_top_n  # tied to gn_top_n so the prose's "largest communities"
-                                # matches what is computed
-        ),
+        build_gn_subclusters(graph_edgelists[[key]], gn_path(key, "removal_log.csv"),
+                             gn[[key]]$cut_file, gn[[key]]$earliest$round, splits_csv, pieces_csv),
         error = function(e) {
-          warning("The subcluster summary for ", key, " could not be built: ", conditionMessage(e))
+          warning("The subcluster files for ", key, " could not be built: ", conditionMessage(e))
         }
       )
     }
   }
-  csv
+  list(splits = read_csv(splits_csv, show_col_types = FALSE),
+       pieces = read_csv(pieces_csv, show_col_types = FALSE, col_types = cols(community_id = col_character())))
 }
 
 gn_ncomm_text <- function(key) {
@@ -1303,52 +1244,117 @@ gn_community_graph <- function(key) {
     )
 }
 
-gn_first_splits_data <- function(key) {
-  read_csv(gn_subclusters_csv(key), show_col_types = FALSE) |>
-    filter(!is.na(first_split_sizes)) |>
-    separate(first_split_sizes, into = c("piece_a", "piece_b"), sep = "/", convert = TRUE) |>
-    mutate(larger_piece = pmax(piece_a, piece_b), smaller_piece = pmin(piece_a, piece_b))
-}
-
-gn_first_split_text <- function() {
+gn_subcluster_text <- function() {
   one <- function(key) {
-    if (!gn[[key]]$available) return("the first-split sizes are not available until the run is in place.")
-    d <- gn_first_splits_data(key)
-    n <- nrow(d)
-    k <- sum(d$smaller_piece == 1)
-    if (n > 0 && k == n) {
-      paste0("every one of the ", n, " largest communities sheds exactly one node at first split, with the remaining piece staying fully intact.")
-    } else {
-      paste0(k, " of the ", n, " largest communities shed exactly one node at first split, with the remaining piece staying intact.")
-    }
+    if (!gn[[key]]$available) return("the replay is not available until the run is in place.")
+    s <- gn_subclusters_data(key)$splits
+    paste0(sum(s$n_substantial > 0), " of the ", nrow(s), " communities replayed have a substantial division, and the most any one has is ",
+           max(s$n_substantial), ".")
   }
   paste0("In Annotated, ", one("annotated"), " In Annotated, seed filtered, ", one("seed_filtered"))
 }
-gn_first_splits_plot <- function(key) {
-  first_splits <- gn_first_splits_data(key) |>
-    arrange(desc(smaller_piece)) |>
-    mutate(community_label = fct_reorder(paste("Community", community_id), smaller_piece))
 
-  long <- first_splits |>
-    select(community_label, larger_piece, smaller_piece) |>
-    pivot_longer(c(larger_piece, smaller_piece), names_to = "piece", values_to = "size") |>
-    mutate(piece = factor(piece, levels = c("larger_piece", "smaller_piece"),
-                           labels = c("Larger piece", "Smaller piece")))
+gn_subcluster_f1_text <- function() {
+  one <- function(key) {
+    if (!gn[[key]]$available) return("none are available until the run is in place")
+    p <- gn_subclusters_data(key)$pieces
+    gen <- node_attrs$generation[match(p$top_paper, node_attrs$name)]
+    paste0(sum(gen %in% c("F1", "P")), " of the ", nrow(p))
+  }
+  paste0("In Annotated, ", one("annotated"), " top papers are citing papers (F1), and in Annotated, seed filtered, ", one("seed_filtered"), " are.")
+}
 
-  ggplot(long, aes(x = size, y = community_label, fill = piece)) +
-    geom_col(position = position_dodge(width = 0.7), width = 0.6) +
-    geom_text(aes(label = size), position = position_dodge(width = 0.7), hjust = -0.15, size = 3) +
-    scale_x_log10(expand = expansion(mult = c(0, 0.15))) +
-    scale_fill_manual(values = c("Larger piece" = "#4C72B0", "Smaller piece" = "#DD8452")) +
-    labs(
-      title = paste0("First-split piece sizes, round ", gn_round_text(key), "'s largest communities, ",
-                     graph_labels[[key]]),
-      subtitle = "Sorted by size of the smaller piece; most balanced at top",
-      x = "Nodes in each piece at first split (log scale)",
-      y = NULL, fill = NULL
-    ) +
+# Every community that was replayed. A community that only sheds single papers sits at 1.
+gn_subcluster_overview <- function(key) {
+  s <- gn_subclusters_data(key)$splits
+  lookup <- gn_label_lookup(key)
+  s <- s |>
+    mutate(substantial = largest_second_piece >= gn_substantial_size,
+           label = if_else(substantial, str_trunc(gn_label_or_id(as.character(community_id), lookup), 34), NA_character_),
+           kind = if_else(substantial, "Has a substantial division", "Sheds only small pieces"))
+  ggplot(s, aes(x = size, y = largest_second_piece, colour = kind)) +
+    geom_hline(yintercept = gn_substantial_size, linetype = "dashed", colour = "grey50") +
+    geom_point(alpha = 0.6, position = position_jitter(width = 0.015, height = 0.12, seed = 1)) +
+    geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, seed = 1, show.legend = FALSE) +
+    scale_x_log10() +
+    scale_colour_manual(values = c("Has a substantial division" = "firebrick", "Sheds only small pieces" = "grey55"), name = NULL) +
+    labs(title = paste0("How far each community divides, ", graph_labels[[key]]),
+         subtitle = paste0("Dashed line at ", gn_substantial_size, " papers."),
+         x = "Papers in the community (log scale)", y = "Largest second piece in any division (papers)") +
     theme_minimal() +
     theme(legend.position = "bottom")
+}
+
+gn_subcluster_table <- function(key) {
+  d <- gn_subclusters_data(key)
+  lookup <- gn_label_lookup(key)
+  cut_round <- gn[[key]]$earliest$round
+  info <- function(p) {
+    i <- match(p, node_attrs$name)
+    paste0(str_trunc(node_attrs$title[i], 55), " (", node_attrs$year[i], ")")
+  }
+  pieces <- d$pieces |>
+    filter(piece <= 2) |>
+    mutate(top = info(top_paper)) |>
+    select(community_id, piece, size, top) |>
+    pivot_wider(names_from = piece, values_from = c(size, top))
+  d$splits |>
+    mutate(community_id = as.character(community_id)) |>
+    filter(n_substantial > 0) |>
+    inner_join(pieces, by = "community_id") |>
+    arrange(desc(size_2), desc(size)) |>
+    transmute(
+      Community = gn_label_or_id(community_id, lookup),
+      Papers = size,
+      `Two pieces` = paste0(size_1, " and ", size_2),
+      `Papers in neither` = size - size_1 - size_2,
+      `Rounds after the cut` = format(first_substantial_round - cut_round, big.mark = ","),
+      `Top paper, larger piece` = top_1,
+      `Top paper, second piece` = top_2
+    ) |>
+    knitr::kable()
+}
+
+# The communities with a substantial division, drawn at the cut and coloured by piece.
+gn_subcluster_pieces_plot <- function(key) {
+  d <- gn_subclusters_data(key)
+  lookup <- gn_label_lookup(key)
+  ids <- d$splits |>
+    mutate(community_id = as.character(community_id)) |>
+    filter(n_substantial > 0) |>
+    arrange(desc(largest_second_piece), desc(size)) |>
+    pull(community_id)
+  if (length(ids) == 0) return(invisible(NULL))
+  g <- as_undirected(graphs[[key]], mode = "collapse")
+  part <- gn[[key]]$partition
+  set.seed(7)
+  parts <- map(ids, function(cid) {
+    members <- part$node_id[part$community_gn == cid]
+    pm <- d$pieces |> filter(community_id == cid)
+    piece1 <- strsplit(pm$members[pm$piece == 1], ";", fixed = TRUE)[[1]]
+    piece2 <- strsplit(pm$members[pm$piece == 2], ";", fixed = TRUE)[[1]]
+    sg <- igraph::induced_subgraph(g, members)
+    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
+    names_in <- igraph::V(sg)$name
+    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 32), ": ", length(piece1), " + ", length(piece2), " papers")
+    el <- igraph::as_edgelist(sg, names = FALSE)
+    list(nodes = tibble(x = xy[, 1], y = xy[, 2], panel = panel,
+                        piece = case_when(names_in %in% piece1 ~ "Larger piece",
+                                          names_in %in% piece2 ~ "Second piece",
+                                          TRUE ~ "Rest of the community")),
+         edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
+  })
+  levels <- map_chr(parts, ~ .x$nodes$panel[1])
+  nodes <- bind_rows(map(parts, "nodes")) |> mutate(panel = factor(panel, levels = levels))
+  edges <- bind_rows(map(parts, "edges")) |> mutate(panel = factor(panel, levels = levels))
+  ggplot() +
+    geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
+    geom_point(data = nodes, aes(x, y, colour = piece), size = 1.8, alpha = 0.9) +
+    scale_colour_manual(values = c("Larger piece" = "#4575b4", "Second piece" = "#d73027", "Rest of the community" = "grey70"), name = NULL) +
+    facet_wrap(~ panel, ncol = 4, scales = "free") +
+    theme_void() +
+    theme(strip.text = element_text(size = 7), legend.position = "bottom") +
+    labs(title = paste0(graph_labels[[key]], ": communities with a substantial division, drawn at the cut"))
 }
 
 # One table per run, built from that run's own labels/ folder.
@@ -1604,62 +1610,80 @@ the labels alone.
 
 #### Internal structure of individual communities
 
-Each graph's earliest-cut partition and its whole-graph dendrogram above both describe the corpus at a single level: `r gn_ncomm_text("annotated")` communities in Annotated and `r gn_ncomm_text("seed_filtered")` in Annotated, seed filtered, and one tree per graph covering the earliest few hundred splits across all of them together.
-A separate question is whether any individual community has further
-structure worth surfacing on its own, the same kind of check performed
-earlier (see "Choosing a stopping point") for two clusters against
-paper titles and annotation coding.
+The earliest cut leaves `r gn_ncomm_text("annotated")` communities in Annotated and `r gn_ncomm_text("seed_filtered")` in Annotated, seed filtered. A community can be taken further by replaying the removal log inside it from the cut onwards and recording each round where removing an edge divides it. Most divisions peel off one paper or a few, which is how any community comes apart and says little about its internal structure. A division counts as substantial here when its second-largest piece has at least `r gn_substantial_size` papers. The replay covers every community of `r gn_subcluster_min` or more papers.
 
-The subcluster analysis addresses this directly: seeded from the real community membership of each graph's earliest cut (not a re-derived or arbitrary starting point), it replays `removal_log.csv` separately for
-each of the round's largest communities and records what happens to
-each one afterward, run below using that same round so it can't drift
-out of sync with the partition described above. An initial version
-capped this replay at a fixed number of split events; that cap was
-itself an arbitrary choice with no basis in the data, so it
-now replays each community to natural completion (full fragmentation
-or the end of the log) by default.
+`r gn_subcluster_text()` Every other community comes apart in pieces of fewer than `r gn_substantial_size` papers.
 
-Doing so shows that, past each community's first split, every one of
-the `r gn_top_n` largest communities collapses the same way the whole graph
-does: a single dominant piece sheds one node at a time for hundreds of
-further rounds, with no further balanced division anywhere in the
-sequence. Plotted as a dendrogram, this produces the same long
-single-branch shape for every community regardless of its size or its
-first split, differing only in length, so the per-community dendrogram
-plots turned out uninformative and are not included here.
-
-The one real signal in this data is the size of the two pieces at each
-community's first split, plotted below. `r gn_first_split_text()` Any community whose two
-pieces are closer in size is a candidate for the same kind of
-title/annotation check performed earlier (see "Choosing a stopping
-point"), and any community where the *smaller* piece is the one that
-stays intact — rather than the one shed — runs against the pattern
-seen in every other community here and in the previous version of this
-corpus, and would be worth investigating further. Reading the specific
-communities and split sizes that meet either description off the plot,
-rather than naming them in prose here, keeps this section accurate
-across re-runs against different partitions.
+Each dot below is one community. The vertical axis is the largest second piece the community ever produces, so a community that only sheds single papers sits at 1. Communities above the dashed line have a substantial division and are named.
 
 ::: {.panel-tabset}
 
 ##### Annotated
 
 ```{r}
-#| label: first-splits-annotated
-#| fig-width: 11
-#| fig-height: 6.5
+#| label: subcluster-overview-annotated
+#| fig-width: 9
+#| fig-height: 6
 #| eval: !expr gn[["annotated"]]$available
-gn_first_splits_plot("annotated")
+gn_subcluster_overview("annotated")
 ```
 
 ##### Annotated, seed filtered
 
 ```{r}
-#| label: first-splits-seed-filtered
-#| fig-width: 11
-#| fig-height: 6.5
+#| label: subcluster-overview-seed-filtered
+#| fig-width: 9
+#| fig-height: 6
 #| eval: !expr gn[["seed_filtered"]]$available
-gn_first_splits_plot("seed_filtered")
+gn_subcluster_overview("seed_filtered")
+```
+
+:::
+
+The table lists the communities with a substantial division, ordered by the size of the second piece. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: subcluster-table-annotated
+#| eval: !expr gn[["annotated"]]$available
+gn_subcluster_table("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: subcluster-table-seed-filtered
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_subcluster_table("seed_filtered")
+```
+
+:::
+
+Each panel draws one of those communities at the cut. Blue is the larger piece, red is the second piece and grey is the rest of the community.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: subcluster-pieces-annotated
+#| fig-width: 12
+#| fig-height: 12
+#| eval: !expr gn[["annotated"]]$available
+gn_subcluster_pieces_plot("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: subcluster-pieces-seed-filtered
+#| fig-width: 12
+#| fig-height: 12
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_subcluster_pieces_plot("seed_filtered")
 ```
 
 :::
