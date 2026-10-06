@@ -1199,20 +1199,25 @@ gn_prepare <- function(key) {
   list(tg = tg, nodes = nodes, label_colours = label_colours, top = top)
 }
 
-# Force-directed layouts leave a handful of nodes far from the rest, which
-# stretches the default bounding box and leaves most of the canvas empty. The
-# view is cropped (coord_cartesian crops the view only, not the data) to the
-# 1st-99th percentile of each axis, so every real cluster stays fully visible.
+# The plot shows every node. `crop = TRUE` trims the view to the 1st-99th
+# percentile of each axis (coord_cartesian crops the view only, not the data),
+# which the `lgl` trials in the appendix need because they throw a few outliers
+# far out. The Fruchterman-Reingold layout places each connected component on
+# its own and packs the components together, so the small disconnected pieces
+# of the seed-filtered graph stay beside the main body instead of drifting off.
 # `weights = NA` makes the layout ignore any edge weight attribute.
 gn_plot_partition <- function(key, layout = "fr",
                               layout_args = list(niter = 500, grid = "grid", weights = NA),
-                              crop = TRUE) {
+                              crop = FALSE, f1_rings = TRUE) {
   d <- gn_prepare(key)
   tg <- d$tg |>
     activate(nodes) |>
     mutate(community_label = fct_reorder(community_label, highlight == "other"))
   set.seed(42)
-  lay <- if (layout == "lgl") {
+  lay <- if (layout == "fr") {
+    xy <- do.call(igraph::layout_components, c(list(tg, layout = igraph::layout_with_fr), layout_args))
+    create_layout(tg, layout = "manual", x = xy[, 1], y = xy[, 2])
+  } else if (layout == "lgl") {
     do.call(create_layout, c(list(tg, layout = "igraph", algorithm = "lgl"), layout_args))
   } else {
     do.call(create_layout, c(list(tg, layout = layout), layout_args))
@@ -1221,9 +1226,12 @@ gn_plot_partition <- function(key, layout = "fr",
 
   p <- ggraph(lay) +
     geom_edge_link(alpha = 0.04, colour = "grey75") +
-    geom_node_point(aes(colour = community_label, size = betweenness), alpha = 0.8) +
-    geom_node_point(data = ~ dplyr::filter(.x, is_f1),
-                    shape = 21, colour = "black", fill = NA, stroke = 0.5, size = 1.5) +
+    geom_node_point(aes(colour = community_label, size = betweenness), alpha = 0.8)
+  if (f1_rings) {
+    p <- p + geom_node_point(data = ~ dplyr::filter(.x, is_f1),
+                             shape = 21, colour = "black", fill = NA, stroke = 0.5, size = 1.5)
+  }
+  p <- p +
     scale_colour_manual(values = d$label_colours, name = "Cluster",
                          guide = guide_legend(ncol = 1)) +
     scale_size_continuous(name = "Betweenness", range = c(0.3, 6)) +
@@ -1233,8 +1241,8 @@ gn_plot_partition <- function(key, layout = "fr",
       title = paste0(graph_labels[[key]], ": ", format(vcount(graphs[[key]]), big.mark = ","),
                      " nodes, ", gn_top_n, " largest Girvan-Newman clusters, sized by betweenness"),
       subtitle = paste0(
-        "(fragmentation-onset cut, round ", gn_round_text(key), "). ",
-        "Black-ringed dots mark F1 papers (", n_f1, " within these clusters)."
+        "(fragmentation-onset cut, round ", gn_round_text(key), ").",
+        if (f1_rings) paste0(" Black-ringed dots mark F1 papers (", n_f1, " within these clusters).") else ""
       )
     )
   if (crop) {
@@ -1505,7 +1513,7 @@ gn_onset_table("seed_filtered")
 
 #### The working partition
 
-Only the top `r gn_top_n` clusters are individually coloured and the rest are grey, since beyond roughly `r gn_top_n` colours a reader cannot reliably distinguish them on the plot. F1 papers carry a black ring. Node size is each node's betweenness centrality in that graph, so the largest dots in the dense core are the corpus's structural bridges. The dense core is real structure and no layout parameter changes what it is. Every plot uses the Fruchterman-Reingold layout, the clearest of the layouts tried (see the appendix).
+Only the top `r gn_top_n` clusters are individually coloured and the rest are grey, since beyond roughly `r gn_top_n` colours a reader cannot reliably distinguish them on the plot. F1 papers carry a black ring except in the tabs marked no F1 rings. Node size is each node's betweenness centrality in that graph, so the largest dots in the dense core are the corpus's structural bridges. The dense core is real structure and no layout parameter changes what it is. Every plot uses the Fruchterman-Reingold layout, the clearest of the layouts tried (see the appendix).
 
 ::: {.panel-tabset}
 
@@ -1519,6 +1527,16 @@ Only the top `r gn_top_n` clusters are individually coloured and the rest are gr
 gn_plot_partition("annotated")
 ```
 
+##### Annotated, no F1 rings
+
+```{r}
+#| label: partition-annotated-plain
+#| fig-width: 16
+#| fig-height: 14
+#| eval: !expr gn[["annotated"]]$available
+gn_plot_partition("annotated", f1_rings = FALSE)
+```
+
 ##### Annotated, seed filtered
 
 ```{r}
@@ -1527,6 +1545,16 @@ gn_plot_partition("annotated")
 #| fig-height: 14
 #| eval: !expr gn[["seed_filtered"]]$available
 gn_plot_partition("seed_filtered")
+```
+
+##### Annotated, seed filtered, no F1 rings
+
+```{r}
+#| label: partition-seed-filtered-plain
+#| fig-width: 16
+#| fig-height: 14
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_plot_partition("seed_filtered", f1_rings = FALSE)
 ```
 
 :::
@@ -1686,6 +1714,318 @@ gn_cluster_labels_table("seed_filtered")
 ```
 
 :::
+
+
+### Communities of communities
+
+```{r}
+#| label: grouping-functions
+#| echo: false
+# One run of a community-detection method is a weak basis for groups, because the
+# result changes with the method, the resolution and what counts as a link between
+# two clusters. The groups come from a consensus over several variants, and each
+# group reports how often its members were grouped together.
+gn_group_cut <- 0.5          # co-association needed on average to share a group
+gn_group_seeds <- 1:5
+gn_group_min_papers <- 10    # smallest cluster drawn in the figures
+
+gn_leiden_groups <- function(g, resolution = 1) {
+  args <- list(g, objective_function = "modularity", weights = igraph::E(g)$weight, n_iterations = 10)
+  # igraph 2.x renamed resolution_parameter to resolution.
+  args[[if ("resolution" %in% names(formals(igraph::cluster_leiden))) "resolution" else "resolution_parameter"]] <- resolution
+  as.integer(igraph::membership(do.call(igraph::cluster_leiden, args)))
+}
+
+# One row per citation edge whose two papers both sit in a cluster, with the
+# clusters of the citing paper (from) and the cited paper (to).
+gn_cluster_edges <- function(key) {
+  part <- gn[[key]]$partition
+  edges_list[[key]] |>
+    select(source, target) |>
+    left_join(transmute(part, source = node_id, from = community_gn), by = "source") |>
+    left_join(transmute(part, target = node_id, to = community_gn), by = "target") |>
+    filter(!is.na(from), !is.na(to))
+}
+
+# Two clusters are linked by the citation edges that cross between them.
+gn_cluster_link_graph <- function(ce, clusters, directed = FALSE) {
+  x <- ce |> filter(from != to, from %in% clusters, to %in% clusters)
+  if (!directed) x <- x |> mutate(a = pmin(from, to), b = pmax(from, to), from = a, to = b)
+  x <- x |> count(from, to, name = "weight")
+  igraph::graph_from_data_frame(x, directed = directed, vertices = data.frame(name = clusters))
+}
+
+# Two clusters are also linked when their citing papers cite the same works,
+# measured as the cosine of the two sets of cited works.
+gn_cluster_reference_graph <- function(ce, clusters) {
+  refs <- ce |> filter(from %in% clusters) |> distinct(from, target)
+  m <- Matrix::sparseMatrix(i = match(refs$from, clusters), j = as.integer(factor(refs$target)),
+                            x = 1, dims = c(length(clusters), n_distinct(refs$target)))
+  b <- as.matrix(Matrix::tcrossprod(m))
+  d <- sqrt(Matrix::rowSums(m))
+  b <- b / outer(d, d)
+  b[!is.finite(b)] <- 0
+  diag(b) <- 0
+  g <- igraph::graph_from_adjacency_matrix(b, mode = "undirected", weighted = TRUE, diag = FALSE)
+  igraph::V(g)$name <- clusters
+  g
+}
+
+gn_group_variant_names <- c("Leiden, resolution 0.75", "Leiden, resolution 1", "Leiden, resolution 1.25",
+                            "Leiden, resolution 1.5", "Louvain", "Infomap, undirected links",
+                            "Infomap, directed links", "Leiden, shared references")
+gn_group_n_variants <- length(gn_group_variant_names)
+
+gn_cluster_groups <- function(key) {
+  ce <- gn_cluster_edges(key)
+  sizes <- count(gn[[key]]$partition, community_gn, name = "papers") |> arrange(desc(papers), community_gn)
+  clusters <- sizes$community_gn
+  g_links <- gn_cluster_link_graph(ce, clusters)
+  if (length(clusters) < 3 || igraph::ecount(g_links) == 0) return(NULL)
+  g_dir <- gn_cluster_link_graph(ce, clusters, directed = TRUE)
+  g_refs <- gn_cluster_reference_graph(ce, clusters)
+  w <- igraph::E(g_links)$weight
+  wd <- igraph::E(g_dir)$weight
+  membership_of <- function(x) as.integer(igraph::membership(x))
+  variants <- list(
+    function() gn_leiden_groups(g_links, 0.75),
+    function() gn_leiden_groups(g_links, 1),
+    function() gn_leiden_groups(g_links, 1.25),
+    function() gn_leiden_groups(g_links, 1.5),
+    function() membership_of(igraph::cluster_louvain(g_links, weights = w)),
+    function() membership_of(igraph::cluster_infomap(g_links, e.weights = w)),
+    function() membership_of(igraph::cluster_infomap(g_dir, e.weights = wd)),
+    function() gn_leiden_groups(g_refs, 1))
+  names(variants) <- gn_group_variant_names
+  larger <- which(sizes$papers >= gn_group_min_papers)
+  runs <- map(variants, function(f) {
+    compact(map(gn_group_seeds, function(s) {
+      set.seed(s)
+      tryCatch(f(), error = function(e) NULL)
+    }))
+  })
+  runs <- runs[lengths(runs) > 0]
+  n <- length(clusters)
+  coassoc <- matrix(0, n, n)
+  for (r in runs) {
+    together <- matrix(0, n, n)
+    for (m in r) together <- together + outer(m, m, "==")
+    coassoc <- coassoc + together / length(r)
+  }
+  coassoc <- coassoc / length(runs)
+  diag(coassoc) <- 1
+  raw <- cutree(hclust(as.dist(1 - coassoc), method = "average"), h = gn_group_cut)
+  totals <- tapply(sizes$papers, raw, sum)
+  group <- as.integer(rank(-totals, ties.method = "first")[as.character(raw)])
+  agreement <- map_dbl(split(seq_len(n), group), function(ix) {
+    if (length(ix) > 1) mean(coassoc[ix, ix][lower.tri(coassoc[ix, ix])]) else NA_real_
+  })
+  a <- as.matrix(igraph::as_adjacency_matrix(g_links, attr = "weight"))
+  inside <- rowSums(a * outer(group, group, "==")) / rowSums(a)
+  list(
+    clusters = tibble(community_gn = clusters, papers = sizes$papers, group = group,
+                      agreement = unname(agreement[as.character(group)]),
+                      links = rowSums(a), share_links_inside = inside),
+    variants = tibble(
+      variant = names(runs),
+      groups = unname(map_chr(runs, function(r) {
+        k <- map_int(r, function(m) length(unique(m[larger])))
+        if (min(k) == max(k)) as.character(min(k)) else paste0(min(k), " to ", max(k))
+      })),
+      agreement = unname(map_dbl(runs, function(r) {
+        mean(map_dbl(r, function(m) igraph::compare(m[larger], group[larger], method = "adjusted.rand")))
+      }))),
+    links = g_links)
+}
+
+gn_has_group <- function(key) !is.null(gn_groups[[key]])
+
+gn_group_note <- function(key) {
+  d <- gn_groups[[key]]
+  if (is.null(d)) return("No grouping is available for this graph.")
+  sizes <- count(d$clusters, group)
+  n_multi <- sum(sizes$n > 1)
+  n_alone <- sum(sizes$n == 1)
+  paste0(format(nrow(d$clusters), big.mark = ","), " clusters fall into ", n_multi,
+         if (n_multi == 1) " group" else " groups", " of two or more clusters, and ", n_alone,
+         if (n_alone == 1) " cluster stays" else " clusters stay", " alone. ",
+         "The table lists the groups of two or more clusters, and larger clusters are those with ",
+         gn_group_min_papers, " or more papers. The figures show only the larger clusters.")
+}
+
+gn_group_table <- function(key) {
+  d <- gn_groups[[key]]
+  lookup <- gn_label_lookup(key)
+  multi <- d$clusters |> count(group) |> filter(n > 1) |> pull(group)
+  d$clusters |>
+    mutate(name = coalesce(lookup$label[match(community_gn, lookup$community_id)], paste0("cluster ", community_gn))) |>
+    filter(group %in% multi) |>
+    group_by(group) |>
+    summarise(Clusters = n(), `Larger clusters` = sum(papers >= gn_group_min_papers), Papers = sum(papers), Agreement = first(agreement),
+              `Largest clusters` = paste0(head(name[order(-papers)], 3), " (", head(sort(papers, decreasing = TRUE), 3), ")", collapse = "; "),
+              .groups = "drop") |>
+    arrange(desc(Papers)) |>
+    mutate(Agreement = scales::percent(Agreement, accuracy = 1)) |>
+    rename(Group = group) |>
+    knitr::kable()
+}
+
+gn_group_graph <- function(key) {
+  d <- gn_groups[[key]]
+  shown <- filter(d$clusters, papers >= gn_group_min_papers)
+  g <- igraph::induced_subgraph(d$links, shown$community_gn)
+  link_counts <- igraph::E(g)$weight
+  # The layout reads the weight attribute separately for each connected piece.
+  igraph::E(g)$weight <- sqrt(link_counts)
+  set.seed(42)
+  xy <- igraph::layout_components(g, layout = igraph::layout_with_fr, niter = 1000)
+  top <- shown |> group_by(group) |> summarise(p = sum(papers), .groups = "drop") |>
+    arrange(desc(p)) |> slice_head(n = 12) |> pull(group)
+  hues <- setNames(grDevices::hcl(h = seq(15, 375, length.out = length(top) + 1)[-(length(top) + 1)], c = 100, l = 62), top)
+  nodes <- tibble(x = xy[, 1], y = xy[, 2], community_gn = igraph::V(g)$name) |>
+    left_join(shown, by = "community_gn") |>
+    mutate(colour = if_else(group %in% top, hues[as.character(group)], "grey75"))
+  el <- igraph::as_edgelist(g, names = FALSE)
+  segments <- tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2],
+                     weight = link_counts)
+  centres <- nodes |> filter(group %in% top) |> group_by(group) |>
+    summarise(x = median(x), y = median(y), .groups = "drop")
+  ggplot() +
+    geom_segment(data = filter(segments, weight >= 2), aes(x, y, xend = xend, yend = yend, linewidth = weight), alpha = 0.2, colour = "grey50") +
+    scale_linewidth(range = c(0.1, 2), guide = "none") +
+    geom_point(data = nodes, aes(x, y, size = papers, colour = colour), alpha = 0.85) +
+    scale_colour_identity() +
+    scale_size_continuous(range = c(1.5, 10), guide = "none") +
+    geom_text(data = centres, aes(x, y, label = group), size = 5, fontface = "bold") +
+    theme_graph() +
+    labs(title = paste0(graph_labels[[key]], ": clusters of ", gn_group_min_papers, " or more papers, coloured by group"),
+         subtitle = "Dot size is the number of papers in the cluster. Edges are drawn where two clusters have at least two citation links, and their width is that count.")
+}
+
+gn_group_heatmap <- function(key) {
+  d <- gn_groups[[key]]
+  shown <- d$clusters |> filter(papers >= gn_group_min_papers)
+  # Groups with fewer than three larger clusters share the last block.
+  in_block <- shown |> count(group) |> filter(n >= 3) |> pull(group)
+  shown <- shown |> mutate(block = if_else(group %in% in_block, group, Inf)) |> arrange(block, group, desc(papers))
+  g <- igraph::induced_subgraph(d$links, shown$community_gn)
+  a <- as.matrix(igraph::as_adjacency_matrix(g, attr = "weight"))[shown$community_gn, shown$community_gn]
+  s <- rowSums(a)
+  m <- a / sqrt(outer(s, s))
+  m[!is.finite(m)] <- 0
+  n <- nrow(m)
+  long <- tibble(i = rep(seq_len(n), n), j = rep(seq_len(n), each = n), value = as.vector(m))
+  bounds <- cumsum(table(factor(shown$block, levels = unique(shown$block)))) + 0.5
+  ggplot(long, aes(j, i, fill = value)) +
+    geom_raster() +
+    scale_fill_gradient(low = "white", high = "black", trans = "sqrt", name = "Citation links,\nadjusted for size") +
+    scale_y_reverse() +
+    geom_vline(xintercept = head(bounds, -1), colour = "red", linewidth = 0.3) +
+    geom_hline(yintercept = head(bounds, -1), colour = "red", linewidth = 0.3) +
+    coord_equal() +
+    theme_void() +
+    labs(title = paste0(graph_labels[[key]], ": citation links between clusters, ordered by group"),
+         subtitle = paste0("Clusters of ", gn_group_min_papers, " or more papers. Red lines separate groups, and the last block pools small groups."))
+}
+
+gn_group_variants_table <- function(key) {
+  gn_groups[[key]]$variants |>
+    rename(Variant = variant, `Groups among the larger clusters` = groups, `Agreement with the consensus` = agreement) |>
+    knitr::kable(digits = 2)
+}
+```
+
+```{r}
+#| label: grouping-compute
+#| echo: false
+gn_groups <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), function(k) {
+  if (!gn[[k]]$available) return(NULL)
+  tryCatch(gn_cluster_groups(k), error = function(e) {
+    warning("The grouping of clusters for ", k, " failed: ", conditionMessage(e))
+    NULL
+  })
+})
+```
+
+The clusters can be grouped in turn. Two clusters are linked when papers in one cite papers in the other, and also when their citing papers cite many of the same works. A single run of one community-detection method is a weak basis for groups here, because the result changes with the method, the resolution and the definition of a link. The grouping below therefore runs `r gn_group_n_variants` variants, with `r length(gn_group_seeds)` random seeds each, on every cluster of every size. The variants are Leiden at four resolutions, Louvain, Infomap on undirected and on directed links, and Leiden on shared references. Two clusters share a group when they were grouped together in at least `r scales::percent(1 - gn_group_cut)` of the runs on average. Each group reports the share of runs in which its members stayed together. A high share is necessary but not enough, because weakly linked clusters can be grouped together consistently without sharing a theme, so the cluster labels in each row need reading as well.
+
+::: {.panel-tabset}
+
+#### Annotated
+
+`r gn_group_note("annotated")`
+
+```{r}
+#| label: groups-table-annotated
+#| echo: false
+#| eval: !expr gn_has_group("annotated")
+gn_group_table("annotated")
+```
+
+```{r}
+#| label: groups-graph-annotated
+#| echo: false
+#| fig-width: 12
+#| fig-height: 10
+#| eval: !expr gn_has_group("annotated")
+gn_group_graph("annotated")
+```
+
+```{r}
+#| label: groups-heatmap-annotated
+#| echo: false
+#| fig-width: 8
+#| fig-height: 8
+#| eval: !expr gn_has_group("annotated")
+gn_group_heatmap("annotated")
+```
+
+```{r}
+#| label: groups-variants-annotated
+#| echo: false
+#| eval: !expr gn_has_group("annotated")
+gn_group_variants_table("annotated")
+```
+
+#### Annotated, seed filtered
+
+`r gn_group_note("seed_filtered")`
+
+```{r}
+#| label: groups-table-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_group("seed_filtered")
+gn_group_table("seed_filtered")
+```
+
+```{r}
+#| label: groups-graph-seed-filtered
+#| echo: false
+#| fig-width: 12
+#| fig-height: 10
+#| eval: !expr gn_has_group("seed_filtered")
+gn_group_graph("seed_filtered")
+```
+
+```{r}
+#| label: groups-heatmap-seed-filtered
+#| echo: false
+#| fig-width: 8
+#| fig-height: 8
+#| eval: !expr gn_has_group("seed_filtered")
+gn_group_heatmap("seed_filtered")
+```
+
+```{r}
+#| label: groups-variants-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_group("seed_filtered")
+gn_group_variants_table("seed_filtered")
+```
+
+:::
+
+The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the numbers mark the twelve largest groups. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
 
 
 ## What the seed filter changes
@@ -1941,7 +2281,7 @@ gn_plot_partition("annotated", layout = "stress", layout_args = list(), crop = F
 #| eval: false
 #| fig-width: 16
 #| fig-height: 14
-gn_plot_partition("annotated", layout = "lgl", layout_args = list())
+gn_plot_partition("annotated", layout = "lgl", layout_args = list(), crop = TRUE)
 ```
 
 ```{r}
@@ -1951,7 +2291,8 @@ gn_plot_partition("annotated", layout = "lgl", layout_args = list())
 #| fig-height: 14
 lgl_area <- vcount(graphs$annotated)^2
 gn_plot_partition("annotated", layout = "lgl",
-                  layout_args = list(area = lgl_area, repulserad = 2 * lgl_area * vcount(graphs$annotated)))
+                  layout_args = list(area = lgl_area, repulserad = 2 * lgl_area * vcount(graphs$annotated)),
+                  crop = TRUE)
 ```
 
 ```{r}
@@ -1959,7 +2300,7 @@ gn_plot_partition("annotated", layout = "lgl",
 #| eval: false
 #| fig-width: 16
 #| fig-height: 14
-gn_plot_partition("annotated", layout = "lgl", layout_args = list(coolexp = 0.5))
+gn_plot_partition("annotated", layout = "lgl", layout_args = list(coolexp = 0.5), crop = TRUE)
 ```
 
 ```{r}
@@ -1967,7 +2308,7 @@ gn_plot_partition("annotated", layout = "lgl", layout_args = list(coolexp = 0.5)
 #| eval: false
 #| fig-width: 16
 #| fig-height: 14
-gn_plot_partition("seed_filtered", layout = "lgl", layout_args = list(coolexp = 0.5))
+gn_plot_partition("seed_filtered", layout = "lgl", layout_args = list(coolexp = 0.5), crop = TRUE)
 ```
 
 The Louvain, Leiden and K-means plots, also disabled. Each saves a PNG and a PDF next to this document.
@@ -2000,7 +2341,7 @@ plot_membership("annotated", "cluster_kmeans", "Citation graph, K-means clusters
 
 ## Node-table export
 
-`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. The Girvan-Newman columns are left out when a run has not been installed.
+`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. The Girvan-Newman columns are left out when a run has not been installed.
 
 ```{r}
 #| label: node-table-export
@@ -2028,6 +2369,17 @@ if (gn$annotated$available) {
 if (gn$seed_filtered$available) {
   node_table <- node_table |>
     left_join(gn_column("seed_filtered", "community_gn_seed_filtered"), by = "name")
+}
+
+gn_group_column <- function(key, column) {
+  if (is.null(gn_groups[[key]])) return(NULL)
+  gn[[key]]$partition |>
+    left_join(select(gn_groups[[key]]$clusters, community_gn, group), by = "community_gn") |>
+    transmute(name = node_id, "{column}" := group)
+}
+for (spec in list(c("annotated", "group_gn"), c("seed_filtered", "group_gn_seed_filtered"))) {
+  group_column <- gn_group_column(spec[1], spec[2])
+  if (!is.null(group_column)) node_table <- node_table |> left_join(group_column, by = "name")
 }
 
 write_csv(node_table, here("analysis", "bibvik_node_table.csv"))

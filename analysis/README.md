@@ -60,8 +60,8 @@ results/annotated/
 ├── state.rds                  checkpoint that lets the run resume
 ├── run.log, session_stdout.log
 ├── multi_cut/                 communities_round_<N>.csv and multi_cut_summary.csv
-├── dendrogram/                gn_dendrogram.png, gn_dendrogram.rds, split_events.csv
-├── subclusters/               subcluster_summary.csv
+├── dendrogram/                gn_dendrogram.png, built by 02 when it renders
+├── subclusters/               subcluster_summary.csv, built by 02 when it renders
 └── labels/                    representatives.csv, cluster_labels.csv, node_labels.csv
 ```
 
@@ -91,13 +91,11 @@ say() { echo "[$(date "+%F %T")] $*"; }
 earliest() { ls $1/multi_cut/communities_round_*.csv | sed -E "s/.*_round_([0-9]+)\.csv$/\1/" | sort -n | head -1; }
 post() {
   D=$1; E=$2
-  rm -rf $D/multi_cut $D/dendrogram $D/subclusters $D/labels
+  rm -rf $D/multi_cut $D/labels
   Rscript generate_multi_cut_communities.R $E $D/removal_log.csv $D/modularity_trace.csv $D/multi_cut $W $R || { say "$D: cluster detection failed"; return 1; }
   N=$(earliest $D); say "$D: earliest cut is round $N"
-  Rscript build_dendrogram.R $E $D/removal_log.csv $D/dendrogram 300 0 0 $D/modularity_trace.csv $W $R || say "$D: dendrogram failed"
-  Rscript build_subcluster_trees.R $E $D/removal_log.csv $D/multi_cut/communities_round_$N.csv $N $D/subclusters 3 20 || say "$D: subcluster trees failed"
   (cd ../cluster_labelling && python3 select_representatives.py ../../data/bibliography.json ../../data/citation_edgelist.csv ../gn_analysis/$D/labels --partition-csv ../gn_analysis/$D/multi_cut/communities_round_$N.csv) || { say "$D: representatives failed"; return 1; }
-  say "$D: cuts, dendrogram, subcluster trees and representatives done"
+  say "$D: cuts and representatives done"
 }
 say "waiting for both GN runs to finish"
 while ! { grep -q "Done\." $A/run.log 2>/dev/null && grep -q "Done\." $B/run.log 2>/dev/null; }; do sleep 300; done
@@ -145,15 +143,13 @@ To restart from scratch on purpose, run `rm -rf results/*` first and paste the c
 |---|---|---|
 | Wait | Polls both `run.log` files every 5 minutes for `Done.` | Starts when both runs have finished. |
 | Cluster detection | `gn_analysis/generate_multi_cut_communities.R` | `multi_cut/communities_round_<N>.csv` for every sustained fragmentation onset, plus `multi_cut_summary.csv`. |
-| Dendrogram | `gn_analysis/build_dendrogram.R` with the modularity trace | `dendrogram/`. The tree stops at the earliest onset. |
-| Subcluster trees | `gn_analysis/build_subcluster_trees.R` seeded at the earliest cut, minimum community size 3, up to 20 trees | `subclusters/subcluster_summary.csv`. |
 | Representatives | `cluster_labelling/select_representatives.py` on the earliest cut | `labels/representatives.csv`, the top 10 papers per cluster by within-cluster degree. |
 | GPU | `nvidia-smi` every 5 minutes | The first GPU with under 2,000 MiB used and under 10% busy. |
 | Ollama | `launch_bibvik_llm.sh --gpu <G> --model qwen3.5:35b` | A server on port 11440, checked through `/api/tags`. |
 | Labelling | `cluster_labelling/label_clusters.py`, with-seed graph first, then no-seed | `labels/cluster_labels.csv` and `node_labels.csv`. |
 | Shutdown | `launch_bibvik_llm.sh --stop` | Ollama stops. |
 
-The labelled cut is the earliest sustained fragmentation onset, which is the smallest round number in `multi_cut/`. `02_network_structure.qmd` documents it as the only onset that gives a singleton-free partition on this corpus. Detection uses a window of 100 rounds and a minimum rate of 0.9 new components per round. `build_dendrogram.R` recomputes the earliest onset from the trace with the same rule, so both scripts need identical window and rate values.
+The labelled cut is the earliest sustained fragmentation onset, which is the smallest round number in `multi_cut/`. `02_network_structure.qmd` documents it as the only onset that gives a singleton-free partition on this corpus. Detection uses a window of 100 rounds and a minimum rate of 0.9 new components per round.
 
 The chain labels both graphs through one Ollama instance on one GPU, one graph after the other. `label_clusters.py` calls Ollama's `/api/generate` endpoint, so the Ollama backend is required and the `llama_server` tensor-parallel route cannot serve it.
 
@@ -180,7 +176,7 @@ The last line prints the chain's own timestamped messages. They name the current
 
 **Cancel the chain.** `pkill -f '[w]hile ! \{ grep -q'`. Pasting the launch command starts it again.
 
-**Rerun detection with other parameters.** Delete the folder first with `rm -rf results/<run>/multi_cut`, then pass the same window and rate to `generate_multi_cut_communities.R` (arguments 5 and 6) and to `build_dendrogram.R` (arguments 8 and 9).
+**Rerun detection with other parameters.** Delete the folder first with `rm -rf results/<run>/multi_cut`, then pass the same window and rate to `generate_multi_cut_communities.R` (arguments 5 and 6). 02 rebuilds the dendrogram from the new cuts on its own.
 
 **Label by hand.** The chain stops before labelling when the launcher cannot be found, `requests` is missing, or Ollama does not serve the model. It waits without failing while no GPU is free. After the cause is fixed, paste the launch command again. It redoes the post-run steps and then labels. The rehearsal below runs the labelling steps by hand on a small sample.
 
@@ -200,7 +196,7 @@ Every line should read `ok`, and the log should end with `all steps finished`.
 
 ```bash
 cd ~/models/BibVik/analysis/gn_analysis
-for D in results/annotated results/annotated_no_seed; do for f in communities.csv final_edgelist.csv modularity_trace.csv removal_log.csv multi_cut/multi_cut_summary.csv dendrogram/gn_dendrogram.png dendrogram/split_events.csv subclusters/subcluster_summary.csv labels/representatives.csv labels/cluster_labels.csv labels/node_labels.csv; do [ -s $D/$f ] && echo "ok       $D/$f" || echo "MISSING  $D/$f"; done; done
+for D in results/annotated results/annotated_no_seed; do for f in communities.csv final_edgelist.csv modularity_trace.csv removal_log.csv multi_cut/multi_cut_summary.csv labels/representatives.csv labels/cluster_labels.csv labels/node_labels.csv; do [ -s $D/$f ] && echo "ok       $D/$f" || echo "MISSING  $D/$f"; done; done
 grep "^\[" results/post_all.log
 ```
 
@@ -216,7 +212,7 @@ git commit -m "Add the finished Girvan-Newman runs"
 git push
 ```
 
-Then pull on the machine that renders and render 02 and 03, or `index.qmd`. 02 selects the earliest cut by sorting, so it needs no round number. For each graph it rebuilds the subcluster summary and the dendrogram image from the run's removal log when they are missing or older than the removal log. Each rebuild takes minutes. `.gitignore` excludes every `*.png`, so no dendrogram image is committed, and both images are rebuilt on the first render.
+Then pull on the machine that renders and render 02 and 03, or `index.qmd`. 02 selects the earliest cut by sorting, so it needs no round number. For each graph it builds the dendrogram image and the subcluster summary when they are missing or older than the earliest cut file (for the dendrogram, also the removal log). Each build takes minutes. The server builds neither. `.gitignore` excludes every `*.png` and the summary, so neither is committed, and both are built on the first render.
 
 Leave the working files out of git. `.gitignore` names a few of them under `analysis/gn_analysis/results/`, and those lines do not match the nested run folders. These lines do.
 
@@ -224,8 +220,6 @@ Leave the working files out of git. `.gitignore` names a few of them under `anal
 analysis/gn_analysis/results/*/state.rds
 analysis/gn_analysis/results/*/run.log
 analysis/gn_analysis/results/*/session_stdout.log
-analysis/gn_analysis/results/*/dendrogram/gn_dendrogram.rds
-analysis/gn_analysis/results/*/dendrogram/split_events.csv
 analysis/gn_analysis/results/*/subclusters/subcluster_summary.csv
 ```
 
@@ -235,7 +229,7 @@ If the runs are later copied into `data/` instead, change `gn_root` in the `gn-p
 
 ### Rehearsal on an earlier run
 
-These two blocks test the post-run steps on a finished earlier run found in `results_backup_*`, and they write to `~/models/rehearsal`. The first prints the real run time of detection, the dendrogram and the subcluster trees. The second runs representative selection, the GPU gate, the launcher, the model check, labelling of the 3 largest clusters, and shutdown. It holds one GPU for a few minutes.
+These two blocks test the post-run steps on a finished earlier run found in `results_backup_*`, and they write to `~/models/rehearsal`. The first prints the real run time of detection. The second runs representative selection, the GPU gate, the launcher, the model check, labelling of the 3 largest clusters, and shutdown. It holds one GPU for a few minutes.
 
 ```bash
 cd ~/models/BibVik/analysis/gn_analysis
@@ -244,8 +238,6 @@ echo "rehearsing on: ${B:-NO BACKUP HAS ALL THREE FILES}"
 T=~/models/rehearsal; rm -rf $T; mkdir -p $T
 time Rscript generate_multi_cut_communities.R $B/final_edgelist.csv $B/removal_log.csv $B/modularity_trace.csv $T/multi_cut
 N=$(ls $T/multi_cut/communities_round_*.csv | sed -E "s/.*_round_([0-9]+)\.csv$/\1/" | sort -n | head -1); echo "earliest cut: $N"
-time Rscript build_dendrogram.R $B/final_edgelist.csv $B/removal_log.csv $T/dendrogram 300 0 0 $B/modularity_trace.csv
-time Rscript build_subcluster_trees.R $B/final_edgelist.csv $B/removal_log.csv $T/multi_cut/communities_round_$N.csv $N $T/subclusters 3 20
 ls -R $T | head -30
 ```
 
@@ -280,7 +272,7 @@ The commands were tested on 2026-10-06 with the real R and Python scripts in a s
 | Launcher missing, `requests` missing, detection failing | Each logged one clear line, kept the CPU outputs, and left the GPU untouched. |
 | Cross-file checks on both graphs | 12 of 12 passed. Node ids, community ids and titles agree from the GN output through the labels. |
 
-Not exercised on real data or on the real machine are the real `launch_bibvik_llm.sh` with its flags and port 11440, whether `qwen3.5:35b` fits on one 24 GB GPU, the run time of cluster detection, the dendrogram and the subcluster trees at the real graph size, and the length of the GN runs themselves. The rehearsal covers the first three.
+Not exercised on real data or on the real machine are the real `launch_bibvik_llm.sh` with its flags and port 11440, whether `qwen3.5:35b` fits on one 24 GB GPU, the run time of cluster detection at the real graph size, and the length of the GN runs themselves. The rehearsal covers the first three.
 
 ### Hazards
 
@@ -292,7 +284,7 @@ Not exercised on real data or on the real machine are the real `launch_bibvik_ll
 
 **Live**
 
-- **No onset found.** With window 100 and rate 0.9, detection stops with `No sustained fast-fragmentation onsets detected` when the graph does not fragment fast enough. A small synthetic graph did this. Detection has not run on these two graphs yet, and the no-seed graph starts with four components. The earlier real runs found onsets with the defaults. If it fails, the chain logs the graph and skips it. Relax the two arguments and give the same values to `build_dendrogram.R`.
+- **No onset found.** With window 100 and rate 0.9, detection stops with `No sustained fast-fragmentation onsets detected` when the graph does not fragment fast enough. A small synthetic graph did this. Detection has not run on these two graphs yet, and the no-seed graph starts with four components. The earlier real runs found onsets with the defaults. If it fails, the chain logs the graph and skips it. Relax the two arguments.
 - **GN modularity.** `run_gn_analysis.R` scores modularity against the shrinking graph, so late rounds can score very high. Cut selection uses fragmentation onsets, so the chain's output is unaffected. The best-scoring partition in `communities.csv` and any modularity figure quoted from the traces are unreliable until a recomputation from the removal log against the original graph is written.
 - **igraph versions.** The server has igraph 1.6.0. The GN scripts use `get.edge.ids` and `as.undirected`, which that version has. 02 calls `as_undirected()`, which igraph added in 2.0, so 02 renders on igraph 2.0 or later. On 1.6.0 the k-core chunk fails and the Louvain and Leiden chunks fail after it. Render 02 locally, or define `as_undirected <- igraph::as.undirected` before it.
 
@@ -359,7 +351,8 @@ Each item appears once here. The documents no longer carry their own lists.
 - 02, internal structure of communities: "a single dominant piece sheds one node at a time for hundreds of further rounds" and the "same long single-branch shape" for every community. The count of communities that shed one node at first split is computed.
 - 02, appendix: the seed is "cited directly by hundreds of F1 papers".
 - `index.qmd` describes 02 as "GN excluded", although 02 now includes Girvan-Newman.
-- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. Read its prose against the new tables. The file has a new column, `community_gn_seed_filtered`, which 03 does not use.
+- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. Read its prose against the new tables. The file has new columns, `community_gn_seed_filtered`, `group_gn` and `group_gn_seed_filtered`, which 03 does not use.
+- 02, communities of communities: the groups come from a consensus of eight variants with five seeds each, and they change if the variant list, the seeds or the 0.5 threshold change. Read each group's cluster labels as well as its agreement share.
 - The comparison section in 02 ("What the seed filter changes") and every Girvan-Newman tab have not rendered on real runs yet.
 
 ## Related documents
