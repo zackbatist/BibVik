@@ -1872,6 +1872,7 @@ gn_group_table <- function(key) {
 
 gn_group_graph <- function(key) {
   d <- gn_groups[[key]]
+  lookup <- gn_label_lookup(key)
   shown <- filter(d$clusters, papers >= gn_group_min_papers)
   g <- igraph::induced_subgraph(d$links, shown$community_gn)
   link_counts <- igraph::E(g)$weight
@@ -1879,27 +1880,40 @@ gn_group_graph <- function(key) {
   igraph::E(g)$weight <- sqrt(link_counts)
   set.seed(42)
   xy <- igraph::layout_components(g, layout = igraph::layout_with_fr, niter = 1000)
-  top <- shown |> group_by(group) |> summarise(p = sum(papers), .groups = "drop") |>
-    arrange(desc(p)) |> slice_head(n = 12) |> pull(group)
-  hues <- setNames(grDevices::hcl(h = seq(15, 375, length.out = length(top) + 1)[-(length(top) + 1)], c = 100, l = 62), top)
+  # Every group of two or more larger clusters gets a colour and a legend entry
+  # named for its largest cluster. Larger clusters that form a group alone share grey.
+  groups <- shown |>
+    group_by(group) |>
+    summarise(n = n(), p = sum(papers), lead = community_gn[which.max(papers)], .groups = "drop") |>
+    filter(n >= 2) |>
+    arrange(desc(p)) |>
+    mutate(entry = paste0(group, ". ", str_trunc(gn_label_or_id(lead, lookup), 48)))
+  n_groups <- nrow(groups)
+  # Consecutive groups get hues far apart, since neighbours in size are often neighbours on the plot.
+  gcd <- function(a, b) if (b == 0) a else gcd(b, a %% b)
+  step <- max(1, ceiling(n_groups / 3))
+  while (n_groups > 1 && gcd(step, n_groups) != 1) step <- step + 1
+  hue_index <- ((seq_len(n_groups) - 1) * step) %% max(n_groups, 1)
+  palette <- setNames(grDevices::hcl(h = 15 + 360 * hue_index / max(n_groups, 1), c = 100, l = 62), groups$entry)
+  other <- "Larger clusters that form a group alone"
   nodes <- tibble(x = xy[, 1], y = xy[, 2], community_gn = igraph::V(g)$name) |>
     left_join(shown, by = "community_gn") |>
-    mutate(colour = if_else(group %in% top, hues[as.character(group)], "grey75"))
+    left_join(select(groups, group, entry), by = "group") |>
+    mutate(entry = factor(coalesce(entry, other), levels = c(groups$entry, other)))
   el <- igraph::as_edgelist(g, names = FALSE)
   segments <- tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2],
                      weight = link_counts)
-  centres <- nodes |> filter(group %in% top) |> group_by(group) |>
-    summarise(x = median(x), y = median(y), .groups = "drop")
   ggplot() +
     geom_segment(data = filter(segments, weight >= 2), aes(x, y, xend = xend, yend = yend, linewidth = weight), alpha = 0.2, colour = "grey50") +
     scale_linewidth(range = c(0.1, 2), guide = "none") +
-    geom_point(data = nodes, aes(x, y, size = papers, colour = colour), alpha = 0.85) +
-    scale_colour_identity() +
+    geom_point(data = nodes, aes(x, y, size = papers, colour = entry), alpha = 0.85) +
+    scale_colour_manual(values = c(palette, setNames("grey75", other)), name = "Group",
+                        guide = guide_legend(ncol = 1, override.aes = list(size = 4, alpha = 1))) +
     scale_size_continuous(range = c(1.5, 10), guide = "none") +
-    geom_text(data = centres, aes(x, y, label = group), size = 5, fontface = "bold") +
     theme_graph() +
+    theme(legend.text = element_text(size = 9)) +
     labs(title = paste0(graph_labels[[key]], ": clusters of ", gn_group_min_papers, " or more papers, coloured by group"),
-         subtitle = "Dot size is the number of papers in the cluster. Edges are drawn where two clusters have at least two citation links, and their width is that count.")
+         subtitle = "Dot size is the number of papers in the cluster. Edges show two or more citation links between two clusters, and edge width grows with the count.")
 }
 
 gn_group_heatmap <- function(key) {
@@ -2025,7 +2039,7 @@ gn_group_variants_table("seed_filtered")
 
 :::
 
-The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the numbers mark the twelve largest groups. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
+The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
 
 
 ### Cluster shapes
