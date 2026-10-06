@@ -3822,7 +3822,8 @@ vertical-align: -.125em;
 
 <style type="text/css">
 @media (min-width: 992px) {
-#quarto-content.page-columns {
+#quarto-content.page-columns,
+#quarto-document-content.page-columns {
 grid-template-columns:
 [screen-start] 1.5em
 [screen-start-inset page-start] minmax(50px, 100px)
@@ -3839,7 +3840,8 @@ grid-template-columns:
 [screen-end];
 }
 }
-</style>
+
+.column-margin { display: none !important; }</style>
 </head>
 
 <body class="nav-sidebar docked quarto-light">
