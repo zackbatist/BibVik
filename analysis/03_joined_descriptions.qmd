@@ -100,7 +100,7 @@ cat("Rows with a matching annotation:", sum(!is.na(cluster_table_annotated$publi
 ```
 
 ```{r}
-#| label: graph-definitions
+#| label: cluster-graph-definitions
 #| echo: false
 # The same two versions of the graph as in Part 2. node_table carries one
 # Girvan-Newman column for each: community_gn (Annotated) and
