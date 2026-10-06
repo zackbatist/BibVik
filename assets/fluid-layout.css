@@ -1,10 +1,12 @@
-/* Let the main column take whatever width the window has. Quarto's grid caps the
-   body column at the configured body-width and gives every extra pixel to an empty
-   track on the right, so zooming out only widened that gutter. Here the body column
-   flexes and the end gutter has no width. The line names and the margin tracks
-   match Quarto's, so margin content and wide-column classes still land correctly. */
+/* Let the page fill the browser window. Quarto lays the page out in two grids: the outer
+   container (#quarto-content) and the main element inside it. Each caps its body column at
+   the configured body-width and gives every extra pixel to an empty track on the right, so
+   zooming out only widened the gutter and left the text narrow. Here the body column flexes
+   and the end gutter has no width, in both grids. The line names and the margin tracks match
+   Quarto's, so the table of contents and the wide-column classes still land correctly. */
 @media (min-width: 992px) {
-  #quarto-content.page-columns {
+  #quarto-content.page-columns,
+  #quarto-document-content.page-columns {
     grid-template-columns:
       [screen-start] 1.5em
       [screen-start-inset page-start] minmax(50px, 100px)
@@ -21,3 +23,7 @@
       [screen-end];
   }
 }
+
+/* Margin notes are hidden until they are redesigned. The text stays in the page source,
+   so deleting this rule brings them back. */
+.column-margin { display: none !important; }
