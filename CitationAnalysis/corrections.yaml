@@ -299256,3 +299256,153 @@
   field: pages
   value: 161--177
   note: OpenAlex identifies the work firmly and gives these pages; the citing papers' own reference lists agree with it and not with the entry.
+
+- action: merge
+  keep: christensen1983a
+  discard: christensen1987
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: blackburn1994
+  discard: blackburn2000
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: jeppesen1990
+  discard: jeppesen1997
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: carlsson1989
+  discard: carlsson1998
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: geary1978
+  discard: geary1990
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: brooks1987
+  discard: brooks2000
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: stein2000
+  discard: stein2015
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: lindahl1984
+  discard: lindahl2003
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: wilson1960a
+  discard: wilson1984
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: bourdieu1977
+  discard: bourdieu2003
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: magnusson1966
+  discard: magnusson2000
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: merge
+  keep: wrenn1958
+  discard: wrenn1998
+  note: 'Reprint or edition of one work: same first author, identical title, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the more central generation, then the earlier year (so no citer predates the kept entry), then the more complete record; the citers of the discarded entry move across.'
+- action: set
+  citekey: christensen1983a
+  field: cited_by
+  value:
+  - holst2013
+  - beck2018
+  - bonde2016
+  - helmbrecht2012
+  - imer2014
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: blackburn1994
+  field: cited_by
+  value:
+  - hadley2016
+  - williams2017
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: jeppesen1990
+  field: cited_by
+  value:
+  - holst2013
+  - jorgensen2009a
+  - lund2013
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: carlsson1989
+  field: cited_by
+  value:
+  - borake2018
+  - magi2015
+  - sindbaek2007
+  - magi2016
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: geary1978
+  field: cited_by
+  value:
+  - hedeager2003
+  - hedeager2010
+  - lund2017
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: brooks1987
+  field: cited_by
+  value:
+  - hadley2016
+  - hadley2018
+  - kershaw2017
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: stein2000
+  field: cited_by
+  value:
+  - hadley2016
+  - ulriksen2011a
+  - richards2018
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: lindahl1984
+  field: cited_by
+  value:
+  - baastrup2014
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: wilson1960a
+  field: cited_by
+  value:
+  - baastrup2014
+  - aannestad2018
+  - aannestad2018a
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: bourdieu1977
+  field: cited_by
+  value:
+  - eriksen2013
+  - fredriksen2014
+  - eriksen2016
+  - kristjansdottir2015
+  - lund2004
+  - lund2013
+  - lund2016
+  - naum2007
+  - gardela2015
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: magnusson1966
+  field: cited_by
+  value:
+  - hilberg2014
+  - price2019
+  - steinforth2018
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: wrenn1958
+  field: cited_by
+  value:
+  - androshchuk2010
+  - lundborg2006a
+  note: 'Pinned after the merge of a reprint or edition: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
