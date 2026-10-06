@@ -1,0 +1,23 @@
+/* Let the main column take whatever width the window has. Quarto's grid caps the
+   body column at the configured body-width and gives every extra pixel to an empty
+   track on the right, so zooming out only widened that gutter. Here the body column
+   flexes and the end gutter has no width. The line names and the margin tracks
+   match Quarto's, so margin content and wide-column classes still land correctly. */
+@media (min-width: 992px) {
+  #quarto-content.page-columns {
+    grid-template-columns:
+      [screen-start] 1.5em
+      [screen-start-inset page-start] minmax(50px, 100px)
+      [page-start-inset] 50px
+      [body-start-outset] 50px
+      [body-start] 1.5em
+      [body-content-start] minmax(500px, 1fr)
+      [body-content-end] 1.5em
+      [body-end] 120px
+      [body-end-outset] minmax(120px, 240px)
+      [page-end-inset] 120px
+      [page-end] 0px
+      [screen-end-inset] 1.5em
+      [screen-end];
+  }
+}

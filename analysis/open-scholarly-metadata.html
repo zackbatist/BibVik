@@ -104,6 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="../assets/fluid-layout.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -241,6 +242,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<style>
+/* Tables with more rows than the script's limit start collapsed behind a summary line. */
+details.collapsible-table { margin: 1em 0; border: 1px solid #dee2e6; border-radius: 4px; }
+details.collapsible-table > summary { cursor: pointer; padding: 0.4em 0.8em; background: #f8f9fa; color: #495057; font-size: 0.9em; }
+details.collapsible-table[open] > summary { border-bottom: 1px solid #dee2e6; }
+details.collapsible-table > summary .when-open { display: none; }
+details.collapsible-table[open] > summary .when-open { display: inline; }
+details.collapsible-table[open] > summary .when-closed { display: none; }
+details.collapsible-table > .collapsible-table-body { overflow-x: auto; padding: 0.5em; }
+details.collapsible-table table { margin-bottom: 0; }
+</style>
+<script>
+(function () {
+  var MAX_OPEN_ROWS = 10;  // tables with more body rows than this start collapsed
+  var scope = document.querySelector("#quarto-document-content") || document.body;
+  Array.prototype.forEach.call(scope.querySelectorAll("table"), function (table) {
+    if (table.closest("details.collapsible-table")) return;
+    var rows = table.querySelectorAll("tbody tr").length;
+    if (rows <= MAX_OPEN_ROWS) return;
+    var details = document.createElement("details");
+    details.className = "collapsible-table";
+    var summary = document.createElement("summary");
+    summary.innerHTML = '<span class="when-closed">Show table (' + rows + ' rows)</span><span class="when-open">Hide table</span>';
+    var body = document.createElement("div");
+    body.className = "collapsible-table-body";
+    table.parentNode.insertBefore(details, table);
+    details.appendChild(summary);
+    details.appendChild(body);
+    body.appendChild(table);
+  });
+  // A printed page shows every table.
+  window.addEventListener("beforeprint", function () {
+    Array.prototype.forEach.call(document.querySelectorAll("details.collapsible-table"), function (d) {
+      d.dataset.closedBeforePrint = d.open ? "no" : "yes";
+      d.open = true;
+    });
+  });
+  window.addEventListener("afterprint", function () {
+    Array.prototype.forEach.call(document.querySelectorAll("details.collapsible-table"), function (d) {
+      if (d.dataset.closedBeforePrint === "yes") d.open = false;
+    });
+  });
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
