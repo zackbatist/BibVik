@@ -353,6 +353,7 @@ Each item appears once here. The documents no longer carry their own lists.
 - `index.qmd` describes 02 as "GN excluded", although 02 now includes Girvan-Newman.
 - 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. Read its prose against the new tables. The file has new columns, `community_gn_seed_filtered`, `group_gn` and `group_gn_seed_filtered`, which 03 does not use.
 - 02, communities of communities: the groups come from a consensus of eight variants with five seeds each, and they change if the variant list, the seeds or the 0.5 threshold change. Read each group's cluster labels as well as its agreement share.
+- 03 now computes every section for both graphs, using `community_gn` for Annotated and `community_gn_seed_filtered` for Annotated, seed filtered. Its prose was written against an earlier cut, so re-read the statements that describe cluster sizes and coverage, including the mention of an "other" grouping in the coverage paragraph, which the heatmaps no longer have.
 - The comparison section in 02 ("What the seed filter changes") and every Girvan-Newman tab have not rendered on real runs yet.
 
 ## Related documents

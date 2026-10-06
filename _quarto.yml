@@ -54,6 +54,8 @@ format:
     code-copy: true
     code-overflow: wrap
     page-layout: article
+    # fluid-layout.css lets the main column fill the window, so body-width no longer caps the page.
+    css: assets/fluid-layout.css
     grid:
       body-width: 1100px
       margin-width: 600px

@@ -2756,8 +2756,3 @@ write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
 cat("Written bibvik_node_table.csv\n")
 cat("Rows:", nrow(node_table), "\n")
 ```
-
-## References
-
-::: {#refs}
-:::
