@@ -1390,8 +1390,6 @@ gn_cluster_labels_table("seed_filtered")
 #| label: seed-filter-nodes
 #| echo: false
 #| results: hide
-removed <- setdiff(V(graphs$annotated)$name, V(graphs$seed_filtered)$name)
-edges_removed <- ecount(graphs$annotated) - ecount(graphs$seed_filtered)
 
 shared <- inner_join(
   metrics$annotated |> filter(is_ghost == "false") |>
@@ -1422,8 +1420,6 @@ fragments <- tibble(name = names(wcc_f$membership), component = wcc_f$membership
   left_join(node_attrs |> select(name, title, year), by = "name") |>
   arrange(desc(component_size), component, year)
 ```
-
-The seed paper, `lund2021`, is the origin of the corpus and cites `r format(edges_removed, big.mark = ",")` of its works. Dropping its rows from the annotated edge list removes those edges and `r length(removed)` nodes, the seed and the works whose only citation was the seed. It changes the graph in three ways that the sections above show one graph at a time. This section puts the two side by side.
 
 ### What separates
 
