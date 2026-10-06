@@ -1816,7 +1816,11 @@ gn_cluster_groups <- function(key) {
   diag(coassoc) <- 1
   raw <- cutree(hclust(as.dist(1 - coassoc), method = "average"), h = gn_group_cut)
   totals <- tapply(sizes$papers, raw, sum)
-  group <- as.integer(rank(-totals, ties.method = "first")[as.character(raw)])
+  # Groups of two or more clusters are numbered 1 to K by size, so the numbers match
+  # the count in the text. Clusters that sit alone are numbered after them.
+  by_size <- function(ids) ids[order(-totals[ids], as.integer(ids))]
+  shared_ids <- names(which(table(raw) > 1))
+  group <- match(as.character(raw), c(by_size(shared_ids), by_size(setdiff(names(totals), shared_ids))))
   agreement <- map_dbl(split(seq_len(n), group), function(ix) {
     if (length(ix) > 1) mean(coassoc[ix, ix][lower.tri(coassoc[ix, ix])]) else NA_real_
   })
@@ -1846,11 +1850,15 @@ gn_group_note <- function(key) {
   sizes <- count(d$clusters, group)
   n_multi <- sum(sizes$n > 1)
   n_alone <- sum(sizes$n == 1)
+  n_hidden <- d$clusters |> group_by(group) |> filter(n() > 1) |>
+    summarise(has_larger = any(papers >= gn_group_min_papers), .groups = "drop") |> filter(!has_larger) |> nrow()
   paste0(format(nrow(d$clusters), big.mark = ","), " clusters fall into ", n_multi,
          if (n_multi == 1) " group" else " groups", " of two or more clusters, and ", n_alone,
          if (n_alone == 1) " cluster stays" else " clusters stay", " alone. ",
          "The table lists the groups of two or more clusters, and larger clusters are those with ",
-         gn_group_min_papers, " or more papers. The figures show only the larger clusters.")
+         gn_group_min_papers, " or more papers. The figures show only the larger clusters.",
+         if (n_hidden > 0) paste0(" ", n_hidden, if (n_hidden == 1) " group has" else " groups have",
+                                  " no larger cluster and ", if (n_hidden == 1) "does" else "do", " not appear in the legend.") else "")
 }
 
 gn_group_table <- function(key) {
@@ -1880,13 +1888,13 @@ gn_group_graph <- function(key) {
   igraph::E(g)$weight <- sqrt(link_counts)
   set.seed(42)
   xy <- igraph::layout_components(g, layout = igraph::layout_with_fr, niter = 1000)
-  # Every group of two or more larger clusters gets a colour and a legend entry
-  # named for its largest cluster. Larger clusters that form a group alone share grey.
+  # Every group of two or more clusters that has a cluster in the figure gets a colour and a
+  # legend entry named for its largest cluster. Clusters that form a group alone share grey.
   groups <- shown |>
     group_by(group) |>
-    summarise(n = n(), p = sum(papers), lead = community_gn[which.max(papers)], .groups = "drop") |>
-    filter(n >= 2) |>
-    arrange(desc(p)) |>
+    summarise(lead = community_gn[which.max(papers)], .groups = "drop") |>
+    semi_join(filter(count(d$clusters, group, name = "n_clusters"), n_clusters >= 2), by = "group") |>
+    arrange(group) |>
     mutate(entry = paste0(group, ". ", str_trunc(gn_label_or_id(lead, lookup), 48)))
   n_groups <- nrow(groups)
   # Consecutive groups get hues far apart, since neighbours in size are often neighbours on the plot.
@@ -1895,7 +1903,7 @@ gn_group_graph <- function(key) {
   while (n_groups > 1 && gcd(step, n_groups) != 1) step <- step + 1
   hue_index <- ((seq_len(n_groups) - 1) * step) %% max(n_groups, 1)
   palette <- setNames(grDevices::hcl(h = 15 + 360 * hue_index / max(n_groups, 1), c = 100, l = 62), groups$entry)
-  other <- "Larger clusters that form a group alone"
+  other <- "Clusters that form a group alone"
   nodes <- tibble(x = xy[, 1], y = xy[, 2], community_gn = igraph::V(g)$name) |>
     left_join(shown, by = "community_gn") |>
     left_join(select(groups, group, entry), by = "group") |>
@@ -1961,7 +1969,7 @@ gn_groups <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), fu
 })
 ```
 
-The clusters can be grouped in turn. Two clusters are linked when papers in one cite papers in the other, and also when their citing papers cite many of the same works. A single run of one community-detection method is a weak basis for groups here, because the result changes with the method, the resolution and the definition of a link. The grouping below therefore runs `r gn_group_n_variants` variants, with `r length(gn_group_seeds)` random seeds each, on every cluster of every size. The variants are Leiden at four resolutions, Louvain, Infomap on undirected and on directed links, and Leiden on shared references. Two clusters share a group when they were grouped together in at least `r scales::percent(1 - gn_group_cut)` of the runs on average. Each group reports the share of runs in which its members stayed together. A high share is necessary but not enough, because weakly linked clusters can be grouped together consistently without sharing a theme, so the cluster labels in each row need reading as well.
+The clusters can be grouped in turn. Two clusters are linked when papers in one cite papers in the other, and also when their citing papers cite many of the same works. A single run of one community-detection method is a weak basis for groups here, because the result changes with the method, the resolution and the definition of a link. The grouping below therefore runs `r gn_group_n_variants` variants, with `r length(gn_group_seeds)` random seeds each, on every cluster of every size. The variants are Leiden at four resolutions, Louvain, Infomap on undirected and on directed links, and Leiden on shared references. Two clusters share a group when they were grouped together in at least `r scales::percent(1 - gn_group_cut)` of the runs on average. A cluster forms a group alone when no other cluster meets that test with it, which means the variants disagree about which cluster it belongs with. Each group reports the share of runs in which its members stayed together. A high share is necessary but not enough, because weakly linked clusters can be grouped together consistently without sharing a theme, so the cluster labels in each row need reading as well.
 
 ::: {.panel-tabset}
 
@@ -2039,7 +2047,7 @@ gn_group_variants_table("seed_filtered")
 
 :::
 
-The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
+The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. Grey dots are clusters that form a group alone. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
 
 
 ### Cluster shapes
