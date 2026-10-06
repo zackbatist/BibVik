@@ -299665,3 +299665,287 @@
   - osullivan2015
   - wickholm2006
   note: 'Citers moved by a second-evidence match: the citing paper''s own parsed reference agrees with the destination on title (and on pages, volume or DOI where both have them), the title does not match the entry it was attached to, and the move creates no self-citation or citation of a later-dated work.'
+
+- action: merge
+  keep: buckland1985
+  discard: buckland1989
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: leahy1997
+  discard: leahy2001
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: wiechmann2002
+  discard: wiechmann2007
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: gullbekk2003
+  discard: gullbekk2009
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: fabech2004
+  discard: fabech1998a
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: simek1993
+  discard: simek2000
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: bjorvand2000
+  discard: bjorvand2007
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: ulriksen1989
+  discard: ulriksen1998
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: moltke1985
+  discard: moltke1976
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: foote1970
+  discard: foote1979
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: barth1969
+  discard: barth1982
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: kopytoff1996
+  discard: kopytoff2010
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: sperber2004a
+  discard: sperber1990
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: maixner2005
+  discard: maixner1990
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: gron1942
+  discard: gron1927
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: elsner1989
+  discard: elsner2004
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: deetz1977
+  discard: deetz1996
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: almgren1955
+  discard: almgren1981
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: lunde2011
+  discard: lunde1983
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: valujev2005
+  discard: valujev1975
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: kirch1984
+  discard: kirch2017
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: merge
+  keep: christaller1933
+  discard: christaller1968
+  note: 'Reviewed by hand: one work under two keys (an edition, reprint, translation or truncated variant). Same first author, related titles, no conflicting DOI, pages, volume, container or second author, and neither entry is an annotated paper or has outgoing edges. Kept the entry named first where the list asked for it and no citer would predate it, otherwise the earlier year; the citers of the discarded entry move across.'
+- action: set
+  citekey: buckland1985
+  field: cited_by
+  value:
+  - milek2012
+  - milek2013
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: leahy1997
+  field: cited_by
+  value:
+  - kershaw2009
+  - kershaw2016
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: wiechmann2002
+  field: cited_by
+  value:
+  - hardh2010a
+  - hilberg2013
+  - hilberg2016
+  - kalmring2010
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: gullbekk2003
+  field: cited_by
+  value:
+  - spangen2009
+  - gullbekk2011
+  - poulsen2011
+  - sindbaek2011
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: fabech2004
+  field: cited_by
+  value:
+  - osullivan2015
+  - jorgensen2009a
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: simek1993
+  field: cited_by
+  value:
+  - andren2013b
+  - barndon2005a
+  - fabech2013
+  - lund2008
+  - lund2010
+  - price2014
+  - rosengren2010
+  - dobat2006
+  - gardelanda
+  - larsson2007
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: bjorvand2000
+  field: cited_by
+  value:
+  - solli2018
+  - sanmark2013
+  - eriksen2016
+  - skre2011c
+  - skre2019
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: ulriksen1989
+  field: cited_by
+  value:
+  - holst2014
+  - borake2018
+  - hardh2010a
+  - magi2015
+  - poulsen2011
+  - sindbaek2007
+  - the2017
+  - vonholstein2014
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: moltke1985
+  field: cited_by
+  value:
+  - imer2014
+  - holst2013
+  - roesdahl2011
+  - raffield2015
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: foote1970
+  field: cited_by
+  value:
+  - fabech2013
+  - milek2012
+  - zachrisson2017
+  - raffield2019
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: barth1969
+  field: cited_by
+  value:
+  - amundsen2017
+  - bergstol2004
+  - croix2019
+  - kemmers2011
+  - lund2021
+  - nielsen2011
+  - furholt2018
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: kopytoff1996
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - myrberg2009a
+  - aannestad2018
+  - aannestad2018a
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: sperber2004a
+  field: cited_by
+  value:
+  - pedersennda
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: maixner2005
+  field: cited_by
+  value:
+  - burstrom2015
+  - christiansen2019
+  - hardh2010a
+  - pedersennda
+  - price2014
+  - rogers2020
+  - androshchuk2010
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: gron1942
+  field: cited_by
+  value:
+  - baug2015
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: elsner1989
+  field: cited_by
+  value:
+  - becker2012
+  - gardela2013a
+  - gardela2018
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: deetz1977
+  field: cited_by
+  value:
+  - kristjansdottir2015
+  - kemmers2011
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: almgren1955
+  field: cited_by
+  value:
+  - hardh2010
+  - hardh2010a
+  - rundkvist2010
+  - sindbaek2011a
+  - sindbaek2014
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: lunde2011
+  field: cited_by
+  value:
+  - eriksen2017
+  - raffield2018
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: valujev2005
+  field: cited_by
+  value:
+  - ibsen2010
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: kirch1984
+  field: cited_by
+  value:
+  - tainter2006
+  - price2018
+  - price2018c
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
+- action: set
+  citekey: christaller1933
+  field: cited_by
+  value:
+  - borake2018
+  - fabech2013
+  - kalmring2013
+  - sindbaek2007
+  note: 'Pinned after the hand-reviewed merge of one work held under two keys: the union of this entry''s citers and its discarded duplicate''s, so the transferred citers survive repeated postprocess runs.'
