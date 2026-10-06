@@ -2972,35 +2972,3 @@ ggplot(region_year_wilson, aes(x = publication_year, y = enrichment, alpha = -ci
   theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
         plot.title = element_text(size = 11))
 ```
-
-## Not yet done
-
-### Gender
-
-- Composition scheme for the topic/method/source cross-tabs — three
-  candidate schemes are computed (strict same/mixed, majority-based,
-  and solo-vs-team split), and the third is used throughout this
-  document's charts. Whether that's the right one to settle on hasn't
-  been decided.
-- Topic/method/source-by-gender proportions are raw, not normalized
-  against the corpus-wide gender base rate.
-- Gender's By-year and Composition subsections have captions and
-  Wilson fade; no margin notes.
-- Mixed-gender team size is shown per topic/method/source as every
-  paper's own size (no averaging); the same has not been built for
-  Gender's own corpus-level sections.
-
-### Region
-
-- Word cloud from the free-text Region field, no normalization —
-  spelling variants and different specificity levels for the same
-  place count as distinct.
-- Wikidata matching chunks are written (see the Region section above)
-  but default to `eval: false`; the coverage probe has not yet been run
-  to confirm hit rate before committing to the full match, and
-  `data/region_lookup.csv` does not yet exist.
-
-### Other
-
-- **Per-F2-node citer profiles.** For F2 works cited by multiple F1 papers, characterize the citer set using annotation data that exists only on the F1 side: gender composition, topic/method diversity, and whether the citer set is itself structurally clustered or scattered. Does not require resolving the community-detection method question and is tractable immediately once prioritized. Speaks to a genuinely different citational-politics phenomenon than the corpus-wide cross-tab: whether particular sources function as shared/foundational touchstones cited across the field's internal divisions, or as in-group markers cited mainly within one part of it.
-- **Direct citation homophily.** Do papers (or, at the author level — see "alternative units" below — authors) disproportionately cite others sharing their coded gender/topic/method characteristics? A direct join of two already-independent descriptions (citation edges, annotation data) with no algorithmic mediation in between. Likely the most immediately tractable of the not-yet-built analyses.

@@ -41,6 +41,43 @@ library(here)
 ```
 
 ```{r}
+#| label: gn-paths
+#| echo: false
+# Girvan-Newman and cluster-labelling outputs are produced outside this
+# render (see analysis/README.md). Each run is one folder with identical
+# contents:
+#   communities.csv, modularity_trace.csv, removal_log.csv, final_edgelist.csv
+#   multi_cut/    communities_round_<N>.csv and multi_cut_summary.csv
+#   dendrogram/   gn_dendrogram.png, split_events.csv
+#   subclusters/  subcluster_summary.csv
+#   labels/       representatives.csv, cluster_labels.csv, node_labels.csv
+#
+# gn_root is the one place this document looks for them: the pipelines'
+# own results folder. If finished runs are later copied into data/, the
+# way the exported bibliography and edge lists are, change gn_root to
+# here("data", "gn") and nothing else.
+#
+# with_seed is the run every section below uses; no_seed is the same
+# procedure on the graph with the seed paper removed, used only in the
+# comparison section at the end.
+gn_runs <- c(with_seed = "annotated", no_seed = "annotated_no_seed")
+gn_root <- here("analysis", "gn_analysis", "results")
+gn_path <- function(run, ...) file.path(gn_root, gn_runs[[run]], ...)
+
+gn_has_run <- function(run) {
+  dir.exists(gn_path(run, "multi_cut")) &&
+    length(list.files(gn_path(run, "multi_cut"),
+                      pattern = "^communities_round_[0-9]+\\.csv$")) > 0
+}
+gn_has_no_seed <- gn_has_run("no_seed")
+
+# How many of the largest communities the plots and tables below
+# single out. Set here, not in gn-setup, because inline text refers to it
+# and has to render even when no run has been installed yet.
+gn_top_n <- 20
+```
+
+```{r}
 #| label: load-graph
 #| echo: false
 #| results: hide
@@ -289,13 +326,13 @@ labelling has been run).
 ```{r}
 #| label: betweenness-bridges
 # Self-contained: finds the same fragmentation-onset partition file the
-# "Girvan-Newman communities" section uses later, and reads
-# cluster_labelling/results/cluster_labels.csv directly here rather than
-# depending on gn_cluster_labels (defined further down) — this chunk does
-# not move or duplicate that later code, it just reads the same
-# already-on-disk files independently, since both exist regardless of
-# where in this document they're referenced.
-bw_multi_cut_dir <- here("analysis", "gn_analysis", "results", "multi_cut")
+# "Girvan-Newman communities" section uses later, and reads the with-seed
+# run's labels/cluster_labels.csv directly here rather than depending on
+# gn_cluster_labels (defined further down) — this chunk does not move or
+# duplicate that later code, it just reads the same already-on-disk files
+# independently, since both exist regardless of where in this document
+# they're referenced.
+bw_multi_cut_dir <- gn_path("with_seed", "multi_cut")
 bw_cut_files <- if (dir.exists(bw_multi_cut_dir)) {
   list.files(bw_multi_cut_dir, pattern = "^communities_round_[0-9]+\\.csv$", full.names = TRUE)
 } else character(0)
@@ -307,7 +344,7 @@ if (length(bw_cut_files) > 0) {
   bw_partition <- read_csv(bw_cut_files[which.min(bw_rounds)], show_col_types = FALSE) |>
     rename(community_gn = community_id)
 
-  bw_labels_path <- here("analysis", "cluster_labelling", "results", "cluster_labels.csv")
+  bw_labels_path <- gn_path("with_seed", "labels", "cluster_labels.csv")
   bw_labels <- if (file.exists(bw_labels_path)) {
     read_csv(bw_labels_path, show_col_types = FALSE) |>
       mutate(community_id = as.character(community_id)) |>
@@ -755,15 +792,14 @@ node_table <- centrality_df |>
 # Girvan-Newman communities are computed standalone (see gn_analysis/)
 # and joined in here only if available. communities.csv (written by
 # run_gn_analysis.R) holds the best-modularity cut, which on this
-# corpus is 97.5% singletons and not usable — see the write-up below.
+# corpus is mostly singletons and not usable — see the write-up below.
 # The partition actually joined here is the earliest fragmentation-onset
-# cut from gn_analysis/results/multi_cut/, produced by
-# generate_multi_cut_communities.R. That directory holds one file per
-# detected onset round; the earliest (smallest round number) is the one
-# established below as usable, so it's selected by sorting rather than
-# a hardcoded round number, in case a future re-run shifts which rounds
-# qualify.
-gn_multi_cut_dir <- here("analysis", "gn_analysis", "results", "multi_cut")
+# cut from the with-seed run's multi_cut/ folder, produced by
+# generate_multi_cut_communities.R (see analysis/README.md). That
+# directory holds one file per detected onset round; the earliest (smallest round number) is the one established
+# below as usable, so it's selected by sorting rather than a hardcoded
+# round number, in case a future re-run shifts which rounds qualify.
+gn_multi_cut_dir <- gn_path("with_seed", "multi_cut")
 gn_cut_files <- if (dir.exists(gn_multi_cut_dir)) {
   list.files(gn_multi_cut_dir, pattern = "^communities_round_[0-9]+\\.csv$", full.names = TRUE)
 } else {
@@ -786,6 +822,24 @@ gn_summary <- if (file.exists(gn_summary_path)) {
 gn_earliest <- if (nrow(gn_summary) > 0) gn_summary |> slice(1) else NULL
 gn_latest   <- if (nrow(gn_summary) > 0) gn_summary |> slice(n()) else NULL
 
+# Share of nodes sitting in a singleton community at the best-modularity
+# cut (communities.csv), quoted in the prose below in place of a typed-in
+# figure.
+gn_best_path <- gn_path("with_seed", "communities.csv")
+gn_best_singleton_share <- if (file.exists(gn_best_path)) {
+  read_csv(gn_best_path, show_col_types = FALSE) |>
+    add_count(community_id) |>
+    summarise(share = mean(n == 1)) |>
+    pull(share)
+} else {
+  NA_real_
+}
+gn_best_singleton_phrase <- if (is.na(gn_best_singleton_share)) {
+  "nearly all nodes are"
+} else {
+  paste0(scales::percent(gn_best_singleton_share, accuracy = 0.1), " of nodes are")
+}
+
 if (length(gn_cut_files) > 0) {
   gn_rounds <- as.integer(gsub(".*communities_round_([0-9]+)\\.csv$", "\\1", gn_cut_files))
   gn_result_path <- gn_cut_files[which.min(gn_rounds)]
@@ -796,7 +850,7 @@ if (length(gn_cut_files) > 0) {
       "(fragmentation-onset round", min(gn_rounds), ") \n")
 } else {
   cat("No Girvan-Newman multi-cut results found at", gn_multi_cut_dir,
-      "— run gn_analysis/generate_multi_cut_communities.R first. Skipping join.\n")
+      "— run the pipeline first (see analysis/README.md). Skipping join.\n")
 }
 
 write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
@@ -832,14 +886,14 @@ to avoid crossing branches.
 #| label: gn-dendrogram-generate
 #| eval: !expr gn_has_communities
 #| results: hide
-gn_dendrogram_dir <- here("analysis", "gn_analysis", "results", "dendrogram")
+gn_dendrogram_dir <- gn_path("with_seed", "dendrogram")
 gn_dendrogram_png <- file.path(gn_dendrogram_dir, "gn_dendrogram.png")
 
 # Regenerated whenever missing or older than the removal log it's
 # built from, so a fresh GN run is reflected without a manual step,
 # but re-rendering right after an unrelated edit doesn't re-run this
 # multi-minute build for no reason.
-gn_removal_log <- here("analysis", "gn_analysis", "results", "removal_log.csv")
+gn_removal_log <- gn_path("with_seed", "removal_log.csv")
 gn_dendrogram_stale <- !file.exists(gn_dendrogram_png) ||
   file.info(gn_dendrogram_png)$mtime < file.info(gn_removal_log)$mtime
 
@@ -853,7 +907,7 @@ if (gn_dendrogram_stale) {
       gn_removal_log,
       gn_dendrogram_dir,
       "300", "0", "0",
-      here("analysis", "gn_analysis", "results", "modularity_trace.csv")
+      gn_path("with_seed", "modularity_trace.csv")
     )
   )
   if (status != 0) {
@@ -865,9 +919,9 @@ if (gn_dendrogram_stale) {
 
 ```{r}
 #| label: gn-dendrogram-embed
-#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "dendrogram", "gn_dendrogram.png"))
+#| eval: !expr file.exists(gn_path("with_seed", "dendrogram", "gn_dendrogram.png"))
 #| out-width: "100%"
-knitr::include_graphics(here("analysis", "gn_analysis", "results", "dendrogram", "gn_dendrogram.png"))
+knitr::include_graphics(gn_path("with_seed", "dendrogram", "gn_dendrogram.png"))
 ```
 
 Girvan-Newman, in its original form, does not select a stopping point
@@ -877,7 +931,7 @@ original algorithm [@newman2004] selects the
 round with the highest modularity score as the working partition, and
 this is the conventional choice, but it fails on this corpus: modularity
 continues to rise as the graph fragments, reaching its maximum only once
-97.5% of nodes are singleton communities, which is not a usable
+`r gn_best_singleton_phrase` singleton communities, which is not a usable
 partition. This is a documented limitation of modularity on sparse
 networks, where it can lack a clear maximum and instead admit many
 different high-scoring partitions [@good2010]. The criterion used
@@ -896,9 +950,9 @@ used for every community grouping in the rest of this document.
 #| label: gn-modularity-trace
 #| fig-width: 8
 #| fig-height: 5
-#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "modularity_trace.csv"))
+#| eval: !expr file.exists(gn_path("with_seed", "modularity_trace.csv"))
 gn_trace <- read_csv(
-  here("analysis", "gn_analysis", "results", "modularity_trace.csv"),
+  gn_path("with_seed", "modularity_trace.csv"),
   show_col_types = FALSE
 )
 
@@ -990,7 +1044,8 @@ partition below is chosen from.
 # largest communities in distinct colors, with everything else grey,
 # shows the actual pattern in this partition instead: a handful of
 # large communities against a long tail of small ones.
-gn_top_n <- 20
+# gn_top_n, how many of the largest communities to highlight, is set in
+# the gn-paths chunk.
 top_gn_communities <- node_table |>
   filter(!is.na(community_gn)) |>
   count(community_gn, sort = TRUE) |>
@@ -1012,15 +1067,15 @@ gn_community_colours <- c(
   )
 )
 
-# cluster_labelling/ (see analysis/cluster_labelling/README.md) is a
-# separate, manually-run pipeline — not part of this render chain — so
-# its output may or may not exist at render time. Read it if present,
-# fall back to bare "Community N" if not, so this document never
-# depends on that pipeline having been run. Only clusters that pipeline
-# was pointed at (currently the top 25 by size) and that passed its
-# stability check will have a real label; every other community still
-# falls back to "Community N".
-gn_cluster_labels_path <- here("analysis", "cluster_labelling", "results", "cluster_labels.csv")
+# Cluster labels come from the labelling pipeline (see
+# analysis/cluster_labelling/README.md), which runs outside this render
+# and whose output lands in <run>/labels/ with the rest of the run. Read
+# it if present, fall back to bare "Community N" if not,
+# so this document never depends on that pipeline having been run. Only
+# clusters that pipeline was pointed at and that passed its stability
+# check will have a real label; every other community still falls back
+# to "Community N".
+gn_cluster_labels_path <- gn_path("with_seed", "labels", "cluster_labels.csv")
 gn_cluster_labels <- if (file.exists(gn_cluster_labels_path)) {
   read_csv(gn_cluster_labels_path, show_col_types = FALSE) |>
     mutate(community_id = as.character(community_id)) |>
@@ -1562,7 +1617,7 @@ it means none of the top `r gn_top_n` clusters share a direct citation
 tie with it, whatever thematic similarity a reader might expect from
 the labels alone.
 
-### Internal structure of individual communities [TO BE COMPLETED]
+### Internal structure of individual communities
 
 The round-`r format(gn_earliest$round, big.mark = ",")` partition and the whole-graph dendrogram above both
 describe the corpus at a single level: `r format(gn_earliest$n_communities, big.mark = ",")` communities, and one tree
@@ -1587,7 +1642,7 @@ or the end of the log) by default.
 #| label: gn-subclusters-generate
 #| eval: !expr gn_has_communities
 #| results: hide
-gn_subclusters_dir <- here("analysis", "gn_analysis", "results", "subclusters")
+gn_subclusters_dir <- gn_path("with_seed", "subclusters")
 gn_subcluster_summary_csv <- file.path(gn_subclusters_dir, "subcluster_summary.csv")
 
 gn_subclusters_stale <- !file.exists(gn_subcluster_summary_csv) ||
@@ -1600,7 +1655,7 @@ if (gn_subclusters_stale) {
     args = c(
       here("analysis", "gn_analysis", "build_subcluster_trees.R"),
       here("data", "citation_edgelist_annotated.csv"),
-      here("analysis", "gn_analysis", "results", "removal_log.csv"),
+      gn_path("with_seed", "removal_log.csv"),
       gn_result_path,
       as.character(gn_earliest$round),
       gn_subclusters_dir,
@@ -1630,13 +1685,37 @@ sequence. Plotted as a dendrogram, this produces the same long
 single-branch shape for every community regardless of its size or its
 first split, differing only in length, so the per-community dendrogram
 plots turned out uninformative and are not included here (the script
-still writes them; see `gn_analysis/results/subclusters/` if useful).
+writes them only when run with `plot_trees = TRUE`; see
+`gn_analysis/README.md`).
+
+```{r}
+#| label: gn-first-split-stats
+#| echo: false
+# Defaults first, so the sentence below renders even when the subcluster
+# summary has not been generated yet.
+gn_fs_sentence <- "The first-split sizes are not available until the subcluster summary is in place."
+if (file.exists(gn_path("with_seed", "subclusters", "subcluster_summary.csv"))) {
+  gn_fs <- read_csv(gn_path("with_seed", "subclusters", "subcluster_summary.csv"),
+                    show_col_types = FALSE) |>
+    filter(!is.na(first_split_sizes)) |>
+    separate(first_split_sizes, into = c("piece_a", "piece_b"), sep = "/", convert = TRUE) |>
+    mutate(smaller_piece = pmin(piece_a, piece_b))
+  gn_fs_n <- nrow(gn_fs)
+  gn_fs_n_single <- sum(gn_fs$smaller_piece == 1)
+  gn_fs_sentence <- if (gn_fs_n > 0 && gn_fs_n_single == gn_fs_n) {
+    paste0("On this corpus, that pattern is close to absolute, not just typical: every one of the ",
+           gn_fs_n, " largest communities sheds exactly one node at first split, with the remaining ",
+           "piece staying fully intact.")
+  } else {
+    paste0("On this corpus, ", gn_fs_n_single, " of the ", gn_fs_n,
+           " largest communities shed exactly one node at first split, with the remaining ",
+           "piece staying intact.")
+  }
+}
+```
 
 The one real signal in this data is the size of the two pieces at each
-community's first split, plotted below. On this corpus, that pattern
-is close to absolute, not just typical: every one of the `r gn_top_n`
-largest communities sheds exactly one node at first split, with the
-remaining piece staying fully intact. Any community whose two
+community's first split, plotted below. `r gn_fs_sentence` Any community whose two
 pieces are closer in size is a candidate for the same kind of
 title/annotation check performed earlier (see "Choosing a stopping
 point"), and any community where the *smaller* piece is the one that
@@ -1651,9 +1730,9 @@ across re-runs against different partitions.
 #| label: gn-first-splits
 #| fig-width: 11
 #| fig-height: 6.5
-#| eval: !expr file.exists(here("analysis", "gn_analysis", "results", "subclusters", "subcluster_summary.csv"))
+#| eval: !expr file.exists(gn_path("with_seed", "subclusters", "subcluster_summary.csv"))
 subcluster_summary <- read_csv(
-  here("analysis", "gn_analysis", "results", "subclusters", "subcluster_summary.csv"),
+  gn_path("with_seed", "subclusters", "subcluster_summary.csv"),
   show_col_types = FALSE
 )
 
@@ -1690,12 +1769,6 @@ ggplot(first_splits_long, aes(x = size, y = community_label, fill = piece)) +
   theme(legend.position = "bottom")
 ```
 
-**Not yet done.** Whichever community stands out above as the most
-balanced split is the strongest remaining candidate for a
-title/annotation check; whichever community shows the smaller-piece-
-stays-intact anomaly is the strongest candidate for a different kind
-of check. Neither has been carried out against this corpus's partition.
-
 ## Cluster labeling
 
 This section identifies each cluster's most-cited papers by
@@ -1726,59 +1799,276 @@ Each row is one cluster.
 | Secondary label | From a real second group, where one exists; blank otherwise |
 
 ```{r}
+#| label: gn-labels-table-fn
+#| echo: false
+# One table per run, built from that run's own labels/ folder. Defined
+# here, separately from the call below, so the comparison section at the
+# end can reuse it for the run without the seed paper.
+gn_cluster_labels_table <- function(run) {
+  labels_full <- read_csv(
+    gn_path(run, "labels", "cluster_labels.csv"),
+    show_col_types = FALSE
+  )
+
+  # representatives.csv carries the within-cluster degree of each
+  # sampled paper, in rank order (see select_representatives.py) — reused
+  # here, not to show individual papers, but to derive, per cluster, the
+  # same hub-dominated classification select_representatives.py computes
+  # internally and only ever prints to console (never writes to a file):
+  # rank-1's within-cluster degree at least --hub-ratio-threshold (5.0,
+  # the script's own default) times rank-2's. cluster_size, also from
+  # this file, is the actual figure the labelling pipeline used, not a
+  # count recomputed independently here.
+  reps_path <- gn_path(run, "labels", "representatives.csv")
+  cluster_shape <- if (file.exists(reps_path)) {
+    read_csv(reps_path, show_col_types = FALSE) |>
+      group_by(community_id) |>
+      summarise(
+        cluster_size = first(cluster_size),
+        shape = if (n() >= 2 && within_cluster_degree[2] > 0 &&
+                    within_cluster_degree[1] / within_cluster_degree[2] >= 5.0) {
+          "Hub-dominated"
+        } else {
+          "Distributed"
+        },
+        .groups = "drop"
+      ) |>
+      mutate(community_id = as.character(community_id))
+  } else {
+    tibble(community_id = character(), cluster_size = integer(), shape = character())
+  }
+
+  labels_full |>
+    mutate(community_id = as.character(community_id)) |>
+    left_join(cluster_shape, by = "community_id") |>
+    arrange(desc(cluster_size)) |>
+    transmute(
+      `Cluster ID` = community_id,
+      Size = cluster_size,
+      Shape = coalesce(shape, "n/a"),
+      Label = label,
+      Description = description,
+      `Secondary label` = coalesce(secondary_label, "")
+    ) |>
+    knitr::kable()
+}
+```
+
+```{r}
 #| label: cluster-labels-table
 #| echo: false
-#| eval: !expr file.exists(here("analysis", "cluster_labelling", "results", "cluster_labels.csv"))
-gn_cluster_labels_full <- read_csv(
-  here("analysis", "cluster_labelling", "results", "cluster_labels.csv"),
+#| eval: !expr file.exists(gn_path("with_seed", "labels", "cluster_labels.csv"))
+gn_cluster_labels_table("with_seed")
+```
+
+## Girvan-Newman without the seed paper
+
+The connected-components check above removes `lund2021` and asks whether
+the graph holds together. A second question is whether the
+Girvan-Newman clusters survive the same removal. A second run of the
+same procedure, with the same fragmentation-onset rule, on the graph
+without `lund2021` and without the works only it cites answers it. Its
+outputs sit beside the first run's. Nodes that exist in
+only one of the two graphs (the seed itself and the works only the seed
+cites) are left out of every comparison below.
+
+```{r}
+#| label: gn-noseed-load
+#| echo: false
+#| eval: !expr gn_has_communities && gn_has_no_seed
+gn_ns_summary <- read_csv(
+  gn_path("no_seed", "multi_cut", "multi_cut_summary.csv"),
   show_col_types = FALSE
-)
+) |>
+  mutate(pct_singleton = n_singletons / n_communities) |>
+  arrange(round)
+gn_ns_earliest <- slice(gn_ns_summary, 1)
 
-# representatives.csv carries the within-cluster degree of each
-# sampled paper, in rank order (see select_representatives.py) — reused
-# here, not to show individual papers, but to derive, per cluster, the
-# same hub-dominated classification select_representatives.py computes
-# internally and only ever prints to console (never writes to a file):
-# rank-1's within-cluster degree at least --hub-ratio-threshold (5.0,
-# the script's own default) times rank-2's. cluster_size, also from
-# this file, is the actual figure the labelling pipeline used, not a
-# count recomputed independently here.
-gn_reps_path <- here("analysis", "cluster_labelling", "results", "representatives.csv")
-gn_cluster_shape <- if (file.exists(gn_reps_path)) {
-  read_csv(gn_reps_path, show_col_types = FALSE) |>
-    group_by(community_id) |>
-    summarise(
-      cluster_size = first(cluster_size),
-      shape = if (n() >= 2 && within_cluster_degree[2] > 0 &&
-                  within_cluster_degree[1] / within_cluster_degree[2] >= 5.0) {
-        "Hub-dominated"
-      } else {
-        "Distributed"
-      },
-      .groups = "drop"
-    ) |>
-    mutate(community_id = as.character(community_id))
-} else {
-  tibble(community_id = character(), cluster_size = integer(), shape = character())
+gn_ns_communities <- read_csv(
+  gn_path("no_seed", "multi_cut", paste0("communities_round_", gn_ns_earliest$round, ".csv")),
+  show_col_types = FALSE
+) |>
+  mutate(community_id = as.character(community_id))
+
+gn_ws_communities <- gn_communities |>
+  transmute(node_id, community_id = as.character(community_gn))
+
+gn_label_lookup <- function(run) {
+  path <- gn_path(run, "labels", "cluster_labels.csv")
+  if (file.exists(path)) {
+    read_csv(path, show_col_types = FALSE) |>
+      mutate(community_id = as.character(community_id)) |>
+      select(community_id, label)
+  } else {
+    tibble(community_id = character(), label = character())
+  }
 }
+gn_label_or_id <- function(ids, lookup) {
+  coalesce(lookup$label[match(ids, lookup$community_id)], paste("Community", ids))
+}
+```
 
-gn_cluster_labels_full |>
-  mutate(community_id = as.character(community_id)) |>
-  left_join(gn_cluster_shape, by = "community_id") |>
-  arrange(desc(cluster_size)) |>
+### Fragmentation onsets, both runs
+
+```{r}
+#| label: gn-noseed-onsets
+#| echo: false
+#| eval: !expr gn_has_communities && gn_has_no_seed
+bind_rows(
+  gn_summary |> mutate(Run = "With seed"),
+  gn_ns_summary |> mutate(Run = "Without seed")
+) |>
   transmute(
-    `Cluster ID` = community_id,
-    Size = cluster_size,
-    Shape = coalesce(shape, "n/a"),
-    Label = label,
-    Description = description,
-    `Secondary label` = coalesce(secondary_label, "")
+    Run,
+    Round = format(round, big.mark = ","),
+    Communities = format(n_communities, big.mark = ","),
+    Singletons = format(n_singletons, big.mark = ","),
+    `% singleton` = scales::percent(pct_singleton, accuracy = 1),
+    `Largest community` = largest_community
   ) |>
   knitr::kable()
+```
+
+```{r}
+#| label: gn-noseed-trace
+#| echo: false
+#| fig-width: 8
+#| fig-height: 5
+#| eval: !expr gn_has_communities && gn_has_no_seed && file.exists(gn_path("no_seed", "modularity_trace.csv"))
+gn_trace_both <- bind_rows(
+  read_csv(gn_path("with_seed", "modularity_trace.csv"), show_col_types = FALSE) |>
+    mutate(run = "With seed"),
+  read_csv(gn_path("no_seed", "modularity_trace.csv"), show_col_types = FALSE) |>
+    mutate(run = "Without seed")
+)
+
+ggplot(gn_trace_both, aes(x = round, y = n_components, colour = run)) +
+  geom_line() +
+  geom_vline(
+    data = tibble(
+      run = c("With seed", "Without seed"),
+      round = c(gn_earliest$round, gn_ns_earliest$round)
+    ),
+    aes(xintercept = round, colour = run),
+    linetype = "dashed", linewidth = 0.4, show.legend = FALSE
+  ) +
+  scale_y_continuous(labels = function(x) format(x, big.mark = ",")) +
+  scale_colour_manual(values = c("With seed" = "steelblue", "Without seed" = "firebrick"),
+                       name = NULL) +
+  labs(
+    title = "Connected components across both Girvan-Newman runs",
+    subtitle = "Dashed lines mark each run's earliest fragmentation onset",
+    x = "Round", y = "Connected components"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+### How far the clusters agree
+
+The two earliest-onset partitions are compared on the nodes they share.
+The adjusted Rand index and normalized mutual information both measure
+how much two partitions agree, from 0 for no more agreement than chance
+to 1 for identical groupings. The last row counts shared nodes whose
+no-seed cluster is not the no-seed cluster that best matches their
+with-seed cluster, the nodes that change groups when the seed goes.
+
+```{r}
+#| label: gn-noseed-agreement
+#| echo: false
+#| eval: !expr gn_has_communities && gn_has_no_seed
+gn_shared <- gn_ws_communities |>
+  rename(community_ws = community_id) |>
+  inner_join(gn_ns_communities |> rename(community_ns = community_id), by = "node_id")
+
+gn_overlap <- gn_shared |>
+  count(community_ws, community_ns, name = "n_both") |>
+  group_by(community_ws) |> mutate(size_ws = sum(n_both)) |> ungroup() |>
+  group_by(community_ns) |> mutate(size_ns = sum(n_both)) |> ungroup() |>
+  mutate(jaccard = n_both / (size_ws + size_ns - n_both))
+
+gn_best_match <- gn_overlap |>
+  group_by(community_ws) |>
+  slice_max(n_both, n = 1, with_ties = FALSE) |>
+  ungroup()
+
+gn_ari <- igraph::compare(as.integer(factor(gn_shared$community_ws)),
+                          as.integer(factor(gn_shared$community_ns)),
+                          method = "adjusted.rand")
+gn_nmi <- igraph::compare(as.integer(factor(gn_shared$community_ws)),
+                          as.integer(factor(gn_shared$community_ns)),
+                          method = "nmi")
+
+gn_switched <- gn_shared |>
+  left_join(gn_best_match |> select(community_ws, best_ns = community_ns), by = "community_ws") |>
+  summarise(n = sum(community_ns != best_ns), share = mean(community_ns != best_ns))
+
+tibble(
+  Measure = c(
+    "Nodes in the with-seed partition",
+    "Nodes in the no-seed partition",
+    "Nodes in both",
+    "Adjusted Rand index",
+    "Normalized mutual information",
+    "Shared nodes outside their cluster's best match"
+  ),
+  Value = c(
+    format(nrow(gn_ws_communities), big.mark = ","),
+    format(nrow(gn_ns_communities), big.mark = ","),
+    format(nrow(gn_shared), big.mark = ","),
+    sprintf("%.3f", gn_ari),
+    sprintf("%.3f", gn_nmi),
+    paste0(format(gn_switched$n, big.mark = ","), " (",
+           scales::percent(gn_switched$share, accuracy = 0.1), ")")
+  )
+) |>
+  knitr::kable()
+```
+
+Each of the largest with-seed clusters, with the no-seed cluster that
+shares the most nodes with it. The share is the fraction of the
+with-seed cluster that lands in that match; the Jaccard index is the
+overlap divided by the union of the two clusters.
+
+```{r}
+#| label: gn-noseed-matches
+#| echo: false
+#| eval: !expr gn_has_communities && gn_has_no_seed
+gn_ws_lookup <- gn_label_lookup("with_seed")
+gn_ns_lookup <- gn_label_lookup("no_seed")
+
+gn_ws_communities |>
+  count(community_id, name = "size", sort = TRUE) |>
+  slice_head(n = gn_top_n) |>
+  left_join(gn_best_match, by = c("community_id" = "community_ws")) |>
+  transmute(
+    `Cluster (with seed)` = gn_label_or_id(community_id, gn_ws_lookup),
+    Size = size,
+    `Best match (without seed)` = gn_label_or_id(community_ns, gn_ns_lookup),
+    `Shared nodes` = n_both,
+    `Share of cluster` = scales::percent(n_both / size, accuracy = 1),
+    Jaccard = round(jaccard, 2)
+  ) |>
+  knitr::kable()
+```
+
+### Without the seed paper: clusters and tree
+
+```{r}
+#| label: gn-noseed-labels-table
+#| echo: false
+#| eval: !expr gn_has_no_seed && file.exists(gn_path("no_seed", "labels", "cluster_labels.csv"))
+gn_cluster_labels_table("no_seed")
+```
+
+```{r}
+#| label: gn-noseed-dendrogram
+#| eval: !expr gn_has_no_seed && file.exists(gn_path("no_seed", "dendrogram", "gn_dendrogram.png"))
+#| out-width: "100%"
+knitr::include_graphics(gn_path("no_seed", "dendrogram", "gn_dendrogram.png"))
 ```
 
 ## References
 
 ::: {#refs}
 :::
-
