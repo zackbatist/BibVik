@@ -299230,3 +299230,29 @@
   value:
   - toplak2018
   note: 'Restored as a separate paper: toplak2017 and toplak2015 are both rows in annotations.csv, so merging toplak2017 into toplak2015 collapsed two corpus papers into one node. The citer lists touched by that merge are pinned to their pre-merge contents so the restoration holds on every replay.'
+
+- action: set
+  citekey: kastholm2015
+  field: _merged_into
+  value: ''
+  note: 'Cleared a stale merge marker: kastholm2015 and kastholm2016 are separate annotated papers with their own source PDFs and distinct titles. The earlier merge note was written when kastholm2015 had no PDF link; it has one now and has been live since, so the recorded merge is superseded and the marker was left over.'
+- action: set
+  citekey: mcgovern1988
+  field: pages
+  value: 225--270
+  note: CrossRef identifies the work firmly (Human Ecology 16, 225-270); the entry and the citing papers disagree with it and with each other.
+- action: set
+  citekey: bonde2016
+  field: volume
+  value: '5'
+  note: CrossRef identifies the work firmly (Danish Journal of Archaeology 5, 19-33); the entry holds the year as the volume and its pages already agree with CrossRef.
+- action: set
+  citekey: duczko1997
+  field: pages
+  value: 291--311
+  note: OpenAlex identifies the work firmly and gives these pages; the citing papers' own reference lists agree with it and not with the entry.
+- action: set
+  citekey: stylegar2005a
+  field: pages
+  value: 161--177
+  note: OpenAlex identifies the work firmly and gives these pages; the citing papers' own reference lists agree with it and not with the entry.
