@@ -44,7 +44,7 @@ library(here)
 #| label: load-graph
 #| echo: false
 #| results: hide
-edges <- read_csv(here("data", "citation_edgelist.csv"), show_col_types = FALSE)
+edges <- read_csv(here("data", "citation_edgelist_annotated.csv"), show_col_types = FALSE)
 g <- graph_from_data_frame(edges, directed = TRUE)
 
 bib <- fromJSON(here("data", "bibliography.json"), simplifyDataFrame = FALSE)
@@ -849,7 +849,7 @@ if (gn_dendrogram_stale) {
     "Rscript",
     args = c(
       here("analysis", "gn_analysis", "build_dendrogram.R"),
-      here("data", "citation_edgelist.csv"),
+      here("data", "citation_edgelist_annotated.csv"),
       gn_removal_log,
       gn_dendrogram_dir,
       "300", "0", "0",
@@ -1599,7 +1599,7 @@ if (gn_subclusters_stale) {
     "Rscript",
     args = c(
       here("analysis", "gn_analysis", "build_subcluster_trees.R"),
-      here("data", "citation_edgelist.csv"),
+      here("data", "citation_edgelist_annotated.csv"),
       here("analysis", "gn_analysis", "results", "removal_log.csv"),
       gn_result_path,
       as.character(gn_earliest$round),
