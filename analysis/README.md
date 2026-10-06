@@ -9,7 +9,7 @@ The Quarto documents in this directory describe the corpus, the annotation data,
 | `index.qmd` | Shell that includes 00 to 03 in order, then a Future work section | the four documents | none |
 | `00_overview.qmd` | Part 0, corpus overview | `data/bibliography.json`, `data/annotations.csv`, `data/citation_edgelist.csv`, `data/citation_edgelist_annotated.csv`, `CitationAnalysis/corrections.yaml` | none |
 | `01_annotation.qmd` | Part 1, annotation descriptives | `data/annotations.csv`, `data/region_lookup.csv` | `analysis/bibvik_annotation_df.csv` (untracked); `data/region_lookup.csv` and `data/region_lookup_needs_review.csv`, only when the disabled Wikidata chunks are switched on |
-| `02_network_structure.qmd` | Part 2, structure of the citation graph | `data/bibliography.json`, `data/citation_edgelist_annotated.csv`, `analysis/gn_analysis/results/<run>/` | `analysis/bibvik_node_table.csv` (untracked); layout images, only from disabled chunks |
+| `02_network_structure.qmd` | Part 2, structure of the citation graph | `data/bibliography.json`, `data/citation_edgelist_annotated.csv`, `analysis/gn_analysis/edgelist_annotated_no_seed.csv`, `analysis/gn_analysis/results/<run>/` | `analysis/bibvik_node_table.csv` (untracked); layout images, only from disabled chunks |
 | `03_joined_descriptions.qmd` | Part 3, structure joined to annotation | `analysis/bibvik_annotation_df.csv`, `analysis/bibvik_node_table.csv` | none |
 | `open-scholarly-metadata.qmd` | Scratch notes on retrieving references from OpenCitations and Crossref | n/a | n/a |
 
@@ -211,12 +211,12 @@ grep "^\[" results/post_all.log
 ```bash
 cd ~/models/BibVik
 git pull
-git add analysis/gn_analysis/results/*/communities.csv analysis/gn_analysis/results/*/final_edgelist.csv analysis/gn_analysis/results/*/modularity_trace.csv analysis/gn_analysis/results/*/removal_log.csv analysis/gn_analysis/results/*/multi_cut analysis/gn_analysis/results/*/labels analysis/gn_analysis/results/*/dendrogram/gn_dendrogram.png
+git add analysis/gn_analysis/results/*/communities.csv analysis/gn_analysis/results/*/final_edgelist.csv analysis/gn_analysis/results/*/modularity_trace.csv analysis/gn_analysis/results/*/removal_log.csv analysis/gn_analysis/results/*/multi_cut analysis/gn_analysis/results/*/labels
 git commit -m "Add the finished Girvan-Newman runs"
 git push
 ```
 
-Then pull on the machine that renders and render 02 and 03, or `index.qmd`. 02 selects the earliest cut by sorting, so it needs no round number. When the subcluster summary is missing, 02 rebuilds it for the with-seed run from the removal log. It does the same for the dendrogram image when that is missing or older than the removal log.
+Then pull on the machine that renders and render 02 and 03, or `index.qmd`. 02 selects the earliest cut by sorting, so it needs no round number. For each graph it rebuilds the subcluster summary and the dendrogram image from the run's removal log when they are missing or older than the removal log. Each rebuild takes minutes. `.gitignore` excludes every `*.png`, so no dendrogram image is committed, and both images are rebuilt on the first render.
 
 Leave the working files out of git. `.gitignore` names a few of them under `analysis/gn_analysis/results/`, and those lines do not match the nested run folders. These lines do.
 
@@ -318,6 +318,7 @@ Each item appears once here. The documents no longer carry their own lists.
 - Run the title and annotation checks on individual Girvan-Newman communities in 02. The community with the most balanced first split is the strongest candidate, and any community whose smaller piece stays intact at first split needs a different check. Neither has been carried out on the new partition.
 - Decide whether to implement bounded-depth, parallelized Girvan-Newman. No benchmark exists for how many splits give a stable, interpretable first division, and the full runs on the repaired graphs now give runtime figures to start from.
 - Decide whether directed variants of Girvan-Newman, Louvain and Leiden are worth the added complexity.
+- Decide whether 03 needs the same Annotated and seed-filtered tabs. It reads only `community_gn`, from the Annotated run.
 
 ### Planned comparisons (03)
 
@@ -351,17 +352,15 @@ Each item appears once here. The documents no longer carry their own lists.
 
 ## Re-check after the first render with the new runs
 
-02 and 03 contain statements typed in from earlier renders. The repaired graph and the new runs can change them.
+02 and 03 contain statements typed in from earlier renders. The repaired graph and the new runs can change them. Figures that 02 used to quote by hand, such as the in-degree range, the pre-2000 betweenness boundary, the coreness-9 works, the single component and the singleton share, are now computed from each graph.
 
-- 02, degree distribution: "in-degree 1 through roughly 8".
-- 02, betweenness and publication year: "roughly 2000 onward", in the text and in a figure subtitle, and the "hard boundary" description.
-- 02, k-core: "coreness = 9" and the five named works (`price2002`, `skre2007`, `svanberg2003`, `sindbaek2007`, `brink2008`).
-- 02, connected components: "every node belongs to a single weakly connected component".
+- 02, degree distribution: "most works are cited once or twice, a much smaller number several times".
+- 02, betweenness and publication year: the closing paragraph treats the split between older and recent works as a boundary. Read it against the two pre-2000 shares printed above it.
 - 02, internal structure of communities: "a single dominant piece sheds one node at a time for hundreds of further rounds" and the "same long single-branch shape" for every community. The count of communities that shed one node at first split is computed.
-- 02 refers to the headings "Choosing a stopping point" (twice) and "Girvan-Newman communities" (once), which no longer exist.
+- 02, appendix: the seed is "cited directly by hundreds of F1 papers".
 - `index.qmd` describes 02 as "GN excluded", although 02 now includes Girvan-Newman.
-- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. Read its prose against the new tables.
-- The new section in 02 on the run without the seed paper has not rendered on real data. Its adjusted Rand index, normalized mutual information and best-match table are the figures to read first.
+- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. Read its prose against the new tables. The file has a new column, `community_gn_seed_filtered`, which 03 does not use.
+- The comparison section in 02 ("What the seed filter changes") and every Girvan-Newman tab have not rendered on real runs yet.
 
 ## Related documents
 
