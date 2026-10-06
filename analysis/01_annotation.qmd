@@ -396,14 +396,6 @@ topic_year_roll <- topic_year_wilson %>%
   ungroup()
 ```
 
-::: {.column-margin}
-**Count.** Raw papers per year, nothing normalized.
-
-**Confidence.** Bar and band opacity come from a 95% Wilson interval —
-faint means too few papers behind that estimate to trust it,
-solid means there's enough. Fades continuously, no hard cutoff.
-:::
-
 ```{r}
 #| label: topics-over-time-count
 #| fig-cap: "Papers per year, per topic. Faint bars: few papers that year."
@@ -467,20 +459,6 @@ ggsave("topics_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11,
 
 :::
 
-::: {.column-margin}
-**Enrichment.** That year's coverage of the topic, divided by the
-topic's own average coverage across the whole corpus (1.0x, dashed
-line = normal). Each topic is checked against its own average, not
-against other topics.
-
-**Smoothed trend.** Replaces individual years with a 3-year rolling
-average and its own confidence band, to make direction easier to read
-through the year-to-year noise.
-
-**Y-axis.** Capped at 4x on both tabs so the bars stay readable — a
-few bars run higher than that and get cut off at the top.
-:::
-
 ### Co-occurrence
 
 ```{r}
@@ -489,13 +467,6 @@ topics <- df %>%
   select(contains("Topics")) %>%
   rename_with(~str_remove(., "Topics.."))
 ```
-
-::: {.column-margin}
-**Reading a facet.** Each facet is one topic; its bars are every
-other topic, ranked by how often it co-occurs with the facet topic.
-Each facet's bars sum to 1 on their own, so proportions aren't
-comparable across facets without also checking each facet's n.
-:::
 
 ```{r}
 #| label: topics-cooccurrence-directional
@@ -672,16 +643,6 @@ ggsave("composition_by_topic.png", plot = last_plot(), width = 10, height = 8, d
 
 ### Mixed-gender authorship only
 
-::: {.column-margin}
-**Green dot.** Share of that topic's mixed-gender papers with a woman
-first author, sized by number of mixed papers.
-
-**Tan dots.** Every distinct team size that occurs among that topic's
-mixed papers, sized by how many papers share that size — no jitter,
-no averaging, so a big tan dot at one team size means many papers,
-not several dots scattered near it.
-:::
-
 ```{r}
 #| label: mixed-only-topic
 #| fig-cap: >
@@ -821,14 +782,6 @@ method_year_roll <- method_year_wilson %>%
   ungroup()
 ```
 
-::: {.column-margin}
-**Count.** Raw papers per year, nothing normalized.
-
-**Confidence.** Bar and band opacity come from a 95% Wilson interval —
-faint means too few papers behind that estimate to trust it,
-solid means there's enough. Fades continuously, no hard cutoff.
-:::
-
 ```{r}
 #| label: methods-over-time-count
 #| fig-cap: "Papers per year, per method. Faint bars: few papers that year."
@@ -892,20 +845,6 @@ ggsave("methods_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11
 
 :::
 
-::: {.column-margin}
-**Enrichment.** That year's coverage of the method, divided by the
-method's own average coverage across the whole corpus (1.0x, dashed
-line = normal). Each method is checked against its own average, not
-against other methods.
-
-**Smoothed trend.** Replaces individual years with a 3-year rolling
-average and its own confidence band, to make direction easier to read
-through the year-to-year noise.
-
-**Y-axis.** Capped at 4x on both tabs so the bars stay readable — a
-few bars run higher than that and get cut off at the top.
-:::
-
 ### Co-occurrence
 
 ```{r}
@@ -914,13 +853,6 @@ methods <- df %>%
   select(contains("Methods")) %>%
   rename_with(~str_remove(., "Methods.."))
 ```
-
-::: {.column-margin}
-**Reading a facet.** Each facet is one method; its bars are every
-other method, ranked by how often it co-occurs with the facet method.
-Each facet's bars sum to 1 on their own, so proportions aren't
-comparable across facets without also checking each facet's n.
-:::
 
 ```{r}
 #| label: methods-cooccurrence-directional
@@ -1096,15 +1028,6 @@ ggsave("composition_by_method.png", plot = last_plot(), width = 10, height = 8, 
 
 ### Mixed-gender authorship only
 
-::: {.column-margin}
-**Navy dot.** Share of that method's mixed-gender papers with a woman
-first author, sized by number of mixed papers.
-
-**Tan dots.** Every distinct team size that occurs among that method's
-mixed papers, sized by how many papers share it — no jitter, no
-averaging.
-:::
-
 ```{r}
 #| label: mixed-only-method
 #| fig-cap: >
@@ -1244,14 +1167,6 @@ source_year_roll <- source_year_wilson %>%
   ungroup()
 ```
 
-::: {.column-margin}
-**Count.** Raw papers per year, nothing normalized.
-
-**Confidence.** Bar and band opacity come from a 95% Wilson interval —
-faint means too few papers behind that estimate to trust it,
-solid means there's enough. Fades continuously, no hard cutoff.
-:::
-
 ```{r}
 #| label: sources-over-time-count
 #| fig-cap: "Papers per year, per source. Faint bars: few papers that year."
@@ -1315,20 +1230,6 @@ ggsave("sources_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11
 
 :::
 
-::: {.column-margin}
-**Enrichment.** That year's coverage of the source, divided by the
-source's own average coverage across the whole corpus (1.0x, dashed
-line = normal). Each source is checked against its own average, not
-against other sources.
-
-**Smoothed trend.** Replaces individual years with a 3-year rolling
-average and its own confidence band, to make direction easier to read
-through the year-to-year noise.
-
-**Y-axis.** Capped at 4x on both tabs so the bars stay readable — a
-few bars run higher than that and get cut off at the top.
-:::
-
 ### Co-occurrence
 
 ```{r}
@@ -1337,13 +1238,6 @@ sources <- df %>%
   select(contains("Sources.of.Evidence")) %>%
   rename_with(~str_remove(., "Sources.of.Evidence.."))
 ```
-
-::: {.column-margin}
-**Reading a facet.** Each facet is one source; its bars are every
-other source, ranked by how often it co-occurs with the facet source.
-Each facet's bars sum to 1 on their own, so proportions aren't
-comparable across facets without also checking each facet's n.
-:::
 
 ```{r}
 #| label: sources-cooccurrence-directional
@@ -1518,15 +1412,6 @@ ggsave("composition_by_source.png", plot = last_plot(), width = 10, height = 8, 
 ```
 
 ### Mixed-gender authorship only
-
-::: {.column-margin}
-**Red dot.** Share of that source's mixed-gender papers with a woman
-first author, sized by number of mixed papers.
-
-**Tan dots.** Every distinct team size that occurs among that source's
-mixed papers, sized by how many papers share it — no jitter, no
-averaging.
-:::
 
 ```{r}
 #| label: mixed-only-source

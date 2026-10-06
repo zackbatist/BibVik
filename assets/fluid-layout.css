@@ -23,7 +23,3 @@
       [screen-end];
   }
 }
-
-/* Margin notes are hidden until they are redesigned. The text stays in the page source,
-   so deleting this rule brings them back. */
-.column-margin { display: none !important; }
