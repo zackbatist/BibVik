@@ -931,6 +931,8 @@ build_gn_dendrogram <- function(edgelist_file, removal_log_file, output_png,
 
 gn_subcluster_min <- 10L       # smallest community that is replayed
 gn_substantial_size <- 5L     # a division is substantial when its second piece has this many papers
+# Bump this when the replay changes, so files built by an older version are rebuilt.
+gn_subcluster_replay_version <- 2L
 # Thresholds at which divisions are also counted, so the result can be checked against the choice above.
 gn_subcluster_thresholds <- sort(unique(c(2L, 3L, gn_substantial_size, 10L)))
 
@@ -951,6 +953,7 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
   removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
   removal_after <- removal_log[removal_log$round > cut_round, ]
   removal_after <- removal_after[order(removal_after$round), ]
+  removal_before <- removal_log[removal_log$round <= cut_round, ]
   edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
   g <- as_undirected(igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE),
                      mode = "collapse")
@@ -959,6 +962,13 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
     members <- as.character(groups[[cid]])
     inside <- removal_after[removal_after$from %in% members & removal_after$to %in% members, ]
     live <- igraph::induced_subgraph(g, members)
+    # The cut is the graph after every removal up to its round, and some edges inside a community
+    # were removed without disconnecting it, so the replay starts without them.
+    before <- removal_before[removal_before$from %in% members & removal_before$to %in% members, ]
+    if (nrow(before) > 0) {
+      gone <- vapply(seq_len(nrow(before)), function(i) as.numeric(get_edge_ids(live, c(before$from[i], before$to[i]))), numeric(1))
+      live <- igraph::delete_edges(live, unique(gone[gone > 0]))
+    }
     ties <- igraph::degree(live)
     comp_id <- setNames(rep(1L, length(members)), members)
     next_id <- 2L
@@ -997,7 +1007,7 @@ build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_
     }
     list(
       row = cbind(
-        data.frame(community_id = cid, size = length(members), n_splits = n_splits,
+        data.frame(community_id = cid, replay_version = gn_subcluster_replay_version, size = length(members), n_splits = n_splits,
                    n_substantial = n_substantial, largest_second_piece = largest_second,
                    first_substantial_round = if (is.null(first)) NA_integer_ else first$round),
         as.data.frame(setNames(lapply(gn_subcluster_thresholds, function(k) sum(seconds >= k)),
@@ -1051,7 +1061,11 @@ gn_subclusters_data <- function(key) {
   if (gn[[key]]$available) {
     stale <- !file.exists(splits_csv) || !file.exists(pieces_csv) ||
       file.info(splits_csv)$mtime < file.info(gn[[key]]$cut_file)$mtime ||
-      !all(paste0("n_split_ge", gn_subcluster_thresholds) %in% names(read.csv(splits_csv, nrows = 1)))
+      !isTRUE({
+        head <- read.csv(splits_csv, nrows = 1)
+        all(c("replay_version", paste0("n_split_ge", gn_subcluster_thresholds)) %in% names(head)) &&
+          head$replay_version[1] == gn_subcluster_replay_version
+      })
     if (stale) {
       dir.create(dir, recursive = TRUE, showWarnings = FALSE)
       tryCatch(
@@ -1272,13 +1286,22 @@ gn_subcluster_f1_text <- function() {
   paste0("In Annotated, ", one("annotated"), " top papers are citing papers (F1), and in Annotated, seed filtered, ", one("seed_filtered"), " are.")
 }
 
+gn_subcluster_panel_height <- function(key) {
+  tryCatch({
+    n <- sum(gn_subclusters_data(key)$splits$n_substantial > 0)
+    3 * max(1, ceiling(n / 4))
+  }, error = function(e) 12)
+}
+
 gn_multi_piece_text <- function() {
   one <- function(key) {
     if (!gn[[key]]$available) return("none are available until the run is in place")
     sum(gn_subclusters_data(key)$splits$n_substantial >= 2)
   }
-  paste0("With a threshold of ", gn_substantial_size, " papers, ", one("annotated"), " communities in Annotated and ", one("seed_filtered"),
-         " in Annotated, seed filtered have three or more viable pieces.")
+  a <- one("annotated")
+  f <- one("seed_filtered")
+  paste0("With a threshold of ", gn_substantial_size, " papers, ", a, if (identical(a, 1L)) " community" else " communities",
+         " in Annotated and ", f, " in Annotated, seed filtered ", if (identical(f, 1L)) "has" else "have", " three or more viable pieces.")
 }
 
 # A division splits one piece into two, so a community needs two divisions to have three viable pieces.
@@ -1332,7 +1355,8 @@ gn_subcluster_table <- function(key) {
     transmute(
       Community = gn_label_or_id(community_id, lookup),
       Papers = size,
-      `Two pieces` = paste0(size_1, " and ", size_2),
+      `Substantial divisions` = n_substantial,
+      `First division` = paste0(size_1, " and ", size_2),
       `Papers in neither` = size - size_1 - size_2,
       `Rounds after the cut` = format(first_substantial_round - cut_round, big.mark = ","),
       `Top paper, larger piece` = top_1,
@@ -1362,7 +1386,9 @@ gn_subcluster_pieces_plot <- function(key) {
     sg <- igraph::induced_subgraph(g, members)
     xy <- scale(igraph::layout_with_fr(sg, niter = 600))
     names_in <- igraph::V(sg)$name
-    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 32), ": ", length(piece1), " + ", length(piece2), " papers")
+    n_sub <- d$splits$n_substantial[as.character(d$splits$community_id) == cid]
+    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 32), ": ", length(piece1), " + ", length(piece2), " papers",
+                    if (n_sub >= 2) paste0(" (first of ", n_sub, " divisions)") else "")
     el <- igraph::as_edgelist(sg, names = FALSE)
     list(nodes = tibble(x = xy[, 1], y = xy[, 2], panel = panel,
                         piece = case_when(names_in %in% piece1 ~ "Larger piece",
@@ -1710,7 +1736,7 @@ gn_subcluster_table("seed_filtered")
 
 :::
 
-Each panel draws one of those communities at the cut. Blue is the larger piece, red is the second piece and grey is the rest of the community.
+Each panel draws one of those communities at the cut, split at its first substantial division. Blue is the larger piece, red is the second piece and grey is the rest of the community. A community with a second division is marked in its title, and its later pieces are inside the blue and grey.
 
 ::: {.panel-tabset}
 
@@ -1719,7 +1745,7 @@ Each panel draws one of those communities at the cut. Blue is the larger piece, 
 ```{r}
 #| label: subcluster-pieces-annotated
 #| fig-width: 12
-#| fig-height: 12
+#| fig-height: !expr gn_subcluster_panel_height("annotated")
 #| eval: !expr gn[["annotated"]]$available
 gn_subcluster_pieces_plot("annotated")
 ```
@@ -1729,7 +1755,7 @@ gn_subcluster_pieces_plot("annotated")
 ```{r}
 #| label: subcluster-pieces-seed-filtered
 #| fig-width: 12
-#| fig-height: 12
+#| fig-height: !expr gn_subcluster_panel_height("seed_filtered")
 #| eval: !expr gn[["seed_filtered"]]$available
 gn_subcluster_pieces_plot("seed_filtered")
 ```
