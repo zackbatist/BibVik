@@ -246,7 +246,7 @@ signature_plot <- function(key) {
   cluster_signatures(key) |>
     ggplot(aes(x = n_peaks, y = mean_peak_enrichment, label = community_gn)) +
     geom_point(size = 3, colour = "steelblue") +
-    geom_text_repel(size = 3.5, seed = 1) +
+    geom_text_repel(size = 3.5, seed = 1, max.overlaps = Inf) +
     scale_x_continuous(breaks = scales::breaks_pretty()) +
     labs(x = "Number of peaks (categories where coverage exceeds\ncorpus baseline, Wilson 95% lower bound)",
          y = "Mean enrichment among those peaks",
