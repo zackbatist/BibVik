@@ -2050,9 +2050,13 @@ The table before each figure lists the groups of two or more clusters, with the 
 gn_shape_min_papers <- 3
 gn_shape_single_hub <- 0.95
 gn_shape_shared <- 0.2
+gn_twin_overlap <- 0.7
+gn_gallery_min_papers <- 30
+gn_shape_order <- c("Single hub", "Several hubs", "Shared references")
 
-# One row per cluster. Every measure comes from the citation edges between
-# papers, labelled with the cluster of each end (gn_cluster_edges).
+# One row per cluster of three or more papers. Every measure comes from the
+# citation edges between papers, labelled with the cluster at each end
+# (gn_cluster_edges).
 gn_cluster_shapes <- function(key) {
   ce <- gn_cluster_edges(key)
   sizes <- count(gn[[key]]$partition, community_gn, name = "papers")
@@ -2072,8 +2076,6 @@ gn_cluster_shapes <- function(key) {
   out_all <- count(ce, from, name = "out_all")
   shared <- internal |> count(from, target, name = "n_citing") |>
     group_by(from) |> summarise(shared_share = mean(n_citing >= 2), .groups = "drop")
-  one_tie <- bind_rows(transmute(internal, from, paper = source), transmute(internal, from, paper = target)) |>
-    count(from, paper) |> group_by(from) |> summarise(one_tie_papers = sum(n == 1), .groups = "drop")
   outsiders <- ce |> group_by(to, target) |> summarise(outside = any(from != to), .groups = "drop") |>
     group_by(to) |> summarise(cited_from_outside = mean(outside), .groups = "drop")
   touching <- bind_rows(count(internal, cluster = from, name = "n"),
@@ -2089,7 +2091,6 @@ gn_cluster_shapes <- function(key) {
     left_join(hubs, by = c("community_gn" = "from")) |>
     left_join(out_all, by = c("community_gn" = "from")) |>
     left_join(shared, by = c("community_gn" = "from")) |>
-    left_join(one_tie, by = c("community_gn" = "from")) |>
     left_join(outsiders, by = c("community_gn" = "to")) |>
     left_join(touching, by = c("community_gn" = "cluster")) |>
     left_join(neighbours, by = c("community_gn" = "cluster")) |>
@@ -2097,8 +2098,6 @@ gn_cluster_shapes <- function(key) {
     mutate(
       shared_share = replace_na(shared_share, 0),
       neighbour_clusters = replace_na(neighbour_clusters, 0L),
-      edges_per_paper = edges_inside / papers,
-      one_tie_share = one_tie_papers / papers,
       kept = edges_inside / out_all,
       cohesion = edges_inside / touching,
       shape = case_when(top_share >= gn_shape_single_hub ~ "Single hub",
@@ -2109,20 +2108,64 @@ gn_cluster_shapes <- function(key) {
 
 gn_has_shapes <- function(key) !is.null(gn_shapes[[key]])
 
-gn_shape_note <- function(key) {
-  if (!gn_has_shapes(key)) return("No cluster shapes are available for this graph.")
+gn_shape_classes <- function(key) {
   s <- gn_shapes[[key]]
-  n <- count(s, shape)
-  part <- function(label) {
-    k <- n$n[n$shape == label]
-    if (length(k) == 0) 0L else k
-  }
-  paste0(nrow(s), " clusters have ", gn_shape_min_papers, " or more papers. ", part("Single hub"),
-         " are single hubs, ", part("Shared references"), " share references and ", part("Several hubs"),
-         " have several hubs without shared references.")
+  meaning <- c(
+    "Single hub" = paste0("One hub accounts for at least ", scales::percent(gn_shape_single_hub),
+                          " of the cluster's internal citation edges."),
+    "Several hubs" = "Two or more hubs, and few of the works they cite are the same.",
+    "Shared references" = paste0("Two or more hubs, and at least ", scales::percent(gn_shape_shared),
+                                 " of the works cited inside the cluster are cited by two or more of its papers."))
+  tibble(Shape = names(meaning), `What it means` = unname(meaning)) |>
+    left_join(s |> group_by(shape) |> summarise(Clusters = n(), Papers = sum(papers), .groups = "drop"),
+              by = c("Shape" = "shape")) |>
+    mutate(Clusters = replace_na(Clusters, 0L), Papers = replace_na(Papers, 0L),
+           `Share of clusters` = scales::percent(Clusters / sum(Clusters), accuracy = 1)) |>
+    select(Shape, `What it means`, Clusters, `Share of clusters`, Papers) |>
+    knitr::kable()
 }
 
-gn_shape_summary <- function(key) {
+# Up to four clusters per shape, spread evenly through the sizes of the clusters
+# with enough papers to draw. The panels illustrate the shapes and are not a sample.
+gn_shape_gallery <- function(key) {
+  s <- gn_shapes[[key]]
+  part <- gn[[key]]$partition
+  g <- as_undirected(graphs[[key]], mode = "collapse")
+  lookup <- gn_label_lookup(key)
+  spread <- function(x, k) x[unique(round(seq(1, length(x), length.out = min(k, length(x)))))]
+  big <- filter(s, papers >= gn_gallery_min_papers)
+  pick <- unlist(map(gn_shape_order, function(cl) {
+    ids <- big |> filter(shape == cl) |> arrange(papers) |> pull(community_gn)
+    if (length(ids) == 0) character() else spread(ids, 4)
+  }))
+  set.seed(7)
+  parts <- map(pick, function(cid) {
+    members <- part$node_id[part$community_gn == cid]
+    sg <- igraph::induced_subgraph(g, members)
+    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
+    r <- filter(s, community_gn == cid)
+    panel <- paste0(r$shape, ": ", str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers)")
+    gen <- node_attrs$generation[match(igraph::V(sg)$name, node_attrs$name)]
+    el <- igraph::as_edgelist(sg, names = FALSE)
+    list(nodes = tibble(x = xy[, 1], y = xy[, 2], ties = igraph::degree(sg), panel = panel,
+                        role = if_else(gen %in% c("F1", "P"), "Hub (citing paper)", "Cited work")),
+         edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
+  })
+  levels <- map_chr(parts, ~ .x$nodes$panel[1])
+  nodes <- bind_rows(map(parts, "nodes")) |> mutate(panel = factor(panel, levels = levels))
+  edges <- bind_rows(map(parts, "edges")) |> mutate(panel = factor(panel, levels = levels))
+  ggplot() +
+    geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
+    geom_point(data = arrange(nodes, role == "Hub (citing paper)"), aes(x, y, size = sqrt(ties), colour = role), alpha = 0.9) +
+    scale_size_continuous(range = c(0.4, 4), guide = "none") +
+    scale_colour_manual(values = c("Hub (citing paper)" = "#d73027", "Cited work" = "#4575b4"), name = NULL) +
+    facet_wrap(~ panel, ncol = 4, scales = "free") +
+    theme_void() +
+    theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
+    labs(title = paste0(graph_labels[[key]], ": clusters seen from the inside, ordered by shape"))
+}
+
+gn_shape_boundary <- function(key) {
   s <- gn_shapes[[key]]
   q <- function(x, accuracy) {
     paste0(scales::number(median(x, na.rm = TRUE), accuracy = accuracy), " (",
@@ -2130,40 +2173,31 @@ gn_shape_summary <- function(key) {
            scales::number(quantile(x, 0.75, na.rm = TRUE), accuracy = accuracy), ")")
   }
   tibble(
-    Measure = c("Papers", "Papers citing inside the cluster", "Internal edges per paper",
-                "Share of internal edges from the top citing paper",
-                "Share of cited works cited by two or more papers inside",
-                "Share of papers with a single tie inside",
-                "Share of the cluster's citing papers' references that stay inside",
-                "Share of cited works also cited from other clusters",
-                "Share of edges touching the cluster that stay inside",
-                "Neighbouring clusters"),
-    `Median (quartiles)` = c(q(s$papers, 1), q(s$citing, 1), q(s$edges_per_paper, 0.01), q(s$top_share, 0.01),
-                             q(s$shared_share, 0.01), q(s$one_tie_share, 0.01), q(s$kept, 0.01),
-                             q(s$cited_from_outside, 0.01), q(s$cohesion, 0.01), q(s$neighbour_clusters, 1))
+    Measure = c("Share of its hubs' references that stay inside the cluster",
+                "Share of the cluster's cited works that other clusters also cite",
+                "Share of citation edges touching the cluster that stay inside it",
+                "Other clusters it shares a citation edge with"),
+    `Median (quartiles)` = c(q(s$kept, 0.01), q(s$cited_from_outside, 0.01), q(s$cohesion, 0.01), q(s$neighbour_clusters, 1))
   ) |> knitr::kable()
 }
 
-gn_shape_largest <- function(key, n = 15) {
+gn_shape_largest <- function(key, n = 10) {
   lookup <- gn_label_lookup(key)
   gn_shapes[[key]] |>
     arrange(desc(papers)) |>
     slice_head(n = n) |>
-    transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, `Citing papers` = citing,
-              Shape = shape,
-              `Top citing paper` = paste0(str_trunc(coalesce(hub_title, ""), 70), " (", hub_year, ")"),
-              `Its references inside / total` = paste0(hub_refs_inside, " / ", hub_refs_total)) |>
+    transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, Shape = shape,
+              `Hub paper` = paste0(str_trunc(coalesce(hub_title, ""), 70), " (", hub_year, ")"),
+              `Its references inside the cluster` = paste0(hub_refs_inside, " of ", hub_refs_total)) |>
     knitr::kable()
 }
 
-# Clusters whose two largest citing papers cite nearly the same works. Two
-# different papers rarely do, and when both records point at the same source
-# PDF the second record is probably attached to the wrong file.
-gn_twin_table <- function(key, min_overlap = 0.7) {
+# Clusters whose two largest hubs cite nearly the same works.
+gn_twin_pairs <- function(key) {
   ce <- gn_cluster_edges(key)
   refs <- ce |> group_by(source) |> summarise(refs = list(target), .groups = "drop")
   refs <- setNames(refs$refs, refs$source)
-  pairs <- ce |>
+  ce |>
     filter(from == to) |>
     count(from, source, name = "n") |>
     group_by(from) |> slice_max(n, n = 2, with_ties = FALSE) |> filter(n() == 2) |>
@@ -2174,60 +2208,33 @@ gn_twin_table <- function(key, min_overlap = 0.7) {
     mutate(overlap = length(intersect(refs[[paper_1]], refs[[paper_2]])) /
              length(union(refs[[paper_1]], refs[[paper_2]]))) |>
     ungroup() |>
-    filter(overlap >= min_overlap)
-  if (nrow(pairs) == 0) return(knitr::kable(tibble(Result = "No cluster has two citing papers with near-identical reference lists.")))
+    filter(overlap >= gn_twin_overlap) |>
+    arrange(desc(overlap))
+}
+
+gn_twin_note <- function(key) {
+  p <- gn_twin_pairs(key)
+  s <- gn_shapes[[key]]
+  in_shared <- sum(p$from %in% s$community_gn[s$shape == "Shared references"])
+  paste0(nrow(p), if (nrow(p) == 1) " cluster has" else " clusters have", " two largest hubs with at least ",
+         scales::percent(gn_twin_overlap), " of their references in common. ", in_shared,
+         if (in_shared == 1) " of them counts" else " of them count", " as sharing references in the table of shapes.")
+}
+
+gn_twin_table <- function(key) {
+  p <- gn_twin_pairs(key)
+  if (nrow(p) == 0) return(knitr::kable(tibble(Result = "No cluster has two hubs with near-identical reference lists.")))
   lookup <- gn_label_lookup(key)
   describe <- function(x) {
     i <- match(x, node_attrs$name)
     paste0(x, ": ", str_trunc(node_attrs$title[i], 60), " (", node_attrs$year[i], ")")
   }
   pdf_of <- function(x) map_chr(x, function(k) bib[[k]][["_source_pdf"]] %||% "")
-  pairs |>
-    arrange(desc(overlap)) |>
-    transmute(Cluster = gn_label_or_id(from, lookup), `Paper A` = describe(paper_1), `Paper B` = describe(paper_2),
-              `Reference lists in common` = scales::percent(overlap, accuracy = 1),
+  p |>
+    transmute(Cluster = gn_label_or_id(from, lookup), `Hub A` = describe(paper_1), `Hub B` = describe(paper_2),
+              `References in common` = scales::percent(overlap, accuracy = 1),
               `Same source PDF` = if_else(nzchar(pdf_of(paper_1)) & pdf_of(paper_1) == pdf_of(paper_2), "yes", "no")) |>
     knitr::kable()
-}
-
-# Twelve clusters drawn from the inside: single hubs and clusters with shared
-# references, spread evenly through the ordering so the gallery shows the range.
-gn_shape_gallery <- function(key) {
-  s <- gn_shapes[[key]]
-  part <- gn[[key]]$partition
-  g <- as_undirected(graphs[[key]], mode = "collapse")
-  lookup <- gn_label_lookup(key)
-  spread <- function(x, k) x[unique(round(seq(1, length(x), length.out = min(k, length(x)))))]
-  big <- filter(s, papers >= 50)
-  singles <- big |> filter(shape == "Single hub") |> arrange(papers) |> pull(community_gn)
-  others <- big |> filter(shape != "Single hub") |> arrange(desc(shared_share), top_share) |> pull(community_gn)
-  pick <- c(if (length(singles) > 0) spread(singles, 4), if (length(others) > 0) spread(others, 8))
-  set.seed(7)
-  parts <- map(pick, function(cid) {
-    members <- part$node_id[part$community_gn == cid]
-    sg <- igraph::induced_subgraph(g, members)
-    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
-    r <- filter(s, community_gn == cid)
-    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers, ", tolower(r$shape), ")")
-    gen <- node_attrs$generation[match(igraph::V(sg)$name, node_attrs$name)]
-    el <- igraph::as_edgelist(sg, names = FALSE)
-    list(nodes = tibble(x = xy[, 1], y = xy[, 2], ties = igraph::degree(sg), panel = panel,
-                        role = if_else(gen %in% c("F1", "P"), "Citing paper", "Cited work")),
-         edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
-  })
-  levels <- map_chr(parts, ~ .x$nodes$panel[1])
-  nodes <- bind_rows(map(parts, "nodes")) |> mutate(panel = factor(panel, levels = levels))
-  edges <- bind_rows(map(parts, "edges")) |> mutate(panel = factor(panel, levels = levels))
-  ggplot() +
-    geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
-    geom_point(data = arrange(nodes, role == "Citing paper"), aes(x, y, size = sqrt(ties), colour = role), alpha = 0.9) +
-    scale_size_continuous(range = c(0.4, 4), guide = "none") +
-    scale_colour_manual(values = c("Citing paper" = "#d73027", "Cited work" = "#4575b4"), name = NULL) +
-    facet_wrap(~ panel, ncol = 4, scales = "free") +
-    theme_void() +
-    theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
-    labs(title = paste0(graph_labels[[key]], ": twelve clusters seen from the inside"),
-         subtitle = "Dot size grows with the number of citation ties inside the cluster.")
 }
 ```
 
@@ -2243,33 +2250,41 @@ gn_shapes <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), fu
 })
 ```
 
-The grouping above treats each cluster as one unit. This section looks inside them. A paper counts as citing inside its cluster when it has citation edges to other members of the cluster. Each cluster of `r gn_shape_min_papers` or more papers is described by how its internal edges are spread across citing papers and by how much of its neighbourhood it shares with other clusters. Clusters of one or two papers have no internal structure and are left out.
+This section looks inside the clusters. In most of them, one paper cites all the others. A typical cluster is a citing paper and the works it cites, with a few of those works also cited from other clusters. A cluster's label therefore describes one paper's bibliography more than a community of papers that cite each other, and the groups above join clusters of that kind.
 
-| Shape | Definition |
-|---|---|
-| Single hub | One citing paper accounts for at least `r scales::percent(gn_shape_single_hub)` of the cluster's internal edges |
-| Shared references | At least `r scales::percent(gn_shape_shared)` of the works cited inside the cluster are cited by two or more of its papers |
-| Several hubs | Two or more citing papers, with fewer shared references than that |
+A paper is a hub when it cites other members of its cluster. Each cluster of `r gn_shape_min_papers` or more papers falls into one of three shapes. Smaller clusters have no internal structure to describe.
+
+#### The three shapes
 
 ::: {.panel-tabset}
 
-#### Annotated
-
-`r gn_shape_note("annotated")`
+##### Annotated
 
 ```{r}
-#| label: shape-summary-annotated
+#| label: shape-classes-annotated
 #| echo: false
 #| eval: !expr gn_has_shapes("annotated")
-gn_shape_summary("annotated")
+gn_shape_classes("annotated")
 ```
 
+##### Annotated, seed filtered
+
 ```{r}
-#| label: shape-largest-annotated
+#| label: shape-classes-seed-filtered
 #| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_shape_largest("annotated")
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shape_classes("seed_filtered")
 ```
+
+:::
+
+#### What the shapes look like
+
+Each panel is one cluster, and its title names the cluster's shape. Red dots are hubs and blue dots are the works they cite. The panels are ordered by shape, with up to four clusters per shape. They come from clusters of `r gn_gallery_min_papers` or more papers, spread evenly across their sizes, so they illustrate the shapes and do not sample them.
+
+::: {.panel-tabset}
+
+##### Annotated
 
 ```{r}
 #| label: shape-gallery-annotated
@@ -2280,30 +2295,7 @@ gn_shape_largest("annotated")
 gn_shape_gallery("annotated")
 ```
 
-```{r}
-#| label: shape-twins-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_twin_table("annotated")
-```
-
-#### Annotated, seed filtered
-
-`r gn_shape_note("seed_filtered")`
-
-```{r}
-#| label: shape-summary-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_summary("seed_filtered")
-```
-
-```{r}
-#| label: shape-largest-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_largest("seed_filtered")
-```
+##### Annotated, seed filtered
 
 ```{r}
 #| label: shape-gallery-seed-filtered
@@ -2314,6 +2306,81 @@ gn_shape_largest("seed_filtered")
 gn_shape_gallery("seed_filtered")
 ```
 
+:::
+
+#### How much of a cluster is its own
+
+These measures describe the edge of a cluster. The first row shows how much of a hub's reference list the cluster keeps, and the other rows show how much of the cluster is shared with other clusters. Each row gives the median across clusters, with the first and third quartiles in brackets.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: shape-boundary-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_shape_boundary("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: shape-boundary-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shape_boundary("seed_filtered")
+```
+
+:::
+
+#### The paper behind each large cluster
+
+The ten largest clusters, each with its hub paper and the number of that paper's references that sit inside the cluster.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: shape-largest-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_shape_largest("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: shape-largest-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shape_largest("seed_filtered")
+```
+
+:::
+
+#### Possible bibliography errors
+
+Two different papers rarely cite nearly the same works. The tables list clusters whose two largest hubs share at least `r scales::percent(gn_twin_overlap)` of their references. When both records point at the same source PDF, one record is probably attached to the wrong file, and the edges from that record are suspect. Pairs like these also move their cluster into the shared references shape, so the count for that shape overstates how often independent papers cite the same works.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+`r if (gn_has_shapes("annotated")) gn_twin_note("annotated")`
+
+```{r}
+#| label: shape-twins-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_twin_table("annotated")
+```
+
+##### Annotated, seed filtered
+
+`r if (gn_has_shapes("seed_filtered")) gn_twin_note("seed_filtered")`
+
 ```{r}
 #| label: shape-twins-seed-filtered
 #| echo: false
@@ -2322,8 +2389,6 @@ gn_twin_table("seed_filtered")
 ```
 
 :::
-
-The first table summarises every cluster with the median and the quartiles of each measure. The second table names the citing paper behind each of the largest clusters and how much of that paper's reference list stays inside the cluster. In the gallery, red dots are citing papers and blue dots are the works they cite. The last table lists clusters whose two largest citing papers cite nearly the same works. Two different papers with near-identical reference lists, especially when both records carry the same source PDF, point to a bibliography record attached to the wrong file, and the edges from that second record are suspect.
 
 ## What the seed filter changes
 
