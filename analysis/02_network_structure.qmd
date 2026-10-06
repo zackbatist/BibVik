@@ -1390,18 +1390,8 @@ gn_cluster_labels_table("seed_filtered")
 #| label: seed-filter-nodes
 #| echo: false
 #| results: hide
-seed_name <- "lund2021"
 removed <- setdiff(V(graphs$annotated)$name, V(graphs$seed_filtered)$name)
-seed_only <- setdiff(removed, seed_name)
 edges_removed <- ecount(graphs$annotated) - ecount(graphs$seed_filtered)
-
-seed_only_by_gen <- node_attrs |> filter(name %in% seed_only) |> count(generation, sort = TRUE)
-seed_only_gen_text <- if (nrow(seed_only_by_gen) == 0) {
-  "none"
-} else {
-  paste0(seed_only_by_gen$n, " ", ifelse(seed_only_by_gen$generation == "", "unclassified", seed_only_by_gen$generation),
-         collapse = ", ")
-}
 
 shared <- inner_join(
   metrics$annotated |> filter(is_ghost == "false") |>
@@ -1433,25 +1423,7 @@ fragments <- tibble(name = names(wcc_f$membership), component = wcc_f$membership
   arrange(desc(component_size), component, year)
 ```
 
-The seed paper, `lund2021`, is the origin of the corpus and cites `r format(edges_removed, big.mark = ",")` of its works. Dropping its rows from the annotated edge list removes those edges and changes the graph in three ways that the sections above show one graph at a time. This section puts the two side by side.
-
-### What disappears
-
-Dropping the seed's rows removes `r length(removed)` nodes. They are the seed itself and `r length(seed_only)` works that no annotated paper cites (`r seed_only_gen_text`). Each of those works has the seed as its only citation, so it has no edge left once the seed's rows are gone.
-
-::: {.callout-note collapse="true"}
-## The works only the seed cited
-
-```{r}
-#| label: seed-filter-only-seed-cited
-#| echo: false
-node_attrs |>
-  filter(name %in% seed_only) |>
-  arrange(year) |>
-  transmute(Year = year, Generation = generation, Title = title) |>
-  knitr::kable()
-```
-:::
+The seed paper, `lund2021`, is the origin of the corpus and cites `r format(edges_removed, big.mark = ",")` of its works. Dropping its rows from the annotated edge list removes those edges and `r length(removed)` nodes, the seed and the works whose only citation was the seed. It changes the graph in three ways that the sections above show one graph at a time. This section puts the two side by side.
 
 ### What separates
 
