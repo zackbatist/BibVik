@@ -122,6 +122,21 @@ has_gn <- function(key) {
 # Everything below that is computed per graph goes through these functions,
 # called once per tab, so the two tabs of a section cannot drift apart.
 
+# Cluster labels from the labelling step. Only the largest clusters of each run are
+# labelled, so a cluster without a label is shown by its number alone.
+label_runs <- c(annotated = "annotated", seed_filtered = "annotated_no_seed")
+cluster_label_lookup <- function(key) {
+  path <- here("analysis", "gn_analysis", "results", label_runs[[key]], "labels", "cluster_labels.csv")
+  if (!file.exists(path)) return(character())
+  read_csv(path, show_col_types = FALSE) |>
+    transmute(id = as.character(community_id), label = label) |>
+    deframe()
+}
+cluster_names <- function(key, width = 40) {
+  lookup <- cluster_label_lookup(key)
+  set_names(str_trunc(unname(lookup), width), names(lookup))
+}
+
 # The annotated works with a cluster in this graph, and the true size of every cluster.
 cluster_context <- function(key) {
   col <- gn_columns[[key]]
@@ -132,7 +147,9 @@ cluster_context <- function(key) {
     annotated_only = filter(assigned, !is.na(publication_year)),
     true_sizes = node_table |>
       filter(!is.na(.data[[col]])) |>
-      count(community_gn = as.character(.data[[col]]), name = "true_size")
+      count(community_gn = as.character(.data[[col]]), name = "true_size"),
+    names = cluster_names(key),
+    names_long = cluster_names(key, 120)
   )
 }
 
@@ -151,7 +168,10 @@ category_data <- function(ctx, pattern, kind, unit = "Cluster", unit_names = NUL
     left_join(ctx$true_sizes, by = "community_gn") |>
     arrange(desc(true_size)) |>
     mutate(label = sprintf("%s %s%s (%d of %d annotated)", unit, community_gn,
-                           if (is.null(unit_names)) "" else paste0(": ", unit_names[community_gn]),
+                           {
+                             nm <- if (is.null(unit_names)) rep(NA_character_, n()) else unname(unit_names[community_gn])
+                             ifelse(is.na(nm), "", paste0(": ", nm))
+                           },
                            n_annotated, true_size)) |>
     mutate(label = fct_rev(fct_inorder(label))) |>
     select(community_gn, label) |>
@@ -178,9 +198,9 @@ category_data <- function(ctx, pattern, kind, unit = "Cluster", unit_names = NUL
 cluster_data <- map(set_names(names(gn_columns)), function(key) {
   if (!has_gn(key)) return(NULL)
   ctx <- cluster_context(key)
-  ctx$topic <- category_data(ctx, "Topics..", "topic")
-  ctx$method <- category_data(ctx, "Methods..", "method")
-  ctx$source <- category_data(ctx, "Sources.of.Evidence..", "source")
+  ctx$topic <- category_data(ctx, "Topics..", "topic", unit_names = ctx$names)
+  ctx$method <- category_data(ctx, "Methods..", "method", unit_names = ctx$names)
+  ctx$source <- category_data(ctx, "Sources.of.Evidence..", "source", unit_names = ctx$names)
   ctx$n_matched <- nrow(ctx$annotated_only)
   sizes <- arrange(ctx$true_sizes, desc(true_size))
   ctx$n_clusters <- nrow(sizes)
@@ -193,6 +213,11 @@ cluster_data <- map(set_names(names(gn_columns)), function(key) {
 # and the most annotated works any cluster holds.
 heatmap_n <- function(key) if (has_gn(key)) length(cluster_data[[key]]$topic$keep) else "n/a"
 most_annotated <- function() max(map_dbl(compact(cluster_data), \(d) max(d$topic$annotated_n$n_annotated)))
+# Figure height that gives every cluster row room for its label.
+heatmap_height <- function(key, kind) {
+  n <- if (has_gn(key)) length(cluster_data[[key]][[kind]]$keep) else 0
+  max(7, 0.3 * n + 2)
+}
 
 category_note <- function(key, kind, data = cluster_data) {
   d <- data[[key]]
@@ -221,12 +246,12 @@ category_heatmap <- function(key, kind, data = cluster_data, unit = "cluster") {
                          labels = scales::label_number(suffix = "x")) +
     labs(x = "", y = "", fill = "Enrichment vs.\ncorpus base rate",
          title = paste0(family, " enrichment within each Girvan-Newman ", unit, ", ", graph_labels[[key]]),
-         subtitle = (function(s) if (unit == "cluster") s else str_wrap(s, 105))(
+         subtitle = (function(s) str_wrap(s, 105))(
            paste0("Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that ",
                   kind, ", not raw coverage — ", tail_text))) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
-          plot.title.position = if (unit == "cluster") "panel" else "plot")
+          plot.title.position = "plot")
 }
 
 # A peak requires the Wilson lower bound (defined in setup) on a cluster's
@@ -266,22 +291,24 @@ signature_plot <- function(key) {
 }
 
 signature_detail <- function(key) {
+  nm <- cluster_data[[key]]$names_long
+  cluster_text <- function(id) paste0("Cluster ", id, ifelse(is.na(nm[id]), "", paste0(": ", nm[id])))
   top_communities <- cluster_signatures(key) |> slice_max(n_peaks, n = 8, with_ties = FALSE) |> pull(community_gn)
   cluster_peaks(key) |>
     filter(community_gn %in% top_communities) |>
     mutate(
-      cluster_label = fct_relevel(paste("Cluster", community_gn), paste("Cluster", top_communities)),
+      cluster_label = fct_relevel(cluster_text(community_gn), cluster_text(top_communities)),
       category_label = fct_reorder(paste0(category, " (", category_type, ")"), enrichment)
     ) |>
     ggplot(aes(x = enrichment, y = category_label)) +
     geom_col(fill = "steelblue") +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "grey50") +
-    facet_wrap(vars(cluster_label), scales = "free_y", ncol = 2) +
+    facet_wrap(vars(cluster_label), scales = "free_y", ncol = 2, labeller = label_wrap_gen(width = 34)) +
     labs(x = "Enrichment vs. corpus base rate", y = "",
          title = paste0("Peak categories for the clusters with the most peaks, ", graph_labels[[key]]),
          subtitle = "Dashed line = corpus baseline (1x). Bars are that cluster's individual peaks.") +
     theme_minimal() +
-    theme(strip.text = element_text(face = "bold"))
+    theme(strip.text = element_text(face = "bold", size = 10))
 }
 ```
 
@@ -377,7 +404,7 @@ true total size.
 #| label: cluster-vs-topic-annotated
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("annotated", "topic")
 #| results: asis
 #| eval: !expr has_gn("annotated")
 category_note("annotated", "topic")
@@ -390,7 +417,7 @@ category_heatmap("annotated", "topic")
 #| label: cluster-vs-topic-seed-filtered
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("seed_filtered", "topic")
 #| results: asis
 #| eval: !expr has_gn("seed_filtered")
 category_note("seed_filtered", "topic")
@@ -411,7 +438,7 @@ Same approach as the topic comparison above, applied to method.
 #| label: cluster-vs-method-annotated
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("annotated", "method")
 #| results: asis
 #| eval: !expr has_gn("annotated")
 category_note("annotated", "method")
@@ -424,7 +451,7 @@ category_heatmap("annotated", "method")
 #| label: cluster-vs-method-seed-filtered
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("seed_filtered", "method")
 #| results: asis
 #| eval: !expr has_gn("seed_filtered")
 category_note("seed_filtered", "method")
@@ -445,7 +472,7 @@ Same approach again, applied to source of evidence.
 #| label: cluster-vs-source-annotated
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("annotated", "source")
 #| results: asis
 #| eval: !expr has_gn("annotated")
 category_note("annotated", "source")
@@ -458,7 +485,7 @@ category_heatmap("annotated", "source")
 #| label: cluster-vs-source-seed-filtered
 #| echo: false
 #| fig-width: 10
-#| fig-height: 7
+#| fig-height: !expr heatmap_height("seed_filtered", "source")
 #| results: asis
 #| eval: !expr has_gn("seed_filtered")
 category_note("seed_filtered", "source")
@@ -544,7 +571,7 @@ directly rather than as a summary number:
 #| label: cluster-signature-detail-annotated
 #| echo: false
 #| fig-width: 9
-#| fig-height: 7
+#| fig-height: 10
 #| eval: !expr has_gn("annotated")
 signature_detail("annotated")
 ```
@@ -555,7 +582,7 @@ signature_detail("annotated")
 #| label: cluster-signature-detail-seed-filtered
 #| echo: false
 #| fig-width: 9
-#| fig-height: 7
+#| fig-height: 10
 #| eval: !expr has_gn("seed_filtered")
 signature_detail("seed_filtered")
 ```
@@ -573,19 +600,9 @@ signature_detail("seed_filtered")
 # category_data() and the heatmap function above are reused, with the group number
 # carried in the same id column the clusters use.
 group_columns <- c(annotated = "group_gn", seed_filtered = "group_gn_seed_filtered")
-label_runs <- c(annotated = "annotated", seed_filtered = "annotated_no_seed")
 has_groups <- function(key) {
   col <- group_columns[[key]]
   has_gn(key) && col %in% names(node_table) && any(!is.na(node_table[[col]]))
-}
-
-# Cluster labels from the labelling step, empty when the run has none.
-cluster_label_lookup <- function(key) {
-  path <- here("analysis", "gn_analysis", "results", label_runs[[key]], "labels", "cluster_labels.csv")
-  if (!file.exists(path)) return(character())
-  read_csv(path, show_col_types = FALSE) |>
-    transmute(id = as.character(community_id), label = label) |>
-    deframe()
 }
 
 # Groups with fewer annotated works than this are listed but not tested: the Wilson interval
