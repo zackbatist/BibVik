@@ -292,50 +292,35 @@ Not exercised on real data or on the real machine are the real `launch_bibvik_ll
 
 Each item appears once here. The documents no longer carry their own lists.
 
-### Annotation and gender (01, 03)
-
-- Choose the gender composition scheme for the topic, method and source cross-tabs. `composition_strict`, `composition_majority` and `composition_singleauthor_split` are computed side by side, and 01 charts the third. None has been chosen.
-- Normalize the topic, method and source proportions by gender against the corpus-wide gender base rate. The cross-tabs report raw proportions.
-- Show mixed-gender team size, as each paper's own size, in Gender's own corpus-level sections. It exists only per topic, method and source.
-- Include secondary topic, method and source values in the gender cross-tabs. Only primary values are compared.
-
 ### Region (01, 03)
 
 - Cross-tab region against gender. Region is cross-tabbed against topic, method and source.
 
 ### Network and communities (02, 03)
 
-- Run the title and annotation checks on individual Girvan-Newman communities in 02. The communities in the table of substantial divisions are the strongest candidates, since each divides into two pieces built around different citing papers. This check has not been carried out on the new partition.
-- Decide whether 03 needs the same Annotated and seed-filtered tabs. It reads only `community_gn`, from the Annotated run.
+- Run the title and annotation checks on individual Girvan-Newman communities in 02. The communities in the table of substantial divisions are the strongest candidates, since each divides into two pieces built around different citing papers. This check has not been carried out on the new partition. A first look at the annotation half on Annotated: the two top papers of a division share 48% of their coded categories on average, against 30% for two random annotated papers, from 5% to 91% across the 29 divisions. A column in the table of divisions would show it for each.
+- Join the consensus groups to the annotation in 03. `group_gn` and `group_gn_seed_filtered` are in the node table, and 03 does not use them.
+- Label the remaining clusters of 10 or more papers, about 176 on Annotated and 192 on seed filtered. Only the 100 largest in each run have labels, so the rest appear as "Community N" in the tables and legends.
 
 ### Planned comparisons (03)
 
 - Test whether centrality (`in_degree`, `betweenness`, `pagerank`) within a cluster correlates with author gender, that is, whether the most central or bridging works in a cluster are disproportionately authored by one gender even when the cluster's dominant topic is not gender-skewed.
 - Analyze self-citation by gender, cluster and unique individual, and test whether the rate tracks centrality or prevalence across clusters. Test whether women-led work is cited more in some clusters than others, using average out-degree within each cluster filtered by the recipient's author information and divided further by the sender's gender.
-- Test direct citation homophily, whether papers (or, at author level, authors) cite others who share their coded gender, topic or method. It is computable from the edge list and the join, with no cluster output.
 - Build per-F2-node citer profiles. For F2 works with `in_degree` above a threshold, characterize the gender, topic and method of their F1 citer set and whether the set is structurally clustered or scattered. This shows whether a source works as a shared touchstone across the field's divisions or as an in-group marker.
-
-### Corpus documentation (00)
-
-- Itemize and categorize the exclusion reasons for the remaining works in the seed's reference list. Only two criteria are documented (full books and edited volumes with consolidated bibliographies, and methodological or technical reports outside the study's scope).
 
 ### Pipeline and data
 
-- Commit the finished Girvan-Newman runs (the commands above), then re-render 02 and 03.
 - Consolidate the `gn_analysis` and `cluster_labelling` directories and outputs into one layout after both runs are installed. Labels now travel with their run, in `<run>/labels/`.
-- Add the ignore lines for the run working files to `.gitignore` (see Committing finished runs).
 - Clear out old results. `~/models/gn_results_old_*` and the two untracked `results_backup_*` folders in `analysis/gn_analysis/` are on the server only.
 - Patch `_find_duplicate()` and `_merge_into()` in the pipeline. Do not run `--extract` or `--iterate-f1` until then.
 - Resolve the 59 field corrections that no online source can settle, and split the `bradley2002` title, which glues two references together.
+- Fix the four near-duplicate label pairs that failed relabelling and kept their original labels: Annotated 66 and 116, 166 and 214; seed filtered 26 and 30, 226 and 304.
+- Review the 26 PDFs on which two or more records carry outgoing edges. For 21 of them one record's citekey matches the PDF's author and year, and the other records carry 893 edges, 4.2% of the Annotated edge list. 13 PDFs have 10 or more such edges, and the tables under "Possible bibliography errors" in 02 list the clearest pairs. Before changing any record, drop the suspect edges, rerun Leiden and compare, and rerun Girvan-Newman and labelling only if clusters move.
 
-## Re-check after the first render with the new runs
+### Presentation and publishing
 
-02 and 03 contain statements typed in from earlier renders. The repaired graph and the new runs can change them. Figures that 02 used to quote by hand, such as the in-degree range, the pre-2000 betweenness boundary, the coreness-9 works, the single component and the singleton share, are now computed from each graph.
-
-- 02, internal structure of communities: the replay covers every community of 10 or more papers, a division is substantial when its second piece has 5 or more papers, and the counts of communities with one are computed. Read the table of divisions against the cluster labels, and check that each pair of top papers belongs in the same community.
-- 02, appendix: the seed is "cited directly by hundreds of F1 papers".
-- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. It does not use the `group_gn` and `group_gn_seed_filtered` columns yet.
-- The comparison section in 02 ("What the seed filter changes") and every Girvan-Newman tab have not rendered on real runs yet.
+- Redesign the 12 deleted margin notes as collapsible "How to read" boxes under the figures they explained. The text is in the history before commit 03e7d2b.
+- Re-render `analysis/00_overview.qmd` and publish, because the page on `gh-pages` is an old version titled "Part 1 — Annotation descriptives". Remove the leftover `.quarto/quarto-publish-worktree-*` folder with `git worktree remove --force` and `git worktree prune`.
 
 ## Related documents
 
