@@ -285,7 +285,7 @@ Not exercised on real data or on the real machine are the real `launch_bibvik_ll
 **Live**
 
 - **No onset found.** With window 100 and rate 0.9, detection stops with `No sustained fast-fragmentation onsets detected` when the graph does not fragment fast enough. A small synthetic graph did this. Detection has not run on these two graphs yet, and the no-seed graph starts with four components. The earlier real runs found onsets with the defaults. If it fails, the chain logs the graph and skips it. Relax the two arguments.
-- **GN modularity.** `run_gn_analysis.R` scores modularity against the shrinking graph, so late rounds can score very high. Cut selection uses fragmentation onsets, so the chain's output is unaffected. The best-scoring partition in `communities.csv` and any modularity figure quoted from the traces are unreliable until a recomputation from the removal log against the original graph is written.
+- **GN modularity.** `run_gn_analysis.R` scores modularity against the shrinking graph, so late rounds can score very high. Cut selection uses fragmentation onsets, so the chain's output is unaffected. The best-scoring partition in `communities.csv` and any modularity figure quoted from the traces are unreliable, and no recomputation is planned.
 - **igraph versions.** The server has igraph 1.6.0. The GN scripts use `get.edge.ids` and `as.undirected`, which that version has. 02 calls `as_undirected()`, which igraph added in 2.0, so 02 renders on igraph 2.0 or later. On 1.6.0 the k-core chunk fails and the Louvain and Leiden chunks fail after it. Render 02 locally, or define `as_undirected <- igraph::as.undirected` before it.
 
 ## Not yet done
@@ -315,11 +315,6 @@ Each item appears once here. The documents no longer carry their own lists.
 - Test direct citation homophily, whether papers (or, at author level, authors) cite others who share their coded gender, topic or method. It is computable from the edge list and the join, with no cluster output.
 - Build per-F2-node citer profiles. For F2 works with `in_degree` above a threshold, characterize the gender, topic and method of their F1 citer set and whether the set is structurally clustered or scattered. This shows whether a source works as a shared touchstone across the field's divisions or as an in-group marker.
 
-### Open decisions
-
-- Choose which unit of analysis beyond the paper to pursue first (author, venue or kind of work). `index.qmd` records the options in its Future work section.
-- Decide how explicitly to frame the seed-paper-testing angle in writeups, given the PI and co-author relationship.
-
 ### Corpus documentation (00)
 
 - Itemize and categorize the exclusion reasons for the remaining works in the seed's reference list. Only two criteria are documented (full books and edited volumes with consolidated bibliographies, and methodological or technical reports outside the study's scope).
@@ -327,7 +322,6 @@ Each item appears once here. The documents no longer carry their own lists.
 ### Pipeline and data
 
 - Commit the finished Girvan-Newman runs (the commands above), then re-render 02 and 03.
-- Write the modularity recomputation from the removal log against the original graph.
 - Consolidate the `gn_analysis` and `cluster_labelling` directories and outputs into one layout after both runs are installed. Labels now travel with their run, in `<run>/labels/`.
 - Add the ignore lines for the run working files to `.gitignore` (see Committing finished runs).
 - Clear out old results. `~/models/gn_results_old_*` and the two untracked `results_backup_*` folders in `analysis/gn_analysis/` are on the server only.
