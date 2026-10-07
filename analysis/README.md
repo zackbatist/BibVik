@@ -1,2782 +1,349 @@
----
-format:
-  html:
-    toc: true
-    toc-depth: 4
-    code-fold: true
-    self-contained: true
-    include-in-header:
-      text: |
-        <style>
-        /* kable() tables default to filling their container's full
-           width regardless of column count — on this page's 1100px
-           body width, a 2-3 column table stretches absurdly wide with
-           padded-out columns. Scoped to size every table to its actual
-           content instead, in one place, rather than passing a width
-           override to each individual kable() call throughout the
-           document. */
-        table { width: auto; }
-        </style>
-execute:
-  warning: false
-  message: false
-  eval: true
----
+# Analysis
 
-# Part 2 — Citation graph: structural descriptions
+The Quarto documents in this directory describe the corpus, the annotation data, the citation graph, and the three combined. Two toolsets run outside the render because they take hours or days or need a GPU. `gn_analysis/` runs Girvan-Newman community detection, and `cluster_labelling/` has a language model name the resulting clusters. Their finished outputs stay in their own results folders, and 02 reads each run from `analysis/gn_analysis/results/<run>/`.
 
-```{r}
-#| label: install
-#| eval: false
-install.packages(c("igraph", "tidyverse", "ggraph", "tidygraph", "jsonlite",
-                   "here", "ggrepel", "scales", "graphlayouts"))
-```
+## Documents
 
-```{r}
-#| label: libraries
-library(igraph)
-library(tidyverse)
-library(ggraph)
-library(tidygraph)
-library(jsonlite)
-library(here)
-library(ggrepel)
-```
+| File | Content | Reads | Writes |
+|---|---|---|---|
+| `index.qmd` | Shell that includes 00 to 03 in order, then a Future work section | the four documents | none |
+| `00_overview.qmd` | Part 0, corpus overview | `data/bibliography.json`, `data/annotations.csv`, `data/citation_edgelist.csv`, `data/citation_edgelist_annotated.csv`, `CitationAnalysis/corrections.yaml` | none |
+| `01_annotation.qmd` | Part 1, annotation descriptives | `data/annotations.csv`, `data/region_lookup.csv` | `analysis/bibvik_annotation_df.csv` (untracked); `data/region_lookup.csv` and `data/region_lookup_needs_review.csv`, only when the disabled Wikidata chunks are switched on |
+| `02_network_structure.qmd` | Part 2, structure of the citation graph | `data/bibliography.json`, `data/citation_edgelist_annotated.csv`, `analysis/gn_analysis/edgelist_annotated_no_seed.csv`, `analysis/gn_analysis/results/<run>/` | `analysis/bibvik_node_table.csv` (untracked); layout images, only from disabled chunks |
+| `03_joined_descriptions.qmd` | Part 3, structure joined to annotation | `analysis/bibvik_annotation_df.csv`, `analysis/bibvik_node_table.csv` | none |
+| `open-scholarly-metadata.qmd` | Scratch notes on retrieving references from OpenCitations and Crossref | n/a | n/a |
 
-```{r}
-#| label: graph-definitions
-#| echo: false
-# Two versions of the annotated graph, handled identically throughout.
-#   annotated      the citations made by the annotated papers, plus the seed
-#                  paper's own references. lund2021 is not annotated; it is the
-#                  origin of the corpus and a source in this edge list.
-#   seed_filtered  the same list with the seed's rows dropped.
-# Every table and plot below is computed on both and shown in two tabs.
-graph_keys   <- c("annotated", "seed_filtered")
-graph_labels <- c(annotated = "Annotated", seed_filtered = "Annotated, seed filtered")
-graph_edgelists <- c(
-  annotated     = here("data", "citation_edgelist_annotated.csv"),
-  seed_filtered = here("analysis", "gn_analysis", "edgelist_annotated_no_seed.csv")
-)
+`index.qmd` renders 00 to 03 in that order. 03 reads files that 01 and 02 write, so a single document rendered on its own needs 01 and 02 rendered first. `open-scholarly-metadata.qmd` is not part of the render.
 
-# Girvan-Newman and cluster-labelling outputs are produced outside this
-# render (see analysis/README.md). Each run is one folder with identical
-# contents:
-#   communities.csv, modularity_trace.csv, removal_log.csv, final_edgelist.csv
-#   multi_cut/    communities_round_<N>.csv and multi_cut_summary.csv
-#   dendrogram/   gn_dendrogram.png
-#   subclusters/  subcluster_summary.csv
-#   labels/       representatives.csv, cluster_labels.csv, node_labels.csv
-#
-# gn_root is the one place this document looks for them: the pipelines'
-# own results folder. If finished runs are later copied into data/, the
-# way the exported bibliography and edge lists are, change gn_root to
-# here("data", "gn") and nothing else.
-gn_runs <- c(annotated = "annotated", seed_filtered = "annotated_no_seed")
-gn_root <- here("analysis", "gn_analysis", "results")
-gn_path <- function(key, ...) file.path(gn_root, gn_runs[[key]], ...)
+## Where outputs live
 
-# How many of the largest communities the plots and tables single out.
-# Set here because inline text refers to it and has to render even when
-# no run has been installed yet.
-gn_top_n <- 20
-```
+Documents read committed files, so a render never needs a pipeline run. The exported bibliography and edge lists reach `data/` by a copy step, in the commits titled "Sync exported data files". Girvan-Newman runs are committed where they are written, the way the earlier single run was.
 
-```{r}
-#| label: load-graphs
-#| echo: false
-#| results: hide
-edges_list <- map(graph_edgelists, read_csv, show_col_types = FALSE)
-graphs <- map(edges_list, ~ graph_from_data_frame(.x, directed = TRUE))
+| Output | Produced by | Working location | Read from |
+|---|---|---|---|
+| Bibliography, edge lists, graph exports | the BibVik pipeline in `CitationAnalysis/` | `BibVik_output/` on the server | `data/` |
+| Region lookup | the disabled Wikidata chunks in 01 | written straight into `data/` | `data/region_lookup.csv` |
+| Girvan-Newman runs and their labels | `gn_analysis/` and `cluster_labelling/` | `analysis/gn_analysis/results/<run>/`, labels in `<run>/labels/` | the same folder |
 
-bib <- fromJSON(here("data", "bibliography.json"), simplifyDataFrame = FALSE)
+## Girvan-Newman and cluster labelling
 
-# Active entries only (tombstoned entries are excluded from the export,
-# but guard here in case of an older bibliography file). Note: entries
-# tombstoned via `delete` (not `merge`) that appear as a citer elsewhere
-# are retained in the edge list so their outbound edges aren't lost — see
-# exporter.py and docs/methods/corrections-system.md. Ghost nodes have no
-# reliable bibliographic metadata; they are kept in the graph (their edges
-# are real) but excluded from any display table or join that assumes real
-# title/author/topic data.
-bib <- bib[!sapply(bib, function(e) isTRUE(e[["_deleted"]]))]
+Two runs are made from the repaired annotated graph, one with the seed paper and one without it. The R and shell scripts live in `analysis/gn_analysis/`, and the Python scripts in `analysis/cluster_labelling/`. `launch_bibvik_llm.sh` is not in the repository, because `.gitignore` excludes it. It exists only on the machine where it was made, and the chain finds it by searching under `~/models/`.
 
-node_attrs <- tibble(
-  name            = names(bib),
-  title           = map_chr(bib, ~ .x$title %||% ""),
-  # year prefers the already-clean year field; date (a full string like
-  # "2021-05-15") is only used as a fallback, and then only its leading
-  # year digits, so a table column named "year" never shows a full date.
-  year            = map_chr(bib, ~ coalesce(
-    if (!is.null(.x$year) && nzchar(.x$year)) .x$year,
-    str_extract(.x$date %||% "", "^\\d{4}"),
-    ""
-  )),
-  generation      = map_chr(bib, ~ .x$generation %||% ""),
-  entry_type      = map_chr(bib, ~ .x$entry_type %||% ""),
-  resolution      = map_chr(bib, ~ .x[["_resolution_method"]] %||% "grobid"),
-  completeness    = map_chr(bib, ~ .x$completeness$label %||% ""),
-  # author is a list of {family, given} objects per entry (or NULL/empty
-  # for entries GROBID/the LLM couldn't resolve an author for); flattened
-  # here to a single "Family, Family" display string, since this is only
-  # used for display (tooltips, tables) and never joined or filtered on.
-  author          = map_chr(bib, function(e) {
-    au <- e$author
-    if (is.null(au) || length(au) == 0) return("")
-    paste(map_chr(au, ~ .x$family %||% ""), collapse = ", ")
-  }),
-)
-
-n_annotated_papers <- n_distinct(edges_list$seed_filtered$source)
-```
-
-```{r}
-#| label: graph-metrics
-#| echo: false
-#| results: hide
-# Every per-node measure for one graph, computed once. Betweenness is the
-# slowest calculation in this document, so the raw value is computed once
-# and the normalized value derived from it: for a directed graph igraph
-# normalizes by (n - 1)(n - 2), so the two are the same up to that factor.
-# Louvain, Leiden and K-means are computed here with no visible output;
-# their agreement across the two graphs appears in the comparison section.
-graph_metrics <- function(g) {
-  set.seed(42)
-  und <- as_undirected(g, mode = "collapse")
-  n <- vcount(g)
-  btw_raw <- betweenness(g, directed = TRUE, normalized = FALSE)
-  weak <- components(g, mode = "weak")
-  strong <- components(g, mode = "strong")
-
-  m <- tibble(
-    name              = V(g)$name,
-    betweenness       = btw_raw / ((n - 1) * (n - 2)),
-    betweenness_raw   = btw_raw,
-    closeness         = closeness(g, mode = "in", normalized = TRUE),
-    pagerank          = page_rank(g, directed = TRUE)$vector,
-    hub               = hub_score(g)$vector,
-    authority         = authority_score(g)$vector,
-    in_degree         = degree(g, mode = "in"),
-    out_degree        = degree(g, mode = "out"),
-    degree            = degree(g, mode = "all")
-  ) |>
-    left_join(node_attrs, by = "name") |>
-    # Ghost = a node present in the edge list (it cites or is cited by
-    # something) but absent from the active bibliography — i.e. no real
-    # metadata to join. Derived from edge-list membership rather than a
-    # GraphML attribute, since we're not loading GraphML at all (libxml2
-    # isn't installable here without sudo — see gn_analysis/README.md for
-    # the same constraint on the GN side).
-    mutate(is_ghost = if_else(name %in% node_attrs$name, "false", "true")) |>
-    mutate(
-      coreness          = coreness(und),
-      component_weak    = weak$membership,
-      component_strong  = strong$membership,
-      community_louvain = as.integer(membership(cluster_louvain(und))),
-      community_leiden  = as.integer(membership(cluster_leiden(und, objective_function = "modularity")))
-    )
-
-  features <- m |>
-    select(betweenness, closeness, pagerank, hub, authority, in_degree) |>
-    mutate(across(everything(), ~ replace_na(., 0))) |>
-    mutate(across(everything(), ~ scale(.)[, 1]))
-  set.seed(42)
-  m$cluster_kmeans <- kmeans(features, centers = 6, nstart = 25)$cluster
-  m
-}
-
-metrics <- map(graphs, graph_metrics)
-```
-
-```{r}
-#| label: gn-load
-#| echo: false
-#| results: hide
-# One list per graph holding that graph's Girvan-Newman run, or just
-# available = FALSE when the run has not been installed. The working
-# partition is the earliest fragmentation-onset cut, selected by sorting
-# rather than a hardcoded round number, in case a future re-run shifts
-# which rounds qualify.
-gn_load <- function(key) {
-  dir <- gn_path(key, "multi_cut")
-  files <- if (dir.exists(dir)) {
-    list.files(dir, pattern = "^communities_round_[0-9]+\\.csv$", full.names = TRUE)
-  } else character(0)
-  summary_path <- file.path(dir, "multi_cut_summary.csv")
-  out <- list(key = key, available = length(files) > 0 && file.exists(summary_path))
-  if (!out$available) return(out)
-
-  rounds <- as.integer(gsub(".*communities_round_([0-9]+)\\.csv$", "\\1", files))
-  out$cut_file <- files[which.min(rounds)]
-  out$summary <- read_csv(summary_path, show_col_types = FALSE) |>
-    mutate(pct_singleton = n_singletons / n_communities) |>
-    arrange(round)
-  out$earliest <- slice(out$summary, 1)
-  out$partition <- read_csv(out$cut_file, show_col_types = FALSE) |>
-    mutate(community_gn = as.character(community_id)) |>
-    select(node_id, community_gn)
-
-  trace_path <- gn_path(key, "modularity_trace.csv")
-  out$trace <- if (file.exists(trace_path)) read_csv(trace_path, show_col_types = FALSE) else NULL
-
-  # Share of nodes in a singleton community at the best-modularity cut
-  # (communities.csv), quoted in the prose in place of a typed-in figure.
-  best_path <- gn_path(key, "communities.csv")
-  out$best_singleton_share <- if (file.exists(best_path)) {
-    read_csv(best_path, show_col_types = FALSE) |>
-      add_count(community_id) |>
-      summarise(share = mean(n == 1)) |>
-      pull(share)
-  } else NA_real_
-  out
-}
-gn <- map(set_names(graph_keys), gn_load)
-
-gn_round_text <- function(key) {
-  if (gn[[key]]$available) format(gn[[key]]$earliest$round, big.mark = ",") else "n/a"
-}
-gn_pct_phrase <- function(key) {
-  s <- gn[[key]]$best_singleton_share
-  if (is.null(s) || is.na(s)) "nearly all nodes" else paste0(scales::percent(s, accuracy = 0.1), " of nodes")
-}
-gn_label_lookup <- function(key) {
-  path <- gn_path(key, "labels", "cluster_labels.csv")
-  if (file.exists(path)) {
-    read_csv(path, show_col_types = FALSE) |>
-      mutate(community_id = as.character(community_id)) |>
-      select(community_id, label)
-  } else {
-    tibble(community_id = character(), label = character())
-  }
-}
-gn_label_or_id <- function(ids, lookup) {
-  coalesce(lookup$label[match(ids, lookup$community_id)], paste("Community", ids))
-}
-```
-
-```{r}
-#| label: structural-functions
-#| echo: false
-# Everything below that is computed per graph goes through one of these,
-# called once per tab, so the two tabs of a section cannot drift apart.
-graph_summary <- function(g) {
-  w <- components(g, mode = "weak")
-  s <- components(g, mode = "strong")
-  list(nodes = vcount(g), edges = ecount(g), density = edge_density(g),
-       wcc = w$no, wcc_largest = max(w$csize),
-       wcc_pct = round(100 * max(w$csize) / vcount(g), 1),
-       scc = s$no, scc_largest = max(s$csize))
-}
-summ <- map(graphs, graph_summary)
-
-top_table <- function(key, col, n = 20) {
-  metrics[[key]] |>
-    filter(is_ghost == "false") |>
-    arrange(desc(.data[[col]])) |>
-    head(n) |>
-    select(name, title, year, generation, all_of(col)) |>
-    knitr::kable()
-}
-
-plot_in_degree <- function(key) {
-  ggplot(metrics[[key]], aes(x = in_degree)) +
-    geom_histogram(aes(x = log10(in_degree)), bins = 20, fill = "steelblue") +
-    scale_y_log10() +
-    scale_x_continuous(
-      labels = function(x) round(10^x),
-      name = "In-degree (times cited)"
-    ) +
-    labs(
-      title = paste0("In-degree distribution (log-log), ", graph_labels[[key]]),
-      y = "Count"
-    ) +
-    theme_minimal()
-}
-
-tail_table <- function(key, threshold = 30) {
-  metrics[[key]] |>
-    filter(in_degree > threshold) |>
-    select(name, title, year, in_degree) |>
-    arrange(desc(in_degree)) |>
-    knitr::kable()
-}
-
-# Neighbours' Girvan-Newman clusters for each of the top-betweenness works:
-# what a work is bridging, not just where it sits. Ranked by how many of
-# the work's neighbours fall in each cluster, and capped at the top 3, since
-# a highly connected broker can touch a dozen clusters, most through a
-# single incidental neighbour. Reads the same earliest-cut partition and
-# labels as the Girvan-Newman section, so it does not depend on the
-# labelling pipeline having been run.
-bridges_table <- function(key, n = 20) {
-  m <- metrics[[key]]
-  g <- graphs[[key]]
-  top <- m |> filter(is_ghost == "false") |> arrange(desc(betweenness)) |> head(n)
-  bridges <- tibble(name = character(), bridges = character())
-
-  if (gn[[key]]$available) {
-    lookup <- gn_label_lookup(key)
-    part <- gn[[key]]$partition |> mutate(label = gn_label_or_id(community_gn, lookup))
-    bridges <- map_dfr(top$name, function(nm) {
-      neighbor_ids <- unique(c(
-        names(igraph::neighbors(g, nm, mode = "in")),
-        names(igraph::neighbors(g, nm, mode = "out"))
-      ))
-      counts <- part |> filter(node_id %in% neighbor_ids) |> count(label, sort = TRUE)
-      top_labels <- counts |> slice_head(n = 3) |> mutate(display = paste0(label, " (", n, ")"))
-      n_more <- nrow(counts) - nrow(top_labels)
-      text <- if (nrow(top_labels) == 0) {
-        ""
-      } else {
-        paste0(paste(top_labels$display, collapse = "; "),
-               if (n_more > 0) paste0("; +", n_more, " more") else "")
-      }
-      tibble(name = nm, bridges = text)
-    })
-  }
-
-  top |>
-    select(name, title, year, betweenness, betweenness_raw) |>
-    left_join(bridges, by = "name") |>
-    knitr::kable(digits = 4)
-}
-
-# year is free-text, sourced from bibliography metadata (dates, ranges, and
-# circa notation all appear there). This pulls the first 4-digit run found,
-# a pragmatic extraction, not a full date parser. Works with no recognizable
-# 4-digit year are dropped rather than guessed at.
-btw_year_data <- function(key) {
-  metrics[[key]] |>
-    filter(is_ghost == "false") |>
-    mutate(year_numeric = suppressWarnings(as.integer(str_extract(year, "\\d{4}"))))
-}
-
-# Zero betweenness is the normal state for most works in a sparse citation
-# graph (only a work on a shortest path between some other pair has nonzero
-# betweenness at all), so the first plot keeps only the nonzero subset,
-# where there is an actual distribution to look at. The second plot shows
-# every work.
-plot_btw_year_nonzero <- function(key) {
-  d <- btw_year_data(key)
-  n_total <- nrow(d)
-  n_no_year <- sum(is.na(d$year_numeric))
-  n_zero <- sum(!is.na(d$year_numeric) & d$betweenness_raw == 0)
-  d <- d |> filter(!is.na(year_numeric), betweenness_raw > 0)
-
-  ggplot(d, aes(x = year_numeric, y = betweenness_raw)) +
-    geom_point(alpha = 0.4, colour = "steelblue") +
-    geom_smooth(method = "loess", colour = "firebrick", se = TRUE) +
-    scale_y_log10() +
-    labs(
-      title = paste0("Betweenness (raw) by publication year, nonzero works only, ", graph_labels[[key]]),
-      subtitle = paste0(
-        nrow(d), " of ", format(n_total, big.mark = ","),
-        " works are shown here: works with zero betweenness (",
-        format(n_zero, big.mark = ","), " of them, the normal state ",
-        "for most works in a sparse citation graph, not excluded data) and ",
-        "works with no parseable year (", n_no_year, ") are left out."
-      ),
-      x = "Publication year", y = "Betweenness (raw, log scale)"
-    ) +
-    theme_minimal()
-}
-
-# betweenness_raw + 1 is plotted because a true log scale can't display a
-# zero: every zero maps to 1, a real position at the bottom of the axis, and
-# every nonzero value keeps its relative position. Jittered in x only, since
-# thousands of exact zeros would otherwise stack into one solid line.
-plot_btw_year_full <- function(key) {
-  ggplot(btw_year_data(key) |> filter(!is.na(year_numeric)),
-         aes(x = year_numeric, y = betweenness_raw + 1)) +
-    geom_jitter(width = 0.3, height = 0, alpha = 0.15, colour = "steelblue") +
-    scale_y_log10() +
-    labs(
-      title = paste0("Betweenness (raw + 1) by publication year, every work, ", graph_labels[[key]]),
-      x = "Publication year", y = "Betweenness (raw + 1, log scale)"
-    ) +
-    theme_minimal()
-}
-
-kcore_summary_table <- function(key) {
-  metrics[[key]] |>
-    group_by(coreness) |>
-    summarise(n = n(), mean_in_degree = mean(in_degree)) |>
-    arrange(desc(coreness)) |>
-    head(15) |>
-    knitr::kable(digits = 2)
-}
-kcore_top_table <- function(key) {
-  metrics[[key]] |>
-    filter(is_ghost == "false") |>
-    arrange(desc(coreness), desc(in_degree)) |>
-    head(20) |>
-    select(name, title, year, coreness, in_degree) |>
-    knitr::kable()
-}
-
-# Figures quoted in the prose, computed from the data so they follow a
-# re-render instead of being typed in.
-deg_stats <- map(metrics, function(m) {
-  cited <- m$in_degree[m$in_degree >= 1]
-  list(share_le8 = scales::percent(mean(cited <= 8), accuracy = 1),
-       max_in = max(m$in_degree, na.rm = TRUE))
-})
-btw_stats <- map(graphs |> names() |> set_names(), function(key) {
-  d <- btw_year_data(key) |> filter(!is.na(year_numeric), betweenness_raw > 0)
-  list(n_nonzero = nrow(d), n_pre2000 = sum(d$year_numeric < 2000),
-       pct_pre2000 = scales::percent(mean(d$year_numeric < 2000), accuracy = 1))
-})
-kcore_stats <- map(metrics, function(m) {
-  real <- m |> filter(is_ghost == "false")
-  kmax <- max(real$coreness)
-  top_core <- real |> filter(coreness == kmax) |> pull(name)
-  list(kmax = kmax, n_core = length(top_core),
-       n_in = length(intersect(top_core, real |> arrange(desc(in_degree)) |> head(5) |> pull(name))),
-       n_btw = length(intersect(top_core, real |> arrange(desc(betweenness)) |> head(5) |> pull(name))))
-})
-```
-
-## The two graphs
-
-This part describes the citation graph and its communities twice. Both versions come from the annotated filter, which keeps the citations made by the `r n_annotated_papers` annotated papers. **Annotated** also keeps the seed paper's own references. The seed, `lund2021`, is not annotated. It is the origin of the corpus and counts as one more citing paper in the edge list. **Annotated, seed filtered** drops the seed's rows. Each table and plot below is computed on both graphs and shown in two tabs, Annotated first. "What the seed filter changes" compares the two directly.
-
-| Metric | Annotated | Annotated, seed filtered |
+| | With seed | No seed |
 |---|---|---|
-| Nodes | `r format(summ$annotated$nodes, big.mark = ",")` | `r format(summ$seed_filtered$nodes, big.mark = ",")` |
-| Edges | `r format(summ$annotated$edges, big.mark = ",")` | `r format(summ$seed_filtered$edges, big.mark = ",")` |
-| Directed | Yes | Yes |
-| Density[^density] | `r format(summ$annotated$density, scientific = FALSE)` | `r format(summ$seed_filtered$density, scientific = FALSE)` |
-| Weakly connected components[^wcc] | `r format(summ$annotated$wcc, big.mark = ",")` | `r format(summ$seed_filtered$wcc, big.mark = ",")` |
-| Largest weak component | `r format(summ$annotated$wcc_largest, big.mark = ",")` nodes (`r summ$annotated$wcc_pct`% of graph) | `r format(summ$seed_filtered$wcc_largest, big.mark = ",")` nodes (`r summ$seed_filtered$wcc_pct`% of graph) |
-| Strongly connected components[^scc] | `r format(summ$annotated$scc, big.mark = ",")` | `r format(summ$seed_filtered$scc, big.mark = ",")` |
-| Largest strong component | `r format(summ$annotated$scc_largest, big.mark = ",")` nodes | `r format(summ$seed_filtered$scc_largest, big.mark = ",")` nodes |
+| Edge list | `data/citation_edgelist_annotated.csv` | `analysis/gn_analysis/edgelist_annotated_no_seed.csv` |
+| Directed edges | 21,457 | 20,884 |
+| Undirected edges GN sees | 21,456 | 20,883 |
+| Nodes | 12,616 | 12,517 |
+| Components at the start | 1 | 4 (12,430, 48, 27 and 12 nodes) |
+| Run folder | `results/annotated` | `results/annotated_no_seed` |
 
-[^density]: The proportion of possible edges that actually exist: edges
-  present divided by every pair of nodes that *could* be connected. Low
-  density is normal and expected for a citation network — most works
-  don't cite most other works.
+The no-seed list drops the seed paper (`lund2021`) and its 573 outgoing edges. That also removes 98 works that only the seed cites (86 F1, 12 F2), which makes 99 fewer nodes. Both lists have a `source,target` header and Windows line endings. GN collapses the directed edges to undirected before the first round. Representative selection reads the full edge list, `data/citation_edgelist.csv`, as `cluster_labelling/cluster_labelling_README.md` specifies.
 
-[^wcc]: A weakly connected component treats every edge as undirected: two
-  nodes are in the same component if a path connects them in either
-  citation direction. This is the more forgiving of the two measures
-  here.
+### Layout while running
 
-[^scc]: A strongly connected component requires an actual directed path
-  in *both* directions between two nodes. Rare in citation networks,
-  since citations are historically directed — a 2010 paper cannot cite
-  a 2020 paper — so most strongly connected components are single
-  isolated nodes.
-
-## Degree and centrality
-
-In-degree (times cited within the corpus) and out-degree (number of works
-cited) capture different roles. High in-degree identifies widely-cited works
-— the intellectual anchors of the field. High out-degree identifies works
-that are heavily engaged with the literature, drawing on many sources.
-
-Betweenness centrality identifies works that sit on many shortest paths
-between other works — brokers between sub-literatures. Betweenness is
-expensive to compute on large graphs; both normalized and raw values are
-reported. Normalized divides by the theoretical maximum for a graph this
-size (roughly (n-1)(n-2) for a directed graph), so on a graph with over
-`r format(vcount(graphs$annotated), big.mark = ",")` nodes even a genuinely
-high-betweenness work normalizes to a very small fraction — small in
-absolute terms, not because the work is unimportant. Raw values, not
-rescaled, are more intuitively legible for comparing works directly
-against each other.
-
-PageRank assigns authority based on incoming links weighted by the
-authority of the linking node — conceptually similar to being cited by
-works that are themselves widely cited. Hub and authority scores (HITS)
-are complementary: hubs point to many authorities; authorities are pointed
-to by many hubs.
-
-Peripheral works — low degree, low centrality by every measure below — are
-not treated as noise in this project. A work cited only once may be exactly
-the interesting case (a niche, contested, or newly emerging reference) for
-a study of citational politics. No node is excluded from any measure in
-this section on the basis of low degree.
-
-### Most cited (by in-degree)
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: most-cited-annotated
-top_table("annotated", "in_degree")
+```text
+analysis/gn_analysis/results/
+├── annotated/                 with-seed run
+├── annotated_no_seed/         no-seed run
+└── post_all.log               log of the chain
 ```
 
-#### Annotated, seed filtered
+Each run folder fills in as the pipeline advances.
 
-```{r}
-#| label: most-cited-seed-filtered
-top_table("seed_filtered", "in_degree")
+```text
+results/annotated/
+├── removal_log.csv            one row per removed edge (round, from, to)
+├── modularity_trace.csv       round, edges_removed, n_components, modularity
+├── communities.csv            node_id, community_id at the best-scoring round
+├── final_edgelist.csv         the edge list the run used
+├── state.rds                  checkpoint that lets the run resume
+├── run.log, session_stdout.log
+├── multi_cut/                 communities_round_<N>.csv and multi_cut_summary.csv
+├── dendrogram/                gn_dendrogram.png, built by 02 when it renders
+├── subclusters/               subcluster_splits.csv and subcluster_pieces.csv, built by 02 when it renders
+└── labels/                    representatives.csv, cluster_labels.csv, node_labels.csv
 ```
 
-:::
-
-### Most citing (by out-degree)
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: most-citing-annotated
-top_table("annotated", "out_degree")
-```
-
-#### Annotated, seed filtered
-
-```{r}
-#| label: most-citing-seed-filtered
-top_table("seed_filtered", "out_degree")
-```
-
-:::
-
-### Degree distribution
-
-A power-law or scale-free degree distribution is characteristic of citation
-networks: most works are cited rarely, a small number are cited frequently,
-visible as a roughly straight-line decline on a log-log plot. The plot below
-tests whether this corpus follows that pattern.
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: degree-dist-annotated
-#| fig-width: 8
-#| fig-height: 5
-plot_in_degree("annotated")
-```
-
-#### Annotated, seed filtered
-
-```{r}
-#| label: degree-dist-seed-filtered
-#| fig-width: 8
-#| fig-height: 5
-plot_in_degree("seed_filtered")
-```
-
-:::
-
-The bulk of the distribution follows a fairly straight decline on this log-log scale, consistent with the expected power-law pattern: most works are cited once or twice, a much smaller number several times. In Annotated, `r deg_stats$annotated$share_le8` of works with at least one citation are cited eight times or fewer, and `r deg_stats$seed_filtered$share_le8` in Annotated, seed filtered. The tail is real, not an artifact of a truncated plot axis: the maximum in-degree is `r deg_stats$annotated$max_in` in Annotated and `r deg_stats$seed_filtered$max_in` in Annotated, seed filtered. A handful of works drive that high-citation tail, listed below rather than relied on to show clearly as bars on the histogram above, since bars this sparse are easy to miss regardless of binning.
-
-### Most-cited works (the high end of the tail)
-
-The most-cited works in each graph, driving the sparse, high-in-degree tail visible in the plots above:
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: degree-dist-tail-annotated
-tail_table("annotated")
-```
-
-#### Annotated, seed filtered
-
-```{r}
-#| label: degree-dist-tail-seed-filtered
-tail_table("seed_filtered")
-```
-
-:::
-
-### Top by betweenness centrality
-
-Works with high betweenness mediate between otherwise disconnected parts
-of the citation network — likely works that bridge sub-fields or periods.
-"Bridges" below lists the top 3 Girvan-Newman clusters (by count) found
-among each work's direct citations and citers, with the number of
-neighbors in each — a broker connecting mostly to one cluster and only
-incidentally to others will show that concentration, rather than an
-undifferentiated list of every cluster it happens to touch (see
-"Girvan-Newman" and "Cluster labels" further down for how
-those labels are produced; a self-contained lookup here, independent of
-that later section, so this table isn't affected by whether cluster
-labelling has been run).
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: betweenness-bridges-annotated
-bridges_table("annotated")
-```
-
-#### Annotated, seed filtered
-
-```{r}
-#| label: betweenness-bridges-seed-filtered
-bridges_table("seed_filtered")
-```
-
-:::
-
-### Betweenness and publication year
-
-A negative relationship between publication year and betweenness is
-expected as a baseline structural effect, independent of any specific
-work's importance: an older work has had more time to accumulate
-citations from both earlier and later literature, giving it more
-opportunities to sit on shortest paths between clusters that didn't yet
-exist when it was published. The interesting question is not whether
-that baseline trend exists, but what departs from it: works that are old
-without being especially well-connected, and, more notably, works that
-are young but already bridging despite limited time to accumulate
-citations — those are candidates for genuinely novel synthesis, not just
-structurally advantaged age.
-
-The trend line[^loess] in the first plot of each tab is fit to the nonzero subset, where the actual bridging signal is. In Annotated, `r btw_stats$annotated$n_pre2000` of the `r btw_stats$annotated$n_nonzero` works with nonzero betweenness (`r btw_stats$annotated$pct_pre2000`) were published before 2000. In Annotated, seed filtered, the figures are `r btw_stats$seed_filtered$n_pre2000` of `r btw_stats$seed_filtered$n_nonzero` (`r btw_stats$seed_filtered$pct_pre2000`). The second plot in each tab shows every work, including the zero-betweenness majority, so the shape of any boundary between old and recent works is visible directly.
-
-::: {.panel-tabset}
-
-#### Annotated
-
-```{r}
-#| label: betweenness-year-annotated
-#| fig-width: 8
-#| fig-height: 5
-plot_btw_year_nonzero("annotated")
-```
-
-```{r}
-#| label: betweenness-year-full-annotated
-#| fig-width: 8
-#| fig-height: 5
-plot_btw_year_full("annotated")
-```
-
-#### Annotated, seed filtered
-
-```{r}
-#| label: betweenness-year-seed-filtered
-#| fig-width: 8
-#| fig-height: 5
-plot_btw_year_nonzero("seed_filtered")
-```
-
-```{r}
-#| label: betweenness-year-full-seed-filtered
-#| fig-width: 8
-#| fig-height: 5
-plot_btw_year_full("seed_filtered")
-```
-
-:::
-
-Whether the boundary reflects something about the corpus itself (older
-material may be primary sources, sagas, or editions with different
-citation patterns than modern academic synthesis) or a genuine
-historiographical shift (post-2000 archaeology being where cross-cutting
-synthesis actually happens) can't be settled from either plot alone.
-
-[^loess]: A LOESS fit, not a strict linear one, to allow for a
-  non-constant relationship across the full year range rather than
-  forcing a single slope.
-
-## K-core decomposition
-
-The k-core of a graph is the maximal subgraph in which every node has at
-least k connections to other nodes within that subgraph. It is computed by
-iteratively removing nodes with degree below k until no further removal
-is possible. A node's **coreness** is the highest k for which it still
-belongs to the k-core: a coreness of 1 means the node only survives the
-weakest possible core (removed as soon as k reaches 2), while a high
-coreness means the node stays embedded even as the graph is stripped down
-to only its most densely-interconnected parts.
-
-K-core decomposition is reported here purely as a **descriptive**
-measure, showing which works sit in dense mutual-citation relationships
-versus which sit at the periphery, following @alvarezhamelin2005. Every
-work, regardless of its coreness, is still included in full in every
-other analysis in this document: coreness only describes a work's
-position, it doesn't filter anything out.
-
-Coreness and in-degree measure genuinely different things, worth
-comparing directly: in-degree simply counts how many times a work is
-cited, with no regard for whether those citing works are themselves
-well-connected. Coreness asks a structurally deeper question, whether a
-work sits inside a neighborhood that is *itself* densely interconnected,
-not just cited often in isolation. A work could have high in-degree
-while sitting at low coreness, if most of its citations come from
-otherwise peripheral, poorly-connected works; conversely, a work with
-only moderate in-degree can have high coreness if it's embedded in a
-tightly interlinked core. The tables below show whether these two
-measures broadly agree on this corpus, or diverge in informative ways.
-
-::: {.panel-tabset}
-
-### Annotated
-
-```{r}
-#| label: kcore-table-annotated
-#| echo: false
-kcore_summary_table("annotated")
-```
-
-```{r}
-#| label: kcore-top-annotated
-kcore_top_table("annotated")
-```
-
-### Annotated, seed filtered
-
-```{r}
-#| label: kcore-table-seed-filtered
-#| echo: false
-kcore_summary_table("seed_filtered")
-```
-
-```{r}
-#| label: kcore-top-seed-filtered
-kcore_top_table("seed_filtered")
-```
-
-:::
-
-At the highest coreness (k = `r kcore_stats$annotated$kmax`), Annotated holds `r kcore_stats$annotated$n_core` works. `r kcore_stats$annotated$n_in` of them are also among the five most cited and `r kcore_stats$annotated$n_btw` among the five highest-betweenness works. In Annotated, seed filtered, the highest coreness is k = `r kcore_stats$seed_filtered$kmax` with `r kcore_stats$seed_filtered$n_core` works, of which `r kcore_stats$seed_filtered$n_in` are among the five most cited and `r kcore_stats$seed_filtered$n_btw` among the five highest-betweenness works. Where in-degree, betweenness and k-core point to the same few works, that is a stronger, cross-validated signal than any one measure alone: those works are central by several different, genuinely distinct criteria at once.
-
-
-```{r}
-#| label: gn-functions
-#| echo: false
-# Everything per-run in the Girvan-Newman sections goes through these, called
-# once per tab.
-
-# Rebuilds the Girvan-Newman dendrogram image from a run's removal log. The log
-# is replayed forward, recording every round where removing an edge splits a
-# component. Read backwards, those splits are merges, which gives an hclust tree
-# over whole pieces. max_round is the earliest cut round, so the tree ends where
-# the labelled partition begins. Height is merge order, since the real rounds are
-# spaced too unevenly for a linear axis.
-build_gn_dendrogram <- function(edgelist_file, removal_log_file, output_png,
-                                max_round, top_n_splits = 300L) {
-  edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
-  g <- igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE)
-  if (igraph::is_directed(g)) g <- as_undirected(g, mode = "collapse")
-
-  removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
-  removal_log <- removal_log[order(removal_log$round), ]
-  removal_log <- removal_log[removal_log$round <= max_round, ]
-
-  # Replay the removals, recording each split with the node names of its pieces.
-  # Components are tracked by an integer label per node.
-  node_names <- igraph::V(g)$name
-  comp_id <- rep(1L, length(node_names))
-  names(comp_id) <- node_names
-  next_comp_id <- 2L
-  g_live <- g
-  splits <- list()
-
-  for (i in seq_len(nrow(removal_log))) {
-    r <- removal_log$round[i]
-    from <- removal_log$from[i]
-    to <- removal_log$to[i]
-
-    eid <- get_edge_ids(g_live, c(from, to))
-    if (eid == 0) next
-    g_live <- igraph::delete_edges(g_live, eid)
-
-    # Only the component holding the removed edge can split.
-    parent_comp <- comp_id[[from]]
-    members <- names(comp_id)[comp_id == parent_comp]
-    sub_g <- igraph::induced_subgraph(g_live, vids = members)
-    sub_comp <- igraph::components(sub_g)
-
-    if (sub_comp$no > 1) {
-      pieces <- split(igraph::V(sub_g)$name, sub_comp$membership)
-      for (k in seq_along(pieces)) {
-        new_id <- if (k == 1) parent_comp else {
-          id <- next_comp_id
-          next_comp_id <- next_comp_id + 1L
-          id
-        }
-        comp_id[pieces[[k]]] <- new_id
-      }
-      splits[[length(splits) + 1]] <- list(round = r, pieces = pieces)
-    }
-  }
-  if (length(splits) == 0) {
-    stop("No split events found. Check that the removal log matches the edge list.")
-  }
-
-  # Build the merge tree from the earliest top_n_splits splits (the coarsest
-  # structure), walking them in decreasing round order. Read that way, each
-  # split merges its pieces back into the piece that existed just before it,
-  # which is what hclust's merge matrix needs. Each piece's hclust reference
-  # (negative for a leaf, positive for the row that produced it) is recorded
-  # when the piece is created.
-  splits_to_use <- if (top_n_splits > 0 && top_n_splits < length(splits)) {
-    splits[seq_len(top_n_splits)]
-  } else {
-    splits
-  }
-  splits_rev <- rev(splits_to_use)
-
-  next_id <- 1L
-  piece_size <- c()
-  name_to_id <- new.env()
-  is_leaf <- integer(0)
-  hclust_ref <- new.env()
-  leaf_counter <- 0L
-
-  register_leaf <- function(members) {
-    id <- next_id
-    next_id <<- next_id + 1L
-    piece_size[as.character(id)] <<- length(members)
-    is_leaf <<- c(is_leaf, id)
-    for (nm in members) assign(nm, id, envir = name_to_id)
-    leaf_counter <<- leaf_counter + 1L
-    assign(as.character(id), -leaf_counter, envir = hclust_ref)
-    id
-  }
-
-  # Every member is checked for an existing id. Checking only the first member
-  # fails because the large remaining component's first name changes each round.
-  get_id_any_member <- function(piece_members) {
-    for (nm in piece_members) {
-      v <- mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
-      if (!is.na(v)) return(v)
-    }
-    NA_integer_
-  }
-
-  merge_a <- integer(0)
-  merge_b <- integer(0)
-  heights <- numeric(0)
-  round_at_height <- integer(0)
-
-  for (s in splits_rev) {
-    ids_here <- integer(0)
-    for (p in s$pieces) {
-      id <- get_id_any_member(p)
-      if (is.na(id)) {
-        id <- register_leaf(p)
-      } else {
-        # Index members freshly separated off a lineage that is still shrinking.
-        for (nm in p) {
-          v <- mget(nm, envir = name_to_id, ifnotfound = NA, inherits = FALSE)[[1]]
-          if (is.na(v)) assign(nm, id, envir = name_to_id)
-        }
-      }
-      ids_here <- c(ids_here, id)
-    }
-    ids_here <- unique(ids_here)
-    if (length(ids_here) < 2) next
-
-    while (length(ids_here) >= 2) {
-      a <- ids_here[1]
-      b <- ids_here[2]
-      parent_id <- next_id
-      next_id <- next_id + 1L
-      piece_size[as.character(parent_id)] <- piece_size[as.character(a)] + piece_size[as.character(b)]
-
-      merge_a <- c(merge_a, get(as.character(a), envir = hclust_ref))
-      merge_b <- c(merge_b, get(as.character(b), envir = hclust_ref))
-      # Height is merge order. Raw rounds put almost every merge at nearly the
-      # same height, because the splits in any window are a few hundred rounds
-      # apart in a run of tens of thousands.
-      heights <- c(heights, length(merge_a))
-      round_at_height <- c(round_at_height, s$round)
-      assign(as.character(parent_id), length(merge_a), envir = hclust_ref)
-
-      for (nm in ls(name_to_id)) {
-        v <- get(nm, envir = name_to_id)
-        if (v == a || v == b) assign(nm, parent_id, envir = name_to_id)
-      }
-      ids_here <- c(parent_id, ids_here[-c(1, 2)])
-    }
-  }
-  if (length(merge_a) == 0) {
-    stop("Could not build any merges from the selected splits.")
-  }
-
-  leaf_size_by_pos <- vapply(is_leaf, function(id) piece_size[as.character(id)], numeric(1))
-  leaf_pos_order <- vapply(is_leaf, function(id) -get(as.character(id), envir = hclust_ref), integer(1))
-  leaf_labels <- character(length(is_leaf))
-  leaf_labels[leaf_pos_order] <- sprintf("n=%d", leaf_size_by_pos)
-
-  # hc$order must follow the tree's branch structure and must be unnamed,
-  # because plot.hclust() rejects the names that order.dendrogram() inherits.
-  hc <- list(
-    merge = cbind(merge_a, merge_b),
-    height = heights,
-    order = seq_along(leaf_labels),
-    labels = leaf_labels,
-    method = "girvan-newman-divisive"
-  )
-  class(hc) <- "hclust"
-  hc$order <- unname(order.dendrogram(as.dendrogram(hc)))
-
-  grDevices::png(output_png, width = 4000, height = 2000, res = 200)
-  on.exit(grDevices::dev.off(), add = TRUE)
-  par(mar = c(5, 6, 4, 8))
-  plot(hc, labels = FALSE, hang = -1,
-       main = sprintf("Girvan-Newman dendrogram (top %d splits, %d leaves, rounds %d-%d)",
-                      length(splits_to_use), length(is_leaf),
-                      min(round_at_height), max(round_at_height)),
-       xlab = "", sub = "", ylab = "Merge order (evenly spaced steps)")
-  invisible(output_png)
+### Launching everything
+
+One paste starts both runs and the chain. It deletes nothing, so it is safe to paste at any time. Run it at a normal prompt, not inside tmux.
+
+```bash
+cd ~/models/BibVik/analysis/gn_analysis
+pkill -f '[w]hile ! grep -q' 2>/dev/null
+if ! pgrep -f 'file=[r]un_gn_analysis.R --args ../../data/citation_edgelist_annotated.csv' > /dev/null && ! grep -qs "Done\." results/annotated/run.log; then
+  tmux kill-session -t =girvan_newman 2>/dev/null
+  mkdir -p results/annotated
+  tmux new-session -d -s girvan_newman "Rscript run_gn_analysis.R ../../data/citation_edgelist_annotated.csv results/annotated/ > results/annotated/session_stdout.log 2>&1; exec bash"
+fi
+if ! pgrep -f 'file=[r]un_gn_analysis.R --args edgelist_annotated_no_seed.csv' > /dev/null && ! grep -qs "Done\." results/annotated_no_seed/run.log; then
+  tmux kill-session -t =girvan_newman_noseed 2>/dev/null
+  mkdir -p results/annotated_no_seed
+  tmux new-session -d -s girvan_newman_noseed "Rscript run_gn_analysis.R edgelist_annotated_no_seed.csv results/annotated_no_seed/ > results/annotated_no_seed/session_stdout.log 2>&1; exec bash"
+fi
+if [ "$(pgrep -fc '[w]hile ! \{ grep -q')" = 0 ] && ! grep -qs "all steps finished" results/post_all.log; then
+nohup bash -c '
+MODEL=qwen3.5:35b; W=100; R=0.9
+A=results/annotated; B=results/annotated_no_seed
+EA=../../data/citation_edgelist_annotated.csv; EB=edgelist_annotated_no_seed.csv
+say() { echo "[$(date "+%F %T")] $*"; }
+earliest() { ls $1/multi_cut/communities_round_*.csv | sed -E "s/.*_round_([0-9]+)\.csv$/\1/" | sort -n | head -1; }
+post() {
+  D=$1; E=$2
+  rm -rf $D/multi_cut $D/labels
+  Rscript generate_multi_cut_communities.R $E $D/removal_log.csv $D/modularity_trace.csv $D/multi_cut $W $R || { say "$D: cluster detection failed"; return 1; }
+  N=$(earliest $D); say "$D: earliest cut is round $N"
+  (cd ../cluster_labelling && python3 select_representatives.py ../../data/bibliography.json ../../data/citation_edgelist.csv ../gn_analysis/$D/labels --partition-csv ../gn_analysis/$D/multi_cut/communities_round_$N.csv) || { say "$D: representatives failed"; return 1; }
+  say "$D: cuts and representatives done"
 }
-
-gn_subcluster_min <- 10L       # smallest community that is replayed
-gn_substantial_size <- 5L     # a division is substantial when its second piece has this many papers
-
-# Replays the removal log inside every community of gn_subcluster_min or more papers,
-# from the cut onwards, and records each round where removing an edge divides the piece
-# that held it. The starting groups come straight from the cut's communities_round_N.csv,
-# so the replay cannot drift from the partition. One row per community goes to splits_csv.
-# For each community with a substantial division, the two largest pieces of its first
-# one go to pieces_csv, with the paper that has the most citation ties inside the community.
-build_gn_subclusters <- function(edgelist_file, removal_log_file, cut_file, cut_round,
-                                 splits_csv, pieces_csv) {
-  communities <- read.csv(cut_file, stringsAsFactors = FALSE)
-  if (!all(c("node_id", "community_id") %in% names(communities))) {
-    stop("Expected columns 'node_id' and 'community_id' in ", cut_file)
-  }
-  groups <- split(communities$node_id, communities$community_id)
-  groups <- groups[lengths(groups) >= gn_subcluster_min]
-  removal_log <- read.csv(removal_log_file, stringsAsFactors = FALSE)
-  removal_after <- removal_log[removal_log$round > cut_round, ]
-  removal_after <- removal_after[order(removal_after$round), ]
-  edges_df <- read.csv(edgelist_file, stringsAsFactors = FALSE)
-  g <- as_undirected(igraph::graph_from_data_frame(edges_df[, c("source", "target")], directed = TRUE),
-                     mode = "collapse")
-
-  replay <- function(cid) {
-    members <- as.character(groups[[cid]])
-    inside <- removal_after[removal_after$from %in% members & removal_after$to %in% members, ]
-    live <- igraph::induced_subgraph(g, members)
-    ties <- igraph::degree(live)
-    comp_id <- setNames(rep(1L, length(members)), members)
-    next_id <- 2L
-    n_splits <- 0L
-    n_substantial <- 0L
-    largest_second <- 0L
-    first <- NULL
-    for (i in seq_len(nrow(inside))) {
-      eid <- get_edge_ids(live, c(inside$from[i], inside$to[i]))
-      if (eid == 0) next
-      live <- igraph::delete_edges(live, eid)
-      parent <- comp_id[[inside$from[i]]]
-      piece <- igraph::induced_subgraph(live, names(comp_id)[comp_id == parent])
-      parts <- igraph::components(piece)
-      if (parts$no > 1) {
-        pieces <- split(igraph::V(piece)$name, parts$membership)
-        pieces <- pieces[order(-lengths(pieces))]
-        for (k in seq_along(pieces)) {
-          new_id <- if (k == 1) parent else {
-            id <- next_id
-            next_id <- next_id + 1L
-            id
-          }
-          comp_id[pieces[[k]]] <- new_id
-        }
-        n_splits <- n_splits + 1L
-        second <- length(pieces[[2]])
-        largest_second <- max(largest_second, second)
-        if (second >= gn_substantial_size) {
-          n_substantial <- n_substantial + 1L
-          if (is.null(first)) first <- list(round = inside$round[i], pieces = pieces)
-        }
-      }
-    }
-    list(
-      row = data.frame(community_id = cid, size = length(members), n_splits = n_splits,
-                       n_substantial = n_substantial, largest_second_piece = largest_second,
-                       first_substantial_round = if (is.null(first)) NA_integer_ else first$round),
-      pieces = if (is.null(first)) NULL else do.call(rbind, lapply(1:2, function(k) {
-        p <- first$pieces[[k]]
-        data.frame(community_id = cid, piece = k, size = length(p),
-                   top_paper = p[which.max(ties[p])], members = paste(p, collapse = ";"))
-      }))
-    )
-  }
-  results <- lapply(names(groups), replay)
-  write.csv(do.call(rbind, lapply(results, `[[`, "row")), splits_csv, row.names = FALSE)
-  pieces_all <- do.call(rbind, lapply(results, `[[`, "pieces"))
-  if (is.null(pieces_all)) {
-    pieces_all <- data.frame(community_id = character(), piece = integer(), size = integer(),
-                             top_paper = character(), members = character())
-  }
-  write.csv(pieces_all, pieces_csv, row.names = FALSE)
-  invisible(c(splits_csv, pieces_csv))
-}
-
-# The dendrogram and the subcluster summary are rebuilt from the run's removal
-# log when they are missing or older than the file they come from, so a fresh
-# GN run is reflected without a manual step, but re-rendering right after an
-# unrelated edit does not re-run these multi-minute builds for no reason.
-gn_dendrogram_png <- function(key) {
-  dir <- gn_path(key, "dendrogram")
-  png <- file.path(dir, "gn_dendrogram.png")
-  log <- gn_path(key, "removal_log.csv")
-  if (gn[[key]]$available && file.exists(log)) {
-    stale <- !file.exists(png) ||
-      file.info(png)$mtime < max(file.info(c(log, gn[[key]]$cut_file))$mtime)
-    if (stale) {
-      dir.create(dir, recursive = TRUE, showWarnings = FALSE)
-      tryCatch(
-        build_gn_dendrogram(graph_edgelists[[key]], log, png, gn[[key]]$earliest$round),
-        error = function(e) {
-          warning("The dendrogram for ", key, " could not be built: ", conditionMessage(e))
-        }
-      )
-    }
-  }
-  png
-}
-
-gn_subclusters_data <- function(key) {
-  dir <- gn_path(key, "subclusters")
-  splits_csv <- file.path(dir, "subcluster_splits.csv")
-  pieces_csv <- file.path(dir, "subcluster_pieces.csv")
-  if (gn[[key]]$available) {
-    stale <- !file.exists(splits_csv) || !file.exists(pieces_csv) ||
-      file.info(splits_csv)$mtime < file.info(gn[[key]]$cut_file)$mtime
-    if (stale) {
-      dir.create(dir, recursive = TRUE, showWarnings = FALSE)
-      tryCatch(
-        build_gn_subclusters(graph_edgelists[[key]], gn_path(key, "removal_log.csv"),
-                             gn[[key]]$cut_file, gn[[key]]$earliest$round, splits_csv, pieces_csv),
-        error = function(e) {
-          warning("The subcluster files for ", key, " could not be built: ", conditionMessage(e))
-        }
-      )
-    }
-  }
-  list(splits = read_csv(splits_csv, show_col_types = FALSE),
-       pieces = read_csv(pieces_csv, show_col_types = FALSE, col_types = cols(community_id = col_character())))
-}
-
-gn_ncomm_text <- function(key) {
-  if (gn[[key]]$available) format(gn[[key]]$earliest$n_communities, big.mark = ",") else "an unknown number of"
-}
-
-# One row per Girvan-Newman round (round, edges_removed, n_components,
-# modularity), written by run_gn_analysis.R. Two series on one plot with
-# different scales (modularity is roughly 0-1, component count runs into the
-# thousands), so component count is rescaled onto modularity's range and given
-# its own right-hand axis with the real numbers.
-gn_trace_plot <- function(key) {
-  tr <- gn[[key]]$trace
-  comp_scale <- max(tr$n_components) / max(tr$modularity, na.rm = TRUE)
-  ggplot(tr, aes(x = round)) +
-    geom_line(aes(y = modularity, colour = "Modularity")) +
-    geom_line(aes(y = n_components / comp_scale, colour = "Connected components")) +
-    geom_vline(xintercept = gn[[key]]$summary$round, linetype = "dashed",
-               colour = "grey40", linewidth = 0.4) +
-    scale_y_continuous(
-      name = "Modularity",
-      sec.axis = sec_axis(~ . * comp_scale, name = "Connected components",
-                           labels = function(x) format(x, big.mark = ","))
-    ) +
-    scale_colour_manual(values = c("Modularity" = "firebrick", "Connected components" = "steelblue"),
-                         name = NULL) +
-    labs(
-      title = paste0("Modularity and fragmentation across the full Girvan-Newman run, ", graph_labels[[key]]),
-      subtitle = "Dashed lines mark the fragmentation-onset rounds in the table below",
-      x = "Round"
-    ) +
-    theme_minimal() +
-    theme(legend.position = "bottom")
-}
-
-gn_onset_table <- function(key) {
-  gn[[key]]$summary |>
-    transmute(
-      Round = format(round, big.mark = ","),
-      Communities = format(n_communities, big.mark = ","),
-      Singletons = format(n_singletons, big.mark = ","),
-      `% singleton` = scales::percent(pct_singleton, accuracy = 1),
-      `Largest community` = largest_community
-    ) |>
-    knitr::kable()
-}
-
-# Highlights only the largest communities in distinct colours, with
-# everything else grey. Colouring every community individually on a
-# continuous scale is not legible: adjacent IDs land on near-identical
-# shades. F1/F2 is a separate visual channel (a black ring), since it cuts
-# across community membership rather than nesting inside it.
-gn_prepare <- function(key) {
-  part <- gn[[key]]$partition
-  top <- part |> count(community_gn, sort = TRUE) |> slice_head(n = gn_top_n) |> pull(community_gn)
-  lookup <- gn_label_lookup(key)
-  tg <- as_tbl_graph(graphs[[key]]) |>
-    activate(nodes) |>
-    left_join(part, by = c("name" = "node_id")) |>
-    left_join(metrics[[key]] |> select(name, betweenness, generation), by = "name") |>
-    mutate(
-      highlight = if_else(community_gn %in% top, community_gn, "other"),
-      community_label = case_when(
-        highlight == "other" ~ "Other",
-        !is.na(lookup$label[match(highlight, lookup$community_id)]) ~ lookup$label[match(highlight, lookup$community_id)],
-        TRUE ~ paste("Community", highlight)
-      ),
-      is_f1 = !is.na(generation) & generation == "F1"
-    )
-  nodes <- tg |> activate(nodes) |> as_tibble()
-  n_top <- length(top)
-  hues <- grDevices::hcl(h = seq(15, 375, length.out = n_top + 1)[-(n_top + 1)], c = 100, l = 65)
-  colour_by_id <- c(other = "grey85", setNames(hues, top))
-  # Palette keyed by the label text ggplot actually plots, built from the
-  # graph's own data rather than re-keyed from community IDs.
-  label_colours <- nodes |>
-    distinct(highlight, community_label) |>
-    mutate(colour = colour_by_id[as.character(highlight)]) |>
-    select(community_label, colour) |>
-    tibble::deframe()
-  list(tg = tg, nodes = nodes, label_colours = label_colours, top = top)
-}
-
-# The plot shows every node. `crop = TRUE` trims the view to the 1st-99th
-# percentile of each axis (coord_cartesian crops the view only, not the data),
-# which the `lgl` trials in the appendix need because they throw a few outliers
-# far out. The Fruchterman-Reingold layout places each connected component on
-# its own and packs the components together, so the small disconnected pieces
-# of the seed-filtered graph stay beside the main body instead of drifting off.
-# `weights = NA` makes the layout ignore any edge weight attribute.
-gn_plot_partition <- function(key, layout = "fr",
-                              layout_args = list(niter = 500, grid = "grid", weights = NA),
-                              crop = FALSE, f1_rings = TRUE) {
-  d <- gn_prepare(key)
-  tg <- d$tg |>
-    activate(nodes) |>
-    mutate(community_label = fct_reorder(community_label, highlight == "other"))
-  set.seed(42)
-  lay <- if (layout == "fr") {
-    xy <- do.call(igraph::layout_components, c(list(tg, layout = igraph::layout_with_fr), layout_args))
-    create_layout(tg, layout = "manual", x = xy[, 1], y = xy[, 2])
-  } else if (layout == "lgl") {
-    do.call(create_layout, c(list(tg, layout = "igraph", algorithm = "lgl"), layout_args))
-  } else {
-    do.call(create_layout, c(list(tg, layout = layout), layout_args))
-  }
-  n_f1 <- sum(d$nodes$is_f1 & d$nodes$highlight != "other", na.rm = TRUE)
-
-  p <- ggraph(lay) +
-    geom_edge_link(alpha = 0.04, colour = "grey75") +
-    geom_node_point(aes(colour = community_label, size = betweenness), alpha = 0.8)
-  if (f1_rings) {
-    p <- p + geom_node_point(data = ~ dplyr::filter(.x, is_f1),
-                             shape = 21, colour = "black", fill = NA, stroke = 0.5, size = 1.5)
-  }
-  p <- p +
-    scale_colour_manual(values = d$label_colours, name = "Cluster",
-                         guide = guide_legend(ncol = 1)) +
-    scale_size_continuous(name = "Betweenness", range = c(0.3, 6)) +
-    theme_graph() +
-    theme(legend.text = element_text(size = 8)) +
-    labs(
-      title = paste0(graph_labels[[key]], ": ", format(vcount(graphs[[key]]), big.mark = ","),
-                     " nodes, ", gn_top_n, " largest Girvan-Newman clusters, sized by betweenness"),
-      subtitle = paste0(
-        "(fragmentation-onset cut, round ", gn_round_text(key), ").",
-        if (f1_rings) paste0(" Black-ringed dots mark F1 papers (", n_f1, " within these clusters).") else ""
-      )
-    )
-  if (crop) {
-    p <- p + coord_cartesian(xlim = quantile(lay$x, c(0.01, 0.99)),
-                             ylim = quantile(lay$y, c(0.01, 0.99)))
-  }
-  p
-}
-
-gn_community_graph <- function(key) {
-  d <- gn_prepare(key)
-  part <- gn[[key]]$partition
-  comm_nodes <- d$nodes |>
-    filter(highlight != "other") |>
-    count(highlight, community_label, name = "size")
-
-  comm_edges <- edges_list[[key]] |>
-    left_join(part, by = c("source" = "node_id")) |>
-    rename(community_source = community_gn) |>
-    left_join(part, by = c("target" = "node_id")) |>
-    rename(community_target = community_gn) |>
-    filter(
-      community_source %in% comm_nodes$highlight,
-      community_target %in% comm_nodes$highlight,
-      community_source != community_target
-    ) |>
-    count(community_source, community_target, name = "weight") |>
-    # Undirected for this summary: A-B and B-A collapsed into one real
-    # crossing count, since the question is "how connected are these two
-    # communities," not citation direction between them.
-    mutate(pair_key = paste(pmin(community_source, community_target),
-                             pmax(community_source, community_target))) |>
-    group_by(pair_key) |>
-    summarise(community_source = first(community_source),
-              community_target = first(community_target),
-              weight = sum(weight), .groups = "drop") |>
-    select(-pair_key)
-
-  g_comm <- graph_from_data_frame(comm_edges, directed = FALSE, vertices = comm_nodes)
-  set.seed(42)
-  ggraph(as_tbl_graph(g_comm), layout = "fr") +
-    geom_edge_link(aes(width = weight), alpha = 0.4, colour = "steelblue") +
-    scale_edge_width(name = "Cross-community\ncitation edges", range = c(0.2, 4)) +
-    geom_node_point(aes(size = size, colour = community_label), alpha = 0.9) +
-    geom_node_text(aes(label = community_label), repel = TRUE, size = 3, max.overlaps = 20) +
-    scale_colour_manual(values = d$label_colours, guide = "none") +
-    scale_size_continuous(name = "Cluster size\n(real membership)", range = c(3, 16)) +
-    theme_graph() +
-    labs(
-      title = paste0("How the top ", gn_top_n, " Girvan-Newman clusters relate to each other, ",
-                     graph_labels[[key]]),
-      subtitle = paste0(
-        "(fragmentation-onset cut, round ", gn_round_text(key), "). ",
-        "Edge width is the real count of citation edges crossing between two clusters; ",
-        "isolated clusters (no edges above) share no real citation ties with any other top-",
-        gn_top_n, " cluster."
-      )
-    )
-}
-
-gn_subcluster_text <- function() {
-  one <- function(key) {
-    if (!gn[[key]]$available) return("the replay is not available until the run is in place.")
-    s <- gn_subclusters_data(key)$splits
-    paste0(sum(s$n_substantial > 0), " of the ", nrow(s), " communities replayed have a substantial division, and the most any one has is ",
-           max(s$n_substantial), ".")
-  }
-  paste0("In Annotated, ", one("annotated"), " In Annotated, seed filtered, ", one("seed_filtered"))
-}
-
-gn_subcluster_f1_text <- function() {
-  one <- function(key) {
-    if (!gn[[key]]$available) return("none are available until the run is in place")
-    p <- gn_subclusters_data(key)$pieces
-    gen <- node_attrs$generation[match(p$top_paper, node_attrs$name)]
-    paste0(sum(gen %in% c("F1", "P")), " of the ", nrow(p))
-  }
-  paste0("In Annotated, ", one("annotated"), " top papers are citing papers (F1), and in Annotated, seed filtered, ", one("seed_filtered"), " are.")
-}
-
-# Every community that was replayed. A community that only sheds single papers sits at 1.
-gn_subcluster_overview <- function(key) {
-  s <- gn_subclusters_data(key)$splits
-  lookup <- gn_label_lookup(key)
-  s <- s |>
-    mutate(substantial = largest_second_piece >= gn_substantial_size,
-           label = if_else(substantial, str_trunc(gn_label_or_id(as.character(community_id), lookup), 34), NA_character_),
-           kind = if_else(substantial, "Has a substantial division", "Sheds only small pieces"))
-  ggplot(s, aes(x = size, y = largest_second_piece, colour = kind)) +
-    geom_hline(yintercept = gn_substantial_size, linetype = "dashed", colour = "grey50") +
-    geom_point(alpha = 0.6, position = position_jitter(width = 0.015, height = 0.12, seed = 1)) +
-    geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, seed = 1, show.legend = FALSE) +
-    scale_x_log10() +
-    scale_colour_manual(values = c("Has a substantial division" = "firebrick", "Sheds only small pieces" = "grey55"), name = NULL) +
-    labs(title = paste0("How far each community divides, ", graph_labels[[key]]),
-         subtitle = paste0("Dashed line at ", gn_substantial_size, " papers."),
-         x = "Papers in the community (log scale)", y = "Largest second piece in any division (papers)") +
-    theme_minimal() +
-    theme(legend.position = "bottom")
-}
-
-gn_subcluster_table <- function(key) {
-  d <- gn_subclusters_data(key)
-  lookup <- gn_label_lookup(key)
-  cut_round <- gn[[key]]$earliest$round
-  info <- function(p) {
-    i <- match(p, node_attrs$name)
-    paste0(str_trunc(node_attrs$title[i], 55), " (", node_attrs$year[i], ")")
-  }
-  pieces <- d$pieces |>
-    filter(piece <= 2) |>
-    mutate(top = info(top_paper)) |>
-    select(community_id, piece, size, top) |>
-    pivot_wider(names_from = piece, values_from = c(size, top))
-  d$splits |>
-    mutate(community_id = as.character(community_id)) |>
-    filter(n_substantial > 0) |>
-    inner_join(pieces, by = "community_id") |>
-    arrange(desc(size_2), desc(size)) |>
-    transmute(
-      Community = gn_label_or_id(community_id, lookup),
-      Papers = size,
-      `Two pieces` = paste0(size_1, " and ", size_2),
-      `Papers in neither` = size - size_1 - size_2,
-      `Rounds after the cut` = format(first_substantial_round - cut_round, big.mark = ","),
-      `Top paper, larger piece` = top_1,
-      `Top paper, second piece` = top_2
-    ) |>
-    knitr::kable()
-}
-
-# The communities with a substantial division, drawn at the cut and coloured by piece.
-gn_subcluster_pieces_plot <- function(key) {
-  d <- gn_subclusters_data(key)
-  lookup <- gn_label_lookup(key)
-  ids <- d$splits |>
-    mutate(community_id = as.character(community_id)) |>
-    filter(n_substantial > 0) |>
-    arrange(desc(largest_second_piece), desc(size)) |>
-    pull(community_id)
-  if (length(ids) == 0) return(invisible(NULL))
-  g <- as_undirected(graphs[[key]], mode = "collapse")
-  part <- gn[[key]]$partition
-  set.seed(7)
-  parts <- map(ids, function(cid) {
-    members <- part$node_id[part$community_gn == cid]
-    pm <- d$pieces |> filter(community_id == cid)
-    piece1 <- strsplit(pm$members[pm$piece == 1], ";", fixed = TRUE)[[1]]
-    piece2 <- strsplit(pm$members[pm$piece == 2], ";", fixed = TRUE)[[1]]
-    sg <- igraph::induced_subgraph(g, members)
-    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
-    names_in <- igraph::V(sg)$name
-    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 32), ": ", length(piece1), " + ", length(piece2), " papers")
-    el <- igraph::as_edgelist(sg, names = FALSE)
-    list(nodes = tibble(x = xy[, 1], y = xy[, 2], panel = panel,
-                        piece = case_when(names_in %in% piece1 ~ "Larger piece",
-                                          names_in %in% piece2 ~ "Second piece",
-                                          TRUE ~ "Rest of the community")),
-         edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
-  })
-  levels <- map_chr(parts, ~ .x$nodes$panel[1])
-  nodes <- bind_rows(map(parts, "nodes")) |> mutate(panel = factor(panel, levels = levels))
-  edges <- bind_rows(map(parts, "edges")) |> mutate(panel = factor(panel, levels = levels))
-  ggplot() +
-    geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
-    geom_point(data = nodes, aes(x, y, colour = piece), size = 1.8, alpha = 0.9) +
-    scale_colour_manual(values = c("Larger piece" = "#4575b4", "Second piece" = "#d73027", "Rest of the community" = "grey70"), name = NULL) +
-    facet_wrap(~ panel, ncol = 4, scales = "free") +
-    theme_void() +
-    theme(strip.text = element_text(size = 7), legend.position = "bottom") +
-    labs(title = paste0(graph_labels[[key]], ": communities with a substantial division, drawn at the cut"))
-}
-
-# One table per run, built from that run's own labels/ folder.
-gn_cluster_labels_table <- function(key) {
-  labels_full <- read_csv(gn_path(key, "labels", "cluster_labels.csv"), show_col_types = FALSE)
-
-  # representatives.csv carries the within-cluster degree of each sampled
-  # paper, in rank order (see select_representatives.py), reused here to derive
-  # the same hub-dominated classification that script computes internally and
-  # only prints to the console: rank-1's within-cluster degree at least
-  # --hub-ratio-threshold (5.0, the script's own default) times rank-2's.
-  # cluster_size, also from this file, is the figure the labelling pipeline
-  # used, not a count recomputed here.
-  reps_path <- gn_path(key, "labels", "representatives.csv")
-  cluster_shape <- if (file.exists(reps_path)) {
-    read_csv(reps_path, show_col_types = FALSE) |>
-      group_by(community_id) |>
-      summarise(
-        cluster_size = first(cluster_size),
-        shape = if (n() >= 2 && within_cluster_degree[2] > 0 &&
-                    within_cluster_degree[1] / within_cluster_degree[2] >= 5.0) {
-          "Hub-dominated"
-        } else {
-          "Distributed"
-        },
-        .groups = "drop"
-      ) |>
-      mutate(community_id = as.character(community_id))
-  } else {
-    tibble(community_id = character(), cluster_size = integer(), shape = character())
-  }
-
-  labels_full |>
-    mutate(community_id = as.character(community_id)) |>
-    left_join(cluster_shape, by = "community_id") |>
-    arrange(desc(cluster_size)) |>
-    transmute(
-      `Cluster ID` = community_id,
-      Size = cluster_size,
-      Shape = coalesce(shape, "n/a"),
-      Label = label,
-      Description = description,
-      `Secondary label` = coalesce(secondary_label, "")
-    ) |>
-    knitr::kable()
-}
+say "waiting for both GN runs to finish"
+while ! { grep -q "Done\." $A/run.log 2>/dev/null && grep -q "Done\." $B/run.log 2>/dev/null; }; do sleep 300; done
+say "both GN runs finished"
+post $A $EA; post $B $EB
+TODO=""; for X in $A $B; do [ -f $X/labels/representatives.csv ] && TODO="$TODO $X"; done
+[ -n "$TODO" ] || { say "nothing to label; stopping"; exit 1; }
+python3 -c "import requests" 2>/dev/null || { say "python3 cannot import requests, which label_clusters.py needs; labelling skipped"; exit 1; }
+LAUNCH=$(find ~/models/ -name launch_bibvik_llm.sh -not -path "*/.git/*" 2>/dev/null | head -1)
+[ -n "$LAUNCH" ] || { say "launch_bibvik_llm.sh not found under ~/models; labelling skipped"; exit 1; }
+say "waiting for a GPU with under 2000 MiB used and under 10 percent busy"
+while true; do
+  G=$(nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader,nounits | awk -F", " "\$2 < 2000 && \$3 < 10 {print \$1; exit}")
+  [ -n "$G" ] && break; sleep 300
+done
+say "GPU $G is free; starting Ollama with $MODEL"
+(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model $MODEL) || { say "launch_bibvik_llm.sh failed"; exit 1; }
+curl -s -m 20 http://localhost:11440/api/tags | grep -q "\"$MODEL\"" || { say "Ollama is not serving $MODEL on port 11440; labelling skipped"; (cd $(dirname $LAUNCH) && bash $LAUNCH --stop); exit 1; }
+for X in $TODO; do
+  N=$(earliest $X); say "$X: labelling the round $N cut"
+  (cd ../cluster_labelling && python3 label_clusters.py ../gn_analysis/$X/labels/representatives.csv ../gn_analysis/$X/multi_cut/communities_round_$N.csv ../gn_analysis/$X/labels --model $MODEL --base-url http://localhost:11440) || say "$X: labelling failed"
+done
+(cd $(dirname $LAUNCH) && bash $LAUNCH --stop)
+say "all steps finished"
+' > results/post_all.log 2>&1 &
+fi
+tmux ls
 ```
 
-## Community detection
+The command acts on whatever state it finds.
 
-Community detection here produces several independent descriptions of how
-the graph divides, not a single answer to be triangulated. Louvain
-[@blondel2008] and Leiden [@traag2019] ask "which groups of nodes are more
-densely interconnected than a random graph with the same degree sequence
-would predict," a notion formalized as modularity [@newman2006].
-Girvan-Newman [@girvan2002] asks "which edges, if removed, disconnect
-otherwise-separate parts of the network." K-means asks a third,
-differently-grounded question again: not about graph structure at all,
-but about each work's centrality profile, grouping works that occupy
-similar structural positions, for example highly-cited authorities vs.
-high-betweenness brokers vs. peripheral works.
-
-### Louvain, Leiden and K-means
-
-::: {.callout-note}
-Louvain, Leiden and K-means are computed for both graphs in `graph_metrics()` with no visible output. Their agreement across the two graphs is reported in "What the seed filter changes". The plotting code for each is kept in the appendix, disabled; toggle `eval: true` on any of those chunks to render it.
-:::
-
-### Girvan-Newman
-
-#### How it works
-
-Louvain and Leiden each partition the graph once, at one resolution,
-and return a single result. Girvan-Newman [@girvan2002] instead removes
-edges one at a time: at each step, it identifies the edge with the
-highest betweenness centrality (the edge carrying the largest number of
-shortest paths between all pairs of nodes in the graph), removes it,
-and recomputes betweenness for the remaining edges before repeating.
-Because a shortest path between two densely connected regions of a
-graph usually has to cross whichever single edge joins them, that edge
-tends to have disproportionately high betweenness and is removed
-early, while edges internal to a well-connected region, which have
-many alternative paths around them, are removed only much later. The
-result is a record of the entire removal sequence, from the original,
-fully connected graph down to every paper standing alone: a
-dendrogram. The tree below is that record. Height represents the order
-in which components split apart, not the raw round number, since the
-actual rounds are spaced too unevenly to remain legible on a linear
-axis; left-right position carries no information and is arranged only
-to avoid crossing branches.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: dendrogram-annotated
-#| out-width: "100%"
-#| eval: !expr gn[["annotated"]]$available && file.exists(gn_dendrogram_png("annotated"))
-knitr::include_graphics(gn_dendrogram_png("annotated"))
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: dendrogram-seed-filtered
-#| out-width: "100%"
-#| eval: !expr gn[["seed_filtered"]]$available && file.exists(gn_dendrogram_png("seed_filtered"))
-knitr::include_graphics(gn_dendrogram_png("seed_filtered"))
-```
-
-:::
-
-#### Choosing a stopping point
-
-Girvan-Newman, in its original form, does not select a stopping point
-from this sequence [@fortunato2010]; the removal process continues
-until no edges remain. A refinement published two years after the
-original algorithm [@newman2004] selects the
-round with the highest modularity score as the working partition, and
-this is the conventional choice, but it fails on this corpus: modularity
-continues to rise as the graph fragments, reaching its maximum only once
-`r gn_pct_phrase("annotated")` are singleton communities (`r gn_pct_phrase("seed_filtered")` in the seed filtered run), which is not a usable partition. This is a documented limitation of modularity on sparse
-networks, where it can lack a clear maximum and instead admit many
-different high-scoring partitions [@good2010]. The criterion used
-instead counts connected components directly: the point where that
-count starts climbing steadily, one round after another, marks where
-the graph is actually breaking into pieces, independent of whether
-modularity happens to be rising or falling at the same time. The earliest such round is `r gn_round_text("annotated")` (Annotated) and `r gn_round_text("seed_filtered")` (Annotated, seed filtered), and it is used for every community grouping in the rest of this document.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: stopping-1-annotated
-#| eval: !expr gn[["annotated"]]$available
-gn_trace_plot("annotated")
-```
-
-```{r}
-#| label: stopping-2-annotated
-#| eval: !expr gn[["annotated"]]$available
-gn_onset_table("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: stopping-1-seed-filtered
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_trace_plot("seed_filtered")
-```
-
-```{r}
-#| label: stopping-2-seed-filtered
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_onset_table("seed_filtered")
-```
-
-:::
-
-#### The working partition
-
-Only the top `r gn_top_n` clusters are individually coloured and the rest are grey, since beyond roughly `r gn_top_n` colours a reader cannot reliably distinguish them on the plot. F1 papers carry a black ring except in the tabs marked no F1 rings. Node size is each node's betweenness centrality in that graph, so the largest dots in the dense core are the corpus's structural bridges. The dense core is real structure and no layout parameter changes what it is. Every plot uses the Fruchterman-Reingold layout, the clearest of the layouts tried (see the appendix).
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: partition-annotated
-#| fig-width: 16
-#| fig-height: 14
-#| eval: !expr gn[["annotated"]]$available
-gn_plot_partition("annotated")
-```
-
-##### Annotated, no F1 rings
-
-```{r}
-#| label: partition-annotated-plain
-#| fig-width: 16
-#| fig-height: 14
-#| eval: !expr gn[["annotated"]]$available
-gn_plot_partition("annotated", f1_rings = FALSE)
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: partition-seed-filtered
-#| fig-width: 16
-#| fig-height: 14
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_plot_partition("seed_filtered")
-```
-
-##### Annotated, seed filtered, no F1 rings
-
-```{r}
-#| label: partition-seed-filtered-plain
-#| fig-width: 16
-#| fig-height: 14
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_plot_partition("seed_filtered", f1_rings = FALSE)
-```
-
-:::
-
-#### Community-level structure
-
-The plots above show individual nodes coloured by
-community; none of them show which communities are strongly connected
-to which others, since edges are drawn identically whether they cross
-community boundaries or stay within one. This collapses each of the
-top `r gn_top_n` clusters to a single node, sized by its real
-membership count, with an edge between two cluster-nodes weighted by
-the real number of citation edges crossing between them in the
-original graph — the genuine inter-community structure, not
-individual-node detail.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: community-graph-annotated
-#| fig-width: 14
-#| fig-height: 12
-#| eval: !expr gn[["annotated"]]$available
-gn_community_graph("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: community-graph-seed-filtered
-#| fig-width: 14
-#| fig-height: 12
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_community_graph("seed_filtered")
-```
-
-:::
-
-A real edge here means real papers in one cluster actually cite, or
-are cited by, real papers in the other; its width is that count, not
-an estimate. A cluster with no edges at all in this plot is real too:
-it means none of the top `r gn_top_n` clusters share a direct citation
-tie with it, whatever thematic similarity a reader might expect from
-the labels alone.
-
-#### Internal structure of individual communities
-
-The earliest cut leaves `r gn_ncomm_text("annotated")` communities in Annotated and `r gn_ncomm_text("seed_filtered")` in Annotated, seed filtered. A community can be taken further by replaying the removal log inside it from the cut onwards and recording each round where removing an edge divides it. Most divisions peel off one paper or a few, which is how any community comes apart and says little about its internal structure. A division counts as substantial here when its second-largest piece has at least `r gn_substantial_size` papers. The replay covers every community of `r gn_subcluster_min` or more papers.
-
-`r gn_subcluster_text()` Every other community comes apart in pieces of fewer than `r gn_substantial_size` papers.
-
-Each dot below is one community. The vertical axis is the largest second piece the community ever produces, so a community that only sheds single papers sits at 1. Communities above the dashed line have a substantial division and are named.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: subcluster-overview-annotated
-#| fig-width: 9
-#| fig-height: 6
-#| eval: !expr gn[["annotated"]]$available
-gn_subcluster_overview("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: subcluster-overview-seed-filtered
-#| fig-width: 9
-#| fig-height: 6
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_subcluster_overview("seed_filtered")
-```
-
-:::
-
-The table lists the communities with a substantial division, ordered by the size of the second piece. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: subcluster-table-annotated
-#| eval: !expr gn[["annotated"]]$available
-gn_subcluster_table("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: subcluster-table-seed-filtered
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_subcluster_table("seed_filtered")
-```
-
-:::
-
-Each panel draws one of those communities at the cut. Blue is the larger piece, red is the second piece and grey is the rest of the community.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: subcluster-pieces-annotated
-#| fig-width: 12
-#| fig-height: 12
-#| eval: !expr gn[["annotated"]]$available
-gn_subcluster_pieces_plot("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: subcluster-pieces-seed-filtered
-#| fig-width: 12
-#| fig-height: 12
-#| eval: !expr gn[["seed_filtered"]]$available
-gn_subcluster_pieces_plot("seed_filtered")
-```
-
-:::
-
-### Cluster labels
-
-This section identifies each cluster's most-cited papers by
-within-cluster citation degree, then has a language model write a
-label and description from their titles, independent of the F1
-annotation codebook. Comparing these labels against the codebook
-happens separately, in `03_joined_descriptions.qmd`.
-
-For each cluster, `select_representatives.py` ranks the cluster's own
-papers by how many other members of that cluster cite them, and takes
-the top few as a representative sample. `label_clusters.py` sends
-those titles to a language model, which sorts them into named groups
-and writes a label and description from the largest group; a second
-label is written only when a real second group exists with enough
-titles behind it. Full detail on both steps, including the
-hub-independence rule and the mechanical checks run on the model's
-output, is in `cluster_labelling/README.md`.
-
-Each row is one cluster.
-
-| Column | Meaning |
+| State | Result |
 |---|---|
-| Cluster ID | Girvan-Newman community ID at the working partition |
-| Size | Cluster size |
-| Shape | `Hub-dominated` (top paper's within-cluster citation degree ≥ 5× the next-highest, `--hub-ratio-threshold` per the README), `Distributed` (otherwise), or `n/a` (no data for this cluster) |
-| Label | From the language model's primary group for this cluster |
-| Description | From the language model's primary group for this cluster |
-| Secondary label | From a real second group, where one exists; blank otherwise |
+| `results/` empty | Both runs start fresh and the chain starts. |
+| Partial runs, nothing running (crash or reboot) | Both runs resume from their checkpoints. |
+| One run dead, one alive | Only the dead run resumes. The live run keeps its process. |
+| Both running | Nothing changes and no second chain starts. |
+| Both finished | Nothing changes. The chain does not restart once its log says `all steps finished`. |
 
-::: {.panel-tabset}
+To restart from scratch on purpose, run `rm -rf results/*` first and paste the command again.
 
-#### Annotated
+### What the chain does
 
-```{r}
-#| label: cluster-labels-annotated
-#| echo: false
-#| eval: !expr file.exists(gn_path("annotated", "labels", "cluster_labels.csv"))
-gn_cluster_labels_table("annotated")
+| Step | Tool | Result |
+|---|---|---|
+| Wait | Polls both `run.log` files every 5 minutes for `Done.` | Starts when both runs have finished. |
+| Cluster detection | `gn_analysis/generate_multi_cut_communities.R` | `multi_cut/communities_round_<N>.csv` for every sustained fragmentation onset, plus `multi_cut_summary.csv`. |
+| Representatives | `cluster_labelling/select_representatives.py` on the earliest cut | `labels/representatives.csv`, the top 10 papers per cluster by within-cluster degree. |
+| GPU | `nvidia-smi` every 5 minutes | The first GPU with under 2,000 MiB used and under 10% busy. |
+| Ollama | `launch_bibvik_llm.sh --gpu <G> --model qwen3.5:35b` | A server on port 11440, checked through `/api/tags`. |
+| Labelling | `cluster_labelling/label_clusters.py`, with-seed graph first, then no-seed | `labels/cluster_labels.csv` and `node_labels.csv`. |
+| Shutdown | `launch_bibvik_llm.sh --stop` | Ollama stops. |
+
+The labelled cut is the earliest sustained fragmentation onset, which is the smallest round number in `multi_cut/`. `02_network_structure.qmd` documents it as the only onset that gives a singleton-free partition on this corpus. Detection uses a window of 100 rounds and a minimum rate of 0.9 new components per round.
+
+The chain labels both graphs through one Ollama instance on one GPU, one graph after the other. `label_clusters.py` calls Ollama's `/api/generate` endpoint, so the Ollama backend is required and the `llama_server` tensor-parallel route cannot serve it.
+
+Every failure writes a timestamped line to `results/post_all.log` and stops only the steps that depend on it. A failed detection skips that graph. A failed launcher, a missing `requests` module or a model that Ollama does not list stops the chain before labelling and leaves every earlier output in place.
+
+### Monitoring
+
+```bash
+cd ~/models/BibVik/analysis/gn_analysis
+echo "now $(date +%H:%M:%S) | GN processes (expect 2): $(pgrep -fc 'file=[r]un_gn_analysis') | chain (expect 1): $(pgrep -fc '[w]hile ! \{ grep -q')"
+for p in "results/annotated 21456" "results/annotated_no_seed 20883"; do read d t <<< "$p"; n=$(( $(wc -l < $d/removal_log.csv) - 1 )); echo "$d: round $n of $t ($(( 100 * n / t ))%) | checkpoint last written $(ls -l --time-style=+%H:%M:%S $d/state.rds | awk '{print $6}')"; done
+grep "^\[" results/post_all.log
 ```
 
-#### Annotated, seed filtered
+A healthy state is 2 GN processes, 1 chain, and a checkpoint written within the last minute or two. Early rounds take about 19 seconds. Rounds speed up as the graph fragments, so the percentage understates how much is left and the finish time cannot be predicted from it. A checkpoint time that stops advancing means the run stalled.
 
-```{r}
-#| label: cluster-labels-seed-filtered
-#| echo: false
-#| eval: !expr file.exists(gn_path("seed_filtered", "labels", "cluster_labels.csv"))
-gn_cluster_labels_table("seed_filtered")
+The last line prints the chain's own timestamped messages. They name the current stage (`waiting for both GN runs to finish`, `waiting for a GPU`, `labelling the round <N> cut`) and any failure.
+
+### Control and recovery
+
+**Stop a run cleanly.** `touch results/annotated/STOP` or `touch results/annotated_no_seed/STOP`. The run checkpoints after its current round, removes the file and exits. Pasting the launch command resumes it.
+
+**After a reboot or crash.** Paste the launch command. It restarts only what is dead, and a run resumes at the round where its checkpoint ends.
+
+**Cancel the chain.** `pkill -f '[w]hile ! \{ grep -q'`. Pasting the launch command starts it again.
+
+**Rerun detection with other parameters.** Delete the folder first with `rm -rf results/<run>/multi_cut`, then pass the same window and rate to `generate_multi_cut_communities.R` (arguments 5 and 6). 02 rebuilds the dendrogram from the new cuts on its own.
+
+**Label by hand.** The chain stops before labelling when the launcher cannot be found, `requests` is missing, or Ollama does not serve the model. It waits without failing while no GPU is free. After the cause is fixed, paste the launch command again. It redoes the post-run steps and then labels. The rehearsal below runs the labelling steps by hand on a small sample.
+
+**Check that the running chain is the tested script.** Terminal echo of a long pasted command can look scrambled. This reads the script back from the process.
+
+```bash
+PID=$(pgrep -f '[w]hile ! \{ grep -q' | head -1); echo "chain pid $PID"
+tr '\0' '\n' < /proc/$PID/cmdline | tail -n +3 > /tmp/chain_as_run.txt
+echo "lines: $(wc -l < /tmp/chain_as_run.txt) (expect 40)"
+echo "sha256: $(sha256sum < /tmp/chain_as_run.txt | cut -c1-16) (expect 6f424e7a80b9ed95)"
+bash -n /tmp/chain_as_run.txt && echo "syntax ok"
 ```
 
-:::
+### Finish check
 
+Every line should read `ok`, and the log should end with `all steps finished`.
 
-### Communities of communities
-
-```{r}
-#| label: grouping-functions
-#| echo: false
-# One run of a community-detection method is a weak basis for groups, because the
-# result changes with the method, the resolution and what counts as a link between
-# two clusters. The groups come from a consensus over several variants, and each
-# group reports how often its members were grouped together.
-gn_group_cut <- 0.5          # co-association needed on average to share a group
-gn_group_seeds <- 1:5
-gn_group_min_papers <- 10    # smallest cluster drawn in the figures
-
-gn_leiden_groups <- function(g, resolution = 1) {
-  args <- list(g, objective_function = "modularity", weights = igraph::E(g)$weight, n_iterations = 10)
-  # igraph 2.x renamed resolution_parameter to resolution.
-  args[[if ("resolution" %in% names(formals(igraph::cluster_leiden))) "resolution" else "resolution_parameter"]] <- resolution
-  as.integer(igraph::membership(do.call(igraph::cluster_leiden, args)))
-}
-
-# One row per citation edge whose two papers both sit in a cluster, with the
-# clusters of the citing paper (from) and the cited paper (to).
-gn_cluster_edges <- function(key) {
-  part <- gn[[key]]$partition
-  edges_list[[key]] |>
-    select(source, target) |>
-    left_join(transmute(part, source = node_id, from = community_gn), by = "source") |>
-    left_join(transmute(part, target = node_id, to = community_gn), by = "target") |>
-    filter(!is.na(from), !is.na(to))
-}
-
-# Two clusters are linked by the citation edges that cross between them.
-gn_cluster_link_graph <- function(ce, clusters, directed = FALSE) {
-  x <- ce |> filter(from != to, from %in% clusters, to %in% clusters)
-  if (!directed) x <- x |> mutate(a = pmin(from, to), b = pmax(from, to), from = a, to = b)
-  x <- x |> count(from, to, name = "weight")
-  igraph::graph_from_data_frame(x, directed = directed, vertices = data.frame(name = clusters))
-}
-
-# Two clusters are also linked when their citing papers cite the same works,
-# measured as the cosine of the two sets of cited works.
-gn_cluster_reference_graph <- function(ce, clusters) {
-  refs <- ce |> filter(from %in% clusters) |> distinct(from, target)
-  m <- Matrix::sparseMatrix(i = match(refs$from, clusters), j = as.integer(factor(refs$target)),
-                            x = 1, dims = c(length(clusters), n_distinct(refs$target)))
-  b <- as.matrix(Matrix::tcrossprod(m))
-  d <- sqrt(Matrix::rowSums(m))
-  b <- b / outer(d, d)
-  b[!is.finite(b)] <- 0
-  diag(b) <- 0
-  g <- igraph::graph_from_adjacency_matrix(b, mode = "undirected", weighted = TRUE, diag = FALSE)
-  igraph::V(g)$name <- clusters
-  g
-}
-
-gn_group_variant_names <- c("Leiden, resolution 0.75", "Leiden, resolution 1", "Leiden, resolution 1.25",
-                            "Leiden, resolution 1.5", "Louvain", "Infomap, undirected links",
-                            "Infomap, directed links", "Leiden, shared references")
-gn_group_n_variants <- length(gn_group_variant_names)
-
-gn_cluster_groups <- function(key) {
-  ce <- gn_cluster_edges(key)
-  sizes <- count(gn[[key]]$partition, community_gn, name = "papers") |> arrange(desc(papers), community_gn)
-  clusters <- sizes$community_gn
-  g_links <- gn_cluster_link_graph(ce, clusters)
-  if (length(clusters) < 3 || igraph::ecount(g_links) == 0) return(NULL)
-  g_dir <- gn_cluster_link_graph(ce, clusters, directed = TRUE)
-  g_refs <- gn_cluster_reference_graph(ce, clusters)
-  w <- igraph::E(g_links)$weight
-  wd <- igraph::E(g_dir)$weight
-  membership_of <- function(x) as.integer(igraph::membership(x))
-  variants <- list(
-    function() gn_leiden_groups(g_links, 0.75),
-    function() gn_leiden_groups(g_links, 1),
-    function() gn_leiden_groups(g_links, 1.25),
-    function() gn_leiden_groups(g_links, 1.5),
-    function() membership_of(igraph::cluster_louvain(g_links, weights = w)),
-    function() membership_of(igraph::cluster_infomap(g_links, e.weights = w)),
-    function() membership_of(igraph::cluster_infomap(g_dir, e.weights = wd)),
-    function() gn_leiden_groups(g_refs, 1))
-  names(variants) <- gn_group_variant_names
-  larger <- which(sizes$papers >= gn_group_min_papers)
-  runs <- map(variants, function(f) {
-    compact(map(gn_group_seeds, function(s) {
-      set.seed(s)
-      tryCatch(f(), error = function(e) NULL)
-    }))
-  })
-  runs <- runs[lengths(runs) > 0]
-  n <- length(clusters)
-  coassoc <- matrix(0, n, n)
-  for (r in runs) {
-    together <- matrix(0, n, n)
-    for (m in r) together <- together + outer(m, m, "==")
-    coassoc <- coassoc + together / length(r)
-  }
-  coassoc <- coassoc / length(runs)
-  diag(coassoc) <- 1
-  raw <- cutree(hclust(as.dist(1 - coassoc), method = "average"), h = gn_group_cut)
-  totals <- tapply(sizes$papers, raw, sum)
-  # Groups of two or more clusters are numbered 1 to K by size, so the numbers match
-  # the count in the text. Clusters that sit alone are numbered after them.
-  by_size <- function(ids) ids[order(-totals[ids], as.integer(ids))]
-  shared_ids <- names(which(table(raw) > 1))
-  group <- match(as.character(raw), c(by_size(shared_ids), by_size(setdiff(names(totals), shared_ids))))
-  agreement <- map_dbl(split(seq_len(n), group), function(ix) {
-    if (length(ix) > 1) mean(coassoc[ix, ix][lower.tri(coassoc[ix, ix])]) else NA_real_
-  })
-  a <- as.matrix(igraph::as_adjacency_matrix(g_links, attr = "weight"))
-  inside <- rowSums(a * outer(group, group, "==")) / rowSums(a)
-  list(
-    clusters = tibble(community_gn = clusters, papers = sizes$papers, group = group,
-                      agreement = unname(agreement[as.character(group)]),
-                      links = rowSums(a), share_links_inside = inside),
-    variants = tibble(
-      variant = names(runs),
-      groups = unname(map_chr(runs, function(r) {
-        k <- map_int(r, function(m) length(unique(m[larger])))
-        if (min(k) == max(k)) as.character(min(k)) else paste0(min(k), " to ", max(k))
-      })),
-      agreement = unname(map_dbl(runs, function(r) {
-        mean(map_dbl(r, function(m) igraph::compare(m[larger], group[larger], method = "adjusted.rand")))
-      }))),
-    links = g_links)
-}
-
-gn_has_group <- function(key) !is.null(gn_groups[[key]])
-
-gn_group_note <- function(key) {
-  d <- gn_groups[[key]]
-  if (is.null(d)) return("No grouping is available for this graph.")
-  sizes <- count(d$clusters, group)
-  n_multi <- sum(sizes$n > 1)
-  n_alone <- sum(sizes$n == 1)
-  n_hidden <- d$clusters |> group_by(group) |> filter(n() > 1) |>
-    summarise(has_larger = any(papers >= gn_group_min_papers), .groups = "drop") |> filter(!has_larger) |> nrow()
-  paste0(format(nrow(d$clusters), big.mark = ","), " clusters fall into ", n_multi,
-         if (n_multi == 1) " group" else " groups", " of two or more clusters, and ", n_alone,
-         if (n_alone == 1) " cluster stays" else " clusters stay", " alone. ",
-         "The table lists the groups of two or more clusters, and larger clusters are those with ",
-         gn_group_min_papers, " or more papers. The figures show only the larger clusters.",
-         if (n_hidden > 0) paste0(" ", n_hidden, if (n_hidden == 1) " group has" else " groups have",
-                                  " no larger cluster and ", if (n_hidden == 1) "does" else "do", " not appear in the legend.") else "")
-}
-
-gn_group_table <- function(key) {
-  d <- gn_groups[[key]]
-  lookup <- gn_label_lookup(key)
-  multi <- d$clusters |> count(group) |> filter(n > 1) |> pull(group)
-  d$clusters |>
-    mutate(name = coalesce(lookup$label[match(community_gn, lookup$community_id)], paste0("cluster ", community_gn))) |>
-    filter(group %in% multi) |>
-    group_by(group) |>
-    summarise(Clusters = n(), `Larger clusters` = sum(papers >= gn_group_min_papers), Papers = sum(papers), Agreement = first(agreement),
-              `Largest clusters` = paste0(head(name[order(-papers)], 3), " (", head(sort(papers, decreasing = TRUE), 3), ")", collapse = "; "),
-              .groups = "drop") |>
-    arrange(desc(Papers)) |>
-    mutate(Agreement = scales::percent(Agreement, accuracy = 1)) |>
-    rename(Group = group) |>
-    knitr::kable()
-}
-
-gn_group_graph <- function(key) {
-  d <- gn_groups[[key]]
-  lookup <- gn_label_lookup(key)
-  shown <- filter(d$clusters, papers >= gn_group_min_papers)
-  g <- igraph::induced_subgraph(d$links, shown$community_gn)
-  link_counts <- igraph::E(g)$weight
-  # The layout reads the weight attribute separately for each connected piece.
-  igraph::E(g)$weight <- sqrt(link_counts)
-  set.seed(42)
-  xy <- igraph::layout_components(g, layout = igraph::layout_with_fr, niter = 1000)
-  # Every group of two or more clusters that has a cluster in the figure gets a colour and a
-  # legend entry named for its largest cluster. Clusters that form a group alone share grey.
-  groups <- shown |>
-    group_by(group) |>
-    summarise(lead = community_gn[which.max(papers)], .groups = "drop") |>
-    semi_join(filter(count(d$clusters, group, name = "n_clusters"), n_clusters >= 2), by = "group") |>
-    arrange(group) |>
-    mutate(entry = paste0(group, ". ", str_trunc(gn_label_or_id(lead, lookup), 48)))
-  n_groups <- nrow(groups)
-  # Consecutive groups get hues far apart, since neighbours in size are often neighbours on the plot.
-  gcd <- function(a, b) if (b == 0) a else gcd(b, a %% b)
-  step <- max(1, ceiling(n_groups / 3))
-  while (n_groups > 1 && gcd(step, n_groups) != 1) step <- step + 1
-  hue_index <- ((seq_len(n_groups) - 1) * step) %% max(n_groups, 1)
-  palette <- setNames(grDevices::hcl(h = 15 + 360 * hue_index / max(n_groups, 1), c = 100, l = 62), groups$entry)
-  other <- "Clusters that form a group alone"
-  nodes <- tibble(x = xy[, 1], y = xy[, 2], community_gn = igraph::V(g)$name) |>
-    left_join(shown, by = "community_gn") |>
-    left_join(select(groups, group, entry), by = "group") |>
-    mutate(entry = factor(coalesce(entry, other), levels = c(groups$entry, other)))
-  el <- igraph::as_edgelist(g, names = FALSE)
-  segments <- tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2],
-                     weight = link_counts)
-  ggplot() +
-    geom_segment(data = filter(segments, weight >= 2), aes(x, y, xend = xend, yend = yend, linewidth = weight), alpha = 0.2, colour = "grey50") +
-    scale_linewidth(range = c(0.1, 2), guide = "none") +
-    geom_point(data = nodes, aes(x, y, size = papers, colour = entry), alpha = 0.85) +
-    scale_colour_manual(values = c(palette, setNames("grey75", other)), name = "Group",
-                        guide = guide_legend(ncol = 1, override.aes = list(size = 4, alpha = 1))) +
-    scale_size_continuous(range = c(1.5, 10), guide = "none") +
-    theme_graph() +
-    theme(legend.text = element_text(size = 9)) +
-    labs(title = paste0(graph_labels[[key]], ": clusters of ", gn_group_min_papers, " or more papers, coloured by group"),
-         subtitle = "Dot size is the number of papers in the cluster. Edges show two or more citation links between two clusters, and edge width grows with the count.")
-}
-
-gn_group_heatmap <- function(key) {
-  d <- gn_groups[[key]]
-  shown <- d$clusters |> filter(papers >= gn_group_min_papers)
-  # Groups with fewer than three larger clusters share the last block.
-  in_block <- shown |> count(group) |> filter(n >= 3) |> pull(group)
-  shown <- shown |> mutate(block = if_else(group %in% in_block, group, Inf)) |> arrange(block, group, desc(papers))
-  g <- igraph::induced_subgraph(d$links, shown$community_gn)
-  a <- as.matrix(igraph::as_adjacency_matrix(g, attr = "weight"))[shown$community_gn, shown$community_gn]
-  s <- rowSums(a)
-  m <- a / sqrt(outer(s, s))
-  m[!is.finite(m)] <- 0
-  n <- nrow(m)
-  long <- tibble(i = rep(seq_len(n), n), j = rep(seq_len(n), each = n), value = as.vector(m))
-  bounds <- cumsum(table(factor(shown$block, levels = unique(shown$block)))) + 0.5
-  ggplot(long, aes(j, i, fill = value)) +
-    geom_raster() +
-    scale_fill_gradient(low = "white", high = "black", trans = "sqrt", name = "Citation links,\nadjusted for size") +
-    scale_y_reverse() +
-    geom_vline(xintercept = head(bounds, -1), colour = "red", linewidth = 0.3) +
-    geom_hline(yintercept = head(bounds, -1), colour = "red", linewidth = 0.3) +
-    coord_equal() +
-    theme_void() +
-    labs(title = paste0(graph_labels[[key]], ": citation links between clusters, ordered by group"),
-         subtitle = paste0("Clusters of ", gn_group_min_papers, " or more papers. Red lines separate groups, and the last block pools small groups."))
-}
-
-gn_group_variants_table <- function(key) {
-  gn_groups[[key]]$variants |>
-    rename(Variant = variant, `Groups among the larger clusters` = groups, `Agreement with the consensus` = agreement) |>
-    knitr::kable(digits = 2)
-}
+```bash
+cd ~/models/BibVik/analysis/gn_analysis
+for D in results/annotated results/annotated_no_seed; do for f in communities.csv final_edgelist.csv modularity_trace.csv removal_log.csv multi_cut/multi_cut_summary.csv labels/representatives.csv labels/cluster_labels.csv labels/node_labels.csv; do [ -s $D/$f ] && echo "ok       $D/$f" || echo "MISSING  $D/$f"; done; done
+grep "^\[" results/post_all.log
 ```
 
-```{r}
-#| label: grouping-compute
-#| echo: false
-gn_groups <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), function(k) {
-  if (!gn[[k]]$available) return(NULL)
-  tryCatch(gn_cluster_groups(k), error = function(e) {
-    warning("The grouping of clusters for ", k, " failed: ", conditionMessage(e))
-    NULL
-  })
-})
+### Committing finished runs
+
+02 reads each run from `analysis/gn_analysis/results/<run>/`, so committing a run is a matter of choosing which files to track. Run this on the server when both runs and the chain have finished. It tracks the files the earlier single run tracked, plus the labels.
+
+```bash
+cd ~/models/BibVik
+git pull
+git add analysis/gn_analysis/results/*/communities.csv analysis/gn_analysis/results/*/final_edgelist.csv analysis/gn_analysis/results/*/modularity_trace.csv analysis/gn_analysis/results/*/removal_log.csv analysis/gn_analysis/results/*/multi_cut analysis/gn_analysis/results/*/labels
+git commit -m "Add the finished Girvan-Newman runs"
+git push
 ```
 
-The clusters can be grouped in turn. Two clusters are linked when papers in one cite papers in the other, and also when their citing papers cite many of the same works. A single run of one community-detection method is a weak basis for groups here, because the result changes with the method, the resolution and the definition of a link. The grouping below therefore runs `r gn_group_n_variants` variants, with `r length(gn_group_seeds)` random seeds each, on every cluster of every size. The variants are Leiden at four resolutions, Louvain, Infomap on undirected and on directed links, and Leiden on shared references. Two clusters share a group when they were grouped together in at least `r scales::percent(1 - gn_group_cut)` of the runs on average. A cluster forms a group alone when no other cluster meets that test with it, which means the variants disagree about which cluster it belongs with. Each group reports the share of runs in which its members stayed together. A high share is necessary but not enough, because weakly linked clusters can be grouped together consistently without sharing a theme, so the cluster labels in each row need reading as well.
+Then pull on the machine that renders and render 02 and 03, or `index.qmd`. 02 selects the earliest cut by sorting, so it needs no round number. For each graph it builds the dendrogram image and the two subcluster files when they are missing or older than the earliest cut file (for the dendrogram, also the removal log). Each build takes minutes. The server builds neither. `.gitignore` excludes every `*.png` and the subcluster files, so none is committed, and all are built on the first render.
 
-::: {.panel-tabset}
+Leave the working files out of git. `.gitignore` names a few of them under `analysis/gn_analysis/results/`, and those lines do not match the nested run folders. These lines do.
 
-#### Annotated
-
-`r gn_group_note("annotated")`
-
-```{r}
-#| label: groups-table-annotated
-#| echo: false
-#| eval: !expr gn_has_group("annotated")
-gn_group_table("annotated")
+```
+analysis/gn_analysis/results/*/state.rds
+analysis/gn_analysis/results/*/run.log
+analysis/gn_analysis/results/*/session_stdout.log
+analysis/gn_analysis/results/*/subclusters/*.csv
 ```
 
-```{r}
-#| label: groups-graph-annotated
-#| echo: false
-#| fig-width: 12
-#| fig-height: 10
-#| eval: !expr gn_has_group("annotated")
-gn_group_graph("annotated")
+`analysis/cluster_labelling/results/` still holds the labels from the earlier run on the old graph. No document reads it.
+
+If the runs are later copied into `data/` instead, change `gn_root` in the `gn-paths` chunk of 02 to `here("data", "gn")` and nothing else.
+
+### Rehearsal on an earlier run
+
+These two blocks test the post-run steps on a finished earlier run found in `results_backup_*`, and they write to `~/models/rehearsal`. The first prints the real run time of detection. The second runs representative selection, the GPU gate, the launcher, the model check, labelling of the 3 largest clusters, and shutdown. It holds one GPU for a few minutes.
+
+```bash
+cd ~/models/BibVik/analysis/gn_analysis
+for d in results_backup_*/; do if [ -f ${d}removal_log.csv ] && [ -f ${d}modularity_trace.csv ] && [ -f ${d}final_edgelist.csv ]; then B=${d%/}; break; fi; done
+echo "rehearsing on: ${B:-NO BACKUP HAS ALL THREE FILES}"
+T=~/models/rehearsal; rm -rf $T; mkdir -p $T
+time Rscript generate_multi_cut_communities.R $B/final_edgelist.csv $B/removal_log.csv $B/modularity_trace.csv $T/multi_cut
+N=$(ls $T/multi_cut/communities_round_*.csv | sed -E "s/.*_round_([0-9]+)\.csv$/\1/" | sort -n | head -1); echo "earliest cut: $N"
+ls -R $T | head -30
 ```
 
-```{r}
-#| label: groups-heatmap-annotated
-#| echo: false
-#| fig-width: 8
-#| fig-height: 8
-#| eval: !expr gn_has_group("annotated")
-gn_group_heatmap("annotated")
+```bash
+cd ~/models/BibVik/analysis/cluster_labelling
+T=~/models/rehearsal; N=$(ls $T/multi_cut/communities_round_*.csv | sed -E "s/.*_round_([0-9]+)\.csv$/\1/" | sort -n | head -1)
+python3 select_representatives.py ../../data/bibliography.json ../../data/citation_edgelist.csv $T/labels --partition-csv $T/multi_cut/communities_round_$N.csv --max-clusters 3
+python3 -c "import requests; print('requests ok')"
+LAUNCH=$(find ~/models/ -name launch_bibvik_llm.sh -not -path "*/.git/*" | head -1); echo "launcher: $LAUNCH"
+G=$(nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader,nounits | awk -F", " '$2 < 2000 && $3 < 10 {print $1; exit}'); echo "free GPU chosen: $G"
+(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model qwen3.5:35b)
+curl -s http://localhost:11440/api/tags | grep -o '"name": *"[^"]*"'
+python3 label_clusters.py $T/labels/representatives.csv $T/multi_cut/communities_round_$N.csv $T/labels --model qwen3.5:35b --base-url http://localhost:11440
+cut -c1-120 $T/labels/cluster_labels.csv
+(cd $(dirname $LAUNCH) && bash $LAUNCH --stop)
 ```
 
-```{r}
-#| label: groups-variants-annotated
-#| echo: false
-#| eval: !expr gn_has_group("annotated")
-gn_group_variants_table("annotated")
-```
+An empty line after `free GPU chosen:` means no GPU is free. A missing model name after the `curl` line means the launcher serves on another port, and the chain assumes port 11440.
 
-#### Annotated, seed filtered
+### What was tested
 
-`r gn_group_note("seed_filtered")`
+The commands were tested on 2026-10-06 with the real R and Python scripts in a scratch copy of the repository (R 4.3.3, igraph 1.6.0). The test data was a synthetic seeded graph with 384 nodes and 1,598 edges, written with Windows line endings. A stand-in Ollama server answered in the format `label_clusters.py` parses. A stand-in launcher recorded its flags. A fake `nvidia-smi` reported the GPU figures from an nvtop screenshot in which GPUs 0 to 3 were busy (GPU 3 held 7.5 GB at 0% utilisation), GPUs 8 and 9 were partly used, and GPUs 4 to 7 were idle, so the gate chose GPU 4. `02_network_structure.qmd` was rendered with knitr against the same synthetic runs in `analysis/gn_analysis/results/`, with both runs present, with only the with-seed run, and with no run installed. All three rendered without errors.
 
-```{r}
-#| label: groups-table-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_group("seed_filtered")
-gn_group_table("seed_filtered")
-```
+| Scenario | Result |
+|---|---|
+| Both runs launched together | Each wrote its own folder with the expected files, headers and row counts. |
+| Stop, move folders, resume | Rounds ran 1 to N with no gaps or repeats. |
+| Empty, interrupted, running, finished and half-finished states | Each behaved as the launching table says. |
+| With-seed run restarted while the no-seed run kept running | The no-seed process kept its process id. |
+| Second run unfinished | The chain waited. |
+| Every GPU busy | The chain waited and used the first GPU that freed up. |
+| Launcher missing, `requests` missing, detection failing | Each logged one clear line, kept the CPU outputs, and left the GPU untouched. |
+| Cross-file checks on both graphs | 12 of 12 passed. Node ids, community ids and titles agree from the GN output through the labels. |
 
-```{r}
-#| label: groups-graph-seed-filtered
-#| echo: false
-#| fig-width: 12
-#| fig-height: 10
-#| eval: !expr gn_has_group("seed_filtered")
-gn_group_graph("seed_filtered")
-```
+Not exercised on real data or on the real machine are the real `launch_bibvik_llm.sh` with its flags and port 11440, whether `qwen3.5:35b` fits on one 24 GB GPU, the run time of cluster detection at the real graph size, and the length of the GN runs themselves. The rehearsal covers the first three.
 
-```{r}
-#| label: groups-heatmap-seed-filtered
-#| echo: false
-#| fig-width: 8
-#| fig-height: 8
-#| eval: !expr gn_has_group("seed_filtered")
-gn_group_heatmap("seed_filtered")
-```
+### Hazards
 
-```{r}
-#| label: groups-variants-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_group("seed_filtered")
-gn_group_variants_table("seed_filtered")
-```
+**Handled by the launch command, still true for manual work**
 
-:::
+- **tmux matches session names by prefix.** `tmux has-session -t girvan_newman` succeeds when only `girvan_newman_noseed` exists, so `start_gn.sh` reports "already running" and starts nothing. A plain `kill-session -t girvan_newman` removes `girvan_newman_noseed` when the exact session is absent. The launch command targets sessions as `=girvan_newman` and starts the with-seed run with the same `tmux new-session` call that `start_gn.sh` makes. Use the `=` form and skip `start_gn.sh` when working by hand.
+- **Process patterns.** `pgrep -f 'Rscript run_gn_analysis'` matches the tmux server and the `bash -c` wrappers. It reports 3 for two runs and still reports 1 after both end, while the tmux server lives. The pattern `file=[r]un_gn_analysis` matches only R. A bare `{` in a `pgrep` or `pkill` pattern is a regex error, so the chain pattern is `[w]hile ! \{ grep -q`. The bracket on the first letter keeps a pattern from matching its own command line.
+- **Stale cuts.** Detection never removes old `communities_round_<N>.csv` files. A leftover file with a smaller round number becomes the earliest cut. The chain deletes `multi_cut/` before each detection, and manual reruns need the same deletion.
 
-The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. Grey dots are clusters that form a group alone. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
+**Live**
 
+- **No onset found.** With window 100 and rate 0.9, detection stops with `No sustained fast-fragmentation onsets detected` when the graph does not fragment fast enough. A small synthetic graph did this. Detection has not run on these two graphs yet, and the no-seed graph starts with four components. The earlier real runs found onsets with the defaults. If it fails, the chain logs the graph and skips it. Relax the two arguments.
+- **GN modularity.** `run_gn_analysis.R` scores modularity against the shrinking graph, so late rounds can score very high. Cut selection uses fragmentation onsets, so the chain's output is unaffected. The best-scoring partition in `communities.csv` and any modularity figure quoted from the traces are unreliable until a recomputation from the removal log against the original graph is written.
+- **igraph versions.** The server has igraph 1.6.0. The GN scripts use `get.edge.ids` and `as.undirected`, which that version has. 02 calls `as_undirected()`, which igraph added in 2.0, so 02 renders on igraph 2.0 or later. On 1.6.0 the k-core chunk fails and the Louvain and Leiden chunks fail after it. Render 02 locally, or define `as_undirected <- igraph::as.undirected` before it.
 
-### Cluster shapes
+## Not yet done
 
-```{r}
-#| label: shape-functions
-#| echo: false
-gn_shape_min_papers <- 3
-gn_shape_single_hub <- 0.95
-gn_shape_shared <- 0.2
-gn_twin_overlap <- 0.7
-gn_gallery_min_papers <- 30
-gn_shape_order <- c("Single hub", "Several hubs", "Shared references")
+Each item appears once here. The documents no longer carry their own lists.
 
-# One row per cluster of three or more papers. Every measure comes from the
-# citation edges between papers, labelled with the cluster at each end
-# (gn_cluster_edges).
-gn_cluster_shapes <- function(key) {
-  ce <- gn_cluster_edges(key)
-  sizes <- count(gn[[key]]$partition, community_gn, name = "papers")
-  internal <- filter(ce, from == to)
-  cross <- filter(ce, from != to)
-  out_total <- count(ce, source, name = "out_total")
+### Annotation and gender (01, 03)
 
-  hubs <- internal |>
-    count(from, source, name = "refs_inside") |>
-    left_join(out_total, by = "source") |>
-    arrange(from, desc(refs_inside)) |>
-    group_by(from) |>
-    summarise(citing = n(), edges_inside = sum(refs_inside),
-              top_share = max(refs_inside) / sum(refs_inside),
-              hub_paper = source[1], hub_refs_inside = refs_inside[1], hub_refs_total = out_total[1],
-              .groups = "drop")
-  out_all <- count(ce, from, name = "out_all")
-  shared <- internal |> count(from, target, name = "n_citing") |>
-    group_by(from) |> summarise(shared_share = mean(n_citing >= 2), .groups = "drop")
-  outsiders <- ce |> group_by(to, target) |> summarise(outside = any(from != to), .groups = "drop") |>
-    group_by(to) |> summarise(cited_from_outside = mean(outside), .groups = "drop")
-  touching <- bind_rows(count(internal, cluster = from, name = "n"),
-                        count(cross, cluster = from, name = "n"),
-                        count(cross, cluster = to, name = "n")) |>
-    group_by(cluster) |> summarise(touching = sum(n), .groups = "drop")
-  neighbours <- bind_rows(transmute(cross, cluster = from, other = to),
-                          transmute(cross, cluster = to, other = from)) |>
-    group_by(cluster) |> summarise(neighbour_clusters = n_distinct(other), .groups = "drop")
+- Choose the gender composition scheme for the topic, method and source cross-tabs. `composition_strict`, `composition_majority` and `composition_singleauthor_split` are computed side by side, and 01 charts the third. None has been chosen.
+- Normalize the topic, method and source proportions by gender against the corpus-wide gender base rate. The cross-tabs report raw proportions.
+- Show mixed-gender team size, as each paper's own size, in Gender's own corpus-level sections. It exists only per topic, method and source.
+- Include secondary topic, method and source values in the gender cross-tabs. Only primary values are compared.
 
-  sizes |>
-    filter(papers >= gn_shape_min_papers) |>
-    left_join(hubs, by = c("community_gn" = "from")) |>
-    left_join(out_all, by = c("community_gn" = "from")) |>
-    left_join(shared, by = c("community_gn" = "from")) |>
-    left_join(outsiders, by = c("community_gn" = "to")) |>
-    left_join(touching, by = c("community_gn" = "cluster")) |>
-    left_join(neighbours, by = c("community_gn" = "cluster")) |>
-    left_join(select(node_attrs, name, hub_title = title, hub_year = year), by = c("hub_paper" = "name")) |>
-    mutate(
-      shared_share = replace_na(shared_share, 0),
-      neighbour_clusters = replace_na(neighbour_clusters, 0L),
-      kept = edges_inside / out_all,
-      cohesion = edges_inside / touching,
-      shape = case_when(top_share >= gn_shape_single_hub ~ "Single hub",
-                        shared_share >= gn_shape_shared ~ "Shared references",
-                        TRUE ~ "Several hubs")
-    )
-}
+### Region (01, 03)
 
-gn_has_shapes <- function(key) !is.null(gn_shapes[[key]])
+- Cross-tab region against gender. Region is cross-tabbed against topic, method and source.
 
-gn_shape_classes <- function(key) {
-  s <- gn_shapes[[key]]
-  meaning <- c(
-    "Single hub" = paste0("One hub accounts for at least ", scales::percent(gn_shape_single_hub),
-                          " of the cluster's internal citation edges."),
-    "Several hubs" = "Two or more hubs, and few of the works they cite are the same.",
-    "Shared references" = paste0("Two or more hubs, and at least ", scales::percent(gn_shape_shared),
-                                 " of the works cited inside the cluster are cited by two or more of its papers."))
-  tibble(Shape = names(meaning), `What it means` = unname(meaning)) |>
-    left_join(s |> group_by(shape) |> summarise(Clusters = n(), Papers = sum(papers), .groups = "drop"),
-              by = c("Shape" = "shape")) |>
-    mutate(Clusters = replace_na(Clusters, 0L), Papers = replace_na(Papers, 0L),
-           `Share of clusters` = scales::percent(Clusters / sum(Clusters), accuracy = 1)) |>
-    select(Shape, `What it means`, Clusters, `Share of clusters`, Papers) |>
-    knitr::kable()
-}
+### Network and communities (02, 03)
 
-# Up to four clusters per shape, spread evenly through the sizes of the clusters
-# with enough papers to draw. The panels illustrate the shapes and are not a sample.
-gn_shape_gallery <- function(key) {
-  s <- gn_shapes[[key]]
-  part <- gn[[key]]$partition
-  g <- as_undirected(graphs[[key]], mode = "collapse")
-  lookup <- gn_label_lookup(key)
-  spread <- function(x, k) x[unique(round(seq(1, length(x), length.out = min(k, length(x)))))]
-  big <- filter(s, papers >= gn_gallery_min_papers)
-  pick <- unlist(map(gn_shape_order, function(cl) {
-    ids <- big |> filter(shape == cl) |> arrange(papers) |> pull(community_gn)
-    if (length(ids) == 0) character() else spread(ids, 4)
-  }))
-  set.seed(7)
-  parts <- map(pick, function(cid) {
-    members <- part$node_id[part$community_gn == cid]
-    sg <- igraph::induced_subgraph(g, members)
-    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
-    r <- filter(s, community_gn == cid)
-    panel <- paste0(r$shape, ": ", str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers)")
-    gen <- node_attrs$generation[match(igraph::V(sg)$name, node_attrs$name)]
-    el <- igraph::as_edgelist(sg, names = FALSE)
-    list(nodes = tibble(x = xy[, 1], y = xy[, 2], ties = igraph::degree(sg), panel = panel,
-                        role = if_else(gen %in% c("F1", "P"), "Hub (citing paper)", "Cited work")),
-         edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
-  })
-  levels <- map_chr(parts, ~ .x$nodes$panel[1])
-  nodes <- bind_rows(map(parts, "nodes")) |> mutate(panel = factor(panel, levels = levels))
-  edges <- bind_rows(map(parts, "edges")) |> mutate(panel = factor(panel, levels = levels))
-  ggplot() +
-    geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
-    geom_point(data = arrange(nodes, role == "Hub (citing paper)"), aes(x, y, size = sqrt(ties), colour = role), alpha = 0.9) +
-    scale_size_continuous(range = c(0.4, 4), guide = "none") +
-    scale_colour_manual(values = c("Hub (citing paper)" = "#d73027", "Cited work" = "#4575b4"), name = NULL) +
-    facet_wrap(~ panel, ncol = 4, scales = "free") +
-    theme_void() +
-    theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
-    labs(title = paste0(graph_labels[[key]], ": clusters seen from the inside, ordered by shape"))
-}
+- Run the title and annotation checks on individual Girvan-Newman communities in 02. The communities in the table of substantial divisions are the strongest candidates, since each divides into two pieces built around different citing papers. This check has not been carried out on the new partition.
+- Decide whether 03 needs the same Annotated and seed-filtered tabs. It reads only `community_gn`, from the Annotated run.
 
-gn_shape_boundary <- function(key) {
-  s <- gn_shapes[[key]]
-  q <- function(x, accuracy) {
-    paste0(scales::number(median(x, na.rm = TRUE), accuracy = accuracy), " (",
-           scales::number(quantile(x, 0.25, na.rm = TRUE), accuracy = accuracy), " to ",
-           scales::number(quantile(x, 0.75, na.rm = TRUE), accuracy = accuracy), ")")
-  }
-  tibble(
-    Measure = c("Share of its hubs' references that stay inside the cluster",
-                "Share of the cluster's cited works that other clusters also cite",
-                "Share of citation edges touching the cluster that stay inside it",
-                "Other clusters it shares a citation edge with"),
-    `Median (quartiles)` = c(q(s$kept, 0.01), q(s$cited_from_outside, 0.01), q(s$cohesion, 0.01), q(s$neighbour_clusters, 1))
-  ) |> knitr::kable()
-}
+### Planned comparisons (03)
 
-gn_shape_largest <- function(key, n = 10) {
-  lookup <- gn_label_lookup(key)
-  gn_shapes[[key]] |>
-    arrange(desc(papers)) |>
-    slice_head(n = n) |>
-    transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, Shape = shape,
-              `Hub paper` = paste0(str_trunc(coalesce(hub_title, ""), 70), " (", hub_year, ")"),
-              `Its references inside the cluster` = paste0(hub_refs_inside, " of ", hub_refs_total)) |>
-    knitr::kable()
-}
+- Test whether centrality (`in_degree`, `betweenness`, `pagerank`) within a cluster correlates with author gender, that is, whether the most central or bridging works in a cluster are disproportionately authored by one gender even when the cluster's dominant topic is not gender-skewed.
+- Analyze self-citation by gender, cluster and unique individual, and test whether the rate tracks centrality or prevalence across clusters. Test whether women-led work is cited more in some clusters than others, using average out-degree within each cluster filtered by the recipient's author information and divided further by the sender's gender.
+- Test direct citation homophily, whether papers (or, at author level, authors) cite others who share their coded gender, topic or method. It is computable from the edge list and the join, with no cluster output.
+- Build per-F2-node citer profiles. For F2 works with `in_degree` above a threshold, characterize the gender, topic and method of their F1 citer set and whether the set is structurally clustered or scattered. This shows whether a source works as a shared touchstone across the field's divisions or as an in-group marker.
 
-# Clusters whose two largest hubs cite nearly the same works.
-gn_twin_pairs <- function(key) {
-  ce <- gn_cluster_edges(key)
-  refs <- ce |> group_by(source) |> summarise(refs = list(target), .groups = "drop")
-  refs <- setNames(refs$refs, refs$source)
-  ce |>
-    filter(from == to) |>
-    count(from, source, name = "n") |>
-    group_by(from) |> slice_max(n, n = 2, with_ties = FALSE) |> filter(n() == 2) |>
-    mutate(rank = row_number()) |> ungroup() |>
-    select(from, source, rank) |>
-    pivot_wider(names_from = rank, values_from = source, names_prefix = "paper_") |>
-    rowwise() |>
-    mutate(overlap = length(intersect(refs[[paper_1]], refs[[paper_2]])) /
-             length(union(refs[[paper_1]], refs[[paper_2]]))) |>
-    ungroup() |>
-    filter(overlap >= gn_twin_overlap) |>
-    arrange(desc(overlap))
-}
+### Open decisions
 
-gn_twin_note <- function(key) {
-  p <- gn_twin_pairs(key)
-  s <- gn_shapes[[key]]
-  in_shared <- sum(p$from %in% s$community_gn[s$shape == "Shared references"])
-  paste0(nrow(p), if (nrow(p) == 1) " cluster has" else " clusters have", " two largest hubs with at least ",
-         scales::percent(gn_twin_overlap), " of their references in common. ", in_shared,
-         if (in_shared == 1) " of them counts" else " of them count", " as sharing references in the table of shapes.")
-}
+- Choose which unit of analysis beyond the paper to pursue first (author, venue or kind of work). `index.qmd` records the options in its Future work section.
+- Decide how explicitly to frame the seed-paper-testing angle in writeups, given the PI and co-author relationship.
 
-gn_twin_table <- function(key) {
-  p <- gn_twin_pairs(key)
-  if (nrow(p) == 0) return(knitr::kable(tibble(Result = "No cluster has two hubs with near-identical reference lists.")))
-  lookup <- gn_label_lookup(key)
-  describe <- function(x) {
-    i <- match(x, node_attrs$name)
-    paste0(x, ": ", str_trunc(node_attrs$title[i], 60), " (", node_attrs$year[i], ")")
-  }
-  pdf_of <- function(x) map_chr(x, function(k) bib[[k]][["_source_pdf"]] %||% "")
-  p |>
-    transmute(Cluster = gn_label_or_id(from, lookup), `Hub A` = describe(paper_1), `Hub B` = describe(paper_2),
-              `References in common` = scales::percent(overlap, accuracy = 1),
-              `Same source PDF` = if_else(nzchar(pdf_of(paper_1)) & pdf_of(paper_1) == pdf_of(paper_2), "yes", "no")) |>
-    knitr::kable()
-}
-```
+### Corpus documentation (00)
 
-```{r}
-#| label: shape-compute
-#| echo: false
-gn_shapes <- map(c(annotated = "annotated", seed_filtered = "seed_filtered"), function(k) {
-  if (!gn[[k]]$available) return(NULL)
-  tryCatch(gn_cluster_shapes(k), error = function(e) {
-    warning("The cluster shapes for ", k, " failed: ", conditionMessage(e))
-    NULL
-  })
-})
-```
+- Itemize and categorize the exclusion reasons for the remaining works in the seed's reference list. Only two criteria are documented (full books and edited volumes with consolidated bibliographies, and methodological or technical reports outside the study's scope).
 
-This section looks inside the clusters. In most of them, one paper cites all the others. A typical cluster is a citing paper and the works it cites, with a few of those works also cited from other clusters. A cluster's label therefore describes one paper's bibliography more than a community of papers that cite each other, and the groups above join clusters of that kind.
+### Pipeline and data
 
-A paper is a hub when it cites other members of its cluster. Each cluster of `r gn_shape_min_papers` or more papers falls into one of three shapes. Smaller clusters have no internal structure to describe.
+- Commit the finished Girvan-Newman runs (the commands above), then re-render 02 and 03.
+- Write the modularity recomputation from the removal log against the original graph.
+- Consolidate the `gn_analysis` and `cluster_labelling` directories and outputs into one layout after both runs are installed. Labels now travel with their run, in `<run>/labels/`.
+- Add the ignore lines for the run working files to `.gitignore` (see Committing finished runs).
+- Clear out old results. `~/models/gn_results_old_*` and the two untracked `results_backup_*` folders in `analysis/gn_analysis/` are on the server only.
+- Patch `_find_duplicate()` and `_merge_into()` in the pipeline. Do not run `--extract` or `--iterate-f1` until then.
+- Resolve the 59 field corrections that no online source can settle, and split the `bradley2002` title, which glues two references together.
 
-#### The three shapes
+## Re-check after the first render with the new runs
 
-::: {.panel-tabset}
+02 and 03 contain statements typed in from earlier renders. The repaired graph and the new runs can change them. Figures that 02 used to quote by hand, such as the in-degree range, the pre-2000 betweenness boundary, the coreness-9 works, the single component and the singleton share, are now computed from each graph.
 
-##### Annotated
+- 02, internal structure of communities: the replay covers every community of 10 or more papers, a division is substantial when its second piece has 5 or more papers, and the counts of communities with one are computed. Read the table of divisions against the cluster labels, and check that each pair of top papers belongs in the same community.
+- 02, appendix: the seed is "cited directly by hundreds of F1 papers".
+- 03 reads `analysis/bibvik_node_table.csv`, which 02 writes. It does not use the `group_gn` and `group_gn_seed_filtered` columns yet.
+- The comparison section in 02 ("What the seed filter changes") and every Girvan-Newman tab have not rendered on real runs yet.
 
-```{r}
-#| label: shape-classes-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_shape_classes("annotated")
-```
+## Related documents
 
-##### Annotated, seed filtered
-
-```{r}
-#| label: shape-classes-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_classes("seed_filtered")
-```
-
-:::
-
-#### What the shapes look like
-
-Each panel is one cluster, and its title names the cluster's shape. Red dots are hubs and blue dots are the works they cite. The panels are ordered by shape, with up to four clusters per shape. They come from clusters of `r gn_gallery_min_papers` or more papers, spread evenly across their sizes, so they illustrate the shapes and do not sample them.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: shape-gallery-annotated
-#| echo: false
-#| fig-width: 12
-#| fig-height: 9
-#| eval: !expr gn_has_shapes("annotated")
-gn_shape_gallery("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: shape-gallery-seed-filtered
-#| echo: false
-#| fig-width: 12
-#| fig-height: 9
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_gallery("seed_filtered")
-```
-
-:::
-
-#### How much of a cluster is its own
-
-These measures describe the edge of a cluster. The first row shows how much of a hub's reference list the cluster keeps, and the other rows show how much of the cluster is shared with other clusters. Each row gives the median across clusters, with the first and third quartiles in brackets.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: shape-boundary-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_shape_boundary("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: shape-boundary-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_boundary("seed_filtered")
-```
-
-:::
-
-#### The paper behind each large cluster
-
-The ten largest clusters, each with its hub paper and the number of that paper's references that sit inside the cluster.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-```{r}
-#| label: shape-largest-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_shape_largest("annotated")
-```
-
-##### Annotated, seed filtered
-
-```{r}
-#| label: shape-largest-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_shape_largest("seed_filtered")
-```
-
-:::
-
-#### Possible bibliography errors
-
-Two different papers rarely cite nearly the same works. The tables list clusters whose two largest hubs share at least `r scales::percent(gn_twin_overlap)` of their references. When both records point at the same source PDF, one record is probably attached to the wrong file, and the edges from that record are suspect. Pairs like these also move their cluster into the shared references shape, so the count for that shape overstates how often independent papers cite the same works.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-`r if (gn_has_shapes("annotated")) gn_twin_note("annotated")`
-
-```{r}
-#| label: shape-twins-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_twin_table("annotated")
-```
-
-##### Annotated, seed filtered
-
-`r if (gn_has_shapes("seed_filtered")) gn_twin_note("seed_filtered")`
-
-```{r}
-#| label: shape-twins-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_twin_table("seed_filtered")
-```
-
-:::
-
-## What the seed filter changes
-
-```{r}
-#| label: seed-filter-nodes
-#| echo: false
-#| results: hide
-
-shared <- inner_join(
-  metrics$annotated |> filter(is_ghost == "false") |>
-    select(name, title, year, in_degree, betweenness_raw, pagerank, coreness),
-  metrics$seed_filtered |> filter(is_ghost == "false") |>
-    select(name, in_degree, betweenness_raw, pagerank, coreness),
-  by = "name", suffix = c("_a", "_f")
-)
-n_btw_lost   <- sum(shared$betweenness_raw_a > 0 & shared$betweenness_raw_f == 0)
-n_btw_gained <- sum(shared$betweenness_raw_a == 0 & shared$betweenness_raw_f > 0)
-n_btw_both   <- sum(shared$betweenness_raw_a > 0 & shared$betweenness_raw_f > 0)
-
-wcc_f <- components(graphs$seed_filtered, mode = "weak")
-frag_sizes <- sort(wcc_f$csize, decreasing = TRUE)
-frag_text <- if (length(frag_sizes) > 1) paste(frag_sizes[-1], collapse = ", ") else "none"
-separation_text <- if (wcc_f$no == 1) {
-  paste0("Annotated has ", summ$annotated$wcc, " weakly connected component(s) and Annotated, seed filtered has 1, ",
-         "so the seed's citations do not hold any fragment to the main body.")
-} else {
-  paste0("Annotated has ", summ$annotated$wcc, " weakly connected component(s) and Annotated, seed filtered has ",
-         wcc_f$no, ": a main body of ", format(frag_sizes[1], big.mark = ","), " works and ",
-         length(frag_sizes) - 1, " smaller fragments of ", frag_text, " works.",
-         if (summ$annotated$wcc == 1) " In Annotated those fragments join the main body only through the seed's citations." else "")
-}
-fragments <- tibble(name = names(wcc_f$membership), component = wcc_f$membership) |>
-  mutate(component_size = wcc_f$csize[component]) |>
-  filter(component != which.max(wcc_f$csize)) |>
-  left_join(node_attrs |> select(name, title, year), by = "name") |>
-  arrange(desc(component_size), component, year)
-```
-
-### What separates
-
-`r separation_text`
-
-::: {.callout-note collapse="true"}
-## The fragments
-
-```{r}
-#| label: seed-filter-fragments
-#| echo: false
-if (nrow(fragments) == 0) {
-  cat("No fragments.")
-} else {
-  fragments |>
-    transmute(`Fragment size` = component_size, Year = year, Title = title) |>
-    knitr::kable()
-}
-```
-:::
-
-### Centrality
-
-The comparison covers the works present in both graphs, with ghost entries excluded. A Spearman correlation near 1 and a large top-20 overlap mean the seed's citations barely change a measure's ranking. Betweenness is zero for most works. The seed filter takes nonzero betweenness away from `r n_btw_lost` works that had it in Annotated and gives it to `r n_btw_gained`. The second table lists the ten works whose betweenness rank moves the most among the `r n_btw_both` that have nonzero betweenness in both graphs.
-
-```{r}
-#| label: seed-filter-centrality
-#| echo: false
-measure_agreement <- function(col, label) {
-  a <- shared[[paste0(col, "_a")]]
-  f <- shared[[paste0(col, "_f")]]
-  tibble(
-    Measure = label,
-    `Spearman correlation` = round(cor(a, f, method = "spearman"), 3),
-    `Top 20 in both` = length(intersect(shared$name[order(-a)][1:20], shared$name[order(-f)][1:20]))
-  )
-}
-
-bind_rows(
-  measure_agreement("in_degree", "In-degree"),
-  measure_agreement("betweenness_raw", "Betweenness"),
-  measure_agreement("pagerank", "PageRank"),
-  measure_agreement("coreness", "Coreness")
-) |>
-  knitr::kable()
-```
-
-```{r}
-#| label: seed-filter-movers
-#| echo: false
-shared |>
-  filter(betweenness_raw_a > 0, betweenness_raw_f > 0) |>
-  mutate(
-    rank_a = rank(-betweenness_raw_a, ties.method = "min"),
-    rank_f = rank(-betweenness_raw_f, ties.method = "min"),
-    change = rank_a - rank_f
-  ) |>
-  arrange(desc(abs(change))) |>
-  head(10) |>
-  transmute(
-    Work = name, Year = year, Title = title,
-    `Rank, Annotated` = rank_a,
-    `Rank, seed filtered` = rank_f,
-    `Places gained` = change
-  ) |>
-  knitr::kable()
-```
-
-### Communities
-
-Partition agreement is measured on the nodes both graphs share. The adjusted Rand index and normalized mutual information both measure how much two partitions agree, from 0 for no more agreement than chance to 1 for identical groupings. Louvain and Leiden are rerun on each graph, and the Girvan-Newman partitions are the earliest fragmentation-onset cuts of the two runs. The last two rows rerun each algorithm on the Annotated graph with a different random seed. They show how much of the disagreement comes from the algorithm's own randomness and not from the seed filter.
-
-```{r}
-#| label: seed-filter-partitions
-#| echo: false
-gn_both <- gn$annotated$available && gn$seed_filtered$available
-
-agree_row <- function(method, x, y) {
-  d <- inner_join(x, y, by = "name")
-  a <- as.integer(factor(d$x))
-  b <- as.integer(factor(d$y))
-  tibble(
-    Method = method,
-    `Adjusted Rand index` = round(igraph::compare(a, b, method = "adjusted.rand"), 3),
-    `Normalized mutual information` = round(igraph::compare(a, b, method = "nmi"), 3),
-    `Nodes compared` = format(nrow(d), big.mark = ",")
-  )
-}
-
-rerun_agreement <- function(method, cluster_fn) {
-  und <- as_undirected(graphs$annotated, mode = "collapse")
-  set.seed(1); a <- as.integer(membership(cluster_fn(und)))
-  set.seed(2); b <- as.integer(membership(cluster_fn(und)))
-  agree_row(paste0(method, ", Annotated against its own rerun"),
-            tibble(name = V(und)$name, x = a), tibble(name = V(und)$name, y = b))
-}
-
-bind_rows(
-  if (gn_both) agree_row("Girvan-Newman, earliest cut",
-                         gn$annotated$partition |> transmute(name = node_id, x = community_gn),
-                         gn$seed_filtered$partition |> transmute(name = node_id, y = community_gn)),
-  agree_row("Louvain", metrics$annotated |> transmute(name, x = community_louvain),
-                       metrics$seed_filtered |> transmute(name, y = community_louvain)),
-  agree_row("Leiden", metrics$annotated |> transmute(name, x = community_leiden),
-                      metrics$seed_filtered |> transmute(name, y = community_leiden)),
-  rerun_agreement("Louvain", cluster_louvain),
-  rerun_agreement("Leiden", function(g) cluster_leiden(g, objective_function = "modularity"))
-) |>
-  knitr::kable()
-```
-
-```{r}
-#| label: gn-trace-overlay
-#| echo: false
-#| fig-width: 8
-#| fig-height: 5
-#| eval: !expr gn$annotated$available && gn$seed_filtered$available && !is.null(gn$annotated$trace) && !is.null(gn$seed_filtered$trace)
-trace_both <- bind_rows(
-  gn$annotated$trace |> mutate(run = graph_labels[["annotated"]]),
-  gn$seed_filtered$trace |> mutate(run = graph_labels[["seed_filtered"]])
-)
-onsets <- tibble(
-  run = unname(graph_labels[c("annotated", "seed_filtered")]),
-  round = c(gn$annotated$earliest$round, gn$seed_filtered$earliest$round)
-)
-ggplot(trace_both, aes(x = round, y = n_components, colour = run)) +
-  geom_line() +
-  geom_vline(data = onsets, aes(xintercept = round, colour = run),
-             linetype = "dashed", linewidth = 0.4, show.legend = FALSE) +
-  scale_y_continuous(labels = function(x) format(x, big.mark = ",")) +
-  scale_colour_manual(values = setNames(c("steelblue", "firebrick"), unname(graph_labels[c("annotated", "seed_filtered")])),
-                      name = NULL) +
-  labs(
-    title = "Connected components across both Girvan-Newman runs",
-    subtitle = "Dashed lines mark each run's earliest fragmentation onset",
-    x = "Round", y = "Connected components"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-```
-
-Each of the largest Annotated clusters, with the seed-filtered cluster that shares the most nodes with it. The share is the fraction of the Annotated cluster that lands in that match, and the Jaccard index is the overlap divided by the union of the two clusters.
-
-```{r}
-#| label: seed-filter-matches
-#| echo: false
-#| eval: !expr gn$annotated$available && gn$seed_filtered$available
-gn_shared <- inner_join(
-  gn$annotated$partition |> rename(community_a = community_gn),
-  gn$seed_filtered$partition |> rename(community_f = community_gn),
-  by = "node_id"
-)
-gn_overlap <- gn_shared |>
-  count(community_a, community_f, name = "n_both") |>
-  group_by(community_a) |> mutate(size_a = sum(n_both)) |> ungroup() |>
-  group_by(community_f) |> mutate(size_f = sum(n_both)) |> ungroup() |>
-  mutate(jaccard = n_both / (size_a + size_f - n_both))
-gn_best_match <- gn_overlap |>
-  group_by(community_a) |>
-  slice_max(n_both, n = 1, with_ties = FALSE) |>
-  ungroup()
-gn_switched <- gn_shared |>
-  left_join(gn_best_match |> select(community_a, best_f = community_f), by = "community_a") |>
-  summarise(n = sum(community_f != best_f), share = mean(community_f != best_f))
-
-lookup_a <- gn_label_lookup("annotated")
-lookup_f <- gn_label_lookup("seed_filtered")
-gn$annotated$partition |>
-  count(community_gn, name = "size", sort = TRUE) |>
-  slice_head(n = gn_top_n) |>
-  left_join(gn_best_match, by = c("community_gn" = "community_a")) |>
-  transmute(
-    `Cluster (Annotated)` = gn_label_or_id(community_gn, lookup_a),
-    Size = size,
-    `Best match (seed filtered)` = gn_label_or_id(community_f, lookup_f),
-    `Shared nodes` = n_both,
-    `Share of cluster` = scales::percent(n_both / size, accuracy = 1),
-    Jaccard = round(jaccard, 2)
-  ) |>
-  knitr::kable()
-```
-
-`r if (gn$annotated$available && gn$seed_filtered$available) paste0(format(gn_switched$n, big.mark = ","), " of the ", format(nrow(gn_shared), big.mark = ","), " nodes in both partitions (", scales::percent(gn_switched$share, accuracy = 0.1), ") sit outside the best-matching cluster of their Annotated cluster.") else ""`
-
-## Appendix: layout trials
-
-The partition plots above use the Fruchterman-Reingold layout (`fr`, 500 iterations, with igraph's grid speed-up). The layouts below were tried and are kept for reference with `eval: false`. Each calls the same plotting function as the main plots, so any of them can be switched on one at a time and run on either graph.
-
-- `fr` spreads the papers that cite a hub around it, so each community reads as a region of the plot. It runs in seconds on either graph.
-- `lgl` with `coolexp` lowered to 0.5, the layout used before, stretches the graph into one diagonal band and leaves the highlighted communities overlapping through its middle. It is also far slower than `fr` on the seed-filtered graph.
-- `drl` stacks the papers that cite a hub on top of it, so every community collapses into a single dot and the plot shows nothing of its shape.
-- `stress` (`graphlayouts::layout_with_stress()`) is faster than `drl` and built to preserve graph distance. It produced a concentric-ring pattern and was rejected.
-- Untuned `lgl` places a handful of true outliers far from the rest. That is why the main plots crop the view to the 1st to 99th percentile.
-- `lgl` with `repulserad` doubled spread the periphery out and left the inner core dense. `repulserad` sets the distance at which repulsion stops acting and does not change its strength, so it is the wrong lever for core density.
-
-```{r}
-#| label: layout-trial-drl
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-gn_plot_partition("annotated", layout = "drl", layout_args = list(), crop = FALSE)
-```
-
-```{r}
-#| label: layout-trial-stress
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-library(graphlayouts)
-gn_plot_partition("annotated", layout = "stress", layout_args = list(), crop = FALSE)
-```
-
-```{r}
-#| label: layout-trial-lgl-default
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-gn_plot_partition("annotated", layout = "lgl", layout_args = list(), crop = TRUE)
-```
-
-```{r}
-#| label: layout-trial-lgl-repulserad
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-lgl_area <- vcount(graphs$annotated)^2
-gn_plot_partition("annotated", layout = "lgl",
-                  layout_args = list(area = lgl_area, repulserad = 2 * lgl_area * vcount(graphs$annotated)),
-                  crop = TRUE)
-```
-
-```{r}
-#| label: layout-trial-lgl-coolexp-annotated
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-gn_plot_partition("annotated", layout = "lgl", layout_args = list(coolexp = 0.5), crop = TRUE)
-```
-
-```{r}
-#| label: layout-trial-lgl-coolexp-seed-filtered
-#| eval: false
-#| fig-width: 16
-#| fig-height: 14
-gn_plot_partition("seed_filtered", layout = "lgl", layout_args = list(coolexp = 0.5), crop = TRUE)
-```
-
-The Louvain, Leiden and K-means plots, also disabled. Each saves a PNG and a PDF next to this document.
-
-```{r}
-#| label: membership-viz
-#| eval: false
-#| fig-width: 12
-#| fig-height: 12
-#| cache: true
-plot_membership <- function(key, column, title, file) {
-  tg <- as_tbl_graph(graphs[[key]]) |>
-    activate(nodes) |>
-    left_join(metrics[[key]] |> select(name, value = all_of(column)), by = "name") |>
-    mutate(group = as.factor(value))
-  p <- ggraph(tg, layout = "drl") +
-    geom_edge_link(alpha = 0.05, colour = "grey60") +
-    geom_node_point(aes(colour = group), size = 0.3, alpha = 0.7) +
-    scale_colour_viridis_d(guide = "none") +
-    theme_graph() +
-    labs(title = title)
-  ggsave(here("analysis", paste0(file, ".png")), p, width = 16, height = 16, dpi = 300)
-  ggsave(here("analysis", paste0(file, ".pdf")), p, width = 16, height = 16, device = cairo_pdf)
-  p
-}
-plot_membership("annotated", "community_louvain", "Citation graph, Louvain communities", "bibvik_louvain")
-plot_membership("annotated", "community_leiden", "Citation graph, Leiden communities", "bibvik_leiden")
-plot_membership("annotated", "cluster_kmeans", "Citation graph, K-means clusters (by centrality profile)", "bibvik_kmeans")
-```
-
-## Node-table export
-
-`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. The Girvan-Newman columns are left out when a run has not been installed.
-
-```{r}
-#| label: node-table-export
-#| echo: false
-#| results: hide
-node_table <- metrics$annotated |>
-  select(name, betweenness, betweenness_raw, closeness, pagerank, hub, authority,
-         in_degree, out_degree, degree,
-         title, year, generation, entry_type, resolution, completeness, author, is_ghost,
-         coreness, cluster_kmeans, component_weak, component_strong,
-         community_louvain, community_leiden)
-
-gn_column <- function(key, column) {
-  gn[[key]]$partition |>
-    transmute(name = node_id, "{column}" := as.integer(community_gn))
-}
-if (gn$annotated$available) {
-  node_table <- node_table |> left_join(gn_column("annotated", "community_gn"), by = "name")
-  cat("Joined Girvan-Newman communities from", gn$annotated$cut_file,
-      "(fragmentation-onset round", gn$annotated$earliest$round, ")\n")
-} else {
-  cat("No Girvan-Newman run found at", gn_path("annotated"),
-      "- run the pipeline first (see analysis/README.md). Skipping join.\n")
-}
-if (gn$seed_filtered$available) {
-  node_table <- node_table |>
-    left_join(gn_column("seed_filtered", "community_gn_seed_filtered"), by = "name")
-}
-
-gn_group_column <- function(key, column) {
-  if (is.null(gn_groups[[key]])) return(NULL)
-  gn[[key]]$partition |>
-    left_join(select(gn_groups[[key]]$clusters, community_gn, group), by = "community_gn") |>
-    transmute(name = node_id, "{column}" := group)
-}
-for (spec in list(c("annotated", "group_gn"), c("seed_filtered", "group_gn_seed_filtered"))) {
-  group_column <- gn_group_column(spec[1], spec[2])
-  if (!is.null(group_column)) node_table <- node_table |> left_join(group_column, by = "name")
-}
-
-write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
-cat("Written bibvik_node_table.csv\n")
-cat("Rows:", nrow(node_table), "\n")
-```
+- `gn_analysis/README.md` describes each Girvan-Newman script, its arguments and its outputs.
+- `cluster_labelling/cluster_labelling_README.md` describes representative selection, labelling and the earlier methods.

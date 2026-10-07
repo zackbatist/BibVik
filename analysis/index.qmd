@@ -3,7 +3,7 @@ title: "BibVik Citation Analysis: Camps, Communities, and Citational Politics"
 format:
   html:
     toc: true
-    toc-depth: 2
+    toc-depth: 3
     code-fold: true
     self-contained: true
 execute:
@@ -19,11 +19,11 @@ p {
 ```
 
 This document renders a full analysis by including each stage in sequence.
-It is executed through a series of included files::
+It is executed through a series of included files:
 
 - `00_overview.qmd` — general information about the dataset that serves as the basis for analysis
 - `01_annotation.qmd` — annotation cross-tab (F1 corpus), independent of the citation graph
-- `02_network_structure.qmd` — degree, centrality, k-core, components, Louvain, Leiden, k-means on centrality profiles (GN excluded — see below)
+- `02_network_structure.qmd` — degree, centrality, k-core, components, Louvain, Leiden and k-means on centrality profiles, then the Girvan-Newman clusters, their groups, shapes and internal structure, read from the standalone runs listed below
 - `03_joined_descriptions.qmd` — integrates the annotation and network analysis strands
 
 The analysis also depends on a few toolsets that operate outside the Quarto render chain:

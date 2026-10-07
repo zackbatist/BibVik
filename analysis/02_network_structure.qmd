@@ -418,13 +418,20 @@ kcore_top_table <- function(key) {
 # re-render instead of being typed in.
 deg_stats <- map(metrics, function(m) {
   cited <- m$in_degree[m$in_degree >= 1]
-  list(share_le8 = scales::percent(mean(cited <= 8), accuracy = 1),
+  list(share_le2 = scales::percent(mean(cited <= 2), accuracy = 1),
+       share_le8 = scales::percent(mean(cited <= 8), accuracy = 1),
        max_in = max(m$in_degree, na.rm = TRUE))
 })
 btw_stats <- map(graphs |> names() |> set_names(), function(key) {
-  d <- btw_year_data(key) |> filter(!is.na(year_numeric), betweenness_raw > 0)
+  all_years <- btw_year_data(key) |> filter(!is.na(year_numeric))
+  d <- all_years |> filter(betweenness_raw > 0)
+  m <- metrics[[key]] |> filter(is_ghost == "false")
   list(n_nonzero = nrow(d), n_pre2000 = sum(d$year_numeric < 2000),
-       pct_pre2000 = scales::percent(mean(d$year_numeric < 2000), accuracy = 1))
+       pct_pre2000 = scales::percent(mean(d$year_numeric < 2000), accuracy = 1),
+       pct_all_pre2000 = scales::percent(mean(all_years$year_numeric < 2000), accuracy = 1),
+       first_year = min(d$year_numeric), last_year = max(d$year_numeric),
+       n_cited_only = sum(m$out_degree == 0), n_cited_only_nonzero = sum(m$out_degree == 0 & m$betweenness_raw > 0),
+       rho = round(cor(d$year_numeric, d$betweenness_raw, method = "spearman"), 2))
 })
 kcore_stats <- map(metrics, function(m) {
   real <- m |> filter(is_ghost == "false")
@@ -566,7 +573,7 @@ plot_in_degree("seed_filtered")
 
 :::
 
-The bulk of the distribution follows a fairly straight decline on this log-log scale, consistent with the expected power-law pattern: most works are cited once or twice, a much smaller number several times. In Annotated, `r deg_stats$annotated$share_le8` of works with at least one citation are cited eight times or fewer, and `r deg_stats$seed_filtered$share_le8` in Annotated, seed filtered. The tail is real, not an artifact of a truncated plot axis: the maximum in-degree is `r deg_stats$annotated$max_in` in Annotated and `r deg_stats$seed_filtered$max_in` in Annotated, seed filtered. A handful of works drive that high-citation tail, listed below rather than relied on to show clearly as bars on the histogram above, since bars this sparse are easy to miss regardless of binning.
+The bulk of the distribution follows a fairly straight decline on this log-log scale, consistent with the expected power-law pattern: most works are cited once or twice (`r deg_stats$annotated$share_le2` of works with at least one citation in Annotated and `r deg_stats$seed_filtered$share_le2` in Annotated, seed filtered), a much smaller number several times. In Annotated, `r deg_stats$annotated$share_le8` of works with at least one citation are cited eight times or fewer, and `r deg_stats$seed_filtered$share_le8` in Annotated, seed filtered. The tail is real, not an artifact of a truncated plot axis: the maximum in-degree is `r deg_stats$annotated$max_in` in Annotated and `r deg_stats$seed_filtered$max_in` in Annotated, seed filtered. A handful of works drive that high-citation tail, listed below rather than relied on to show clearly as bars on the histogram above, since bars this sparse are easy to miss regardless of binning.
 
 ### Most-cited works (the high end of the tail)
 
@@ -674,11 +681,7 @@ plot_btw_year_full("seed_filtered")
 
 :::
 
-Whether the boundary reflects something about the corpus itself (older
-material may be primary sources, sagas, or editions with different
-citation patterns than modern academic synthesis) or a genuine
-historiographical shift (post-2000 archaeology being where cross-cutting
-synthesis actually happens) can't be settled from either plot alone.
+The boundary at `r btw_stats$annotated$first_year` comes from the graph and not from the history of the field. A work can have nonzero betweenness only when it both cites other works and is cited, and only the annotated papers cite anything here. The works with nonzero betweenness were published between `r btw_stats$annotated$first_year` and `r btw_stats$annotated$last_year`, although `r btw_stats$annotated$pct_all_pre2000` of all works in Annotated predate 2000. `r format(btw_stats$annotated$n_cited_only, big.mark = ",")` works in Annotated and `r format(btw_stats$seed_filtered$n_cited_only, big.mark = ",")` in Annotated, seed filtered are only cited, and `r btw_stats$annotated$n_cited_only_nonzero` and `r btw_stats$seed_filtered$n_cited_only_nonzero` of them have nonzero betweenness. Older works therefore score zero whatever their place in the literature, and these plots cannot compare old and recent works. Among the works that can score, the Spearman correlation between publication year and betweenness is `r btw_stats$annotated$rho` in Annotated and `r btw_stats$seed_filtered$rho` in Annotated, seed filtered, where a negative value means earlier works have higher betweenness.
 
 [^loess]: A LOESS fit, not a strict linear one, to allow for a
   non-constant relationship across the full year range rather than

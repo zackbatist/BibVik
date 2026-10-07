@@ -292,9 +292,9 @@ Coverage is thin relative to the graph as a whole: in Annotated,
 `r if (has_gn("annotated")) cluster_data$annotated$n_matched else "n/a"` annotated
 works out of `r nrow(node_table)` nodes, and within any single cluster
 that annotated count is often a small fraction of the cluster's real
-size (the "other" grouping below hides clusters with fewer than 3
-annotated works, but even the clusters shown may have only a handful of
-annotated works out of a much larger true membership). A prior
+size (the heatmaps below show only the 20 clusters with the most annotated
+works, and even those may have only a handful of annotated works out of a
+much larger true membership). A prior
 exploratory pass on an earlier GN cut of this same corpus found 7-13
 annotated nodes per cluster typical, out of hundreds of members, and
 treated agreement between structure and annotation as directionally
