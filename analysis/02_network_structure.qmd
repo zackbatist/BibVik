@@ -1337,6 +1337,54 @@ gn_subcluster_overview <- function(key) {
     theme(legend.position = "bottom")
 }
 
+# The coded categories of each annotated paper: every topic, method and source column
+# whose value is Primary or Secondary, as 03 counts them. NULL when the file is missing.
+gn_annotation_codes <- function() {
+  path <- here("data", "annotations.csv")
+  if (!file.exists(path)) return(NULL)
+  a <- read_csv(path, show_col_types = FALSE)
+  cols <- names(a)[str_detect(names(a), "^(Topics|Methods|Sources of Evidence) \\[")]
+  matrix(as.matrix(a[, cols]) %in% c("Primary", "Secondary"), nrow = nrow(a), dimnames = list(a$cite_key, cols))
+}
+
+# Share of the coded categories two papers have in common (shared over either),
+# NA when either paper is not annotated or neither has a code.
+gn_codes_alike <- function(codes, p1, p2) {
+  map2_dbl(p1, p2, function(a, b) {
+    if (is.null(codes) || !all(c(a, b) %in% rownames(codes))) return(NA_real_)
+    x <- codes[a, ]
+    y <- codes[b, ]
+    if (!any(x | y)) NA_real_ else sum(x & y) / sum(x | y)
+  })
+}
+
+# The same share averaged over every pair of annotated papers.
+gn_codes_baseline <- function(codes) {
+  m <- codes * 1
+  shared <- m %*% t(m)
+  either <- outer(rowSums(m), rowSums(m), "+") - shared
+  ok <- upper.tri(either) & either > 0
+  mean(shared[ok] / either[ok])
+}
+
+gn_alike_text <- function() {
+  codes <- gn_annotation_codes()
+  if (is.null(codes)) return("The annotation file was not found, so the column is blank.")
+  one <- function(key) {
+    if (!gn[[key]]$available) return("not available until the run is in place")
+    p <- gn_subclusters_data(key)$pieces |>
+      filter(piece <= 2) |>
+      select(community_id, piece, top_paper) |>
+      pivot_wider(names_from = piece, values_from = top_paper, names_prefix = "p")
+    a <- gn_codes_alike(codes, p$p1, p$p2)
+    a <- a[!is.na(a)]
+    paste0(scales::percent(mean(a), accuracy = 1), " of their codes (", length(a), " divisions where both are annotated)")
+  }
+  paste0("In Annotated, the two top papers of a division share on average ", one("annotated"),
+         ", and in Annotated, seed filtered ", one("seed_filtered"), ". Two annotated papers picked at random share ",
+         scales::percent(gn_codes_baseline(codes), accuracy = 1), ".")
+}
+
 gn_subcluster_table <- function(key) {
   d <- gn_subclusters_data(key)
   lookup <- gn_label_lookup(key)
@@ -1348,8 +1396,9 @@ gn_subcluster_table <- function(key) {
   pieces <- d$pieces |>
     filter(piece <= 2) |>
     mutate(top = info(top_paper)) |>
-    select(community_id, piece, size, top) |>
-    pivot_wider(names_from = piece, values_from = c(size, top))
+    select(community_id, piece, size, top, paper = top_paper) |>
+    pivot_wider(names_from = piece, values_from = c(size, top, paper))
+  codes <- gn_annotation_codes()
   d$splits |>
     mutate(community_id = as.character(community_id)) |>
     filter(n_substantial > 0) |>
@@ -1362,6 +1411,7 @@ gn_subcluster_table <- function(key) {
       `First division` = paste0(size_1, " and ", size_2),
       `Papers in neither` = size - size_1 - size_2,
       `Rounds after the cut` = format(first_substantial_round - cut_round, big.mark = ","),
+      `Coded alike` = scales::percent(gn_codes_alike(codes, paper_1, paper_2), accuracy = 1, na.label = "n/a"),
       `Top paper, larger piece` = top_1,
       `Top paper, second piece` = top_2
     ) |>
@@ -1879,7 +1929,7 @@ gn_subcluster_threshold_table("seed_filtered")
 
 :::
 
-The next table lists the communities with a substantial division, ordered by the size of the second piece, and shows the first division of each. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined.
+The next table lists the communities with a substantial division, ordered by the size of the second piece, and shows the first division of each. Each piece is named for the paper with the most citation ties inside the community that ends up in it. `r gn_subcluster_f1_text()` Rounds after the cut is how long the community held together once the cut was made, so a small number means its two pieces were only loosely joined. Coded alike is the share of coded topics, methods and sources that the two top papers have in common, counting primary and secondary values. A low share means the division separates two subjects, and a high share means both halves are about the same subject and only their reference lists differ. `r gn_alike_text()` It is a rough measure, because it counts ticked boxes, so two papers on the same subject can score low when the coders ticked different categories.
 
 ::: {.panel-tabset}
 

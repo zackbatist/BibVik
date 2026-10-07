@@ -298,7 +298,6 @@ Each item appears once here. The documents no longer carry their own lists.
 
 ### Network and communities (02, 03)
 
-- Run the title and annotation checks on individual Girvan-Newman communities in 02. The communities in the table of substantial divisions are the strongest candidates, since each divides into two pieces built around different citing papers. This check has not been carried out on the new partition. A first look at the annotation half on Annotated: the two top papers of a division share 48% of their coded categories on average, against 30% for two random annotated papers, from 5% to 91% across the 29 divisions. A column in the table of divisions would show it for each.
 - Join the consensus groups to the annotation in 03. `group_gn` and `group_gn_seed_filtered` are in the node table, and 03 does not use them.
 - Label the remaining clusters of 10 or more papers, about 176 on Annotated and 192 on seed filtered. Only the 100 largest in each run have labels, so the rest appear as "Community N" in the tables and legends.
 
@@ -318,7 +317,6 @@ Each item appears once here. The documents no longer carry their own lists.
 ### Presentation and publishing
 
 - Redesign the 12 deleted margin notes as collapsible "How to read" boxes under the figures they explained. The text is in the history before commit 03e7d2b.
-- Re-render `analysis/00_overview.qmd` and publish, because the page on `gh-pages` is an old version titled "Part 1 — Annotation descriptives". Remove the leftover `.quarto/quarto-publish-worktree-*` folder with `git worktree remove --force` and `git worktree prune`.
 
 ## Related documents
 
