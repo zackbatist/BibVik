@@ -298,7 +298,6 @@ Each item appears once here. The documents no longer carry their own lists.
 
 ### Network and communities (02, 03)
 
-- Join the consensus groups to the annotation in 03. `group_gn` and `group_gn_seed_filtered` are in the node table, and 03 does not use them.
 - Label the remaining clusters of 10 or more papers, about 176 on Annotated and 192 on seed filtered. Only the 100 largest in each run have labels, so the rest appear as "Community N" in the tables and legends.
 
 ### Planned comparisons (03)

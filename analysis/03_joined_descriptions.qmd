@@ -137,8 +137,8 @@ cluster_context <- function(key) {
 }
 
 # Coverage and enrichment of one category family (topic, method or source of
-# evidence) in the 20 clusters with the most annotated works.
-category_data <- function(ctx, pattern, kind) {
+# evidence) in the clusters tied for the 20 most annotated works.
+category_data <- function(ctx, pattern, kind, unit = "Cluster", unit_names = NULL) {
   long <- ctx$annotated_only |>
     select(name, community_gn, contains(pattern)) |>
     pivot_longer(contains(pattern), names_to = "category", values_to = "value") |>
@@ -150,7 +150,9 @@ category_data <- function(ctx, pattern, kind) {
     filter(community_gn %in% keep) |>
     left_join(ctx$true_sizes, by = "community_gn") |>
     arrange(desc(true_size)) |>
-    mutate(label = sprintf("Cluster %s (%d of %d annotated)", community_gn, n_annotated, true_size)) |>
+    mutate(label = sprintf("%s %s%s (%d of %d annotated)", unit, community_gn,
+                           if (is.null(unit_names)) "" else paste0(": ", unit_names[community_gn]),
+                           n_annotated, true_size)) |>
     mutate(label = fct_rev(fct_inorder(label))) |>
     select(community_gn, label) |>
     deframe()
@@ -187,18 +189,24 @@ cluster_data <- map(set_names(names(gn_columns)), function(key) {
   ctx
 })
 
-category_note <- function(key, kind) {
-  d <- cluster_data[[key]]
+# How many clusters the heatmaps show (every cluster tied for the 20 most annotated works),
+# and the most annotated works any cluster holds.
+heatmap_n <- function(key) if (has_gn(key)) length(cluster_data[[key]]$topic$keep) else "n/a"
+most_annotated <- function() max(map_dbl(compact(cluster_data), \(d) max(d$topic$annotated_n$n_annotated)))
+
+category_note <- function(key, kind, data = cluster_data) {
+  d <- data[[key]]
   cat("Works with a cluster assignment and any ", kind, " coded: ", n_distinct(d[[kind]]$long$name), "\n\n", sep = "")
 }
 
-category_heatmap <- function(key, kind) {
-  d <- cluster_data[[key]][[kind]]
+category_heatmap <- function(key, kind, data = cluster_data, unit = "cluster") {
+  d <- data[[key]][[kind]]
   family <- c(topic = "Topic", method = "Method", source = "Source-of-evidence")[[kind]]
   tail_text <- c(
     topic = paste0("a cluster at 1x carries the topic at exactly the corpus average; ubiquitous topics (e.g. Environment) will not dominate every row here the way they do on raw coverage"),
     method = "ubiquitous methods (e.g. Spatial analysis) will not dominate every row here the way they do on raw coverage",
     source = "ubiquitous sources (e.g. Written sources, Graves and monuments) will not dominate every row here the way they do on raw coverage")[[kind]]
+  tail_text <- str_replace(tail_text, "a cluster at 1x", paste0("a ", unit, " at 1x"))
   d$enrichment |>
     mutate(cluster_label = d$labels[as.character(community_gn)]) |>
     ggplot(aes(x = category, y = cluster_label, fill = enrichment)) +
@@ -212,17 +220,19 @@ category_heatmap <- function(key, kind) {
                          midpoint = 1, limits = c(0, 3), oob = scales::squish,
                          labels = scales::label_number(suffix = "x")) +
     labs(x = "", y = "", fill = "Enrichment vs.\ncorpus base rate",
-         title = paste0(family, " enrichment within each Girvan-Newman cluster, ", graph_labels[[key]]),
-         subtitle = paste0("Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that ",
-                           kind, ", not raw coverage — ", tail_text)) +
+         title = paste0(family, " enrichment within each Girvan-Newman ", unit, ", ", graph_labels[[key]]),
+         subtitle = (function(s) if (unit == "cluster") s else str_wrap(s, 105))(
+           paste0("Cell numbers are raw counts. Fill shows coverage relative to the corpus-wide rate for that ",
+                  kind, ", not raw coverage — ", tail_text))) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+          plot.title.position = if (unit == "cluster") "panel" else "plot")
 }
 
 # A peak requires the Wilson lower bound (defined in setup) on a cluster's
 # coverage rate to exceed the corpus baseline rate for that category.
-cluster_peaks <- function(key) {
-  d <- cluster_data[[key]]
+cluster_peaks <- function(key, data = cluster_data) {
+  d <- data[[key]]
   bind_rows(d$topic$enrichment, d$method$enrichment, d$source$enrichment) |>
     filter(ci_lower > corpus_rate)
 }
@@ -292,9 +302,10 @@ Coverage is thin relative to the graph as a whole: in Annotated,
 `r if (has_gn("annotated")) cluster_data$annotated$n_matched else "n/a"` annotated
 works out of `r nrow(node_table)` nodes, and within any single cluster
 that annotated count is often a small fraction of the cluster's real
-size (the heatmaps below show only the 20 clusters with the most annotated
-works, and even those may have only a handful of annotated works out of a
-much larger true membership). A prior
+size (the heatmaps below show the clusters tied for the 20 most annotated
+works, `r heatmap_n("annotated")` in Annotated and `r heatmap_n("seed_filtered")` in Annotated, seed filtered, and no
+cluster holds more than `r most_annotated()` annotated works out of a much larger
+true membership). A prior
 exploratory pass on an earlier GN cut of this same corpus found 7-13
 annotated nodes per cluster typical, out of hundreds of members, and
 treated agreement between structure and annotation as directionally
@@ -337,8 +348,9 @@ just present because it's common everywhere.
 **Girvan-Newman clusters by topic.** A threshold of 3+ annotated
 works lets through only a small share of the clusters in this corpus (see
 the counts below), so it does not give a workable set. Shown here
-instead, in the heatmap below: the 20 clusters with the most annotated works. This is
-a readability choice, not a derived breakpoint.
+instead, in the heatmap below: the clusters tied for the 20 most annotated works
+(`r heatmap_n("annotated")` in Annotated and `r heatmap_n("seed_filtered")` in Annotated, seed filtered, because many
+clusters tie at two annotated works). This is a readability choice, not a derived breakpoint.
 
 At this cut, Annotated has
 `r if (has_gn("annotated")) format(cluster_data$annotated$n_clusters, big.mark = ",") else "n/a"` clusters,
@@ -546,6 +558,244 @@ signature_detail("annotated")
 #| fig-height: 7
 #| eval: !expr has_gn("seed_filtered")
 signature_detail("seed_filtered")
+```
+
+:::
+
+
+## Groups of clusters vs. topics, methods, and sources of evidence
+
+```{r}
+#| label: group-functions
+#| echo: false
+# Part 2 sorts the Girvan-Newman clusters into groups by consensus. Only groups of two or
+# more clusters are used here, as in Part 2, and each is named for its largest cluster.
+# category_data() and the heatmap function above are reused, with the group number
+# carried in the same id column the clusters use.
+group_columns <- c(annotated = "group_gn", seed_filtered = "group_gn_seed_filtered")
+label_runs <- c(annotated = "annotated", seed_filtered = "annotated_no_seed")
+has_groups <- function(key) {
+  col <- group_columns[[key]]
+  has_gn(key) && col %in% names(node_table) && any(!is.na(node_table[[col]]))
+}
+
+# Cluster labels from the labelling step, empty when the run has none.
+cluster_label_lookup <- function(key) {
+  path <- here("analysis", "gn_analysis", "results", label_runs[[key]], "labels", "cluster_labels.csv")
+  if (!file.exists(path)) return(character())
+  read_csv(path, show_col_types = FALSE) |>
+    transmute(id = as.character(community_id), label = label) |>
+    deframe()
+}
+
+# Groups with fewer annotated works than this are listed but not tested: the Wilson interval
+# cannot tell a pattern from chance in a handful of papers, and one paper is enough to make
+# any rare category look like a peak.
+group_min_annotated <- 10
+
+group_context <- function(key) {
+  gcol <- group_columns[[key]]
+  ccol <- gn_columns[[key]]
+  lookup <- cluster_label_lookup(key)
+  groups <- node_table |>
+    filter(!is.na(.data[[gcol]]), !is.na(.data[[ccol]])) |>
+    count(group = .data[[gcol]], cluster = .data[[ccol]], name = "papers") |>
+    group_by(group) |>
+    summarise(lead = cluster[which.max(papers)], n_clusters = n(), true_size = sum(papers), .groups = "drop") |>
+    filter(n_clusters >= 2) |>
+    mutate(name = str_trunc(coalesce(unname(lookup[as.character(lead)]), paste("Community", lead)), 40))
+  annotated_all <- cluster_table_annotated |>
+    mutate(community_gn = as.character(.data[[gcol]])) |>
+    filter(community_gn %in% as.character(groups$group), !is.na(publication_year))
+  per_group <- count(annotated_all, community_gn, name = "n_annotated")
+  eligible <- per_group$community_gn[per_group$n_annotated >= group_min_annotated]
+  list(
+    annotated_only = filter(annotated_all, community_gn %in% eligible),
+    true_sizes = transmute(groups, community_gn = as.character(group), true_size = true_size),
+    names = set_names(groups$name, as.character(groups$group)),
+    groups = groups,
+    per_group = per_group,
+    eligible = eligible
+  )
+}
+
+group_data <- map(set_names(names(gn_columns)), function(key) {
+  if (!has_groups(key)) return(NULL)
+  ctx <- group_context(key)
+  ctx$topic <- category_data(ctx, "Topics..", "topic", "Group", ctx$names)
+  ctx$method <- category_data(ctx, "Methods..", "method", "Group", ctx$names)
+  ctx$source <- category_data(ctx, "Sources.of.Evidence..", "source", "Group", ctx$names)
+  ctx$n_matched <- nrow(ctx$annotated_only)
+  ctx$n_categories <- nrow(ctx$topic$corpus_rate) + nrow(ctx$method$corpus_rate) + nrow(ctx$source$corpus_rate)
+  ctx$peaks <- cluster_peaks(key, set_names(list(ctx), key))
+  ctx
+})
+
+# One row per group: its size, its annotated works, and the strongest categories it carries
+# above the corpus rate (Wilson lower bound, as for the clusters).
+group_peak_table <- function(key) {
+  d <- group_data[[key]]
+  strongest <- d$peaks |>
+    group_by(community_gn) |>
+    arrange(desc(enrichment), .by_group = TRUE) |>
+    summarise(
+      n_peaks = n(),
+      strongest = paste0(head(paste0(category, " (", round(enrichment, 1), "x, ", n, " of ", n_annotated, ")"), 3), collapse = "; "),
+      .groups = "drop"
+    )
+  d$groups |>
+    mutate(community_gn = as.character(group)) |>
+    left_join(d$per_group, by = "community_gn") |>
+    left_join(strongest, by = "community_gn") |>
+    arrange(group) |>
+    transmute(
+      Group = paste0(group, ". ", name),
+      Clusters = n_clusters,
+      Papers = format(true_size, big.mark = ","),
+      `Annotated papers` = coalesce(n_annotated, 0L),
+      Peaks = if_else(community_gn %in% d$eligible, as.character(coalesce(n_peaks, 0L)), "not tested"),
+      `Strongest peaks (enrichment, annotated papers with it of those coded)` =
+        if_else(community_gn %in% d$eligible, coalesce(strongest, "none"), paste0("fewer than ", group_min_annotated, " annotated works"))
+    ) |>
+    knitr::kable()
+}
+
+group_summary_text <- function() {
+  one <- function(key) {
+    if (!has_groups(key)) return("n/a")
+    d <- group_data[[key]]
+    tested <- filter(d$per_group, community_gn %in% d$eligible)
+    with_peak <- n_distinct(d$peaks$community_gn)
+    top <- d$peaks |> slice_max(enrichment, n = 1, with_ties = FALSE)
+    paste0(nrow(d$groups), " groups, of which ", nrow(tested), " hold at least ", group_min_annotated, " annotated works (between ",
+           min(tested$n_annotated), " and ", max(tested$n_annotated), " each); ", with_peak, " of those ", nrow(tested),
+           " carry at least one peak (", nrow(d$peaks), " peaks in all), and the strongest is ", top$category, " in Group ",
+           top$community_gn, " at ", round(top$enrichment, 1), "x")
+  }
+  paste0("In Annotated there are ", one("annotated"), ". In Annotated, seed filtered there are ", one("seed_filtered"), ".")
+}
+```
+
+Part 2 sorts the Girvan-Newman clusters into groups, using a consensus of eight community-detection variants run with five seeds each. This section repeats the comparison above one level up: each group's annotated works are compared with the annotation of the whole corpus. Enrichment, peaks and heatmaps work as described above, with a group in place of a cluster. `r group_summary_text()` Groups with fewer than `r group_min_annotated` annotated works are listed in the first table but left out of the peaks and heatmaps. Each remaining group holds a few dozen annotated works at most, so only large gaps register as peaks. Each is compared on `r group_data$annotated$n_categories` categories, and about one peak per group could arise by chance at this bound. The uncoded majority of each group may tell a different story.
+
+### What each group stands out for
+
+Every group of two or more clusters, with its number of clusters, its papers, the annotated works among them and the categories it carries furthest above the corpus rate.
+
+::: {.panel-tabset}
+
+#### Annotated
+
+```{r}
+#| label: group-table-annotated
+#| echo: false
+#| eval: !expr has_groups("annotated")
+group_peak_table("annotated")
+```
+
+#### Annotated, seed filtered
+
+```{r}
+#| label: group-table-seed-filtered
+#| echo: false
+#| eval: !expr has_groups("seed_filtered")
+group_peak_table("seed_filtered")
+```
+
+:::
+
+### Groups by topic
+
+::: {.panel-tabset}
+
+#### Annotated
+
+```{r}
+#| label: group-vs-topic-annotated
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+#| results: asis
+#| eval: !expr has_groups("annotated")
+category_note("annotated", "topic", group_data)
+category_heatmap("annotated", "topic", group_data, "group of clusters")
+```
+
+#### Annotated, seed filtered
+
+```{r}
+#| label: group-vs-topic-seed-filtered
+#| echo: false
+#| fig-width: 10
+#| fig-height: 7
+#| results: asis
+#| eval: !expr has_groups("seed_filtered")
+category_note("seed_filtered", "topic", group_data)
+category_heatmap("seed_filtered", "topic", group_data, "group of clusters")
+```
+
+:::
+
+### Groups by method
+
+::: {.panel-tabset}
+
+#### Annotated
+
+```{r}
+#| label: group-vs-method-annotated
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+#| results: asis
+#| eval: !expr has_groups("annotated")
+category_note("annotated", "method", group_data)
+category_heatmap("annotated", "method", group_data, "group of clusters")
+```
+
+#### Annotated, seed filtered
+
+```{r}
+#| label: group-vs-method-seed-filtered
+#| echo: false
+#| fig-width: 10
+#| fig-height: 7
+#| results: asis
+#| eval: !expr has_groups("seed_filtered")
+category_note("seed_filtered", "method", group_data)
+category_heatmap("seed_filtered", "method", group_data, "group of clusters")
+```
+
+:::
+
+### Groups by source of evidence
+
+::: {.panel-tabset}
+
+#### Annotated
+
+```{r}
+#| label: group-vs-source-annotated
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+#| results: asis
+#| eval: !expr has_groups("annotated")
+category_note("annotated", "source", group_data)
+category_heatmap("annotated", "source", group_data, "group of clusters")
+```
+
+#### Annotated, seed filtered
+
+```{r}
+#| label: group-vs-source-seed-filtered
+#| echo: false
+#| fig-width: 10
+#| fig-height: 7
+#| results: asis
+#| eval: !expr has_groups("seed_filtered")
+category_note("seed_filtered", "source", group_data)
+category_heatmap("seed_filtered", "source", group_data, "group of clusters")
 ```
 
 :::
