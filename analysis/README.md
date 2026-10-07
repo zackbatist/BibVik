@@ -298,7 +298,7 @@ Each item appears once here. The documents no longer carry their own lists.
 
 ### Network and communities (02, 03)
 
-- Label the remaining clusters of 10 or more papers, about 176 on Annotated and 192 on seed filtered. Only the 100 largest in each run have labels, so the rest appear as "Community N" in the tables and legends.
+- Label the remaining clusters of 10 or more papers, about 176 on Annotated and 192 on seed filtered. Only the 100 largest in each run have labels, so the rest appear as "Community N" in the tables and legends. Do it in the same pass as the new Girvan-Newman runs, since new cluster numbers need new labels anyway.
 
 ### Planned comparisons (03)
 
@@ -311,11 +311,13 @@ Each item appears once here. The documents no longer carry their own lists.
 - Consolidate the `gn_analysis` and `cluster_labelling` directories and outputs into one layout after both runs are installed. Labels now travel with their run, in `<run>/labels/`.
 - Patch `_find_duplicate()` and `_merge_into()` in the pipeline. Do not run `--extract` or `--iterate-f1` until then.
 - Resolve the 59 field corrections that no online source can settle, and split the `bradley2002` title, which glues two references together.
-- Review the 26 PDFs on which two or more records carry outgoing edges. For 21 of them one record's citekey matches the PDF's author and year, and the other records carry 893 edges, 4.2% of the Annotated edge list. 13 PDFs have 10 or more such edges, and the tables under "Possible bibliography errors" in 02 list the clearest pairs. Before changing any record, drop the suspect edges, rerun Leiden and compare, and rerun Girvan-Newman and labelling only if clusters move.
 
-### Presentation and publishing
 
-- Redesign the 12 deleted margin notes as collapsible "How to read" boxes under the figures they explained. The text is in the history before commit 03e7d2b.
+### Parked
+
+Decided to leave this until the data fixes can be batched.
+
+- Fix the shared-PDF problem, then rerun Girvan-Newman. Fourteen pairs of annotated papers have reference lists that are at least 50% identical. Eight are on a shared PDF: harrison2016 with anchukaitis2017, hayeursmith2013 with hartman2017, graslund2012a with pilo2018, hedeager2003 with hedeager2010, gardela2014 with croix2016, feveile2015 with feveile2017, kalmring2016 with price2018b and pentz2009 with christensen2013. Six were found by comparing all reference lists: price2005 with gardela2008, kitzlerahfeldt2013 with wicker2013, ashby2015a with ashby2015, aannestad2018a with aannestad2018, barrett2010 with barrett2008 and glorstad2012 with andren2006b. The coders annotated both papers of each pair separately, and the annotations match on 14% to 54% of codes, so one paper in each pair carries the other's reference list and its own list is missing. croix2015 and croix2016 are one work under two keys. Eight more records on a shared PDF have reference lists that differ by more than half from their partner's and need a look at the PDFs first. `corrections.yaml` has no action that clears only a record's outgoing citations, and `delete` would also remove works that other papers cite, so the fix needs a new action. The cause probably sits in `_find_duplicate()`. Any change to the edge list needs new Girvan-Newman runs on both graphs, new labels and a re-render, so batch this with the other data fixes.
 
 ## Related documents
 
