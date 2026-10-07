@@ -311,10 +311,8 @@ Each item appears once here. The documents no longer carry their own lists.
 ### Pipeline and data
 
 - Consolidate the `gn_analysis` and `cluster_labelling` directories and outputs into one layout after both runs are installed. Labels now travel with their run, in `<run>/labels/`.
-- Clear out old results. `~/models/gn_results_old_*` and the two untracked `results_backup_*` folders in `analysis/gn_analysis/` are on the server only.
 - Patch `_find_duplicate()` and `_merge_into()` in the pipeline. Do not run `--extract` or `--iterate-f1` until then.
 - Resolve the 59 field corrections that no online source can settle, and split the `bradley2002` title, which glues two references together.
-- Fix the four near-duplicate label pairs that failed relabelling and kept their original labels: Annotated 66 and 116, 166 and 214; seed filtered 26 and 30, 226 and 304.
 - Review the 26 PDFs on which two or more records carry outgoing edges. For 21 of them one record's citekey matches the PDF's author and year, and the other records carry 893 edges, 4.2% of the Annotated edge list. 13 PDFs have 10 or more such edges, and the tables under "Possible bibliography errors" in 02 list the clearest pairs. Before changing any record, drop the suspect edges, rerun Leiden and compare, and rerun Girvan-Newman and labelling only if clusters move.
 
 ### Presentation and publishing
