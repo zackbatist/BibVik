@@ -30,7 +30,8 @@ bib_matched <- bib[names(bib) %in% df$cite_key]
 
 full_edgelist <- read.csv(here("data/citation_edgelist.csv"), stringsAsFactors = FALSE)
 n_seed_refs <- full_edgelist %>% filter(source == "lund2021") %>% nrow()
-n_live <- sum(map_lgl(bib, ~ !isTRUE(.x$`_deleted`)))
+bib_live <- bib[!map_lgl(bib, ~ isTRUE(.x$`_deleted`))]
+n_live <- length(bib_live)
 
 df <- df %>%
   mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
@@ -93,7 +94,7 @@ The corpus spans `r year_range[1]` to `r year_range[2]`. Publication counts rise
 ```{r}
 #| label: overview-pubyears-full
 #| fig-cap: "Papers published per year across the full bibliography."
-pubyears_full <- tibble(year = map_chr(bib, ~ as.character(.x$year %||% NA))) %>%
+pubyears_full <- tibble(year = map_chr(bib_live, ~ as.character(.x$year %||% NA))) %>%
   filter(!is.na(year), year != "", str_detect(year, "^\\d{4}$")) %>%
   mutate(year = as.integer(year)) %>%
   filter(year >= 1900, year <= 2026) %>%
@@ -144,7 +145,7 @@ ggplot(data = entry_type_counts, aes(x = fct_reorder(entry_type, n), y = n)) +
 ```{r}
 #| label: overview-entry-types-full
 #| fig-cap: "Entry type across the full bibliography."
-entry_types_full <- map_chr(bib, ~ .x$entry_type %||% NA_character_)
+entry_types_full <- map_chr(bib_live, ~ .x$entry_type %||% NA_character_)
 
 entry_type_counts_full <- tibble(entry_type = entry_types_full) %>%
   filter(!is.na(entry_type), !str_detect(entry_type, "\\|")) %>%
@@ -200,7 +201,7 @@ max_authors <- max(n_authors$n_authors)
 ```{r}
 #| label: overview-author-counts-full
 #| fig-cap: "Number of authors per entry across the full bibliography, counted from the author list on each record, capped at 10 for readability, with exact counts labelled."
-n_authors_full <- tibble(n_authors = map_int(bib, ~ length(.x$author %||% list())))
+n_authors_full <- tibble(n_authors = map_int(bib_live, ~ length(.x$author %||% list())))
 n_authors_full <- n_authors_full %>% filter(n_authors > 0)
 
 axis_cap <- 10
@@ -270,8 +271,8 @@ venue_counts %>%
 #| fig-width: 10
 #| fig-height: 6.5
 venue_types_full <- tibble(
-  journal = map_chr(bib, ~ .x$journaltitle %||% NA_character_),
-  volume  = map_chr(bib, ~ .x$booktitle %||% NA_character_)
+  journal = map_chr(bib_live, ~ .x$journaltitle %||% NA_character_),
+  volume  = map_chr(bib_live, ~ .x$booktitle %||% NA_character_)
 )
 
 venue_long_full <- bind_rows(
@@ -294,7 +295,7 @@ venue_counts_full %>%
   labs(x = "", y = "Count", fill = "", title = paste0("Venues with ", min_shown_full, "+ entries, full bibliography"))
 ```
 
-`r n_with_venue_full` of `r scales::comma(n_live)` entries are published in an identifiable journal or edited volume; a further `r scales::comma(sum(map_lgl(bib, ~ !is.null(.x$publisher) && is.null(.x$journaltitle) && is.null(.x$booktitle))))` have only a publisher recorded, typically standalone books, and are excluded from this chart since a publisher is not a comparable unit to a journal or volume title. The full bibliography draws on `r nrow(venue_counts_full)` distinct journals and volumes, `r n_single_venue_full` of which contribute only a single entry.
+`r n_with_venue_full` of `r scales::comma(n_live)` entries are published in an identifiable journal or edited volume; a further `r scales::comma(sum(map_lgl(bib_live, ~ !is.null(.x$publisher) && is.null(.x$journaltitle) && is.null(.x$booktitle))))` have only a publisher recorded, typically standalone books, and are excluded from this chart since a publisher is not a comparable unit to a journal or volume title. The full bibliography draws on `r nrow(venue_counts_full)` distinct journals and volumes, `r n_single_venue_full` of which contribute only a single entry.
 
 :::
 
@@ -348,7 +349,7 @@ lang_counts %>%
 ```{r}
 #| label: overview-language-full
 #| fig-cap: "Full bibliography by detected source-PDF language, excluding English."
-paper_langs_full <- map_chr(bib, ~ .x$language %||% NA_character_)
+paper_langs_full <- map_chr(bib_live, ~ .x$language %||% NA_character_)
 
 n_classified_full <- sum(!is.na(paper_langs_full) & paper_langs_full != "unknown")
 n_english_full <- sum(paper_langs_full == "en", na.rm = TRUE)
