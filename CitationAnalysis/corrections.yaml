@@ -326170,3 +326170,1111 @@
   - wicker2013christianization
   note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
     list, read from the PDF).
+- action: set
+  citekey: aannestad2015
+  field: generation
+  value: F2
+  note: aannestad2015 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: ambrosiani2013
+  field: generation
+  value: F2
+  note: ambrosiani2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: andersson2004
+  field: generation
+  value: F2
+  note: andersson2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: andersson2016
+  field: generation
+  value: F2
+  note: andersson2016 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: andren2002
+  field: generation
+  value: F2
+  note: andren2002 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: andren2004
+  field: generation
+  value: F2
+  note: andren2004 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: andren2014
+  field: generation
+  value: F2
+  note: andren2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: androshchuk2012
+  field: generation
+  value: F2
+  note: androshchuk2012 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: androshchuk2013
+  field: generation
+  value: F2
+  note: androshchuk2013 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: androshchuk2014
+  field: generation
+  value: F2
+  note: androshchuk2014 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: androshchuk2016
+  field: generation
+  value: F2
+  note: androshchuk2016 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: arents2010
+  field: generation
+  value: F2
+  note: arents2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: armbruster2010
+  field: generation
+  value: F2
+  note: armbruster2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: artelius2005
+  field: generation
+  value: F2
+  note: artelius2005 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: artelius2007
+  field: generation
+  value: F2
+  note: artelius2007 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: artelius2013
+  field: generation
+  value: F2
+  note: artelius2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: arwillnordbladh1998
+  field: generation
+  value: F2
+  note: arwillnordbladh1998 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: arwillnordbladh2007
+  field: generation
+  value: F2
+  note: arwillnordbladh2007 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: ashby2014
+  field: generation
+  value: F2
+  note: ashby2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: axelsen2014
+  field: generation
+  value: F2
+  note: axelsen2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: backdanielsson2007
+  field: generation
+  value: F2
+  note: backdanielsson2007 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: barrett2008
+  field: generation
+  value: F2
+  note: barrett2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: barth1969
+  field: generation
+  value: F2
+  note: barth1969 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: bergstol2008
+  field: generation
+  value: F2
+  note: bergstol2008 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: bhabha1994
+  field: generation
+  value: F2
+  note: bhabha1994 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: bjerg2013
+  field: generation
+  value: F2
+  note: bjerg2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: bogucki2012
+  field: generation
+  value: F2
+  note: bogucki2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: brather2013
+  field: generation
+  value: F2
+  note: brather2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: brink2011
+  field: generation
+  value: F2
+  note: brink2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: buntgen2016
+  field: generation
+  value: F2
+  note: buntgen2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: cannell2016
+  field: generation
+  value: F2
+  note: cannell2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: chenery2014
+  field: generation
+  value: F2
+  note: chenery2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: christensen2013
+  field: generation
+  value: F2
+  note: christensen2013 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: christiansen2014
+  field: generation
+  value: F2
+  note: christiansen2014 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: clarke2017
+  field: generation
+  value: F2
+  note: clarke2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: croix2012
+  field: generation
+  value: F2
+  note: croix2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: crumlinpedersen2010
+  field: generation
+  value: F2
+  note: crumlinpedersen2010 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: diamond2005
+  field: generation
+  value: F2
+  note: diamond2005 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: dobat2010
+  field: generation
+  value: F2
+  note: dobat2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: dobat2014
+  field: generation
+  value: F2
+  note: dobat2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: domeijlundborg2004
+  field: generation
+  value: F2
+  note: domeijlundborg2004 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: dugmore2007
+  field: generation
+  value: F2
+  note: dugmore2007 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: e2014
+  field: generation
+  value: F2
+  note: e2014 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: ed2012
+  field: generation
+  value: F2
+  note: ed2012 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: englert2015
+  field: generation
+  value: F2
+  note: englert2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: eriksen1994
+  field: generation
+  value: F2
+  note: eriksen1994 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: feveile2009
+  field: generation
+  value: F2
+  note: feveile2009 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: feveile2012
+  field: generation
+  value: F2
+  note: feveile2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: forster2009
+  field: generation
+  value: F2
+  note: forster2009 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: frei2011
+  field: generation
+  value: F2
+  note: frei2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: frei2015
+  field: generation
+  value: F2
+  note: frei2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: frog2014
+  field: generation
+  value: F2
+  note: frog2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gardela2012
+  field: generation
+  value: F2
+  note: gardela2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gardela2013
+  field: generation
+  value: F2
+  note: gardela2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gardela2015
+  field: generation
+  value: F2
+  note: gardela2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gardela2016
+  field: generation
+  value: F2
+  note: gardela2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gerds2015
+  field: generation
+  value: F2
+  note: gerds2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gjerde2009
+  field: generation
+  value: F2
+  note: gjerde2009 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: gjerpe2017
+  field: generation
+  value: F2
+  note: gjerpe2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: glorstad2010
+  field: generation
+  value: F2
+  note: glorstad2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: grahamcampbell2011
+  field: generation
+  value: F2
+  note: grahamcampbell2011 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: grahamcampbell2013
+  field: generation
+  value: F2
+  note: grahamcampbell2013 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: graslund2007
+  field: generation
+  value: F2
+  note: graslund2007 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: graslund2018
+  field: generation
+  value: F2
+  note: graslund2018 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: griffiths2003
+  field: generation
+  value: F2
+  note: griffiths2003 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: gustafsson2011
+  field: generation
+  value: F2
+  note: gustafsson2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: gustafsson2013
+  field: generation
+  value: F2
+  note: gustafsson2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: hadley2013
+  field: generation
+  value: F2
+  note: hadley2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: hall2014
+  field: generation
+  value: F2
+  note: hall2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: hallansstenholm2012
+  field: generation
+  value: F2
+  note: hallansstenholm2012 is not among the 369 papers in the annotations csv, so
+    it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: hardh2016
+  field: generation
+  value: F2
+  note: hardh2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: harrison2014
+  field: generation
+  value: F2
+  note: harrison2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: hedeager2004
+  field: generation
+  value: F2
+  note: hedeager2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: hedeager2011
+  field: generation
+  value: F2
+  note: hedeager2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: hedenstiernajonson2006
+  field: generation
+  value: F2
+  note: hedenstiernajonson2006 is not among the 369 papers in the annotations csv,
+    so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: hedenstiernajonson2012
+  field: generation
+  value: F2
+  note: hedenstiernajonson2012 is not among the 369 papers in the annotations csv,
+    so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: hedjakobsson2003
+  field: generation
+  value: F2
+  note: hedjakobsson2003 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: helmbrecht2011
+  field: generation
+  value: F2
+  note: helmbrecht2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: hodges2012
+  field: generation
+  value: F2
+  note: hodges2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: holst2014
+  field: generation
+  value: F2
+  note: holst2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: ingvardson2012
+  field: generation
+  value: F2
+  note: ingvardson2012 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: jarman2018
+  field: generation
+  value: F2
+  note: jarman2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: jennbert2015
+  field: generation
+  value: F2
+  note: jennbert2015 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: jensen2010
+  field: generation
+  value: F2
+  note: jensen2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: jesch2015
+  field: generation
+  value: F2
+  note: jesch2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: jones1997
+  field: generation
+  value: F2
+  note: jones1997 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: jorgensen2010
+  field: generation
+  value: F2
+  note: jorgensen2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: kalmring2013
+  field: generation
+  value: F2
+  note: kalmring2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: kershaw2013
+  field: generation
+  value: F2
+  note: kershaw2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: kleingartner2013
+  field: generation
+  value: F2
+  note: kleingartner2013 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: larsson2007
+  field: generation
+  value: F2
+  note: larsson2007 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lemm2013
+  field: generation
+  value: F2
+  note: lemm2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lemm2014
+  field: generation
+  value: F2
+  note: lemm2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lia2002
+  field: generation
+  value: F2
+  note: lia2002 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: linderholm2008
+  field: generation
+  value: F2
+  note: linderholm2008 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: ljungkvist2006
+  field: generation
+  value: F2
+  note: ljungkvist2006 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: ljungkvist2011
+  field: generation
+  value: F2
+  note: ljungkvist2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: loe2014
+  field: generation
+  value: F2
+  note: loe2014 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lund2004
+  field: generation
+  value: F2
+  note: lund2004 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lund2008
+  field: generation
+  value: F2
+  note: lund2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lund2009
+  field: generation
+  value: F2
+  note: lund2009 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: lund2013
+  field: generation
+  value: F2
+  note: lund2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: mcanany2010
+  field: generation
+  value: F2
+  note: mcanany2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: merkel2016
+  field: generation
+  value: F2
+  note: merkel2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: milek2012
+  field: generation
+  value: F2
+  note: milek2012 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: moen2011
+  field: generation
+  value: F2
+  note: moen2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: moen2019
+  field: generation
+  value: F2
+  note: moen2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: moesgaard2015
+  field: generation
+  value: F2
+  note: moesgaard2015 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: morawiec2009
+  field: generation
+  value: F2
+  note: morawiec2009 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: myhre2015
+  field: generation
+  value: F2
+  note: myhre2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: myrberg2009
+  field: generation
+  value: F2
+  note: myrberg2009 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: n2017
+  field: generation
+  value: F2
+  note: n2017 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: naum2007
+  field: generation
+  value: F2
+  note: naum2007 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: naum2008
+  field: generation
+  value: F2
+  note: naum2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: naumann2014
+  field: generation
+  value: F2
+  note: naumann2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: nordeide2011
+  field: generation
+  value: F2
+  note: nordeide2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: oehrl2017
+  field: generation
+  value: F2
+  note: oehrl2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: opedal2010
+  field: generation
+  value: F2
+  note: opedal2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: oye2013
+  field: generation
+  value: F2
+  note: oye2013 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: paterson2014
+  field: generation
+  value: F2
+  note: paterson2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: pedersen2004
+  field: generation
+  value: F2
+  note: pedersen2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: pedersen2014
+  field: generation
+  value: F2
+  note: pedersen2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: pedersen2015
+  field: generation
+  value: F2
+  note: pedersen2015 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: pilo2005
+  field: generation
+  value: F2
+  note: pilo2005 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: pluskowski2010
+  field: generation
+  value: F2
+  note: pluskowski2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: price2000
+  field: generation
+  value: F2
+  note: price2000 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: price2001
+  field: generation
+  value: F2
+  note: price2001 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: price2002
+  field: generation
+  value: F2
+  note: price2002 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: price2008
+  field: generation
+  value: F2
+  note: price2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: price2010
+  field: generation
+  value: F2
+  note: price2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: price2018
+  field: generation
+  value: F2
+  note: price2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: raffield2016
+  field: generation
+  value: F2
+  note: raffield2016 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: raja2018
+  field: generation
+  value: F2
+  note: raja2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: rasmussen2014
+  field: generation
+  value: F2
+  note: rasmussen2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: roesdahl2009
+  field: generation
+  value: F2
+  note: roesdahl2009 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: roesdahl2014
+  field: generation
+  value: F2
+  note: roesdahl2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: roslund2007
+  field: generation
+  value: F2
+  note: roslund2007 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: rostad2016
+  field: generation
+  value: F2
+  note: rostad2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: rundkvist2011
+  field: generation
+  value: F2
+  note: rundkvist2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: russel2014
+  field: generation
+  value: F2
+  note: russel2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: said1978
+  field: generation
+  value: F2
+  note: said1978 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: sanmark2017
+  field: generation
+  value: F2
+  note: sanmark2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: schietzel2014
+  field: generation
+  value: F2
+  note: schietzel2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: schultze2008
+  field: generation
+  value: F2
+  note: schultze2008 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: semple2013
+  field: generation
+  value: F2
+  note: semple2013 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: sindbaek2009
+  field: generation
+  value: F2
+  note: sindbaek2009 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: skre2008
+  field: generation
+  value: F2
+  note: skre2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: skre2011
+  field: generation
+  value: F2
+  note: skre2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: soderberg2005
+  field: generation
+  value: F2
+  note: soderberg2005 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: solli2002
+  field: generation
+  value: F2
+  note: solli2002 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: solli2011
+  field: generation
+  value: F2
+  note: solli2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: staecker2004
+  field: generation
+  value: F2
+  note: staecker2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: stanislawski2013
+  field: generation
+  value: F2
+  note: stanislawski2013 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: stidsing2014
+  field: generation
+  value: F2
+  note: stidsing2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: svanberg2003
+  field: generation
+  value: F2
+  note: svanberg2003 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: sveinbjarnardottir2016
+  field: generation
+  value: F2
+  note: sveinbjarnardottir2016 is not among the 369 papers in the annotations csv,
+    so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: svensson2009
+  field: generation
+  value: F2
+  note: svensson2009 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: thate2007
+  field: generation
+  value: F2
+  note: thate2007 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: the2017
+  field: generation
+  value: F2
+  note: the2017 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: toplak2016
+  field: generation
+  value: F2
+  note: toplak2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: tummuscheit2011
+  field: generation
+  value: F2
+  note: tummuscheit2011 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: turner2006
+  field: generation
+  value: F2
+  note: turner2006 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: ulriksen2011
+  field: generation
+  value: F2
+  note: ulriksen2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: vesteinsson2014
+  field: generation
+  value: F2
+  note: vesteinsson2014 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by at least one of the 369 F1 papers, so its generation
+    is F2.
+- action: set
+  citekey: wallace2016
+  field: generation
+  value: F2
+  note: wallace2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: wickham2005
+  field: generation
+  value: F2
+  note: wickham2005 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.
+- action: set
+  citekey: williams2010
+  field: generation
+  value: F2
+  note: williams2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: williams2016
+  field: generation
+  value: F2
+  note: williams2016 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: williams2020
+  field: generation
+  value: F2
+  note: williams2020 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: zachrisson2004
+  field: generation
+  value: F2
+  note: zachrisson2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: zachrisson2011
+  field: generation
+  value: F2
+  note: zachrisson2011 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.
+- action: set
+  citekey: zachrisson2014
+  field: generation
+  value: F2
+  note: zachrisson2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by at least one of the 369 F1 papers, so its generation is
+    F2.

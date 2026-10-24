@@ -157,7 +157,7 @@
     "eventtitle": "Oslo",
     "_raw_citation": "Aannestad, H. L. (2015). Transformasjoner: Omforming og Bruk av Importerte Gjenstander i Viking- etid, Ph.D. dissertation, Det Humanistiske Fakultet, University of Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "heenpettersen2018insular",
@@ -384,9 +384,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "aannestad2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -939,7 +940,7 @@
     "eventtitle": "Riksantikvarieämbetet, Stockholm",
     "_raw_citation": "Ambrosiani, B. (2013). Stratigraphy: Part One: The Site and the Shore, Part Two: The Bronze Cast- er's Workshop, Riksantikvarieämbetet, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ambrosiani2015small",
       "croix2015permanency",
@@ -1168,9 +1169,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding price2018isotopes to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "ambrosiani2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -2149,7 +2151,7 @@
     "location": "Riksantikvarieämbetet, Stockholm",
     "_raw_citation": "Andersson, G. (2004). Att Föra Gudarnas Talan: Figurinerna från Lunda, Riksantikvarieämbetet, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "dobat2006king",
       "fabech2013ritual",
@@ -2432,9 +2434,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by larsson2007 onto the references.csv paper it belongs to (larsson2007iron).",
+    "_correction_note": "andersson2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -2470,7 +2473,7 @@
     "location": "Adelsösocken, Uppland; Stockholm",
     "_raw_citation": "Andersson, G., Näversköld, K. O., and Vedin, E. (2016). Arkeologisk undersökning av grav Bj 749, RAÄ 118, Adelsösocken, Uppland, FoU Rapport 16, Statens Historiska Musseer, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "fahlander2016materiality",
       "lund2021",
@@ -2737,9 +2740,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "andersson2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -3342,7 +3346,7 @@
     "eventtitle": "Lund",
     "_raw_citation": "Andrén, A. (2002). Platsernas betydelse: Norrön ritual och kultplatskontinuitet. In Jennbert, K., Andrén, A., and Raudvere, C. (eds.), Plats och Praxis: Studier av Nordisk Förkristen Ritual, Vägar till Midgård No. 2, Nordic Academic Press, Lund, pp. 299-342.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "andren2013significance",
       "andren2013places",
@@ -3582,9 +3586,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by larsson2007, lund2004, lund2008, lund2013 onto the references.csv paper it belongs to (larsson2007iron, lund2004vaben, lund2008banks, lund2013fragments).",
+    "_correction_note": "andren2002 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -3983,7 +3988,7 @@
     "eventtitle": "Sweden; Lund",
     "_raw_citation": "Andrén, A., Jennbert, K., and Raudvere, C. (2006). Old Norse religion: Some problems and prospects. In Andrén, A., Jennbert, K., and Raudvere, C. (eds.), Old Norse Religion in Long-Term Perspec- tives: Origins, Changes and Interactions. An International Conference in Lund, Sweden, June 3-7, 2004, Vagar till Midgård No. 8, Nordic Academic Press, Lund, pp. 11-14.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "fabech2013ritual",
       "jorgensen2009pre",
@@ -4240,9 +4245,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by larsson2007, lund2013, oehrl2017 onto the references.csv paper it belongs to (larsson2007iron, lund2013fragments, oehrl2017documenting).",
+    "_correction_note": "andren2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 0,
@@ -4538,7 +4544,7 @@
     "location": "Uppsala, Sweden",
     "_raw_citation": "Androshchuk, F. (2013). Vikings in the East: Essays on Contacts along the Road to Byzantium (800- 1100), Acta Universitatis Upsaliensis, Uppsala.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "gustafsson2016beeswax",
@@ -4768,9 +4774,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "androshchuk2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -4797,7 +4804,7 @@
     "location": "Stockholm",
     "_raw_citation": "Androshchuk, F. (2014). Viking Swords: Swords and Social Aspects of Weaponry in Viking Age Socie- ties, Swedish History Museum Studies No. 23, Historiska Museet, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "androshchuk2018female",
       "bill2017heimdalsjordet",
@@ -5030,9 +5037,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "androshchuk2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -5316,7 +5324,7 @@
     "eventtitle": "Paris",
     "_raw_citation": "Androshchuk, F., and Zotsenko, V. (2012). Cкaндинaвcкиe дpeвнocти Южнoй Pycи: кaтaлoг / Scandinavian Antiquities of Southern Rus: Catalogue, ACHCByz, Paris.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "raffield2018polygyny"
@@ -5559,9 +5567,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: warmlander2015 -> androshchuk2012a",
+    "_correction_note": "androshchuk2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -5595,7 +5604,7 @@
     "location": "Uppsala University; Uppsala",
     "_raw_citation": "Androshchuk, F., Shepard, J., and White, M., (eds.) (2016). Byzantium and the Viking World, Acta Universitatis Upsaliensis No. 16, Uppsala University, Uppsala.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma"
     ],
@@ -5837,9 +5846,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> androshchuk2016a",
+    "_correction_note": "androshchuk2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -5868,7 +5878,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Arents, U., and Eisenschmidt, S. (2010). Die Gräber von Haithabu, Wachholtz, Neumünster.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardelanda",
       "kalmring2010thieves",
@@ -6122,9 +6132,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: feveile2011 -> arents2010a; hedenstiernajonson2015 -> arents2010a; hilberg2013 -> arents2010a; hilberg2014 -> arents2010a; hilberg2018 -> arents2010a; lund2021 -> arents2010a",
+    "_correction_note": "arents2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -6153,7 +6164,7 @@
     "eventtitle": "Hinstorff, Rostock",
     "_raw_citation": "Armbruster, B. R., and Eilbracht, H. (2010). Winkingergold auf Hiddensee, Hinstorff, Rostock.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gustafsson2011beyond",
       "lund2021"
@@ -6382,9 +6393,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "armbruster2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -6775,7 +6787,7 @@
     "eventtitle": "Leiden",
     "_raw_citation": "Artelius, T. (2013). Inventions of memory and meaning: Examples of late Iron Age reuse of Bronze Age monuments in south-western Sweden. In Fontijn, D. R., Louwen, A., van der Vaart, S., and Wen- tink, K. (eds.), Beyond Barrows: Current Research on the Structuration and Perception of the Pre- historic Landscape through Monuments, Sidestone Press, Leiden, pp. 21-40.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "williams2016viking"
     ],
@@ -7046,9 +7058,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by williams2016 onto the references.csv paper it belongs to (williams2016viking).",
+    "_correction_note": "artelius2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 32,
@@ -7075,7 +7088,7 @@
     "pages": "261--276",
     "_raw_citation": "Artelius, T., and Lindqvist, M. (2005). Bones of the earth: Imitation as meaning in Viking Age burial rites. Current Swedish Archaeology 13: 25-39.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "lund2021",
@@ -7119,7 +7132,7 @@
     ],
     "series": "Riksantikvarieämbetet arkeologiska undersökningar skrifter",
     "_split_from": "andersendommasnesstefansson1985",
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "artelius2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "_entry_type_original": "incollection",
     "_corrections_applied": [
       "cited_by",
@@ -7360,7 +7373,8 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
     "language": "en",
     "detection": {
@@ -7390,7 +7404,7 @@
     "eventtitle": "Riksantikvarieämbetet, Stockholm",
     "_raw_citation": "Artelius, T., and Lindqvist, M. (2007). Döda Minnen, Riksantikvarieämbetet, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "artelius2013inventions",
       "fahlander2016materiality",
@@ -7616,9 +7630,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by artelius2013 onto the references.csv paper it belongs to (artelius2013inventions).",
+    "_correction_note": "artelius2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -7655,7 +7670,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Arwill-Nordbladh, E. (1998). Att lägga förhistorien tillrätta: Om återbegravningen av människoskeletten i Osebergsgraven. In Jensen, O. W., and Karlsson, H. (eds.), Arkeologiska Horisonter, Brutus Öst- lings Bokförlag Symposion, Stockholm, pp. 28-45.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "price2014ginnungagap",
@@ -7911,9 +7926,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "arwillnordbladh1998 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -7960,7 +7976,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Arwill-Nordbladh, E. (2007). Memory and material culture: The rune-stone at Rök. In Fransson, U., Sve- din, M., Bergerbrant, S., and Androshchuk, F. (eds.), Cultural Interaction between East and West: Archaeology, Artefacts and Human Contacts in Northern Europe, Stockholm Studies in Archaeol- ogy No. 44, Stockholm University, Stockholm, pp. 56-60.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "glorstad2015mot"
     ],
@@ -8207,9 +8223,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: arwillnordbladh2013a -> arwillnordbladh2007a; glorstad2012 -> arwillnordbladh2007a; heenpettersen2018 -> arwillnordbladh2007a; lund2016 -> arwillnordbladh2007a; lund2021 -> arwillnordbladh2007a; williams2016 -> arwillnordbladh2007a",
+    "_correction_note": "arwillnordbladh2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 30,
@@ -8851,7 +8868,7 @@
     "location": "Stroud, Amberley",
     "_raw_citation": "Ashby, S. (2014). A Viking Way of Life: Combs and Communities in Early Medieval Britain, Stroud, Amberley.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ashby2015what",
       "lund2021"
@@ -9103,9 +9120,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2016 -> ashby2014a; williams2016 -> ashby2014a",
+    "_correction_note": "ashby2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -9943,7 +9961,7 @@
     "location": "Stockholm University",
     "_raw_citation": "Back Danielsson, I.-M. (2007). Masking Moments: The Transitions of Bodies and Beings in Late Iron Age Scandinavia, Stockholm Studies in Archaeology No. 40, Stockholm University, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "arwillnordbladh2012ability",
       "backdanielsson2016more",
@@ -10183,9 +10201,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "backdanielsson2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -10598,7 +10617,7 @@
     "pages": "671--685",
     "_raw_citation": "Barrett, J. H. (2008). What caused the Viking Age? Antiquity 82: 671-685.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "barrett2010rounding",
       "naumann2014slaves",
@@ -10876,9 +10895,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by naumann2014, raffield2016 onto the references.csv paper it belongs to (naumann2014slaves, raffield2016bands).",
+    "_correction_note": "barrett2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 112,
@@ -11201,7 +11221,7 @@
     "location": "Cambridge",
     "_raw_citation": "Barrett, J. H. B. (ed.) (2012). Being an Islander: Production and Identity at Quoygrew, Orkney, AD 900- 1600, McDonald Institute for Archaeological Research, Cambridge.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "downham2016coastal",
       "griffiths2019rethinking",
@@ -11551,9 +11571,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "ed2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -11578,7 +11599,7 @@
     "location": "Bergen",
     "_raw_citation": "Barth, F. 1969. Ethnic Groups and Boundaries: The Social Organization of Culture Difference, Univer- sitets Forlaget, Bergen.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
       "bergstol2004creoles",
@@ -11811,9 +11832,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by bergstol2004 onto the references.csv paper it belongs to (bergstol2004creoles).",
+    "_correction_note": "barth1969 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -11849,7 +11871,7 @@
     "location": "Caen",
     "_raw_citation": "Bauduin, P., and Musin, A. E. (eds.) (2014). Vers l'Orient et vers l'Occident: Regards croisés sur les dynamiques et les transferts culturels des Vikings à la Rous ancienne, Presses Universitaires de Caen, Caen.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "lund2021"
@@ -12194,9 +12216,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "e2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -14070,7 +14093,7 @@
     "location": "Oslo",
     "_raw_citation": "Bergstøl, J. (2008). Samer i Østerdalen? En Studie av Etnisitet i Jernalderen og Middelalderen i det Nor- døstre Hedmark, Acta Humaniora No. 325, Unipub, Oslo.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
       "glorstad2012sign",
@@ -14324,9 +14347,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: jahnsen2016 -> bergstol2008a",
+    "_correction_note": "bergstol2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -14618,7 +14642,7 @@
     "location": "Routledge, London",
     "_raw_citation": "Bhabha, H. K. (1994) The Location of Culture. Routledge, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
       "kristjansdottir2015becoming",
@@ -14844,9 +14868,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "bhabha1994 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -16642,7 +16667,7 @@
     "location": "Aarhus",
     "_raw_citation": "Bjerg, L., Lind, J. H., and Sindbaek, S. M. (eds.) (2013). From Goths to Varangians: Communication and Cultural Exchange between the Baltic and the Black Sea, Aarhus University Press, Aarhus.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "lund2021"
@@ -16864,9 +16889,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "bjerg2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -17396,7 +17422,7 @@
     "location": "Turnhout",
     "_raw_citation": "Bogucki, M., and Jagodziński, M. (2012). Janów Pomorski, stan. 1: wyniki ratowniczych badań archeo- logicznych w latach 2007-2008 = Janów Pomorski, Site 1: Archaeological Rescue Excavations in 2007-2008, Studia nad Truso/Truso Studies, Muzeum Archeologiczno-Historyczne w Elblągu, Elbląg.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "gardela2015vikings",
@@ -17972,9 +17998,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by gardela2015 onto the references.csv paper it belongs to (gardela2015vikings).",
+    "_correction_note": "bogucki2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -19044,7 +19071,7 @@
     "location": "Habelt, Bonn",
     "_raw_citation": "Brather, S., and Jagodziński, M. F. (2013). Der Wikingerzeitliche Seehandelsplatz Von Janów (Truso): Geophysikalische, archäopedologische und archäologische Untersuchungen 2004-2008 / Nadmor- ska osada handowa z okresu wikingów z Janowa (Truso), Habelt, Bonn.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "hilberg2016hedeby",
@@ -19281,9 +19308,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Pinned after merging 1 duplicate entry into this one: the union of its own citers and the merged duplicates' citers. A set is replaced on every replay, so the transferred citers survive repeated postprocess runs.",
+    "_correction_note": "brather2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -19606,7 +19634,7 @@
     "pages": "89--117",
     "_raw_citation": "Brink, S., Grimm, O., Iversen, F., Hobaek, H., Ødegaard, M., Näsman, U., et al. (2011). Court sites of Arctic Norway: Remains of thing sites and representations of political consolidation processes in the northern Germanic world during the first millennium AD? Norwegian Archaeological Review 44: 89-117.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "iversen2015community",
       "lund2021",
@@ -19865,9 +19893,10 @@
       "cited_by",
       "language",
       "detection",
-      "pages"
+      "pages",
+      "generation"
     ],
-    "_correction_note": "Recovered from _raw_citation; CrossRef (DOI 10.1080/00293652.2011.572685) agrees.",
+    "_correction_note": "brink2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -20253,7 +20282,7 @@
     "pages": "231--236",
     "_raw_citation": "Büntgen, U., Myglan, V. S., Ljungqvist, F. C., McCormick, M., Di Cosmo, N., Sigl, M., et al. (2016). Cooling and societal change during the Late Antique Little Ice Age from 536 to around 660 AD. Nature Geoscience 9: 231-236.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "anchukaitis2017last",
       "helama2017dark",
@@ -20486,9 +20515,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "buntgen2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 29,
@@ -21312,7 +21342,7 @@
     "location": "Berlin",
     "_raw_citation": "Cannell, R. J. S., Cheetham, P. N., and Welham, K. (2016). Geochemical analysis using portable X-ray fluorescence. In Skre, D. (ed.), Avaldsnes: A Sea-Kings' Manor in First-Millennium Western Scan- dinavia, De Gruyter, Berlin, pp. 423-456.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2020ship",
       "ellingsen2019northern",
@@ -22029,9 +22059,10 @@
       "author",
       "_deleted",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "cannell2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "_deleted": false,
     "language": "en",
     "detection": {
@@ -22667,7 +22698,7 @@
     "pages": "259--284",
     "_raw_citation": "Chenery, C. A., Evans, J. A., Score, D., Boyle, A., and Chenery, S. R. (2014). A boat load of Vikings? Journal of the North Atlantic 7: 43-53.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "jarman2018viking",
       "raffield2016ingroup",
@@ -22922,9 +22953,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by jarman2018, raffield2016 onto the references.csv paper it belongs to (jarman2018viking, raffield2016bands).",
+    "_correction_note": "chenery2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 45,
@@ -23237,7 +23269,7 @@
     "pages": "218--222",
     "_raw_citation": "Christensen, T. (2013). A silver figurine from Lejre. Danish Journal of Archaeology 2: 65-78.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ulriksen2018volva"
     ],
@@ -23482,9 +23514,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: gardela2018 -> christensen2013a; lund2021 -> christensen2013b",
+    "_correction_note": "christensen2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 28,
@@ -23766,7 +23799,7 @@
     "location": "Central Sweden; Schleswig",
     "_raw_citation": "Clarke, H., and Lamm, K. (2017). Helgö Revisited: A New Look at the Excavated Evidence for Helgö, Central Sweden, Stiftung Schleswig-Holsteinische Landesmuseen Schloss Gottorf, Schleswig.",
     "entry_type": "misc",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "skre2019rulership"
@@ -23987,9 +24020,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "clarke2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -24014,7 +24048,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Croix, S. (2012). Work and Space in Rural Settlements in Viking-Age Scandinavia: Gender Perspectives, Ph.D. dissertation, Department of Archaeology and Heritage Studies, Aarhus University, Aarhus.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "lund2021",
@@ -24238,9 +24272,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "croix2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -25382,7 +25417,7 @@
     "location": "Viking Ship Museum, Roskilde",
     "_raw_citation": "Crumlin-Pedersen, O. (2010). Archaeology and the Sea in Scandinavia and Britain: A Personal Account, Viking Ship Museum, Roskilde.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "ravn2019erritso",
@@ -25611,9 +25646,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "crumlinpedersen2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -25978,7 +26014,7 @@
     "location": "Allan Lane, Penguin",
     "_raw_citation": "Diamond, J., (2005). Collapse: How Societies Choose to Fail orSsucceed, Viking, New York.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "dugmore2007norse",
       "dugmore2012cultural",
@@ -26217,9 +26253,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding graslund2012twilight to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "diamond2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -26779,7 +26816,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Dobat, A. S. (2014). Füsing: A metal-rich site in the vicinity of Hedeby/Schleswig (AD c. 700-1000). In Stidsing, E., Nielsen, K. H., and Fiedel, R. (eds.), Wealth and Complexity: Economically Special- ised Sites in Late Iron Age Denmark, Aarhus University Press, Aarhus, pp. 51-64.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "runge2018new"
@@ -27023,9 +27060,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: NOAUTHOR28 -> dobat2014a",
+    "_correction_note": "dobat2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -27067,7 +27105,7 @@
     "eventtitle": "Sweden; Lund",
     "_raw_citation": "Domeij Lundborg, M. (2006). Bound animal bodies. In Andrén, A., Jennbert, K., and Raudvere, C. (eds.), Old Norse Religion in Long-term Perspectives: Origins, Changes and Interaction, An International Conference in Lund, Sweden, June 3-7, 2004, Vagar till Midgård No. 8, Nordic Academic Press, Lund, pp. 39-44.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "domeijlundborg2012coming",
       "lund2008banks",
@@ -27297,9 +27335,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2008 onto the references.csv paper it belongs to (lund2008banks).",
+    "_correction_note": "domeijlundborg2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -27970,7 +28009,7 @@
     "pages": "169--178",
     "_raw_citation": "Dugmore, A. J., Keller, C., and McGovern, T. H. (2007). Norse Greenland settlement: Reflections on climate change, trade, and the contrasting fates of human settlements in the North Atlantic islands. Arctic Anthropology 44: 12-36.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "barrett2010rounding",
       "frei2015was",
@@ -28226,9 +28265,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding barrett2008what; removing barrett2008.",
+    "_correction_note": "dugmore2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 60,
@@ -28865,7 +28905,7 @@
     "location": "Viking Ship Museum, Roskilde",
     "_raw_citation": "Englert, A. (2015). Large Cargo Ships in Danish Waters 1000-1250: Evidence of Specialised Merchant Seafaring Prior to the Hanseatic Period, Viking Ship Museum, Roskilde.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hilberg2016hedeby",
       "lund2021",
@@ -29089,9 +29129,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "englert2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -29886,7 +29927,7 @@
     "location": "Oslo",
     "_raw_citation": "Eriksen, T. H. (1994). Kulturelle veikryss: essays om kreolisering. Universitetsforlaget, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bergstol2004creoles",
       "lund2019hunting",
@@ -30112,9 +30153,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by bergstol2004 onto the references.csv paper it belongs to (bergstol2004creoles).",
+    "_correction_note": "eriksen1994 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -31494,7 +31536,7 @@
     "eventtitle": "Comacchio; Turnhout",
     "_raw_citation": "Feveile, C. (2012). Ribe: Emporia and town in the 8th and 9th century. In Gelichi, S., and Hodges, R. (eds.), From One Sea to Another: Trading Places in the European and Mediterranean Early Middle Ages, Proceedings of the International Conference, Comacchio 27th-29th March 2009, Brepols Publishers, Turnhout, pp. 111-122.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ashby2015what",
       "croix2015permanency",
@@ -31802,9 +31844,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> feveile2009a",
+    "_correction_note": "feveile2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 1,
@@ -32738,7 +32781,7 @@
     "location": "Shetland Amenity Trust, Lerwick",
     "_raw_citation": "Forster, A. K., and Turner, V. E. (eds.) (2009). Kleber: Shetland's Oldest Industry: Shetland Soapstone Since Prehistory, Shetland Amenity Trust, Lerwick.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "baug2015stones",
       "baug2017soapstone",
@@ -32963,9 +33006,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "forster2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -33937,7 +33981,7 @@
     "location": "Helsinki",
     "_raw_citation": "Frog, E., Ahola, J., and Lucenius, J. (2014). The Viking Age in Åland: Insights into Identity and Remnants of Culture, Academia Scientiarum Fennica, Helsinki.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "lund2021"
@@ -34159,9 +34203,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "frog2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -35258,7 +35303,7 @@
     "location": "Wien",
     "_raw_citation": "Gardeła, L. (2013a). The dangerous dead? Rethinking Viking-age deviant burials. In Słupecki, L. P., and Simek, R. (eds.), Conversions: Looking for Ideological Change in the Early Middle Ages, Fassbae- nder, Wien, pp. 99-136.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "edberg2019dod",
       "gardela2014a",
@@ -35547,9 +35592,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "gardela2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -35591,7 +35637,7 @@
     "eventtitle": "Warsaw",
     "_raw_citation": "Gardeła L. (2014). Death in the margin: The landscape context of Viking-Age \"deviant burials.\" In Bedyński, W., and Povedák, I. (eds.), Landscape as a Factor in Creating Identity, International conference, Jarosław 22-24 June 2012, Stowarzyszenie \"Dom Tańca,\" Warsaw, pp. 63-76.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2014a",
       "gardela2018amazons",
@@ -35870,9 +35916,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding gardela2014death to cited_by. gardela2014death (Gardeła 2014, Death in the Margin) cites this work in its reference list, read from the paper itself.",
+    "_correction_note": "gardela2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -35922,7 +35969,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Gardeła, L. (2015). Vikings in Poland: A critical overview. In Eriksen, M. H., Pedersen, U., Rundberget, B., Axelsen, I., and Berg, H. L. (eds.), Viking Worlds: Things, Spaces, and Movement, Oxbow Books, Oxford, pp. 213-234.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "fahlander2018grave",
@@ -36173,9 +36220,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: toplak2015 -> gardela2015a",
+    "_correction_note": "gardela2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 41,
@@ -36561,7 +36609,7 @@
     "location": "Nordwestmecklenburg; Wiesbaden",
     "_raw_citation": "Gerds, M., and Wolf, M. (2015). Das Gräberfeld des frühmittelalterlichen Seehandelsplatzes von Groß Strömkendorf, Lkr. Nordwestmecklenburg, Reichert Verlag, Wiesbaden.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2019single",
       "lund2021"
@@ -36783,9 +36831,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gerds2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -37083,7 +37132,7 @@
     "location": "Oslo",
     "_raw_citation": "Gjerpe, L. E. (2017). Effektive Hus: Bosetning, Jord og Rettigheder på Østlandet i Jernalder, Vol. 1, Ph.D. dissertation, Department of Archaeology, Conservation and History, University of Oslo, Oslo.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "moen2020ideas"
@@ -37307,9 +37356,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gjerpe2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -38662,7 +38712,7 @@
     "location": "Viking Art, Thames and Hudson, London",
     "_raw_citation": "Graham-Campbell, J. (2013). Viking Art, Thames and Hudson, London.",
     "entry_type": "misc",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "lund2021"
@@ -38882,9 +38932,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "grahamcampbell2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "_title_recovered": true,
     "language": "en",
     "detection": {
@@ -38918,7 +38969,7 @@
     "location": "British Museum, London",
     "_raw_citation": "Graham-Campbell, J., and Ager, B. (2011). The Cuerdale Hoard and Related Viking-Age Silver and Gold from Britain and Ireland in the British Museum, British Museum, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "glorstad2012sign",
       "griffiths2019rethinking",
@@ -39173,9 +39224,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: skre2017 -> grahamcampbell2011a; svendsen2016 -> grahamcampbell2011a",
+    "_correction_note": "grahamcampbell2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -39216,7 +39268,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Gräslund, A.-S. (2007). Some Viking-Age amulets: The Birka evidence. In Fransson, U., Svedin, M., and Bergerbrant, S. (eds.), Cultural Interaction between East and West: Archaeology, Artefacts and Human Contacts in Northern Europe, Department of Archaeology and Classical Studies, Stockholm University, Stockholm, pp. 90-96.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "forest2011",
       "fredriksen2014nar",
@@ -39490,9 +39542,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding graslund2012twilight to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "graslund2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -39530,7 +39583,7 @@
     "eventtitle": "Uppsala",
     "_raw_citation": "Gräslund, A.-S., Hedenstierna-Jonson, C., Lamm, J. P., and Edberg, R. (2018). Fynden från \"Svarta jorden\" på Björkö: från Hjalmar Stolpes undersökningar, Uppsala Universitet, Uppsala.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2020ship",
       "skre2019rulership"
@@ -39772,9 +39825,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> graslund2018a",
+    "_correction_note": "graslund2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -40127,7 +40181,7 @@
     "location": "Oxford",
     "_raw_citation": "Griffiths, D., Harrison, J., and Athanson, M. (2019). Beside the Ocean: Coastal Landscapes at the Bay of Skaill, Marwick, and Birsay Bay, Orkney: Archaeological Research 2003-18, Oxbow Books, Oxford.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "griffiths2019rethinking",
       "lund2021",
@@ -40354,9 +40408,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "griffiths2003 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -40884,7 +40939,7 @@
     "pages": "242--245",
     "_raw_citation": "Gustafsson, N. B. (2011). Beyond Wayland: Thoughts on early medieval metal workshops in Scandi- navia. Historical Metallurgy 45: 20-31.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
       "gustafsson2016beeswax",
@@ -41110,9 +41165,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gustafsson2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 15,
@@ -42007,7 +42063,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Hadley, D. M., and ten Harkel, L. (eds.) (2013). Everyday Life in Viking-Age Towns: Social Approaches to Towns in England and Ireland, C. 800-1100, Oxbow Books, Oxford.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "mcleod2011warriors",
@@ -42239,9 +42295,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "hadley2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -42540,7 +42597,7 @@
     "eventtitle": "York",
     "_raw_citation": "Hall, R. A., Allen, S. J., Evans, D. T., Hunter-Mann, K., and Mainman, A. J. (2014). Anglo-Scandi- navian Occupation at 16-22 Coppergate: Defining a Townscape, York Archaeological Trust, York.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "raffield2019playing"
     ],
@@ -42786,9 +42843,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: buckberry2014 -> hall2014a; lund2021 -> hall2014a",
+    "_correction_note": "hall2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -42814,7 +42872,7 @@
     "eventtitle": "Lund",
     "_raw_citation": "Hållans Stenholm, A.-M. (2012). Fornminnen: Det Förflutnas Roll i det Förkristna och Kristna Mälard- alen, Nordic Academic Press, Lund.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "beck2017temporalising",
       "fahlander2016materiality",
@@ -43161,9 +43219,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hallansstenholm2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -44109,7 +44168,7 @@
     "location": "Lund University, Lund",
     "_raw_citation": "Hårdh, B. (2016). The Perm'/Glazov Rings: Contacts and Economy in the Viking Age between Russia and the Baltic Region, Lund University, Lund.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hrnjic2018missing",
       "lund2021"
@@ -44333,9 +44392,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hardh2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -44967,7 +45027,7 @@
     "location": "Lanham, MD",
     "_raw_citation": "Harrison, S. H., and Ó Floinn, R. (2014). Viking Graves and Grave-Goods in Ireland, National Museum of Ireland, Dublin.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "frei2015was",
       "harris2017assembling",
@@ -45245,9 +45305,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "harrison2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -45274,7 +45335,7 @@
     "location": "Stockholm",
     "_raw_citation": "Hed Jakobsson, A. (2003). Smältdeglars Härskare och Jerusalems Tillskyndare: Berättelser om Vikingatid och Tidig Medeltid, Stockholm Studies in Archaeology No. 25, Department of Archae- ology and Classical Studies, Stockholm University, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "barndon2018grav",
       "lund2006vikingetidens",
@@ -45504,9 +45565,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hedjakobsson2003 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -45905,7 +45967,7 @@
     "eventtitle": "Lund",
     "_raw_citation": "Hedeager, L. (2004). Dyr og andre mennesker -mennesker og andre dyr: Dyreornamentikkens transcen- dentale realitet. In Andrén, A., Jennbert, K., and Raudvere, C. (eds.), Ordning mot Kaos: Studier af Nordisk Förkristen Kosmologi, Vägar till Midgård No. 4, Nordic Academic Press, Lund, pp. 219-252.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "barndon2018grav",
       "eriksen2013doors",
@@ -46157,9 +46219,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by larsson2007 onto the references.csv paper it belongs to (larsson2007iron).",
+    "_correction_note": "hedeager2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "journaltitle": "Vagar till Midgard",
     "location": "Lund",
     "volume": "4",
@@ -46458,7 +46521,7 @@
     "eventtitle": "New York",
     "_raw_citation": "Hedeager, L. (2011). Iron Age Myth and Materiality: An Archaeology of Scandinavia AD 400-1000, Routledge, New York.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "arwillnordbladh2013golden",
@@ -46704,9 +46767,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by fredriksen2014, lund2013, raffield2016, williams2016 onto the references.csv paper it belongs to (fredriksen2014nar, lund2013fragments, raffield2016bands, williams2016viking).",
+    "_correction_note": "hedeager2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -46739,7 +46803,7 @@
     "location": "Stockholm University",
     "_raw_citation": "Hedenstierna-Jonson, C. (2006). The Birka Warrior: The Material Culture of a Martial Society, Ph.D. dissertation, Institutionen för Arkeologi och Antikens Kultur, Stockholm University, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ambrosiani2015small",
       "axelsen2014",
@@ -47022,9 +47086,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "hedenstiernajonson2006 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -47050,7 +47115,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Hedenstierna-Jonson, C. (ed.) (2012). Birka Nu: Pågående Forskning om Världsarvet Birka och Hov- gården, Historiska Museet, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kalmring2012birka",
       "kalmring2017home",
@@ -47273,9 +47338,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hedenstiernajonson2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -48951,7 +49017,7 @@
     "location": "Lund",
     "_raw_citation": "Helmbrecht, M. (2011). Wirkmächtige Kommunikationsmedien: Menschenbilder der Vendel-und Wiking- erzeit und ihre Kontexte, Acta Archaeologica Lundensia Series No. 30, Lund University, Lund.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "arwillnordbladh2012ability",
       "arwillnordbladh2013negotiating",
@@ -49189,9 +49255,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by oehrl2017 onto the references.csv paper it belongs to (oehrl2017documenting).",
+    "_correction_note": "helmbrecht2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -51130,7 +51197,7 @@
     "location": "Woodbridge",
     "_raw_citation": "Hines, J., and IJssennagger, N. (eds.) (2017). Frisians and Their North Sea Neighbours: From the Fifth Century to the Viking Age, Boydell and Brewer, Woodbridge.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2019single",
       "lund2021"
@@ -51476,9 +51543,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "n2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -51507,7 +51575,7 @@
     "eventtitle": "Bloomsbury, London",
     "_raw_citation": "Hodges, R. (2012). Dark Age Economics: A New Audit, Bloomsbury, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "carver2015commerce",
       "gullbekk2014vestfold",
@@ -51759,9 +51827,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: ashby2015 -> hodges2012a; croix2019 -> hodges2012a; frei2015 -> hodges2012a; hilberg2018 -> hodges2012a; lund2021 -> hodges2012a; sindbaek2017 -> hodges2012a",
+    "_correction_note": "hodges2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -52364,7 +52433,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Holst, M. K. (2014). Warrior aristocracy and village community: Two fundamental forms of social organ- isation in the late Iron Age and Viking Age. In Stidsing, E., Nielsen, K. H., and Fiedel, R. (eds.), Wealth and Complexity. Economically Specialised Sites in Late Iron Age Denmark, Aarhus Univer- sity Press, Aarhus, pp. 179-197.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "buckberry2014finding",
@@ -52595,9 +52664,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "holst2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 82,
@@ -54214,7 +54284,7 @@
     "pages": "281--346",
     "_raw_citation": "Ingvardson, G. (2012). Nørremølle: The largest Viking Age silver hoard of Bornholm (Denmark). The Journal of Archaeological Numismatics 2: 281-346.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "price2012isotopic"
@@ -54439,9 +54509,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "ingvardson2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 44,
@@ -56151,7 +56222,7 @@
     "location": "Lund",
     "_raw_citation": "Jennbert, K. (2015). Animals and Humans: Recurrent Symbiosis in Archaeology and Old Norse Reli- gion, Nordic Academic Press, Lund.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "williams2016viking"
@@ -56374,9 +56445,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by williams2016 onto the references.csv paper it belongs to (williams2016viking).",
+    "_correction_note": "jennbert2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -56408,7 +56480,7 @@
     "location": "Oxford",
     "_raw_citation": "Jensen, B. (2010). Viking Age Amulets in Scandinavia and Western Europe, BAR International Series No. 2169, BAR Publishing, Oxford.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ellingsen2019northern",
       "gardela2018amazons",
@@ -56638,9 +56710,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "jensen2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -56666,7 +56739,7 @@
     "eventtitle": "New York",
     "_raw_citation": "Jesch, J. (2015). The Viking Diaspora, Routledge, New York.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "heenpettersen2018insular",
       "heenpettersen2019earliest",
@@ -56964,9 +57037,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "jesch2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -57542,7 +57616,7 @@
     "eventtitle": "Routledge, London",
     "_raw_citation": "Jones, S. (1997). The Archaeology of Ethnicity: Constructing Identitites in the Past and Present, Routledge, London.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bergstol2004creoles",
       "croix2019single",
@@ -57822,9 +57896,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by bergstol2004 onto the references.csv paper it belongs to (bergstol2004creoles).",
+    "_correction_note": "jones1997 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -57886,7 +57961,7 @@
     "eventtitle": "Stuttgart",
     "_raw_citation": "Jørgensen, L. (2010). Gudme and Tissø: Two magnates' complexes in Denmark from the 3rd to the 11th century AD. In Ludowici, B., and Jöns, H. (eds.), Trade and Communication Networks of the First Millennium AD in the Northern Part of Central Europe: Central Places, Beach Mar- kets, Landing Places and Trading Centres, Konrad Theiss, Stuttgart, pp. 273-286.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "borake2018bottlenecks",
       "carver2015commerce",
@@ -58182,9 +58257,10 @@
       "cited_by",
       "_source_pdf",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "jorgensen2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 3,
@@ -59480,7 +59556,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Kalmring, S., Holmquist, L., and Hedenstierna-Jonson, C. (2016). Early northern towns as special economic zones. In Holmquist, L., Kalmring, S., and Hedenstierna-Jonson, C. (eds.), New Aspects on Viking-Age Urbanism c. AD 750-1100: Proceedings of the International Symposium at the Swedish History Museum, April 17-20th 2013, Archaeological Research Laboratory, Stockholm University, Stockholm, pp. 11-21.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "hilberg2014viking",
@@ -59709,9 +59785,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "kalmring2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 42,
@@ -60662,7 +60739,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Kershaw, J. F. (2013). Viking Identities: Scandinavian Jewellery in England, Oxford University Press, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
       "croix2015permanency",
@@ -60906,9 +60983,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "kershaw2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -61728,7 +61806,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Kleingärtner, S. (2013). Die frühe Phase der Urbanisierung an der südlichen Ostseeküste im Frühmit- telalter, Wachholtz, Neumünster.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kalmring2013",
       "lund2021",
@@ -62325,9 +62403,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding kalmring2016early to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "kleingartner2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -63806,7 +63885,7 @@
     "pages": "11--25",
     "_raw_citation": "Larsson, L. (2007). The Iron Age ritual building at Uppåkra, southern Sweden. Antiquity 81: 11-25.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bonde2016between",
       "gustin2017contacts",
@@ -64051,9 +64130,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding price2018isotopes to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "larsson2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 39,
@@ -64080,7 +64160,7 @@
     "pages": "371--389",
     "_raw_citation": "Lemm, T. (2014). Husby in Angeln: Ein königlicher Hof der späten Wikingerzeit? Praehistorische Zeitschrift 89: 371-389.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "ravn2019erritso"
@@ -64307,9 +64387,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "lemm2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "fr",
     "detection": {
       "reference_list": 36,
@@ -64617,7 +64698,7 @@
     "eventtitle": "Oslo",
     "_raw_citation": "Lia, Ø. (2004). Vikingetidsgravenes rituelle kompleksitet. In Melheim, L., Hedeager, L., and Oma, K. (eds.), Mellom Himmel og Jord: Foredrag fra et Seminar om Religionsarkeologi, Isegran, 31. jan- uar-2. februar 2002, Oslo Archaeological Serie No. 2, Institutt for Arkeologi, Kunsthistorie og Konservering, University of Oslo, Oslo, pp. 292-319.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2012plundering",
       "lund2005thresholds",
@@ -64844,9 +64925,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2013 onto the references.csv paper it belongs to (lund2013fragments).",
+    "_correction_note": "lia2002 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -65135,7 +65217,7 @@
     "location": "Uppsala; Lund",
     "_raw_citation": "Ljungkvist, J. (2006). En Hiar atti RikR: Om Elit, Struktur och Ekonomi kring Uppsala och Mälaren under Yngre Järnålder, Aun No. 34, Ph.D. dissertation, Institutionen för Arkeologi och Antik His- toria, Uppsala University, Uppsala.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "androshchuk2010gift",
       "bill2020ship",
@@ -65371,9 +65453,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "ljungkvist2006 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -66048,7 +66131,7 @@
     "pages": "571--585",
     "_raw_citation": "Ljungkvist, J., Frölund, P., Göthberg, H., and Löwenborg, D. (2011). Gamla Uppsala: Structural develop- ment of a centre in Middle Sweden. Archäologisches Korrespondenzblatt 41: 571-585.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "heenpettersen2018insular",
       "kalmring2012birka"
@@ -66360,9 +66443,10 @@
       "_source_pdf",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Automated draft from citers' own reference lists (same first author and year, title match). Moves: jessen2014 -> ljungkvist2011a; ljungkvist2015 -> ljungkvist2011a; ljungkvist2018 -> ljungkvist2011a; lund2021 -> ljungkvist2011a; skre2019 -> ljungkvist2011a",
+    "_correction_note": "ljungkvist2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 45,
@@ -66400,7 +66484,7 @@
     "eventtitle": "Weymouth; Dorchester",
     "_raw_citation": "Loe, L., Boyle, A., Webb, H., and Score, D. (2014). \"Given to the Ground\": A Viking Age Mass Grave on Ridgeway Hill, Weymouth, Dorset Natural History and Archaeological Society, Dorchester.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "chenery2014boat",
       "hedenstiernajonson2017female",
@@ -66634,9 +66718,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by chenery2014, raffield2016 onto the references.csv paper it belongs to (chenery2014boat, raffield2016bands).",
+    "_correction_note": "loe2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -67798,7 +67883,7 @@
     "pages": "497--508",
     "_raw_citation": "Lund, J. (2008). Banks, borders and bodies of water in a Viking Age mentality. Journal of Wetland Archaeology 8: 53-72.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "raffield2014river",
       "skre2019rulership"
@@ -68068,9 +68153,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: bill2016 -> lund2008b",
+    "_correction_note": "lund2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 88,
@@ -68095,7 +68181,7 @@
     "location": "Unipub, Oslo",
     "_raw_citation": "Lund, J. (2009). Åsted og Vadested: Deponeringer, Genstandsbiografier og Rumlig Strukturering som Kilde til Vikingetidens Kognitive Landskaber, Unipub, Oslo.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "andren2013significance",
@@ -68338,9 +68424,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2013 onto the references.csv paper it belongs to (lund2013fragments).",
+    "_correction_note": "lund2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -68640,7 +68727,7 @@
     "pages": "173--185",
     "_raw_citation": "Lund, J. (2013). Fragments of a conversion: Handling bodies and objects in pagan and Christian Scandi- navia AD 800-1100. World Archaeology 45: 46-63.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "barndon2018grav",
@@ -68913,9 +69000,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: NOAUTHOR28 -> lundo2013",
+    "_correction_note": "lund2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 105,
@@ -73776,7 +73864,7 @@
     "eventtitle": "Bochum",
     "_raw_citation": "Merkel, S. W. (2016). Silver and the Silver Economy at Hedeby, Verlag Marie Leidorf, Bochum.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hrnjic2018missing",
       "kalmring2018gleaming",
@@ -74006,9 +74094,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "merkel2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -74283,7 +74372,7 @@
     "pages": "119--137",
     "_raw_citation": "Milek, K. (2012). The roles of pit houses and gendered spaces on Viking-Age farmsteads in Iceland. Medieval Archaeology 56: 85-130.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2019single",
       "devos2013soil",
@@ -74598,9 +74687,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: ellingsen2019 -> milek2012a; kristjansdottir2015 -> milek2012a; lund2021 -> milek2012a",
+    "_correction_note": "milek2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 121,
@@ -74890,7 +74980,7 @@
     "location": "Oxford",
     "_raw_citation": "Moen, M. (2011). The Gendered Landscape: A Discussion on Gender, Status and Power in the Norwe- gian Viking Age Landscape, BAR International Series No. 2207, BAR Publishing, Oxford.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardelanda",
       "hedenstiernajonson2017female",
@@ -75124,9 +75214,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "moen2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -75151,7 +75242,7 @@
     "location": "Oslo",
     "_raw_citation": "Moen, M. (2019). Challenging Gender: A Reconsideration of Gender in the Viking Age Using the Mortu- ary Landscape, Ph.D. dissertation, Department of Archaeology, Conservation and History, Univer- sity of Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2019hunting",
       "lund2021",
@@ -75374,9 +75465,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "moen2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -75665,7 +75757,7 @@
     "location": "Copenhagen",
     "_raw_citation": "Moesgaard, J. C. (2015). King Harold's Cross Coinage: Christian Coins for the Merchants of Haithabu and the King's Soldiers, University Press of Southern Denmark, Copenhagen.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "lund2021",
@@ -76271,9 +76363,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "moesgaard2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -77104,7 +77197,7 @@
     "location": "Vestfold Fylkeskommune, Tønsberg",
     "_raw_citation": "Myhre, B. (2015). Før Viken Ble Norge: Borregravfeltet som Religiøs og Politisk Arena, Vestfold Fylkeskommune, Tønsberg.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2017skipsgrav",
       "bill2020ship",
@@ -77342,9 +77435,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "myhre2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -77393,7 +77487,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Myrberg, N. (2009a). The hoarded dead: Late Iron Age silver hoards as graves. In Back Danielsson, I.-M., Gustin, I., Larsson, A., Myrberg, N., and Thedéen, S. (eds.), Döda Personers Sällskap: Gravmaterialens Identiteter och Kulturella Uttryck, Stockholm Studies in Archaeology, Stockholm University, Stockholm, pp. 131-145.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR18",
       "burstrom2014things",
@@ -77711,9 +77805,10 @@
       "_source_pdf",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Automated draft from citers' own reference lists (same first author and year, title match). Moves: lund2016 -> myrberg2009a; williams2016 -> myrberg2009a",
+    "_correction_note": "myrberg2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 0,
@@ -78006,7 +78101,7 @@
     "pages": "287--304",
     "_raw_citation": "Naum, M. (2007). Theory of practice and archaeology of culture contact: Case study of early medieval Bornholm. Quaestiones Medii Avi Novae 11: 287-304.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "price2012isotopic"
     ],
@@ -78249,9 +78344,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> naum2007a",
+    "_correction_note": "naum2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 4,
@@ -78276,7 +78372,7 @@
     "location": "Lund",
     "_raw_citation": "Naum, M. (2008). Homelands Lost and Gained: Slavic Migration and Settlement on Bornholm in the Early Middle Ages, Lund University, Lund.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "gardela2015vikings",
@@ -79065,9 +79161,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by gardela2015 onto the references.csv paper it belongs to (gardela2015vikings).",
+    "_correction_note": "naum2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "publisher": "Lund University",
     "language": "en",
     "detection": {
@@ -79111,7 +79208,7 @@
     "pages": "533--540",
     "_raw_citation": "Naumann, E., Krzewińska, M., Götherström, A., and Eriksson, G. (2014). Slaves as burial gifts in Viking Age Norway? Evidence from stable isotope and ancient DNA analyses. Journal of Archaeological Science 41: 533-540.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "harris2017assembling"
     ],
@@ -79361,9 +79458,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: krzewinska2015 -> naumann2014a; lund2016 -> naumann2014a; lund2021 -> naumann2014a",
+    "_correction_note": "naumann2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 59,
@@ -81238,7 +81336,7 @@
     "pages": "243--262",
     "_raw_citation": "Oehrl, S. (2017). Documenting and interpreting the picture stones of Gotland: Old problems and new approaches. Current Swedish Archaeology 25: 87-122.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "oehrl2019interpretations"
     ],
@@ -81547,9 +81645,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> oehrl2017a",
+    "_correction_note": "oehrl2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 120,
@@ -81834,7 +81933,7 @@
     "location": "Oslo",
     "_raw_citation": "Opedal, A. (2010). Kongemakt og kongerike: Gravritualer og Avaldsnes-områdets politiske rolle 600- 1000, Oslo Archaeological Series No. 13, Unipub, Institutt for Arkeologi, Konservering og Histo- rie, Universitetet i Oslo, Oslo.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2017skipsgrav",
       "bill2020ship",
@@ -82062,9 +82161,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "opedal2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -82098,7 +82198,7 @@
     "eventtitle": "Turnhout",
     "_raw_citation": "Øye, I. (2013). Agrarian technology and land use in Scandinavian landscapes c. 800-1300 AD. In Klápště, J. (ed.), Agrarian Technology in the Medieval Landscape, Brepols Publishers, Turnhout, pp. 157-172.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "jackson2018disequilibrium",
       "lund2021"
@@ -82323,9 +82423,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "oye2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -82636,7 +82737,7 @@
     "eventtitle": "Cumbria, Oxford Archaeology North, Lancaster",
     "_raw_citation": "Paterson, C., Parsons, A. J., Newman, R. M., Johnson, N., Howard-Davis, C., Dickson, A., et al. (2014). Shadows in the Sand: Excavation of a Viking-Age Cemetery at Cumwhitton, Cumbria, Oxford Archaeology North, Lancaster.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "harris2017assembling",
       "harrison2016warrior",
@@ -82866,9 +82967,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by williams2016 onto the references.csv paper it belongs to (williams2016viking).",
+    "_correction_note": "paterson2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -83176,7 +83278,7 @@
     "eventtitle": "Lund",
     "_raw_citation": "Pedersen, A. (2006). Ancient mounds for new graves: An aspect of Viking Age burial customs in south- ern Scandinavia. In Andrén, A., Jennbert, K., and Raudvere, C. (eds.), Old Norse Religion in Long- Term Perspectives: Origins, Changes and Interactions, An International Conference in Lund, Swe- den, June 3-7, 2004, Vagar till Midgård No. 8, Nordic Academic Press, Lund, pp. 346-353.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "abrams2012diaspora",
       "baastrup2014continental",
@@ -83453,9 +83555,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: artelius2013 -> pedersen2006; fahlander2016 -> pedersen2006; fahlander2018 -> pedersen2006; lund2021 -> pedersen2006",
+    "_correction_note": "pedersen2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -83840,7 +83943,7 @@
     "location": "Jelling Series. Odense, Denmark",
     "_raw_citation": "Pedersen, A. (2014). Dead Warriors in Living Memory: A Study of Weapon and Equestrian Buri- als in Viking-Age Denmark, AD 800-1000: Catalogue, Publications from the National Museum, Copenhagen.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "christiansen2019metal",
@@ -84118,9 +84221,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "pedersen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -84436,7 +84540,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Pedersen, U. (2015). Urban craftspeople at Viking-Age Kaupang. In Hansen, G., Baug, I., and Ashby, S. P. (eds.), Everyday Products in the Middle Ages: Crafts, Consumption and the Individual in North- ern Europe c. AD 800-1600, Oxbow Books, Oxford, pp. 51-68.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "pedersen2017viking",
       "ravn2019erritso",
@@ -84767,9 +84871,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: christiansen2019 -> pedersen2015a",
+    "_correction_note": "pedersen2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 74,
@@ -86603,7 +86708,7 @@
     "location": "Oslo",
     "_raw_citation": "Pilø, L. (2005). Bosted-urgård-enkeltgård: En analyse av premissene i den norske bosetningshistor- iske forskningstradisjon på bakgrunn av bebyggelsesarkeologisk feltarbeid på Hedemarken, Institutt for Arkeologi, Kunsthistorie og Konservering, Universitetet i Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "fredriksen2014nar",
       "lund2005thresholds",
@@ -86828,9 +86933,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by fredriksen2014, milek2012 onto the references.csv paper it belongs to (fredriksen2014nar, milek2012roles).",
+    "_correction_note": "pilo2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -87137,7 +87243,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Pluskowski, A. (2010). Animal magic: Signals of belief in early England. In Carver, M. O. H., San- mark, A., and Semple, S. (eds.), Anglo-Saxon Paganism Revisited, Oxbow Books, Oxford, pp. 103-127.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kristjansdottir2015becoming"
     ],
@@ -87384,9 +87490,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> pluskowski2010b",
+    "_correction_note": "pluskowski2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -87993,7 +88100,7 @@
     "eventtitle": "Copenhagen",
     "_raw_citation": "Price, N. (2000). Drum-time and Viking Age: Sámi-Norse identities in early medieval Scandinavia. In Appelt, M., Berglund, J., and Gulløv, H.-C. (eds.), Identities and Cultural Contacts in the Arc- tic, National Museum of Denmark and Danish Polar Centre, Copenhagen, pp. 12-27.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "frei2011",
       "gardela2008into",
@@ -88269,9 +88376,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: price2020 -> price2000b",
+    "_correction_note": "price2000 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -88304,7 +88412,7 @@
     "eventtitle": "Uppsala",
     "_raw_citation": "Price, N. (2002). The Viking Way: Religion and War in Late Iron Age Scandinavia, Aun No. 31, Department of Archaeology and Ancient History, Uppsala University, Uppsala.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR18",
       "toplak2017deviant",
@@ -88697,9 +88805,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding pentz2009kong to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "price2002 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -88752,7 +88861,7 @@
     "eventtitle": "Tórshavn",
     "_raw_citation": "Price, N. (2005). Cognition, culture, and context: Observations on the \"new\" Viking archaeology. In Mortensen, A., and Arge, S. V. (eds.), Viking and Norse in the North Atlantic: Select Papers from the Proceedings of the Fourteenth Viking Congress Tórshavn, 19-30 July 2001, Føroya Froðskaparfelag, Tórshavn, pp. 375-382.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "frei2011",
       "gardela2008into",
@@ -89008,9 +89117,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2008 -> price2005a; lund2021 -> price2005a",
+    "_correction_note": "price2001 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -89048,7 +89158,7 @@
     "eventtitle": "Walnut Creek, CA",
     "_raw_citation": "Price, N. (2008a). Bodylore and the archaeology of embedded religion: Dramatic license in the funer- als of the Vikings. In Hays-Gilpin, K., and Whitley, D. S. (eds.), Belief in the Past: Theoretical Approaches to the Archaeology of Religion, Left Coast Press, Walnut Creek, CA, pp. 143-165.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "eriksen2013doors",
       "gardela2015vikings",
@@ -89334,9 +89444,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking.",
+    "_correction_note": "price2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -89383,7 +89494,7 @@
     "pages": "123--156",
     "_raw_citation": "Price, N. (2010). Passing into poetry: Viking-Age mortuary drama and the origins of Norse mythol- ogy. Medieval Archaeology 54: 123-156.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "toplak2017deviant",
       "gardela2018amazons",
@@ -89664,9 +89775,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: gardela2015 -> price2008a",
+    "_correction_note": "price2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 90,
@@ -90047,7 +90159,7 @@
     "pages": "113--132",
     "_raw_citation": "Price, N. (2018a). Distant Vikings: A manifesto. Acta Archaeologica 89: 113-132.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "carver2015commerce",
       "price2018isotopes",
@@ -90447,9 +90559,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: price2019 -> price2018e",
+    "_correction_note": "price2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -91562,7 +91675,7 @@
     "pages": "308--337",
     "_raw_citation": "Raffield, B. (2016). Bands of brothers: A re-appraisal of the Viking Great Army and its implications for the Scandinavian colonization of England. Early Medieval Europe 24: 308-337.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "moen2020ideas"
@@ -91898,9 +92011,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: griffiths2019 -> raffield2016b; hadley2018 -> raffield2016b; odeback2018 -> raffield2016b",
+    "_correction_note": "raffield2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 22,
@@ -92824,7 +92938,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Raja, R., and Sindbaek, S. M. (2018). Urban network evolutions: Exploring dynamics and flows through evidence from urban contexts. In Raja, R., and Sindbaek, S. M. (eds.), Urban Network Evolutions: Towards a High-Definition Archaeology, Aarhus University Press, Aarhus, pp. 13-18.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2019single",
       "lund2021"
@@ -93048,9 +93162,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "raja2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 4,
@@ -93085,7 +93200,7 @@
     "pages": "83--107",
     "_raw_citation": "Rasmussen, J. M. (2014). Securing cultural heritage objects and fencing stolen goods? A case study on museums and metal detecting in Norway. Norwegian Archaeological Review 74: 83-107.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "tummuscheit2014einzige"
@@ -93332,9 +93447,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: imer2014 -> rasmussen2014a",
+    "_correction_note": "rasmussen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 87,
@@ -94474,7 +94590,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Roesdahl, E., Pedersen, A., Sindbaek, S., and Wilson, D. (eds.) (2014). Aggersborg: The Viking-Age Set- tlement and Fortress, Aarhus University Press, Aarhus.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "ashby2015what",
@@ -94773,9 +94889,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: goodchild2017 -> roesdahl2014b; lund2021 -> roesdahl2014c",
+    "_correction_note": "roesdahl2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -95332,7 +95449,7 @@
     "eventtitle": "Leiden",
     "_raw_citation": "Roslund, M., (2007). Guests in the House: Cultural Transmission between Slavs and Scandinavians 900 to 1300 AD, Brill, Leiden.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "bill2017heimdalsjordet",
       "gardela2015vikings",
@@ -95570,9 +95687,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by gardela2015 onto the references.csv paper it belongs to (gardela2015vikings).",
+    "_correction_note": "roslund2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -97000,7 +97118,7 @@
     "location": "Waterford; Dublin",
     "_raw_citation": "Russel, I., and Hurley, M. F. (2014). Woodstown: A Viking-Age Settlement in Co. Waterford, Four Courts Press, Dublin.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hadley2016winter",
       "hadley2018search",
@@ -97228,9 +97346,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "russel2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -97255,7 +97374,7 @@
     "publisher": "Pantheon Books, N.Y",
     "_raw_citation": "Said, E. W. (1978). Orientalism. Pantheon Books, N.Y.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kristjansdottir2015becoming",
       "lund2021",
@@ -97479,9 +97598,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "said1978 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -97507,7 +97627,7 @@
     "location": "Edinburgh",
     "_raw_citation": "Sanmark, A. (2017). Viking Law and Order: Places and Rituals of Assembly in the Medieval North, Edinburgh University Press, Edinburgh.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "mainland2018nature",
@@ -97730,9 +97850,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "sanmark2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -97765,7 +97886,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Schietzel, K. (2014). Spurensuche Haithabu: Archäologische Spurensuche in der frühmittelalterlichen Ansiedlung Haithabu: Dokumentation und Chronik 1963-2013, Wachholtz, Neumünster.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "hilberg2018detektoruntersuchungen",
@@ -98013,9 +98134,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: hilberg2013 -> schietzel1981",
+    "_correction_note": "schietzel2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -98631,7 +98753,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Schultze, J. (2008). Haithabu: Die Siedlungsgrabungen 1: Methoden und Möglichkeiten der Auswer- tung, Wachholtz, Neumünster.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "hilberg2016hedeby",
@@ -99187,9 +99309,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "schultze2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -99220,7 +99343,7 @@
     "pages": "518--542",
     "_raw_citation": "Semple, S., and Sanmark, A. (2013). Assembly in north west Europe: Collective concerns for early societies? European Journal of Archaeology 16: 518-542.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2016divergent"
     ],
@@ -99528,9 +99651,10 @@
       "_source_pdf",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> semple2013a; sanmark2013a -> semple2013a",
+    "_correction_note": "semple2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 98,
@@ -101949,7 +102073,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Skre, D. (2008). Post-substantivist towns and trade. In Skre, D. (ed.), Means of Exchange, Kaupang Excavation Project Publications Series No. 2, Aarhus University Press, Aarhus, pp. 327-342",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "baug2017soapstone",
       "bill2017heimdalsjordet",
@@ -102259,9 +102383,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by price2010 onto the references.csv paper it belongs to (price2010passing).",
+    "_correction_note": "skre2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -102296,7 +102421,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Skre, D. (2011a). The inhabitants: Activities. In Skre, D. (ed.), Things from the Town: Artefacts and Inhabitants in Viking-Age Kaupang, Kaupang Excavation Project Publication Series No. 3, Aarhus University Press, Aarhus, pp. 395-416.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "aannestad2018charisma",
@@ -102561,9 +102686,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Automated draft from citers' own reference lists (same first author and year, title match). Moves: skre2016 -> skre2011c; skre2017 -> skre2011c; smith2013 -> skre2011c",
+    "_correction_note": "skre2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -103194,7 +103320,7 @@
     "location": "Skrifter, 62. Riksantikvarieämbetet, Lund",
     "_raw_citation": "Söderberg, B. (2005). Aristokratiskt Rum och Gränsöverskridande: Järrestad och Sydöstra Skåne mellan Region och Rike 600-1100, Riksantikvarieämbetet, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "andren2013significance",
       "borake2018bottlenecks",
@@ -103439,9 +103565,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by larsson2007 onto the references.csv paper it belongs to (larsson2007iron).",
+    "_correction_note": "soderberg2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -103474,7 +103601,7 @@
     "eventtitle": "Pax, Oslo",
     "_raw_citation": "Solli, B. (2002). Seid: Myter, Sjamanisme og Kjønn i Vikingenes Tid, Pax, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "eriksen2013doors",
       "gardelanda",
@@ -103728,9 +103855,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "solli2002 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -104034,7 +104162,7 @@
     "pages": "40--88",
     "_raw_citation": "Solli, B., Burström, M., Domanska, E., Edgeworth, M., González-Ruibal, A., Holtorf, C., et al. (2011). Some reflections on heritage and archaeology in the Anthropocene. Norwegian Archaeological Review 44: 40-88.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "stene2017uplands"
     ],
@@ -104277,9 +104405,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> solli2011a",
+    "_correction_note": "solli2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 147,
@@ -104588,7 +104717,7 @@
     "eventtitle": "Lund",
     "_raw_citation": "Staecker, J. (2004). Hjälter, kungar och gudar. In Berggren, Å., Arvidsson, S., and Hållans, A.-M. (eds.), Minne och Myt: Kunsten at Skapa det Förflutna, Vägar till Midgård No. 5, Nordic Academic Press, Lund, pp. 39-80.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ahfeldt2015",
       "lund2005thresholds",
@@ -104905,9 +105034,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2008, oehrl2017 onto the references.csv paper it belongs to (lund2008banks, oehrl2017documenting).",
+    "_correction_note": "staecker2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "sv",
     "detection": {
       "reference_list": 0,
@@ -104941,7 +105071,7 @@
     "location": "Wrocław",
     "_raw_citation": "Stanisławski, B. M. (2013). Jómswikingowie z Wolina-Jómsborga: Studium archeologiczne przenikania kultury skandynawskiej na ziemie polskie, Wydawnictwo Instytutu Archeologii i Etnologii Polskiej Akademii Nauk, Wrocław.",
     "entry_type": "misc",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "gardela2015vikings",
@@ -105165,9 +105295,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by gardela2015 onto the references.csv paper it belongs to (gardela2015vikings).",
+    "_correction_note": "stanislawski2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -106388,7 +106519,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Stidsing, E., Høilund Nielsen, K., and Fiedel, R. (eds.) (2014). Wealth and Complexity: Economically Specialised Sites in Late Iron Age Denmark, Aarhus University Press, Aarhus.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "borake2018bottlenecks",
       "christiansen2019metal",
@@ -106618,9 +106749,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "stidsing2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -107185,7 +107317,7 @@
     "location": "Stockholm",
     "_raw_citation": "Svanberg, F. (2003a). Decolonizing the Viking Age 1, Acta Archaeologica Lundensia Series No. 43, Almqvist and Wiksell, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "androshchuk2010gift",
@@ -107832,9 +107964,10 @@
       "detection",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "svanberg2003 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -108716,7 +108849,7 @@
     "pages": "183--205",
     "_raw_citation": "Svensson, E., Bodin, S., Hulling, H., and Pettersson, S. (2009). The crofter and the iron works: The mate- rial culture of structural crisis, identity and making a living on the edge. International Journal of Historical Archaeology 13: 183-205.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "zachrisson2014heliga"
     ],
@@ -108961,9 +109094,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> svensson2009a; rasmussen2014 -> svensson2009b; sanmark2013 -> svensson2009c",
+    "_correction_note": "svensson2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 18,
@@ -108991,7 +109125,7 @@
     "location": "Lund, Sweden",
     "_raw_citation": "Thäte, E. S. (2007). Monuments and Minds: Monument Re-Use in Scandinavia in the Second Half of the First Millennium AD, Acta Archaeologica Lundensia Series No. 27, Wallin and Dalholm, Lund.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "andren2013significance",
       "andren2013places",
@@ -109231,9 +109365,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by artelius2013, williams2016 onto the references.csv paper it belongs to (artelius2013inventions, williams2016viking).",
+    "_correction_note": "thate2007 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -109875,7 +110010,7 @@
     "eventtitle": "Tübingen",
     "_raw_citation": "Toplak, M. (2016). Das wikingerzeitliche Gräberfeld von Kopparsvik auf Gotland: Studien zu neuen Konzepten sozialer Identitäten am Übergang zum christlichen Mittelalter, Ph.D. dissertation, Phi- losophische Fakultät, Eberhard Karls Universität, Tübingen.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "toplak2018deconstructing"
@@ -110096,9 +110231,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "toplak2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -110389,7 +110525,7 @@
     "location": "Neumünster/ Hamburg",
     "_raw_citation": "Tummuscheit, A. (2011). Die Baubefunde des frühmittelalterlichen Seehandelsplatzes von Groß Ström- kendorf, Lkr. Nordwestmecklenburg: Frühmittelalterliche Archäologie zwischen Ostsee und Mit- telmeer, Reichert Verlag, Wiesbaden.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "tummuscheit2014einzige",
       "tummuscheit2019danevirke"
@@ -110984,9 +111120,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> tummuscheit2012",
+    "_correction_note": "tummuscheit2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -111020,7 +111157,7 @@
     "location": "Lerwick",
     "_raw_citation": "Turner, V. E., Bond, J. M., and Larsen, A. C. (2013). Viking Unst: Excavation and Survey in Northern Scotland 2006-2010, Shetland Heritage Publications, Lerwick.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "raffield2014river"
@@ -111242,9 +111379,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "turner2006 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -112923,7 +113061,7 @@
     "pages": "39--68",
     "_raw_citation": "Vésteinsson, O., Church, M. J., Dugmore, A. J., McGovern, T. H., and Newton, A. J. (2014). Expensive errors or rational choices: The pioneer fringe in late Viking Age Iceland. European Journal of Post-Classical Archaeologies 4: 39-68.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "catlin2016archaeology",
       "hartman2017medieval",
@@ -113211,9 +113349,10 @@
       "cited_by",
       "_source_pdf",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "vesteinsson2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 45,
@@ -114182,7 +114321,7 @@
     "location": "Newbridge, Ireland",
     "_raw_citation": "Wallace, P. (2016). Viking Dublin: The Wood Quay Excavations, Ireland Irish Academic Press, Kildare.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "raffield2019playing"
@@ -114404,9 +114543,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "wallace2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -114709,7 +114849,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Wickham, C. (2005). Framing the Early Middle Ages: Europe and the Mediterranean, 400-800, Oxford University Press, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "ashby2015what",
       "barrett2010rounding",
@@ -114948,9 +115088,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding barrett2008what; removing barrett2008.",
+    "_correction_note": "wickham2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -115892,7 +116033,7 @@
     "eventtitle": "London",
     "_raw_citation": "Williams, G. (ed.) (2020). A Riverine Site Near York: A Possible Viking Camp? British Museum, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "raffield2016bands",
@@ -116115,9 +116256,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "williams2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -116148,7 +116290,7 @@
     "pages": "400--414",
     "_raw_citation": "Williams, H. (2016). Viking mortuary citations. European Journal of Archaeology 19: 400-414.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "barndon2018grav",
       "hadley2018search"
@@ -116401,9 +116543,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: heenpettersen2018 -> williams2016a; lund2020 -> williams2016a; lund2021 -> williams2016a",
+    "_correction_note": "williams2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 75,
@@ -116984,7 +117127,7 @@
     "eventtitle": "Stockholm; Stockholm",
     "_raw_citation": "Zachrisson, T. (2004a). The holiness of Helgö. In Gyllensvärd, B. (ed.), Exotic and Sacral Finds from Helgö, Stockholm, Excavations at Helgö No. 16, Almqvist and Wiksell, Stockholm, 143-175. Journal of Archaeological Research (2022) 30:169-229",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2013fragments",
       "lund2015living",
@@ -117341,9 +117484,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2013 onto the references.csv paper it belongs to (lund2013fragments).",
+    "_correction_note": "zachrisson2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "sv",
     "detection": {
       "reference_list": 37,
@@ -117397,7 +117541,7 @@
     "eventtitle": "Härnösand",
     "_raw_citation": "Zachrisson, T. (2014). De heliga platsernas arkeologi: Materiell kultur och miljöer i järnålderns Mellans- verige. In Nyman, E., Magnusson, J., and Strzelecka. E. (eds.), Den Heliga Platsen: Handlingar från Symposiet Den Heliga Platsen, Härnösand 15-18 september 2011, Skrifter i Humaniora vid Mittuniversitetet No. 1, Mid Sweden University, Härnösand, pp. 87-126.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "forest2011",
       "ljungkvist2015gamla",
@@ -117693,9 +117837,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding graslund2012twilight to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "zachrisson2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -119321,7 +119466,7 @@
     "location": "Lund",
     "_raw_citation": "Andrén, A. (2014). Tracing Old Norse Cosmology: The World Tree, Middle Earth, and the Sun from Archaeological Perspectives, Nordic Academic Press, Lund.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kristjansdottir2015becoming",
       "lund2021",
@@ -119554,9 +119699,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by oehrl2017, williams2016 onto the references.csv paper it belongs to (oehrl2017documenting, williams2016viking).",
+    "_correction_note": "andren2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -120880,7 +121026,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Christiansen, T. T., Sarauw, T., Stidsing, E., Høilund-Nielsen, K., and Fiedel, R. (2014). Cen- tral places in abundance? The eastern Limfjord area in the Late Iron Age and Viking Age. In Høilund-Nielsen, K., and Fiedel, R. (eds.), Wealth and Complexity: Economically Specialised Sites in Late Iron Age Denmark, Aarhus University Press, Aarhus, pp. 127-142.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
       "croix2019single",
@@ -121106,9 +121252,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "christiansen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -121145,7 +121292,7 @@
     "eventtitle": "Wachholtz, Neumünster",
     "_raw_citation": "Dobat, A. S. (2010). Füsing: Ein frühmittelalterlicher Zentralplatz im Umfeld von Haithabu/ Schleswig: Bericht über die Ergebnisse der Prospektionen 2003-2005. In Anspach, B., and Dobat, A. S. (eds.), Studien zu Haithabu und Füsing, Wachholtz, Neumünster, pp. 131-247.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "axelsen2014",
       "christiansen2019metal",
@@ -121400,9 +121547,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by pedersen2015 onto the references.csv paper it belongs to (pedersen2015urban).",
+    "_correction_note": "dobat2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -122286,7 +122434,7 @@
     "eventtitle": "København; Nationalmuseet, Copenhagen",
     "_raw_citation": "Feveile, C. (2015). Metaldetektorproblematikken: Uens regler og deres konsekvenser. In Pedersen, A., and Sindbaek, S. M. (eds.), Et Faelles Hav: Skagerrak Og Kattegat i Vikingetiden Seminar På Nationalmuseet, København, 19.-20. September 2012, Nationalmuseet, Copenhagen, pp. 120-135.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "croix2015permanency",
       "croix2019single",
@@ -122531,9 +122679,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: ashby2015 -> feveile2012a",
+    "_correction_note": "feveile2012 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "da",
     "detection": {
       "reference_list": 9,
@@ -122560,7 +122709,7 @@
     "location": "Vienna",
     "_raw_citation": "Gardeła, L. (2016). (Magic) Staffs in the Viking Age, Studia Medievalia Septentrionalia No. 27, Fassbae- nder, Vienna.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2018amazons",
       "heenpettersen2018insular",
@@ -122809,9 +122958,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> gardela2016b; williams2016 -> gardela2016c",
+    "_correction_note": "gardela2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -122841,7 +122991,7 @@
     "pages": "197--210",
     "_raw_citation": "Gjerde, H. S. (2009). Samiske tufter i Hallingdal? Viking 72: 197-210.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
       "lund2021"
@@ -123067,9 +123217,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gjerde2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -123098,7 +123249,7 @@
     "eventtitle": "Oslo",
     "_raw_citation": "Glørstad, Z. T. (2010). Ringspennen og Kappen: Kulturelle Møter, Politiske Symboler og Sentralisering- sprocesser i Norge ca. 800-950, Ph.D. dissertation, Department of Archaeology, Conservation and History, University of Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "aannestad2018charisma",
       "burstrom2015things",
@@ -123328,9 +123479,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "glorstad2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -125132,7 +125284,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Gustafsson, N. B. (2013). Casting Identities in Central Seclusion: Aspects of Non-Ferrous Metalworking and Society on Gotland in the Early Medieval Period, Ph.D. dissertation, Department of Archaeol- ogy and Classical Studies, Stockholm University, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
       "gustafsson2016beeswax",
@@ -125356,9 +125508,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gustafsson2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -128052,7 +128205,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Lemm, T. (2013). Die frühmittelalterlichen Ringwälle im westlichen und mittleren Holstein, Wachholtz, Neumünster.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "goodchild2017borgring",
       "lund2021"
@@ -128275,9 +128428,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "lemm2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -128324,7 +128478,7 @@
     "pages": "446--461",
     "_raw_citation": "Linderholm, A., Hedenstierna-Jonson, C., Svensk, O., and Lidén, K. (2008). Diet and status in Birka: Analysis of stable isotopes and grave goods. Antiquity 82: 446-461.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hedenstiernajonson2015she",
       "helama2017dark",
@@ -128596,9 +128750,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: chenery2014 -> linderholm2008a; pollard2012 -> linderholm2008a",
+    "_correction_note": "linderholm2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -128627,7 +128782,7 @@
     "pages": "197--220",
     "_raw_citation": "Lund, J. (2004). Våben i vand: Om deponeringer i vikingetiden. Kuml: Årbog for Jysk Arkaeologisk Selskab 2004: 197-220",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "androshchuk2010gift",
       "baastrup2014continental",
@@ -129216,9 +129371,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by lund2008, lund2013 onto the references.csv paper it belongs to (lund2008banks, lund2013fragments).",
+    "_correction_note": "lund2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "da",
     "detection": {
       "reference_list": 70,
@@ -129507,7 +129663,7 @@
     "location": "Cambridge",
     "_raw_citation": "McAnany, P. A., and Yoffee, N. (2010). Questioning Collapse: Human Resilience, Ecological Vulnerabil- ity, and the Aftermath of Empire, Cambridge University Press, Cambridge.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "graslund2012twilight"
@@ -129734,9 +129890,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding graslund2012twilight to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "mcanany2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -129761,7 +129918,7 @@
     "eventtitle": "Fassbaender, Vienna",
     "_raw_citation": "Morawiec, J. (2009). Vikings among the Slavs: Jomsborg and the Jomsvikings in Old Norse Tradition, Fassbaender, Vienna.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "gardela2015vikings",
       "lund2021"
@@ -129983,9 +130140,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by gardela2015 onto the references.csv paper it belongs to (gardela2015vikings).",
+    "_correction_note": "morawiec2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -130573,7 +130731,7 @@
     "location": "Turnhout",
     "_raw_citation": "Nordeide, S.W. (2011). The Viking Age as a Period of Religious Transformation: The Christianization of Norway from AD 560 to 1150/1200, Brepols Publishers, Turnhout.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "heenpettersen2018insular",
       "kristjansdottir2015becoming",
@@ -130823,9 +130981,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by williams2016 onto the references.csv paper it belongs to (williams2016viking).",
+    "_correction_note": "nordeide2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -133126,7 +133285,7 @@
     "eventtitle": "Reykjavik",
     "_raw_citation": "Roesdahl, E. (2011). Scandinavia in the melting-pot, 950-1000. In Sigmundsson, S. (ed.), Viking Set- tlements and Viking Society: Proceedings from the 16th Viking Congress Held in Reykjavík and Reykholt in Iceland in August 2009, University of Iceland Press, Reykjavik, pp. 347-374.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "price2019viking"
@@ -133351,9 +133510,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking.",
+    "_correction_note": "roesdahl2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -134458,7 +134618,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Rundkvist, M. (2011). Mead-Halls of the Eastern Geats: Elite Settlements and Political Geography AD 375-1000 in Östergötland, Sweden, Kungl. Vitterhets Historie och Antikvitets Akademien, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "rundkvist2015geophysical",
@@ -134683,9 +134843,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by williams2016 onto the references.csv paper it belongs to (williams2016viking).",
+    "_correction_note": "rundkvist2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -134710,7 +134871,7 @@
     "location": "Oslo",
     "_raw_citation": "Røstad, I. (2016). Smykkenes spark: Smykker og identitetsforhandlinger i Skandinavia ca. 400-650/700 e.Kr., Ph.D. dissertation, Institute for Archaeology, Conservation and History, University of Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "baug2019beginning",
       "lund2021",
@@ -134933,9 +135094,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "rostad2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -134969,7 +135131,7 @@
     "eventtitle": "Reykjavík",
     "_raw_citation": "Sindbaek, S. M. (2011). Urban crafts and oval brooches: Style, innovation and social networks in Viking Age towns. In Sigmundsson, S. (ed.), Viking Settlements and Viking Society: Proceedings from the 16th Viking Congress Held in Reykjavík and Reykholt in Iceland in August 2009, University of Iceland Press, Reykjavík, pp. 407-421.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
       "knappett2025",
@@ -135569,9 +135731,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2021 -> sindbaek2011a; stene2017 -> sindbaek2011a",
+    "_correction_note": "sindbaek2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -136753,7 +136916,7 @@
     "location": "Þjóðminjasafn Íslands, Reykjavík",
     "_raw_citation": "Sveinbjarnardóttir, G. (2016). Reykholt: The Church Excavations, Þjóðminjasafn Íslands, Reykjavík.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "schmid2017tephra"
@@ -136975,9 +137138,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "sveinbjarnardottir2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -137792,7 +137956,7 @@
     "pages": "161--245",
     "_raw_citation": "Ulriksen, J. (2011). Vikingetidens gravskik i Danmark: Spor af begravelsesritualer i jordfaestegrave. Kuml 60: 161-245.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
       "gardela2018amazons",
@@ -138124,9 +138288,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: gardelanda -> ulriksen2011b",
+    "_correction_note": "ulriksen2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "da",
     "detection": {
       "reference_list": 118,
@@ -138160,7 +138325,7 @@
     "location": "Cambridge",
     "_raw_citation": "Williams, G., and Ager, B. (2010). The Vale of York Hoard, British Museum Press, London.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "axelsen2014",
       "gullbekk2014vestfold",
@@ -138435,9 +138600,10 @@
       "detection",
       "cited_by",
       "pages",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016, williams2016 onto the references.csv paper it belongs to (raffield2016bands, williams2016viking).",
+    "_correction_note": "williams2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -138464,7 +138630,7 @@
     "pages": "181--191",
     "_raw_citation": "Zachrisson, T. (2014). Rotary querns and bread: A social history of Iron Age Sweden. AmS-Skrifter 24: 181-191.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
       "zachrisson2014rotary"
@@ -138795,9 +138961,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: gotfredsen2014 -> zachrisson2014c",
+    "_correction_note": "zachrisson2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "sv",
     "detection": {
       "reference_list": 96,
@@ -381609,7 +381776,7 @@
     "pages": "326--340",
     "_raw_citation": "Frei KM, Frei R (2011) The geographic distribution of strontium isotopes in Danish surface waters-a base for provenance studies in archaeology, hydrology and agriculture. Appl Geochem 28:326- 340",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "becker2012archaeometry",
       "buckberry2014finding",
@@ -381802,9 +381969,10 @@
       "language",
       "detection",
       "volume",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Moving the reference list held by chenery2014 onto the references.csv paper it belongs to (chenery2014boat).",
+    "_correction_note": "frei2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "language": "en",
     "detection": {
       "reference_list": 45,
@@ -948756,7 +948924,7 @@
     "pages": "28--35",
     "_raw_citation": "Jarman, C. 2018. Resolving Repton: has archaeology found the great Viking camp? British Archaeology March-April 2018, 28-35.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "hadley2018search",
       "lund2021",
@@ -948863,9 +949031,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "jarman2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "detection": {
       "reference_list": 30,
       "inline_markers": 34,
@@ -1097662,7 +1097831,7 @@
     "doi": "10.1038/srep10431",
     "_raw_citation": "Frei, K.M., et al., 2015. Tracing the dynamic life story of a Bronze age female. Scientific Reports (Nature), 5, 10431. doi:10.1038/srep10431",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "henriksen2017iron",
       "jackson2018disequilibrium",
@@ -1097771,9 +1097940,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "frei2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "detection": {
       "reference_list": 70,
       "inline_markers": 62,
@@ -1310440,7 +1310610,7 @@
     "booktitle": "Viking worlds. Things, spaces and movement",
     "pages": "179--94",
     "citekey": "axelsen2014",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "kalmring2018gleaming",
       "lund2021"
@@ -1310543,9 +1310713,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "axelsen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "detection": {
       "reference_list": 36,
       "inline_markers": 41,
@@ -2270103,7 +2270274,7 @@
     ],
     "date": "2017",
     "year": "2017",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "pilo2018chronology"
@@ -2270204,9 +2270375,10 @@
       "detection",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Adding pilo2018chronology to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "the2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
     "_renamed_from": "thend",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "en",
