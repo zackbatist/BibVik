@@ -327278,3 +327278,486 @@
   note: zachrisson2014 is not among the 369 papers in the annotations csv, so it is
     not F1. It is cited by at least one of the 369 F1 papers, so its generation is
     F2.
+- action: set
+  citekey: ahola2014
+  field: generation
+  value: F2
+  note: ahola2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: andren2013b
+  field: generation
+  value: F2
+  note: andren2013b is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: andren2013c
+  field: generation
+  value: F2
+  note: andren2013c is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: bergstol2004
+  field: generation
+  value: F2
+  note: bergstol2004 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: beroniusjorpeland2018
+  field: generation
+  value: F2
+  note: beroniusjorpeland2018 is not among the 369 papers in the annotations csv,
+    so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none
+    of the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: birkett2020
+  field: generation
+  value: F2
+  note: birkett2020 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: blaszczyk2017
+  field: generation
+  value: F2
+  note: blaszczyk2017 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: borake2019
+  field: generation
+  value: F2
+  note: borake2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: brewer2018
+  field: generation
+  value: F2
+  note: brewer2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: brorsson2010
+  field: generation
+  value: F2
+  note: brorsson2010 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: callmer2017
+  field: generation
+  value: F2
+  note: callmer2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: cannell2016a
+  field: generation
+  value: F2
+  note: cannell2016a is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: cooijmans2020
+  field: generation
+  value: F2
+  note: cooijmans2020 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: croix2020
+  field: generation
+  value: F2
+  note: croix2020 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: d2016
+  field: generation
+  value: F2
+  note: d2016 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by lund2021 or by papers outside the 369 and by none of the 369, and
+    F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: eriksen2019
+  field: generation
+  value: F2
+  note: eriksen2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: eriksson2018
+  field: generation
+  value: F2
+  note: eriksson2018 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: forest2011
+  field: generation
+  value: F2
+  note: forest2011 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: fredriksen2014
+  field: generation
+  value: F2
+  note: fredriksen2014 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: frieman2019
+  field: generation
+  value: F2
+  note: frieman2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: furholt2018
+  field: generation
+  value: F2
+  note: furholt2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: furholt2019
+  field: generation
+  value: F2
+  note: furholt2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: gardela2014a
+  field: generation
+  value: F2
+  note: gardela2014a is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: gardelanda
+  field: generation
+  value: F2
+  note: gardelanda is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: gjerpe2008
+  field: generation
+  value: F2
+  note: gjerpe2008 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: gossler2018
+  field: generation
+  value: F2
+  note: gossler2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: grundvad2017
+  field: generation
+  value: F2
+  note: grundvad2017 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: gruszczynski2018
+  field: generation
+  value: F2
+  note: gruszczynski2018 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by lund2021 or by papers outside the 369 and by none of
+    the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: hansen2017
+  field: generation
+  value: F2
+  note: hansen2017 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: hansson2018
+  field: generation
+  value: F2
+  note: hansson2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: holmquist2013
+  field: generation
+  value: F2
+  note: holmquist2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: iversen2015
+  field: generation
+  value: F2
+  note: iversen2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: jackson2019
+  field: generation
+  value: F2
+  note: jackson2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: janowski2015
+  field: generation
+  value: F2
+  note: janowski2015 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: kershaw2018
+  field: generation
+  value: F2
+  note: kershaw2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: kershaw2019
+  field: generation
+  value: F2
+  note: kershaw2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: kirpichnikov2018
+  field: generation
+  value: F2
+  note: kirpichnikov2018 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by lund2021 or by papers outside the 369 and by none of
+    the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: knappett2025
+  field: generation
+  value: F2
+  note: knappett2025 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: laroche1997
+  field: generation
+  value: F2
+  note: laroche1997 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: madsen2010
+  field: generation
+  value: F2
+  note: madsen2010 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: magi2018
+  field: generation
+  value: F2
+  note: magi2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: magi2019
+  field: generation
+  value: F2
+  note: magi2019 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: martin2020
+  field: generation
+  value: F2
+  note: martin2020 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: mehler2015
+  field: generation
+  value: F2
+  note: mehler2015 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: melheim2016
+  field: generation
+  value: F2
+  note: melheim2016 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: mikhaylov2016
+  field: generation
+  value: F2
+  note: mikhaylov2016 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: mozdzioch2013
+  field: generation
+  value: F2
+  note: mozdzioch2013 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: nordahl2018
+  field: generation
+  value: F2
+  note: nordahl2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: nordeide2016
+  field: generation
+  value: F2
+  note: nordeide2016 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: norstein2020
+  field: generation
+  value: F2
+  note: norstein2020 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: olsson2004
+  field: generation
+  value: F2
+  note: olsson2004 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: pearson2018
+  field: generation
+  value: F2
+  note: pearson2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: pedersen2009a
+  field: generation
+  value: F2
+  note: pedersen2009a is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: pluskowski2010a
+  field: generation
+  value: F2
+  note: pluskowski2010a is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by lund2021 or by papers outside the 369 and by none of
+    the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: ratican2020
+  field: generation
+  value: F2
+  note: ratican2020 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: rebkowski2019
+  field: generation
+  value: F2
+  note: rebkowski2019 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: rundberget2017
+  field: generation
+  value: F2
+  note: rundberget2017 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: s2019
+  field: generation
+  value: F2
+  note: s2019 is not among the 369 papers in the annotations csv, so it is not F1.
+    It is cited by lund2021 or by papers outside the 369 and by none of the 369, and
+    F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: sanmarknda
+  field: generation
+  value: F2
+  note: sanmarknda is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: sharples2020
+  field: generation
+  value: F2
+  note: sharples2020 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: spangen2006
+  field: generation
+  value: F2
+  note: spangen2006 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: stanislawski2014
+  field: generation
+  value: F2
+  note: stanislawski2014 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by lund2021 or by papers outside the 369 and by none of
+    the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: strand2001
+  field: generation
+  value: F2
+  note: strand2001 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: ulriksen2019
+  field: generation
+  value: F2
+  note: ulriksen2019 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: vedeler2014
+  field: generation
+  value: F2
+  note: vedeler2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: vonholstein2016
+  field: generation
+  value: F2
+  note: vonholstein2016 is not among the 369 papers in the annotations csv, so it
+    is not F1. It is cited by lund2021 or by papers outside the 369 and by none of
+    the 369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: williams2017
+  field: generation
+  value: F2
+  note: williams2017 is not among the 369 papers in the annotations csv, so it is
+    not F1. It is cited by lund2021 or by papers outside the 369 and by none of the
+    369, and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: wilson2018
+  field: generation
+  value: F2
+  note: wilson2018 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.
+- action: set
+  citekey: zori2014
+  field: generation
+  value: F2
+  note: zori2014 is not among the 369 papers in the annotations csv, so it is not
+    F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369,
+    and F2 is the only generation left for an entry that is not F1.

@@ -689,7 +689,7 @@
     "eventtitle": "Helsinki",
     "_raw_citation": "Ahola, J., and Tolley, C. (eds.) (2014). Fibula, Fabula, Fact: The Viking Age in Finland, Finnish Lit- erature Society, Helsinki.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -913,9 +913,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "ahola2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -9937,7 +9938,7 @@
     "location": "Oxford",
     "_raw_citation": "Ashby, S., and Sindbaek S. (eds.) (2019). Crafts and Social Networks in Viking Towns, Oxbow Books, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -10159,9 +10160,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "s2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -14813,7 +14815,7 @@
     "pages": "7--24",
     "_raw_citation": "Bergstøl, J. (2004). Creoles in Iron Age Norway? Archaeological Review from Cambridge 19: 7-24.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "rasmussen2014"
     ],
@@ -15061,9 +15063,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: amundsen2017 -> bergstol2004a; lund2019 -> bergstol2004a; lund2021 -> bergstol2004a",
+    "_correction_note": "bergstol2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 16,
@@ -15390,7 +15393,7 @@
     "location": "Stockholm",
     "_raw_citation": "Beronius Jörpeland, L., Göthberg, H., Seiler, A., and Wikborg, J. (eds.) (2018). At Upsalum -Människor och landskapande, Statens Historiska Museer, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -15611,9 +15614,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "beroniusjorpeland2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -18235,7 +18239,7 @@
     "location": "Warsaw",
     "_raw_citation": "Błaszczyk, D. (2017). Między ziemią a niebem: Groby komorowe na obszarze państwa pierwszych Piastów, Instytut Archeologii Uniwersytetu Warszawskiego, Warsaw.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -18456,9 +18460,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "blaszczyk2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -18485,7 +18490,7 @@
     "location": "Warsaw",
     "_raw_citation": "Błaszczyk, D., and Stępniewska, D. (eds.) (2016). Pochówki w grobach komorowych na ziemiach pols- kich w okresie wczesnego średniowiecza / Burials in Chamber Graves in the Polish Lands during the early Middle Ages, Instytut Archeologii Uniwersytetu Warszawskiego, Warsaw.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -18707,9 +18712,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "d2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -19868,7 +19874,7 @@
     "pages": "61--73",
     "_raw_citation": "Borake, T. L. (2019). Anarchistic action: Social organization and dynamics in southern Scandinavia from the Iron Age to the Middle Ages. Archaeological Dialogues 26: 61-73.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -20094,9 +20100,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "borake2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -20659,7 +20666,7 @@
     "pages": "554--569",
     "_raw_citation": "Brewer, J., and Riede, F. (2018). Cultural heritage and climate adaptation: A cultural evolutionary per- spective for the Anthropocene. World Archaeology 50: 554-569.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -20886,9 +20893,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "brewer2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 97,
@@ -22394,7 +22402,7 @@
     "eventtitle": "Leiden",
     "_raw_citation": "Callmer, J., Gustin, I., and Roslund, M. (eds.) (2017). Identity Formation and Diversity in the Early Medi- eval Baltic and Beyond: Communicators and Communication, Brill, Leiden.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -22616,9 +22624,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "callmer2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -26204,7 +26213,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Croix, S. (2020). Ribe's pre-Christian cemetery: The burial customs of an early urban community. In Pedersen, A., and Sindbaek, S. M. (eds.), Viking Encounters: Proceedings of the 18th Viking Con- gress, Aarhus University Press, Aarhus, pp. 465-480.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -26427,9 +26436,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "croix2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -30992,7 +31002,7 @@
     "eventtitle": "Cambridge",
     "_raw_citation": "Eriksen, M. H. (2019). Architecture, Society, and Ritual in Viking Age Scandinavia: Doors, Dwellings, and Domestic Space, Cambridge University Press, Cambridge.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -31213,9 +31223,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "eriksen2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -31498,7 +31509,7 @@
     "eventtitle": "Norstedts, Stockholm",
     "_raw_citation": "Eriksson, K. E. (2018). Gamla Uppsala: Människor och makterna i högarnas skugga, Norstedts, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -31718,9 +31729,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "eriksson2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -34361,7 +34373,7 @@
     "location": "Viking",
     "_raw_citation": "Fredriksen, P. D., and Amundsen, M. (2014). Når stedsbånd veves og løses opp: En sosial kronologi for bosetningen av Kalvebeitet i indre Sogn i yngre romertid og folkevandringstid. Viking 77: 79-104.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -34666,9 +34678,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: martin2020 -> fredriksen2014a",
+    "_correction_note": "fredriksen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "nb",
     "detection": {
       "reference_list": 38,
@@ -35034,7 +35047,7 @@
     "pages": "528--545",
     "_raw_citation": "Frieman, C. J., and Hofman, D. (2019). Present pasts in the archaeology of genetics, identity, and migra- tion in Europe: A critical essay. World Archaeology 51: 528-545.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "furholt2019",
       "lund2021"
@@ -35262,9 +35275,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "frieman2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 109,
@@ -35558,7 +35572,7 @@
     "pages": "159--191",
     "_raw_citation": "Furholt, M. (2018). Massive migrations? The impact of recent aDNA studies on our view of third millen- nium Europe. European Journal of Archaeology 21: 159-191.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "frieman2019",
       "furholt2019",
@@ -35788,9 +35802,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "furholt2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 129,
@@ -35817,7 +35832,7 @@
     "pages": "53--68",
     "_raw_citation": "Furholt, M. (2019). De-contaminating the aDNA: Archaeology dialogue on mobility and migration dis- cussing the culture-historical legacy. Current Swedish Archaeology 27: 53-68.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -36106,9 +36121,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "furholt2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -38176,7 +38192,7 @@
     "location": "Oslo",
     "_raw_citation": "Gjerpe, L. E. (ed.) (2008). E18-prosjektet Vestfold -Bind 3 -Hus, boplass-og dyrkningsspor, Varia 73, Museum of Cultural History, University of Oslo, Oslo.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "forest2011",
       "lund2021"
@@ -38420,9 +38436,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: rasmussen2014 -> gjerpe2008a",
+    "_correction_note": "gjerpe2008 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -39778,7 +39795,7 @@
     "location": "Wachholtz, Neumünster",
     "_raw_citation": "Goßler, N., and Jahn, C. (2018). Wikinger und Balten an der Memel, Die Ausgrabungen des frühge- schichtlichen Gräberfeldes von Linkuhnen in Ostpreußen 1928-1939, Studien zur Siedlungsge- schichte und Archäologie der Ostseegebiete 16, Wachholtz, Neumünster.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -40002,9 +40019,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gossler2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -41754,7 +41772,7 @@
     "location": "Routledge, London",
     "_raw_citation": "Gruszczyński, J. (2018). Silver, Hoards and Containers: The Archaeological and Historical Context of Viking-Age Silver Coin Deposits in the Baltic c. 800-1050, Routledge, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -41975,9 +41993,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gruszczynski2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -44966,7 +44985,7 @@
     "_raw_citation": "Hansen, G., and Storemyr, P. (eds.) (2017). Soapstone in the North: Quarries, Products and People 7000 BC-AD 1700, University of Bergen, Bergen.",
     "entry_type": "book",
     "_catalogue_candidate": true,
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -45187,9 +45206,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hansen2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -45238,7 +45258,7 @@
     "eventtitle": "Medströms, Stockholm",
     "_raw_citation": "Hansson, J., Harrison, D., Hedenstierna-Jonson, C., Helmerson, K., Lindström, J., Magnusson, T., and Sundström, A. (2018). Birkas skepp: Vikingatid på östersjön, Medströms, Stockholm.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -45458,9 +45478,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "hansson2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -53783,7 +53804,7 @@
     "eventtitle": "the International Symposium at the Swedish History MuseumStockholm",
     "_raw_citation": "Holmquist, L., Kalmring, S., and Hedenstierna-Jonson, C. (eds.) (2016). New Aspects on Viking-Age Urbanism c. AD 750-1100: Proceedings of the International Symposium at the Swedish His- tory Museum, April 17-20th 2013, Archaeological Research Laboratory, Stockholm University, Stockholm.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -54006,9 +54027,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "holmquist2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -56798,7 +56820,7 @@
     "pages": "1--17",
     "_raw_citation": "Iversen, F. (2015). Community and society: The thing at the edge of Europe. Journal of the North Atlan- tic 8: 1-17.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "furholt2019"
     ],
@@ -57128,9 +57150,10 @@
       "language",
       "detection",
       "cited_by",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: iversen2015a -> iversen2015b",
+    "_correction_note": "iversen2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 60,
@@ -57156,7 +57179,7 @@
     "eventtitle": "Leeds",
     "_raw_citation": "Jackson, T. N. (2019). Eastern Europe in Icelandic Sagas, Arc Humanities Press, Leeds.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -57379,9 +57402,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "jackson2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -58245,7 +58269,7 @@
     "eventtitle": "Szczecin",
     "_raw_citation": "Janowski, A. S. (2015). Groby komorowe w Europie Środkowo-Wschodniej: Problemy wybrane, Insty- tut Archeologii i Etnologii Polskiej Akademii Nauk, Szczecin.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -58465,9 +58489,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "janowski2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -63920,7 +63945,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Kershaw, J. F., Williams, G., Sindbaek, S. M., and Graham-Campbell, J. (eds.) (2019). Silver, Butter, Cloth: Monetary and Social Economies in the Viking Age, Oxford University Press, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -64141,9 +64166,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "kershaw2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -64180,7 +64206,7 @@
     "publisher": "Sankt-Petersburg",
     "_raw_citation": "Kirpichnikov, A. N. (2018). Istoriko-kul'turnoye issledovaniye Staroy Ladogi. In Platonova, N. I., and Lapšin, V. A. (eds.), Novoe v archeologii Staroj Ladogi: Materialy i issledovanija / Advance in Archaeology of Staraya Ladoga: Materials and Studies, Nevskaja Knižnaja Tipografija, Sankt- Petersburg, pp. 7-20",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -64403,9 +64429,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "kirpichnikov2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -73640,7 +73667,7 @@
     "eventtitle": "Aarhus Universitetsforlag, Aarhus",
     "_raw_citation": "Madsen, J. S., Klassen, L. and Larsen, L. K. (2010). Fribrødre Å: A Late 11th Century Ship-Handling Site on Falster, Aarhus Universitetsforlag, Aarhus.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -73860,9 +73887,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "madsen2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -74412,7 +74440,7 @@
     "location": "Leiden",
     "_raw_citation": "Mägi, M. (2018). In Austrvegr: The Role of the Eastern Baltic in Viking Age Communication across the Baltic Sea, Brill, Leiden.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -74635,9 +74663,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "magi2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -74663,7 +74692,7 @@
     "location": "Leeds",
     "_raw_citation": "Mägi, M. (2019). The Viking Eastern Baltic, ARC Humanities Press, Leeds.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -74886,9 +74915,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "magi2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -76323,7 +76353,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Mehler, N., Hansen, G., Ashby, S. P., and Baug, I. (eds.) (2015). Everyday Products in the Middle Ages: Crafts, Consumption and the Individual in Northern Europe, c. AD 800-1600, Oxbow Books, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -76544,9 +76574,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "mehler2015 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -76586,7 +76617,7 @@
     "location": "Sheffield",
     "_raw_citation": "Melheim, A. L., Glørstad, H., and Glørstad, Z. T. (eds.) (2016). Comparative Perspectives on Past Colo- nisation, Maritime Interaction and Cultural Integration, Equinox Publishing, Sheffield.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021",
       "price2018"
@@ -76808,9 +76839,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "melheim2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -77093,7 +77125,7 @@
     "location": "Branko, St. Petersburg",
     "_raw_citation": "Mikhaylov, K. A. (2016). Elitarnyy pogrebalnyy obryad Drevney Rusi: Kamernyye pogrebeniya IX - Nachala XI veka v kontekste severoyevropeyskikh analogiy / Elite Funeral Rite of Ancient Russia: Chamber-graves of the Late 9th -Early 11th Centuries in the Context of North European Analo- gies, Branko, St. Petersburg.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -77314,9 +77346,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "mikhaylov2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -79660,7 +79693,7 @@
     "eventtitle": "Wrocław",
     "_raw_citation": "Moździoch, S., Stanisławski, B., Wiszewski, P., and Borkowski, T. (eds.) (2013). Scandinavian Culture in Medieval Poland, Institute of Archaeology and Ethnology, Polish Academy of Sciences, Wrocław.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -79881,9 +79914,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "mozdzioch2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -82987,7 +83021,7 @@
     "location": "Uppsala",
     "_raw_citation": "Nordahl, E. (2018). Valsgärde 14, Acta Sepulcreti Valsgaerdiae Regiae Universitatis Upsaliensis No. 1, Arkeologi och Antik Historia, Uppsala.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -83208,9 +83242,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "nordahl2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -83252,7 +83287,7 @@
     "eventtitle": "Lerwick; Lerwick",
     "_raw_citation": "Nordeide, S. W. (2016). Viking identity in Romsdal, Norway, as reflected through burial rituals. In Turner, V., O. A., and Waugh, D. J. (eds.), Shetland and the Viking World: Papers from the Seventeenth Viking Congress, Lerwick, Shetland Heritage Publications, Lerwick, pp. 167-172.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -83475,9 +83510,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "nordeide2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -83502,7 +83538,7 @@
     "location": "Gothenburg",
     "_raw_citation": "Norstein, F. E. (2020). Processing Death: Oval brooches and Viking Graves in Britain, Ireland and Ice- land, Gothenburg University, Gothenburg.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -83723,9 +83759,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "norstein2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -85979,7 +86016,7 @@
     "eventtitle": "Oxford",
     "_raw_citation": "Pearson, M. P., Brennan, M., Mulville, J., and Smith, H. (2018). Cille Pheadair: A Norse Farmstead and Pictish Burial Cairn in South Uist, Oxbow Books, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -86200,9 +86237,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "pearson2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -98281,7 +98319,7 @@
     "eventtitle": "Warsaw",
     "_raw_citation": "Rębkowski, M. (ed.) (2019b). Wolin -The Old Town, Vol. 2: Studies on Finds, Szczecin Institute of Archaeology and Ethnology, Polish Academy of Science, Warsaw.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -98502,9 +98540,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "rebkowski2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -101003,7 +101042,7 @@
     "location": "Leiden",
     "_raw_citation": "Rundberget, B. (2017). Tales of the Iron Bloomer, Brill, Leiden.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -101228,9 +101267,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "rundberget2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -104799,7 +104839,7 @@
     "location": "Bornais, South Uist, Oxbow books, Oxford",
     "_raw_citation": "Sharples, N. M., and Best, J. (2020). A Norse Settlement in the Outer Hebrides: Excavations on Mounds 2 and 2A, Bornais, South Uist, Oxbow books, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -105020,9 +105060,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "sharples2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -110099,7 +110140,7 @@
     "eventtitle": "the First International Conference on Sami ArchaeologyRovaniemi; Helsinki",
     "_raw_citation": "Spangen, M. (2009). Silver hoards in Sami areas. In Lavento, M., Halinen, P., and Suhonen, M. (eds.), Recent Perspectives on Sámi Archaeology in Fennoscandia and North-West Russia, Proceedings of the First International Conference on Sami Archaeology, Rovaniemi, 19-22 October 2006, The Finnish Antiquarian Society, Helsinki, pp. 94-106.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -110322,9 +110363,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "spangen2006 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -110976,7 +111018,7 @@
     "location": "Warsaw",
     "_raw_citation": "Stanisławski, B., and Filipowiak, W. (2014). Wolin wczesnośredniowieczny 2, Fundacja na Rzecz Nauki Polskiej, Warsaw.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -111197,9 +111239,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "stanislawski2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -117583,7 +117626,7 @@
     "eventtitle": "Aarhus",
     "_raw_citation": "Ulriksen, J. (2019). Vester Egesborg: En Anløbs-og Togtsamlingsplads fra Yngre Germansk Jernalder og Vikingetid på Sydsjaelland, Aarhus University Press, Aarhus.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -117804,9 +117847,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "ulriksen2019 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -117832,7 +117876,7 @@
     "location": "Oxford",
     "_raw_citation": "Vedeler, M. (2014). Silk for the Vikings, Oxbow Books, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -118055,9 +118099,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "vedeler2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -119719,7 +119764,7 @@
     "pages": "1423--1434",
     "_raw_citation": "von Holstein, I. C. and Makarewicz, C. A. (2016). Geographical variability in northern European sheep wool isotopic composition (δ13C, δ15N, δ2H values). Rapid Communications in Mass Spectrometry 30: 1423-1434.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -119942,9 +119987,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "vonholstein2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -122221,7 +122267,7 @@
     "location": "Oxford",
     "_raw_citation": "Wilson, D. M. (2018). Manx Crosses: A Handbook of Stone Sculpture 500-1040 in the Isle of Man, Archaeopress, Oxford.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -122444,9 +122490,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "wilson2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -123783,7 +123830,7 @@
     "location": "Turnhout",
     "_raw_citation": "Zori, D., and Byock, J. L. (eds.) (2014). Viking Archaeology in Iceland: Mosfell Archaeological Project, Brepols Publishers, Turnhout.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -124004,9 +124051,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "zori2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -125045,7 +125093,7 @@
     "location": "Björkö, Adelsö sn, Uppland; Stockholm",
     "_raw_citation": "Andersson Strand, E., and Bergström, L. (2013). Hus och Hantverk: Arkeologisk undersökning av de övre terrasserna i Birkas garnison, RAÄ 173, Björkö, Adelsö sn, Uppland, 2001-2004, Stock- holms Universitet, Stockholm.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -125268,9 +125316,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "strand2001 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -125818,7 +125867,7 @@
     "eventtitle": "Berlin",
     "_raw_citation": "Birkett, T., and Dale, R. (eds.) (2020). The Vikings Reimagined: Reception, Recovery, Engagement, De Gruyter, Berlin.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -126040,9 +126089,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "birkett2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -126330,7 +126380,7 @@
     "location": "Wiesbaden",
     "_raw_citation": "Brorsson, T. (2010). The Pottery from the Early Medieval Trading Site and Cemetery at Gross Ström- kendorf, Lkr. Nordwestmecklenburg, Forschungen zu Gross Strömkendorf No. 3, Reichert, Wiesbaden.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -126553,9 +126603,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "brorsson2010 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -126580,7 +126631,7 @@
     "eventtitle": "Routledge, London",
     "_raw_citation": "Cooijmans, C. (2020). Monarchs and Hydrarchs: The Conceptual Development of Viking Activity across the Frankish Realm (c. 750-940), Routledge, London.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -126800,9 +126851,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "cooijmans2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -130331,7 +130383,7 @@
     "location": "Turbine, Aarhus",
     "_raw_citation": "Grundvad, L., Schaadt, N., and Ejstrud, B. (2017). Faestedskatten Danmarks Største Guldskat fra Viking- etiden, Turbine, Aarhus.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -130552,9 +130604,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "grundvad2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -133782,7 +133835,7 @@
     "pages": "84--106",
     "_raw_citation": "LaRoche, C. J., and Blakey, M. L. (1997). Seizing intellectual power: The dialogue at the New York Afri- can Burial Ground. Historical Archaeology 31: 84-106.",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -134008,9 +134061,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "laroche1997 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -135574,7 +135628,7 @@
     "url": "https://doi.org/10.1007/s10816-019-09441-x",
     "_raw_citation": "Martin, T. F. (2020). Casting the net wider: Network approaches to artefact variation in post- Roman Europe. Journal of Archaeological Method and Theory 2020. https://doi.org/10.1007/ s10816-019-09441-x",
     "entry_type": "article",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -135804,9 +135858,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "martin2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 57,
@@ -137183,7 +137238,7 @@
     "eventtitle": "Stockholm",
     "_raw_citation": "Olsson, A. (2017). Maritima Birka: Arkeologisk rapport över marinarkeologiska undersökningar av kul- turlager och pålanläggning i vattenområdet utanför Svarta jorden på Björkö 2004-2014, Sjöhis- toriska museet, Stockholm.",
     "entry_type": "incollection",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -137424,9 +137479,10 @@
       "cited_by",
       "language",
       "detection",
-      "cited_by"
+      "cited_by",
+      "generation"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: kalmring2012 -> olsson2004a",
+    "_correction_note": "olsson2004 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -138942,7 +138998,7 @@
     "eventtitle": "Cambridge",
     "_raw_citation": "Ratican, C. (2020). The Other Body: Persons in Viking Age Multiple Burials in Scandinavia and the Western Diaspora, Ph.D. dissertation, Archaeology, University of Cambridge, Cambridge.",
     "entry_type": "book",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -139162,9 +139218,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "ratican2020 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -1281182,7 +1281239,7 @@
     ],
     "date": "2011",
     "year": "2011",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -1281284,9 +1281341,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "forest2011 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "detection": {
       "reference_list": 61,
       "inline_markers": 57,
@@ -1306430,7 +1306488,7 @@
     ],
     "date": "2018",
     "year": "2018",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -1306527,9 +1306585,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "kershaw2018 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "detection": {
       "reference_list": 16,
       "inline_markers": 14,
@@ -2814851,7 +2814910,7 @@
     ],
     "date": "",
     "year": "",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -2814949,9 +2815008,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "sanmarknda is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "detection": {
       "reference_list": 5,
       "inline_markers": 5,
@@ -2841500,7 +2841560,7 @@
     ],
     "date": "2025",
     "year": "2025",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -2841597,9 +2841657,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "knappett2025 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "detection": {
       "reference_list": 49,
       "inline_markers": 38,
@@ -3297196,7 +3297257,7 @@
     ],
     "date": "2017",
     "year": "2017",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3297353,9 +3297414,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "williams2017 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "language": "en",
     "detection": {
       "reference_list": 2,
@@ -3380740,7 +3380802,7 @@
     ],
     "date": "",
     "year": "",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3380838,9 +3380900,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gardelanda is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "NOAUTHOR8",
     "_rename_note": "Citekey regenerated after author correction: Confirmed identity via multiple independent sources: Gardela, L. (2013), Warrior-women in Viking Age Scandinavia? A Preliminary Archaeological Study, Analecta Archaeologica Ressoviensia 8, 273-339/340. Title and date already correct on this entry, matches source PDF exactly.",
     "language": "en",
@@ -3480823,7 +3480886,7 @@
     ],
     "date": "2016",
     "year": "2016",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3480923,9 +3480986,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "cannell2016a is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "cannellnd",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "en",
@@ -3480956,7 +3481020,7 @@
     ],
     "date": "2014",
     "year": "2014",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3481056,9 +3481120,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "gardela2014a is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "gardeland",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "en",
@@ -3481951,7 +3482016,7 @@
     ],
     "date": "2009",
     "year": "2009",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3482051,9 +3482116,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "pedersen2009a is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "pedersennd",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "de",
@@ -3482425,7 +3482491,7 @@
     ],
     "date": "2010",
     "year": "2010",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3482524,9 +3482590,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "pluskowski2010a is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "pluskowskind",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "en",
@@ -3494922,7 +3494989,7 @@
     ],
     "date": "2013",
     "year": "2013",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3495021,9 +3495088,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "andren2013b is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "andrennd",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "sv",
@@ -3517066,7 +3517134,7 @@
     ],
     "date": "2013",
     "year": "2013",
-    "generation": "F1",
+    "generation": "F2",
     "cited_by": [
       "lund2021"
     ],
@@ -3517165,9 +3517233,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "generation"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "andren2013c is not among the 369 papers in the annotations csv, so it is not F1. It is cited by lund2021 or by papers outside the 369 and by none of the 369, and F2 is the only generation left for an entry that is not F1.",
     "_renamed_from": "andrennd",
     "_rename_note": "Citekey regenerated after author correction: Re-setting author (unchanged) to trigger citekey regeneration now that year is set.",
     "language": "sv",

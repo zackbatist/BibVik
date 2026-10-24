@@ -60,7 +60,7 @@
         <attvalues>
           <attvalue for="0" value="Fibula, Fabula, Fact: The Viking Age in Finland"/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value="10.21435/sfh.18"/>
@@ -480,7 +480,7 @@
         <attvalues>
           <attvalue for="0" value="Crafts and Social Networks in Viking Towns"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -704,7 +704,7 @@
         <attvalues>
           <attvalue for="0" value="Kulturhistorier i sentrum: Historisk museum 100 år. Oslo: Kulturhistorisk museum"/>
           <attvalue for="1" value="2004"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Bergstøl Jostein"/>
           <attvalue for="5" value=""/>
@@ -732,7 +732,7 @@
         <attvalues>
           <attvalue for="0" value="At Upsalum -Människor och landskapande"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Beronius Jörpeland L."/>
           <attvalue for="5" value=""/>
@@ -816,7 +816,7 @@
         <attvalues>
           <attvalue for="0" value="Między ziemią a niebem: groby komorowe na obszarze państwa pierwszych piastów"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Błaszczyk Dariusz"/>
           <attvalue for="5" value=""/>
@@ -830,7 +830,7 @@
         <attvalues>
           <attvalue for="0" value="Pochówki w grobach komorowych na ziemiach polskich w okresie wczesnego średniowiecza / Burials in Chamber Graves in the Polish Lands during the early Middle Ages"/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -886,7 +886,7 @@
         <attvalues>
           <attvalue for="0" value="Anarchistic action: Social organization and dynamics in southern Scandinavia from the Iron Age to the Middle Ages"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Borake Trine Louise"/>
           <attvalue for="5" value="10.1017/s1380203819000151"/>
@@ -928,7 +928,7 @@
         <attvalues>
           <attvalue for="0" value="Cultural Heritage and Climate Adaptation: A Cultural Evolutionary Perspective for the Anthropocene"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Brewer Joe"/>
           <attvalue for="5" value="10.1080/00438243.2018.1527246"/>
@@ -1012,7 +1012,7 @@
         <attvalues>
           <attvalue for="0" value="Identity Formation and Diversity in the Early Medieval Baltic and Beyond: Communicators and Communication"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -1180,7 +1180,7 @@
         <attvalues>
           <attvalue for="0" value="Ribe's Pre-Christian Cemetery: The Burial Customs of an Early Urban Community"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Croix Sarah"/>
           <attvalue for="5" value=""/>
@@ -1418,7 +1418,7 @@
         <attvalues>
           <attvalue for="0" value="Architecture, Society, and Ritual in Viking Age Scandinavia: Doors, Dwellings, and Domestic Space"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Eriksen Marianne"/>
           <attvalue for="5" value=""/>
@@ -1446,7 +1446,7 @@
         <attvalues>
           <attvalue for="0" value="Gamla Uppsala: Människor och makterna i högarnas skugga"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Eriksson K. E."/>
           <attvalue for="5" value=""/>
@@ -1586,7 +1586,7 @@
         <attvalues>
           <attvalue for="0" value="Når stedsbånd veves og løses opp: en sosial kronologi for bosetningen av kalvebeitet i indre sogn i yngre romertid og folkevandringstid"/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Fredriksen Per Ditlef"/>
           <attvalue for="5" value=""/>
@@ -1614,7 +1614,7 @@
         <attvalues>
           <attvalue for="0" value="Present pasts in the archaeology of genetics, identity, and migration in europe: a critical essay"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Frieman Catherine J."/>
           <attvalue for="5" value="10.1080/00438243.2019.1627907"/>
@@ -1642,7 +1642,7 @@
         <attvalues>
           <attvalue for="0" value="Massive migrations? The impact of recent aDNA studies on our view of third millennium Europe"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Furholt Martin"/>
           <attvalue for="5" value="10.1017/eaa.2017.43"/>
@@ -1656,7 +1656,7 @@
         <attvalues>
           <attvalue for="0" value="Re-integrating Archaeology: A Contribution to aDNA Studies and the Migration Discourse on the 3rd Millennium BC in Europe"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Furholt Martin"/>
           <attvalue for="5" value="10.1017/ppr.2019.4"/>
@@ -1754,7 +1754,7 @@
         <attvalues>
           <attvalue for="0" value="E18-prosjektet Vestfold -Bind 3 -Hus, boplass-og dyrkningsspor, Varia 73"/>
           <attvalue for="1" value="2008"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Gjerpe L. E."/>
           <attvalue for="5" value=""/>
@@ -1838,7 +1838,7 @@
         <attvalues>
           <attvalue for="0" value="Wikinger und Balten an der Memel, Die Ausgrabungen des frühgeschichtlichen Gräberfeldes von Linkuhnen in Ostpreußen 1928-1939"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Goßler N."/>
           <attvalue for="5" value=""/>
@@ -1936,7 +1936,7 @@
         <attvalues>
           <attvalue for="0" value="Silver, Hoards and Containers: The Archaeological and Historical Context of Viking-Age Silver Coin Deposits in the Baltic c"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Gruszczyński J."/>
           <attvalue for="5" value=""/>
@@ -2090,7 +2090,7 @@
         <attvalues>
           <attvalue for="0" value="Soapstone in the North: Quarries, Products and People 7000 BC-AD 1700"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -2104,7 +2104,7 @@
         <attvalues>
           <attvalue for="0" value="Birkas skepp: Vikingatid på östersjön"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Hansson J."/>
           <attvalue for="5" value=""/>
@@ -2482,7 +2482,7 @@
         <attvalues>
           <attvalue for="0" value="New Aspects on Viking-Age Urbanism c"/>
           <attvalue for="1" value="2013"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Holmquist Lena"/>
           <attvalue for="5" value=""/>
@@ -2636,7 +2636,7 @@
         <attvalues>
           <attvalue for="0" value="The Transformation of Neolithic Societies: An Eastern Danish Perspective on the 3rd Millennium BC"/>
           <attvalue for="1" value="2015"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Iversen Frode"/>
           <attvalue for="5" value=""/>
@@ -2650,7 +2650,7 @@
         <attvalues>
           <attvalue for="0" value="Eastern Europe in Icelandic Sagas"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Jackson Tatjana N."/>
           <attvalue for="5" value="10.1515/9781641890274"/>
@@ -2706,7 +2706,7 @@
         <attvalues>
           <attvalue for="0" value="Groby komorowe w Europie Środkowo-Wschodniej: Problemy wybrane, Instytut Archeologii i Etnologii Polskiej Akademii Nauk"/>
           <attvalue for="1" value="2015"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Janowski Andrzej"/>
           <attvalue for="5" value=""/>
@@ -2944,7 +2944,7 @@
         <attvalues>
           <attvalue for="0" value="Silver, Butter, Cloth: Monetary and Social Economies in the Viking Age"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Kershaw Jane F."/>
           <attvalue for="5" value=""/>
@@ -2958,7 +2958,7 @@
         <attvalues>
           <attvalue for="0" value="Istoriko-kul'turnoye issledovaniye Staroy Ladogi"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Kirpichnikov A. N."/>
           <attvalue for="5" value=""/>
@@ -3392,7 +3392,7 @@
         <attvalues>
           <attvalue for="0" value="Fribrødre Å: A Late 11th Century Ship-Handling Site on Falster"/>
           <attvalue for="1" value="2010"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Madsen J. S."/>
           <attvalue for="5" value=""/>
@@ -3434,7 +3434,7 @@
         <attvalues>
           <attvalue for="0" value="In Austrvegr: The Role of the Eastern Baltic in Viking Age Communication across the Baltic Sea"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Mägi Marika"/>
           <attvalue for="5" value="10.1163/9789004363816"/>
@@ -3448,7 +3448,7 @@
         <attvalues>
           <attvalue for="0" value="The Viking Eastern Baltic"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Mägi Marika"/>
           <attvalue for="5" value="10.2307/j.ctvmd841k"/>
@@ -3532,7 +3532,7 @@
         <attvalues>
           <attvalue for="0" value="Everyday Products in the Middle Ages: Crafts, Consumption and the Individual in Northern Europe, c. AD 800-1600"/>
           <attvalue for="1" value="2015"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Mehler Natascha"/>
           <attvalue for="5" value=""/>
@@ -3546,7 +3546,7 @@
         <attvalues>
           <attvalue for="0" value="Comparative Perspectives on past Colonisation, Maritime Interaction and Cultural Integration"/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Melheim A. L."/>
           <attvalue for="5" value=""/>
@@ -3574,7 +3574,7 @@
         <attvalues>
           <attvalue for="0" value="Elitarnyy pogrebalnyy obryad Drevney Rusi: Kamernyye pogrebeniya IX -Nachala XI veka v kontekste severoyevropeyskikh analogiy / Elite Funeral Rite of Ancient Russia: Chamber-graves of the Late 9th -Early 11th Centuries in the Context of North European Analogies"/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Mikhaylov K. A."/>
           <attvalue for="5" value=""/>
@@ -3686,7 +3686,7 @@
         <attvalues>
           <attvalue for="0" value="Scandinavian Culture in Medieval Poland, Institute of Archaeology and Ethnology"/>
           <attvalue for="1" value="2013"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Moździoch Sławomir"/>
           <attvalue for="5" value=""/>
@@ -3826,7 +3826,7 @@
         <attvalues>
           <attvalue for="0" value="Valsgärde 14, Acta Sepulcreti Valsgaerdiae Regiae Universitatis Upsaliensis No. 1, Arkeologi och Antik Historia"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Nordahl E."/>
           <attvalue for="5" value=""/>
@@ -3840,7 +3840,7 @@
         <attvalues>
           <attvalue for="0" value="Viking identity in Romsdal, Norway, as reflected through burial rituals"/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Nordeide Sæbjørg Walaker"/>
           <attvalue for="5" value=""/>
@@ -3854,7 +3854,7 @@
         <attvalues>
           <attvalue for="0" value="Processing Death: Oval brooches and Viking Graves in Britain"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Norstein Frida E"/>
           <attvalue for="5" value=""/>
@@ -3980,7 +3980,7 @@
         <attvalues>
           <attvalue for="0" value="Cille Pheadair: A Norse Farmstead and Pictish Burial Cairn in South Uist"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Pearson Mike Parker"/>
           <attvalue for="5" value=""/>
@@ -4442,7 +4442,7 @@
         <attvalues>
           <attvalue for="0" value="Studies on Finds, Szczecin Institute of Archaeology and Ethnology, Polish Academy of Science"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -4582,7 +4582,7 @@
         <attvalues>
           <attvalue for="0" value="Tales of the Iron Bloomer"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Rundberget Bernt"/>
           <attvalue for="5" value="10.1163/9789004331570_009"/>
@@ -4722,7 +4722,7 @@
         <attvalues>
           <attvalue for="0" value="A Norse Settlement in the Outer Hebrides: Excavations on Mounds 2 and 2A"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Sharples N. M."/>
           <attvalue for="5" value=""/>
@@ -4918,7 +4918,7 @@
         <attvalues>
           <attvalue for="0" value="Recent Perspectives on Sámi Archaeology in Fennoscandia and North-West Russia"/>
           <attvalue for="1" value="2006"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Spangen Marte"/>
           <attvalue for="5" value=""/>
@@ -4960,7 +4960,7 @@
         <attvalues>
           <attvalue for="0" value="Wolin wczesnośredniowieczny 2, Fundacja na Rzecz Nauki Polskiej"/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Stanisławski Błażej"/>
           <attvalue for="5" value=""/>
@@ -5254,7 +5254,7 @@
         <attvalues>
           <attvalue for="0" value="Vester Egesborg: En Anløbs-og Togtsamlingsplads fra Yngre Germansk Jernalder og Vikingetid på Sydsjaelland"/>
           <attvalue for="1" value="2019"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Ulriksen Jens"/>
           <attvalue for="5" value=""/>
@@ -5268,7 +5268,7 @@
         <attvalues>
           <attvalue for="0" value="Silk for the Vikings"/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Vedeler Marianne"/>
           <attvalue for="5" value="10.2307/j.ctvh1dtt3"/>
@@ -5352,7 +5352,7 @@
         <attvalues>
           <attvalue for="0" value="Geographical variability in northern European sheep wool isotopic composition (δ13C, δ15N, δ2H values)"/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Von Holstein Isabella C. C."/>
           <attvalue for="5" value=""/>
@@ -5478,7 +5478,7 @@
         <attvalues>
           <attvalue for="0" value="Manx Crosses: A Handbook of Stone Sculpture 500-1040 in the Isle of Man"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Wilson David M."/>
           <attvalue for="5" value="10.2307/j.ctvndv69q"/>
@@ -5548,7 +5548,7 @@
         <attvalues>
           <attvalue for="0" value="Viking Archaeology in Iceland: Mosfell Archaeological Project"/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Zori Davide"/>
           <attvalue for="5" value=""/>
@@ -5604,7 +5604,7 @@
         <attvalues>
           <attvalue for="0" value="Hus och Hantverk: Arkeologisk undersökning av de övre terrasserna i Birkas garnison"/>
           <attvalue for="1" value="2001"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Strand Andersson"/>
           <attvalue for="5" value=""/>
@@ -5646,7 +5646,7 @@
         <attvalues>
           <attvalue for="0" value="The Vikings Reimagined: Reception, Recovery, Engagement"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value=""/>
           <attvalue for="5" value=""/>
@@ -5674,7 +5674,7 @@
         <attvalues>
           <attvalue for="0" value="The Pottery from the Early Medieval Trading Site and Cemetery at Gross Strömkendorf"/>
           <attvalue for="1" value="2010"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Brorsson Torbjörn"/>
           <attvalue for="5" value=""/>
@@ -5688,7 +5688,7 @@
         <attvalues>
           <attvalue for="0" value="Monarchs and Hydrarchs: The Conceptual Development of Viking Activity across the Frankish Realm (c. 750-940)"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Cooijmans C."/>
           <attvalue for="5" value=""/>
@@ -5870,7 +5870,7 @@
         <attvalues>
           <attvalue for="0" value="Faestedskatten Danmarks Største Guldskat fra Vikingetiden"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Grundvad L."/>
           <attvalue for="5" value=""/>
@@ -6052,7 +6052,7 @@
         <attvalues>
           <attvalue for="0" value="Seizing intellectual power: The dialogue at the New York African Burial Ground"/>
           <attvalue for="1" value="1997"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Laroche Cheryl J."/>
           <attvalue for="5" value="10.1007/bf03374233"/>
@@ -6108,7 +6108,7 @@
         <attvalues>
           <attvalue for="0" value="Casting the net wider: Network approaches to artefact variation in post-Roman Europe"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="article"/>
           <attvalue for="4" value="Martin Toby F."/>
           <attvalue for="5" value="10.1007/s10816-019-09441-x"/>
@@ -6192,7 +6192,7 @@
         <attvalues>
           <attvalue for="0" value="Maritima birka: arkeologisk rapport över marinarkeologiska undersökningar av kulturlager och pålanläggning i vattenområdet utanför svarta jorden på björkö"/>
           <attvalue for="1" value="2004"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="incollection"/>
           <attvalue for="4" value="Olsson Andreas"/>
           <attvalue for="5" value=""/>
@@ -6262,7 +6262,7 @@
         <attvalues>
           <attvalue for="0" value="The Other Body: Persons in Viking Age Multiple Burials in Scandinavia and the Western Diaspora"/>
           <attvalue for="1" value="2020"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="book"/>
           <attvalue for="4" value="Ratican C."/>
           <attvalue for="5" value=""/>
@@ -88778,7 +88778,7 @@
         <attvalues>
           <attvalue for="0" value="Viandes animales dans le Languedoc-Roussillon rural médiéval: bilan 2010"/>
           <attvalue for="1" value="2011"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Forest Vianney"/>
           <attvalue for="5" value="10.1484/m.ruralia-eb.1.100158"/>
@@ -90598,7 +90598,7 @@
         <attvalues>
           <attvalue for="0" value="Silver, Butter, Cloth"/>
           <attvalue for="1" value="2018"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Kershaw Jane F."/>
           <attvalue for="5" value=""/>
@@ -148250,7 +148250,7 @@
         <attvalues>
           <attvalue for="0" value=""/>
           <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Sanmark Alexandra"/>
           <attvalue for="5" value=""/>
@@ -150350,7 +150350,7 @@
         <attvalues>
           <attvalue for="0" value="Network Analysis in Archaeology"/>
           <attvalue for="1" value="2025"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Knappett Carl"/>
           <attvalue for="5" value=""/>
@@ -164560,7 +164560,7 @@
         <attvalues>
           <attvalue for="0" value="Coins and Currency in viking England, ad 865-954"/>
           <attvalue for="1" value="2017"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Williams Gareth"/>
           <attvalue for="5" value=""/>
@@ -170594,7 +170594,7 @@
         <attvalues>
           <attvalue for="0" value="Warrior-women' in Viking Age Scandinavia? A preliminary archaeological study"/>
           <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Gardela Leszek"/>
           <attvalue for="5" value=""/>
@@ -174514,7 +174514,7 @@
         <attvalues>
           <attvalue for="0" value=""/>
           <attvalue for="1" value="2016"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Cannell Rebecca J S"/>
           <attvalue for="5" value=""/>
@@ -174528,7 +174528,7 @@
         <attvalues>
           <attvalue for="0" value=""/>
           <attvalue for="1" value="2014"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Gardela Leszek"/>
           <attvalue for="5" value=""/>
@@ -174612,7 +174612,7 @@
         <attvalues>
           <attvalue for="0" value=""/>
           <attvalue for="1" value="2009"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Pedersen Anne"/>
           <attvalue for="5" value=""/>
@@ -174654,7 +174654,7 @@
         <attvalues>
           <attvalue for="0" value="Animal Magic"/>
           <attvalue for="1" value="2010"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Pluskowski Aleks"/>
           <attvalue for="5" value=""/>
@@ -175606,7 +175606,7 @@
         <attvalues>
           <attvalue for="0" value="Platserna S Betydelse Norr6n Ritual Och Kultplatskon Tinuitet"/>
           <attvalue for="1" value="2013"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Andrén Anders"/>
           <attvalue for="5" value=""/>
@@ -177174,7 +177174,7 @@
         <attvalues>
           <attvalue for="0" value="Platsernas betydelse: norrön ritual och kultplatskontinuitet"/>
           <attvalue for="1" value="2013"/>
-          <attvalue for="2" value="F1"/>
+          <attvalue for="2" value="F2"/>
           <attvalue for="3" value="misc"/>
           <attvalue for="4" value="Andrén Anders"/>
           <attvalue for="5" value=""/>
@@ -190624,20 +190624,6 @@
           <attvalue for="9" value="false"/>
         </attvalues>
       </node>
-      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
-        <attvalues>
-          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
-          <attvalue for="1" value=""/>
-          <attvalue for="2" value="F1"/>
-          <attvalue for="3" value="misc"/>
-          <attvalue for="4" value=""/>
-          <attvalue for="5" value=""/>
-          <attvalue for="6" value="0.25"/>
-          <attvalue for="7" value="0"/>
-          <attvalue for="8" value="195"/>
-          <attvalue for="9" value="true"/>
-        </attvalues>
-      </node>
       <node id="NOAUTHOR18" label="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was wr">
         <attvalues>
           <attvalue for="0" value="Andrén, Mats Burström, Kjell Myrberg and Susanne Thedéen for keeping me intellectually upright while this article was written; and Ing-Marie Back Danielsson and Kristin Bornholdt Collins for valuable comments on the final product. Thank you"/>
@@ -190649,6 +190635,20 @@
           <attvalue for="6" value="0.25"/>
           <attvalue for="7" value="0"/>
           <attvalue for="8" value="21"/>
+          <attvalue for="9" value="true"/>
+        </attvalues>
+      </node>
+      <node id="NOAUTHOR28" label="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Model">
+        <attvalues>
+          <attvalue for="0" value="Kaupanghave Qualified for Classification as Prototowns or Emporia, According to Frankish and Anglo-Saxon Terms and Models ("/>
+          <attvalue for="1" value=""/>
+          <attvalue for="2" value="F1"/>
+          <attvalue for="3" value="misc"/>
+          <attvalue for="4" value=""/>
+          <attvalue for="5" value=""/>
+          <attvalue for="6" value="0.25"/>
+          <attvalue for="7" value="0"/>
+          <attvalue for="8" value="195"/>
           <attvalue for="9" value="true"/>
         </attvalues>
       </node>
