@@ -322825,3 +322825,3348 @@
   - price2019vikings
   note: Adding price2019vikings to cited_by, read from the reference list of the paper
     itself. Corrects the previous set action on this citekey that dropped this addition.
+- action: set
+  citekey: armit2014
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: barbier2011
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - star2017ancient
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: barrett2016
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - star2017ancient
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: barth1983
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - solli2018reindeer
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: beijersbergen2017
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: benn2010
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: bevanger2004
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - solli2018reindeer
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: buntgen2017
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: callanan2013a
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: callanan2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: callanan2016
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: dixon2014
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: farbregd2009
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - solli2011some
+  - solli2018reindeer
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: fehrenschmitz2014
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: finstad2008
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - solli2018reindeer
+  - stene2017uplands
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: haas2017
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hafner2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hare2012
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: helama2012
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hjelle2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hoeg2014
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: howardjohnston1998
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: indrelid2011
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - rosvold2019mountains
+  - solli2018reindeer
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: indrelid2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ipccrkpachauri2014
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: kelly2013
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: kullman1994
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: lee2017
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: linderholm2010
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: mann2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: matthews2008
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: nesje2009
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: odegard2017
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: orengo2013
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: pluskowski2013
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: reckin2013
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stene2015
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: vedeler2013
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - pilo2020crossing
+  - solli2018reindeer
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: villumsen2016
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: vorren1998
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: walloe2010
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: williams2012
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: young2012
+  field: cited_by
+  value:
+  - pilo2018chronology
+  note: Removing graslund2012twilight from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: andersen1994
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: axboe1999
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: axboe2001
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: baillie1994
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: baillie1995
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: barnish1992
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: berglund1996
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: berglund2003
+  field: cited_by
+  value:
+  - helama2017dark
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: bernhardsson2007
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: bork1998
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: briffa1990
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: briffa1992
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: buckland1997
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: buntgen2011
+  field: cited_by
+  value:
+  - anchukaitis2017last
+  - buntgen2016
+  - harrison2016
+  - helama2017dark
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: diamond2005
+  field: cited_by
+  value:
+  - dugmore2007norse
+  - dugmore2012cultural
+  - hartman2017medieval
+  - jackson2018disequilibrium
+  - keller2016northern
+  - lund2021
+  - tainter2006archaeology
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: dull2010
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: fagan2000
+  field: cited_by
+  value:
+  - keller2016northern
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: faulkes1987
+  field: cited_by
+  value:
+  - gardela2008into
+  - gardela2018amazons
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - price2005
+  - sanmark2013patterns
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: graslund2007
+  field: cited_by
+  value:
+  - forest2011
+  - fredriksen2014nar
+  - zachrisson2017background
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: graslund2009
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: grattan2007
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: grudd2002
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: grudd2006
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: gunn2000
+  field: cited_by
+  value:
+  - buntgen2016
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: herschend2009
+  field: cited_by
+  value:
+  - croix2015permanency
+  - eriksen2013doors
+  - fabech2013ritual
+  - ellingsen2019northern
+  - eriksen2016commemorating
+  - fredriksen2014nar
+  - hedenstiernajonson2015she
+  - hillerdal2010early
+  - kalmring2017home
+  - lindholm2016bear
+  - tonning2020halls
+  - sanmark2013patterns
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hultgard2008
+  field: cited_by
+  value:
+  - bill2016protecting
+  - fabech2013ritual
+  - jorgensen2009pre
+  - mainland2018nature
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jansen2000
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kaul2004
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: keys1999
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: larsen2008
+  field: cited_by
+  value:
+  - helama2017dark
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: lowenborg2010
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: mcanany2010
+  field: cited_by
+  value:
+  - lund2021
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: rampino1988
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: renck2008
+  field: cited_by
+  value:
+  - eriksen2016commemorating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: salzer2007
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: solberg2000
+  field: cited_by
+  value:
+  - barndon2005metall
+  - benderjorgensen2012introduction
+  - bergstol2004creoles
+  - forest2011
+  - glorstad2012sign
+  - glorstad2015mot
+  - heenpettersen2014insular
+  - stene2017uplands
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stenberger1933
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stenberger1955
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stothers1983
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stothers1984
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: torrence2002
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: traufetter2004
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: vervruggen1996
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: vitaliano1968
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: welinder1975
+  field: cited_by
+  value:
+  - price2015excavating
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: zachrisson2011
+  field: cited_by
+  value:
+  - forest2011
+  - ljungkvist2015gamla
+  - lund2021
+  - zachrisson2014heliga
+  - zachrisson2017background
+  - graslund2012twilight
+  note: Adding graslund2012twilight to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ashby2015urban
+  field: cited_by
+  value:
+  - baug2019beginning
+  - croix2019single
+  - glorstad2017view
+  - loftsgarden2019prime
+  - lund2019hunting
+  - lund2021
+  - pilo2020crossing
+  - raja2018
+  - rosvold2019mountains
+  - sindbaek2018northern
+  - the2017
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: barrett2011
+  field: cited_by
+  value:
+  - ashby2015what
+  - ashby2015urban
+  - mainland2018nature
+  - sindbaek2017urbanism
+  - star2017ancient
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: price2011who
+  field: cited_by
+  value:
+  - frei2012strontium
+  - gotfredsen2014birds
+  - gotfredsen2014ritual
+  - gardela2015vikings
+  - price2014peopling
+  - montgomery2014finding
+  - price2018
+  - peschel2017who
+  - price2014galgedil
+  - lund2021
+  - price2014ginnungagap
+  - price2020human
+  - price2012isotopic
+  - price2019vikings
+  - raffield2016ingroup
+  - reiter2019interpreting
+  - pilo2018chronology
+  - price2018isotopes
+  note: Adding pilo2018chronology, price2018isotopes to cited_by (listed in the paper's
+    own reference list, read from the PDF).
+- action: set
+  citekey: ramsey2017
+  field: cited_by
+  value:
+  - loftsgarden2019prime
+  - pilo2020crossing
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: reimer2013a
+  field: cited_by
+  value:
+  - ravn2019erritso
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: roed2014
+  field: cited_by
+  value:
+  - solli2018reindeer
+  - rosvold2019mountains
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: roed2015
+  field: cited_by
+  value:
+  - solli2018reindeer
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: sindbaek2014d
+  field: cited_by
+  value:
+  - croix2015permanency
+  - pilo2018chronology
+  - kalmring2016early
+  note: Adding pilo2018chronology, kalmring2016early to cited_by (listed in the paper's
+    own reference list, read from the PDF).
+- action: set
+  citekey: the2017
+  field: cited_by
+  value:
+  - lund2021
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: weber2007
+  field: cited_by
+  value:
+  - solli2018reindeer
+  - rosvold2019mountains
+  - stene2017uplands
+  - pilo2018chronology
+  note: Adding pilo2018chronology to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: aberg1990
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  - price2019vikings
+  - price2020human
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ambrosiani2005
+  field: cited_by
+  value:
+  - pedersen2009ideelle
+  - price2018
+  - price2018isotopes
+  - sindbaek2014crossbreeding
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ambrosiani2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: backstrom2016
+  field: cited_by
+  value:
+  - price2018
+  - price2019vikings
+  - krzewinska2018genomic
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: blauer2013
+  field: cited_by
+  value:
+  - price2018
+  - price2019vikings
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: burgman1987
+  field: cited_by
+  value:
+  - price2018
+  - price2019vikings
+  - price2020human
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: fennomuyingo2000
+  field: cited_by
+  value:
+  - price2018
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: gustin2016
+  field: cited_by
+  value:
+  - price2018
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: harvig2014
+  field: cited_by
+  value:
+  - price2018
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: kaislaniem2011
+  field: cited_by
+  value:
+  - price2018
+  - price2019vikings
+  note: Removing kalmring2016early, price2018isotopes from cited_by (copied from another
+    paper's reference list; not in its own PDF).
+- action: set
+  citekey: lama2015
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: leciejewicz1956
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: lightfoot2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: nironen1997
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  - price2019vikings
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: pellegrini2016
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stolpendc
+  field: cited_by
+  value:
+  - kalmring2012birka
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: tuross2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: weihed2005
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: wilhelmson2017
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  - price2019vikings
+  - price2020human
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: yurtsever1980
+  field: cited_by
+  value:
+  - price2018
+  - price2018isotopes
+  note: Removing kalmring2016early from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ahrens1995
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrosiani1972
+  field: cited_by
+  value:
+  - kalmring2017home
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrosiani1991a
+  field: cited_by
+  value:
+  - sindbaek2007small
+  - kalmring2016early
+  - wicker2013christianization
+  note: Adding kalmring2016early, wicker2013christianization to cited_by (listed in
+    the paper's own reference list, read from the PDF).
+- action: set
+  citekey: andersson1979
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: andersson2004a
+  field: cited_by
+  value:
+  - kalmring2013
+  - zachrisson2017background
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: back1997
+  field: cited_by
+  value:
+  - kalmring2013
+  - skre2011inhabitantsorigins
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: callmer1994
+  field: cited_by
+  value:
+  - hilberg2016hedeby
+  - hilberg2018detektoruntersuchungen
+  - hillerdal2010early
+  - jagodzinski2014scandinavians
+  - kalmring2013
+  - price2008dying
+  - raninen2014finland
+  - sindbaek2007small
+  - skre2011inhabitantsorigins
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: christaller1933
+  field: cited_by
+  value:
+  - borake2018bottlenecks
+  - fabech2013ritual
+  - kalmring2013
+  - sindbaek2007small
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: denecke1973
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: dilcher1973
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: fabech1998b
+  field: cited_by
+  value:
+  - borake2018bottlenecks
+  - christiansen2019metal
+  - hillerdal2010early
+  - kalmring2013
+  - ljungkvist2011gamla
+  - lund2017connectedness
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: farole2011
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: gurevic1968a
+  field: cited_by
+  value:
+  - sheehan2013viking
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: gurevich1968
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - kalmring2013
+  - sheehan2013viking
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hardh2002
+  field: cited_by
+  value:
+  - skre2019rulership
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hardh2003a
+  field: cited_by
+  value:
+  - sindbaek2017urbanism
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: helmold1966
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hodges1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015what
+  - ashby2015urban
+  - bill2017heimdalsjordet
+  - carver2015commerce
+  - croix2015permanency
+  - gullbekk2014vestfold
+  - kalmring2013
+  - ljungkvist2011gamla
+  - price2018
+  - sheehan2013viking
+  - sindbaek2007small
+  - sindbaek2011silver
+  - skre2011inhabitantsorigins
+  - skre2011commodity
+  - the2017
+  - wouters2016soil
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hodges1983
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - price2018
+  - tainter2006archaeology
+  - barrett2008what
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hodges2000
+  field: cited_by
+  value:
+  - croix2019single
+  - croix2019reseau
+  - hilberg2014viking
+  - kalmring2013
+  - sindbaek2007small
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hohenberg1995
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - runge2018origins
+  - kalmring2013
+  - sindbaek2007small
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jankuhn1958
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jankuhn1973
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kalmring2010e
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - hennius2018whalebone
+  - hilberg2016hedeby
+  - hilberg2018detektoruntersuchungen
+  - kalmring2010thieves
+  - kalmring2012birka
+  - kalmring2013
+  - kalmring2018gleaming
+  - raffield2019playing
+  - ravn2012maritim
+  - voncarnapbornheim2014research
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kleingartner2013
+  field: cited_by
+  value:
+  - kalmring2013
+  - lund2021
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kleingartner2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - hilberg2016hedeby
+  - hilberg2018detektoruntersuchungen
+  - kalmring2013
+  - price2018
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kulke2009
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: laur1992
+  field: cited_by
+  value:
+  - kalmring2013
+  - lemm2014
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ludowici2010
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ludowici2010a
+  field: cited_by
+  value:
+  - carver2015commerce
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: miksic2000
+  field: cited_by
+  value:
+  - ashby2015what
+  - ashby2015urban
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: mogren2012
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: mohr2005
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: mullerwille2002a
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: nasman2000
+  field: cited_by
+  value:
+  - ashby2015what
+  - ashby2015urban
+  - barrett2010rounding
+  - baug2019beginning
+  - croix2015permanency
+  - croix2019single
+  - kalmring2013
+  - larsson2007iron
+  - raffield2016bands
+  - sindbaek2007small
+  - sindbaek2017urbanism
+  - barrett2008what
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: nasman2001
+  field: cited_by
+  value:
+  - jessen2016towering
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: oed2010
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: polanyi1963
+  field: cited_by
+  value:
+  - kalmring2013
+  - skre2016post
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: randsborg1980
+  field: cited_by
+  value:
+  - andren2000reading
+  - barrett2010rounding
+  - glorstad2012sign
+  - goodchild2017borgring
+  - imer2014danish
+  - holst2014warrior
+  - kalmring2013
+  - holst2010inconcistency
+  - holst2013late
+  - lund2020rune
+  - poulsen2011settlement
+  - price2011who
+  - price2012isotopic
+  - NOAUTHOR28
+  - ulriksen2011vikingetidens
+  - barrett2008what
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: reynolds1977
+  field: cited_by
+  value:
+  - croix2015permanency
+  - kalmring2013
+  - NOAUTHOR28
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: sachensymposium2001
+  field: cited_by
+  value:
+  - ashby2015what
+  - ashby2015urban
+  - sindbaek2007small
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: samson1991b
+  field: cited_by
+  value:
+  - pedersen2016lead
+  - pedersen2017viking
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: schlesinger1973a
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: sindbaek2007networks
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015what
+  - carver2015commerce
+  - croix2019single
+  - holst2014warrior
+  - jessen2016towering
+  - lund2008banks
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2021
+  - osullivan2015strung
+  - pedersen2017viking
+  - pedersen2015urban
+  - raninen2014finland
+  - sindbaek2011urban
+  - sindbaek2013all
+  - skre2016post
+  - svendsen2016how
+  - svendsen2019two
+  - barrett2008what
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: sindbaek2007small
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - baug2017soapstone
+  - downham2016coastal
+  - glorstad2017view
+  - hennius2018whalebone
+  - kalmring2013
+  - knappett2025
+  - kristjansdottir2015becoming
+  - lund2021
+  - sindbaek2014crossbreeding
+  - sindbaek2017urbanism
+  - vonholstein2014searching
+  - williams2015viking
+  - barrett2008what
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: skre2007a
+  field: cited_by
+  value:
+  - dobat2013between
+  - kalmring2012birka
+  - kalmring2013
+  - price2010passing
+  - feveile2015metaldetektorproblematikken
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: steuer2003
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: tummuscheit2003
+  field: cited_by
+  value:
+  - kalmring2013
+  - sindbaek2011urban
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: verhaeghe2005
+  field: cited_by
+  value:
+  - devos2013soil
+  - kalmring2013
+  - wouters2016soil
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: verhulst2002
+  field: cited_by
+  value:
+  - baug2019beginning
+  - croix2019single
+  - hilberg2014viking
+  - kalmring2013
+  - poulsen2011settlement
+  - sindbaek2007small
+  - skre2011inhabitantsorigins
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: vestergaard1991a
+  field: cited_by
+  value:
+  - kalmring2013
+  - sheehan2013viking
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: white2010
+  field: cited_by
+  value:
+  - kalmring2013
+  - kalmring2016early
+  note: Adding kalmring2016early to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: aberg1995
+  field: cited_by
+  value:
+  - frei2011
+  - price2018
+  - price2019vikings
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrose1993a
+  field: cited_by
+  value:
+  - becker2012archaeometry
+  - grupe2013rise
+  - knudson2012migration
+  - naumann2014slaves
+  - price2014peopling
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrose1993c
+  field: cited_by
+  value:
+  - price2012isotopic
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrosiani2002a
+  field: cited_by
+  value:
+  - hardh2010viking
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ambrosiani2013
+  field: cited_by
+  value:
+  - ambrosiani2015small
+  - croix2015permanency
+  - lund2021
+  - price2018
+  - vonholstein2014searching
+  - warmlander2015analysis
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arbman1939
+  field: cited_by
+  value:
+  - hilberg2016hedeby
+  - hillerdal2010early
+  - kalmring2012birka
+  - kalmring2017home
+  - kalmring2018gleaming
+  - linderholm2008diet
+  - price2018
+  - price2019viking
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arbman1940
+  field: cited_by
+  value:
+  - ambrosiani2015small
+  - androshchuk2010gift
+  - androshchuk2018female
+  - burstrom2015things
+  - croix2019single
+  - gardela2018amazons
+  - hardh2010viking
+  - hedenstiernajonson2015she
+  - jagodzinski2014scandinavians
+  - kalmring2010thieves
+  - kalmring2012birka
+  - kalmring2017home
+  - kastholm2016spydkvinden
+  - kershaw2009culture
+  - linderholm2008diet
+  - pedersen2009ideelle
+  - price2008dying
+  - price2010passing
+  - trinks2014first
+  - ulriksen2018volva
+  - warmlander2015analysis
+  - price2019viking
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arbman1943
+  field: cited_by
+  value:
+  - burstrom2015things
+  - edberg2019dod
+  - gardelanda
+  - gustin2017contacts
+  - hedenstiernajonson2015she
+  - kalmring2012birka
+  - kalmring2017home
+  - linderholm2008diet
+  - lund2013fragments
+  - odeback2018krigare
+  - price2006what
+  - price2018
+  - raffield2019playing
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - price2019viking
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arwidson1984
+  field: cited_by
+  value:
+  - price2014galgedil
+  - price2018isotopes
+  - glorstad2012sign
+  note: Adding price2018isotopes, glorstad2012sign to cited_by (listed in the paper's
+    own reference list, read from the PDF).
+- action: set
+  citekey: arwidsson1984a
+  field: cited_by
+  value:
+  - kalmring2012birka
+  - price2018
+  - price2019viking
+  - price2018isotopes
+  - glorstad2012sign
+  note: Adding price2018isotopes, glorstad2012sign to cited_by (listed in the paper's
+    own reference list, read from the PDF).
+- action: set
+  citekey: kalmring2017home
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: kyhlberg1980
+  field: cited_by
+  value:
+  - gustin2017contacts
+  - kalmring2017home
+  - linderholm2008diet
+  - price2018
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: larsson2007
+  field: cited_by
+  value:
+  - bonde2016between
+  - gustin2017contacts
+  - hardh2010viking
+  - hedeager2010split
+  - hennius2018whalebone
+  - hillerdal2010early
+  - kalmring2018gleaming
+  - lund2021
+  - poulsen2011settlement
+  - price2014ship
+  - price2018
+  - price2020human
+  - raffield2016ingroup
+  - zachrisson2014rotary
+  - zachrisson2014heliga
+  - zachrisson2017volund
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: linderholm2008diet
+  field: cited_by
+  value:
+  - arneborg2012human
+  - chenery2014boat
+  - gustin2017contacts
+  - hedenstiernajonson2017female
+  - knudson2012migration
+  - krzewinska2018genomic
+  - lund2021
+  - naumann2014slaves
+  - pollard2012sprouting
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: lofvendahl1990
+  field: cited_by
+  value:
+  - krzewinska2018genomic
+  - price2018
+  - price2012isotopic
+  - price2019vikings
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: negrel2003
+  field: cited_by
+  value:
+  - price2018
+  - price2019vikings
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: price2012isotopic
+  field: cited_by
+  value:
+  - krzewinska2018genomic
+  - lund2021
+  - price2019vikings
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: price2013a
+  field: cited_by
+  value:
+  - price2019vikings
+  - price2020human
+  - price2014peopling
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: price2014galgedil
+  field: cited_by
+  value:
+  - barndon2018grav
+  - lund2017connectedness
+  - lund2021
+  - peschel2017who
+  - price2019vikings
+  - raffield2016bands
+  - zachrisson2017volund
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: roslund2017bringing
+  field: cited_by
+  value:
+  - lund2021
+  - price2018
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: sjogren2009
+  field: cited_by
+  value:
+  - becker2012archaeometry
+  - chenery2014boat
+  - frei2011
+  - frei2012strontium
+  - krzewinska2018genomic
+  - knudson2012migration
+  - price2014peopling
+  - price2018
+  - nielsen2011boathouses
+  - peschel2017who
+  - price2014galgedil
+  - price2011who
+  - price2012isotopic
+  - price2019vikings
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stolpend
+  field: cited_by
+  value:
+  - hedenstiernajonson2017female
+  - price2018isotopes
+  note: Adding price2018isotopes to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: alcock1991
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: als2006
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - krzewinska2015mitochondrial
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: barrett2004d
+  field: cited_by
+  value:
+  - glorstad2014homeland
+  - semple2013assembly
+  - sindbaek2017urbanism
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: bjorgo1995
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2014insular
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: blindheim1947
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: blindheim1976
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2018insular
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: blindheim1978
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2014insular
+  - sheehan2013viking
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: blindheim1981
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - lund2013fragments
+  - lund2019hunting
+  - price2010passing
+  - skre2011inhabitantsorigins
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: bodal1998
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2014insular
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: boe1934
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: braathen1989
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: callaway1987
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: cessford1996
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: crane2002
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: damsholt2003
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2015mot
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: demarrais1996
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: enright1986
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - raffield2016bands
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: etchingham2001
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: fuglesang1972
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: goodacre2005
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - krzewinska2015mitochondrial
+  - krzewinska2018genomic
+  - leslie2015fine
+  - montgomery2014finding
+  - rogers2020non
+  - sindbaek2016steatite
+  - vonholstein2014searching
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: grahamcampbell1976
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - ijssennagger2015viking
+  - barrett2008what
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: grahamcampbell1983
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  - kershaw2009culture
+  - mcleod2011warriors
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: grahamcampbell1987
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - hardh2010viking
+  - rogers2020non
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: gupta1992
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: gustafson1900
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hall2004a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hammerton2004
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: harlow2004
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2014insular
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hedeager1998
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hedeager2005a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - pluskowski2010a
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hedeager2007
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - sheehan2013viking
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: helgason2000a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: helgason2001
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - knudson2012migration
+  - krzewinska2018genomic
+  - naumann2014slaves
+  - hayeursmith2013thorir
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: hougen2006
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: janes1996
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: jenkins1997
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: johansen1973a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: jondell1974
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - heenpettersen2014insular
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: kaland1995
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: kertzner1988
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: larsen1978
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: larsen2001t
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: levine2004
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: macdermott1955
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: magnus1975
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: mahr1941
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: malmius2003
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: nieke1988
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: nieke1991
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: olsen2000a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: paisley2004
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: pedersen2010a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - gustafsson2011beyond
+  - pedersen2015urban
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: petersen1928
+  field: cited_by
+  value:
+  - axelsen2014
+  - gardela2018amazons
+  - glorstad2012sign
+  - glorstad2014homeland
+  - glorstad2015mot
+  - heenpettersen2014insular
+  - heenpettersen2019earliest
+  - ijssennagger2015viking
+  - jagodzinski2014scandinavians
+  - kastholm2016spydkvinden
+  - kershaw2009culture
+  - pedersen2017viking
+  - rundkvist2010domed
+  - sindbaek2011urban
+  - spangen2009silver
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ryste2005
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  - lund2008banks
+  - lund2010water
+  - lund2015living
+  - lund2017connectedness
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: skibstedtklaesoe1999
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: staecker2003
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stafford1998
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stenberger1958
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - glorstad2012sign
+  - pedersen2009ideelle
+  - spangen2009silver
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stevenson1974
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stevenson1987
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stevenson1989
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: stoler2002
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: sveaasandersen1977
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - gullbekk2014vestfold
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: trenchjellicoe1999
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: tsigaridasglorstad2010a
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: vandommelen2002
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - nielsen2011boathouses
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: whitfield2001
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: whitfield2004
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: wilson1973
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: ynglingesaga1979
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing andren2006old from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: anderson2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: andren2002platsernas
+  field: cited_by
+  value:
+  - lund2021
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: andren2004a
+  field: cited_by
+  value:
+  - mannering2013man
+  - price2010passing
+  - raffield2014river
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: barrett2003a
+  field: cited_by
+  value:
+  - osullivan2015strung
+  - barrett2008what
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: enright1995
+  field: cited_by
+  value:
+  - rosengren2010miniatyren
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: hedeager1999
+  field: cited_by
+  value:
+  - andren2000reading
+  - andren2013significance
+  - arwillnordbladh2013golden
+  - glorstad2014homeland
+  - lund2004vaben
+  - lund2005thresholds
+  - lund2008banks
+  - lund2010water
+  - lund2013fragments
+  - lund2015living
+  - lund2017connectedness
+  - mulk2007liminality
+  - pluskowski2010a
+  - price2014galgedil
+  - spangen2009silver
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: holm2000
+  field: cited_by
+  value:
+  - knudson2012migration
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: iversen1991a
+  field: cited_by
+  value:
+  - mannering2013man
+  - lund2013fragments
+  - pedersen2006ancient
+  - price2010passing
+  - price2008dying
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: iversen2004
+  field: cited_by
+  value:
+  - zachrisson2017background
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: jansson1984
+  field: cited_by
+  value:
+  - croix2019single
+  - hardh2010viking
+  - kalmring2010thieves
+  - kalmring2018gleaming
+  - kershaw2009culture
+  - lemm2014
+  - neiss2016new
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: jansson1985c
+  field: cited_by
+  value:
+  - warmlander2015analysis
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: jansson2007
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - croix2015permanency
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: larsson2004
+  field: cited_by
+  value:
+  - andren2013significance
+  - andren2013places
+  - beck2018revisiting
+  - carver2015commerce
+  - fabech2013ritual
+  - helmbrecht2012winged
+  - hardh2010viking
+  - jorgensen2009pre
+  - larsson2007iron
+  - NOAUTHOR28
+  - skre2019rulership
+  - zachrisson2017volund
+  - zachrisson2014rotary
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: myhre2003a
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - skre2019rulership
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: mytum2003a
+  field: cited_by
+  value:
+  - glorstad2014homeland
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: olsen2001
+  field: cited_by
+  value:
+  - nielsen2011boathouses
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: oxford2005
+  field: cited_by
+  value:
+  - ljungkvist2011gamla
+  - barrett2008what
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: pedersen1996
+  field: cited_by
+  value:
+  - toplak2015prone
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: pedersen2010
+  field: cited_by
+  value:
+  - axelsen2014
+  - gardela2015vikings
+  - holst2013late
+  - lund2016divergent
+  - lund2017connectedness
+  - pedersen2017viking
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: petersen1927
+  field: cited_by
+  value:
+  - bill2020ship
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: small1973
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - barrett2008what
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: stylegar2007a
+  field: cited_by
+  value:
+  - lund2013fragments
+  - lund2019hunting
+  - price2010passing
+  - gardela2014death
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: watt2004a
+  field: cited_by
+  value:
+  - glorstad2015mot
+  - jorgensen2009pre
+  - larsson2007iron
+  - mannering2013man
+  - pedersen2009ideelle
+  - sindbaek2011silver
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: watt2005
+  field: cited_by
+  value:
+  - hedeager2010split
+  - heenpettersen2018insular
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: wilson1974
+  field: cited_by
+  value:
+  - steinforth2015early
+  - barrett2008what
+  - glorstad2012sign
+  note: Adding glorstad2012sign to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: ahfeldt2002
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - ahfeldt2013scanning
+  note: Adding ahfeldt2013scanning to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ahfeldt2008
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - ahfeldt2013scanning
+  note: Adding ahfeldt2013scanning to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ahfeldt2009
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - ahfeldt2013scanning
+  note: Adding ahfeldt2013scanning to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: foster2005
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - ahfeldt2013scanning
+  note: Adding ahfeldt2013scanning to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: karnell2012a
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - oehrl2019interpretations
+  - williams2014memory
+  - ahfeldt2013scanning
+  note: Adding ahfeldt2013scanning to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arrhenius2009
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: christensen1991d
+  field: cited_by
+  value:
+  - lund2016divergent
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: fleischer2003
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: franceschi2005
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: gabriel1991
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: klaesoe2003
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: larsen1991
+  field: cited_by
+  value:
+  - glorstad2017view
+  - toplak2015prone
+  - tveiten2017extensive
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: lindow2001
+  field: cited_by
+  value:
+  - gardela2008into
+  - gardela2018amazons
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: mackeprang1935
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: mango2002
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: nielsen2001
+  field: cited_by
+  value:
+  - jessen2016towering
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: orsnes1990
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: pesch2005
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - gardelanda
+  - rosengren2010miniatyren
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: petersen2005a
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: roesdahl1977
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - gardela2008into
+  - gardelanda
+  - goodchild2017borgring
+  - gustafsson2011beyond
+  - price2011who
+  - price2014galgedil
+  - roesdahl2011scandinavia
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: thrane2005
+  field: cited_by
+  value:
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: voss1990
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: watt2003
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2015mot
+  - christensen2013silver
+  note: Removing pentz2009kong from cited_by (copied from another paper's reference
+    list; not in its own PDF).
+- action: set
+  citekey: lund2003a
+  field: cited_by
+  value:
+  - croix2021cultures
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: olsen1977
+  field: cited_by
+  value:
+  - baastrup2014continental
+  - beck2018revisiting
+  - christensen2018borgring
+  - gustafsson2011beyond
+  - goodchild2017borgring
+  - holst2013late
+  - roesdahl2011scandinavia
+  - runge2018new
+  - price2011who
+  - NOAUTHOR28
+  - stott2019searching
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - toplak2017deviant
+  - aannestad2018charisma
+  - amundsen2017changing
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - barrett2010rounding
+  - baug2019beginning
+  - bergstol2004creoles
+  - carver2015commerce
+  - edberg2019dod
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2008into
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - gustin2017contacts
+  - hardh2010viking
+  - heenpettersen2018insular
+  - kalmring2010thieves
+  - kastholm2016spydkvinden
+  - kristjansdottir2015becoming
+  - larsson2007iron
+  - linderholm2008diet
+  - lucas2007bloody
+  - lund2005thresholds
+  - lund2006vikingetidens
+  - lund2008banks
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - milek2012roles
+  - moen2020ideas
+  - odeback2018krigare
+  - osullivan2015strung
+  - pedersen2009ideelle
+  - pluskowski2010a
+  - price2005cognition
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014ship
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - raffield2018polygyny
+  - raffield2019playing
+  - roesdahl2011scandinavia
+  - rosengren2010miniatyren
+  - skre2019rulership
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - wickholm2006stay
+  - williams2016viking
+  - gardela2014death
+  - barrett2008what
+  - price2019viking
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: roesdahl1977a
+  field: cited_by
+  value:
+  - holst2013late
+  - price2010passing
+  - christensen2013silver
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: roesdahl2004
+  field: cited_by
+  value:
+  - roesdahl2011scandinavia
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: schmidt1977
+  field: cited_by
+  value:
+  - gustafsson2011beyond
+  - jessen2014palisade
+  - holst2013late
+  - pentz2009kong
+  note: Adding pentz2009kong to cited_by (listed in the paper's own reference list,
+    read from the PDF).
+- action: set
+  citekey: arrhenius1960
+  field: cited_by
+  value:
+  - christiansen2019metal
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: bildsteine1941
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: bjelland2006
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: carty2005
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: dating2006
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: hamilton2006
+  field: cited_by
+  value:
+  - vesteinsson2016conversion
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: jansson1962
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: jansson1978
+  field: cited_by
+  value:
+  - hardh2010viking
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: kitzlerahfeldt2002
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: kitzlerahfeldt2008
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: kitzlerahfeldt2009
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: lindqvist1941
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - helmbrecht2012winged
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - price2010passing
+  - price2008dying
+  - staecker2004hjalter
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: mahl1990
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: manneke1984
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: norderang2004a
+  field: cited_by
+  value:
+  - oehrl2017documenting
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: nylen2003
+  field: cited_by
+  value:
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: oehrl2008
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: oehrl2009
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - ahfeldt2015picture
+  - ahfeldt2013scanning
+  - oehrl2019interpretations
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: oehrl2012
+  field: cited_by
+  value:
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: sileniuslarsen2009
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: snaedal2002
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  - ahfeldt2015
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: snaedal2005
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: walderhaug1998
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: widerstrom2002
+  field: cited_by
+  value:
+  - ahfeldt2013scanning
+  note: Removing wicker2013christianization from cited_by (copied from another paper's
+    reference list; not in its own PDF).
+- action: set
+  citekey: ambrosiani1995
+  field: cited_by
+  value:
+  - edberg2019dod
+  - glorstad2017view
+  - kalmring2012birka
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: arwidsson1942a
+  field: cited_by
+  value:
+  - kalmring2018gleaming
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: clover1988
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - eriksen2017don
+  - raffield2016bands
+  - raffield2018polygyny
+  - barrett2008what
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: dommasnes1978
+  field: cited_by
+  value:
+  - gardela2013warrior
+  - gardela2018amazons
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: dommasnes1979
+  field: cited_by
+  value:
+  - gardelanda
+  - jahnsen2016sosiale
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: halsall1998a
+  field: cited_by
+  value:
+  - vesteinsson2016conversion
+  - harrison2016warrior
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: hofseth1999
+  field: cited_by
+  value:
+  - moen2020ideas
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: islendingabok1968a
+  field: cited_by
+  value:
+  - vesteinsson2016conversion
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jesch1991a
+  field: cited_by
+  value:
+  - rosengren2010miniatyren
+  - price2019viking
+  - price2005cognition
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jochens1995d
+  field: cited_by
+  value:
+  - milek2012roles
+  - price2005cognition
+  - milek2013integrated
+  - raffield2016bands
+  - price2014ginnungagap
+  - raffield2018polygyny
+  - raffield2016ingroup
+  - raffield2019playing
+  - moen2020ideas
+  - price2019viking
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: jochens1996
+  field: cited_by
+  value:
+  - gardelanda
+  - hedenstiernajonson2017female
+  - price2005cognition
+  - raffield2018polygyny
+  - price2019viking
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: karras1988
+  field: cited_by
+  value:
+  - milek2012roles
+  - raffield2018polygyny
+  - vesteinsson2016conversion
+  - zoega2017archeology
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: loken1987
+  field: cited_by
+  value:
+  - rogers2020non
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: miller1990
+  field: cited_by
+  value:
+  - lucas2007bloody
+  - raffield2016bands
+  - skre2011commodity
+  - williams2015viking
+  - zoega2017archeology
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: ruth1988
+  field: cited_by
+  value:
+  - raffield2019playing
+  - raffield2019slave
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
+- action: set
+  citekey: stalsberg1987
+  field: cited_by
+  value:
+  - moen2020ideas
+  - osullivan2015strung
+  - wicker2013christianization
+  note: Adding wicker2013christianization to cited_by (listed in the paper's own reference
+    list, read from the PDF).
