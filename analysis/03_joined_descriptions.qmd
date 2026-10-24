@@ -52,7 +52,7 @@ wilson_lower_bound <- function(x, n, conf = 0.95) {
 ```{r}
 #| label: join
 # df (Part 1's annotation dataframe, from 01_annotation.qmd) is keyed by
-# cite_key; centrality_df / node_table (Part 2's structural data, from
+# citekey; centrality_df / node_table (Part 2's structural data, from
 # 02_network_structure.qmd) is keyed by name (citekey). F1-only:
 # annotations exist for F1 papers only. F2 works cited by multiple F1
 # papers can still be described using the annotation profile of their
@@ -93,7 +93,7 @@ cat("structural_df:", nrow(structural_df), "rows. is_ghost values:",
 # read_csv's type inference) or was passed in memory as character "false".
 cluster_table_annotated <- structural_df |>
   filter(is_ghost == FALSE | is_ghost == "false") |>
-  left_join(df, by = c("name" = "cite_key"))
+  left_join(df, by = c("name" = "citekey"))
 
 cat("Joined cluster_table_annotated:", nrow(cluster_table_annotated), "rows\n")
 cat("Rows with a matching annotation:", sum(!is.na(cluster_table_annotated$publication_year)), "\n")

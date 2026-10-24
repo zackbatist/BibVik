@@ -1340,11 +1340,11 @@ gn_subcluster_overview <- function(key) {
 # The coded categories of each annotated paper: every topic, method and source column
 # whose value is Primary or Secondary, as 03 counts them. NULL when the file is missing.
 gn_annotation_codes <- function() {
-  path <- here("data", "annotations.csv")
+  path <- here("data", "references.csv")
   if (!file.exists(path)) return(NULL)
   a <- read_csv(path, show_col_types = FALSE)
   cols <- names(a)[str_detect(names(a), "^(Topics|Methods|Sources of Evidence) \\[")]
-  matrix(as.matrix(a[, cols]) %in% c("Primary", "Secondary"), nrow = nrow(a), dimnames = list(a$cite_key, cols))
+  matrix(as.matrix(a[, cols]) %in% c("Primary", "Secondary"), nrow = nrow(a), dimnames = list(a$citekey, cols))
 }
 
 # Share of the coded categories two papers have in common (shared over either),

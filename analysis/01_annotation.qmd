@@ -51,10 +51,11 @@ gender_colors <- c("Woman" = nord_palettes$red_mountain[1],
 
 ```{r}
 #| label: annotation-load
-df <- read.csv(here("data/annotations.csv"), na.strings = "")
+df <- read.csv(here("data/references.csv"), na.strings = "") %>%
+  select(-any_of(c("annotations_cite_key", "annotations_id", "entry_type", "authors", "year", "title", "venue", "pages", "doi", "bibliography_json_key")))
 
 df <- df %>%
-  mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
+  mutate(publication_year = as.numeric(str_extract_all(citekey, "\\d+")))
 
 df$publication_year <- factor(df$publication_year,
                               levels = as.character(seq(min(df$publication_year,
@@ -100,7 +101,7 @@ roll_sum3 <- function(x) {
 }
 
 n_per_year <- df %>% count(publication_year, name = "n_papers_year")
-n_total_papers <- n_distinct(df$cite_key)
+n_total_papers <- n_distinct(df$citekey)
 ```
 
 ## Gender
@@ -198,7 +199,7 @@ author_gender_cols <- df %>%
 # Per-paper ordered gender sequence (e.g. "Man, Woman, Man"), preserving
 # author order and author count, rather than pooling into an unordered set.
 gender_sequences <- df %>%
-  select(cite_key, all_of(author_gender_cols)) %>%
+  select(citekey, all_of(author_gender_cols)) %>%
   pivot_longer(
     cols = all_of(author_gender_cols),
     names_to = "position",
@@ -209,8 +210,8 @@ gender_sequences <- df %>%
   # Extract numeric author position from the column name for correct
   # ordering regardless of how many positions exist.
   mutate(author_n = as.integer(str_extract(position, "\\d+$"))) %>%
-  arrange(cite_key, author_n) %>%
-  group_by(cite_key) %>%
+  arrange(citekey, author_n) %>%
+  group_by(citekey) %>%
   summarise(
     n_authors        = n(),
     gender_sequence  = paste(gender, collapse = ", "),
@@ -348,20 +349,20 @@ ggsave("topics_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi = 
 ```{r}
 #| label: topics-over-time-setup
 # Built directly from df (not topic_count above, which was pivoted
-# without cite_key and can't be used to count distinct papers per topic).
+# without citekey and can't be used to count distinct papers per topic).
 topic_long_with_key <- df %>%
-  select(cite_key, publication_year, contains("Topics")) %>%
+  select(citekey, publication_year, contains("Topics")) %>%
   pivot_longer(cols = contains("Topics"), names_to = "topic", values_to = "count") %>%
   filter(!is.na(count)) %>%
   mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " "))
 
 topic_corpus_rate <- topic_long_with_key %>%
-  distinct(cite_key, topic) %>%
+  distinct(citekey, topic) %>%
   count(topic, name = "n_corpus") %>%
   mutate(corpus_rate = n_corpus / n_total_papers)
 
 topic_year_wilson <- topic_long_with_key %>%
-  distinct(cite_key, publication_year, topic) %>%
+  distinct(citekey, publication_year, topic) %>%
   count(publication_year, topic, name = "n") %>%
   complete(publication_year, topic, fill = list(n = 0)) %>%
   left_join(n_per_year, by = "publication_year") %>%
@@ -596,13 +597,13 @@ that difference.
 #| fig-width: 10
 #| fig-height: 8
 composition_topic <- composition_candidates %>%
-  select(cite_key, composition_singleauthor_split) %>%
+  select(citekey, composition_singleauthor_split) %>%
   left_join(
-    df %>% select(cite_key, contains("Topics")) %>%
-      pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+    df %>% select(citekey, contains("Topics")) %>%
+      pivot_longer(!citekey, names_to = "topic", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(topic), !is.na(composition_singleauthor_split))
 
@@ -656,22 +657,22 @@ ggsave("composition_by_topic.png", plot = last_plot(), width = 10, height = 8, d
 #| fig-width: 11.5
 #| fig-height: 9.5
 mixed_topic_raw <- df %>%
-  select(cite_key, all_of(author_gender_cols)) %>%
+  select(citekey, all_of(author_gender_cols)) %>%
   pivot_longer(all_of(author_gender_cols), names_to = "position", values_to = "gender") %>%
   mutate(gender = na_if(gender, "")) %>%
   filter(!is.na(gender)) %>%
   mutate(author_n = as.integer(str_extract(position, "\\d+$"))) %>%
-  arrange(cite_key, author_n) %>%
-  group_by(cite_key) %>%
+  arrange(citekey, author_n) %>%
+  group_by(citekey) %>%
   summarise(n_authors = n(), n_women = sum(gender == "Woman"), n_men = sum(gender == "Man"),
             first = first(gender), .groups = "drop") %>%
   filter(n_women > 0, n_men > 0) %>%
   left_join(
-    df %>% select(cite_key, contains("Topics")) %>%
-      pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+    df %>% select(citekey, contains("Topics")) %>%
+      pivot_longer(!citekey, names_to = "topic", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(topic)) %>%
   mutate(is_woman_first = as.numeric(first == "Woman"))
@@ -744,18 +745,18 @@ ggsave("methods_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi =
 ```{r}
 #| label: methods-over-time-setup
 method_long_with_key <- df %>%
-  select(cite_key, publication_year, contains("Methods")) %>%
+  select(citekey, publication_year, contains("Methods")) %>%
   pivot_longer(cols = contains("Methods"), names_to = "method", values_to = "count") %>%
   filter(!is.na(count)) %>%
   mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " "))
 
 method_corpus_rate <- method_long_with_key %>%
-  distinct(cite_key, method) %>%
+  distinct(citekey, method) %>%
   count(method, name = "n_corpus") %>%
   mutate(corpus_rate = n_corpus / n_total_papers)
 
 method_year_wilson <- method_long_with_key %>%
-  distinct(cite_key, publication_year, method) %>%
+  distinct(citekey, publication_year, method) %>%
   count(publication_year, method, name = "n") %>%
   complete(publication_year, method, fill = list(n = 0)) %>%
   left_join(n_per_year, by = "publication_year") %>%
@@ -981,13 +982,13 @@ a team's composition.
 #| fig-width: 10
 #| fig-height: 8
 composition_method <- composition_candidates %>%
-  select(cite_key, composition_singleauthor_split) %>%
+  select(citekey, composition_singleauthor_split) %>%
   left_join(
-    df %>% select(cite_key, contains("Methods")) %>%
-      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+    df %>% select(citekey, contains("Methods")) %>%
+      pivot_longer(!citekey, names_to = "method", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(method), !is.na(composition_singleauthor_split))
 
@@ -1041,22 +1042,22 @@ ggsave("composition_by_method.png", plot = last_plot(), width = 10, height = 8, 
 #| fig-width: 11
 #| fig-height: 7
 mixed_method_raw <- df %>%
-  select(cite_key, all_of(author_gender_cols)) %>%
+  select(citekey, all_of(author_gender_cols)) %>%
   pivot_longer(all_of(author_gender_cols), names_to = "position", values_to = "gender") %>%
   mutate(gender = na_if(gender, "")) %>%
   filter(!is.na(gender)) %>%
   mutate(author_n = as.integer(str_extract(position, "\\d+$"))) %>%
-  arrange(cite_key, author_n) %>%
-  group_by(cite_key) %>%
+  arrange(citekey, author_n) %>%
+  group_by(citekey) %>%
   summarise(n_authors = n(), n_women = sum(gender == "Woman"), n_men = sum(gender == "Man"),
             first = first(gender), .groups = "drop") %>%
   filter(n_women > 0, n_men > 0) %>%
   left_join(
-    df %>% select(cite_key, contains("Methods")) %>%
-      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+    df %>% select(citekey, contains("Methods")) %>%
+      pivot_longer(!citekey, names_to = "method", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(method)) %>%
   mutate(is_woman_first = as.numeric(first == "Woman"))
@@ -1129,18 +1130,18 @@ ggsave("sources_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi =
 ```{r}
 #| label: sources-over-time-setup
 source_long_with_key <- df %>%
-  select(cite_key, publication_year, contains("Sources.of.Evidence")) %>%
+  select(citekey, publication_year, contains("Sources.of.Evidence")) %>%
   pivot_longer(cols = contains("Sources.of.Evidence"), names_to = "source", values_to = "count") %>%
   filter(!is.na(count)) %>%
   mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " "))
 
 source_corpus_rate <- source_long_with_key %>%
-  distinct(cite_key, source) %>%
+  distinct(citekey, source) %>%
   count(source, name = "n_corpus") %>%
   mutate(corpus_rate = n_corpus / n_total_papers)
 
 source_year_wilson <- source_long_with_key %>%
-  distinct(cite_key, publication_year, source) %>%
+  distinct(citekey, publication_year, source) %>%
   count(publication_year, source, name = "n") %>%
   complete(publication_year, source, fill = list(n = 0)) %>%
   left_join(n_per_year, by = "publication_year") %>%
@@ -1366,13 +1367,13 @@ a team's composition.
 #| fig-width: 10
 #| fig-height: 8
 composition_source <- composition_candidates %>%
-  select(cite_key, composition_singleauthor_split) %>%
+  select(citekey, composition_singleauthor_split) %>%
   left_join(
-    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+    df %>% select(citekey, contains("Sources.of.Evidence")) %>%
+      pivot_longer(!citekey, names_to = "source", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(source), !is.na(composition_singleauthor_split))
 
@@ -1426,22 +1427,22 @@ ggsave("composition_by_source.png", plot = last_plot(), width = 10, height = 8, 
 #| fig-width: 11
 #| fig-height: 6.5
 mixed_source_raw <- df %>%
-  select(cite_key, all_of(author_gender_cols)) %>%
+  select(citekey, all_of(author_gender_cols)) %>%
   pivot_longer(all_of(author_gender_cols), names_to = "position", values_to = "gender") %>%
   mutate(gender = na_if(gender, "")) %>%
   filter(!is.na(gender)) %>%
   mutate(author_n = as.integer(str_extract(position, "\\d+$"))) %>%
-  arrange(cite_key, author_n) %>%
-  group_by(cite_key) %>%
+  arrange(citekey, author_n) %>%
+  group_by(citekey) %>%
   summarise(n_authors = n(), n_women = sum(gender == "Woman"), n_men = sum(gender == "Man"),
             first = first(gender), .groups = "drop") %>%
   filter(n_women > 0, n_men > 0) %>%
   left_join(
-    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+    df %>% select(citekey, contains("Sources.of.Evidence")) %>%
+      pivot_longer(!citekey, names_to = "source", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(source)) %>%
   mutate(is_woman_first = as.numeric(first == "Woman"))
@@ -1525,9 +1526,9 @@ Method, and Source read their own derived data.
 
 ```{r}
 #| label: region-tokens
-# One row per (cite_key, region_token) pair, trimmed, blanks dropped.
+# One row per (citekey, region_token) pair, trimmed, blanks dropped.
 region_tokens <- df %>%
-  select(cite_key, Region) %>%
+  select(citekey, Region) %>%
   filter(!is.na(Region), Region != "") %>%
   separate_rows(Region, sep = ",") %>%
   mutate(Region = str_trim(Region)) %>%
@@ -2236,7 +2237,7 @@ if (file.exists(region_lookup_path)) {
 
 Once `region_lookup.csv` exists, the resulting `region_df` joins region to
 gender, topic, method, source, and year the same way those variables
-already join to each other elsewhere in this document — by `cite_key`,
+already join to each other elsewhere in this document — by `citekey`,
 using the same Wilson-interval and by-year machinery.
 
 ### Where the corpus is set
@@ -2367,7 +2368,7 @@ has_country_data <- "country" %in% names(region_df) && any(!is.na(region_df$coun
 if (has_country_data) {
   region_country_totals <- region_df %>%
     filter(!is.na(country)) %>%
-    distinct(cite_key, country) %>%
+    distinct(citekey, country) %>%
     count(country, sort = TRUE)
 
   ggplot(region_country_totals, aes(x = fct_reorder(country, n), y = n)) +
@@ -2414,7 +2415,7 @@ row order, so a region's profile can be compared directly across tabs.
 #| fig-width: 11
 #| fig-height: 9
 region_n_papers <- region_tokens %>%
-  distinct(cite_key, region = Region_normalized) %>%
+  distinct(citekey, region = Region_normalized) %>%
   count(region, name = "n_region_papers") %>%
   filter(n_region_papers >= 5)
 
@@ -2435,19 +2436,19 @@ region_order <- region_order_df$region_label
 region_label_lookup <- setNames(region_order_df$region_label, region_order_df$region)
 
 region_topic <- region_tokens %>%
-  select(cite_key, region = Region_normalized) %>%
+  select(citekey, region = Region_normalized) %>%
   left_join(
-    df %>% select(cite_key, contains("Topics")) %>%
-      pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+    df %>% select(citekey, contains("Topics")) %>%
+      pivot_longer(!citekey, names_to = "topic", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(topic))
 
 region_topic_enrichment <- region_topic %>%
   filter(region %in% region_n_papers$region) %>%
-  distinct(cite_key, region, topic) %>%
+  distinct(citekey, region, topic) %>%
   count(region, topic, name = "n") %>%
   left_join(region_n_papers, by = "region") %>%
   left_join(topic_corpus_rate, by = "topic") %>%
@@ -2485,19 +2486,19 @@ region_topic_heatmap
 #| fig-width: 11
 #| fig-height: 9
 region_method <- region_tokens %>%
-  select(cite_key, region = Region_normalized) %>%
+  select(citekey, region = Region_normalized) %>%
   left_join(
-    df %>% select(cite_key, contains("Methods")) %>%
-      pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+    df %>% select(citekey, contains("Methods")) %>%
+      pivot_longer(!citekey, names_to = "method", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(method))
 
 region_method_enrichment <- region_method %>%
   filter(region %in% region_n_papers$region) %>%
-  distinct(cite_key, region, method) %>%
+  distinct(citekey, region, method) %>%
   count(region, method, name = "n") %>%
   left_join(region_n_papers, by = "region") %>%
   left_join(method_corpus_rate, by = "method") %>%
@@ -2529,19 +2530,19 @@ region_method_heatmap
 #| fig-width: 11
 #| fig-height: 9
 region_source <- region_tokens %>%
-  select(cite_key, region = Region_normalized) %>%
+  select(citekey, region = Region_normalized) %>%
   left_join(
-    df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-      pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+    df %>% select(citekey, contains("Sources.of.Evidence")) %>%
+      pivot_longer(!citekey, names_to = "source", values_to = "count") %>%
       filter(!is.na(count)) %>%
       mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-    by = "cite_key"
+    by = "citekey"
   ) %>%
   filter(!is.na(source))
 
 region_source_enrichment <- region_source %>%
   filter(region %in% region_n_papers$region) %>%
-  distinct(cite_key, region, source) %>%
+  distinct(citekey, region, source) %>%
   count(region, source, name = "n") %>%
   left_join(region_n_papers, by = "region") %>%
   left_join(source_corpus_rate, by = "source") %>%
@@ -2604,10 +2605,10 @@ make_nesting_heatmaps <- function(group_col, min_papers = 5) {
     filter(!is.na(.data[[group_col]])) %>%
     rename(group = all_of(group_col))
 
-  n_nested_papers <- n_distinct(nested$cite_key)
+  n_nested_papers <- n_distinct(nested$citekey)
 
   group_n_papers <- nested %>%
-    distinct(cite_key, group) %>%
+    distinct(citekey, group) %>%
     count(group, name = "n_group_papers") %>%
     filter(n_group_papers >= min_papers)
 
@@ -2627,18 +2628,18 @@ make_nesting_heatmaps <- function(group_col, min_papers = 5) {
   # region tag at all, or a region tag that never resolved to this
   # nesting level, which would understate enrichment for anything
   # genuinely concentrated within the resolved subset. long_df is
-  # already restricted to nested's cite_keys by the caller, so the rate
+  # already restricted to nested's citekeys by the caller, so the rate
   # only needs recomputing against n_nested_papers, not whole-corpus
   # corpus_rate_df.
   make_one <- function(long_df, category_col, fill_label) {
     category_rate <- long_df %>%
-      distinct(cite_key, .data[[category_col]]) %>%
+      distinct(citekey, .data[[category_col]]) %>%
       count(.data[[category_col]], name = "n_subset_corpus") %>%
       mutate(subset_corpus_rate = n_subset_corpus / n_nested_papers)
 
     enrichment <- long_df %>%
       filter(group %in% group_n_papers$group) %>%
-      distinct(cite_key, group, .data[[category_col]]) %>%
+      distinct(citekey, group, .data[[category_col]]) %>%
       count(group, .data[[category_col]], name = "n") %>%
       left_join(group_n_papers, by = "group") %>%
       left_join(category_rate, by = category_col) %>%
@@ -2660,33 +2661,33 @@ make_nesting_heatmaps <- function(group_col, min_papers = 5) {
   }
 
   topic_long <- nested %>%
-    select(cite_key, group) %>%
+    select(citekey, group) %>%
     left_join(
-      df %>% select(cite_key, contains("Topics")) %>%
-        pivot_longer(!cite_key, names_to = "topic", values_to = "count") %>%
+      df %>% select(citekey, contains("Topics")) %>%
+        pivot_longer(!citekey, names_to = "topic", values_to = "count") %>%
         filter(!is.na(count)) %>%
         mutate(topic = str_replace_all(str_remove(topic, "Topics.."), fixed("."), " ")),
-      by = "cite_key"
+      by = "citekey"
     ) %>% filter(!is.na(topic))
 
   method_long <- nested %>%
-    select(cite_key, group) %>%
+    select(citekey, group) %>%
     left_join(
-      df %>% select(cite_key, contains("Methods")) %>%
-        pivot_longer(!cite_key, names_to = "method", values_to = "count") %>%
+      df %>% select(citekey, contains("Methods")) %>%
+        pivot_longer(!citekey, names_to = "method", values_to = "count") %>%
         filter(!is.na(count)) %>%
         mutate(method = str_replace_all(str_remove(method, "Methods.."), fixed("."), " ")),
-      by = "cite_key"
+      by = "citekey"
     ) %>% filter(!is.na(method))
 
   source_long <- nested %>%
-    select(cite_key, group) %>%
+    select(citekey, group) %>%
     left_join(
-      df %>% select(cite_key, contains("Sources.of.Evidence")) %>%
-        pivot_longer(!cite_key, names_to = "source", values_to = "count") %>%
+      df %>% select(citekey, contains("Sources.of.Evidence")) %>%
+        pivot_longer(!citekey, names_to = "source", values_to = "count") %>%
         filter(!is.na(count)) %>%
         mutate(source = str_replace_all(str_remove(source, "Sources.of.Evidence.."), fixed("."), " ")),
-      by = "cite_key"
+      by = "citekey"
     ) %>% filter(!is.na(source))
 
   list(
@@ -2790,22 +2791,22 @@ and enrichment machinery already defined for Topic, Method, and Source.
 region_min_shown_year <- 8
 
 region_n_papers_year_eligible <- region_tokens %>%
-  distinct(cite_key, region = Region_normalized) %>%
+  distinct(citekey, region = Region_normalized) %>%
   count(region, name = "n_region_papers") %>%
   filter(n_region_papers >= region_min_shown_year)
 
 region_long_with_key <- region_tokens %>%
-  select(cite_key, region = Region_normalized) %>%
+  select(citekey, region = Region_normalized) %>%
   filter(region %in% region_n_papers_year_eligible$region) %>%
-  left_join(df %>% select(cite_key, publication_year), by = "cite_key")
+  left_join(df %>% select(citekey, publication_year), by = "citekey")
 
 region_corpus_rate <- region_long_with_key %>%
-  distinct(cite_key, region) %>%
+  distinct(citekey, region) %>%
   count(region, name = "n_corpus") %>%
   mutate(corpus_rate = n_corpus / n_total_papers)
 
 region_year_wilson <- region_long_with_key %>%
-  distinct(cite_key, publication_year, region) %>%
+  distinct(citekey, publication_year, region) %>%
   count(publication_year, region, name = "n") %>%
   complete(publication_year, region, fill = list(n = 0)) %>%
   left_join(n_per_year, by = "publication_year") %>%

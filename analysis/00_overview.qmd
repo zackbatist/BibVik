@@ -23,10 +23,11 @@ library(tidyverse)
 library(here)
 library(jsonlite)
 
-df <- read.csv(here("data/annotations.csv"), na.strings = "")
+df <- read.csv(here("data/references.csv"), na.strings = "") %>%
+  select(-any_of(c("annotations_cite_key", "annotations_id", "entry_type", "authors", "year", "title", "venue", "pages", "doi", "bibliography_json_key")))
 
 bib <- fromJSON(here("data/bibliography.json"), simplifyVector = FALSE)
-bib_matched <- bib[names(bib) %in% df$cite_key]
+bib_matched <- bib[names(bib) %in% df$citekey]
 
 full_edgelist <- read.csv(here("data/citation_edgelist.csv"), stringsAsFactors = FALSE)
 n_seed_refs <- full_edgelist %>% filter(source == "lund2021") %>% nrow()
@@ -34,14 +35,14 @@ bib_live <- bib[!map_lgl(bib, ~ isTRUE(.x$`_deleted`))]
 n_live <- length(bib_live)
 
 df <- df %>%
-  mutate(publication_year = as.numeric(str_extract_all(cite_key, "\\d+")))
+  mutate(publication_year = as.numeric(str_extract_all(citekey, "\\d+")))
 
 df$publication_year <- factor(df$publication_year,
                               levels = as.character(seq(min(df$publication_year,
                                        na.rm = TRUE),
                                        max(df$publication_year, na.rm = TRUE), 1)))
 
-n_papers <- n_distinct(df$cite_key)
+n_papers <- n_distinct(df$citekey)
 year_range <- range(as.numeric(as.character(df$publication_year)), na.rm = TRUE)
 ```
 
@@ -176,10 +177,10 @@ ggplot(data = entry_type_counts_full, aes(x = fct_reorder(entry_type, n), y = n)
 gender_cols <- names(df)[str_starts(names(df), "Authors..Genders")]
 
 n_authors <- df %>%
-  select(cite_key, all_of(gender_cols)) %>%
-  pivot_longer(-cite_key, names_to = "author_slot", values_to = "gender") %>%
+  select(citekey, all_of(gender_cols)) %>%
+  pivot_longer(-citekey, names_to = "author_slot", values_to = "gender") %>%
   filter(!is.na(gender)) %>%
-  count(cite_key, name = "n_authors")
+  count(citekey, name = "n_authors")
 
 n_authors %>%
   count(n_authors, name = "n_papers") %>%
@@ -387,10 +388,10 @@ lang_counts_full %>%
 edgelist <- read.csv(here("data/citation_edgelist_annotated.csv"), stringsAsFactors = FALSE)
 
 out_counts <- edgelist %>%
-  filter(source %in% df$cite_key) %>%
+  filter(source %in% df$citekey) %>%
   count(source, name = "n_citations")
 
-out_counts_full <- tibble(source = df$cite_key) %>%
+out_counts_full <- tibble(source = df$citekey) %>%
   left_join(out_counts, by = "source") %>%
   mutate(n_citations = replace_na(n_citations, 0))
 
