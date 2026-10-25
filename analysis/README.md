@@ -32,13 +32,13 @@ Two runs are made from the repaired annotated graph, one with the seed paper and
 | | With seed | No seed |
 |---|---|---|
 | Edge list | `data/citation_edgelist_annotated.csv` | `analysis/gn_analysis/edgelist_annotated_no_seed.csv` |
-| Directed edges | 21,457 | 20,884 |
-| Undirected edges GN sees | 21,456 | 20,883 |
-| Nodes | 12,616 | 12,517 |
-| Components at the start | 1 | 4 (12,430, 48, 27 and 12 nodes) |
+| Directed edges | 22,376 | 21,806 |
+| Undirected edges GN sees | 22,375 | 21,805 |
+| Nodes | 12,869 | 12,799 |
+| Components at the start | 1 | 2 (12,787 and 12 nodes) |
 | Run folder | `results/annotated` | `results/annotated_no_seed` |
 
-The no-seed list drops the seed paper (`lund2021`) and its 573 outgoing edges. That also removes 98 works that only the seed cites (86 F1, 12 F2), which makes 99 fewer nodes. Both lists have a `source,target` header and Windows line endings. GN collapses the directed edges to undirected before the first round. Representative selection reads the full edge list, `data/citation_edgelist.csv`, as `cluster_labelling/cluster_labelling_README.md` specifies.
+The no-seed list drops the seed paper (`lund2021`) and its 570 outgoing edges. That also removes 69 works that only the seed cites (all F2), which makes 70 fewer nodes. Both lists have a `source,target` header and Windows line endings. GN collapses the directed edges to undirected before the first round. Representative selection reads the full edge list, `data/citation_edgelist.csv`, as `cluster_labelling/cluster_labelling_README.md` specifies.
 
 ### Layout while running
 
@@ -112,13 +112,13 @@ while true; do
   [ -n "$G" ] && break; sleep 300
 done
 say "GPU $G is free; starting Ollama with $MODEL"
-(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model $MODEL) || { say "launch_bibvik_llm.sh failed"; exit 1; }
-curl -s -m 20 http://localhost:11440/api/tags | grep -q "\"$MODEL\"" || { say "Ollama is not serving $MODEL on port 11440; labelling skipped"; (cd $(dirname $LAUNCH) && bash $LAUNCH --stop); exit 1; }
+(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model $MODEL --port 11440) || { say "launch_bibvik_llm.sh failed"; exit 1; }
+curl -s -m 20 http://localhost:11440/api/tags | grep -q "\"$MODEL\"" || { say "Ollama is not serving $MODEL on port 11440; labelling skipped"; docker rm -f ollama_zack; exit 1; }
 for X in $TODO; do
   N=$(earliest $X); say "$X: labelling the round $N cut"
   (cd ../cluster_labelling && python3 label_clusters.py ../gn_analysis/$X/labels/representatives.csv ../gn_analysis/$X/multi_cut/communities_round_$N.csv ../gn_analysis/$X/labels --model $MODEL --base-url http://localhost:11440) || say "$X: labelling failed"
 done
-(cd $(dirname $LAUNCH) && bash $LAUNCH --stop)
+docker rm -f ollama_zack
 say "all steps finished"
 ' > results/post_all.log 2>&1 &
 fi
@@ -145,11 +145,11 @@ To restart from scratch on purpose, run `rm -rf results/*` first and paste the c
 | Cluster detection | `gn_analysis/generate_multi_cut_communities.R` | `multi_cut/communities_round_<N>.csv` for every sustained fragmentation onset, plus `multi_cut_summary.csv`. |
 | Representatives | `cluster_labelling/select_representatives.py` on the earliest cut | `labels/representatives.csv`, the top 10 papers per cluster by within-cluster degree. |
 | GPU | `nvidia-smi` every 5 minutes | The first GPU with under 2,000 MiB used and under 10% busy. |
-| Ollama | `launch_bibvik_llm.sh --gpu <G> --model qwen3.5:35b` | A server on port 11440, checked through `/api/tags`. |
+| Ollama | `launch_bibvik_llm.sh --gpu <G> --model qwen3.5:35b --port 11440` | A server on port 11440, checked through `/api/tags`. |
 | Labelling | `cluster_labelling/label_clusters.py`, with-seed graph first, then no-seed | `labels/cluster_labels.csv` and `node_labels.csv`. |
-| Shutdown | `launch_bibvik_llm.sh --stop` | Ollama stops. |
+| Shutdown | `docker rm -f ollama_zack` | Ollama stops. |
 
-The labelled cut is the earliest sustained fragmentation onset, which is the smallest round number in `multi_cut/`. `02_network_structure.qmd` documents it as the only onset that gives a singleton-free partition on this corpus. Detection uses a window of 100 rounds and a minimum rate of 0.9 new components per round.
+The labelled cut is the earliest sustained fragmentation onset, which is the smallest round number in `multi_cut/`. About 67% of the nodes have a single edge in the undirected graph, so every cut contains many singleton communities. Detection uses a window of 100 rounds and a minimum rate of 0.9 new components per round.
 
 The chain labels both graphs through one Ollama instance on one GPU, one graph after the other. `label_clusters.py` calls Ollama's `/api/generate` endpoint, so the Ollama backend is required and the `llama_server` tensor-parallel route cannot serve it.
 
@@ -248,11 +248,11 @@ python3 select_representatives.py ../../data/bibliography.json ../../data/citati
 python3 -c "import requests; print('requests ok')"
 LAUNCH=$(find ~/models/ -name launch_bibvik_llm.sh -not -path "*/.git/*" | head -1); echo "launcher: $LAUNCH"
 G=$(nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader,nounits | awk -F", " '$2 < 2000 && $3 < 10 {print $1; exit}'); echo "free GPU chosen: $G"
-(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model qwen3.5:35b)
+(cd $(dirname $LAUNCH) && bash $LAUNCH --gpu $G --model qwen3.5:35b --port 11440)
 curl -s http://localhost:11440/api/tags | grep -o '"name": *"[^"]*"'
 python3 label_clusters.py $T/labels/representatives.csv $T/multi_cut/communities_round_$N.csv $T/labels --model qwen3.5:35b --base-url http://localhost:11440
 cut -c1-120 $T/labels/cluster_labels.csv
-(cd $(dirname $LAUNCH) && bash $LAUNCH --stop)
+docker rm -f ollama_zack
 ```
 
 An empty line after `free GPU chosen:` means no GPU is free. A missing model name after the `curl` line means the launcher serves on another port, and the chain assumes port 11440.
