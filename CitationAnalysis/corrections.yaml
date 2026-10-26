@@ -354272,3 +354272,206 @@
     the full text of each of these papers only as a different work by the same author,
     a first name, part of another word, or a credit; no reference or in-text citation
     matches this work's year or title.
+- action: set
+  citekey: becker2012archaeometry
+  field: cited_by
+  value:
+  - grupe2013rise
+  - lund2021
+  - zachrisson2017volund
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: buckley2010
+  field: cited_by
+  value:
+  - vonholstein2014searching
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: clarke1993
+  field: cited_by
+  value:
+  - gustafsson2011beyond
+  - hillerdal2010early
+  note: Removing hillerdal2009mannens from cited_by. The cited author's surname is
+    absent from the full text of the published paper (read from the PDF, with OCR
+    for scanned pages), and neither the work's title nor a spelling variant of the
+    author's name beside a matching year appears in the text.
+- action: set
+  citekey: croix2015permanency
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2019single
+  - lund2021
+  - sindbaek2018northern
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: feveile2009
+  field: cited_by
+  value:
+  - croix2015permanency
+  - ulriksen2011vikingetidens
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: feveile2012ribe
+  field: cited_by
+  value:
+  - lund2021
+  - ashby2015urban
+  - croix2015permanency
+  - croix2019single
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: hilberg2014viking
+  field: cited_by
+  value:
+  - hilberg2016hedeby
+  - hilberg2018detektoruntersuchungen
+  - lund2021
+  - sindbaek2017urbanism
+  - star2017ancient
+  - voncarnapbornheim2014research
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: holm2000
+  field: cited_by
+  value:
+  - knudson2012migration
+  - barrett2010rounding
+  note: Removing hedeager2003kognitiv from cited_by. The cited author's surname is
+    absent from the full text of the published paper (read from the PDF, with OCR
+    for scanned pages), and neither the work's title nor a spelling variant of the
+    author's name beside a matching year appears in the text.
+- action: set
+  citekey: jeffrey2005
+  field: cited_by
+  value: []
+  note: Removing wicker2013christianization from cited_by. The cited author's surname
+    is absent from the full text of the published paper (read from the PDF, with OCR
+    for scanned pages), and neither the work's title nor a spelling variant of the
+    author's name beside a matching year appears in the text.
+- action: set
+  citekey: kalmring2010thieves
+  field: cited_by
+  value:
+  - draganits2015late
+  - gardela2014a
+  - lund2021
+  - gardela2013dangerous
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: kuzmin2000
+  field: cited_by
+  value:
+  - hillerdal2010early
+  note: Removing nosov2018stratigrafiya from cited_by. The cited author's surname
+    is absent from the full text of the published paper (read from the PDF, with OCR
+    for scanned pages), and neither the work's title nor a spelling variant of the
+    author's name beside a matching year appears in the text.
+- action: set
+  citekey: lie1991a
+  field: cited_by
+  value:
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: mikkelsen1994
+  field: cited_by
+  value:
+  - amundsen2017changing
+  - glorstad2017view
+  - loftsgarden2019prime
+  - pilo2018chronology
+  - rosvold2019mountains
+  - solli2018reindeer
+  - stene2017uplands
+  - the2017
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: oye2001
+  field: cited_by
+  value: []
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: roesdahl2014
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - christensen2018borgring
+  - feveile2017ombukkede
+  - ravn2019erritso
+  - stott2019searching
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: vandoorn2011
+  field: cited_by
+  value:
+  - vonholstein2014searching
+  - ashby2015urban
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: wickham2005
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - carver2015commerce
+  - frei2015was
+  - hardh2010viking
+  - hilberg2018detektoruntersuchungen
+  - holst2010inconcistency
+  - holst2014warrior
+  - ljungkvist2011gamla
+  - lund2021
+  - poulsen2011settlement
+  - price2018
+  - raja2018
+  - sindbaek2011silver
+  - sindbaek2017urbanism
+  - barrett2008what
+  - ashby2015urban
+  - raffield2016bands
+  note: Removing ashby2015what from cited_by. The cited author's surname is absent
+    from the full text of the published paper (read from the PDF, with OCR for scanned
+    pages), and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.

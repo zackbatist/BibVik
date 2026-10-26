@@ -14314,7 +14314,6 @@
     "entry_type": "article",
     "generation": "F1",
     "cited_by": [
-      "ashby2015what",
       "grupe2013rise",
       "lund2021",
       "zachrisson2017volund",
@@ -14544,9 +14543,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 61,
@@ -25667,7 +25667,6 @@
     "generation": "F1",
     "cited_by": [
       "NOAUTHOR28",
-      "ashby2015what",
       "croix2019single",
       "lund2021",
       "sindbaek2018northern",
@@ -25898,9 +25897,10 @@
       "language",
       "detection",
       "title",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 70,
@@ -32907,7 +32907,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "ashby2015what",
       "croix2015permanency",
       "ulriksen2011vikingetidens"
     ],
@@ -33214,9 +33213,10 @@
       "language",
       "detection",
       "cited_by",
-      "generation"
+      "generation",
+      "cited_by"
     ],
-    "_correction_note": "feveile2009 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 1,
@@ -52175,7 +52175,6 @@
     "entry_type": "incollection",
     "generation": "F1",
     "cited_by": [
-      "ashby2015what",
       "hilberg2016hedeby",
       "hilberg2018detektoruntersuchungen",
       "lund2021",
@@ -52530,9 +52529,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 83,
@@ -61021,7 +61021,6 @@
     "entry_type": "article",
     "generation": "F1",
     "cited_by": [
-      "ashby2015what",
       "draganits2015late",
       "gardela2014a",
       "lund2021",
@@ -61373,9 +61372,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding gardela2013dangerous to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 44,
@@ -99249,7 +99249,6 @@
     "generation": "F2",
     "cited_by": [
       "NOAUTHOR28",
-      "ashby2015what",
       "christensen2018borgring",
       "feveile2017ombukkede",
       "ravn2019erritso",
@@ -99546,9 +99545,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
-      "generation"
+      "generation",
+      "cited_by"
     ],
-    "_correction_note": "roesdahl2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -120701,7 +120701,6 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "ashby2015what",
       "barrett2010rounding",
       "carver2015commerce",
       "frei2015was",
@@ -120943,9 +120942,10 @@
       "cited_by",
       "generation",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding raffield2016bands to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -169420,7 +169420,6 @@
     "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
-      "ashby2015what",
       "glorstad2017view",
       "loftsgarden2019prime",
       "pilo2018chronology",
@@ -169550,9 +169549,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 117,
       "inline_markers": 111,
@@ -205465,7 +205465,6 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "ashby2015what",
       "vonholstein2014searching",
       "ashby2015urban"
     ],
@@ -205654,9 +205653,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 227,
@@ -270450,9 +270450,7 @@
     "_raw_citation": "Øye, I. 2005. Farming and farming systems in Norse societies of the North Atlantic. Pp. 359-370, In A. Mortensen and S.V. Arge (Eds.). Viking and Norse in the North Atlantic. Select Papers from the Proceedings of the Fourteenth Viking Congress, Tórshavn, 19-30 July 2001. Annales Societatis Scientiarum Faeroen- sis Supplementum XLIV. Tórshavn, Faroe Islands. 445 pp. Endnotes",
     "entry_type": "incollection",
     "generation": "F2",
-    "cited_by": [
-      "ashby2015what"
-    ],
+    "cited_by": [],
     "_source_pdf": "Arneborg et al  2012 - Human Diet and Subsistence Patterns in Norse Greenland, AD c. 980–AD c. 1450 Archaeological Interpr.pdf",
     "year": "2001",
     "citekey": "oye2001",
@@ -270571,9 +270569,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: arneborg2012 -> oye2001a",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 41,
       "inline_markers": 45,
@@ -363815,7 +363814,6 @@
     "citekey": "vandoorn2011",
     "generation": "F2",
     "cited_by": [
-      "ashby2015what",
       "vonholstein2014searching",
       "ashby2015urban"
     ],
@@ -363923,9 +363921,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ashby2015urban to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 100,
       "inline_markers": 12,
@@ -609891,8 +609890,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "hillerdal2010early",
-      "nosov2018stratigrafiya"
+      "hillerdal2010early"
     ],
     "_source_pdf": "Croix 2015 - Permanency in Early Medieval Emporia Reassessing Ribe.pdf",
     "year": "2000",
@@ -609995,9 +609993,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2015permanency from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list.",
+    "_correction_note": "Removing nosov2018stratigrafiya from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 87,
       "inline_markers": 9,
@@ -1026448,7 +1026447,6 @@
     "generation": "F2",
     "cited_by": [
       "gustafsson2011beyond",
-      "hillerdal2009mannens",
       "hillerdal2010early"
     ],
     "_source_pdf": "Gustafsson 2011 - Beyond Wayland - thoughts on early medieval metal workshops in Scandinavia.pdf",
@@ -1026607,9 +1026605,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing hillerdal2009mannens from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_title_recovered": true,
     "language": "en",
     "detection": {
@@ -1452779,8 +1452778,7 @@
     "generation": "F2",
     "cited_by": [
       "knudson2012migration",
-      "barrett2010rounding",
-      "hedeager2003kognitiv"
+      "barrett2010rounding"
     ],
     "_source_pdf": "Knudson et al  2012 - Migration and Viking Dublin Paleomobility and Paleodiet through Isotopic Analyses.pdf",
     "year": "2000",
@@ -1452882,9 +1452880,10 @@
       "detection",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing glorstad2012sign from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
+    "_correction_note": "Removing hedeager2003kognitiv from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 155,
       "inline_markers": 7,
@@ -3340446,9 +3340445,7 @@
     "_raw_citation": "Jeffrey, S. 2005. The Missing Dimension: Future directions in digital recording of early medieval sculptured stone. In: S. M. Forster & M. Cross (eds.). Able Minds and Practised Hands. Scotland's Early Medieval Sculpture in the 21st Century, pp. 353-365.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "wicker2013christianization"
-    ],
+    "cited_by": [],
     "_source_pdf": "Wicker 2013 - Christianization, Female Infanticide, and the Abundance of Female Burials at Viking Age Birka in Swe.pdf",
     "year": "2005",
     "citekey": "jeffrey2005",
@@ -3340544,9 +3340541,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing wicker2013christianization from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 22,
       "inline_markers": 20,
@@ -3537941,7 +3537939,6 @@
     "year": "1991",
     "generation": "F2",
     "cited_by": [
-      "ashby2015what",
       "ashby2015urban"
     ],
     "_source_pdf": "Ashby 2015 - What Really Caused the Viking Age The Social Content of Raiding and Exploration.pdf",
@@ -3537957,8 +3537954,11 @@
     },
     "_grobid_id": "b53",
     "citekey": "lie1991a",
-    "_correction_note": "Work cited by 2 paper(s) but absent from the bibliography; reconstructed from the citers' own GROBID-parsed reference (it had been merged into a same-author-year entry by duplicate detection).",
-    "_created_via_correction": true
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
+    "_created_via_correction": true,
+    "_corrections_applied": [
+      "cited_by"
+    ]
   },
   "lindqvist1936a": {
     "author": [
@@ -3547189,7 +3547189,6 @@
     "generation": "F1",
     "cited_by": [
       "lund2021",
-      "ashby2015what",
       "ashby2015urban",
       "croix2015permanency",
       "croix2019single"
@@ -3547207,7 +3547206,7 @@
     },
     "_grobid_id": "b123",
     "citekey": "feveile2012ribe",
-    "_correction_note": "Adding croix2015permanency, croix2019single to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing ashby2015what from cited_by. The cited author's surname is absent from the full text of the published paper (read from the PDF, with OCR for scanned pages), and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_created_via_correction": true,
     "_corrections_applied": [
       "cited_by",
@@ -3547225,6 +3547224,7 @@
       "cited_by",
       "cited_by",
       "generation",
+      "cited_by",
       "cited_by",
       "cited_by"
     ]
