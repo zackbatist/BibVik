@@ -27,7 +27,7 @@ Reads a plain two-column edge list CSV (header: `source,target`), not GraphML. S
 Two lists are used.
 
 - `../../data/citation_edgelist_annotated.csv` is the annotated graph with the seed paper (`lund2021`).
-- `edgelist_annotated_no_seed.csv`, in this directory and committed, is the same list without the seed and its outgoing edges. It has 21,220 rows against 21,589.
+- `edgelist_annotated_no_seed.csv`, in this directory and committed, is the same list without the seed and its outgoing edges. It has 21,234 rows against 21,603.
 
 Both keep Windows line endings.
 

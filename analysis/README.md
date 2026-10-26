@@ -32,10 +32,10 @@ Two runs are made from the repaired annotated graph, one with the seed paper and
 | | With seed | No seed |
 |---|---|---|
 | Edge list | `data/citation_edgelist_annotated.csv` | `analysis/gn_analysis/edgelist_annotated_no_seed.csv` |
-| Directed edges | 21,589 | 21,220 |
-| Undirected edges GN sees | 21,588 | 21,219 |
-| Nodes | 12,700 | 12,699 |
-| Components at the start | 1 | 3 (12,678, 12 and 9 nodes) |
+| Directed edges | 21,603 | 21,234 |
+| Undirected edges GN sees | 21,602 | 21,233 |
+| Nodes | 12,693 | 12,692 |
+| Components at the start | 1 | 3 (12,671, 12 and 9 nodes) |
 | Run folder | `results/annotated` | `results/annotated_no_seed` |
 
 The no-seed list drops the seed paper (`lund2021`) and its 369 outgoing edges. No work is cited only by the seed, so the seed is the only node removed. Both lists have a `source,target` header and Windows line endings. GN collapses the directed edges to undirected before the first round. Representative selection reads the full edge list, `data/citation_edgelist.csv`, as `cluster_labelling/cluster_labelling_README.md` specifies.

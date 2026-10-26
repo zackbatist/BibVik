@@ -354475,3 +354475,299 @@
     one work, Lars Lonnroth 1977, The Riddles of the Rok stone. A structural approach,
     Arkiv for nordisk filologi 92:1-57, for the English translation of the Rok inscription
     (read from the PDF).
+- action: merge
+  keep: sealy1995
+  discard: sealey1995
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: ostigard2006a
+  discard: oestigaard2006
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: shetelig1912
+  discard: schetelig1912a
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: skibstedklaeso1997
+  discard: klaesoe1997
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: crumlinpederson1995
+  discard: crumlinpedersen1995d
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: graslund2008c
+  discard: graslund2008a
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: andersson2008f
+  discard: andersson2008b
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: karras1988
+  discard: ruth1988
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: ellisdavidson1969
+  discard: gelling1969
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: merge
+  keep: zachrisson1989
+  discard: hammarberg1989
+  note: Same work recorded twice (same title and year; the authors, the spelling of
+    the author name or the editors differ only in form). Merged on the stored citation
+    text.
+- action: set
+  citekey: blackburn1986
+  field: cited_by
+  value:
+  - williams2015viking
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: blackburn1997
+  field: cited_by
+  value:
+  - kershaw2017early
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: blackburn1998
+  field: cited_by
+  value:
+  - hadley2018search
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: blackburn2005
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  - frei2015was
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: blackburn2006
+  field: cited_by
+  value:
+  - williams2015viking
+  - williams2017
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: blackburn2011
+  field: cited_by
+  value:
+  - hadley2016winter
+  - kershaw2017early
+  - perry2016pottery
+  - rogers2020non
+  - williams2015viking
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: brooks1987
+  field: cited_by
+  value:
+  - hadley2016winter
+  - hadley2018search
+  - kershaw2017early
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: downham2007a
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - downham2016coastal
+  - harrison2016warrior
+  - steinforth2015early
+  - barrett2008what
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: dolley1966
+  field: cited_by
+  value:
+  - williams2017
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: grahamcampbell2001
+  field: cited_by
+  value:
+  - harrison2016warrior
+  - keller2016northern
+  - kershaw2017early
+  - raffield2016bands
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: grahamcampbell2011a
+  field: cited_by
+  value:
+  - skre2017monetary
+  - svendsen2016how
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: mcleod2014
+  field: cited_by
+  value:
+  - baug2019beginning
+  - ashby2015what
+  - raffield2016bands
+  - perry2019situation
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: samson1991a
+  field: cited_by
+  value:
+  - sindbaek2011silver
+  - skre2011commodity
+  - skre2017monetary
+  - williams2015viking
+  - hillerdal2009mannens
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: sindbaek2011silver
+  field: cited_by
+  value:
+  - ashby2015what
+  - baug2019beginning
+  - borake2018bottlenecks
+  - ellingsen2019northern
+  - glorstad2015mot
+  - gullbekk2014vestfold
+  - heenpettersen2019earliest
+  - hrnjic2018missing
+  - lund2021
+  - raffield2018polygyny
+  - raninen2014finland
+  - sindbaek2017urbanism
+  - skre2017monetary
+  - ashby2015urban
+  - aannestad2018allure
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: skre2008b
+  field: cited_by
+  value:
+  - wouters2016soil
+  - croix2015permanency
+  - price2010passing
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: smyth1975
+  field: cited_by
+  value:
+  - williams2017
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: tschan2002b
+  field: cited_by
+  value:
+  - sindbaek2017urbanism
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: williams2007
+  field: cited_by
+  value:
+  - hadley2016winter
+  - kershaw2017early
+  - sheehan2013viking
+  - sindbaek2011silver
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: williams2011b
+  field: cited_by
+  value:
+  - rogers2020non
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: williams2015viking
+  field: cited_by
+  value:
+  - aannestad2018charisma
+  - hadley2016winter
+  - hadley2018search
+  - lund2021
+  - richards2018scale
+  - gardela2018amazons
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).
+- action: set
+  citekey: williams2020
+  field: cited_by
+  value:
+  - lund2021
+  - williams2014coins
+  note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
+    which the extraction missed. The footnotes give this work's author and title (read
+    from the PDF).

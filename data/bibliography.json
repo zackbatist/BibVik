@@ -106113,7 +106113,8 @@
       "sindbaek2017urbanism",
       "skre2017monetary",
       "ashby2015urban",
-      "aannestad2018allure"
+      "aannestad2018allure",
+      "williams2014coins"
     ],
     "_source_pdf": "Sindbæk 2011 - Silver Economies and Social Ties Long-distance Interaction, Long-Term Investments – and why the Vik.pdf",
     "year": "2011",
@@ -106387,9 +106388,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing aannestad2018charisma from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 55,
@@ -121616,7 +121618,8 @@
       "hadley2018search",
       "lund2021",
       "richards2018scale",
-      "gardela2018amazons"
+      "gardela2018amazons",
+      "williams2014coins"
     ],
     "_source_pdf": "Williams 2015 - Viking camps and the means of exchange in Britain and Ireland in the ninth century.pdf",
     "year": "2015",
@@ -121862,9 +121865,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding gardela2018amazons to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -121891,7 +121895,8 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "lund2021"
+      "lund2021",
+      "williams2014coins"
     ],
     "_source_pdf": "Lund and Sindbæk 2022 - Crossing the Maelstrom New Departures in Viking Archaeology.pdf",
     "year": "2020",
@@ -122113,9 +122118,10 @@
       "cited_by",
       "generation",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing williams2017 from cited_by. Year test: the citing work (2017) predates this work (2020) by more than a year.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -466254,7 +466260,8 @@
       "baug2019beginning",
       "ashby2015what",
       "raffield2016bands",
-      "perry2019situation"
+      "perry2019situation",
+      "williams2014coins"
     ],
     "_source_pdf": "Baug et al  2019 - The Beginning of the Viking Age in the West.pdf",
     "year": "2014",
@@ -466284,7 +466291,7 @@
     "_entry_type_original": "misc",
     "series": "Studies in the Early Middle Ages",
     "_split_from": "mcleod1915",
-    "_correction_note": "Adding perry2019situation to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "_corrections_applied": [
       "language",
@@ -466362,6 +466369,7 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by",
       "cited_by",
       "cited_by"
@@ -469532,7 +469540,8 @@
       "harrison2016warrior",
       "keller2016northern",
       "kershaw2017early",
-      "raffield2016bands"
+      "raffield2016bands",
+      "williams2014coins"
     ],
     "_source_pdf": "Barrett 2010 - Rounding up the Usual Suspects Causation and the Viking Age Diaspora.pdf",
     "year": "2001",
@@ -469660,9 +469669,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 142,
       "inline_markers": 146,
@@ -716623,7 +716633,9 @@
     "cited_by": [
       "chenery2014boat",
       "naumann2014slaves",
-      "pollard2012sprouting"
+      "pollard2012sprouting",
+      "frei2011",
+      "frei2012strontium"
     ],
     "_source_pdf": "Chenery et al  2014 - A Boat Load of Vikings.pdf",
     "year": "1995",
@@ -731974,9 +731986,7 @@
     "_raw_citation": "Andersson, Gunnar, and Eva Skyllberg (eds). 2008. Gestalter och gestaltningar: om tid, rum och händelser på Lunda (Stockholm: Riksantikvarieämbetet)",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "fabech2013ritual"
-    ],
+    "cited_by": [],
     "_source_pdf": "Fabech and Näsman 2013 - Ritual Landscapes and Sacral Places in the First Millennium AD in South Scandinavia.pdf",
     "year": "2008",
     "citekey": "andersson2008b",
@@ -732076,7 +732086,7 @@
       "language",
       "detection"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "detection": {
       "reference_list": 100,
       "inline_markers": 142,
@@ -732085,7 +732095,9 @@
       "llm_footnotes": 23,
       "llm_bib_reparse": 0,
       "merged_total": 189
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "andersson2008f"
   },
   "andren1991a": {
     "_grobid_id": "b11",
@@ -852104,10 +852116,7 @@
     "_raw_citation": "Sealey JC, Armstrong R, Schrire C (1995) Beyond lifetime averages: tracing life histories through isotopic analysis of different calcified tissues from archaeological human skeletons. Antiquity 69:290-301",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "frei2011",
-      "frei2012strontium"
-    ],
+    "cited_by": [],
     "_source_pdf": "Frei and Price 2012 - Strontium Isotopes and Human Mobility in Prehistoric Denmark.pdf",
     "year": "1995",
     "citekey": "sealey1995",
@@ -852209,7 +852218,7 @@
       "detection",
       "cited_by"
     ],
-    "_correction_note": "Adding frei2012strontium to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "detection": {
       "reference_list": 45,
       "inline_markers": 42,
@@ -852218,7 +852227,9 @@
       "llm_footnotes": 0,
       "llm_bib_reparse": 0,
       "merged_total": 49
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "sealy1995"
   },
   "smed1993": {
     "_grobid_id": "b42",
@@ -1009181,10 +1009192,7 @@
     "_raw_citation": "Klaesøe, I.S. 1999. Vikingetidens kronologi - en nybearbejdning af det arkaerlogiske materiale. Aarbøger for Nordisk Oldkyndighed og Historie, 1997: 89-142.",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "heenpettersen2019earliest",
-      "lund2008banks"
-    ],
+    "cited_by": [],
     "_source_pdf": "Heen-Pettersen 2019 - The Earliest Wave of Viking Activity The Norwegian Evidence Revisited.pdf",
     "year": "1997",
     "citekey": "klaesoe1997",
@@ -1009288,7 +1009296,7 @@
       "detection",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by lund2008 onto the references.csv paper it belongs to (lund2008banks).",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "detection": {
       "reference_list": 60,
       "inline_markers": 13,
@@ -1009297,7 +1009305,9 @@
       "llm_footnotes": 0,
       "llm_bib_reparse": 0,
       "merged_total": 66
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "skibstedklaeso1997"
   },
   "myhre2000": {
     "_grobid_id": "b37",
@@ -1033062,7 +1033072,8 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "hadley2018search"
+      "hadley2018search",
+      "williams2014coins"
     ],
     "_source_pdf": "Hadley and Richards 2018 - In Search of the Viking Great Army Beyond the Winter Camps.pdf",
     "year": "1998",
@@ -1033162,9 +1033173,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 58,
       "inline_markers": 57,
@@ -1042631,9 +1042643,7 @@
     "_raw_citation": "Gräslund 2008: A.-S. Gräslund, Some Powerful Women at Valsgärde. In: Norr 2008, 65 -82.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "graslund2011valsgarde"
-    ],
+    "cited_by": [],
     "_source_pdf": "Gräslund and Ljungkvist 2011 - Valsgärde Revisited.pdf",
     "year": "2008",
     "citekey": "graslund2008a",
@@ -1042732,7 +1042742,7 @@
       "language",
       "detection"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "detection": {
       "reference_list": 21,
       "inline_markers": 26,
@@ -1042741,7 +1042751,9 @@
       "llm_footnotes": 1,
       "llm_bib_reparse": 16,
       "merged_total": 40
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "graslund2008c"
   },
   "lindqvist1934": {
     "_grobid_id": "b16",
@@ -1046360,7 +1046372,8 @@
       "kershaw2017early",
       "perry2016pottery",
       "rogers2020non",
-      "williams2015viking"
+      "williams2015viking",
+      "williams2014coins"
     ],
     "_source_pdf": "Hadley and Richards 2016 - The Winter Camp of the Viking Great Army, AD 872–3, Torksey, Lincolnshire.pdf",
     "year": "2011",
@@ -1046468,9 +1046481,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 51,
       "inline_markers": 1,
@@ -1047745,7 +1047759,8 @@
       "hadley2016winter",
       "kershaw2017early",
       "sheehan2013viking",
-      "sindbaek2011silver"
+      "sindbaek2011silver",
+      "williams2014coins"
     ],
     "_source_pdf": "Hadley and Richards 2016 - The Winter Camp of the Viking Great Army, AD 872–3, Torksey, Lincolnshire.pdf",
     "year": "2007",
@@ -1047862,9 +1047877,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: lund2016 -> williams2007a",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 51,
       "inline_markers": 1,
@@ -1101276,7 +1101292,8 @@
     "cited_by": [
       "hadley2016winter",
       "hadley2018search",
-      "kershaw2017early"
+      "kershaw2017early",
+      "williams2014coins"
     ],
     "_source_pdf": "Hadley and Richards 2016 - The Winter Camp of the Viking Great Army, AD 872–3, Torksey, Lincolnshire.pdf",
     "completeness": {
@@ -1101960,9 +1101977,10 @@
       "author",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Pinned after the merge of a reprint or edition: the union of this entry's citers and its discarded duplicate's, so the transferred citers survive repeated postprocess runs.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 51,
@@ -1250280,7 +1250298,9 @@
     "cited_by": [
       "NOAUTHOR28",
       "hardh2010viking",
-      "price2014galgedil"
+      "price2014galgedil",
+      "heenpettersen2019earliest",
+      "lund2008banks"
     ],
     "_source_pdf": "Hårdh 2010 - Viking Age Uppåkra.pdf",
     "year": "1997",
@@ -1433676,7 +1433696,8 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "kershaw2017early"
+      "kershaw2017early",
+      "williams2014coins"
     ],
     "_source_pdf": "Kershaw 2017 - An Early Medieval Dual-Currency Economy Bullion and Coin in the Danelaw.pdf",
     "year": "1997",
@@ -1433798,9 +1433819,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: kershaw2017 from blackburn2001",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 28,
       "inline_markers": 39,
@@ -1504402,7 +1504424,9 @@
       "price2010passing",
       "rundkvist2010domed",
       "aannestad2018charisma",
-      "fredriksen2014nar"
+      "fredriksen2014nar",
+      "bonde2016between",
+      "gardela2013warrior"
     ],
     "_source_pdf": "Lund 2013 - Fragments of a Conversion Handling Bodies and Objects in Pagan and Christian Scandinavia AD 800–110.pdf",
     "year": "1912",
@@ -1514267,7 +1514291,8 @@
     "generation": "F2",
     "cited_by": [
       "oehrl2017documenting",
-      "oehrl2019interpretations"
+      "oehrl2019interpretations",
+      "price2015excavating"
     ],
     "_source_pdf": "Oehrl 2017 - Documenting and Interpreting the Picture Stones of Gotland Old Problems and New Approaches.pdf",
     "year": "1969",
@@ -1602349,7 +1602374,8 @@
     "generation": "F2",
     "cited_by": [
       "mcleod2011warriors",
-      "frei2015was"
+      "frei2015was",
+      "williams2014coins"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "2005",
@@ -1602449,9 +1602475,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by frei2015 onto the references.csv paper it belongs to (frei2015was).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 11,
       "inline_markers": 0,
@@ -1634676,7 +1634703,8 @@
       "raffield2018polygyny",
       "vesteinsson2016conversion",
       "zoega2017archeology",
-      "wicker2013christianization"
+      "wicker2013christianization",
+      "raffield2019slave"
     ],
     "_source_pdf": "Milek 2012 - The Roles of Pit Houses and Gendered Spaces on Viking-Age Farmsteads in Iceland.pdf",
     "year": "1988",
@@ -1648667,7 +1648695,8 @@
     "generation": "F2",
     "cited_by": [
       "price2014galgedil",
-      "price2014nine"
+      "price2014nine",
+      "fabech2013ritual"
     ],
     "_source_pdf": "Price 2014 - Nine Paces from Hel Time and Motion in Old Norse Ritual Performance.pdf",
     "year": "2008",
@@ -1678499,7 +1678528,8 @@
     "generation": "F2",
     "cited_by": [
       "NOAUTHOR18",
-      "myrberg2009hoarded"
+      "myrberg2009hoarded",
+      "myrberg2009social"
     ],
     "_source_pdf": "Myrberg 2009 - The Hoarded Dead Late Iron Age silver hoards as graves.pdf",
     "year": "1989",
@@ -1746377,7 +1746407,8 @@
       "skre2011commodity",
       "skre2017monetary",
       "williams2015viking",
-      "hillerdal2009mannens"
+      "hillerdal2009mannens",
+      "williams2014coins"
     ],
     "_source_pdf": "Pedersen 2017 - Viking-Period Non-Ferrous Metalworking and Urban Commodity Production.pdf",
     "year": "1991",
@@ -1746561,9 +1746592,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding hillerdal2009mannens to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 36,
@@ -1833082,10 +1833114,7 @@
     "_raw_citation": "E.g. Ruth Marzo Karras, Slavery and Society in Medieval Scandinavia (New Haven, CT, and London: Yale University Press, 1988);",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "raffield2019slave",
-      "wicker2013christianization"
-    ],
+    "cited_by": [],
     "_source_pdf": "Raffield 2019 - The Slave Markets of the Viking World Comparative Perspectives on an “Invisible Archaeology”.pdf",
     "year": "1988",
     "citekey": "ruth1988",
@@ -1833246,7 +1833275,7 @@
       "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing raffield2019playing from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list. raffield2019playing is 2019.",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "language": "en",
     "detection": {
       "reference_list": 60,
@@ -1833256,7 +1833285,9 @@
       "llm_footnotes": 0,
       "llm_bib_reparse": 0,
       "merged_total": 73
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "karras1988"
   },
   "lindkvist2003": {
     "_grobid_id": "b6",
@@ -2599090,9 +2599121,7 @@
     "_raw_citation": "Crumlin-Pedersen, O. and Munch Thye, B. (eds) (1995) The Ship as Symbol in Prehistoric and Medieval Scandinavia. (PNM -Publications from the National Museum 1), Copenhagen: National Museum of Denmark.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "price2008dying"
-    ],
+    "cited_by": [],
     "_source_pdf": "Price 2008 - Dying and the Dead.pdf",
     "year": "1995",
     "citekey": "crumlinpedersen1995d",
@@ -2600926,7 +2600955,7 @@
       "language",
       "detection"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "series": "PNM - Publications from the National Museum, Studies in Archaeology and History, Vol. 1",
     "location": "Copenhagen",
     "language": "en",
@@ -2600938,7 +2600967,9 @@
       "llm_footnotes": 0,
       "llm_bib_reparse": 0,
       "merged_total": 53
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "crumlinpederson1995"
   },
   "t1999": {
     "_grobid_id": "b16",
@@ -2818976,9 +2819007,7 @@
     "_raw_citation": "Oestigaard, T., Goldhahn, J. 2006. From the Dead to the Living: Death as Trans- actions and Re-negotiations. -Norwegian Archaeological Review, 39: 1, 27-48.",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "wickholm2006stay"
-    ],
+    "cited_by": [],
     "_source_pdf": "Wickholm 2006 - “Stay Where You Have Been Put!” The Use of Spears as Coffin Nails in Late Iron Age Finland.pdf",
     "year": "2006",
     "citekey": "oestigaard2006",
@@ -2819081,7 +2819110,7 @@
       "language",
       "detection"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "detection": {
       "reference_list": 46,
       "inline_markers": 46,
@@ -2819090,7 +2819119,9 @@
       "llm_footnotes": 0,
       "llm_bib_reparse": 0,
       "merged_total": 50
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "ostigard2006a"
   },
   "paulaharju1924": {
     "_grobid_id": "b36",
@@ -3144973,7 +3145004,8 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "sindbaek2017urbanism"
+      "sindbaek2017urbanism",
+      "williams2014coins"
     ],
     "_source_pdf": "Sindbæk 2017 - Urbanism and Exchange in the North AtlanticBaltic, 600–1000 CE.pdf",
     "year": "2002",
@@ -3145071,9 +3145103,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 45,
       "inline_markers": 53,
@@ -3259487,7 +3259520,8 @@
     "citekey": "blackburn1986",
     "generation": "F2",
     "cited_by": [
-      "williams2015viking"
+      "williams2015viking",
+      "williams2014coins"
     ],
     "_source_pdf": "Williams 2015 - Viking camps and the means of exchange in Britain and Ireland in the ninth century.pdf",
     "year": "1986",
@@ -3259585,9 +3259619,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 11,
       "inline_markers": 0,
@@ -3260841,7 +3260876,8 @@
     "generation": "F2",
     "cited_by": [
       "williams2015viking",
-      "williams2017"
+      "williams2017",
+      "williams2014coins"
     ],
     "_source_pdf": "Williams 2015 - Viking camps and the means of exchange in Britain and Ireland in the ninth century.pdf",
     "year": "2006",
@@ -3261138,9 +3261174,10 @@
       "detection",
       "pages",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -3319681,7 +3319718,8 @@
     "citekey": "smyth1975",
     "generation": "F2",
     "cited_by": [
-      "williams2017"
+      "williams2017",
+      "williams2014coins"
     ],
     "_source_pdf": "Williams 2014 - Coins and Currency in Viking England, AD 865–954.pdf",
     "year": "1975",
@@ -3319777,9 +3319815,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 2,
       "inline_markers": 0,
@@ -3319806,7 +3319845,8 @@
     "citekey": "dolley1966",
     "generation": "F2",
     "cited_by": [
-      "williams2017"
+      "williams2017",
+      "williams2014coins"
     ],
     "_source_pdf": "Williams 2014 - Coins and Currency in Viking England, AD 865–954.pdf",
     "year": "1966",
@@ -3319902,9 +3319942,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "detection": {
       "reference_list": 2,
       "inline_markers": 0,
@@ -3441918,10 +3441959,7 @@
     "_resolution_confidence": "medium",
     "citekey": "stockholm1989",
     "generation": "F2",
-    "cited_by": [
-      "myrberg2009social",
-      "myrberg2009hoarded"
-    ],
+    "cited_by": [],
     "_source_pdf": "Myrberg 2009 - The Social Identity of Coin Hoards  An Example of Theory and Practice in the Space between Numismat.pdf",
     "completeness": {
       "score": 0.778,
@@ -3442070,7 +3442108,7 @@
       "detection",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by myrberg2009 onto the references.csv paper it belongs to (myrberg2009hoarded).",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "series": "Commentationes de Nummis Saeculorum IX-XI in Suecia Repertis, Nova Series 2",
     "location": "Stockholm",
     "_renamed_from": "stockholm1989",
@@ -3442084,7 +3442122,9 @@
       "llm_footnotes": 5,
       "llm_bib_reparse": 0,
       "merged_total": 15
-    }
+    },
+    "_deleted": true,
+    "_merged_into": "zachrisson1989"
   },
   "harrison2014a": {
     "author": [
@@ -3524597,17 +3524637,16 @@
     "location": "London, Dent",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "price2015excavating",
-      "oehrl2017documenting"
-    ],
+    "cited_by": [],
     "year": "1969",
     "citekey": "gelling1969",
-    "_correction_note": "Adding oehrl2017documenting to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "_created_via_correction": true,
     "_corrections_applied": [
       "cited_by"
-    ]
+    ],
+    "_deleted": true,
+    "_merged_into": "ellisdavidson1969"
   },
   "graslund2009": {
     "author": [
@@ -3530284,7 +3530323,8 @@
       "downham2016coastal",
       "harrison2016warrior",
       "steinforth2015early",
-      "barrett2008what"
+      "barrett2008what",
+      "williams2014coins"
     ],
     "_source_pdf": "Barrett 2008 - What Caused the Viking Age.pdf",
     "language": "en",
@@ -3530299,9 +3530339,10 @@
     },
     "_grobid_id": "b29",
     "citekey": "downham2007a",
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding barrett2008what; removing barrett2008.",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "_created_via_correction": true,
     "_corrections_applied": [
+      "cited_by",
       "cited_by",
       "cited_by",
       "cited_by",
@@ -3536330,7 +3536371,8 @@
     "generation": "F2",
     "cited_by": [
       "skre2017monetary",
-      "svendsen2016how"
+      "svendsen2016how",
+      "williams2014coins"
     ],
     "_source_pdf": "Skre 2017 - Monetary Practices in Early Medieval Western Scandinavia (5th–10th Centuries AD).pdf",
     "language": "en",
@@ -3536345,8 +3536387,11 @@
     },
     "_grobid_id": "b35",
     "citekey": "grahamcampbell2011a",
-    "_correction_note": "Work cited by 2 paper(s) but absent from the bibliography; reconstructed from the citers' own GROBID-parsed reference (it had been merged into a same-author-year entry by duplicate detection).",
-    "_created_via_correction": true
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
+    "_created_via_correction": true,
+    "_corrections_applied": [
+      "cited_by"
+    ]
   },
   "graslund2007a": {
     "author": [
@@ -3556854,7 +3556899,8 @@
     "year": "2006",
     "generation": "F2",
     "cited_by": [
-      "bill2020ship"
+      "bill2020ship",
+      "wickholm2006stay"
     ],
     "_source_pdf": "Bill 2020 - The Ship Graves on Kormt – and Beyond.pdf",
     "language": "en",
@@ -3560071,12 +3560117,7 @@
     "_raw_citation": "Schetelig, H., 1912. Vestlandske graver fra jernalderen. Bergen: Grieg.",
     "year": "1912",
     "generation": "F2",
-    "cited_by": [
-      "bonde2016between",
-      "fredriksen2014nar",
-      "gardela2013warrior",
-      "lund2013fragments"
-    ],
+    "cited_by": [],
     "_source_pdf": "Bonde and Stylegar 2016 - Between Sutton Hoo and Oseberg – Dendrochronology and the Origins of the Ship Burial Tradition.pdf",
     "language": "en",
     "detection": {
@@ -3560090,12 +3560131,14 @@
     },
     "_grobid_id": "b79",
     "citekey": "schetelig1912a",
-    "_correction_note": "Adding lund2013fragments to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Same work recorded twice (same title and year; the authors, the spelling of the author name or the editors differ only in form). Merged on the stored citation text.",
     "_created_via_correction": true,
     "_corrections_applied": [
       "cited_by",
       "cited_by"
-    ]
+    ],
+    "_deleted": true,
+    "_merged_into": "shetelig1912"
   },
   "schneidhofer2017a": {
     "author": [
@@ -3560960,7 +3561003,8 @@
     "cited_by": [
       "wouters2016soil",
       "croix2015permanency",
-      "price2010passing"
+      "price2010passing",
+      "williams2014coins"
     ],
     "_source_pdf": "Wouters et al  2016 - Soil Micromorphology in Urban Research Early Medieval Antwerp (Belgium) and Viking Age Kaupang (Nor.pdf",
     "language": "en",
@@ -3560975,9 +3561019,10 @@
     },
     "_grobid_id": "b58",
     "citekey": "skre2008b",
-    "_correction_note": "Adding price2010passing to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
     "_created_via_correction": true,
     "_corrections_applied": [
+      "cited_by",
       "cited_by",
       "cited_by"
     ]
@@ -3564225,7 +3564270,8 @@
     "year": "2011",
     "generation": "F2",
     "cited_by": [
-      "rogers2020non"
+      "rogers2020non",
+      "williams2014coins"
     ],
     "_source_pdf": "Rogers 2020 - Non-Ferrous Metalworking Networks in Scandinavian-influenced Towns of Britain and Ireland.pdf",
     "language": "en",
@@ -3564240,8 +3564286,11 @@
     },
     "_grobid_id": "b122",
     "citekey": "williams2011b",
-    "_correction_note": "Work cited by 1 paper(s) but absent from the bibliography; reconstructed from the citers' own GROBID-parsed reference (it had been merged into a same-author-year entry by duplicate detection).",
-    "_created_via_correction": true
+    "_correction_note": "Adding williams2014coins to cited_by. The paper cites its sources in footnotes, which the extraction missed. The footnotes give this work's author and title (read from the PDF).",
+    "_created_via_correction": true,
+    "_corrections_applied": [
+      "cited_by"
+    ]
   },
   "williams2007a": {
     "author": [

@@ -925,6 +925,7 @@ sindbaek2017urbanism,sindbaek2011silver
 skre2017monetary,sindbaek2011silver
 ashby2015urban,sindbaek2011silver
 aannestad2018allure,sindbaek2011silver
+williams2014coins,sindbaek2011silver
 ashby2015what,sindbaek2013broken
 ashby2015urban,sindbaek2013broken
 baug2019beginning,sindbaek2017urbanism
@@ -1100,6 +1101,8 @@ hadley2016winter,williams2015viking
 hadley2018search,williams2015viking
 richards2018scale,williams2015viking
 gardela2018amazons,williams2015viking
+williams2014coins,williams2015viking
+williams2014coins,williams2020
 barndon2018grav,williams2016
 hadley2018search,williams2016
 croix2019single,wouters2016soil
@@ -4779,6 +4782,7 @@ baug2019beginning,mcleod2014
 ashby2015what,mcleod2014
 raffield2016bands,mcleod2014
 perry2019situation,mcleod2014
+williams2014coins,mcleod2014
 baug2019beginning,roesdahl2005
 dugmore2007norse,roesdahl2005
 frei2015was,roesdahl2005
@@ -4869,6 +4873,7 @@ harrison2016warrior,grahamcampbell2001
 keller2016northern,grahamcampbell2001
 kershaw2017early,grahamcampbell2001
 raffield2016bands,grahamcampbell2001
+williams2014coins,grahamcampbell2001
 barrett2010rounding,grahamcampbell2003
 spangen2009silver,grahamcampbell2003
 barrett2010rounding,gudmundsson1965
@@ -7459,6 +7464,7 @@ price2014galgedil,sealy2001
 chenery2014boat,sealy1995
 naumann2014slaves,sealy1995
 pollard2012sprouting,sealy1995
+frei2012strontium,sealy1995
 chenery2014boat,vennemann2002
 montgomery2014finding,vennemann2002
 knudson2012migration,voerkelius2010
@@ -7666,7 +7672,6 @@ jessen2014palisade,andersen2009
 holst2013late,andersen2009
 roesdahl2011scandinavia,andersen2009
 poulsen2011settlement,andersen2009
-fabech2013ritual,andersson2008b
 fabech2013ritual,andren1991a
 skre2017monetary,andren1991a
 fabech2013ritual,anglert2006
@@ -8632,7 +8637,6 @@ price2014galgedil,price1998
 raffield2016ingroup,price1998
 raffield2016bands,price2007
 lund2013fragments,price2007
-frei2012strontium,sealey1995
 frei2012strontium,smed1993
 frei2012strontium,stewart2001
 frei2012strontium,sun1975
@@ -9791,8 +9795,6 @@ heenpettersen2019earliest,dugmore2010
 jackson2018disequilibrium,dugmore2010
 heenpettersen2019earliest,golledge2003
 heenpettersen2019earliest,gronnesby2015
-heenpettersen2019earliest,klaesoe1997
-lund2008banks,klaesoe1997
 heenpettersen2019earliest,myhre2000
 ashby2015what,myhre2000
 holst2014warrior,myhre2000
@@ -10032,6 +10034,7 @@ hadley2018search,archibald2007
 williams2015viking,archibald2007
 hadley2018search,baker2011
 hadley2018search,blackburn1998
+williams2014coins,blackburn1998
 hadley2018search,blair2013
 hadley2018search,booth1983
 richards2018scale,booth1983
@@ -10142,7 +10145,6 @@ ljungkvist2018gamla,arwidsson1977
 oehrl2017documenting,arwidsson1977
 raffield2019playing,arwidsson1977
 price2019viking,arwidsson1977
-graslund2011valsgarde,graslund2008a
 graslund2011valsgarde,lindqvist1934
 graslund2011valsgarde,lloydsmith2002
 graslund2011valsgarde,madsen1996
@@ -10170,6 +10172,7 @@ kershaw2017early,blackburn2011
 perry2016pottery,blackburn2011
 rogers2020non,blackburn2011
 williams2015viking,blackburn2011
+williams2014coins,blackburn2011
 hadley2016winter,blackburn1994
 frei2015was,blackburn2001
 hadley2016winter,blackburn2001
@@ -10180,6 +10183,7 @@ hadley2016winter,williams2007
 kershaw2017early,williams2007
 sheehan2013viking,williams2007
 sindbaek2011silver,williams2007
+williams2014coins,williams2007
 hadley2016winter,stocker2000
 perry2016pottery,stocker2000
 hadley2016winter,foster1924
@@ -10549,6 +10553,7 @@ hadley2016winter,hadley2015
 hadley2016winter,brooks1987
 hadley2018search,brooks1987
 kershaw2017early,brooks1987
+williams2014coins,brooks1987
 hadley2016winter,wessexarchaeology1997
 harrison2016warrior,andersonnd
 harrison2016warrior,anonnd
@@ -11723,6 +11728,8 @@ hardh2010viking,sindbaek2001
 rogers2020non,sindbaek2001
 hardh2010viking,skibstedklaeso1997
 price2014galgedil,skibstedklaeso1997
+heenpettersen2019earliest,skibstedklaeso1997
+lund2008banks,skibstedklaeso1997
 hardh2010viking,steineke2005
 hardh2010viking,stenholm1976
 hardh2010viking,stjernquist1995
@@ -12992,6 +12999,7 @@ leonard2011vikings,homson1995
 leonard2011vikings,homson2001
 kershaw2017early,akin1999
 kershaw2017early,blackburn1997
+williams2014coins,blackburn1997
 kershaw2017early,bogucki2007
 kershaw2017early,chesterkadwell2009
 kershaw2017early,frier2007
@@ -13580,6 +13588,8 @@ price2010passing,shetelig1912
 rundkvist2010domed,shetelig1912
 aannestad2018charisma,shetelig1912
 fredriksen2014nar,shetelig1912
+bonde2016between,shetelig1912
+gardela2013warrior,shetelig1912
 lund2013fragments,thompson2004
 pluskowski2010animal,thompson2004
 lund2013fragments,wagnkilde2000
@@ -13691,6 +13701,7 @@ oehrl2017documenting,ellisdavidson1950
 oehrl2019interpretations,ellisdavidson1950
 oehrl2017documenting,ellisdavidson1969
 oehrl2019interpretations,ellisdavidson1969
+price2015excavating,ellisdavidson1969
 oehrl2017documenting,ellisdavidson1988
 oehrl2019interpretations,ellisdavidson1988
 oehrl2017documenting,ellmers1973
@@ -14324,6 +14335,7 @@ mcleod2011warriors,richards2011
 mcleod2011warriors,rollason2000
 mcleod2011warriors,blackburn2005
 frei2015was,blackburn2005
+williams2014coins,blackburn2005
 mcleod2011warriors,mckinley2003
 macphail2013integrated,avery1990
 macphail2013integrated,babel1975
@@ -14518,6 +14530,7 @@ raffield2018polygyny,karras1988
 vesteinsson2016conversion,karras1988
 zoega2017archeology,karras1988
 wicker2013christianization,karras1988
+raffield2019slave,karras1988
 milek2012roles,jochens1995d
 price2005cognition,jochens1995d
 milek2013integrated,jochens1995d
@@ -14581,6 +14594,7 @@ raffield2019playing,stoodley1999
 pluskowski2010animal,stoodley1999
 price2014galgedil,andersson2008f
 price2014nine,andersson2008f
+fabech2013ritual,andersson2008f
 price2014nine,back2008
 zachrisson2014heliga,back2008
 price2014nine,frioriksson2013
@@ -14723,6 +14737,7 @@ magi2011viking,zarina2006
 magi2016bound,zarina2006
 myrberg2009hoarded,gramsch2007
 myrberg2009hoarded,zachrisson1989
+myrberg2009social,zachrisson1989
 myrberg2009hoarded,kopytoff1996
 aannestad2018allure,kopytoff1996
 lund2008banks,kopytoff1996
@@ -15232,6 +15247,7 @@ skre2011commodity,samson1991a
 skre2017monetary,samson1991a
 williams2015viking,samson1991a
 hillerdal2009mannens,samson1991a
+williams2014coins,samson1991a
 pedersen2017viking,schramm1955
 pedersen2017viking,werner1980
 pollard2012sprouting,coplen1988
@@ -15765,8 +15781,6 @@ pluskowski2010animal,sykes2001
 pluskowski2010animal,thompson2003
 pluskowski2010animal,yalden1999
 raffield2019slave,clauskrag1982
-raffield2019slave,ruth1988
-wicker2013christianization,ruth1988
 raffield2019playing,lindkvist2003
 raffield2019slave,lindkvist2003
 raffield2019slave,yuhl2013
@@ -15974,7 +15988,6 @@ sindbaek2013all,nosov2001
 skorokhod2020studies,smolichev1925
 skorokhod2020studies,sitii2006
 price2008dying,beskowsjoberg1987
-price2008dying,crumlinpedersen1995d
 price2008dying,t1999
 barrett2010rounding,grahamcampbell1998j
 rogers2020non,grahamcampbell1998j
@@ -17207,7 +17220,6 @@ wickholm2006stay,kivikoski1961
 wickholm2006stay,kivikoski1963
 wickholm2006stay,lehtosalohilander1988
 wickholm2006stay,mandel2003
-wickholm2006stay,oestigaard2006
 wickholm2006stay,paulaharju1924
 wickholm2006stay,purhonen1998
 wickholm2006stay,palsi1938
@@ -17669,6 +17681,7 @@ sindbaek2017urbanism,holm2005
 sindbaek2017urbanism,metcalf1995
 sindbaek2017urbanism,trakadas2014
 sindbaek2017urbanism,tschan2002b
+williams2014coins,tschan2002b
 sindbaek2017urbanism,vosmer2014
 skre2017monetary,wray2004
 solli2011some,ahmad2006
@@ -18246,11 +18259,13 @@ tummuscheit2014einzige,kramer1984
 tummuscheit2019danevirke,kramer1984
 tummuscheit2014einzige,schwank2013
 williams2015viking,blackburn1986
+williams2014coins,blackburn1986
 williams2015viking,redknap2003
 williams2015viking,wallace2015
 williams2015viking,reuter1992
 williams2015viking,redknap2009
 williams2015viking,blackburn2006
+williams2014coins,blackburn2006
 tummuscheit2014einzige,schovsbo2013
 tummuscheit2019danevirke,schovsbo2013
 vesteinsson2016conversion,felixnd
@@ -18497,6 +18512,8 @@ zoega2017archeology,zoega2014
 zoega2017archeology,zoega2015
 zoega2017archeology,zoega2007
 zoega2017archeology,zori2007
+williams2014coins,smyth1975
+williams2014coins,dolley1966
 tummuscheit2019danevirke,beckerchristensen1981
 tummuscheit2019danevirke,belford2017
 tummuscheit2019danevirke,dobat2005
@@ -18993,8 +19010,6 @@ skre2011inhabitantsorigins,skibstedklaesoe1999
 majchczack2018early,segschneider2016
 kemmers2011rethinking,myrberg2008a
 myrberg2009social,myrberg2008a
-myrberg2009social,hammarberg1989
-myrberg2009hoarded,hammarberg1989
 gardela2018amazons,harrison2014a
 griffiths2019rethinking,harrison2014a
 harrison2016warrior,harrison2014a
@@ -19558,8 +19573,6 @@ price2015excavating,dull2010
 graslund2012twilight,dull2010
 price2015excavating,eggum2007
 price2015excavating,fehr2011
-price2015excavating,gelling1969
-oehrl2017documenting,gelling1969
 price2015excavating,graslund2009
 graslund2012twilight,graslund2009
 price2015excavating,grattan2007
@@ -19996,6 +20009,7 @@ downham2016coastal,downham2007a
 harrison2016warrior,downham2007a
 steinforth2015early,downham2007a
 barrett2008what,downham2007a
+williams2014coins,downham2007a
 hillerdal2010early,franklin1996a
 keller2016northern,franklin1996a
 roslund2015end,franklin1996a
@@ -20368,6 +20382,7 @@ hedeager2010split,glosecki1989a
 pluskowski2010animal,glosecki1989a
 skre2017monetary,grahamcampbell2011a
 svendsen2016how,grahamcampbell2011a
+williams2014coins,grahamcampbell2011a
 backdanielsson2016more,graslund1992b
 hardh2010viking,graslund1992b
 zachrisson2017background,graslund1992b
@@ -20997,6 +21012,7 @@ zachrisson2004hyndevadsfallet,olsen1965a
 pilo2020crossing,olsen2001a
 kalmring2012birka,olsson2004a
 bill2020ship,ostigard2006a
+wickholm2006stay,ostigard2006a
 boyd2013country,osullivan2008a
 fabech2013ritual,others1998
 arneborg2012human,oye2001a
@@ -21080,10 +21096,6 @@ zachrisson2017background,sawyer2002a
 lund2020rune,sawyer1987
 lund2013fragments,sawyer1987
 sheehan2013viking,sawyer1985b
-bonde2016between,schetelig1912a
-fredriksen2014nar,schetelig1912a
-gardela2013warrior,schetelig1912a
-lund2013fragments,schetelig1912a
 bill2020ship,schneidhofer2017a
 tonning2020halls,schneidhofer2017b
 chenery2014boat,sealy2001a
@@ -21107,6 +21119,7 @@ croix2019single,sindbaek2014d
 wouters2016soil,skre2008b
 croix2015permanency,skre2008b
 price2010passing,skre2008b
+williams2014coins,skre2008b
 carver2015commerce,skre2010a
 price2010passing,skre2004a
 lund2013fragments,skre2004a
@@ -21189,6 +21202,7 @@ solli2011some,wilkinson2003a
 ashby2015what,williams2010a
 hilberg2016hedeby,williams2008a
 rogers2020non,williams2011b
+williams2014coins,williams2011b
 lund2016divergent,williams2007a
 skre2017monetary,williams2002a
 barrett2010rounding,williams2002a
