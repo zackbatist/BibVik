@@ -32,8 +32,8 @@ Two runs are made from the repaired annotated graph, one with the seed paper and
 | | With seed | No seed |
 |---|---|---|
 | Edge list | `data/citation_edgelist_annotated.csv` | `analysis/gn_analysis/edgelist_annotated_no_seed.csv` |
-| Directed edges | 21,588 | 21,219 |
-| Undirected edges GN sees | 21,587 | 21,218 |
+| Directed edges | 21,589 | 21,220 |
+| Undirected edges GN sees | 21,588 | 21,219 |
 | Nodes | 12,700 | 12,699 |
 | Components at the start | 1 | 3 (12,678, 12 and 9 nodes) |
 | Run folder | `results/annotated` | `results/annotated_no_seed` |

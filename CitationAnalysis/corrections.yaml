@@ -2126,18 +2126,6 @@
   _keep_raw: ''
   _discard_raw: ''
 - action: merge
-  keep: sawyer1998b
-  discard: sawyer1998c
-  note: ''
-  _draft: true
-  _source: titleless_duplicate
-  _confidence: 0.3
-  _keep_title: Anglo-Saxon Lincolnshire
-  _discard_title: ''
-  _keep_raw: 'Sawyer, P 1998, Anglo-Saxon Lincolnshire, Lincolnshire: History of Lincolnshire
-    Committee.'
-  _discard_raw: ''
-- action: merge
   keep: jansson1963
   discard: jansson1963a
   note: 'Confirmed via cited_by overlap: shared citer between both sides, consistent
@@ -354475,3 +354463,15 @@
     from the full text of the published paper (read from the PDF, with OCR for scanned
     pages), and neither the work's title nor a spelling variant of the author's name
     beside a matching year appears in the text.
+- action: set
+  citekey: lonnroth1977
+  field: cited_by
+  value:
+  - andren2013places
+  - arwillnordbladh2007memory
+  - arwillnordbladh2008aska
+  - andren2006old
+  note: Adding andren2006old to cited_by. The paper (4 pages, no reference list) cites
+    one work, Lars Lonnroth 1977, The Riddles of the Rok stone. A structural approach,
+    Arkiv for nordisk filologi 92:1-57, for the English translation of the Rok inscription
+    (read from the PDF).

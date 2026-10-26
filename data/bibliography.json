@@ -292061,7 +292061,8 @@
     "cited_by": [
       "andren2013places",
       "arwillnordbladh2007memory",
-      "arwillnordbladh2008aska"
+      "arwillnordbladh2008aska",
+      "andren2006old"
     ],
     "_source_pdf": "Andrén 2013 - Places, Monuments, and Objects The Past in Ancient Scandinavia.pdf",
     "year": "1977",
@@ -292162,9 +292163,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by arwillnordbladh2007 onto the references.csv paper it belongs to (arwillnordbladh2007memory).",
+    "_correction_note": "Adding andren2006old to cited_by. The paper (4 pages, no reference list) cites one work, Lars Lonnroth 1977, The Riddles of the Rok stone. A structural approach, Arkiv for nordisk filologi 92:1-57, for the English translation of the Rok inscription (read from the PDF).",
     "detection": {
       "reference_list": 31,
       "inline_markers": 34,
