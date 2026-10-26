@@ -949,7 +949,6 @@
       "croix2015permanency",
       "lund2021",
       "price2018",
-      "vonholstein2014searching",
       "warmlander2015analysis",
       "price2018isotopes"
     ],
@@ -1173,9 +1172,10 @@
       "language",
       "detection",
       "cited_by",
-      "generation"
+      "generation",
+      "cited_by"
     ],
-    "_correction_note": "ambrosiani2013 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing vonholstein2014searching from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -2787,7 +2787,6 @@
     "entry_type": "article",
     "generation": "F1",
     "cited_by": [
-      "eriksen2013doors",
       "fabech2013ritual",
       "jorgensen2009pre",
       "jorgensen2010gudme",
@@ -3035,9 +3034,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: strand2011 -> andersson2008a; zachrisson2014b -> andersson2008c",
+    "_correction_note": "Removing eriksen2013doors from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "sv",
     "detection": {
       "reference_list": 0,
@@ -7352,7 +7352,6 @@
     "cited_by": [
       "gardela2018amazons",
       "lund2021",
-      "tummuscheit2019danevirke",
       "gardela2013warrior",
       "williams2016viking"
     ],
@@ -7394,7 +7393,7 @@
     ],
     "series": "Riksantikvarieämbetet arkeologiska undersökningar skrifter",
     "_split_from": "andersendommasnesstefansson1985",
-    "_correction_note": "Adding williams2016viking to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing tummuscheit2019danevirke from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_entry_type_original": "incollection",
     "_corrections_applied": [
       "cited_by",
@@ -7637,6 +7636,7 @@
       "language",
       "detection",
       "generation",
+      "cited_by",
       "cited_by",
       "cited_by"
     ],
@@ -22706,10 +22706,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "bill2020ship",
-      "ellingsen2019northern",
-      "lund2021",
-      "skre2019rulership"
+      "lund2021"
     ],
     "_source_pdf": "Cannell et al  2016 - Geochemical analysis using portable x-ray fluorescence.pdf",
     "year": "2016",
@@ -23422,9 +23419,12 @@
       "_deleted",
       "language",
       "detection",
-      "generation"
+      "generation",
+      "cited_by",
+      "cited_by",
+      "cited_by"
     ],
-    "_correction_note": "cannell2016 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing bill2020ship from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_deleted": false,
     "language": "en",
     "detection": {
@@ -88049,8 +88049,7 @@
     "cited_by": [
       "kalmring2018gleaming",
       "lund2021",
-      "pedersen2017viking",
-      "williams2015viking"
+      "pedersen2017viking"
     ],
     "_source_pdf": "Lund and Sindbæk 2022 - Crossing the Maelstrom New Departures in Viking Archaeology.pdf",
     "year": "2016",
@@ -88622,9 +88621,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2019single from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing williams2015viking from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -108625,7 +108625,6 @@
       "holst2013late",
       "jessen2016towering",
       "jorgensen2009pre",
-      "larsson2007iron",
       "lund2021",
       "osullivan2015strung",
       "ravn2019erritso",
@@ -108859,9 +108858,10 @@
       "language",
       "detection",
       "cited_by",
-      "generation"
+      "generation",
+      "cited_by"
     ],
-    "_correction_note": "soderberg2005 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing larsson2007iron from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -111748,9 +111748,7 @@
     "entry_type": "article",
     "generation": "F1",
     "cited_by": [
-      "hadley2016winter",
-      "lund2021",
-      "richards2018scale"
+      "lund2021"
     ],
     "_source_pdf": "Steinforth 2015 - Early Vikings in the Isle of Man Old Paradigms and New Perspectives.pdf",
     "year": "2015",
@@ -112039,9 +112037,11 @@
       "cited_by",
       "language",
       "detection",
-      "title"
+      "title",
+      "cited_by",
+      "cited_by"
     ],
-    "_correction_note": "The title of steinforth2015early in bibliography.json did not match data/references.csv, the source of truth for the 369 F1 papers. Set it to the references.csv title.",
+    "_correction_note": "Removing hadley2016winter from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 19,
@@ -127072,7 +127072,6 @@
     "generation": "F2",
     "cited_by": [
       "christiansen2019metal",
-      "croix2019single",
       "jessen2016towering",
       "lund2021"
     ],
@@ -127296,9 +127295,10 @@
       "cited_by",
       "language",
       "detection",
-      "generation"
+      "generation",
+      "cited_by"
     ],
-    "_correction_note": "christiansen2014 is not among the 369 papers in the annotations csv, so it is not F1. It is cited by at least one of the 369 F1 papers, so its generation is F2.",
+    "_correction_note": "Removing croix2019single from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 498,
@@ -132130,7 +132130,6 @@
     "cited_by": [
       "gardelanda",
       "jackson2018disequilibrium",
-      "lund2017connectedness",
       "lund2021"
     ],
     "_source_pdf": "Hayeur Smith 2013 - Thorir’s Bargain Gender, Vaðmál and the Law.pdf",
@@ -132385,9 +132384,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding jackson2018: its reference list cites Hayeur-Smith 2013, \"Thorir's bargain: gender, vadmal and the law\", World Archaeology 45(5): 730-746.",
+    "_correction_note": "Removing lund2017connectedness from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 49,
@@ -153376,8 +153376,7 @@
     "cited_by": [
       "aannestad2018allure",
       "bergstol2004creoles",
-      "fredriksen2014nar",
-      "glorstad2014homeland"
+      "fredriksen2014nar"
     ],
     "_source_pdf": "Aannestad 2018 - The Allure of the Foreign The Social and Cultural Dimension of Imports in Scandinavia in the Viking.pdf",
     "year": "1992",
@@ -153603,9 +153602,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing aannestad2018charisma from cited_by (copied from another paper's reference list; not in its own PDF).",
+    "_correction_note": "Removing glorstad2014homeland from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -156610,8 +156610,6 @@
     "generation": "F2",
     "cited_by": [
       "aannestad2018allure",
-      "downham2016coastal",
-      "eriksen2016commemorating",
       "furholt2019"
     ],
     "_source_pdf": "Aannestad 2018 - The Allure of the Foreign The Social and Cultural Dimension of Imports in Scandinavia in the Viking.pdf",
@@ -156775,9 +156773,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2015permanency from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing downham2016coastal, eriksen2016commemorating from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -172521,7 +172520,6 @@
     "generation": "F2",
     "cited_by": [
       "amundsen2017changing",
-      "lund2017connectedness",
       "solli2011some"
     ],
     "_source_pdf": "Amundsen 2017 - Changing Histories and Ethnicities in a Sámi and Norse Borderland.pdf",
@@ -172622,9 +172620,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by solli2011 onto the references.csv paper it belongs to (solli2011some).",
+    "_correction_note": "Removing lund2017connectedness from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 117,
       "inline_markers": 111,
@@ -181802,9 +181801,7 @@
     "doi": "https://onlinelibrary.wiley.com/doi/10.1111/j.1468-0254.2011.00333.x",
     "citekey": "anonymous2012",
     "generation": "F2",
-    "cited_by": [
-      "abrams2012diaspora"
-    ],
+    "cited_by": [],
     "_source_pdf": "Abrams 2012 - Diaspora and Identity in the Viking Age.pdf",
     "year": "2012",
     "completeness": {
@@ -181905,9 +181902,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing abrams2012diaspora from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 14,
       "inline_markers": 0,
@@ -191016,7 +191014,6 @@
     "cited_by": [
       "androshchuk2010gift",
       "dobat2013between",
-      "gotfredsen2014birds",
       "jorgensen2009pre",
       "jessen2016towering",
       "ljungkvist2011gamla",
@@ -191125,9 +191122,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing gotfredsen2014birds from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 99,
       "inline_markers": 51,
@@ -191969,8 +191967,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "androshchuk2010gift",
-      "hilberg2014viking"
+      "androshchuk2010gift"
     ],
     "_source_pdf": "Androshchuk 2010 - The Gift to Men and the Gift to the Gods Weapon Sacrifices and the Circulation of Swords in Viking.pdf",
     "year": "1980",
@@ -192070,9 +192067,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing hilberg2014viking from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 99,
       "inline_markers": 51,
@@ -194985,7 +194983,6 @@
     "cited_by": [
       "ahfeldt2015",
       "androshchuk2010gift",
-      "hardh2010viking",
       "ibsen2010search",
       "toplak2018deconstructing",
       "ahfeldt2015picture"
@@ -195112,9 +195109,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ahfeldt2015picture to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing hardh2010viking from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 99,
       "inline_markers": 51,
@@ -245906,8 +245904,7 @@
     "generation": "F2",
     "cited_by": [
       "anchukaitis2017last",
-      "harrison2016",
-      "perry2016pottery"
+      "harrison2016"
     ],
     "_source_pdf": "Anchukaitis et al  2017 - Last Millennium Northern Hemisphere Summer Temperatures from Tree Rings Part II, Spatially Resolved.pdf",
     "year": "2008",
@@ -246069,9 +246066,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing perry2016pottery from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 227,
@@ -274085,7 +274083,6 @@
       "poulsen2011settlement",
       "price2014ginnungagap",
       "price2018",
-      "price2018isotopes",
       "raffield2016ingroup",
       "raffield2016bands",
       "roesdahl2011scandinavia",
@@ -275575,9 +275572,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing price2014galgedil, raffield2019playing from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list. price2014galgedil is 2014. raffield2019playing is 2019.",
+    "_correction_note": "Removing price2018isotopes from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 65,
@@ -277322,7 +277320,6 @@
       "sindbaek2011silver",
       "skre2011inhabitantsactivities",
       "skre2011inhabitantsorigins",
-      "skre2016post",
       "pedersen2009amulete"
     ],
     "_source_pdf": "Arwill-Nordbladh 2012 - Ability and Disability. On Bodily Variations and Bodily Possibilities in Viking Age Myth and Image.pdf",
@@ -277469,9 +277466,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing pedersen2009ideelle from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list.",
+    "_correction_note": "Removing skre2016post from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 65,
       "inline_markers": 56,
@@ -286052,7 +286050,6 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "andren2013places",
       "artelius2013inventions",
       "arwillnordbladh2007memory",
       "arwillnordbladh2008aska",
@@ -286162,9 +286159,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by artelius2013, arwillnordbladh2007, gardela2015, williams2016 onto the references.csv paper it belongs to (artelius2013inventions, arwillnordbladh2007memory, gardela2015vikings, williams2016viking).",
+    "_correction_note": "Removing andren2013places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 48,
       "inline_markers": 56,
@@ -294751,7 +294749,6 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "andren2000reading",
       "price2019vikings"
     ],
     "_source_pdf": "Andrén 2000 - Re-reading Embodied Texts - an Interpretation of Rune-stones.pdf",
@@ -294856,9 +294853,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing andren2000reading from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 117,
       "inline_markers": 24,
@@ -299136,7 +299134,6 @@
     "generation": "F2",
     "cited_by": [
       "andren2000reading",
-      "fabech2013ritual",
       "spangen2009silver",
       "zachrisson2017background",
       "hedeager2003kognitiv"
@@ -299239,9 +299236,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding hedeager2003kognitiv to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing fabech2013ritual from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 117,
       "inline_markers": 24,
@@ -310236,7 +310234,6 @@
       "oehrl2017documenting",
       "oehrl2019interpretations",
       "axelsen2014",
-      "zachrisson2017volund",
       "ahfeldt2015",
       "ahfeldt2015picture"
     ],
@@ -310340,9 +310337,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding ahfeldt2015picture to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing zachrisson2017volund from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 117,
       "inline_markers": 24,
@@ -317776,7 +317774,6 @@
     "cited_by": [
       "ashby2015urban",
       "burstrom2014things",
-      "downham2016coastal",
       "knappett2013"
     ],
     "_source_pdf": "Ashby et al  2015 - Urban Networks and Arctic Outlands Craft Specialists and Reindeer Antler in Viking Towns.pdf",
@@ -317941,9 +317938,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing ashby2015what from cited_by (copied from another paper's reference list; not in its own PDF).",
+    "_correction_note": "Removing downham2016coastal from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 100,
@@ -351746,8 +351744,7 @@
     "_catalogue_candidate": true,
     "generation": "F2",
     "cited_by": [
-      "baastrup2014continental",
-      "beck2018revisiting"
+      "baastrup2014continental"
     ],
     "_source_pdf": "Baastrup 2014 - Continental and Insular Import in Viking Age Denmark Distribution and Circulation.pdf",
     "year": "1984",
@@ -352506,9 +352503,10 @@
       "pages",
       "author",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing beck2018revisiting from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "journaltitle": "Nationalmuseets Arbejdsmark",
     "_entry_type_original": "incollection",
     "language": "en",
@@ -378450,7 +378448,6 @@
     "generation": "F2",
     "cited_by": [
       "baug2015stones",
-      "baug2019beginning",
       "baug2017soapstone",
       "pedersen2015urban",
       "the2017"
@@ -378556,9 +378553,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing baug2019beginning from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 56,
       "inline_markers": 54,
@@ -400743,8 +400741,7 @@
     "generation": "F2",
     "cited_by": [
       "becker2012archaeometry",
-      "kristjansdottir2015becoming",
-      "sheehan2013viking"
+      "kristjansdottir2015becoming"
     ],
     "_source_pdf": "Becker and Grupe 2012 - Archaeometry meets archaeozoology Viking Haithabu and medieval Schleswig reconsidered.pdf",
     "year": "2010",
@@ -400848,9 +400845,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sheehan2013viking from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 61,
       "inline_markers": 66,
@@ -402622,7 +402620,6 @@
       "knudson2012migration",
       "price2014peopling",
       "price2018",
-      "nielsen2011boathouses",
       "peschel2017who",
       "price2014galgedil",
       "price2011who",
@@ -402764,9 +402761,10 @@
       "detection",
       "pages",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding price2018isotopes to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing nielsen2011boathouses from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 61,
       "inline_markers": 66,
@@ -416191,7 +416189,6 @@
       "holst2013late",
       "jessen2016towering",
       "jorgensen2009pre",
-      "kastholm2016spydkvinden",
       "sindbaek2007small",
       "skre2019rulership"
     ],
@@ -416294,9 +416291,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing kastholm2016spydkvinden from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 82,
       "inline_markers": 79,
@@ -482756,8 +482754,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "baug2017soapstone",
-      "zoega2017archeology"
+      "baug2017soapstone"
     ],
     "_source_pdf": "Baug 2017 - Soapstone vessels and quernstones as commodities in the Viking Age and Middle Ages.pdf",
     "year": "1999",
@@ -482857,9 +482854,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing zoega2017archeology from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 37,
       "inline_markers": 47,
@@ -489100,7 +489098,6 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "bill2012plundering",
       "lund2017connectedness"
     ],
     "_source_pdf": "Bill and Daly 2012 - The plundering of the ship graves from Oseberg and Gokstad An example of power politics.pdf",
@@ -489199,9 +489196,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing bill2012plundering from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 33,
       "inline_markers": 38,
@@ -490426,8 +490424,7 @@
     "generation": "F2",
     "cited_by": [
       "bill2012plundering",
-      "eriksen2013doors",
-      "roslund2017bringing"
+      "eriksen2013doors"
     ],
     "_source_pdf": "Bill and Daly 2012 - The plundering of the ship graves from Oseberg and Gokstad An example of power politics.pdf",
     "year": "2002",
@@ -490527,9 +490524,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing roslund2017bringing from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 33,
       "inline_markers": 38,
@@ -490690,7 +490688,6 @@
     "citekey": "berg2015",
     "generation": "F2",
     "cited_by": [
-      "baug2017soapstone",
       "star2017ancient"
     ],
     "_source_pdf": "Baug 2017 - Soapstone vessels and quernstones as commodities in the Viking Age and Middle Ages.pdf",
@@ -490796,9 +490793,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing baug2017soapstone from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 37,
       "inline_markers": 47,
@@ -534274,7 +534272,6 @@
       "hedenstiernajonson2017female",
       "hedenstiernajonson2015she",
       "hillerdal2010early",
-      "linderholm2008diet",
       "kalmring2010thieves",
       "kalmring2012birka",
       "price2018",
@@ -535783,9 +535780,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding toplak2017deviant to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing linderholm2008diet from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 20,
@@ -537439,8 +537437,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "bill2020ship",
-      "lund2017connectedness"
+      "bill2020ship"
     ],
     "_source_pdf": "Bill 2020 - The Ship Graves on Kormt – and Beyond.pdf",
     "year": "2018",
@@ -537600,9 +537597,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing lund2017connectedness from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 173,
@@ -551324,9 +551322,7 @@
     "generation": "F2",
     "cited_by": [
       "bill2020ship",
-      "dobat2006king",
       "draganits2015late",
-      "raffield2016ingroup",
       "tonning2020halls"
     ],
     "_source_pdf": "Bill 2020 - The Ship Graves on Kormt – and Beyond.pdf",
@@ -551545,9 +551541,10 @@
       "cited_by",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing dobat2006king, raffield2016ingroup from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 173,
@@ -565431,8 +565428,7 @@
       "catlin2016archaeology",
       "lund2015living",
       "lund2017connectedness",
-      "lund2020rune",
-      "solli2018reindeer"
+      "lund2020rune"
     ],
     "_source_pdf": "Catlin 2016 - Archaeology for the Anthropocene Scale, Soil, and the Settlement of Iceland.pdf",
     "year": "1993",
@@ -565535,9 +565531,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing solli2018reindeer from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 89,
       "inline_markers": 4,
@@ -579817,7 +579814,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "bill2016protecting",
       "fabech2013ritual",
       "jorgensen2009pre",
       "mainland2018nature"
@@ -579922,9 +579918,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing graslund2012twilight from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing bill2016protecting from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 48,
       "inline_markers": 49,
@@ -585919,7 +585916,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "croix2019single",
       "croix2021cultures"
     ],
     "_source_pdf": "Croix and IJssennagger-van derPluijm 2021 - Cultures without borders Approaching the cultural continuum in the Danish-Frisian coastal areas in.pdf",
@@ -586084,9 +586080,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing croix2019single from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 78,
@@ -595753,8 +595750,7 @@
       "lund2019hunting",
       "osullivan2015strung",
       "ravn2019erritso",
-      "sindbaek2016steatite",
-      "vesteinsson2016conversion"
+      "sindbaek2016steatite"
     ],
     "_source_pdf": "Croix and IJssennagger-van derPluijm 2021 - Cultures without borders Approaching the cultural continuum in the Danish-Frisian coastal areas in.pdf",
     "year": "2008",
@@ -595922,9 +595918,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2019single from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing vesteinsson2016conversion from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 78,
@@ -615430,7 +615427,6 @@
       "dobat2013between",
       "christiansen2019metal",
       "hardh2010viking",
-      "larsson2007iron",
       "rundkvist2010domed",
       "feveile2015metaldetektorproblematikken"
     ],
@@ -615534,9 +615530,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding feveile2015metaldetektorproblematikken.",
+    "_correction_note": "Removing larsson2007iron from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 60,
       "inline_markers": 1,
@@ -689061,8 +689058,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "eriksen2017don",
-      "hennius2018whalebone"
+      "eriksen2017don"
     ],
     "_source_pdf": "Eriksen 2017 - Don’t All Mothers Love Their Children Deposited Infants as Animate Objects in the Scandinavian Iron.pdf",
     "year": "2012",
@@ -689185,9 +689181,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: krzewinska2018 -> brink2012a; krzewinska2018 -> brink2012b",
+    "_correction_note": "Removing hennius2018whalebone from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 91,
       "inline_markers": 90,
@@ -698025,8 +698022,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "domeijlundborg2012coming",
-      "lundborg2006bound"
+      "domeijlundborg2012coming"
     ],
     "_source_pdf": "Domeij Lundborg et al  2012 - Coming to Grips with the Beast A Reply to Carrie Roy.pdf",
     "year": "1944",
@@ -698207,9 +698203,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by lundborg2006 onto the references.csv paper it belongs to (lundborg2006bound).",
+    "_correction_note": "Removing lundborg2006bound from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 8,
@@ -698244,7 +698241,6 @@
     "generation": "F2",
     "cited_by": [
       "domeijlundborg2012coming",
-      "lundborg2006bound",
       "sindbaek2014crossbreeding"
     ],
     "_source_pdf": "Domeij Lundborg et al  2012 - Coming to Grips with the Beast A Reply to Carrie Roy.pdf",
@@ -698409,9 +698405,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by lundborg2006 onto the references.csv paper it belongs to (lundborg2006bound).",
+    "_correction_note": "Removing lundborg2006bound from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 8,
@@ -717531,8 +717528,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "chenery2014boat",
-      "lund2013fragments"
+      "chenery2014boat"
     ],
     "_source_pdf": "Chenery et al  2014 - A Boat Load of Vikings.pdf",
     "year": "1995",
@@ -717635,9 +717631,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by chenery2014, lund2013 onto the references.csv paper it belongs to (chenery2014boat, lund2013fragments).",
+    "_correction_note": "Removing lund2013fragments from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 45,
       "inline_markers": 40,
@@ -718560,8 +718557,6 @@
       "edberg2019dod",
       "gardela2014",
       "kovalenko2013scandinavians",
-      "svendsen2016how",
-      "svendsen2019two",
       "price2019viking"
     ],
     "_source_pdf": "Edberg 2019 - Död amazon på Birka – en debatt.pdf",
@@ -718843,9 +718838,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2015permanency from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing svendsen2016how, svendsen2019two from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "sv",
     "detection": {
       "reference_list": 33,
@@ -754491,8 +754487,7 @@
       "price2019viking",
       "fredriksen2014nar",
       "gardela2013warrior",
-      "gardela2018amazons",
-      "solli2011some"
+      "gardela2018amazons"
     ],
     "_source_pdf": "Croix 2016 - The Vikings, Victims of Their Own Success A Selective View on Viking Research and Its Dissemination.pdf",
     "year": "2007",
@@ -754715,9 +754710,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding solli2011some to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing solli2011some from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 70,
@@ -762813,10 +762809,7 @@
     "generation": "F2",
     "cited_by": [
       "croix2016vikings",
-      "gardela2014",
-      "hadley2016winter",
-      "richards2018scale",
-      "sindbaek2013all"
+      "gardela2014"
     ],
     "_source_pdf": "Croix 2016 - The Vikings, Victims of Their Own Success A Selective View on Viking Research and Its Dissemination.pdf",
     "year": "2014",
@@ -763039,9 +763032,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing price2005cognition from cited_by. Year test: price2005cognition; the citing paper (2005) predates this work (2014) by more than a year.",
+    "_correction_note": "Removing hadley2016winter, richards2018scale, sindbaek2013all from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 70,
@@ -774303,7 +774297,6 @@
     "cited_by": [
       "NOAUTHOR28",
       "croix2019reseau",
-      "price2012isotopic",
       "sanmark2013patterns",
       "hayeursmith2013thorir"
     ],
@@ -774487,9 +774480,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2019single from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing price2012isotopic from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 82,
@@ -781339,9 +781333,7 @@
     "pages": "Passio Sancti Adalberti Martitis Christi",
     "citekey": "klaniczay1985",
     "generation": "F2",
-    "cited_by": [
-      "fontaine2017early"
-    ],
+    "cited_by": [],
     "_source_pdf": "Fontaine 2017 - Early medieval slave-trading in the archaeological record Comparative methodologies.pdf",
     "year": "1985",
     "completeness": {
@@ -781436,9 +781428,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing fontaine2017early from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 30,
       "inline_markers": 0,
@@ -781463,9 +781456,7 @@
     "_source_footnote": "31 M. McCormick, studies of enclosures. The post-Roman enclosure at Yeavering has been interpreted as a cattle pen, as have early stone ringforts in Ireland. C. O'Brien, 'The Great Enclosure', in Paul Frodsham and Colm O'Brien (eds), Yeavering: People, Power, and Place (Stroud, 2005), pp. 145-52. Fo",
     "citekey": "mccormick2005",
     "generation": "F2",
-    "cited_by": [
-      "fontaine2017early"
-    ],
+    "cited_by": [],
     "_source_pdf": "Fontaine 2017 - Early medieval slave-trading in the archaeological record Comparative methodologies.pdf",
     "year": "2005",
     "completeness": {
@@ -781559,9 +781550,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing fontaine2017early from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 30,
       "inline_markers": 0,
@@ -788029,9 +788021,7 @@
     "_raw_citation": "Böhner, K. 1958. Die fränkischen Altertümer des Trierer Landes 1-2. Germanische Denkmäler der Völkerwanderungszeit ser. B. Berlin: Verlag Gebr. Mann.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "dobat2006king"
-    ],
+    "cited_by": [],
     "_source_pdf": "Dobat 2006 - The King and His Cult The Axe-Hammer from Sutton Hoo and Its Implications for the Concept of Sacral.pdf",
     "year": "1958",
     "citekey": "bohner1958",
@@ -788128,9 +788118,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing dobat2006king from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 58,
       "inline_markers": 60,
@@ -836140,7 +836131,6 @@
     "cited_by": [
       "gardelanda",
       "hayeursmith2013thorir",
-      "lund2017connectedness",
       "neiss2016new",
       "osullivan2015strung",
       "solli2011some",
@@ -836249,9 +836239,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding gardela2013warrior to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing lund2017connectedness from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 90,
       "inline_markers": 78,
@@ -839490,7 +839481,6 @@
     "generation": "F2",
     "cited_by": [
       "gardelanda",
-      "kastholm2016spydkvinden",
       "gardela2013warrior",
       "gardela2018amazons",
       "NOAUTHOR28"
@@ -839594,9 +839584,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding gardela2013warrior, gardela2018amazons to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing kastholm2016spydkvinden from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 90,
       "inline_markers": 78,
@@ -847084,8 +847075,7 @@
     "entry_type": "misc",
     "generation": "F2",
     "cited_by": [
-      "ellingsen2019northern",
-      "price2019viking"
+      "ellingsen2019northern"
     ],
     "_source_pdf": "Ellingsen and Sauvage 2019 - The Northern Scandinavian Viking Hall A Case Study from Viklem in Ørland, Norway.pdf",
     "year": "2018",
@@ -847184,9 +847174,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Reference lists read from the papers themselves (PDFs): adding price2019viking; removing price2019vikings.",
+    "_correction_note": "Removing price2019viking from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 51,
       "inline_markers": 51,
@@ -881064,8 +881055,7 @@
     "cited_by": [
       "glorstad2012sign",
       "glorstad2014homeland",
-      "kershaw2009culture",
-      "mcleod2011warriors"
+      "kershaw2009culture"
     ],
     "_source_pdf": "Glørstad 2012 - Sign of the Times The Transfer and Transformation of Penannular Brooches in Viking-Age Norway.pdf",
     "year": "1983",
@@ -881229,9 +881219,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing andren2006old from cited_by (copied from another paper's reference list; not in its own PDF).",
+    "_correction_note": "Removing mcleod2011warriors from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 122,
@@ -883967,8 +883958,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "glorstad2012sign",
-      "bergstol2004creoles"
+      "glorstad2012sign"
     ],
     "_source_pdf": "Glørstad 2012 - Sign of the Times The Transfer and Transformation of Penannular Brooches in Viking-Age Norway.pdf",
     "year": "1997",
@@ -884129,9 +884119,10 @@
       "detection",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding bergstol2004creoles to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing bergstol2004creoles from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 122,
@@ -892212,9 +892203,7 @@
     "_raw_citation": "Henriksen, M.B. 2006. The Metal detector -Friend or Foe for the Archaeologist? - aspects of Metal Detector Archaeology in Denmark\". I: K.M. Hansen & K. B. Pe- dersen (red.), Across the Western Baltic. Proceedings of the Archaeological Con- ference \"The Prehistory and Early Medie- val Period in the Western Baltic\" Vording- borg, South Zealand, Denmark, March 27 th -29 th 2003. Vordingborg. 217-226.",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "feveile2012ribe"
-    ],
+    "cited_by": [],
     "_source_pdf": "Feveile 2015 - Metaldetektorproblematikken – uens regler og deres konsekvenser.pdf",
     "year": "2003",
     "citekey": "henriksen2003",
@@ -892335,9 +892324,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by feveile2012 onto the references.csv paper it belongs to (feveile2012ribe).",
+    "_correction_note": "Removing feveile2012ribe from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 9,
       "inline_markers": 3,
@@ -902286,8 +902276,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "furholt2018",
-      "star2017ancient"
+      "furholt2018"
     ],
     "_source_pdf": "Furholt 2018 - Massive Migrations The Impact of Recent aDNA Studies on Our View of Third Millennium Europe.pdf",
     "year": "2009",
@@ -902385,9 +902374,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing star2017ancient from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 129,
       "inline_markers": 21,
@@ -964122,8 +964112,7 @@
     "generation": "F2",
     "cited_by": [
       "gotfredsen2014ritual",
-      "magnell2010veitstu",
-      "sloth2012viking"
+      "magnell2010veitstu"
     ],
     "_source_pdf": "Gotfredsen et al  2014 - A Ritual Site with Sacrificial Wells from the Viking Age at Trelleborg, Denmark.pdf",
     "year": "1978",
@@ -964225,9 +964214,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sloth2012viking from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 71,
       "inline_markers": 56,
@@ -965909,8 +965899,7 @@
       "gotfredsen2014ritual",
       "lund2020rune",
       "ulriksen2011vikingetidens",
-      "zachrisson2017background",
-      "zoega2017archeology"
+      "zachrisson2017background"
     ],
     "_source_pdf": "Gotfredsen et al  2014 - A Ritual Site with Sacrificial Wells from the Viking Age at Trelleborg, Denmark.pdf",
     "year": "2002",
@@ -966010,9 +965999,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing zoega2017archeology from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 71,
       "inline_markers": 56,
@@ -986593,9 +986583,7 @@
     "_raw_citation": "Nylén, B. & Schénback, B. (1994) Tuna i Bade- lunda: Guld, kvinnor, batar. Bind 2 Almavist og Wiksell, Uppsala.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "zachrisson2017volund"
-    ],
+    "cited_by": [],
     "_source_pdf": "Glørstad and Røstad 2015 - Mot en ny tid Merovingertidens ryggknappspenner som uttrykk for endring og erindring.pdf",
     "year": "1994",
     "citekey": "nylen1994",
@@ -986720,9 +986708,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing gardela2018amazons from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing zachrisson2017volund from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 34,
       "inline_markers": 5,
@@ -1062354,8 +1062343,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "helama2017dark",
-      "price2014ginnungagap"
+      "helama2017dark"
     ],
     "_source_pdf": "Hartman et al  2017 - Medieval Iceland, Greenland, and the New Human Condition A Case Study in Integrated Environmental H.pdf",
     "year": "2001",
@@ -1062544,9 +1062532,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: hartman2017 -> demaree2001a; hayeursmith2013 -> demaree2001a",
+    "_correction_note": "Removing price2014ginnungagap from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 153,
@@ -1070835,8 +1070824,7 @@
     "generation": "F2",
     "cited_by": [
       "hartman2017medieval",
-      "hayeursmith2013",
-      "schmid2017tephra"
+      "hayeursmith2013"
     ],
     "_source_pdf": "Hartman et al  2017 - Medieval Iceland, Greenland, and the New Human Condition A Case Study in Integrated Environmental H.pdf",
     "year": "1956",
@@ -1070995,9 +1070983,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing schmid2017tephra from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 153,
@@ -1116168,11 +1116157,7 @@
     "generation": "F2",
     "cited_by": [
       "hedeager2003kognitiv",
-      "hedeager2010split",
-      "mainland2018nature",
-      "sheehan2013viking",
-      "skre2016post",
-      "sutherland2015evidence"
+      "sheehan2013viking"
     ],
     "_source_pdf": "Hedeager 2010 - Split Bodies in the Late Iron AgeViking Age of Scandinavia.pdf",
     "year": "1996",
@@ -1116455,9 +1116440,10 @@
       "editor",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing hedeager2010split, mainland2018nature, skre2016post, sutherland2015evidence from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 62,
@@ -1139009,9 +1138995,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "hayeursmith2013thorir",
-      "hilberg2014viking",
-      "richards2011settlement"
+      "hayeursmith2013thorir"
     ],
     "_source_pdf": "Hayeur Smith 2013 - Thorir’s Bargain Gender, Vaðmál and the Law.pdf",
     "year": "2008",
@@ -1139109,9 +1139093,11 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing hilberg2014viking from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 49,
       "inline_markers": 28,
@@ -1145870,8 +1145856,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "hedenstiernajonson2015she",
-      "zachrisson2014rotary"
+      "hedenstiernajonson2015she"
     ],
     "_source_pdf": "Hedenstierna-Jonson 2015 - She Came from Another Place On the Burial of a Young Girl in Birka.pdf",
     "year": "2007",
@@ -1145971,9 +1145956,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing zachrisson2014rotary from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 15,
       "inline_markers": 29,
@@ -1205941,8 +1205927,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "hilberg2014viking",
-      "steinforth2018that"
+      "hilberg2014viking"
     ],
     "_source_pdf": "Hilberg and Kalmring 2014 - Viking Age Hedeby and Its Relations with Iceland and the North Atlantic Communication, Long-Distanc.pdf",
     "year": "1966",
@@ -1206050,9 +1206035,10 @@
       "detection",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing price2019viking from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing steinforth2018that from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 83,
       "inline_markers": 0,
@@ -1217892,7 +1217878,6 @@
       "borake2018bottlenecks",
       "hardh2010viking",
       "magi2016bound",
-      "poulsen2011settlement",
       "sindbaek2007small",
       "the2017",
       "vonholstein2014searching"
@@ -1217995,9 +1217980,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by holst2014 onto the references.csv paper it belongs to (holst2014warrior).",
+    "_correction_note": "Removing poulsen2011settlement from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 82,
       "inline_markers": 77,
@@ -1218278,9 +1218264,7 @@
     "_resolution_method": "llm_bib_reparse",
     "citekey": "bjork1982",
     "generation": "F2",
-    "cited_by": [
-      "jessen2014palisade"
-    ],
+    "cited_by": [],
     "_source_pdf": "Jessen et al  2014 - A Palisade Fit for a King Ideal Architecture in King Harald Bluetooth’s Jelling.pdf",
     "year": "1982",
     "completeness": {
@@ -1218375,9 +1218359,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing jessen2014palisade from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 38,
       "inline_markers": 29,
@@ -1252422,7 +1252407,6 @@
     "generation": "F2",
     "cited_by": [
       "baastrup2014continental",
-      "bill2020ship",
       "hardh2010viking"
     ],
     "_source_pdf": "Hårdh 2010 - Viking Age Uppåkra.pdf",
@@ -1252451,7 +1252435,7 @@
     "volume": "19",
     "location": "Neumünster",
     "_split_from": "jensen1984",
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing bill2020ship from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_corrections_applied": [
       "cited_by",
       "cited_by",
@@ -1252588,7 +1252572,8 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
     "language": "en",
     "detection": {
@@ -1265372,8 +1265357,7 @@
     "citekey": "eriksen2001",
     "generation": "F2",
     "cited_by": [
-      "holst2010inconcistency",
-      "jahnsen2016sosiale"
+      "holst2010inconcistency"
     ],
     "_source_pdf": "Holst 2010 - Inconcistency and Stability Large and Small Farmsteads in the Village of Nørre Snede (Central Jutla.pdf",
     "_entry_type_original": "article",
@@ -1265468,9 +1265452,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing jahnsen2016sosiale from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 27,
       "inline_markers": 16,
@@ -1336534,9 +1336519,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "jackson2018disequilibrium",
-      "lund2017connectedness",
-      "raninen2014finland"
+      "jackson2018disequilibrium"
     ],
     "_source_pdf": "Jackson et al  2018 - Disequilibrium, Adaptation, and the Norse Settlement of Greenland.pdf",
     "year": "2011",
@@ -1336659,9 +1336642,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Citers whose own reference lists cite a different work by the same author were moved: sanmark2013a -> smith2011",
+    "_correction_note": "Removing lund2017connectedness, raninen2014finland from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 123,
       "inline_markers": 116,
@@ -1452795,7 +1452779,6 @@
     "generation": "F2",
     "cited_by": [
       "knudson2012migration",
-      "glorstad2012sign",
       "barrett2010rounding",
       "hedeager2003kognitiv"
     ],
@@ -1452898,9 +1452881,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding barrett2010rounding, hedeager2003kognitiv to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing glorstad2012sign from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 155,
       "inline_markers": 7,
@@ -1464390,7 +1464374,6 @@
     "cited_by": [
       "andren2013b",
       "rundkvist2010domed",
-      "feveile2015metaldetektorproblematikken",
       "pedersen2009amulete"
     ],
     "_source_pdf": "Mannering 2013 - Man or Woman Perception of Gender through Costume.pdf",
@@ -1464516,9 +1464499,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing pedersen2009ideelle from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list.",
+    "_correction_note": "Removing feveile2015metaldetektorproblematikken from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 42,
       "inline_markers": 37,
@@ -1478684,8 +1478668,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "lund2004vaben",
-      "hennius2018whalebone"
+      "lund2004vaben"
     ],
     "_source_pdf": "Lund 2004 - Våben i vand Om deponeringer i vikingetiden.pdf",
     "year": "1987",
@@ -1479099,9 +1479082,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding hennius2018whalebone to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing hennius2018whalebone from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "da",
     "detection": {
       "reference_list": 70,
@@ -1495461,7 +1495445,6 @@
     "generation": "F2",
     "cited_by": [
       "lund2015living",
-      "skre2016post",
       "aannestad2018charisma",
       "fredriksen2014nar"
     ],
@@ -1495490,7 +1495473,7 @@
       "label": "complete"
     },
     "_split_from": "lie1992",
-    "_correction_note": "Adding fredriksen2014nar to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing skre2016post from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_corrections_applied": [
       "cited_by",
       "cited_by",
@@ -1495609,6 +1495592,7 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by",
       "cited_by"
     ],
@@ -1497659,8 +1497643,7 @@
     "generation": "F2",
     "cited_by": [
       "lund2015living",
-      "solli2018reindeer",
-      "vonholstein2014searching"
+      "solli2018reindeer"
     ],
     "_source_pdf": "Lund 2015 - Living Places or Animated Objects Sámi Sacrificial Places with Metal Objects and Their South Scandi.pdf",
     "year": "2009",
@@ -1497759,9 +1497742,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing vonholstein2014searching from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 107,
       "inline_markers": 104,
@@ -1545768,8 +1545752,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "mainland2018nature",
-      "zori2013feasting"
+      "mainland2018nature"
     ],
     "_source_pdf": "Mainland and Batey 2018 - The Nature of the Feast Commensality and the Politics of Consumption in Viking Age and Early Mediev.pdf",
     "year": "2003",
@@ -1545871,9 +1545854,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing milek2012roles from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing zori2013feasting from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 82,
       "inline_markers": 61,
@@ -1550429,8 +1550413,7 @@
     "generation": "F2",
     "cited_by": [
       "mainland2018nature",
-      "milek2012roles",
-      "price2010passing"
+      "milek2012roles"
     ],
     "_source_pdf": "Mainland and Batey 2018 - The Nature of the Feast Commensality and the Politics of Consumption in Viking Age and Early Mediev.pdf",
     "year": "2010",
@@ -1550531,9 +1550514,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding milek2012roles, price2010passing to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing price2010passing from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 82,
       "inline_markers": 61,
@@ -1553543,8 +1553527,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1898",
@@ -1553704,9 +1553687,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1553735,8 +1553719,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2003",
@@ -1553896,9 +1553879,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1553928,8 +1553912,7 @@
     "generation": "F2",
     "cited_by": [
       "lund2010water",
-      "lund2017connectedness",
-      "sanmark2008places"
+      "lund2017connectedness"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1967",
@@ -1554092,9 +1554075,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1554144,7 +1554128,6 @@
     "generation": "F2",
     "cited_by": [
       "lund2010water",
-      "sanmark2008places",
       "skre2011inhabitantsactivities"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
@@ -1554305,9 +1554288,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1554342,8 +1554326,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1905",
@@ -1554503,9 +1554486,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1554534,8 +1554518,7 @@
     "generation": "F2",
     "cited_by": [
       "lund2010water",
-      "lund2017connectedness",
-      "sanmark2008places"
+      "lund2017connectedness"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2004",
@@ -1554694,9 +1554677,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1554741,8 +1554725,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2003",
@@ -1554902,9 +1554885,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1555141,8 +1555125,7 @@
     "generation": "F2",
     "cited_by": [
       "lund2010water",
-      "raffield2014river",
-      "sanmark2008places"
+      "raffield2014river"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1983",
@@ -1555305,9 +1555288,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1555341,8 +1555325,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1992",
@@ -1555500,9 +1555483,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1555530,8 +1555514,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1886",
@@ -1555691,9 +1555674,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1555736,8 +1555720,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1944",
@@ -1555897,9 +1555880,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1555929,8 +1555913,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2004",
@@ -1556092,9 +1556075,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1556137,8 +1556121,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2000",
@@ -1556298,9 +1556281,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1556341,8 +1556325,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1919",
@@ -1556502,9 +1556485,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1557823,7 +1557807,6 @@
     "generation": "F2",
     "cited_by": [
       "lund2010water",
-      "sanmark2008places",
       "zachrisson2004hyndevadsfallet"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
@@ -1557982,9 +1557965,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1558010,8 +1557994,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "2006",
@@ -1558168,9 +1558151,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1558199,8 +1558183,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "lund2010water",
-      "sanmark2008places"
+      "lund2010water"
     ],
     "_source_pdf": "Lund 2010 - At the Water’s Edge.pdf",
     "year": "1964",
@@ -1558359,9 +1558342,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2008places from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 76,
@@ -1582351,7 +1582335,6 @@
     "citekey": "hammarberg1985",
     "generation": "F2",
     "cited_by": [
-      "zachrisson2004hyndevadsfallet",
       "pedersen2009amulete"
     ],
     "_source_pdf": "Pedersen 2009 - Amulete und Amuletsite der jüngeren Eisen- und Wikingerzeit in Südskandinavien.pdf",
@@ -1583628,9 +1583611,10 @@
       "detection",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing pedersen2009ideelle from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list.",
+    "_correction_note": "Removing zachrisson2004hyndevadsfallet from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "journaltitle": "Hikuin",
     "volume": "11",
     "_entry_type_original": "misc",
@@ -1597477,8 +1597461,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "mcleod2011warriors",
-      "richards2011settlement"
+      "mcleod2011warriors"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "1990",
@@ -1597639,9 +1597622,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by richards2011 onto the references.csv paper it belongs to (richards2011settlement).",
+    "_correction_note": "Removing richards2011settlement from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -1597900,8 +1597884,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "mcleod2011warriors",
-      "richards2011settlement"
+      "mcleod2011warriors"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "1987",
@@ -1598062,9 +1598045,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by richards2011 onto the references.csv paper it belongs to (richards2011settlement).",
+    "_correction_note": "Removing richards2011settlement from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -1598093,8 +1598077,7 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "mcleod2011warriors",
-      "richards2011settlement"
+      "mcleod2011warriors"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "1969",
@@ -1598255,9 +1598238,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by richards2011 onto the references.csv paper it belongs to (richards2011settlement).",
+    "_correction_note": "Removing richards2011settlement from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -1598297,8 +1598281,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "mcleod2011warriors",
-      "richards2011settlement"
+      "mcleod2011warriors"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "2000",
@@ -1598459,9 +1598442,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by richards2011 onto the references.csv paper it belongs to (richards2011settlement).",
+    "_correction_note": "Removing richards2011settlement from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -1598490,8 +1598474,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "mcleod2011warriors",
-      "richards2011settlement"
+      "mcleod2011warriors"
     ],
     "_source_pdf": "McLeod 2011 - Warriors and women the sex ratio of Norse migrants to eastern England up to 900 AD.pdf",
     "year": "1999",
@@ -1598652,9 +1598635,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by richards2011 onto the references.csv paper it belongs to (richards2011settlement).",
+    "_correction_note": "Removing richards2011settlement from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 11,
@@ -1629703,7 +1629687,6 @@
     "cited_by": [
       "milek2012roles",
       "kristjansdottir2015becoming",
-      "zori2013feasting",
       "baug2017soapstone"
     ],
     "_source_pdf": "Milek 2012 - The Roles of Pit Houses and Gendered Spaces on Viking-Age Farmsteads in Iceland.pdf",
@@ -1630867,9 +1630850,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by milek2012 onto the references.csv paper it belongs to (milek2012roles).",
+    "_correction_note": "Removing zori2013feasting from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "journaltitle": "Árbók hins Íslenzka Fornleifafélags",
     "volume": "1972",
     "_entry_type_original": "misc",
@@ -1710142,7 +1710126,6 @@
     "year": "",
     "generation": "F1",
     "cited_by": [
-      "croix2019single",
       "lund2021",
       "pedersen2016lead"
     ],
@@ -1710268,9 +1710251,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding pedersen2016lead to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing croix2019single from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "detection": {
       "reference_list": 74,
       "inline_markers": 70,
@@ -1727608,7 +1727592,6 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "raffield2016bands",
       "raffield2017male"
     ],
     "_source_pdf": "Raffield et al  2017 - Male-Biased Operational Sex Ratios and the Viking Phenomenon An Evolutionary Anthropological Perspe.pdf",
@@ -1727773,9 +1727756,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "Removing raffield2016bands from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 108,
@@ -1734670,7 +1734654,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "raffield2016bands",
       "raffield2017male"
     ],
     "_source_pdf": "Raffield et al  2017 - Male-Biased Operational Sex Ratios and the Viking Phenomenon An Evolutionary Anthropological Perspe.pdf",
@@ -1734832,9 +1734815,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Moving the reference list held by raffield2016 onto the references.csv paper it belongs to (raffield2016bands).",
+    "_correction_note": "Removing raffield2016bands from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 108,
@@ -1773258,9 +1773242,7 @@
     "_raw_citation": "Fangel, 1998; Skre, 1998; Tollin, 1999; Callmer, 2001; Riddersporre, 2003a; Riddersporre, 2003b. 41",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "poulsen2011settlement"
-    ],
+    "cited_by": [],
     "_source_pdf": "Poulsen and Sindbæk 2011 - Settlement and Lordship in Viking and Early Medieval Scandinavia.pdf",
     "year": "1941",
     "citekey": "fangel1941",
@@ -1773358,9 +1773340,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing poulsen2011settlement from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 4,
       "inline_markers": 0,
@@ -1822576,8 +1822559,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "price2018",
-      "price2018polynesians"
+      "price2018"
     ],
     "_source_pdf": "Price and Ljungkvist 2018 - Polynesians of the Atlantic Precedents, Potentials, and Pitfalls in Oceanic Analogies of the Viking.pdf",
     "year": "2008",
@@ -1822735,9 +1822717,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing price2018polynesians from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -1823144,10 +1823127,7 @@
     "generation": "F2",
     "cited_by": [
       "price2018",
-      "price2018polynesians",
-      "price2019vikings",
-      "barrett2010rounding",
-      "gardela2014death"
+      "price2018polynesians"
     ],
     "_source_pdf": "Price and Ljungkvist 2018 - Polynesians of the Atlantic Precedents, Potentials, and Pitfalls in Oceanic Analogies of the Viking.pdf",
     "year": "2003",
@@ -1823309,9 +1823289,12 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
+      "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing barrett2008what from cited_by. The PDF of each of these papers was read in full: the author's surname appears only in an unrelated context (a common word, a different work by the same author, or a name in running text), and no reference or in-text citation matches this work's year or title.",
+    "_correction_note": "Removing barrett2010rounding from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -1825647,8 +1825630,7 @@
     "generation": "F2",
     "cited_by": [
       "price2018",
-      "price2018polynesians",
-      "raninen2014finland"
+      "price2018polynesians"
     ],
     "_source_pdf": "Price and Ljungkvist 2018 - Polynesians of the Atlantic Precedents, Potentials, and Pitfalls in Oceanic Analogies of the Viking.pdf",
     "year": "2010",
@@ -1825808,9 +1825790,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing williams2016viking from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing raninen2014finland from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -1826234,7 +1826217,6 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "kalmring2017home",
       "price2018",
       "price2018polynesians"
     ],
@@ -1826396,9 +1826378,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing kalmring2017home from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "language": "en",
     "detection": {
       "reference_list": 33,
@@ -1844227,7 +1844210,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "price2016isotopic",
       "sindbaek2014crossbreeding"
     ],
     "_source_pdf": "Price et al  2016 - Isotopic Provenancing of the Salme Ship Burials in Pre-Viking Age Estonia.pdf",
@@ -1844353,9 +1844335,10 @@
       "cited_by",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Automated draft from citers' own reference lists (same first author and year, title match). Moves: price2016 from hardh2001a",
+    "_correction_note": "Removing price2016isotopic from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 28,
       "inline_markers": 30,
@@ -2632911,8 +2632894,7 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "skre2011commodity",
-      "skre2017monetary"
+      "skre2011commodity"
     ],
     "_source_pdf": "Skre 2011 - Commodity Money, Silver and Coinage in Viking-Age Scandinavia.pdf",
     "year": "1921",
@@ -2633012,9 +2632994,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing skre2017monetary from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 34,
       "inline_markers": 36,
@@ -2645478,7 +2645461,6 @@
     "generation": "F2",
     "cited_by": [
       "rundkvist2010domed",
-      "spangen2009silver",
       "lund2008banks",
       "lund2015living",
       "lund2006vikingetidens",
@@ -2645586,9 +2645568,10 @@
       "cited_by",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing pedersen2015urban from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list. pedersen2015urban is ?.",
+    "_correction_note": "Removing spangen2009silver from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 101,
       "inline_markers": 86,
@@ -2692550,8 +2692533,7 @@
     "generation": "F2",
     "cited_by": [
       "raffield2016ingroup",
-      "raffield2019playing",
-      "skre2017monetary"
+      "raffield2019playing"
     ],
     "_source_pdf": "Raffield et al  2016 - Ingroup Identification, Identity Fusion and the Formation of Viking War Bands.pdf",
     "year": "1974",
@@ -2692709,9 +2692691,10 @@
       "detection",
       "cited_by",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing skre2017monetary from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "language": "en",
     "detection": {
       "reference_list": 78,
@@ -2747824,8 +2747807,7 @@
     "entry_type": "misc",
     "generation": "F2",
     "cited_by": [
-      "svendsen2016how",
-      "ulriksen2011vikingetidens"
+      "svendsen2016how"
     ],
     "_source_pdf": "Svendsen and Svendsen 2016 - How did trade norms evolve in Scandinavia Long-distance trade and social trust in the Viking age.pdf",
     "year": "1960",
@@ -2747923,9 +2747905,10 @@
       "detection",
       "language",
       "detection",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing williams2015viking from cited_by. The PDF of each of these papers was read in full against the stored edges: the text contains no reference or in-text citation by this work's author, so the edge came from another paper's list. williams2015viking is 2015.",
+    "_correction_note": "Removing ulriksen2011vikingetidens from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 58,
       "inline_markers": 13,
@@ -3145255,9 +3145238,7 @@
     "_source_footnote": "Connections between symbolic and monetary value are explored inTheuws 2004 andin Kilger 2015.",
     "citekey": "uws2004",
     "generation": "F2",
-    "cited_by": [
-      "skre2017monetary"
-    ],
+    "cited_by": [],
     "_source_pdf": "Skre 2017 - Monetary Practices in Early Medieval Western Scandinavia (5th–10th Centuries AD).pdf",
     "year": "2004",
     "completeness": {
@@ -3145352,9 +3145333,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing skre2017monetary from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 92,
       "inline_markers": 47,
@@ -3317856,9 +3317838,7 @@
     "_raw_citation": "Vilhja´lmsson VO ¨(1995) Ga˚rd og kirke pa˚Sto¨ng ı´Þjo´rsa´rdalur [The farm and church at Sto¨ng Þjo´rsa´rdalur]. In: Krøger JF and Naley H-R (eds) Nordsjøen. Handel, religion og politikk [Trade, religion and politics]. Karmøysemnaret 94/95: Karmø, pp. 119-139.",
     "entry_type": "incollection",
     "generation": "F2",
-    "cited_by": [
-      "zoega2017archeology"
-    ],
+    "cited_by": [],
     "_source_pdf": "Zoëga and Bolender 2017 - An Archeology of Moments Christian Conversion and Practice in a Medieval Household Cemetery.pdf",
     "year": "1995",
     "citekey": "vilhjalmsson1995",
@@ -3318998,9 +3318978,10 @@
       "pages",
       "author",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing zoega2017archeology from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "series": "Karmøyseminaret 94/95",
     "location": "Karmøy",
     "language": "en",
@@ -3330207,9 +3330188,7 @@
     "_raw_citation": "Lind vist Sune. 1925. endelh l arnas ursprung. Fornv nnen 20: 181 207.",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "zachrisson2017volund"
-    ],
+    "cited_by": [],
     "_source_pdf": "Zachrisson 2017 - Volund Was Here A Myth Archaeologically Anchored in Viking Age Scania.pdf",
     "year": "1925",
     "citekey": "vist1925",
@@ -3330308,9 +3330287,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing zachrisson2017volund from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "detection": {
       "reference_list": 27,
       "inline_markers": 23,
@@ -3365716,9 +3365696,7 @@
     "title": "Gard und Einfriedigung",
     "entry_type": "misc",
     "generation": "F2",
-    "cited_by": [
-      "oye2016agrarian"
-    ],
+    "cited_by": [],
     "_source_pdf": "Øye 2016 - Agrarian technology and land use in Scandinavian landscapes c. 800-1300 AD.pdf",
     "year": "1975",
     "citekey": "ramskou1975",
@@ -3365813,9 +3365791,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing oye2016agrarian from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "detection": {
       "reference_list": 69,
       "inline_markers": 66,
@@ -3389964,8 +3389943,7 @@
     "generation": "F2",
     "cited_by": [
       "price2014ship",
-      "toplak2018deconstructing",
-      "toplak2015prone"
+      "toplak2018deconstructing"
     ],
     "_source_pdf": "Price 2014 - Ship-Men and Slaughter-Wolves Pirate Polities in the Viking Age.pdf",
     "year": "2008",
@@ -3390775,9 +3390753,10 @@
       "volume",
       "pages",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing toplak2015prone from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_renamed_from": "arcini2008",
     "_rename_note": "Citekey regenerated after author correction: Confirmed real title (Post-Medieval Archaeology 2005, 39:1, 1-91) but misattributed to Caroline Arcini in extraction. Real authors are Douglas Killock and Frank Meddens. Caroline Arcini is a real Swedish bioarchaeologist with no connection to this English post-medieval ceramics topic - clear misattribution, not fabrication.",
     "language": "en",
@@ -3433505,9 +3433484,7 @@
     "cited_by": [
       "graslund2011valsgarde",
       "kalmring2018gleaming",
-      "price2014ship",
       "price2018",
-      "raffield2016ingroup",
       "williams2014memory",
       "williams2016viking",
       "hennius2018whalebone"
@@ -3434621,9 +3434598,10 @@
       "detection",
       "cited_by",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Adding hennius2018whalebone to cited_by (listed in the paper's own reference list, read from the PDF).",
+    "_correction_note": "Removing price2014ship, raffield2016ingroup from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_renamed_from": "larsson2008",
     "_rename_note": "Citekey regenerated after author correction: Corrected author - real chapter is by Ljungkvist, not Larsson. Norr S. is the volume editor. Checked corpus first: no duplicate risk.",
     "editor": [
@@ -3446126,9 +3446104,7 @@
     "pages": "109--134",
     "citekey": "self1981",
     "generation": "F2",
-    "cited_by": [
-      "keller2016northern"
-    ],
+    "cited_by": [],
     "_source_pdf": "Dugmore et al  2007 - Norse Greenland Settlement Reflections on Climate Change, Trade, and the Contrasting Fates of Human.pdf",
     "year": "1981",
     "booktitle": "Tephra Studies",
@@ -3446235,9 +3446211,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing dugmore2007norse from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing keller2016northern from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "editor": [
       {
         "family": "Self",
@@ -3448118,8 +3448095,7 @@
     "citekey": "vince1993",
     "generation": "F2",
     "cited_by": [
-      "perry2016pottery",
-      "sindbaek2016steatite"
+      "perry2016pottery"
     ],
     "_source_pdf": "Perry 2016 - Pottery Production in Anglo-Scandinavian Torksey (Lincolnshire) Reconstructing and Contextualising.pdf",
     "year": "1993",
@@ -3448217,9 +3448193,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sindbaek2016steatite from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "series": "Cambridge Manuals in Archaeology",
     "publisher": "Cambridge University Press",
     "_renamed_from": "vince1993",
@@ -3453419,15 +3453396,7 @@
     "_raw_citation": "Jensen, S. 1991. Ribes Vikinger. Ribe: Den antikvariske Samling.",
     "entry_type": "article",
     "generation": "F2",
-    "cited_by": [
-      "arwillnordbladh2012ability",
-      "fabech2013ritual",
-      "hardh2010viking",
-      "lund2020rune",
-      "osullivan2015strung",
-      "rundkvist2010domed",
-      "sloth2012viking"
-    ],
+    "cited_by": [],
     "_source_pdf": "Arwill-Nordbladh 2012 - Ability and Disability. On Bodily Variations and Bodily Possibilities in Viking Age Myth and Image.pdf",
     "year": "1991",
     "citekey": "jensen1991",
@@ -3453921,9 +3453890,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond was read in full: the text contains no reference or in-text citation of this work (the author's name is absent, or appears only as an editor or for a different work by the same author).",
+    "_correction_note": "Removing arwillnordbladh2012ability, fabech2013ritual, hardh2010viking, lund2020rune, osullivan2015strung, rundkvist2010domed, sloth2012viking from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "editor": [
       {
         "family": "Jakobsson",
@@ -3454235,9 +3454205,7 @@
     "_raw_citation": "Ba.ksted, A. 1952. Målnme& og tnrldniner. R«ne- magisl e stiidiei. Nationalmuseets skrifter. Ar- ka:ologisk-Historisk Ra:kke IV. Copenhagen.",
     "entry_type": "book",
     "generation": "F2",
-    "cited_by": [
-      "andren2000reading"
-    ],
+    "cited_by": [],
     "_source_pdf": "Andrén 2000 - Re-reading Embodied Texts - an Interpretation of Rune-stones.pdf",
     "year": "1952",
     "citekey": "ba1952",
@@ -3454337,9 +3454305,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing andren2000reading from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "series": "Nationalmuseets Skrifter, Arkæologisk-Historisk Række IV",
     "location": "Copenhagen",
     "_renamed_from": "ba1952",
@@ -3455688,15 +3455657,14 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
     "cited_by": [
-      "baastrup2014continental",
-      "glorstad2017view",
-      "schmid2017tephra"
+      "baastrup2014continental"
     ],
     "_split_from": "larsenserensen1984",
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing glorstad2017view, schmid2017tephra from cited_by. A server-side read of the full text of each of these papers found the cited author's surname absent, and neither the work's title nor a spelling variant of the author's name beside a matching year appears in the text.",
     "_renamed_from": "latour2008b",
     "_rename_note": "Citekey regenerated after author correction: Confirmed full author name.",
     "language": "en",
@@ -3460748,7 +3460716,6 @@
     "generation": "F2",
     "cited_by": [
       "price2008dying",
-      "sanmark2013patterns",
       "zachrisson2017background"
     ],
     "_source_pdf": "Price 2008 - Dying and the Dead.pdf",
@@ -3460847,9 +3460814,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing sanmark2013patterns from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_renamed_from": "hollander1964",
     "_rename_note": "Citekey regenerated after author correction: Corrected role split.",
     "language": "en",
@@ -3468301,7 +3468269,6 @@
     "entry_type": "article",
     "generation": "F2",
     "cited_by": [
-      "bitzthorsen2018domestic",
       "gotfredsen2014birds",
       "the2017",
       "sloth2012viking"
@@ -3468406,9 +3468373,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing bitzthorsen2018domestic from cited_by. The cited author's surname is absent from the full text of each of these papers. The only trace of the work is a generic title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated word, so the citation could not be confirmed.",
     "_renamed_from": "enghoff2006",
     "_rename_note": "Citekey regenerated after author correction: Cleared empty fragment.",
     "language": "en",
@@ -3468730,8 +3468698,7 @@
     "entry_type": "book",
     "generation": "F2",
     "cited_by": [
-      "androshchuk2010gift",
-      "glorstad2012sign"
+      "androshchuk2010gift"
     ],
     "_source_pdf": "Androshchuk 2010 - The Gift to Men and the Gift to the Gods Weapon Sacrifices and the Circulation of Swords in Viking.pdf",
     "year": "2007",
@@ -3468830,9 +3468797,10 @@
       "language",
       "detection",
       "cited_by",
+      "cited_by",
       "cited_by"
     ],
-    "_correction_note": "Removing croix2015permanency from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing glorstad2012sign from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_renamed_from": "androshchuk2007",
     "_rename_note": "Citekey regenerated after author correction: Cleared misattributed co-author.",
     "language": "en",
@@ -3469013,7 +3468981,6 @@
     "entry_type": "incollection",
     "generation": "F2",
     "cited_by": [
-      "toplak2015prone",
       "toplak2017deviant"
     ],
     "_source_pdf": "Toplak 2015 - Prone Burials and Modified Teeth at the Viking Age Cemetery of Kopparsvik The Changing of Social Id.pdf",
@@ -3469117,9 +3469084,10 @@
       "language",
       "detection",
       "language",
-      "detection"
+      "detection",
+      "cited_by"
     ],
-    "_correction_note": "Backfilling detection field from _graph_state.json processing cache - per-method citation detection counts, computed during extraction but never previously persisted.",
+    "_correction_note": "Removing toplak2015prone from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_renamed_from": "wilke1933",
     "_rename_note": "Citekey regenerated after author correction: Corrected compound surname split.",
     "language": "en",
@@ -3519249,11 +3519217,9 @@
     ],
     "publisher": "Cambridge University Press",
     "location": "Cambridge",
-    "cited_by": [
-      "myrberg2009hoarded"
-    ],
+    "cited_by": [],
     "citekey": "kristiansen1984",
-    "_correction_note": "Moving the reference list held by myrberg2009 onto the references.csv paper it belongs to (myrberg2009hoarded).",
+    "_correction_note": "Removing myrberg2009hoarded from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_created_via_correction": true,
     "completeness": {
       "score": 0.917,
@@ -3519275,6 +3519241,7 @@
       "label": "complete"
     },
     "_corrections_applied": [
+      "cited_by",
       "cited_by"
     ]
   },
@@ -3528498,7 +3528465,6 @@
     "year": "2016",
     "generation": "F1",
     "cited_by": [
-      "aannestad2018charisma",
       "bill2020ship",
       "hedenstiernajonson2017female",
       "heenpettersen2019earliest",
@@ -3528524,9 +3528490,10 @@
     },
     "_grobid_id": "b46",
     "citekey": "price2016isotopic",
-    "_correction_note": "Removing hennius2018whalebone from cited_by (stored from another paper's PDF; not in this paper's own reference list, read from its PDF).",
+    "_correction_note": "Removing aannestad2018charisma from cited_by. The cited author's surname appears in the full text of each of these papers only as a different work by the same author, a first name, part of another word, or a credit; no reference or in-text citation matches this work's year or title.",
     "_created_via_correction": true,
     "_corrections_applied": [
+      "cited_by",
       "cited_by",
       "cited_by",
       "cited_by"

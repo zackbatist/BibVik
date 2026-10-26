@@ -352754,3 +352754,1521 @@
     was read in full: the author''s surname appears only in an unrelated context (a
     common word, a different work by the same author, or a name in running text),
     and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: alexander1987
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  note: Removing richards2011settlement from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: anonymous2012
+  field: cited_by
+  value: []
+  note: Removing abrams2012diaspora from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: arndt2007
+  field: cited_by
+  value:
+  - croix2021cultures
+  note: Removing croix2019single from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: artelius2005
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - lund2021
+  - gardela2013warrior
+  - williams2016viking
+  note: Removing tummuscheit2019danevirke from cited_by. A server-side read of the
+    full text of each of these papers found the cited author's surname absent, and
+    neither the work's title nor a spelling variant of the author's name beside a
+    matching year appears in the text.
+- action: set
+  citekey: baeksted1952
+  field: cited_by
+  value: []
+  note: Removing andren2000reading from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: barrettnd
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: behrensmeyer1978
+  field: cited_by
+  value:
+  - gotfredsen2014ritual
+  - magnell2010veitstu
+  note: Removing sloth2012viking from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: berg2015
+  field: cited_by
+  value:
+  - star2017ancient
+  note: Removing baug2017soapstone from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: bohner1958
+  field: cited_by
+  value: []
+  note: Removing dobat2006king from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: brink2012
+  field: cited_by
+  value:
+  - eriksen2017don
+  note: Removing hennius2018whalebone from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: cannell2016
+  field: cited_by
+  value:
+  - bill2020ship
+  - lund2021
+  - skre2019rulership
+  note: Removing ellingsen2019northern from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: carter1969
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  note: Removing richards2011settlement from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: christiansen2014
+  field: cited_by
+  value:
+  - christiansen2019metal
+  - jessen2016towering
+  - lund2021
+  note: Removing croix2019single from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: cohen2003
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: connerton1989
+  field: cited_by
+  value:
+  - artelius2013inventions
+  - arwillnordbladh2007memory
+  - arwillnordbladh2008aska
+  - arwillnordbladh2013golden
+  - backdanielsson2016more
+  - gardela2015vikings
+  - lund2016divergent
+  - lund2020rune
+  - williams2016viking
+  note: Removing andren2013places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: drachmann1967
+  field: cited_by
+  value:
+  - lund2010water
+  - lund2017connectedness
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: eriksen2001
+  field: cited_by
+  value:
+  - holst2010inconcistency
+  note: Removing jahnsen2016sosiale from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: fox1974
+  field: cited_by
+  value:
+  - raffield2016ingroup
+  - raffield2019playing
+  note: Removing skre2017monetary from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: fridriksdottir1991
+  field: cited_by
+  value: []
+  note: Removing arwillnordbladh2012ability, fabech2013ritual, hardh2010viking, lund2020rune,
+    osullivan2015strung, rundkvist2010domed, sloth2012viking from cited_by. A server-side
+    read of the full text of each of these papers found the cited author's surname
+    absent, and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: gansum2002
+  field: cited_by
+  value:
+  - lund2010water
+  - skre2011inhabitantsactivities
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: graslund1980
+  field: cited_by
+  value:
+  - becket2013stranger
+  - edberg2019dod
+  - gustin2017contacts
+  - graslund2011valsgarde
+  - hedenstiernajonson2017female
+  - hedenstiernajonson2015she
+  - hillerdal2010early
+  - kalmring2010thieves
+  - kalmring2012birka
+  - price2018
+  - price2010passing
+  - ulriksen2018volva
+  - wickholm2006stay
+  - toplak2018deconstructing
+  - toplak2015prone
+  - price2019viking
+  - gardela2013warrior
+  - toplak2017deviant
+  note: Removing linderholm2008diet from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: graslund2002
+  field: cited_by
+  value:
+  - arwillnordbladh2008aska
+  - gotfredsen2014ritual
+  - lund2020rune
+  - ulriksen2011vikingetidens
+  - zachrisson2017background
+  note: Removing zoega2017archeology from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: greenblatt2009
+  field: cited_by
+  value:
+  - furholt2018
+  note: Removing star2017ancient from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: hardh1999
+  field: cited_by
+  value:
+  - dobat2013between
+  - christiansen2019metal
+  - hardh2010viking
+  - rundkvist2010domed
+  - feveile2015metaldetektorproblematikken
+  note: Removing larsson2007iron from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: hardh2001
+  field: cited_by
+  value:
+  - sindbaek2014crossbreeding
+  note: Removing price2016isotopic from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: hardh2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - hardh2010viking
+  - pedersen2017viking
+  - pedersen2015urban
+  - sindbaek2011silver
+  - skre2011inhabitantsactivities
+  - skre2011inhabitantsorigins
+  - pedersen2009amulete
+  note: Removing skre2016post from cited_by. A server-side read of the full text of
+    each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: hayeursmith2013thorir
+  field: cited_by
+  value:
+  - gardelanda
+  - jackson2018disequilibrium
+  - lund2021
+  note: Removing lund2017connectedness from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: henriksen2003
+  field: cited_by
+  value: []
+  note: Removing feveile2012ribe from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: holm2000
+  field: cited_by
+  value:
+  - knudson2012migration
+  - barrett2010rounding
+  - hedeager2003kognitiv
+  note: Removing glorstad2012sign from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: idsoe2004
+  field: cited_by
+  value:
+  - lund2010water
+  - lund2017connectedness
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: ilkjaer2003
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: jenkins1997
+  field: cited_by
+  value:
+  - glorstad2012sign
+  note: Removing bergstol2004creoles from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: jensenius2018
+  field: cited_by
+  value:
+  - ellingsen2019northern
+  note: Removing price2019viking from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: kershaw1990
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  note: Removing richards2011settlement from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: killock2008
+  field: cited_by
+  value:
+  - price2014ship
+  - toplak2018deconstructing
+  note: Removing toplak2015prone from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: king2003
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - barrett2010rounding
+  - gardela2014death
+  note: Removing price2019vikings from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: klingenberg1984
+  field: cited_by
+  value:
+  - baastrup2014continental
+  note: Removing beck2018revisiting from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: knappett2008
+  field: cited_by
+  value:
+  - ashby2015urban
+  - burstrom2014things
+  - knappett2013
+  note: Removing downham2016coastal from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: kummel2009
+  field: cited_by
+  value:
+  - lund2017connectedness
+  note: Removing bill2012plundering from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: latour1984
+  field: cited_by
+  value:
+  - baastrup2014continental
+  note: Removing glorstad2017view, schmid2017tephra from cited_by. A server-side read
+    of the full text of each of these papers found the cited author's surname absent,
+    and neither the work's title nor a spelling variant of the author's name beside
+    a matching year appears in the text.
+- action: set
+  citekey: ljungkvist2008a
+  field: cited_by
+  value:
+  - graslund2011valsgarde
+  - kalmring2018gleaming
+  - price2018
+  - williams2014memory
+  - williams2016viking
+  - hennius2018whalebone
+  note: Removing price2014ship, raffield2016ingroup from cited_by. A server-side read
+    of the full text of each of these papers found the cited author's surname absent,
+    and neither the work's title nor a spelling variant of the author's name beside
+    a matching year appears in the text.
+- action: set
+  citekey: magnusson1973
+  field: cited_by
+  value:
+  - milek2012roles
+  - kristjansdottir2015becoming
+  - baug2017soapstone
+  note: Removing zori2013feasting from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: maran2012
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - furholt2019
+  note: Removing downham2016coastal, eriksen2016commemorating from cited_by. A server-side
+    read of the full text of each of these papers found the cited author's surname
+    absent, and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: mckinley2000
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  note: Removing richards2011settlement from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: morris1983
+  field: cited_by
+  value:
+  - lund2010water
+  - raffield2014river
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: mullernda
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: murphy1992
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: nasstrom1944
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: nylen1994
+  field: cited_by
+  value: []
+  note: Removing zachrisson2017volund from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: osborne2004
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: osullivan2000
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: owencrocker1919
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: reichert2006
+  field: cited_by
+  value:
+  - raffield2017male
+  note: Removing raffield2016bands from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: robertsdottir2008
+  field: cited_by
+  value:
+  - hayeursmith2013thorir
+  - hilberg2014viking
+  note: Removing richards2011settlement from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: shetelig1944
+  field: cited_by
+  value:
+  - domeijlundborg2012coming
+  note: Removing lundborg2006bound from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: sigurdsson1999
+  field: cited_by
+  value:
+  - baug2017soapstone
+  note: Removing zoega2017archeology from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: sjogren2009
+  field: cited_by
+  value:
+  - becker2012archaeometry
+  - chenery2014boat
+  - frei2011
+  - frei2012strontium
+  - krzewinska2018genomic
+  - knudson2012migration
+  - price2014peopling
+  - price2018
+  - peschel2017who
+  - price2014galgedil
+  - price2011who
+  - price2012isotopic
+  - price2019vikings
+  - price2018isotopes
+  note: Removing nielsen2011boathouses from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: smith2010
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  note: Removing raninen2014finland from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: smith2011a
+  field: cited_by
+  value:
+  - jackson2018disequilibrium
+  note: Removing lund2017connectedness, raninen2014finland from cited_by. A server-side
+    read of the full text of each of these papers found the cited author's surname
+    absent, and neither the work's title nor a spelling variant of the author's name
+    beside a matching year appears in the text.
+- action: set
+  citekey: soderberg2005
+  field: cited_by
+  value:
+  - andren2013significance
+  - borake2018bottlenecks
+  - ellingsen2019northern
+  - eriksen2013doors
+  - fabech2013ritual
+  - fallgren2008farm
+  - forest2011
+  - holst2013late
+  - jessen2016towering
+  - jorgensen2009pre
+  - lund2021
+  - osullivan2015strung
+  - ravn2019erritso
+  - poulsen2011settlement
+  - rundkvist2015geophysical
+  - skre2019rulership
+  note: Removing larsson2007iron from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: sommerseth2009
+  field: cited_by
+  value:
+  - lund2015living
+  - solli2018reindeer
+  note: Removing vonholstein2014searching from cited_by. A server-side read of the
+    full text of each of these papers found the cited author's surname absent, and
+    neither the work's title nor a spelling variant of the author's name beside a
+    matching year appears in the text.
+- action: set
+  citekey: steinforth2015early
+  field: cited_by
+  value:
+  - hadley2016winter
+  - lund2021
+  note: Removing richards2018scale from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: steinsland2002
+  field: cited_by
+  value:
+  - bill2012plundering
+  - eriksen2013doors
+  note: Removing roslund2017bringing from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: steuer1994
+  field: cited_by
+  value:
+  - domeijlundborg2012coming
+  - sindbaek2014crossbreeding
+  note: Removing lundborg2006bound from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: thorarinsson1956
+  field: cited_by
+  value:
+  - hartman2017medieval
+  - hayeursmith2013
+  note: Removing schmid2017tephra from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: uws2004
+  field: cited_by
+  value: []
+  note: Removing skre2017monetary from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: vilhjalmsson1995
+  field: cited_by
+  value: []
+  note: Removing zoega2017archeology from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: vist1925
+  field: cited_by
+  value: []
+  note: Removing zachrisson2017volund from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: welinder1992
+  field: cited_by
+  value:
+  - lund2010water
+  - zachrisson2004hyndevadsfallet
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: wellendorf2006
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: wilson1964
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: wilson1995
+  field: cited_by
+  value:
+  - andren2000reading
+  - helmbrecht2012winged
+  - hardh2010viking
+  - kershaw2009culture
+  - lemm2014
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - axelsen2014
+  - ahfeldt2015
+  - ahfeldt2015picture
+  note: Removing zachrisson2017volund from cited_by. A server-side read of the full
+    text of each of these papers found the cited author's surname absent, and neither
+    the work's title nor a spelling variant of the author's name beside a matching
+    year appears in the text.
+- action: set
+  citekey: youngblut2008
+  field: cited_by
+  value:
+  - anchukaitis2017last
+  - harrison2016
+  note: Removing perry2016pottery from cited_by. A server-side read of the full text
+    of each of these papers found the cited author's surname absent, and neither the
+    work's title nor a spelling variant of the author's name beside a matching year
+    appears in the text.
+- action: set
+  citekey: aldritt2003
+  field: cited_by
+  value:
+  - mainland2018nature
+  note: Removing zori2013feasting from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: almgren1967
+  field: cited_by
+  value:
+  - croix2016vikings
+  - edberg2019dod
+  - gardela2014
+  - kovalenko2013scandinavians
+  - price2019viking
+  note: Removing svendsen2016how, svendsen2019two from cited_by. The cited author's
+    surname is absent from the full text of each of these papers. The only trace of
+    the work is a generic title phrase, a title-word match without a phrase, or a
+    fuzzy match to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: bjork1982
+  field: cited_by
+  value: []
+  note: Removing jessen2014palisade from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: brown2009
+  field: cited_by
+  value:
+  - raffield2017male
+  note: Removing raffield2016bands from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: budd1999
+  field: cited_by
+  value:
+  - mcleod2011warriors
+  note: Removing richards2011settlement from cited_by. The cited author's surname
+    is absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: cannell2016
+  field: cited_by
+  value:
+  - bill2020ship
+  - lund2021
+  note: Removing skre2019rulership from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: flores1996
+  field: cited_by
+  value:
+  - hedeager2003kognitiv
+  - sheehan2013viking
+  note: Removing hedeager2010split, mainland2018nature, skre2016post, sutherland2015evidence
+    from cited_by. The cited author's surname is absent from the full text of each
+    of these papers. The only trace of the work is a generic title phrase, a title-word
+    match without a phrase, or a fuzzy match to an unrelated word, so the citation
+    could not be confirmed.
+- action: set
+  citekey: hall2007
+  field: cited_by
+  value:
+  - croix2015permanency
+  - croix2016vikings
+  - gardela2014
+  - gardelanda
+  - raffield2016bands
+  - raffield2019playing
+  - sindbaek2013all
+  - svendsen2016how
+  - price2019viking
+  - fredriksen2014nar
+  - gardela2013warrior
+  - gardela2018amazons
+  note: Removing solli2011some from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: hammarberg1985
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: Removing zachrisson2004hyndevadsfallet from cited_by. The cited author's surname
+    is absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: hauofa2008
+  field: cited_by
+  value:
+  - price2018
+  note: Removing price2018polynesians from cited_by. The cited author's surname is
+    absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: hodges1905
+  field: cited_by
+  value:
+  - lund2010water
+  note: Removing sanmark2008places from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: hultgard2008
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - jorgensen2009pre
+  - mainland2018nature
+  note: Removing bill2016protecting from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: king2003
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - barrett2010rounding
+  note: Removing gardela2014death from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: liden1995
+  field: cited_by
+  value:
+  - chenery2014boat
+  note: Removing lund2013fragments from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: orton1993
+  field: cited_by
+  value:
+  - perry2016pottery
+  note: Removing sindbaek2016steatite from cited_by. The cited author's surname is
+    absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: pedersen2015urban
+  field: cited_by
+  value:
+  - lund2021
+  - pedersen2016lead
+  note: Removing croix2019single from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: robertsdottir2008
+  field: cited_by
+  value:
+  - hayeursmith2013thorir
+  note: Removing hilberg2014viking from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: robinson2006
+  field: cited_by
+  value:
+  - gotfredsen2014birds
+  - the2017
+  - sloth2012viking
+  note: Removing bitzthorsen2018domestic from cited_by. The cited author's surname
+    is absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: smith2004
+  field: cited_by
+  value:
+  - gardelanda
+  - hayeursmith2013thorir
+  - neiss2016new
+  - osullivan2015strung
+  - solli2011some
+  - gardela2013warrior
+  note: Removing lund2017connectedness from cited_by. The cited author's surname is
+    absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: smith2006
+  field: cited_by
+  value:
+  - amundsen2017changing
+  - solli2011some
+  note: Removing lund2017connectedness from cited_by. The cited author's surname is
+    absent from the full text of each of these papers. The only trace of the work
+    is a generic title phrase, a title-word match without a phrase, or a fuzzy match
+    to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: steinforth2015early
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing hadley2016winter from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: thorarinsson1981
+  field: cited_by
+  value: []
+  note: Removing keller2016northern from cited_by. The cited author's surname is absent
+    from the full text of each of these papers. The only trace of the work is a generic
+    title phrase, a title-word match without a phrase, or a fuzzy match to an unrelated
+    word, so the citation could not be confirmed.
+- action: set
+  citekey: watt1999
+  field: cited_by
+  value:
+  - andren2013b
+  - rundkvist2010domed
+  - pedersen2009amulete
+  note: Removing feveile2015metaldetektorproblematikken from cited_by. The cited author's
+    surname is absent from the full text of each of these papers. The only trace of
+    the work is a generic title phrase, a title-word match without a phrase, or a
+    fuzzy match to an unrelated word, so the citation could not be confirmed.
+- action: set
+  citekey: winroth2014
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2014
+  note: Removing hadley2016winter, richards2018scale, sindbaek2013all from cited_by.
+    The cited author's surname is absent from the full text of each of these papers.
+    The only trace of the work is a generic title phrase, a title-word match without
+    a phrase, or a fuzzy match to an unrelated word, so the citation could not be
+    confirmed.
+- action: set
+  citekey: ambrosiani2013
+  field: cited_by
+  value:
+  - ambrosiani2015small
+  - croix2015permanency
+  - lund2021
+  - price2018
+  - warmlander2015analysis
+  - price2018isotopes
+  note: Removing vonholstein2014searching from cited_by. The cited author's surname
+    appears in the full text of each of these papers only as a different work by the
+    same author, a first name, part of another word, or a credit; no reference or
+    in-text citation matches this work's year or title.
+- action: set
+  citekey: andersson2008hvorfor
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - jorgensen2009pre
+  - jorgensen2010gudme
+  - lund2021
+  - price2018
+  note: Removing eriksen2013doors from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: baug2011
+  field: cited_by
+  value:
+  - baug2015stones
+  - baug2017soapstone
+  - pedersen2015urban
+  - the2017
+  note: Removing baug2019beginning from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: berg1987
+  field: cited_by
+  value:
+  - price2019vikings
+  note: Removing andren2000reading from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: bill2018
+  field: cited_by
+  value:
+  - bill2020ship
+  note: Removing lund2017connectedness from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: boyes1921
+  field: cited_by
+  value:
+  - skre2011commodity
+  note: Removing skre2017monetary from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: brink2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - barrett2010rounding
+  - baug2019beginning
+  - boyd2013country
+  - croix2015permanency
+  - eriksen2016commemorating
+  - fabech2013ritual
+  - fontaine2017early
+  - griffiths2019rethinking
+  - hillerdal2010early
+  - kalmring2010thieves
+  - kalmring2018gleaming
+  - krzewinska2015mitochondrial
+  - leonard2011vikings
+  - lund2016divergent
+  - lund2020rune
+  - poulsen2011settlement
+  - price2014ginnungagap
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - roesdahl2011scandinavia
+  - sindbaek2013all
+  - sindbaek2014crossbreeding
+  - skre2019rulership
+  - stene2017uplands
+  - zachrisson2014rotary
+  - price2019viking
+  - gardela2013dangerous
+  - price2010passing
+  - gardela2015vikings
+  note: Removing price2018isotopes from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: brondsted1960
+  field: cited_by
+  value:
+  - svendsen2016how
+  note: Removing ulriksen2011vikingetidens from cited_by. The cited author's surname
+    appears in the full text of each of these papers only as a different work by the
+    same author, a first name, part of another word, or a credit; no reference or
+    in-text citation matches this work's year or title.
+- action: set
+  citekey: cannell2016
+  field: cited_by
+  value:
+  - lund2021
+  note: Removing bill2020ship from cited_by. The cited author's surname appears in
+    the full text of each of these papers only as a different work by the same author,
+    a first name, part of another word, or a credit; no reference or in-text citation
+    matches this work's year or title.
+- action: set
+  citekey: fangel1941
+  field: cited_by
+  value: []
+  note: Removing poulsen2011settlement from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: grahamcampbell1983
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  - kershaw2009culture
+  note: Removing mcleod2011warriors from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: gurevich1985
+  field: cited_by
+  value:
+  - andren2000reading
+  - spangen2009silver
+  - zachrisson2017background
+  - hedeager2003kognitiv
+  note: Removing fabech2013ritual from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: hedeager1992
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - bergstol2004creoles
+  - fredriksen2014nar
+  note: Removing glorstad2014homeland from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: ingold1993
+  field: cited_by
+  value:
+  - barndon2005metall
+  - catlin2016archaeology
+  - lund2015living
+  - lund2017connectedness
+  - lund2020rune
+  note: Removing solli2018reindeer from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: jansson2007
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  note: Removing glorstad2012sign from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: john1987
+  field: cited_by
+  value:
+  - lund2004vaben
+  note: Removing hennius2018whalebone from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: jones2001
+  field: cited_by
+  value:
+  - helama2017dark
+  note: Removing price2014ginnungagap from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: jorgensen1966
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - dobat2013between
+  - jorgensen2009pre
+  - jessen2016towering
+  - ljungkvist2011gamla
+  - lund2017connectedness
+  - lund2016divergent
+  - ravn2019erritso
+  - skre2019rulership
+  note: Removing gotfredsen2014birds from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: king2003
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  note: Removing barrett2010rounding from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: klaniczay1985
+  field: cited_by
+  value: []
+  note: Removing fontaine2017early from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: kristiansen1984
+  field: cited_by
+  value: []
+  note: Removing myrberg2009hoarded from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: lund2011
+  field: cited_by
+  value:
+  - lund2015living
+  - aannestad2018charisma
+  - fredriksen2014nar
+  note: Removing skre2016post from cited_by. The cited author's surname appears in
+    the full text of each of these papers only as a different work by the same author,
+    a first name, part of another word, or a credit; no reference or in-text citation
+    matches this work's year or title.
+- action: set
+  citekey: magnusson1966
+  field: cited_by
+  value:
+  - hilberg2014viking
+  note: Removing steinforth2018that from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: mccormick2005
+  field: cited_by
+  value: []
+  note: Removing fontaine2017early from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: mcgovern2010
+  field: cited_by
+  value:
+  - mainland2018nature
+  - milek2012roles
+  note: Removing price2010passing from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: miller2010
+  field: cited_by
+  value:
+  - becker2012archaeometry
+  - kristjansdottir2015becoming
+  note: Removing sheehan2013viking from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: mullerwille1980
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  note: Removing hilberg2014viking from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: nicolaysenndb
+  field: cited_by
+  value:
+  - bill2020ship
+  - draganits2015late
+  - tonning2020halls
+  note: Removing dobat2006king, raffield2016ingroup from cited_by. The cited author's
+    surname appears in the full text of each of these papers only as a different work
+    by the same author, a first name, part of another word, or a credit; no reference
+    or in-text citation matches this work's year or title.
+- action: set
+  citekey: nordstrom2007
+  field: cited_by
+  value:
+  - hedenstiernajonson2015she
+  note: Removing zachrisson2014rotary from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: pedersen2016lead
+  field: cited_by
+  value:
+  - kalmring2018gleaming
+  - lund2021
+  - pedersen2017viking
+  note: Removing williams2015viking from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: price2016isotopic
+  field: cited_by
+  value:
+  - bill2020ship
+  - hedenstiernajonson2017female
+  - heenpettersen2019earliest
+  - odeback2018krigare
+  - price2018isotopes
+  - price2020human
+  - baug2019beginning
+  - lund2021
+  - price2018
+  - raffield2016bands
+  - aannestad2018allure
+  note: Removing aannestad2018charisma from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: ramskou1975
+  field: cited_by
+  value: []
+  note: Removing oye2016agrarian from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: ryghndf
+  field: cited_by
+  value:
+  - rundkvist2010domed
+  - lund2008banks
+  - lund2015living
+  - lund2006vikingetidens
+  - skre2017monetary
+  - aannestad2018allure
+  - pedersen2016lead
+  - pedersen2017viking
+  note: Removing spangen2009silver from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: sindbaek2008
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2015permanency
+  - croix2021cultures
+  - downham2016coastal
+  - holst2014warrior
+  - lund2019hunting
+  - osullivan2015strung
+  - ravn2019erritso
+  - sindbaek2016steatite
+  note: Removing vesteinsson2016conversion from cited_by. The cited author's surname
+    appears in the full text of each of these papers only as a different work by the
+    same author, a first name, part of another word, or a credit; no reference or
+    in-text citation matches this work's year or title.
+- action: set
+  citekey: smith2009
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - croix2019reseau
+  - sanmark2013patterns
+  - hayeursmith2013thorir
+  note: Removing price2012isotopic from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: snorristurluson1964
+  field: cited_by
+  value:
+  - price2008dying
+  - zachrisson2017background
+  note: Removing sanmark2013patterns from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: stolpendd
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  note: Removing kalmring2017home from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: thunmarknylen1995
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - androshchuk2010gift
+  - ibsen2010search
+  - toplak2018deconstructing
+  - ahfeldt2015picture
+  note: Removing hardh2010viking from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: tornbjerg1998
+  field: cited_by
+  value:
+  - beck2017temporalising
+  - beck2018revisiting
+  - fabech2013ritual
+  - holst2013late
+  - jessen2016towering
+  - jorgensen2009pre
+  - sindbaek2007small
+  - skre2019rulership
+  note: Removing kastholm2016spydkvinden from cited_by. The cited author's surname
+    appears in the full text of each of these papers only as a different work by the
+    same author, a first name, part of another word, or a credit; no reference or
+    in-text citation matches this work's year or title.
+- action: set
+  citekey: ulriksen1989
+  field: cited_by
+  value:
+  - holst2014warrior
+  - borake2018bottlenecks
+  - hardh2010viking
+  - magi2016bound
+  - sindbaek2007small
+  - the2017
+  - vonholstein2014searching
+  note: Removing poulsen2011settlement from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: vangpetersen2005
+  field: cited_by
+  value:
+  - gardelanda
+  - gardela2013warrior
+  - gardela2018amazons
+  - NOAUTHOR28
+  note: Removing kastholm2016spydkvinden from cited_by. The cited author's surname
+    appears in the full text of each of these papers only as a different work by the
+    same author, a first name, part of another word, or a credit; no reference or
+    in-text citation matches this work's year or title.
+- action: set
+  citekey: vonamira1933
+  field: cited_by
+  value:
+  - toplak2017deviant
+  note: Removing toplak2015prone from cited_by. The cited author's surname appears
+    in the full text of each of these papers only as a different work by the same
+    author, a first name, part of another word, or a credit; no reference or in-text
+    citation matches this work's year or title.
+- action: set
+  citekey: wamers1984
+  field: cited_by
+  value:
+  - baastrup2014continental
+  - hardh2010viking
+  note: Removing bill2020ship from cited_by. The cited author's surname appears in
+    the full text of each of these papers only as a different work by the same author,
+    a first name, part of another word, or a credit; no reference or in-text citation
+    matches this work's year or title.
