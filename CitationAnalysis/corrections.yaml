@@ -349103,3 +349103,3654 @@
     same first author, year, near-identical title). Kept price2019viking, which is
     the references.csv citekey or the more central entry. price2019b had no outgoing
     edges of its own.
+- action: set
+  citekey: ahfeldt2013scanning
+  field: cited_by
+  value:
+  - oehrl2019interpretations
+  - oehrl2017documenting
+  - lund2021
+  - ahfeldt2015picture
+  note: 'Reducing cited_by from 78 to 4. The earlier ''Restoring the 96 citers'' correction
+    moved 95 citers onto this entry from the deleted smith2020 entry with no per-paper
+    evidence. PDF reads of 19 of those citers found 18 that do not cite it (frei2015was,
+    graslund2011valsgarde, jarman2018viking, larsson2007iron, leslie2015fine, linderholm2008diet,
+    milek2012roles, naum2007theory, naumann2014slaves, perry2019situation, pilo2018chronology,
+    price2008dying, price2010passing, price2019viking, raffield2016bands, semple2013assembly,
+    solli2011some, williams2016viking) and one that does (oehrl2017documenting). The
+    pipeline detector credited the work with 34 citing works against 78 stored, and
+    13 of the F1 citers were published before it. Kept: lund2021 (the seed lists it),
+    oehrl2017documenting and oehrl2019interpretations (their texts cite Kitzler Åhfeldt
+    2013) and ahfeldt2015picture (its text cites Kitzler Åhfeldt 2013). The rest are
+    removed until a reference list shows otherwise.'
+- action: set
+  citekey: fredriksen2014nar
+  field: cited_by
+  value:
+  - eriksen2016commemorating
+  - lund2021
+  note: Adding lund2021 to cited_by. Every paper in references.csv is cited by the
+    seed, and the seed edge to this paper was missing.
+- action: set
+  citekey: gardela2013dangerous
+  field: cited_by
+  value:
+  - toplak2015prone
+  - gardelanda
+  - gardela2014death
+  - price2019viking
+  - gardela2013warrior
+  - lund2021
+  note: Adding lund2021 to cited_by. Every paper in references.csv is cited by the
+    seed, and the seed edge to this paper was missing.
+- action: set
+  citekey: graslund2012twilight
+  field: cited_by
+  value:
+  - pilo2018chronology
+  - sindbaek2017urbanism
+  - skre2019rulership
+  - tveiten2017extensive
+  - zachrisson2017background
+  - fredriksen2014nar
+  - price2015excavating
+  - lund2021
+  note: Adding lund2021 to cited_by. Every paper in references.csv is cited by the
+    seed, and the seed edge to this paper was missing.
+- action: set
+  citekey: raffield2016bands
+  field: cited_by
+  value:
+  - griffiths2019rethinking
+  - hadley2018search
+  - odeback2018krigare
+  - gardela2018amazons
+  - lund2021
+  note: Adding lund2021 to cited_by. Every paper in references.csv is cited by the
+    seed, and the seed edge to this paper was missing.
+- action: set
+  citekey: sanmark2013debating
+  field: cited_by
+  value:
+  - stene2017uplands
+  - lund2021
+  note: Adding lund2021 to cited_by. Every paper in references.csv is cited by the
+    seed, and the seed edge to this paper was missing.
+- action: set
+  citekey: andersen2015
+  field: cited_by
+  value:
+  - feveile2015
+  - feveile2017ombukkede
+  note: 'Removing lund2013fragments from cited_by. Year test: lund2013fragments; the
+    citing paper (2013) predates this work (2015) by more than a year.'
+- action: set
+  citekey: baron2006
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: baron2009
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: baron2014
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: beagrie1989
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bersu1966
+  field: cited_by
+  value:
+  - gardela2018miniature
+  - harris2017assembling
+  - harrison2016warrior
+  - pluskowski2010a
+  - price2008dying
+  - price2010passing
+  - raffield2016ingroup
+  - raffield2016bands
+  - steinforth2015early
+  - pluskowski2010animal
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: bielicki1991
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: billstrom1990
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bjorlykke1982
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bjorlykke1990
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bjorlykke1993
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: blanchard2001
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: blili1996
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: bode2008
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bode2009
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: bodel2005
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: bodel2014
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: boni2000
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: braconi2005
+  field: cited_by
+  value: []
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: bratt2009
+  field: cited_by
+  value:
+  - fischer2011new
+  - forest2011
+  - iversen2013big
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: brink2004d
+  field: cited_by
+  value:
+  - lund2005thresholds
+  - magnell2010veitstu
+  - myrberg2008room
+  - sanmark2008places
+  - andren2013significance
+  - backdanielsson2016more
+  - fabech2013ritual
+  - jorgensen2009pre
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: brink2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - barrett2010rounding
+  - baug2019beginning
+  - boyd2013country
+  - croix2015permanency
+  - eriksen2016commemorating
+  - fabech2013ritual
+  - fontaine2017early
+  - griffiths2019rethinking
+  - hillerdal2010early
+  - kalmring2010thieves
+  - kalmring2018gleaming
+  - krzewinska2015mitochondrial
+  - leonard2011vikings
+  - lund2016divergent
+  - lund2020rune
+  - poulsen2011settlement
+  - price2014ginnungagap
+  - price2018
+  - price2018isotopes
+  - raffield2016ingroup
+  - raffield2016bands
+  - roesdahl2011scandinavia
+  - sindbaek2013all
+  - sindbaek2014crossbreeding
+  - skre2019rulership
+  - stene2017uplands
+  - zachrisson2014rotary
+  - price2019viking
+  - gardela2013dangerous
+  - price2010passing
+  - gardela2015vikings
+  note: 'Removing price2014galgedil, raffield2019playing from cited_by. The PDF of
+    each of these papers was read in full against the stored edges: the text contains
+    no reference or in-text citation by this work''s author, so the edge came from
+    another paper''s list. price2014galgedil is 2014. raffield2019playing is 2019.'
+- action: set
+  citekey: brondsted1960
+  field: cited_by
+  value:
+  - svendsen2016how
+  - ulriksen2011vikingetidens
+  note: 'Removing williams2015viking from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    williams2015viking is 2015.'
+- action: set
+  citekey: brondsted1962
+  field: cited_by
+  value: []
+  note: 'Removing williams2015viking from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    williams2015viking is 2015.'
+- action: set
+  citekey: brooks2004
+  field: cited_by
+  value:
+  - axelsen2014
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: chen2012
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: chernyshev2008
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: chugayev2010
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: chugayev2013
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: danielsson2007
+  field: cited_by
+  value:
+  - mannering2013man
+  - lund2019hunting
+  - raffield2018polygyny
+  - raffield2019playing
+  - williams2014memory
+  - price2019viking
+  - gardela2018amazons
+  - williams2016viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: devlet2001
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: dobat2010
+  field: cited_by
+  value:
+  - axelsen2014
+  - christiansen2019metal
+  - lemm2014
+  - lund2021
+  - price2011who
+  - voncarnapbornheim2014research
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: downham2017
+  field: cited_by
+  value: []
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: duralimuller2005
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: eliade1964
+  field: cited_by
+  value:
+  - barndon2005metall
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: faure2004
+  field: cited_by
+  value:
+  - price2020human
+  - price2016isotopic
+  - price2012isotopic
+  - becker2012archaeometry
+  - price2011who
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: fedorova2001
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: fontaine2017early
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: frioriksson2013
+  field: cited_by
+  value:
+  - price2014nine
+  - zoega2017archeology
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: gale1992
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: gardela2009
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - gardelanda
+  - gardela2013warrior
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: gardela2012
+  field: cited_by
+  value:
+  - gardela2014a
+  - gardela2018amazons
+  - jackson2018disequilibrium
+  - raffield2018polygyny
+  - semple2013assembly
+  - ulriksen2018volva
+  - gardela2014death
+  - gardela2013warrior
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: gardela2013
+  field: cited_by
+  value:
+  - edberg2019dod
+  - gardela2014a
+  - gardela2015vikings
+  - harris2017assembling
+  - kastholm2016spydkvinden
+  - moen2020ideas
+  - raffield2019playing
+  - toplak2018deconstructing
+  - williams2016viking
+  - price2019viking
+  - gardela2013warrior
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: goodall1990
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: goodman1990
+  field: cited_by
+  value:
+  - gotfredsen2014ritual
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: grahamcampbell1980
+  field: cited_by
+  value:
+  - abrams2012diaspora
+  - axelsen2014
+  - gustafsson2011beyond
+  - ijssennagger2013between
+  - kershaw2009culture
+  - milek2012roles
+  - price2006what
+  - price2014ship
+  - raffield2016ingroup
+  - richards2018scale
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: guenettebeck2009
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: gunnell1995
+  field: cited_by
+  value:
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: gunnell2004
+  field: cited_by
+  value:
+  - price2010passing
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: gunnell2008
+  field: cited_by
+  value:
+  - price2010passing
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: guy1981
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: hadley2013
+  field: cited_by
+  value:
+  - lund2021
+  - perry2016pottery
+  - raffield2016bands
+  - williams2017
+  note: 'Removing mcleod2011warriors from cited_by. Year test: mcleod2011warriors;
+    the citing paper (2011) predates this work (2013) by more than a year.'
+- action: set
+  citekey: hadley2015
+  field: cited_by
+  value:
+  - hadley2016winter
+  note: 'Removing mcleod2011warriors from cited_by. Year test: mcleod2011warriors;
+    the citing paper (2011) predates this work (2015) by more than a year.'
+- action: set
+  citekey: hallansstenholm2010
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: harris2000
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: harrison2007
+  field: cited_by
+  value:
+  - furholt2018
+  - hardh2010viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: hedenstiernajonson2006
+  field: cited_by
+  value:
+  - ambrosiani2015small
+  - axelsen2014
+  - domeijlundborg2012coming
+  - hedenstiernajonson2015she
+  - price2011who
+  - price2019viking
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: henning2008
+  field: cited_by
+  value:
+  - carver2015commerce
+  - fontaine2017early
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: hohndorf1986
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: homer1991
+  field: cited_by
+  value:
+  - rogers2020non
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: ingstad1995
+  field: cited_by
+  value:
+  - gardela2008into
+  - halstadmcguire2010sailing
+  - milek2012roles
+  - price2005
+  - price2005cognition
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: jankowiak2016
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: johansson1983
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: johansson1984
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: johansson1985
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: kalmring2010e
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - hilberg2016hedeby
+  - hilberg2018detektoruntersuchungen
+  - kalmring2010thieves
+  - kalmring2012birka
+  - kalmring2013
+  - kalmring2018gleaming
+  - ravn2012maritim
+  - voncarnapbornheim2014research
+  - kalmring2016early
+  - ashby2015urban
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: kankpeyeng2009
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: karakaya1988
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: karkanas2018
+  field: cited_by
+  value:
+  - croix2019single
+  note: 'Removing macphail2013integrated from cited_by. Year test: macphail2013integrated;
+    the citing paper (2013) predates this work (2018) by more than a year.'
+- action: set
+  citekey: karras1990
+  field: cited_by
+  value:
+  - raffield2014river
+  - raffield2018polygyny
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: kelly2015longphort
+  field: cited_by
+  value:
+  - hadley2016winter
+  - hadley2018search
+  - lund2021
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: kershaw2017early
+  field: cited_by
+  value:
+  - hadley2018search
+  - lund2021
+  - richards2018scale
+  note: 'Removing mcleod2011warriors from cited_by. Year test: mcleod2011warriors;
+    the citing paper (2011) predates this work (2017) by more than a year.'
+- action: set
+  citekey: kershaw2023
+  field: cited_by
+  value: []
+  note: 'Removing williams2015viking from cited_by. Year test: williams2015viking;
+    the citing paper (2015) predates this work (2023) by more than a year.'
+- action: set
+  citekey: kirnbauer2012
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: kjaerum1990
+  field: cited_by
+  value:
+  - helmbrecht2012winged
+  - mannering2013man
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: kommunikationsmedien2001
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: kramers1997
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: laird2010
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: leveque1993
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: lihammer2012
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: london2002
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: londonhelmbrecht2011
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: loveluck1998
+  field: cited_by
+  value:
+  - axelsen2014
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: merkel2015
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: mirnejad2011
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: morgan1998
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: muller2001
+  field: cited_by
+  value:
+  - furholt2018
+  - furholt2019
+  - hillerdal2010early
+  - hardh2010viking
+  - axelsen2014
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: mullerwille2001a
+  field: cited_by
+  value:
+  - axelsen2014
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: murphy2008b
+  field: cited_by
+  value:
+  - toplak2018deconstructing
+  - gardela2014a
+  - gardela2014death
+  - gardela2013dangerous
+  - toplak2017deviant
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: myhre2015
+  field: cited_by
+  value:
+  - bill2017skipsgrav
+  - bill2020ship
+  - lund2021
+  - ravn2019erritso
+  - price2018
+  - raffield2019playing
+  - skre2019rulership
+  - tonning2020halls
+  note: 'Removing sheehan2013viking from cited_by. Year test: sheehan2013viking; the
+    citing paper (2013) predates this work (2015) by more than a year.'
+- action: set
+  citekey: nicolaysennda
+  field: cited_by
+  value:
+  - axelsen2014
+  - bill2012plundering
+  - macphail2013integrated
+  - price2008dying
+  - price2010passing
+  - schneidhofer2017palaeoenvironmental
+  - bill2020ship
+  - bill2017heimdalsjordet
+  - pedersen2016lead
+  - draganits2015late
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: nilsen1991
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: norr1998
+  field: cited_by
+  value:
+  - bill2020ship
+  - kalmring2017home
+  - price2005cognition
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: nriagu1983
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: ostergaard2016
+  field: cited_by
+  value:
+  - bitzthorsen2018domestic
+  note: 'Removing ravn2012maritim from cited_by. Year test: ravn2012maritim; the citing
+    paper (2012) predates this work (2016) by more than a year.'
+- action: set
+  citekey: ostergard2008
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: ostergren2008
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: p2008
+  field: cited_by
+  value:
+  - gardelanda
+  note: 'Removing lund2005thresholds from cited_by. Year test: lund2005thresholds;
+    the citing paper (2005) predates this work (2008) by more than a year.'
+- action: set
+  citekey: peets2013
+  field: cited_by
+  value:
+  - bonde2016between
+  - price2014ginnungagap
+  - price2016isotopic
+  - price2018isotopes
+  - price2020human
+  - raffield2016ingroup
+  - aannestad2018allure
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: penhallurick1986
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: pentz2009kong
+  field: cited_by
+  value:
+  - lund2021
+  - price2010passing
+  - price2014ginnungagap
+  - sloth2012viking
+  - christensen2013silver
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: petursdottir2009
+  field: cited_by
+  value:
+  - price2010passing
+  - vesteinsson2016conversion
+  - williams2016viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: philipotts1920
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: pilo2020crossing
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing skre2011inhabitantsorigins from cited_by. Year test: skre2011inhabitantsorigins;
+    the citing paper (2011) predates this work (2020) by more than a year.'
+- action: set
+  citekey: pollard2008
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: price2015excavating
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - hedenstiernajonson2017female
+  - krzewinska2018genomic
+  - lund2021
+  - price2018
+  - price2018isotopes
+  - price2020human
+  - price2014peopling
+  - raffield2016bands
+  - raffield2019playing
+  note: 'Removing abrams2012diaspora from cited_by. Year test: abrams2012diaspora;
+    the citing paper (2012) predates this work (2015) by more than a year.'
+- action: set
+  citekey: price2018
+  field: cited_by
+  value:
+  - price2018isotopes
+  - reiter2019interpreting
+  note: 'Removing carver2015commerce from cited_by. Year test: carver2015commerce;
+    the citing paper (2015) predates this work (2018) by more than a year.'
+- action: set
+  citekey: ravn2019erritso
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing gullbekk2014vestfold from cited_by. Year test: gullbekk2014vestfold;
+    the citing paper (2014) predates this work (2019) by more than a year.'
+- action: set
+  citekey: reuter2012
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: reynolds2009
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - fontaine2017early
+  - odeback2018krigare
+  - ulriksen2018volva
+  - toplak2018deconstructing
+  - toplak2015prone
+  - toplak2017deviant
+  - gardela2014a
+  - gardela2014death
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: robinson1921
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: roesdahl1977
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - gardela2008into
+  - gardelanda
+  - goodchild2017borgring
+  - gustafsson2011beyond
+  - price2011who
+  - roesdahl2011scandinavia
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - christensen2013silver
+  - gardela2013warrior
+  - price2010passing
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: rogers2020non
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing hilberg2014viking, mcleod2011warriors from cited_by. Year test:
+    hilberg2014viking, mcleod2011warriors; the citing paper (2014, 2011) predates
+    this work (2020) by more than a year.'
+- action: set
+  citekey: rohl1996
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: rohl1998
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: roslund2007
+  field: cited_by
+  value:
+  - bill2017heimdalsjordet
+  - gardela2015vikings
+  - gustin2017contacts
+  - krzewinska2018genomic
+  - lund2021
+  - roslund2013tralars
+  - roslund2015end
+  - roslund2017bringing
+  - skre2011inhabitantsorigins
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: ruth1988
+  field: cited_by
+  value:
+  - raffield2019slave
+  - wicker2013christianization
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: rydh1936
+  field: cited_by
+  value:
+  - lund2016divergent
+  - pedersen2017viking
+  - rundkvist2010domed
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: ryghndf
+  field: cited_by
+  value:
+  - rundkvist2010domed
+  - spangen2009silver
+  - lund2008banks
+  - lund2015living
+  - lund2006vikingetidens
+  - skre2017monetary
+  - aannestad2018allure
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: sanmark2010a
+  field: cited_by
+  value:
+  - lund2010water
+  - semple2013assembly
+  note: 'Removing sanmark2008places from cited_by. Year test: sanmark2008places; the
+    citing paper (2008) predates this work (2010) by more than a year.'
+- action: set
+  citekey: sayer2009
+  field: cited_by
+  value:
+  - gardelanda
+  - gardela2018amazons
+  - gardela2015vikings
+  - gardela2014a
+  - gardela2014death
+  - price2019viking
+  - gardela2013warrior
+  - williams2016viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: sayre2001
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: schetelig1920
+  field: cited_by
+  value:
+  - bill2016protecting
+  - axelsen2014
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: seid2009
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: shepherd1993
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: simek1993
+  field: cited_by
+  value:
+  - andren2013b
+  - barndon2005metall
+  - fabech2013ritual
+  - lund2010water
+  - rosengren2010miniatyren
+  - dobat2006king
+  - gardelanda
+  - hedeager2010split
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: sjastad2011
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: sjosvard1989
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: skre2017monetary
+  field: cited_by
+  value:
+  - ellingsen2019northern
+  - loftsgarden2019prime
+  - lund2021
+  - price2018
+  - raffield2019playing
+  note: 'Removing sheehan2013viking from cited_by. Year test: sheehan2013viking; the
+    citing paper (2013) predates this work (2017) by more than a year.'
+- action: set
+  citekey: skre2019rulership
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing gullbekk2014vestfold from cited_by. Year test: gullbekk2014vestfold;
+    the citing paper (2014) predates this work (2019) by more than a year.'
+- action: set
+  citekey: smallwood2007
+  field: cited_by
+  value: []
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: smiarowski2017
+  field: cited_by
+  value:
+  - hartman2017medieval
+  - hayeursmith2013
+  - jackson2018disequilibrium
+  note: 'Removing frei2015was from cited_by. Year test: frei2015was; the citing paper
+    (2015) predates this work (2017) by more than a year.'
+- action: set
+  citekey: solli2002
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - gardelanda
+  - jahnsen2016sosiale
+  - ulriksen2011vikingetidens
+  - price2019viking
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: somerville2014
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: stacey1975
+  field: cited_by
+  value:
+  - frei2015was
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: staecker2009
+  field: cited_by
+  value:
+  - kalmring2017home
+  - magi2011viking
+  - sindbaek2017urbanism
+  - toplak2018deconstructing
+  note: 'Removing williams2015viking from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    williams2015viking is 2015.'
+- action: set
+  citekey: stosgale1997
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: stosgale2004
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: sundblad1994
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: svensson2010
+  field: cited_by
+  value:
+  - price2014nine
+  - zachrisson2014heliga
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: tarlow2016
+  field: cited_by
+  value:
+  - barndon2018grav
+  - lund2016divergent
+  note: 'Removing williams2014memory from cited_by. Year test: williams2014memory;
+    the citing paper (2014) predates this work (2016) by more than a year.'
+- action: set
+  citekey: tereygeol2005
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: timberlake2005
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: trincherini2009
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: tylecote1992
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: ulriksen2011
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - gardela2018amazons
+  - price2014ginnungagap
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: vestergaard2014
+  field: cited_by
+  value: []
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full against the stored edges: the text contains no reference
+    or in-text citation by this work''s author, so the edge came from another paper''s
+    list. kastholm2016spydkvinden is 2016.'
+- action: set
+  citekey: vikstrand2001
+  field: cited_by
+  value:
+  - andren2013significance
+  - fabech2013ritual
+  - fischer2011new
+  - kalmring2017home
+  - lemm2014
+  - magnell2010veitstu
+  - myrberg2008room
+  - price2018
+  - sanmark2013patterns
+  - skre2019rulership
+  - zachrisson2014heliga
+  - zachrisson2004hyndevadsfallet
+  - zachrisson2014rotary
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: vikstrand2010
+  field: cited_by
+  value:
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: villa2009
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: wagner2001a
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: walz1977
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: warner2009
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: warren1977
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: wedepohl1978
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    pedersen2015urban is ?.'
+- action: set
+  citekey: wessman2010
+  field: cited_by
+  value:
+  - price2014nine
+  - williams2014memory
+  - williams2016viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: williams2006
+  field: cited_by
+  value:
+  - andren2013places
+  - barndon2018grav
+  - gardelanda
+  - eriksen2016commemorating
+  - gardela2018amazons
+  - gardela2015vikings
+  - gardela2014a
+  - glorstad2015mot
+  - leonard2011vikings
+  - lund2016divergent
+  - price2010passing
+  - pluskowski2010a
+  - zoega2017archeology
+  - williams2014memory
+  - williams2016viking
+  - gardela2014death
+  - price2019viking
+  - gardela2013dangerous
+  - gardela2013warrior
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: winroth2014
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2014
+  - hadley2016winter
+  - richards2018scale
+  - sindbaek2013all
+  note: 'Removing price2005cognition from cited_by. Year test: price2005cognition;
+    the citing paper (2005) predates this work (2014) by more than a year.'
+- action: set
+  citekey: yuhl2013
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    raffield2019playing is 2019.'
+- action: set
+  citekey: zachrisson2004hyndevadsfallet
+  field: cited_by
+  value:
+  - andren2013significance
+  - lund2021
+  - lund2013fragments
+  - lund2015living
+  - zachrisson2014heliga
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.
+    price2014galgedil is 2014.'
+- action: set
+  citekey: moberg1987
+  field: cited_by
+  value:
+  - arwillnordbladh2007memory
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: arrhenius1973
+  field: cited_by
+  value:
+  - sindbaek2011silver
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: arbman1933
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: arbman1935
+  field: cited_by
+  value: []
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: grahamcampbell1992
+  field: cited_by
+  value:
+  - raffield2014river
+  - spangen2009silver
+  - steinforth2018that
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: kleinglrtner2007
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: nordin1990
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: paulsen1937
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: sundkvist2001
+  field: cited_by
+  value:
+  - price2005cognition
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: sturluson1993
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: tesch1990
+  field: cited_by
+  value:
+  - hillerdal2010early
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: stockholm2007
+  field: cited_by
+  value:
+  - gustafsson2011new
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: baudou1963
+  field: cited_by
+  value: []
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: fridriksdottir1991
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - fabech2013ritual
+  - hardh2010viking
+  - lund2020rune
+  - osullivan2015strung
+  - rundkvist2010domed
+  - sloth2012viking
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: englert2009
+  field: cited_by
+  value:
+  - abrams2012diaspora
+  - gardela2015vikings
+  - hilberg2014viking
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: tesch2007a
+  field: cited_by
+  value: []
+  note: 'Removing gustafsson2011beyond from cited_by. The PDF of gustafsson2011beyond
+    was read in full: the text contains no reference or in-text citation of this work
+    (the author''s name is absent, or appears only as an editor or for a different
+    work by the same author).'
+- action: set
+  citekey: androshchuk2016
+  field: cited_by
+  value:
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: arrhenius1961
+  field: cited_by
+  value:
+  - rosengren2010miniatyren
+  - staecker2004hjalter
+  - christensen2013silver
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: ashby2015what
+  field: cited_by
+  value:
+  - heenpettersen2018insular
+  - heenpettersen2019earliest
+  - hennius2018whalebone
+  - lund2021
+  - perry2016pottery
+  - raffield2019playing
+  - sindbaek2017urbanism
+  - williams2016viking
+  - ashby2015urban
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: axboe2007
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: barrett2008what
+  field: cited_by
+  value:
+  - ashby2015what
+  - croix2015permanency
+  - dugmore2012cultural
+  - glorstad2012sign
+  - griffiths2019rethinking
+  - krzewinska2015mitochondrial
+  - lund2021
+  - moen2020ideas
+  - raffield2018polygyny
+  - raffield2019playing
+  - raninen2014finland
+  - sheehan2013viking
+  - sindbaek2011silver
+  - sindbaek2013all
+  - vonholstein2014searching
+  - ashby2015urban
+  - aannestad2018allure
+  - barrett2010rounding
+  - naumann2014slaves
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: brondsted1936
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - baastrup2014continental
+  - gardelanda
+  - pedersen2006ancient
+  - axelsen2014
+  - sindbaek2014crossbreeding
+  - rundkvist2010domed
+  - ulriksen2018volva
+  - ulriksen2011vikingetidens
+  - gardela2013warrior
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: brondsted1942
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: brondsted1979
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2014
+  note: 'Removing croix2015permanency from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: cambridge2017
+  field: cited_by
+  value:
+  - price2018viking
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: capelle2003
+  field: cited_by
+  value:
+  - rosengren2010miniatyren
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: corsten1991
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: fuglesang1989
+  field: cited_by
+  value:
+  - gardela2018miniature
+  - rosengren2010miniatyren
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: fuglesang2006
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: glorstad2010
+  field: cited_by
+  value:
+  - burstrom2015things
+  - ellingsen2019northern
+  - glorstad2012sign
+  - heenpettersen2014insular
+  - lund2019hunting
+  - lund2021
+  - pedersen2017viking
+  - stene2017uplands
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: glorstad2012sign
+  field: cited_by
+  value:
+  - downham2016coastal
+  - gustin2017contacts
+  - lund2021
+  - pedersen2017viking
+  - peschel2017who
+  - stene2017uplands
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: glorstad2015mot
+  field: cited_by
+  value:
+  - ellingsen2019northern
+  - heenpettersen2018insular
+  - heenpettersen2019earliest
+  - lund2021
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: glorstad2017view
+  field: cited_by
+  value:
+  - lund2021
+  - moen2020ideas
+  - pilo2020crossing
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: graslund2005
+  field: cited_by
+  value:
+  - arwillnordbladh2008aska
+  - arwillnordbladh2012ability
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: gullbekk2011money
+  field: cited_by
+  value:
+  - lund2021
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hammarberg1976
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hammarberg1985
+  field: cited_by
+  value:
+  - zachrisson2004hyndevadsfallet
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hardh2003
+  field: cited_by
+  value:
+  - christiansen2019metal
+  - dobat2013between
+  - fabech2013ritual
+  - hardh2010viking
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hardh2008
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - hardh2010viking
+  - pedersen2017viking
+  - pedersen2015urban
+  - sindbaek2011silver
+  - skre2011inhabitantsactivities
+  - skre2011inhabitantsorigins
+  - skre2016post
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: harrison2014a
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - griffiths2019rethinking
+  - harrison2016warrior
+  - heenpettersen2018insular
+  - lund2021
+  - montgomery2014finding
+  - williams2016viking
+  - price2019viking
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hauptman2014
+  field: cited_by
+  value:
+  - price2018viking
+  - raffield2018polygyny
+  - price2019viking
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: hedeager2011
+  field: cited_by
+  value:
+  - arwillnordbladh2013golden
+  - carver2015commerce
+  - draganits2015late
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2014a
+  - heenpettersen2018insular
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2021
+  - mannering2013man
+  - moen2020ideas
+  - osullivan2015strung
+  - price2014galgedil
+  - price2018
+  - raffield2019playing
+  - williams2016viking
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: heide2006
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - gardela2008into
+  - milek2012roles
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: helms1988
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - glorstad2014homeland
+  - gustin2017contacts
+  - ashby2015what
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: jesch2015
+  field: cited_by
+  value:
+  - heenpettersen2018insular
+  - heenpettersen2019earliest
+  - jackson2018disequilibrium
+  - price2018
+  - raffield2018polygyny
+  - raffield2019playing
+  - sindbaek2017urbanism
+  - price2019viking
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: john1991
+  field: cited_by
+  value:
+  - lund2005thresholds
+  - hedeager2003kognitiv
+  - lund2004vaben
+  note: 'Removing croix2015permanency from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: koktvedgaardzeiten1997
+  field: cited_by
+  value:
+  - androshchuk2018female
+  - gardela2008into
+  - ravn2012maritim
+  - rosengren2010miniatyren
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: kuzmin2000
+  field: cited_by
+  value:
+  - hillerdal2010early
+  - nosov2018stratigrafiya
+  note: 'Removing croix2015permanency from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: lamm2004a
+  field: cited_by
+  value:
+  - mannering2013man
+  - zachrisson2014heliga
+  - zachrisson2014rotary
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: larsson1873
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - glorstad2012sign
+  - zachrisson2014rotary
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: mainz1997
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: mckinnell2004
+  field: cited_by
+  value:
+  - bill2016protecting
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: moesgaard2004
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: mullerwille1976
+  field: cited_by
+  value:
+  - bill2012plundering
+  - bill2020ship
+  - price2010passing
+  - price2008dying
+  - ulriksen2018volva
+  - ulriksen2011vikingetidens
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: nasman1942
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: nerman1958
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2014
+  - magi2011viking
+  - magi2016bound
+  - price2016isotopic
+  - price2020human
+  note: 'Removing croix2015permanency from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: nordeide1948
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: nordeide2006
+  field: cited_by
+  value:
+  - ellingsen2019northern
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - toplak2017deviant
+  - aannestad2018charisma
+  - amundsen2017changing
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - barrett2010rounding
+  - baug2019beginning
+  - bergstol2004creoles
+  - carver2015commerce
+  - edberg2019dod
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2008into
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - gustin2017contacts
+  - hardh2010viking
+  - heenpettersen2018insular
+  - kalmring2010thieves
+  - kastholm2016spydkvinden
+  - kristjansdottir2015becoming
+  - larsson2007iron
+  - linderholm2008diet
+  - lucas2007bloody
+  - lund2005thresholds
+  - lund2006vikingetidens
+  - lund2008banks
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - milek2012roles
+  - moen2020ideas
+  - odeback2018krigare
+  - osullivan2015strung
+  - pluskowski2010a
+  - price2005cognition
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014ship
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - raffield2018polygyny
+  - raffield2019playing
+  - roesdahl2011scandinavia
+  - rosengren2010miniatyren
+  - skre2019rulership
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - wickholm2006stay
+  - williams2016viking
+  - gardela2014death
+  - barrett2008what
+  - price2019viking
+  - pentz2009kong
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  - gardela2013warrior
+  - pedersen2009amulete
+  - pluskowski2010animal
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: ringstad1988
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: romersdal1961
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: samdal2000
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: schnittger1912
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: sheehan2013viking
+  field: cited_by
+  value:
+  - lund2021
+  - heenpettersen2018insular
+  - williams2015viking
+  - ashby2015what
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: sindbaek2011silver
+  field: cited_by
+  value:
+  - ashby2015what
+  - baug2019beginning
+  - borake2018bottlenecks
+  - ellingsen2019northern
+  - glorstad2015mot
+  - gullbekk2014vestfold
+  - heenpettersen2019earliest
+  - hrnjic2018missing
+  - lund2021
+  - raffield2018polygyny
+  - raninen2014finland
+  - sindbaek2017urbanism
+  - skre2017monetary
+  - ashby2015urban
+  - aannestad2018allure
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: skovmand1942
+  field: cited_by
+  value:
+  - baastrup2014continental
+  - ijssennagger2015viking
+  - ingvardson2012
+  - lund2017connectedness
+  - runge2018new
+  - spangen2009silver
+  - hedeager2003kognitiv
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: skre2011
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - baug2019beginning
+  - bill2016protecting
+  - bill2017heimdalsjordet
+  - borake2018bottlenecks
+  - croix2015permanency
+  - hilberg2014viking
+  - ijssennagger2013between
+  - lund2021
+  - oye2014technology
+  - pedersen2015urban
+  - richards2018scale
+  - the2017
+  note: 'Removing aannestad2018charisma from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: staecker1990
+  field: cited_by
+  value:
+  - staecker2004hjalter
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: staecker1999
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - lund2013fragments
+  - staecker2004hjalter
+  - toplak2015prone
+  - toplak2018deconstructing
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: stenberger1958
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - spangen2009silver
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: stoklund2001
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: svanberg2003
+  field: cited_by
+  value:
+  - aannestad2018charisma
+  - androshchuk2010gift
+  - eriksen2013doors
+  - eriksen2016commemorating
+  - gardela2014a
+  - gardela2015vikings
+  - gardela2018amazons
+  - gardelanda
+  - halstadmcguire2010sailing
+  - hardh2010viking
+  - holst2014warrior
+  - kershaw2009culture
+  - lucas2007bloody
+  - lund2004vaben
+  - lund2008banks
+  - lund2013fragments
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - price2008dying
+  - price2010passing
+  - price2014ginnungagap
+  - skre2011inhabitantsorigins
+  - skre2019rulership
+  - toplak2018deconstructing
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - williams2014memory
+  - williams2016viking
+  - price2019viking
+  - gardela2013warrior
+  - pedersen2009amulete
+  - toplak2017deviant
+  note: 'Removing pedersen2009ideelle, price2018isotopes from cited_by. The PDF of
+    each of these papers was read in full against the stored edges: the text contains
+    no reference or in-text citation by this work''s author, so the edge came from
+    another paper''s list.'
+- action: set
+  citekey: thrane1973
+  field: cited_by
+  value:
+  - runge2018new
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: vierck2002
+  field: cited_by
+  value:
+  - oehrl2017documenting
+  - gardela2018amazons
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: wamers1997
+  field: cited_by
+  value:
+  - roesdahl2011scandinavia
+  - sindbaek2014crossbreeding
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: watt1999
+  field: cited_by
+  value:
+  - andren2013b
+  - rundkvist2010domed
+  - feveile2015metaldetektorproblematikken
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: watt2004a
+  field: cited_by
+  value:
+  - glorstad2015mot
+  - jorgensen2009pre
+  - larsson2007iron
+  - mannering2013man
+  - sindbaek2011silver
+  - glorstad2012sign
+  - hedeager2010split
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: westlund1989
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: williams2014memory
+  field: cited_by
+  value:
+  - aannestad2018charisma
+  - gardela2018amazons
+  - harris2017assembling
+  - kershaw2017early
+  - lund2016divergent
+  - lund2021
+  - price2018
+  - raffield2016ingroup
+  - williams2016viking
+  - williams2017
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: wilson2006b
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: zeiten2002
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: zemitis1997
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full against the stored edges: the text contains no reference or in-text
+    citation by this work''s author, so the edge came from another paper''s list.'
+- action: set
+  citekey: knappett2025
+  field: year
+  value: '2013'
+  note: Correcting the year from 2025 to 2013. The entry is Carl Knappett (ed.), Network
+    Analysis in Archaeology, Oxford University Press, 2013, the volume that holds
+    Sindbæk 2013, 'Broken links and black boxes'. The entry's own source PDF is that
+    chapter.
+- action: set
+  citekey: knappett2025
+  field: author
+  value:
+  - family: Knappett
+    given: Carl
+  note: Removing the two stray author fragments ('Roman Archaeology' and Sindbaek).
+    The volume is edited by Carl Knappett.
+- action: merge
+  keep: resi1979
+  discard: gjosteinresi1979
+  note: Merging gjosteinresi1979 into resi1979. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: petersen1991
+  discard: vangpetersen1991b
+  note: Merging vangpetersen1991b into petersen1991. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: haseloff1981
+  discard: haselof1981
+  note: Merging haselof1981 into haseloff1981. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: thunmarknylen2000
+  discard: thunmarknylen2000a
+  note: Merging thunmarknylen2000a into thunmarknylen2000. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: merge
+  keep: jorpeland2018
+  discard: beroniusjorpeland2018
+  note: Merging beroniusjorpeland2018 into jorpeland2018. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: merge
+  keep: fuglesang1989
+  discard: hornfuglesang1989
+  note: Merging hornfuglesang1989 into fuglesang1989. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: vangpetersen2005
+  discard: petersen2005
+  note: Merging petersen2005 into vangpetersen2005. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: christensen1991e
+  discard: birkedalchristensen1991
+  note: Merging birkedalchristensen1991 into christensen1991e. Same first author,
+    same year and the same title; the pipeline stored one work under two citekeys,
+    which split its citations between two nodes.
+- action: merge
+  keep: waltonrogers2007
+  discard: rogers2007
+  note: Merging rogers2007 into waltonrogers2007. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: dillman1997
+  discard: dillmann1997
+  note: Merging dillmann1997 into dillman1997. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: smith2016
+  discard: hayeursmith2016
+  note: Merging hayeursmith2016 into smith2016. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: thorlaksson1991
+  discard: jorlaksson1991
+  note: Merging jorlaksson1991 into thorlaksson1991. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: jacobsen1942a
+  discard: drjacobsen1942
+  note: Merging drjacobsen1942 into jacobsen1942a. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: bennet1987
+  discard: bennett1987
+  note: Merging bennett1987 into bennet1987. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: bertelsen1992
+  discard: gjedssobertelsen1992
+  note: Merging gjedssobertelsen1992 into bertelsen1992. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: skovmand1942
+  discard: skovmann1942
+  note: Merging skovmann1942 into skovmand1942. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: ahfeldt2002
+  discard: kitzlerahfeldt2002
+  note: Merging kitzlerahfeldt2002 into ahfeldt2002. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: koktvedgaardzeiten1997
+  discard: koktvedgaardzeiten1997b
+  note: Merging koktvedgaardzeiten1997b into koktvedgaardzeiten1997. Same first author,
+    same year and the same title; the pipeline stored one work under two citekeys,
+    which split its citations between two nodes.
+- action: merge
+  keep: staecker1999
+  discard: jornstaecker1999
+  note: Merging jornstaecker1999 into staecker1999. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: olsen1993
+  discard: kiefferolsen1993a
+  note: Merging kiefferolsen1993a into olsen1993. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: gjedssobertelsen1991
+  discard: bertelsen1991
+  note: Merging bertelsen1991 into gjedssobertelsen1991. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: alberti2009a
+  discard: sourcesalberti2009
+  note: Merging sourcesalberti2009 into alberti2009a. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: larsen2011a
+  discard: agersnaplarsen2011
+  note: Merging agersnaplarsen2011 into larsen2011a. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: arwidsson1984a
+  discard: arwidson1984
+  note: Merging arwidson1984 into arwidsson1984a. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: fuglesang1985
+  discard: fuglesang1985b
+  note: Merging fuglesang1985b into fuglesang1985. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: roussell1941
+  discard: roussel1941
+  note: Merging roussel1941 into roussell1941. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: sindbaek2012a
+  discard: sindbaek2012c
+  note: Merging sindbaek2012c into sindbaek2012a. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: andersen1995
+  discard: wulffandersen1995
+  note: Merging wulffandersen1995 into andersen1995. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: lennartsson1999
+  discard: lennarrsson1999
+  note: Merging lennarrsson1999 into lennartsson1999. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: sorensen1983
+  discard: meulengrachtsorensen1983
+  note: Merging meulengrachtsorensen1983 into sorensen1983. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: merge
+  keep: jorgensen1999
+  discard: norgardjorgensen1999
+  note: Merging norgardjorgensen1999 into jorgensen1999. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: coleman2014a
+  discard: coleman2014
+  note: Merging coleman2014 into coleman2014a. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: sveinbjorndottir2010
+  discard: sveinbjornsdottir2010
+  note: Merging sveinbjornsdottir2010 into sveinbjorndottir2010. Same first author,
+    same year and the same title; the pipeline stored one work under two citekeys,
+    which split its citations between two nodes.
+- action: merge
+  keep: gennep1960
+  discard: vangennep1960a
+  note: Merging vangennep1960a into gennep1960. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: jorgensen1995a
+  discard: benderjorgensen1995
+  note: Merging benderjorgensen1995 into jorgensen1995a. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: andersson1992
+  discard: anderson1992
+  note: Merging anderson1992 into andersson1992. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: stephensnda
+  discard: stephensnd
+  note: Merging stephensnd into stephensnda. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: benderjorgensen1992
+  discard: jorgensen1992a
+  note: Merging jorgensen1992a into benderjorgensen1992. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: nicolaysenndb
+  discard: nicolaysenndo
+  note: Merging nicolaysenndo into nicolaysenndb. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: kleingartner2007
+  discard: kleinglrtner2007
+  note: Merging kleinglrtner2007 into kleingartner2007. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: mullermertens1999
+  discard: miuillermertens1999
+  note: Merging miuillermertens1999 into mullermertens1999. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: merge
+  keep: mcguire2010
+  discard: halstadmcguire2010b
+  note: Merging halstadmcguire2010b into mcguire2010. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: madsen1984
+  discard: brinchmadsen1984
+  note: Merging brinchmadsen1984 into madsen1984. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: gardela2018miniature
+  discard: gardela2018a
+  note: Merging gardela2018a into gardela2018miniature. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: danielsson2010
+  discard: backdanielsson2010a
+  note: Merging backdanielsson2010a into danielsson2010. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: smith2004
+  discard: hayeursmith2004
+  note: Merging hayeursmith2004 into smith2004. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: sanmark2010
+  discard: sanmark2010a
+  note: Merging sanmark2010a into sanmark2010. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: backdanielsson2007
+  discard: danielsson2007
+  note: Merging danielsson2007 into backdanielsson2007. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: halsall2003
+  discard: vulnerabilityhalsall2003
+  note: Merging vulnerabilityhalsall2003 into halsall2003. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: merge
+  keep: nielsen1986
+  discard: hoilundnielsen1986
+  note: Merging hoilundnielsen1986 into nielsen1986. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: gjessing1943
+  discard: gjessing1943a
+  note: Merging gjessing1943a into gjessing1943. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: gurevich1968
+  discard: gurevic1968a
+  note: Merging gurevic1968a into gurevich1968. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: price2008
+  discard: price2008b
+  note: Merging price2008b into price2008. Same first author, same year and the same
+    title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: jakobsson1999
+  discard: hedjakobsson1999
+  note: Merging hedjakobsson1999 into jakobsson1999. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: ryghndf
+  discard: ryghnde
+  note: Merging ryghnde into ryghndf. Same first author, same year and the same title;
+    the pipeline stored one work under two citekeys, which split its citations between
+    two nodes.
+- action: merge
+  keep: mccormick2001
+  discard: mccormic2001a
+  note: Merging mccormic2001a into mccormick2001. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: sandholm1965
+  discard: akesandholm1965
+  note: Merging akesandholm1965 into sandholm1965. Same first author, same year and
+    the same title; the pipeline stored one work under two citekeys, which split its
+    citations between two nodes.
+- action: merge
+  keep: buttler1991
+  discard: worldcatbuttler1991
+  note: Merging worldcatbuttler1991 into buttler1991. Same first author, same year
+    and the same title; the pipeline stored one work under two citekeys, which split
+    its citations between two nodes.
+- action: merge
+  keep: gunnel2013
+  discard: gunnell2013
+  note: Merging gunnell2013 into gunnel2013. Same first author, same year and the
+    same title; the pipeline stored one work under two citekeys, which split its citations
+    between two nodes.
+- action: merge
+  keep: glorstad2012sign
+  discard: tsigaridasglorstad2012
+  note: Merging tsigaridasglorstad2012 into glorstad2012sign. Same first author, same
+    year and the same title; the pipeline stored one work under two citekeys, which
+    split its citations between two nodes.
+- action: set
+  citekey: ahdr2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: batt2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  - schmid2017tephra
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: bradley2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: camenisch2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: campbell2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: feveile2012
+  field: cited_by
+  value:
+  - croix2015permanency
+  - croix2019single
+  - lund2021
+  note: 'Removing feveile2009 from cited_by. Year test: the citing work (2009) predates
+    this work (2012) by more than a year.'
+- action: set
+  citekey: gardela2025
+  field: cited_by
+  value:
+  - gardela2008into
+  - gardela2013warrior
+  - gardela2018amazons
+  note: 'Removing price2005 from cited_by. Year test: the citing work (2005) predates
+    this work (2009) by more than a year.'
+- action: set
+  citekey: hambrecht2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: hartman2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: hartman2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: kristjansson2007
+  field: cited_by
+  value:
+  - gardela2008into
+  - lund2008banks
+  note: 'Removing price2005 from cited_by. Year test: the citing work (2005) predates
+    this work (2007) by more than a year.'
+- action: set
+  citekey: luterbacher2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: pfister2017
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2017) by more than a year.'
+- action: set
+  citekey: serreze2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: smiarowski2017
+  field: cited_by
+  value:
+  - hartman2017medieval
+  - jackson2018disequilibrium
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2017) by more than a year.'
+- action: set
+  citekey: waters2016
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2016) by more than a year.'
+- action: set
+  citekey: williams2020
+  field: cited_by
+  value:
+  - lund2021
+  note: 'Removing williams2017 from cited_by. Year test: the citing work (2017) predates
+    this work (2020) by more than a year.'
+- action: set
+  citekey: young2015
+  field: cited_by
+  value:
+  - hartman2017medieval
+  note: 'Removing hayeursmith2013 from cited_by. Year test: the citing work (2013)
+    predates this work (2015) by more than a year.'
+- action: set
+  citekey: andersen1970a
+  field: cited_by
+  value:
+  - ulriksen2011vikingetidens
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: andersson2016
+  field: cited_by
+  value:
+  - fahlander2016materiality
+  - lund2021
+  note: 'Removing price2018isotopes from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: archaeologica2005
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  - gardela2013warrior
+  - lund2008banks
+  - lund2004vaben
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: arwidsson1989
+  field: cited_by
+  value:
+  - edberg2019dod
+  - lund2006vikingetidens
+  - price2006what
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: back2008
+  field: cited_by
+  value:
+  - price2014nine
+  - zachrisson2014heliga
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: bradley1992a
+  field: cited_by
+  value:
+  - helama2017dark
+  note: 'Removing williams2015viking from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: cameron2008
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: cameron2016
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: capelle1976
+  field: cited_by
+  value:
+  - axelsen2014
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: clauskrag1982
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: eriksen2007
+  field: cited_by
+  value: []
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: gansum2004
+  field: cited_by
+  value:
+  - barndon2005metall
+  - lund2006vikingetidens
+  - lund2010water
+  - pedersen2009ideelle
+  - price2019viking
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: hedeager1999
+  field: cited_by
+  value:
+  - andren2000reading
+  - andren2013significance
+  - arwillnordbladh2013golden
+  - glorstad2014homeland
+  - lund2004vaben
+  - lund2005thresholds
+  - lund2008banks
+  - lund2010water
+  - lund2013fragments
+  - lund2015living
+  - lund2017connectedness
+  - mulk2007liminality
+  - pluskowski2010a
+  - spangen2009silver
+  - glorstad2012sign
+  - hedeager2003kognitiv
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: hedeager2011
+  field: cited_by
+  value:
+  - arwillnordbladh2013golden
+  - carver2015commerce
+  - draganits2015late
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2014a
+  - heenpettersen2018insular
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2021
+  - mannering2013man
+  - moen2020ideas
+  - osullivan2015strung
+  - price2018
+  - raffield2019playing
+  - williams2016viking
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: hoj2005
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: hoj2011
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: holm1986
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - sheehan2013viking
+  - barrett2008what
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: ireland1952
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: jahrhundert1997
+  field: cited_by
+  value:
+  - feveile2015
+  - feveile2017ombukkede
+  - lund2013fragments
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: king2003
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - price2019vikings
+  - barrett2010rounding
+  - gardela2014death
+  note: 'Removing barrett2008what from cited_by. The PDF of each of these papers was
+    read in full: the author''s surname appears only in an unrelated context (a common
+    word, a different work by the same author, or a name in running text), and no
+    reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: lee1936
+  field: cited_by
+  value:
+  - raffield2019slave
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: london1964
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: lund2013
+  field: cited_by
+  value:
+  - aannestad2018charisma
+  - barndon2018grav
+  - lund2017connectedness
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: lundhansen1973
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: lundhansen1974
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: lundhansen1979
+  field: cited_by
+  value:
+  - kastholm2015harriver
+  note: 'Removing kastholm2016spydkvinden from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: pedersen1999
+  field: cited_by
+  value:
+  - hardh2010viking
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: petersen1905
+  field: cited_by
+  value:
+  - glorstad2015mot
+  note: 'Removing sindbaek2014crossbreeding from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: petersen1909
+  field: cited_by
+  value:
+  - holst2013late
+  - kastholm2016spydkvinden
+  note: 'Removing sindbaek2014crossbreeding from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: petersen1995
+  field: cited_by
+  value:
+  - pedersen2016lead
+  note: 'Removing pedersen2015urban from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: ramskou1999
+  field: cited_by
+  value: []
+  note: 'Removing sindbaek2014crossbreeding from cited_by. The PDF of each of these
+    papers was read in full: the author''s surname appears only in an unrelated context
+    (a common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: roberts2009
+  field: cited_by
+  value:
+  - price2010passing
+  - price2014nine
+  note: 'Removing price2014galgedil from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: scott1978
+  field: cited_by
+  value:
+  - fontaine2017early
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: speake1980
+  field: cited_by
+  value:
+  - pluskowski2010a
+  - pluskowski2010animal
+  note: 'Removing raffield2019playing from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: steinsland1990
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
+- action: set
+  citekey: strom1984
+  field: cited_by
+  value:
+  - pedersen2009amulete
+  note: 'Removing pedersen2009ideelle from cited_by. The PDF of each of these papers
+    was read in full: the author''s surname appears only in an unrelated context (a
+    common word, a different work by the same author, or a name in running text),
+    and no reference or in-text citation matches this work''s year or title.'
