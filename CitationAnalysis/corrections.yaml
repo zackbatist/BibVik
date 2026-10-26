@@ -354771,3 +354771,2122 @@
   note: Adding williams2014coins to cited_by. The paper cites its sources in footnotes,
     which the extraction missed. The footnotes give this work's author and title (read
     from the PDF).
+- action: merge
+  keep: holmquistolausson1990
+  discard: holmquist1990
+  note: Same work recorded twice (Holmquist Olausson 1990, "Älgmannen" från Birka,
+    same title and year; the author name differs only in form). Merged on the stored
+    citation text.
+- action: set
+  citekey: gaut2011
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - axelsen2014
+  - croix2015permanency
+  - pedersen2015urban
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: skaare1976
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - the2017
+  - gullbekk2011money
+  - skre2017monetary
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: hodges1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015what
+  - ashby2015urban
+  - bill2017heimdalsjordet
+  - carver2015commerce
+  - croix2015permanency
+  - gullbekk2014vestfold
+  - kalmring2013
+  - ljungkvist2011gamla
+  - price2018
+  - sheehan2013viking
+  - sindbaek2011silver
+  - skre2011inhabitantsorigins
+  - skre2011commodity
+  - the2017
+  - wouters2016soil
+  - kalmring2016early
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: skre2007
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015urban
+  - axelsen2014
+  - baug2017soapstone
+  - bill2017heimdalsjordet
+  - croix2015permanency
+  - devos2013soil
+  - ellingsen2019northern
+  - feveile2011korsfibler
+  - glorstad2017view
+  - heenpettersen2014insular
+  - jahnsen2016sosiale
+  - jessen2016towering
+  - kershaw2017early
+  - lund2016divergent
+  - lund2017connectedness
+  - macphail2013integrated
+  - moen2020ideas
+  - pedersen2017viking
+  - poulsen2011settlement
+  - semple2013assembly
+  - sindbaek2017urbanism
+  - sindbaek2018northern
+  - skre2011inhabitantsorigins
+  - skre2016post
+  - skre2019rulership
+  - storli2010court
+  - the2017
+  - tonning2020halls
+  - baug2015stones
+  - fabech2013ritual
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: resi1979
+  field: cited_by
+  value:
+  - baug2015stones
+  - baug2017soapstone
+  - pedersen2009ideelle
+  - the2017
+  - rosvold2019mountains
+  - sindbaek2016steatite
+  - knappett2013
+  - skre2011inhabitantsorigins
+  - hardh2010viking
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: lepiksaar1977
+  field: cited_by
+  value:
+  - becker2012archaeometry
+  - the2017
+  - star2017ancient
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: eldorhagen2001
+  field: cited_by
+  value:
+  - baug2019beginning
+  - the2017
+  - sindbaek2011silver
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: lonaas2001
+  field: cited_by
+  value:
+  - baug2019beginning
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: wickham2009
+  field: cited_by
+  value:
+  - croix2019reseau
+  - sindbaek2013all
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: oka2008
+  field: cited_by
+  value:
+  - downham2016coastal
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: holm2012
+  field: cited_by
+  value:
+  - hennius2018whalebone
+  - lindholm2016bear
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ashby2009
+  field: cited_by
+  value:
+  - heenpettersen2014insular
+  - leonard2011vikings
+  - the2017
+  - vonholstein2014searching
+  - ashby2015urban
+  - ashby2015what
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: christophersen1980
+  field: cited_by
+  value:
+  - pedersen2015urban
+  - the2017
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: polanyi1957
+  field: cited_by
+  value:
+  - skre2016post
+  - sindbaek2011silver
+  - skre2017monetary
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: robinson2006
+  field: cited_by
+  value:
+  - gotfredsen2014birds
+  - the2017
+  - sloth2012viking
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ashby2015urban
+  field: cited_by
+  value:
+  - baug2019beginning
+  - croix2019single
+  - glorstad2017view
+  - loftsgarden2019prime
+  - lund2019hunting
+  - lund2021
+  - pilo2020crossing
+  - raja2018
+  - rosvold2019mountains
+  - sindbaek2018northern
+  - the2017
+  - pilo2018chronology
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: stylegar2007a
+  field: cited_by
+  value:
+  - lund2013fragments
+  - lund2019hunting
+  - price2010passing
+  - gardela2014death
+  - glorstad2012sign
+  - gardela2013warrior
+  - gardela2018amazons
+  - price2008dying
+  - skre2017viking
+  note: Adding skre2017viking to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ashby2015what
+  field: cited_by
+  value:
+  - heenpettersen2018insular
+  - heenpettersen2019earliest
+  - hennius2018whalebone
+  - lund2021
+  - perry2016pottery
+  - raffield2019playing
+  - sindbaek2017urbanism
+  - williams2016viking
+  - ashby2015urban
+  - aannestad2018allure
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: backdanielsson2007
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - backdanielsson2016more
+  - gardela2008into
+  - gardela2018amazons
+  - lund2019hunting
+  - lund2021
+  - odeback2018krigare
+  - price2014galgedil
+  - raffield2018polygyny
+  - raffield2019playing
+  - mannering2013man
+  - williams2014memory
+  - price2019viking
+  - williams2016viking
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: glorstad2012sign
+  field: cited_by
+  value:
+  - downham2016coastal
+  - gustin2017contacts
+  - lund2021
+  - pedersen2017viking
+  - peschel2017who
+  - stene2017uplands
+  - aannestad2018allure
+  - burstrom2015things
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: hedeager2011
+  field: cited_by
+  value:
+  - arwillnordbladh2013golden
+  - carver2015commerce
+  - draganits2015late
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2014a
+  - heenpettersen2018insular
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2021
+  - mannering2013man
+  - moen2020ideas
+  - osullivan2015strung
+  - price2018
+  - raffield2019playing
+  - williams2016viking
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: myhre2015
+  field: cited_by
+  value:
+  - bill2017skipsgrav
+  - bill2020ship
+  - lund2021
+  - ravn2019erritso
+  - price2018
+  - raffield2019playing
+  - skre2019rulership
+  - tonning2020halls
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - toplak2017deviant
+  - aannestad2018charisma
+  - amundsen2017changing
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - barrett2010rounding
+  - baug2019beginning
+  - bergstol2004creoles
+  - carver2015commerce
+  - edberg2019dod
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2008into
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - gustin2017contacts
+  - hardh2010viking
+  - heenpettersen2018insular
+  - kalmring2010thieves
+  - kastholm2016spydkvinden
+  - kristjansdottir2015becoming
+  - larsson2007iron
+  - linderholm2008diet
+  - lucas2007bloody
+  - lund2005thresholds
+  - lund2006vikingetidens
+  - lund2008banks
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - milek2012roles
+  - moen2020ideas
+  - odeback2018krigare
+  - osullivan2015strung
+  - pluskowski2010a
+  - price2005cognition
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014ship
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - raffield2018polygyny
+  - raffield2019playing
+  - roesdahl2011scandinavia
+  - rosengren2010miniatyren
+  - skre2019rulership
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - wickholm2006stay
+  - williams2016viking
+  - gardela2014death
+  - barrett2008what
+  - price2019viking
+  - pentz2009kong
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  - gardela2013warrior
+  - pedersen2009amulete
+  - pluskowski2010animal
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: abrams2012diaspora
+  field: cited_by
+  value:
+  - downham2016coastal
+  - kristjansdottir2015becoming
+  - lund2021
+  - osullivan2015strung
+  - rasmussen2014
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2015excavating
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - hedenstiernajonson2017female
+  - krzewinska2018genomic
+  - lund2021
+  - price2018
+  - price2018isotopes
+  - price2020human
+  - price2014peopling
+  - raffield2016bands
+  - raffield2019playing
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: peets2012
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - bill2020ship
+  - gustavsson2015are
+  - odeback2018krigare
+  - price2016isotopic
+  - price2020human
+  - raffield2016ingroup
+  - raffield2019playing
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ross1998
+  field: cited_by
+  value:
+  - artelius2004minnesmakarnas
+  - artelius2005bones
+  - heenpettersen2018insular
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: clover1988
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - eriksen2017don
+  - raffield2018polygyny
+  - barrett2008what
+  - wicker2013christianization
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: simek2004
+  field: cited_by
+  value:
+  - baug2019beginning
+  - barrett2010rounding
+  - raffield2018polygyny
+  - barrett2008what
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: skre2001
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - eriksen2013doors
+  - harrison2016warrior
+  - price2005cognition
+  - raffield2019playing
+  - skre2019rulership
+  - barrett2008what
+  - ashby2015what
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: brink2002
+  field: cited_by
+  value:
+  - bill2016protecting
+  - holst2010inconcistency
+  - forest2011
+  - kalmring2010thieves
+  - kalmring2017home
+  - myrberg2008room
+  - sanmark2008places
+  - zachrisson2017background
+  - semple2013assembly
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ross1994
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - gardela2008into
+  - heenpettersen2018insular
+  - lund2017connectedness
+  - price2005cognition
+  - raffield2018polygyny
+  - raffield2019playing
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: hall2007
+  field: cited_by
+  value:
+  - croix2015permanency
+  - croix2016vikings
+  - gardela2014
+  - gardelanda
+  - raffield2016bands
+  - raffield2019playing
+  - sindbaek2013all
+  - svendsen2016how
+  - price2019viking
+  - fredriksen2014nar
+  - gardela2013warrior
+  - gardela2018amazons
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: konsa2008
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2014
+  - gustavsson2015are
+  - magi2011viking
+  - price2016isotopic
+  - price2020human
+  - ashby2015what
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: dommasnes1991
+  field: cited_by
+  value:
+  - gardelanda
+  - osullivan2015strung
+  - raffield2018polygyny
+  - raffield2016ingroup
+  - moen2020ideas
+  - gardela2013warrior
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: helgason2000
+  field: cited_by
+  value:
+  - griffiths2019rethinking
+  - krzewinska2015mitochondrial
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: myhre2000
+  field: cited_by
+  value:
+  - heenpettersen2019earliest
+  - ashby2015what
+  - holst2014warrior
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: jesch2001
+  field: cited_by
+  value:
+  - heenpettersen2018insular
+  - ijssennagger2013between
+  - kalmring2018gleaming
+  - lundborg2006bound
+  - mcleod2011warriors
+  - raffield2016bands
+  - roesdahl2011scandinavia
+  - raffield2016ingroup
+  - raffield2019playing
+  - skre2019rulership
+  - toplak2015prone
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: bakka1965
+  field: cited_by
+  value:
+  - heenpettersen2014insular
+  - aannestad2018allure
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: androshchuk2008
+  field: cited_by
+  value:
+  - jagodzinski2014scandinavians
+  - hillerdal2010early
+  - price2012isotopic
+  - raffield2016ingroup
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: vestergaard1991
+  field: cited_by
+  value:
+  - sindbaek2011silver
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: magnusdottir2001
+  field: cited_by
+  value:
+  - kristjansdottir2015becoming
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: miller1990
+  field: cited_by
+  value:
+  - lucas2007bloody
+  - skre2011commodity
+  - williams2015viking
+  - zoega2017archeology
+  - wicker2013christianization
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: jochens1995d
+  field: cited_by
+  value:
+  - milek2012roles
+  - price2005cognition
+  - milek2013integrated
+  - raffield2016bands
+  - price2014ginnungagap
+  - raffield2018polygyny
+  - raffield2016ingroup
+  - raffield2019playing
+  - moen2020ideas
+  - price2019viking
+  - wicker2013christianization
+  - gardela2013warrior
+  - gardela2018amazons
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: karras1990
+  field: cited_by
+  value:
+  - raffield2014river
+  - raffield2018polygyny
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: evans1997
+  field: cited_by
+  value:
+  - odeback2018krigare
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: enright1995
+  field: cited_by
+  value:
+  - rosengren2010miniatyren
+  - glorstad2012sign
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2014ship
+  field: cited_by
+  value:
+  - baug2019beginning
+  - lund2021
+  - raffield2016ingroup
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: adamofbremen1959
+  field: cited_by
+  value:
+  - price2012isotopic
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: barrett2008what
+  field: cited_by
+  value:
+  - ashby2015what
+  - croix2015permanency
+  - dugmore2012cultural
+  - glorstad2012sign
+  - griffiths2019rethinking
+  - krzewinska2015mitochondrial
+  - lund2021
+  - moen2020ideas
+  - raffield2018polygyny
+  - raffield2019playing
+  - raninen2014finland
+  - sheehan2013viking
+  - sindbaek2011silver
+  - sindbaek2013all
+  - vonholstein2014searching
+  - ashby2015urban
+  - aannestad2018allure
+  - barrett2010rounding
+  - naumann2014slaves
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2016isotopic
+  field: cited_by
+  value:
+  - bill2020ship
+  - hedenstiernajonson2017female
+  - heenpettersen2019earliest
+  - odeback2018krigare
+  - price2018isotopes
+  - price2020human
+  - baug2019beginning
+  - lund2021
+  - price2018
+  - raffield2016bands
+  - aannestad2018allure
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: zachrisson1994a
+  field: cited_by
+  value:
+  - andren2000reading
+  - andren2013places
+  - fahlander2016materiality
+  - fahlander2018grave
+  - lund2020rune
+  - sanmark2013patterns
+  - sindbaek2011silver
+  - zachrisson2014rotary
+  - zachrisson2017background
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: arwillnordbladh1998a
+  field: cited_by
+  value:
+  - lund2019hunting
+  - moen2020ideas
+  - osullivan2015strung
+  - price2005cognition
+  - raffield2018polygyny
+  - hillerdal2009mannens
+  - price2019viking
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: raffield2016bands
+  field: cited_by
+  value:
+  - griffiths2019rethinking
+  - hadley2018search
+  - odeback2018krigare
+  - gardela2018amazons
+  - lund2021
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: nasman2000a
+  field: cited_by
+  value:
+  - svendsen2016how
+  - barrett2010rounding
+  - raffield2017male
+  note: Adding raffield2017male to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ljungkvist2006
+  field: cited_by
+  value:
+  - androshchuk2010gift
+  - bill2020ship
+  - graslund2011valsgarde
+  - holst2013late
+  - lindholm2016bear
+  - lund2021
+  - odeback2018krigare
+  - price2018
+  - price2019viking
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - toplak2017deviant
+  - aannestad2018charisma
+  - amundsen2017changing
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - barrett2010rounding
+  - baug2019beginning
+  - bergstol2004creoles
+  - carver2015commerce
+  - edberg2019dod
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2008into
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - gustin2017contacts
+  - hardh2010viking
+  - heenpettersen2018insular
+  - kalmring2010thieves
+  - kastholm2016spydkvinden
+  - kristjansdottir2015becoming
+  - larsson2007iron
+  - linderholm2008diet
+  - lucas2007bloody
+  - lund2005thresholds
+  - lund2006vikingetidens
+  - lund2008banks
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - milek2012roles
+  - moen2020ideas
+  - odeback2018krigare
+  - osullivan2015strung
+  - pluskowski2010a
+  - price2005cognition
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014ship
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - raffield2018polygyny
+  - raffield2019playing
+  - roesdahl2011scandinavia
+  - rosengren2010miniatyren
+  - skre2019rulership
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - wickholm2006stay
+  - williams2016viking
+  - gardela2014death
+  - barrett2008what
+  - price2019viking
+  - pentz2009kong
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  - gardela2013warrior
+  - pedersen2009amulete
+  - pluskowski2010animal
+  - raffield2017male
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: price2015excavating
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - hedenstiernajonson2017female
+  - krzewinska2018genomic
+  - lund2021
+  - price2018
+  - price2018isotopes
+  - price2020human
+  - price2014peopling
+  - raffield2016bands
+  - raffield2019playing
+  - raffield2017male
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: thomas1991
+  field: cited_by
+  value:
+  - aannestad2018allure
+  - burstrom2014things
+  - price2018
+  - ashby2015what
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: hodges1982
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - ashby2015what
+  - ashby2015urban
+  - bill2017heimdalsjordet
+  - carver2015commerce
+  - croix2015permanency
+  - gullbekk2014vestfold
+  - kalmring2013
+  - ljungkvist2011gamla
+  - price2018
+  - sheehan2013viking
+  - sindbaek2011silver
+  - skre2011inhabitantsorigins
+  - skre2011commodity
+  - the2017
+  - wouters2016soil
+  - kalmring2016early
+  - skre2017viking
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: mccormick2001
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - carver2015commerce
+  - fontaine2017early
+  - hilberg2018detektoruntersuchungen
+  - hardh2010viking
+  - sindbaek2007small
+  - price2018
+  - sindbaek2013all
+  - sindbaek2018northern
+  - sindbaek2011silver
+  - sindbaek2017urbanism
+  - skre2011inhabitantsorigins
+  - barrett2008what
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: hedeager2000
+  field: cited_by
+  value:
+  - bill2020ship
+  - fredriksen2014nar
+  - glorstad2012sign
+  - larsson2007iron
+  - odeback2018krigare
+  - pluskowski2010a
+  - price2018
+  - pluskowski2010animal
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: tainter1988
+  field: cited_by
+  value:
+  - dugmore2012cultural
+  - jackson2018disequilibrium
+  - tainter2006archaeology
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: brink1996
+  field: cited_by
+  value:
+  - fabech2013ritual
+  - holst2014warrior
+  - lemm2014
+  - ljungkvist2011gamla
+  - myrberg2008room
+  - tonning2020halls
+  - hedeager2003kognitiv
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: wickham2003
+  field: cited_by
+  value:
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: buck1938
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: kirch1992
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: ravn2011
+  field: cited_by
+  value:
+  - price2018
+  - price2018polynesians
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: sundqvist2016
+  field: cited_by
+  value:
+  - zachrisson2017background
+  - skre2019rulership
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: vanderlinden2016a
+  field: cited_by
+  value:
+  - price2018
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: brink2008a
+  field: cited_by
+  value:
+  - price2018
+  - price2019viking
+  - gardela2013dangerous
+  - gardela2013warrior
+  - gardela2015vikings
+  - price2018distant
+  note: Adding price2018distant to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: androshchuk2013
+  field: cited_by
+  value:
+  - gustafsson2016beeswax
+  - lund2021
+  - raffield2018polygyny
+  - raffield2019playing
+  - warmlander2015analysis
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: androshchuk2014
+  field: cited_by
+  value:
+  - androshchuk2018female
+  - bill2017heimdalsjordet
+  - bill2020ship
+  - burstrom2015things
+  - glorstad2017view
+  - lund2021
+  - odeback2018krigare
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2015
+  field: cited_by
+  value:
+  - fahlander2018grave
+  - gardela2018amazons
+  - kastholm2016spydkvinden
+  - lund2021
+  - toplak2018deconstructing
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2018amazons
+  field: cited_by
+  value:
+  - lund2021
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: hedenstiernajonson2017female
+  field: cited_by
+  value:
+  - androshchuk2018female
+  - edberg2019dod
+  - krzewinska2018genomic
+  - lund2019hunting
+  - lund2021
+  - mainland2018nature
+  - moen2020ideas
+  - odeback2018krigare
+  - raffield2019playing
+  - price2019viking
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: helmbrecht2011
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - domeijlundborg2012coming
+  - gardela2018amazons
+  - helmbrecht2012winged
+  - lund2021
+  - mannering2013man
+  - oehrl2017documenting
+  - oehrl2019interpretations
+  - sindbaek2014crossbreeding
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: odeback2018krigare
+  field: cited_by
+  value:
+  - lund2021
+  - raffield2019playing
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: price2002
+  field: cited_by
+  value:
+  - NOAUTHOR18
+  - toplak2017deviant
+  - aannestad2018charisma
+  - amundsen2017changing
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - arwillnordbladh2013golden
+  - barrett2010rounding
+  - baug2019beginning
+  - bergstol2004creoles
+  - carver2015commerce
+  - edberg2019dod
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2008into
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - gustin2017contacts
+  - hardh2010viking
+  - heenpettersen2018insular
+  - kalmring2010thieves
+  - kastholm2016spydkvinden
+  - kristjansdottir2015becoming
+  - larsson2007iron
+  - linderholm2008diet
+  - lucas2007bloody
+  - lund2005thresholds
+  - lund2006vikingetidens
+  - lund2008banks
+  - lund2013fragments
+  - lund2015living
+  - lund2016divergent
+  - lund2017connectedness
+  - lund2019hunting
+  - lund2021
+  - milek2012roles
+  - moen2020ideas
+  - odeback2018krigare
+  - osullivan2015strung
+  - pluskowski2010a
+  - price2005cognition
+  - price2006what
+  - price2008dying
+  - price2010passing
+  - price2014ship
+  - price2018
+  - raffield2016ingroup
+  - raffield2016bands
+  - raffield2018polygyny
+  - raffield2019playing
+  - roesdahl2011scandinavia
+  - rosengren2010miniatyren
+  - skre2019rulership
+  - ulriksen2011vikingetidens
+  - ulriksen2018volva
+  - wickholm2006stay
+  - williams2016viking
+  - gardela2014death
+  - barrett2008what
+  - price2019viking
+  - pentz2009kong
+  - ashby2015what
+  - aannestad2018allure
+  - gardela2013dangerous
+  - gardela2013warrior
+  - pedersen2009amulete
+  - pluskowski2010animal
+  - raffield2017male
+  - price2018distant
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2016
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - heenpettersen2018insular
+  - kastholm2016spydkvinden
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: lassen2003
+  field: cited_by
+  value:
+  - arwillnordbladh2012ability
+  - arwillnordbladh2013negotiating
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: jansson1985
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - arwillnordbladh2013golden
+  - burstrom2015things
+  - glorstad2012sign
+  - gustin2017contacts
+  - hardh2010viking
+  - hedenstiernajonson2015she
+  - kalmring2010thieves
+  - pedersen2017viking
+  - rogers2020non
+  - rundkvist2010domed
+  - sindbaek2011urban
+  - sindbaek2014crossbreeding
+  - hillerdal2009mannens
+  - heenpettersen2019earliest
+  - warmlander2015analysis
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: skovmand1942
+  field: cited_by
+  value:
+  - baastrup2014continental
+  - ijssennagger2015viking
+  - ingvardson2012
+  - lund2017connectedness
+  - runge2018new
+  - spangen2009silver
+  - hedeager2003kognitiv
+  - pedersen2009amulete
+  - glorstad2014homeland
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: nicolaysennda
+  field: cited_by
+  value:
+  - axelsen2014
+  - bill2012plundering
+  - macphail2013integrated
+  - price2008dying
+  - price2010passing
+  - schneidhofer2017palaeoenvironmental
+  - bill2020ship
+  - bill2017heimdalsjordet
+  - pedersen2016lead
+  - draganits2015late
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: lorangenda
+  field: cited_by
+  value:
+  - bill2020ship
+  - lund2013fragments
+  - rundkvist2010domed
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: ringstedt1997
+  field: cited_by
+  value:
+  - edberg2019dod
+  - gardela2008into
+  - gustin2017contacts
+  - price2010passing
+  - price2019viking
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2014
+  field: cited_by
+  value:
+  - croix2016vikings
+  - gardela2018amazons
+  - williams2016viking
+  - gardela2015vikings
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: braathen1989
+  field: cited_by
+  value:
+  - glorstad2012sign
+  - aannestad2018charisma
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: worrell2003
+  field: cited_by
+  value:
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: holmquistolausson1990
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - kalmring2010thieves
+  - naumann2014slaves
+  - odeback2018krigare
+  - price2008dying
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: petre2011
+  field: cited_by
+  value:
+  - zachrisson2014heliga
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: harrison2014a
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - griffiths2019rethinking
+  - harrison2016warrior
+  - heenpettersen2018insular
+  - lund2021
+  - montgomery2014finding
+  - williams2016viking
+  - price2019viking
+  - aannestad2018allure
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2013warrior
+  field: cited_by
+  value:
+  - androshchuk2018female
+  - gardela2018amazons
+  - hedenstiernajonson2017female
+  - lund2021
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: price2010passing
+  field: cited_by
+  value:
+  - bill2020ship
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2014a
+  - gardelanda
+  - harris2017assembling
+  - harrison2016warrior
+  - heenpettersen2018insular
+  - leonard2011vikings
+  - lund2019hunting
+  - lund2021
+  - odeback2018krigare
+  - williams2014memory
+  - williams2016viking
+  - zoega2017archeology
+  - gardela2014death
+  - gardela2013warrior
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: duczko2004a
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - krzewinska2015mitochondrial
+  - neiss2016new
+  - osullivan2015strung
+  - price2019vikings
+  - raffield2018polygyny
+  - sindbaek2013all
+  - sindbaek2017urbanism
+  - barrett2008what
+  - ashby2015what
+  - axelsen2014
+  - raninen2014finland
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: wilson2008a
+  field: cited_by
+  value:
+  - ahfeldt2015
+  - harrison2016warrior
+  - roesdahl2011scandinavia
+  - rogers2020non
+  - steinforth2015early
+  - ashby2015urban
+  - ahfeldt2015picture
+  - gardela2013dangerous
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: duczko1985a
+  field: cited_by
+  value:
+  - arwillnordbladh2008aska
+  - gustin2017contacts
+  - price2019viking
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: kilger2008a
+  field: cited_by
+  value:
+  - burstrom2015things
+  - lund2016divergent
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: stylegar2007a
+  field: cited_by
+  value:
+  - lund2013fragments
+  - lund2019hunting
+  - price2010passing
+  - gardela2014death
+  - glorstad2012sign
+  - gardela2013warrior
+  - gardela2018amazons
+  - price2008dying
+  - skre2017viking
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: graslund2007a
+  field: cited_by
+  value:
+  - lund2021
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: hedenstiernajonson2006b
+  field: cited_by
+  value:
+  - bill2016protecting
+  - gardela2018amazons
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: christensen2013a
+  field: cited_by
+  value:
+  - gardela2018amazons
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2016b
+  field: cited_by
+  value:
+  - lund2021
+  - gardela2018amazons
+  - williams2016viking
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: leontev2017a
+  field: cited_by
+  value:
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: pedersen2001a
+  field: cited_by
+  value:
+  - gardela2018miniature
+  note: Adding gardela2018miniature to cited_by. The paper's own reference list or
+    footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: thate2007
+  field: cited_by
+  value:
+  - andren2013significance
+  - andren2013places
+  - artelius2013inventions
+  - beck2017temporalising
+  - eriksen2013doors
+  - eriksen2016commemorating
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardelanda
+  - lund2016divergent
+  - lund2021
+  - sanmark2013patterns
+  - williams2016viking
+  - zoega2017archeology
+  - gardela2013dangerous
+  - gardela2013warrior
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: andersson2005
+  field: cited_by
+  value:
+  - artelius2013inventions
+  - fahlander2016materiality
+  - hedenstiernajonson2015she
+  - ulriksen2011vikingetidens
+  - price2019viking
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: andersson2000
+  field: cited_by
+  value:
+  - fahlander2016materiality
+  - gardela2014a
+  - gustafsson2011beyond
+  - iversen2015community
+  - wickholm2006stay
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: price2008dying
+  field: cited_by
+  value:
+  - croix2021cultures
+  - price2014ship
+  - price2014peopling
+  - barndon2018grav
+  - eriksen2016commemorating
+  - eriksen2017don
+  - gardela2014a
+  - gardela2015vikings
+  - lund2016divergent
+  - lund2019hunting
+  - lund2021
+  - osullivan2015strung
+  - raninen2014finland
+  - ulriksen2018volva
+  - williams2016viking
+  - gardela2014death
+  - price2019viking
+  - harrison2016warrior
+  - gardela2013dangerous
+  - gardela2013warrior
+  - lund2013fragments
+  - price2010passing
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: holmquistolausson1990
+  field: cited_by
+  value:
+  - eriksen2013doors
+  - kalmring2010thieves
+  - naumann2014slaves
+  - odeback2018krigare
+  - price2008dying
+  - gardela2018miniature
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: sellevold1984
+  field: cited_by
+  value:
+  - gardelanda
+  - gotfredsen2014ritual
+  - lund2020rune
+  - mannering2013man
+  - price2014galgedil
+  - price2011who
+  - gardela2014a
+  - gardela2014death
+  - gardela2013warrior
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: stylegar2007
+  field: cited_by
+  value:
+  - gardela2014a
+  - gardela2018amazons
+  - gardelanda
+  - glorstad2012sign
+  - gotfredsen2014birds
+  - hillerdal2010early
+  - osullivan2015strung
+  - pedersen2017viking
+  - pedersen2015urban
+  - price2008dying
+  - raffield2018polygyny
+  - skre2011inhabitantsorigins
+  - skre2019rulership
+  - the2017
+  - ulriksen2018volva
+  - wouters2016soil
+  - gardela2013warrior
+  - gardela2014death
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: kjellstrom2005
+  field: cited_by
+  value:
+  - hedenstiernajonson2015she
+  - krzewinska2018genomic
+  - price2020human
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: brather2009
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: ebel1987
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: harke2003
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: kjellstrom2014
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: kyll1964
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: lykiardopoulos1981
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: malarstedt1979
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: onasch1981
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: philpott1991
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: pettersson1966
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: sandholm1965
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: taylor2008
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: wilke1931
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: handler1996
+  field: cited_by
+  value:
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: price2010passing
+  field: cited_by
+  value:
+  - bill2020ship
+  - eriksen2013doors
+  - fahlander2016materiality
+  - fahlander2018grave
+  - gardela2014a
+  - gardelanda
+  - harris2017assembling
+  - harrison2016warrior
+  - heenpettersen2018insular
+  - leonard2011vikings
+  - lund2019hunting
+  - lund2021
+  - odeback2018krigare
+  - williams2014memory
+  - williams2016viking
+  - zoega2017archeology
+  - gardela2014death
+  - gardela2013warrior
+  - gardela2018miniature
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: svanberg2003a
+  field: cited_by
+  value:
+  - barrett2010rounding
+  - gustin2017contacts
+  - jahnsen2016sosiale
+  - kristjansdottir2015becoming
+  - moen2020ideas
+  - sindbaek2013all
+  - barrett2008what
+  - price2019viking
+  - gardela2013warrior
+  - gardela2018amazons
+  - pedersen2009amulete
+  - lund2008banks
+  - lund2013fragments
+  - price2008dying
+  - price2010passing
+  - williams2016viking
+  - lund2004vaben
+  - gardela2015vikings
+  - holst2014warrior
+  - toplak2017deviant
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: stylegar2007a
+  field: cited_by
+  value:
+  - lund2013fragments
+  - lund2019hunting
+  - price2010passing
+  - gardela2014death
+  - glorstad2012sign
+  - gardela2013warrior
+  - gardela2018amazons
+  - price2008dying
+  - skre2017viking
+  - gardela2018miniature
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: gardela2013dangerous
+  field: cited_by
+  value:
+  - toplak2015prone
+  - gardelanda
+  - gardela2014death
+  - price2019viking
+  - gardela2013warrior
+  - lund2021
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: meier2001a
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: staecker2009a
+  field: cited_by
+  value:
+  - toplak2015prone
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: toplak2017deviant
+  field: cited_by
+  value:
+  - lund2021
+  - toplak2018deconstructing
+  note: Adding toplak2018deconstructing to cited_by. The paper's own reference list
+    or footnotes give this work's author, year and title, which the extraction missed
+    (read from the PDF).
+- action: set
+  citekey: goodchild2017borgring
+  field: cited_by
+  value:
+  - NOAUTHOR28
+  - christensen2018borgring
+  - lund2021
+  - stott2019searching
+  - runge2018new
+  note: Adding runge2018new to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: runge2018origins
+  field: cited_by
+  value:
+  - lund2021
+  - stott2019searching
+  - runge2018new
+  note: Adding runge2018new to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: schmidt1977
+  field: cited_by
+  value:
+  - gustafsson2011beyond
+  - jessen2014palisade
+  - holst2013late
+  - pentz2009kong
+  - runge2018new
+  note: Adding runge2018new to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).
+- action: set
+  citekey: olesen2000
+  field: cited_by
+  value:
+  - goodchild2017borgring
+  - NOAUTHOR28
+  - runge2018new
+  note: Adding runge2018new to cited_by. The paper's own reference list or footnotes
+    give this work's author, year and title, which the extraction missed (read from
+    the PDF).

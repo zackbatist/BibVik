@@ -85,6 +85,7 @@ lund2021,androshchuk2013
 raffield2018polygyny,androshchuk2013
 raffield2019playing,androshchuk2013
 warmlander2015analysis,androshchuk2013
+gardela2018miniature,androshchuk2013
 androshchuk2018female,androshchuk2014
 bill2017heimdalsjordet,androshchuk2014
 bill2020ship,androshchuk2014
@@ -92,6 +93,7 @@ burstrom2015things,androshchuk2014
 glorstad2017view,androshchuk2014
 lund2021,androshchuk2014
 odeback2018krigare,androshchuk2014
+gardela2018miniature,androshchuk2014
 edberg2019dod,androshchuk2018female
 lund2021,androshchuk2018female
 lund2021,androshchuk2012
@@ -143,6 +145,7 @@ sindbaek2017urbanism,ashby2015what
 williams2016viking,ashby2015what
 ashby2015urban,ashby2015what
 aannestad2018allure,ashby2015what
+raffield2017male,ashby2015what
 lund2021,s2019
 griffiths2019rethinking,baastrup2014continental
 lund2021,baastrup2014continental
@@ -160,6 +163,7 @@ mannering2013man,backdanielsson2007
 williams2014memory,backdanielsson2007
 price2019viking,backdanielsson2007
 williams2016viking,backdanielsson2007
+raffield2017male,backdanielsson2007
 lund2021,backdanielsson2016more
 barrett2010rounding,barrett2008
 naumann2014slaves,barrett2008
@@ -433,7 +437,9 @@ gardela2018amazons,gardela2015
 kastholm2016spydkvinden,gardela2015
 lund2021,gardela2015
 toplak2018deconstructing,gardela2015
+gardela2018miniature,gardela2015
 lund2021,gardela2018amazons
+gardela2018miniature,gardela2018amazons
 lund2021,gerds2015
 forest2011,gjerpe2008
 lund2021,gjerpe2008
@@ -447,6 +453,7 @@ peschel2017who,glorstad2012sign
 stene2017uplands,glorstad2012sign
 aannestad2018allure,glorstad2012sign
 burstrom2015things,glorstad2012sign
+raffield2017male,glorstad2012sign
 heenpettersen2018insular,glorstad2014homeland
 lund2021,glorstad2014homeland
 ellingsen2019northern,glorstad2015mot
@@ -458,6 +465,7 @@ NOAUTHOR28,goodchild2017borgring
 christensen2018borgring,goodchild2017borgring
 lund2021,goodchild2017borgring
 stott2019searching,goodchild2017borgring
+runge2018new,goodchild2017borgring
 lund2021,gossler2018
 gardela2018amazons,grahamcampbell2013
 lund2021,grahamcampbell2013
@@ -581,6 +589,7 @@ williams2016viking,hedeager2011
 ashby2015what,hedeager2011
 aannestad2018allure,hedeager2011
 gardela2013dangerous,hedeager2011
+raffield2017male,hedeager2011
 ambrosiani2015small,hedenstiernajonson2006
 axelsen2014,hedenstiernajonson2006
 domeijlundborg2012coming,hedenstiernajonson2006
@@ -604,6 +613,7 @@ moen2020ideas,hedenstiernajonson2017female
 odeback2018krigare,hedenstiernajonson2017female
 raffield2019playing,hedenstiernajonson2017female
 price2019viking,hedenstiernajonson2017female
+gardela2018miniature,hedenstiernajonson2017female
 baug2019beginning,heenpettersen2014insular
 lund2021,heenpettersen2014insular
 ashby2015what,heenpettersen2014insular
@@ -622,6 +632,7 @@ mannering2013man,helmbrecht2011
 oehrl2017documenting,helmbrecht2011
 oehrl2019interpretations,helmbrecht2011
 sindbaek2014crossbreeding,helmbrecht2011
+gardela2018miniature,helmbrecht2011
 baug2019beginning,hennius2018whalebone
 lund2021,hennius2018whalebone
 lund2021,henriksen2017iron
@@ -812,6 +823,7 @@ lund2021,ljungkvist2006
 odeback2018krigare,ljungkvist2006
 price2018,ljungkvist2006
 price2019viking,ljungkvist2006
+price2018distant,ljungkvist2006
 lund2021,ljungkvist2018gamla
 bill2020ship,ljungkvist2015gamla
 ellingsen2019northern,ljungkvist2015gamla
@@ -966,6 +978,7 @@ price2018,myhre2015
 raffield2019playing,myhre2015
 skre2019rulership,myhre2015
 tonning2020halls,myhre2015
+raffield2017male,myhre2015
 NOAUTHOR18,myrberg2009
 burstrom2014things,myrberg2009
 burstrom2015things,myrberg2009
@@ -994,6 +1007,7 @@ lund2021,norstein2020
 lund2021,nosov2018stratigrafiya
 lund2021,odeback2018krigare
 raffield2019playing,odeback2018krigare
+gardela2018miniature,odeback2018krigare
 oehrl2019interpretations,oehrl2017
 oehrl2017documenting,oehrl2017
 lund2021,oehrl2019interpretations
@@ -1136,6 +1150,9 @@ gardela2013dangerous,price2002
 gardela2013warrior,price2002
 pedersen2009amulete,price2002
 pluskowski2010animal,price2002
+raffield2017male,price2002
+price2018distant,price2002
+gardela2018miniature,price2002
 frei2011,price2001
 gardela2008into,price2001
 hillerdal2010early,price2001
@@ -1447,6 +1464,7 @@ williams2016viking,thate2007
 zoega2017archeology,thate2007
 gardela2013dangerous,thate2007
 gardela2013warrior,thate2007
+toplak2018deconstructing,thate2007
 lund2021,tonning2020halls
 toplak2017deviant,toplak2015prone
 lund2021,toplak2015prone
@@ -1551,6 +1569,7 @@ kristjansdottir2015becoming,abrams2012diaspora
 lund2021,abrams2012diaspora
 osullivan2015strung,abrams2012diaspora
 rasmussen2014,abrams2012diaspora
+raffield2017male,abrams2012diaspora
 lund2021,anderssonstrand2011tools
 lund2021,strand2001
 kristjansdottir2015becoming,andren2014
@@ -1588,6 +1607,7 @@ lund2021,feveile2012
 gardela2018amazons,gardela2016
 heenpettersen2018insular,gardela2016
 kastholm2016spydkvinden,gardela2016
+gardela2018miniature,gardela2016
 amundsen2017changing,gjerde2009
 lund2021,gjerde2009
 burstrom2015things,glorstad2010
@@ -1687,6 +1707,8 @@ price2020human,price2015excavating
 price2014peopling,price2015excavating
 raffield2016bands,price2015excavating
 raffield2019playing,price2015excavating
+raffield2017male,price2015excavating
+price2018distant,price2015excavating
 lund2021,raninen2014finland
 roslund2017bringing,raninen2014finland
 lund2021,ratican2020
@@ -1847,6 +1869,7 @@ axelsen2014,gaut2011
 croix2015permanency,gaut2011
 pedersen2015urban,gaut2011
 the2017,gaut2011
+skre2017viking,gaut2011
 aannestad2018allure,geber1991
 burstrom2015things,geber1991
 heenpettersen2014insular,geber1991
@@ -1960,6 +1983,7 @@ price2016isotopic,peets2012
 price2020human,peets2012
 raffield2016ingroup,peets2012
 raffield2019playing,peets2012
+raffield2017male,peets2012
 aannestad2018allure,petersen1940
 baastrup2014continental,petersen1940
 aannestad2018allure,raven2005
@@ -1975,12 +1999,14 @@ aannestad2018allure,skaare1976
 the2017,skaare1976
 gullbekk2011money,skaare1976
 skre2017monetary,skaare1976
+skre2017viking,skaare1976
 aannestad2018allure,solli1995
 lund2013fragments,solli1995
 aannestad2018allure,thomas1991
 burstrom2014things,thomas1991
 price2018,thomas1991
 ashby2015what,thomas1991
+price2018distant,thomas1991
 aannestad2018allure,waller1982
 aannestad2018allure,wamers1985
 baastrup2014continental,wamers1985
@@ -3513,6 +3539,7 @@ andren2000reading,larsson1997
 sanmark2008places,larsson1997
 arwillnordbladh2012ability,lassen2003
 arwillnordbladh2013negotiating,lassen2003
+gardela2018miniature,lassen2003
 arwillnordbladh2008aska,lundstrom1995
 arwillnordbladh2012ability,lundstrom1995
 arwillnordbladh2013golden,lundstrom1995
@@ -3637,6 +3664,7 @@ sindbaek2014crossbreeding,jansson1985
 hillerdal2009mannens,jansson1985
 heenpettersen2019earliest,jansson1985
 warmlander2015analysis,jansson1985
+gardela2018miniature,jansson1985
 arwillnordbladh2013golden,jennbert2011
 williams2016viking,jennbert2011
 arwillnordbladh2013golden,jensen2003
@@ -4105,6 +4133,8 @@ skre2011commodity,hodges1982
 the2017,hodges1982
 wouters2016soil,hodges1982
 kalmring2016early,hodges1982
+skre2017viking,hodges1982
+price2018distant,hodges1982
 ashby2015urban,hull2008
 ashby2015urban,jantzen2013
 ashby2015urban,keller2010
@@ -4220,6 +4250,7 @@ the2017,skre2007
 tonning2020halls,skre2007
 baug2015stones,skre2007
 fabech2013ritual,skre2007
+skre2017viking,skre2007
 ashby2015urban,smirnova2002
 rosvold2019mountains,smirnova2002
 ashby2015urban,stephan1994
@@ -4271,6 +4302,7 @@ artelius2005bones,berger1979
 artelius2004minnesmakarnas,ross1998
 artelius2005bones,ross1998
 heenpettersen2018insular,ross1998
+raffield2017male,ross1998
 artelius2004minnesmakarnas,edsman1987
 artelius2005bones,edsman1987
 artelius2004minnesmakarnas,fors2002
@@ -4479,6 +4511,7 @@ eriksen2017don,clover1988
 raffield2018polygyny,clover1988
 barrett2008what,clover1988
 wicker2013christianization,clover1988
+raffield2017male,clover1988
 barrett2010rounding,coupland1998
 henriksen2017iron,coupland1998
 ijssennagger2015viking,coupland1998
@@ -4631,6 +4664,7 @@ sindbaek2011silver,mccormick2001
 sindbaek2017urbanism,mccormick2001
 skre2011inhabitantsorigins,mccormick2001
 barrett2008what,mccormick2001
+price2018distant,mccormick2001
 barrett2010rounding,michelli1993
 glorstad2012sign,michelli1993
 barrett2008what,michelli1993
@@ -4729,6 +4763,7 @@ baug2019beginning,simek2004
 barrett2010rounding,simek2004
 raffield2018polygyny,simek2004
 barrett2008what,simek2004
+raffield2017male,simek2004
 barrett2010rounding,skre2001
 eriksen2013doors,skre2001
 harrison2016warrior,skre2001
@@ -4737,6 +4772,7 @@ raffield2019playing,skre2001
 skre2019rulership,skre2001
 barrett2008what,skre2001
 ashby2015what,skre2001
+raffield2017male,skre2001
 barrett2010rounding,small1973
 barrett2008what,small1973
 glorstad2012sign,small1973
@@ -4866,6 +4902,7 @@ sindbaek2016steatite,resi1979
 knappett2013,resi1979
 skre2011inhabitantsorigins,resi1979
 hardh2010viking,resi1979
+skre2017viking,resi1979
 baug2015stones,rnregestanorvegica1989
 baug2015stones,roesdahl1980
 NOAUTHOR28,roesdahl1980
@@ -4977,6 +5014,7 @@ fahlander2016materiality,andersson2005
 hedenstiernajonson2015she,andersson2005
 ulriksen2011vikingetidens,andersson2005
 price2019viking,andersson2005
+toplak2018deconstructing,andersson2005
 artelius2013inventions,artelius2010
 fahlander2018grave,artelius2010
 fahlander2016materiality,artelius2010
@@ -5075,6 +5113,7 @@ knudson2012migration,leethorp1989
 becker2012archaeometry,lepiksaar1977
 the2017,lepiksaar1977
 star2017ancient,lepiksaar1977
+skre2017viking,lepiksaar1977
 becker2012archaeometry,mewis2004
 becker2012archaeometry,miller2010
 kristjansdottir2015becoming,miller2010
@@ -5342,6 +5381,7 @@ price2014ship,downham2011
 baug2019beginning,eldorhagen2001
 the2017,eldorhagen2001
 sindbaek2011silver,eldorhagen2001
+skre2017viking,eldorhagen2001
 baug2019beginning,ellis1969
 oehrl2017documenting,ellis1969
 baug2019beginning,ellmers1985
@@ -5395,6 +5435,7 @@ skre2019rulership,ljungkvist2009
 sindbaek2017urbanism,ljungkvist2009
 baug2019beginning,lonaas2001
 the2017,lonaas2001
+skre2017viking,lonaas2001
 baug2019beginning,moore1978
 baug2019beginning,moore1983
 baug2019beginning,myrvoll1991
@@ -5497,6 +5538,7 @@ spangen2009silver,skovmand1942
 hedeager2003kognitiv,skovmand1942
 pedersen2009amulete,skovmand1942
 glorstad2014homeland,skovmand1942
+gardela2018miniature,skovmand1942
 baastrup2014continental,wamers1991
 baastrup2014continental,lennartsson1999
 hardh2010viking,lennartsson1999
@@ -6060,6 +6102,7 @@ bill2020ship,nicolaysennda
 bill2017heimdalsjordet,nicolaysennda
 pedersen2016lead,nicolaysennda
 draganits2015late,nicolaysennda
+gardela2018miniature,nicolaysennda
 bill2012plundering,randsborg1998
 fahlander2016materiality,randsborg1998
 bill2012plundering,roesdahl2008
@@ -6458,6 +6501,7 @@ gardela2014a,andersson2000
 gustafsson2011beyond,andersson2000
 iversen2015community,andersson2000
 wickholm2006stay,andersson2000
+toplak2018deconstructing,andersson2000
 beck2018revisiting,artursson2005
 larsson2007iron,artursson2005
 beck2018revisiting,bantelmann1975
@@ -6748,6 +6792,7 @@ odeback2018krigare,hedeager2000
 pluskowski2010a,hedeager2000
 price2018,hedeager2000
 pluskowski2010animal,hedeager2000
+price2018distant,hedeager2000
 bill2020ship,helgesson2004
 dobat2013between,helgesson2004
 fabech2013ritual,helgesson2004
@@ -6779,6 +6824,7 @@ zachrisson2017background,ljungkvist2008
 bill2020ship,lorangenda
 lund2013fragments,lorangenda
 rundkvist2010domed,lorangenda
+gardela2018miniature,lorangenda
 bill2020ship,lonnroth1986
 bill2020ship,madsen1997
 graslund2011valsgarde,madsen1997
@@ -7072,6 +7118,7 @@ myrberg2008room,brink2002
 sanmark2008places,brink2002
 zachrisson2017background,brink2002
 semple2013assembly,brink2002
+raffield2017male,brink2002
 bill2016protecting,brogger1945
 lund2017connectedness,brogger1945
 lund2013fragments,brogger1945
@@ -7228,6 +7275,7 @@ gardela2013dangerous,price2008dying
 gardela2013warrior,price2008dying
 lund2013fragments,price2008dying
 price2010passing,price2008dying
+toplak2018deconstructing,price2008dying
 croix2021cultures,prummel2000
 croix2021cultures,prummel2001
 croix2021cultures,pohl1998
@@ -7881,6 +7929,7 @@ buckberry2014finding,leethorp2008
 dugmore2012cultural,tainter1988
 jackson2018disequilibrium,tainter1988
 tainter2006archaeology,tainter1988
+price2018distant,tainter1988
 dugmore2012cultural,hegmon2008
 hartman2017medieval,vesteinsson2007
 milek2012roles,vesteinsson2007
@@ -8502,6 +8551,8 @@ kalmring2010thieves,holmquistolausson1990
 naumann2014slaves,holmquistolausson1990
 odeback2018krigare,holmquistolausson1990
 price2008dying,holmquistolausson1990
+gardela2018miniature,holmquistolausson1990
+toplak2018deconstructing,holmquistolausson1990
 eriksen2013doors,holmquistolausson1996
 eriksen2013doors,holmqvist1961
 jorgensen2009pre,holmqvist1961
@@ -8689,6 +8740,7 @@ gardela2008into,ringstedt1997
 gustin2017contacts,ringstedt1997
 price2010passing,ringstedt1997
 price2019viking,ringstedt1997
+gardela2018miniature,ringstedt1997
 edberg2019dod,roesdahl1992a
 gardela2015vikings,roesdahl1992a
 lund2004vaben,roesdahl1992a
@@ -8869,6 +8921,7 @@ lund2017connectedness,ross1994
 price2005cognition,ross1994
 raffield2018polygyny,ross1994
 raffield2019playing,ross1994
+raffield2017male,ross1994
 fabech2013ritual,conti1999
 fabech2013ritual,rosengren1997
 fabech2013ritual,green1995
@@ -9035,6 +9088,7 @@ croix2016vikings,gardela2014
 gardela2018amazons,gardela2014
 williams2016viking,gardela2014
 gardela2015vikings,gardela2014
+gardela2018miniature,gardela2014
 croix2016vikings,gravesbrown1996
 gardela2014,gravesbrown1996
 jahnsen2016sosiale,gravesbrown1996
@@ -9050,6 +9104,7 @@ price2019viking,hall2007
 fredriksen2014nar,hall2007
 gardela2013warrior,hall2007
 gardela2018amazons,hall2007
+raffield2017male,hall2007
 croix2016vikings,hannestad1970
 gardela2014,hannestad1970
 croix2016vikings,heininen2014
@@ -9071,6 +9126,7 @@ magi2011viking,konsa2008
 price2016isotopic,konsa2008
 price2020human,konsa2008
 ashby2015what,konsa2008
+raffield2017male,konsa2008
 croix2016vikings,laakso2014
 gardela2014,laakso2014
 croix2016vikings,lamm1928
@@ -9263,6 +9319,7 @@ croix2019reseau,wailes1996
 croix2019reseau,wickham2009
 sindbaek2013all,wickham2009
 the2017,wickham2009
+skre2017viking,wickham2009
 croix2019reseau,wirth1938
 eriksen2016commemorating,alberti2009
 fahlander2016materiality,alberti2009
@@ -9669,6 +9726,7 @@ downham2016coastal,ofloinn1998
 glorstad2014homeland,ofloinn1998
 downham2016coastal,oka2008
 the2017,oka2008
+skre2017viking,oka2008
 downham2016coastal,omeara1982
 harrison2016warrior,omeara1982
 downham2016coastal,sheehan2001
@@ -9704,6 +9762,7 @@ ljungkvist2011gamla,brink1996
 myrberg2008room,brink1996
 tonning2020halls,brink1996
 hedeager2003kognitiv,brink1996
+price2018distant,brink1996
 dugmore2007norse,albrethsen1986
 keller2016northern,albrethsen1986
 dugmore2007norse,amorosi1998
@@ -9811,6 +9870,7 @@ raffield2018polygyny,dommasnes1991
 raffield2016ingroup,dommasnes1991
 moen2020ideas,dommasnes1991
 gardela2013warrior,dommasnes1991
+raffield2017male,dommasnes1991
 gardelanda,einarolafursveinsson1935
 gardelanda,ellis1943
 gardela2018amazons,ellis1943
@@ -9912,6 +9972,7 @@ price2011who,sellevold1984
 gardela2014a,sellevold1984
 gardela2014death,sellevold1984
 gardela2013warrior,sellevold1984
+toplak2018deconstructing,sellevold1984
 gardelanda,skaarup1976
 gardela2014a,skaarup1976
 kastholm2016spydkvinden,skaarup1976
@@ -9951,6 +10012,7 @@ ulriksen2018volva,stylegar2007
 wouters2016soil,stylegar2007
 gardela2013warrior,stylegar2007
 gardela2014death,stylegar2007
+toplak2018deconstructing,stylegar2007
 gardelanda,vangpetersen2005
 gardela2013warrior,vangpetersen2005
 gardela2018amazons,vangpetersen2005
@@ -10351,6 +10413,7 @@ heenpettersen2014insular,bodal1998
 glorstad2012sign,boe1934
 glorstad2012sign,braathen1989
 aannestad2018charisma,braathen1989
+gardela2018miniature,braathen1989
 glorstad2012sign,callaway1987
 glorstad2012sign,cessford1996
 glorstad2012sign,crane2002
@@ -10395,6 +10458,7 @@ glorstad2012sign,hedeager2007
 sheehan2013viking,hedeager2007
 griffiths2019rethinking,helgason2000
 krzewinska2015mitochondrial,helgason2000
+raffield2017male,helgason2000
 glorstad2012sign,helgason2001
 knudson2012migration,helgason2001
 krzewinska2018genomic,helgason2001
@@ -11538,6 +11602,7 @@ heenpettersen2019earliest,gronnesby2015
 heenpettersen2019earliest,myhre2000
 ashby2015what,myhre2000
 holst2014warrior,myhre2000
+raffield2017male,myhre2000
 heenpettersen2019earliest,owen2004
 heenpettersen2019earliest,purcell2015
 hadley2016winter,purcell2015
@@ -11687,6 +11752,7 @@ gustin2017contacts,young1995
 kershaw2009culture,young1995
 perry2016pottery,young1995
 steinforth2018that,wilson2009
+gardela2018miniature,worrell2003
 griffiths2019rethinking,downham2017c
 heenpettersen2019earliest,downham2017c
 steinforth2018that,downham2017c
@@ -11733,6 +11799,7 @@ gustafsson2011beyond,schmidt1977
 jessen2014palisade,schmidt1977
 holst2013late,schmidt1977
 pentz2009kong,schmidt1977
+runge2018new,schmidt1977
 gustafsson2011beyond,schvindtnd
 gustafsson2011beyond,soderberg2011
 gustafsson2011beyond,soderberg2002
@@ -11765,6 +11832,7 @@ goodchild2017borgring,jensen1988
 holst2013late,jensen1988
 goodchild2017borgring,olesen2000
 NOAUTHOR28,olesen2000
+runge2018new,olesen2000
 goodchild2017borgring,olsen1999
 goodchild2017borgring,rindel2002
 goodchild2017borgring,roesdahl2002
@@ -11856,6 +11924,7 @@ ulriksen2011vikingetidens,henriksen2009
 hennius2018whalebone,holm2012
 lindholm2016bear,holm2012
 the2017,holm2012
+skre2017viking,holm2012
 hennius2018whalebone,isaksen2012
 heenpettersen2018insular,isaksen2012
 hennius2018whalebone,karlsson2016
@@ -12757,6 +12826,7 @@ raffield2019playing,kanvall1995
 hedenstiernajonson2015she,kjellstrom2005
 krzewinska2018genomic,kjellstrom2005
 price2020human,kjellstrom2005
+toplak2018deconstructing,kjellstrom2005
 hedenstiernajonson2015she,kjellstrom1995
 hedenstiernajonson2015she,nordstrom2007
 hedenstiernajonson2015she,rimbert1986
@@ -12806,6 +12876,7 @@ raffield2016ingroup,jesch2001
 raffield2019playing,jesch2001
 skre2019rulership,jesch2001
 toplak2015prone,jesch2001
+raffield2017male,jesch2001
 heenpettersen2018insular,jesch2006
 raffield2019playing,jesch2006
 heenpettersen2018insular,kelly1993
@@ -12865,8 +12936,10 @@ the2017,ashby2009
 vonholstein2014searching,ashby2009
 ashby2015urban,ashby2009
 ashby2015what,ashby2009
+skre2017viking,ashby2009
 heenpettersen2014insular,bakka1965
 aannestad2018allure,bakka1965
+raffield2017male,bakka1965
 heenpettersen2014insular,blindheim1977
 jarman2018viking,budd2004
 knudson2012migration,budd2004
@@ -13078,6 +13151,7 @@ jagodzinski2014scandinavians,androshchuk2008
 hillerdal2010early,androshchuk2008
 price2012isotopic,androshchuk2008
 raffield2016ingroup,androshchuk2008
+raffield2017male,androshchuk2008
 jagodzinski2014scandinavians,jagodzinski2012
 gardela2015vikings,jagodzinski2012
 jagodzinski2014scandinavians,cnotliwy2013
@@ -13433,6 +13507,7 @@ kalmring2013,tummuscheit2003
 sindbaek2011urban,tummuscheit2003
 kalmring2016early,tummuscheit2003
 sindbaek2011silver,vestergaard1991
+raffield2017male,vestergaard1991
 kalmring2013,white2010
 kalmring2016early,white2010
 hilberg2014viking,lysehansen2000
@@ -14745,6 +14820,7 @@ kristjansdottir2015becoming,larusson1980
 kristjansdottir2015becoming,loren2006
 kristjansdottir2015becoming,lynn1984
 kristjansdottir2015becoming,magnusdottir2001
+raffield2017male,magnusdottir2001
 kristjansdottir2015becoming,nilsson1994
 zoega2017archeology,nilsson1994
 kristjansdottir2015becoming,nordeide2013
@@ -15682,6 +15758,7 @@ skre2011commodity,miller1990
 williams2015viking,miller1990
 zoega2017archeology,miller1990
 wicker2013christianization,miller1990
+raffield2017male,miller1990
 lucas2007bloody,monsen2004
 lucas2007bloody,nasstrom1996
 magnell2010veitstu,nasstrom1996
@@ -16610,6 +16687,7 @@ price2019viking,jochens1995d
 wicker2013christianization,jochens1995d
 gardela2013warrior,jochens1995d
 gardela2018amazons,jochens1995d
+raffield2017male,jochens1995d
 milek2012roles,gudmundsson2009a
 macphail2013integrated,skjelsvik1958
 majchczack2018early,schindler1956
@@ -17079,6 +17157,7 @@ sindbaek2017urbanism,ilkjaer2002
 raffield2014river,jankuhn1955
 raffield2014river,karras1990
 raffield2018polygyny,karras1990
+raffield2017male,karras1990
 raffield2014river,knapp1999
 hedeager2003kognitiv,knapp1999
 gardelanda,larrington1996a
@@ -17134,6 +17213,7 @@ pedersen2015urban,blindheim1968
 pedersen2015urban,capelle1971
 pedersen2015urban,christophersen1980
 the2017,christophersen1980
+skre2017viking,christophersen1980
 pedersen2015urban,de1979
 pedersen2009ideelle,de1979
 pedersen2015urban,dungworth2000
@@ -17168,10 +17248,8 @@ odeback2018krigare,collins2016
 odeback2018krigare,davis2008
 odeback2018krigare,diazandreu2005
 odeback2018krigare,evans1997
+raffield2017male,evans1997
 odeback2018krigare,goldhahn2007
-odeback2018krigare,holmquist1990
-naumann2014slaves,holmquist1990
-price2008dying,holmquist1990
 odeback2018krigare,holmquist1993
 odeback2018krigare,holmquist2001
 odeback2018krigare,holmquist1998
@@ -17880,6 +17958,7 @@ price2018polynesians,brink2014
 zachrisson2017background,brink2014
 price2018,buck1938
 price2018polynesians,buck1938
+price2018distant,buck1938
 price2018,erikson2015
 price2018polynesians,erikson2015
 price2018,hauofa2008
@@ -17900,12 +17979,14 @@ price2018polynesians,kirch2007
 vesteinsson2012peopling,kirch2007
 price2018,kirch1992
 price2018polynesians,kirch1992
+price2018distant,kirch1992
 price2018,ljungstrom2004
 price2018polynesians,ljungstrom2004
 price2018,ravn1993
 price2018polynesians,ravn1993
 price2018,ravn2011
 price2018polynesians,ravn2011
+price2018distant,ravn2011
 price2018,ravn2018
 price2018polynesians,ravn2018
 price2018,salmond2010
@@ -19462,6 +19543,7 @@ tonning2020halls,warner1987
 skre2016post,polanyi1957
 sindbaek2011silver,polanyi1957
 skre2017monetary,polanyi1957
+skre2017viking,polanyi1957
 skre2016post,swedberg1992b
 solli2018reindeer,anderson1998
 solli2018reindeer,asbjornsen1914
@@ -19638,6 +19720,7 @@ schneidhofer2017palaeoenvironmental,yoshiki2005
 rosengren2010miniatyren,dommasnes1992
 rosengren2010miniatyren,enright1995
 glorstad2012sign,enright1995
+raffield2017male,enright1995
 rosengren2010miniatyren,kaliff2004
 rosengren2010miniatyren,larsson2005
 rosengren2010miniatyren,rosengren2007
@@ -19979,6 +20062,7 @@ zachrisson2017background,stahle1958
 zachrisson2017background,struck1990
 zachrisson2017background,sundqvist2016
 skre2019rulership,sundqvist2016
+price2018distant,sundqvist2016
 zachrisson2017background,taranger1913
 zachrisson2017background,vikstrand2015
 zachrisson2017background,vogt2010
@@ -20635,34 +20719,45 @@ toplak2015prone,anz1998
 toplak2015prone,arcini1991
 toplak2015prone,boylstone2000
 toplak2015prone,brather2009
+toplak2018deconstructing,brather2009
 toplak2015prone,carlsson1990
 toplak2015prone,duwel1987a
 toplak2015prone,ebel1987
+toplak2018deconstructing,ebel1987
 toplak2015prone,finucane2008
 toplak2015prone,floderus1927
 toplak2015prone,garve2011
 toplak2015prone,harke2003
+toplak2018deconstructing,harke2003
 toplak2015prone,hoffmann1989
 toplak2015prone,kattinger1999
 toplak2015prone,kjellstrom2014
+toplak2018deconstructing,kjellstrom2014
 toplak2015prone,kunzler1999
 toplak2015prone,kyhlberg1991
 toplak2015prone,kyll1964
 toplak2017deviant,kyll1964
+toplak2018deconstructing,kyll1964
 toplak2015prone,lykiardopoulos1981
 toplak2017deviant,lykiardopoulos1981
+toplak2018deconstructing,lykiardopoulos1981
 toplak2015prone,malarstedt1979
+toplak2018deconstructing,malarstedt1979
 toplak2015prone,milner1991
 toplak2015prone,mortagua2006
 toplak2015prone,onasch1981
+toplak2018deconstructing,onasch1981
 toplak2015prone,philpott1991
+toplak2018deconstructing,philpott1991
 toplak2015prone,pettersson1966
+toplak2018deconstructing,pettersson1966
 toplak2015prone,molina1970
 toplak2015prone,ruprecht1958
 toplak2015prone,salin1952
 toplak2017deviant,salin1952
 toplak2015prone,sandholm1965
 toplak2017deviant,sandholm1965
+toplak2018deconstructing,sandholm1965
 toplak2015prone,g2000
 toplak2015prone,staecker1997
 toplak2015prone,staecker1998
@@ -20673,10 +20768,12 @@ toplak2015prone,svahnstrom1984
 toplak2015prone,thunmarknylen2004
 toplak2015prone,taylor2008
 toplak2017deviant,taylor2008
+toplak2018deconstructing,taylor2008
 toplak2015prone,vukovic2009
 toplak2015prone,westholm1989
 toplak2015prone,wilke1931
 toplak2017deviant,wilke1931
+toplak2018deconstructing,wilke1931
 toplak2017deviant,wilson1992
 lund2010water,wilson1992
 toplak2015prone,wilson1992
@@ -20842,6 +20939,7 @@ zachrisson2014heliga,nordberg2011
 zachrisson2014heliga,nordberg2008
 zachrisson2014heliga,olsson1993
 zachrisson2014heliga,petre2011
+gardela2018miniature,petre2011
 zachrisson2014heliga,schovsbo1987
 zachrisson2014heliga,stjernquist1962
 zachrisson2014heliga,stjernquist1967
@@ -20912,6 +21010,7 @@ toplak2017deviant,evers2007
 toplak2017deviant,jorg1999
 toplak2017deviant,matheson1951
 toplak2017deviant,handler1996
+toplak2018deconstructing,handler1996
 toplak2017deviant,stulzebach1998
 toplak2017deviant,diekritikbei2009
 toplak2017deviant,nandor1965
@@ -21443,6 +21542,7 @@ lund2021,kastholm2016spydkvinden
 baug2019beginning,price2014ship
 lund2021,price2014ship
 raffield2016ingroup,price2014ship
+raffield2017male,price2014ship
 lund2021,skre2011inhabitantsactivities
 croix2015permanency,skre2011inhabitantsactivities
 lund2021,skre2011inhabitantsorigins
@@ -21610,7 +21710,9 @@ montgomery2014finding,harrison2014a
 williams2016viking,harrison2014a
 price2019viking,harrison2014a
 aannestad2018allure,harrison2014a
+gardela2018miniature,harrison2014a
 price2018,vanderlinden2016a
+price2018distant,vanderlinden2016a
 price2005cognition,price1994a
 lund2021,price2019vikings
 jagodzinski2014scandinavians,leciejewicz1962
@@ -21620,6 +21722,7 @@ androshchuk2018female,gardela2013warrior
 gardela2018amazons,gardela2013warrior
 hedenstiernajonson2017female,gardela2013warrior
 lund2021,gardela2013warrior
+gardela2018miniature,gardela2013warrior
 barndon2018grav,ostigard1985
 barndon2018grav,solberg1985a
 kalmring2017home,zachrisson2011a
@@ -21651,6 +21754,7 @@ sanmark2013patterns,brinchpetersen2006
 feveile2017ombukkede,harck1997
 hedenstiernajonson2015she,ahlinsundman2012
 price2012isotopic,adamofbremen1959
+raffield2017male,adamofbremen1959
 kovalenko2013scandinavians,sawyer2006
 krzewinska2015mitochondrial,dersarkissian2013
 mulk2007liminality,mulk1991
@@ -21774,6 +21878,7 @@ hilberg2014viking,englert2009
 gotfredsen2014birds,robinson2006
 the2017,robinson2006
 sloth2012viking,robinson2006
+skre2017viking,robinson2006
 gardelanda,norrman2008a
 hayeursmith2013thorir,norrman2008a
 raffield2018polygyny,norrman2008a
@@ -22063,12 +22168,14 @@ rosvold2019mountains,ashby2015urban
 sindbaek2018northern,ashby2015urban
 the2017,ashby2015urban
 pilo2018chronology,ashby2015urban
+skre2017viking,ashby2015urban
 lund2021,raffield2019slave
 loftsgarden2019prime,hennius2018viking
 lund2021,hennius2018viking
 pilo2020crossing,hennius2018viking
 lund2021,runge2018origins
 stott2019searching,runge2018origins
+runge2018new,runge2018origins
 lund2016divergent,myrberg2009hoarded
 lund2021,myrberg2009hoarded
 williams2016viking,myrberg2009hoarded
@@ -22426,6 +22533,8 @@ williams2016viking,price2010passing
 zoega2017archeology,price2010passing
 gardela2014death,price2010passing
 gardela2013warrior,price2010passing
+gardela2018miniature,price2010passing
+toplak2018deconstructing,price2010passing
 ashby2015what,barrett2008what
 croix2015permanency,barrett2008what
 dugmore2012cultural,barrett2008what
@@ -22445,6 +22554,7 @@ ashby2015urban,barrett2008what
 aannestad2018allure,barrett2008what
 barrett2010rounding,barrett2008what
 naumann2014slaves,barrett2008what
+raffield2017male,barrett2008what
 amundsen2017changing,solli2002a
 arwillnordbladh2012ability,solli2002a
 arwillnordbladh2013negotiating,solli2002a
@@ -22513,6 +22623,7 @@ barrett2008what,duczko2004a
 ashby2015what,duczko2004a
 axelsen2014,duczko2004a
 raninen2014finland,duczko2004a
+gardela2018miniature,duczko2004a
 baug2017soapstone,gustin2004a
 bill2017heimdalsjordet,gustin2004a
 gustin2017contacts,gustin2004a
@@ -22543,6 +22654,7 @@ lund2021,price2016isotopic
 price2018,price2016isotopic
 raffield2016bands,price2016isotopic
 aannestad2018allure,price2016isotopic
+raffield2017male,price2016isotopic
 barrett2010rounding,svanberg2003a
 gustin2017contacts,svanberg2003a
 jahnsen2016sosiale,svanberg2003a
@@ -22563,6 +22675,7 @@ lund2004vaben,svanberg2003a
 gardela2015vikings,svanberg2003a
 holst2014warrior,svanberg2003a
 toplak2017deviant,svanberg2003a
+toplak2018deconstructing,svanberg2003a
 andren2000reading,zachrisson1994a
 andren2013places,zachrisson1994a
 fahlander2016materiality,zachrisson1994a
@@ -22572,6 +22685,7 @@ sanmark2013patterns,zachrisson1994a
 sindbaek2011silver,zachrisson1994a
 zachrisson2014rotary,zachrisson1994a
 zachrisson2017background,zachrisson1994a
+raffield2017male,zachrisson1994a
 fabech2013ritual,bradley2000a
 harris2017assembling,bradley2000a
 leonard2011vikings,bradley2000a
@@ -22666,6 +22780,7 @@ price2005cognition,arwillnordbladh1998a
 raffield2018polygyny,arwillnordbladh1998a
 hillerdal2009mannens,arwillnordbladh1998a
 price2019viking,arwillnordbladh1998a
+raffield2017male,arwillnordbladh1998a
 fallgren2008farm,christensen1991c
 henriksen2014first,christensen1991c
 hilberg2018detektoruntersuchungen,christensen1991c
@@ -22842,6 +22957,7 @@ steinforth2015early,wilson2008a
 ashby2015urban,wilson2008a
 ahfeldt2015picture,wilson2008a
 gardela2013dangerous,wilson2008a
+gardela2018miniature,wilson2008a
 bill2012plundering,andersen1995a
 fahlander2018grave,andersen1995a
 lund2013fragments,andersen1995a
@@ -22906,6 +23022,7 @@ lund2016divergent,christensen1991d
 arwillnordbladh2008aska,duczko1985a
 gustin2017contacts,duczko1985a
 price2019viking,duczko1985a
+gardela2018miniature,duczko1985a
 frei2012strontium,faure1986a
 knudson2012migration,faure1986a
 peschel2017who,faure1986a
@@ -22949,6 +23066,7 @@ eriksen2017don,jorgensen2014a
 gotfredsen2014ritual,jorgensen2014a
 burstrom2015things,kilger2008a
 lund2016divergent,kilger2008a
+gardela2018miniature,kilger2008a
 gustafsson2016beeswax,krogh2007a
 helmbrecht2012winged,krogh2007a
 roesdahl2011scandinavia,krogh2007a
@@ -23010,6 +23128,7 @@ hadley2018search,raffield2016bands
 odeback2018krigare,raffield2016bands
 gardela2018amazons,raffield2016bands
 lund2021,raffield2016bands
+raffield2017male,raffield2016bands
 harrison2016warrior,richards2003a
 montgomery2014finding,richards2003a
 raffield2014river,richards2003a
@@ -23058,6 +23177,9 @@ glorstad2012sign,stylegar2007a
 gardela2013warrior,stylegar2007a
 gardela2018amazons,stylegar2007a
 price2008dying,stylegar2007a
+skre2017viking,stylegar2007a
+gardela2018miniature,stylegar2007a
+toplak2018deconstructing,stylegar2007a
 lund2019hunting,stylegar2005a
 price2008dying,stylegar2005a
 price2010passing,stylegar2005a
@@ -23172,6 +23294,7 @@ skre2017monetary,grahamcampbell2011a
 svendsen2016how,grahamcampbell2011a
 williams2014coins,grahamcampbell2011a
 lund2021,graslund2007a
+gardela2018miniature,graslund2007a
 backdanielsson2016more,graslund1992b
 hardh2010viking,graslund1992b
 zachrisson2017background,graslund1992b
@@ -23193,6 +23316,7 @@ milek2012roles,harrison2008a
 hayeursmith2013thorir,harrison2008a
 bill2016protecting,hedenstiernajonson2006b
 gardela2018amazons,hedenstiernajonson2006b
+gardela2018miniature,hedenstiernajonson2006b
 glorstad2012sign,helgason2000a
 hilberg2016hedeby,hilberg2010a
 hedeager2010split,jakobsson2003a
@@ -23507,6 +23631,7 @@ price2019viking,brink2008a
 gardela2013dangerous,brink2008a
 gardela2013warrior,brink2008a
 gardela2015vikings,brink2008a
+price2018distant,brink2008a
 bill2016protecting,brogger1917a
 bill2016protecting,brogger1917b
 lund2013fragments,brogger1945a
@@ -23528,6 +23653,7 @@ barrett2010rounding,carver1995a
 lund2013fragments,carver1995a
 schneidhofer2017palaeoenvironmental,chappell1986a
 gardela2018amazons,christensen2013a
+gardela2018miniature,christensen2013a
 lund2021,christensen2013silver
 beck2018revisiting,christensen2008b
 holst2013late,christensen2008c
@@ -23596,6 +23722,7 @@ gardela2014death,gardela2013dangerous
 price2019viking,gardela2013dangerous
 gardela2013warrior,gardela2013dangerous
 lund2021,gardela2013dangerous
+toplak2018deconstructing,gardela2013dangerous
 lund2021,gardela2014death
 raffield2019playing,gardela2012c
 semple2013assembly,gardela2012c
@@ -23603,6 +23730,7 @@ toplak2015prone,gardela2015a
 lund2021,gardela2016b
 gardela2018amazons,gardela2016b
 williams2016viking,gardela2016b
+gardela2018miniature,gardela2016b
 williams2016viking,gardela2016c
 kastholm2016spydkvinden,gardela2009b
 rasmussen2014,gjerpe2008a
@@ -23779,6 +23907,7 @@ jessen2016towering,larsson2006c
 zoega2017archeology,lee2008b
 raninen2014finland,lehtosalohilander1982a
 magi2011viking,leimus2007a
+gardela2018miniature,leontev2017a
 catlin2016archaeology,lewis2015a
 andren2000reading,lie1952a
 gustin2017contacts,ligi1993a
@@ -23815,6 +23944,7 @@ carver2015commerce,mccormick2012a
 milek2012roles,mcgovern2009a
 henriksen2017iron,mcgovern2013a
 toplak2015prone,meier2001a
+toplak2018deconstructing,meier2001a
 burstrom2014things,meskell2005a
 sloth2012viking,mikkelsen1994a
 beck2017temporalising,mikkelsen1998a
@@ -23841,6 +23971,7 @@ skre2017monetary,naismith2012a
 fabech2013ritual,nasman1989a
 svendsen2016how,nasman2000a
 barrett2010rounding,nasman2000a
+raffield2017male,nasman2000a
 fischer2011new,nasman1984a
 lund2021,naum2007theory
 stott2019searching,naum2012a
@@ -23890,6 +24021,7 @@ lund2019hunting,pedersen2014c
 christiansen2019metal,pedersen2015a
 NOAUTHOR28,pedersen2016c
 moen2020ideas,pedersen2008b
+gardela2018miniature,pedersen2001a
 borake2018bottlenecks,pedersen2003b
 lund2019hunting,pedersen2011a
 dugmore2012cultural,perdikaris2008a
@@ -24021,6 +24153,7 @@ holst2014warrior,sorensen1999a
 hardh2010viking,staecker1999a
 fahlander2018grave,staecker2001a
 toplak2015prone,staecker2009a
+toplak2018deconstructing,staecker2009a
 barndon2005metall,steinsland1994a
 oehrl2019interpretations,steinsland2013
 lindholm2016bear,stene2011a
@@ -24134,4 +24267,5 @@ edberg2019dod,price2019viking
 lund2019hunting,price2019viking
 raffield2019playing,price2019viking
 lund2021,toplak2017deviant
+toplak2018deconstructing,toplak2017deviant
 lund2021,knappett2013
