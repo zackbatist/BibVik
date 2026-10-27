@@ -132,10 +132,11 @@ cluster_label_lookup <- function(key) {
     transmute(id = as.character(community_id), label = label) |>
     deframe()
 }
-cluster_names <- function(key, width = 200) {
-  lookup <- cluster_label_lookup(key)
-  set_names(str_trunc(unname(lookup), width), names(lookup))
-}
+cluster_names <- function(key) cluster_label_lookup(key)
+
+# Cluster labels appear in full. A heatmap row label wraps onto a second line when it is
+# longer than this many characters.
+cluster_label_width <- 90
 
 # The annotated works with a cluster in this graph, and the true size of every cluster.
 cluster_context <- function(key) {
@@ -213,10 +214,12 @@ cluster_data <- map(set_names(names(gn_columns)), function(key) {
 # and the most annotated works any cluster holds.
 heatmap_n <- function(key) if (has_gn(key)) length(cluster_data[[key]]$topic$keep) else "n/a"
 most_annotated <- function() max(map_dbl(compact(cluster_data), \(d) max(d$topic$annotated_n$n_annotated)))
-# Figure height that gives every cluster row room for its label.
+# Figure height that gives every cluster row room for its label, with extra room for each
+# label that wraps onto a second line.
 heatmap_height <- function(key, kind) {
   n <- if (has_gn(key)) length(cluster_data[[key]][[kind]]$keep) else 0
-  max(7, 0.3 * n + 2)
+  wrapped <- if (n > 0) sum(nchar(as.character(cluster_data[[key]][[kind]]$labels)) > cluster_label_width) else 0
+  max(7, 0.3 * n + 0.15 * wrapped + 2)
 }
 
 category_note <- function(key, kind, data = cluster_data) {
@@ -236,6 +239,7 @@ category_heatmap <- function(key, kind, data = cluster_data, unit = "cluster") {
     mutate(cluster_label = d$labels[as.character(community_gn)]) |>
     ggplot(aes(x = category, y = cluster_label, fill = enrichment)) +
     geom_tile(colour = "white") +
+    scale_y_discrete(labels = scales::label_wrap(cluster_label_width)) +
     geom_text(aes(label = n), size = 3, colour = "grey20") +
     # Diverging scale centred on 1.0 (cluster rate == corpus rate): blue means
     # this cluster carries the category more than the corpus baseline
