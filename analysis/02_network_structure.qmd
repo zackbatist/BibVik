@@ -418,6 +418,41 @@ kcore_top_table <- function(key) {
     knitr::kable()
 }
 
+# The counts behind the in-degree histogram, with both graphs side by side. A work nothing
+# cites has an in-degree of 0, which a log scale cannot draw, so it is counted here only.
+in_degree_table <- function() {
+  map(graph_keys, function(key) count(metrics[[key]], in_degree, name = graph_labels[[key]])) |>
+    reduce(full_join, by = "in_degree") |>
+    mutate(across(-in_degree, ~ replace_na(.x, 0L))) |>
+    arrange(in_degree) |>
+    rename(`In-degree (times cited)` = in_degree) |>
+    knitr::kable()
+}
+
+# The numbers behind the two betweenness scatterplots: for each publication year, the works
+# with a parseable year, how many of them have nonzero betweenness, and the median raw
+# betweenness of those, with both graphs side by side.
+btw_year_table <- function() {
+  one <- function(key) {
+    btw_year_data(key) |>
+      filter(!is.na(year_numeric)) |>
+      group_by(year_numeric) |>
+      summarise(works = n(), nonzero = sum(betweenness_raw > 0),
+                median_nonzero = if (any(betweenness_raw > 0)) median(betweenness_raw[betweenness_raw > 0]) else NA_real_,
+                .groups = "drop") |>
+      rename_with(~ paste0(.x, "_", key), -year_numeric)
+  }
+  measures <- c("Works", "Works with nonzero betweenness", "Median raw betweenness of those")
+  full_join(one("annotated"), one("seed_filtered"), by = "year_numeric") |>
+    arrange(year_numeric) |>
+    mutate(across(c(starts_with("works_"), starts_with("nonzero_")), ~ replace_na(.x, 0L)),
+           across(starts_with("median_nonzero_"), ~ if_else(is.na(.x), "", as.character(round(.x, 2))))) |>
+    select(year_numeric, ends_with("_annotated"), ends_with("_seed_filtered")) |>
+    knitr::kable(col.names = c("Year",
+                               paste0(measures, " (", graph_labels[["annotated"]], ")"),
+                               paste0(measures, " (", graph_labels[["seed_filtered"]], ")")))
+}
+
 # Figures quoted in the prose, computed from the data so they follow a
 # re-render instead of being typed in.
 deg_stats <- map(metrics, function(m) {
@@ -575,6 +610,15 @@ plot_in_degree("annotated")
 plot_in_degree("seed_filtered")
 ```
 
+#### Table
+
+Works at each in-degree, in both graphs. Works that nothing cites have an in-degree of 0 and are not on the plot, which is on a log scale.
+
+```{r}
+#| label: degree-dist-table
+in_degree_table()
+```
+
 :::
 
 The bulk of the distribution follows a fairly straight decline on this log-log scale, consistent with the expected power-law pattern: most works are cited once or twice (`r deg_stats$annotated$share_le2` of works with at least one citation in Annotated and `r deg_stats$seed_filtered$share_le2` in Annotated, seed filtered), a much smaller number several times. In Annotated, `r deg_stats$annotated$share_le8` of works with at least one citation are cited eight times or fewer, and `r deg_stats$seed_filtered$share_le8` in Annotated, seed filtered. The tail is real, not an artifact of a truncated plot axis: the maximum in-degree is `r deg_stats$annotated$max_in` in Annotated and `r deg_stats$seed_filtered$max_in` in Annotated, seed filtered. A handful of works drive that high-citation tail, listed below rather than relied on to show clearly as bars on the histogram above, since bars this sparse are easy to miss regardless of binning.
@@ -681,6 +725,16 @@ plot_btw_year_nonzero("seed_filtered")
 #| fig-width: 8
 #| fig-height: 5
 plot_btw_year_full("seed_filtered")
+```
+
+#### Table
+
+For each publication year, the works with a parseable year, how many of them have nonzero betweenness, and the median raw betweenness of those. Both plots draw these works.
+
+```{r}
+#| label: betweenness-year-table
+#| classes: long-table
+btw_year_table()
 ```
 
 :::
@@ -1222,7 +1276,9 @@ gn_plot_partition <- function(key, layout = "fr",
   p
 }
 
-gn_community_graph <- function(key) {
+# The top clusters as nodes, and the citation edges that cross between them. The graph below
+# draws them and gn_community_table lists them.
+gn_community_data <- function(key) {
   d <- gn_prepare(key)
   part <- gn[[key]]$partition
   comm_nodes <- d$nodes |>
@@ -1251,6 +1307,14 @@ gn_community_graph <- function(key) {
               weight = sum(weight), .groups = "drop") |>
     select(-pair_key)
 
+  list(d = d, nodes = comm_nodes, edges = comm_edges)
+}
+
+gn_community_graph <- function(key) {
+  x <- gn_community_data(key)
+  d <- x$d
+  comm_nodes <- x$nodes
+  comm_edges <- x$edges
   g_comm <- graph_from_data_frame(comm_edges, directed = FALSE, vertices = comm_nodes)
   set.seed(42)
   ggraph(as_tbl_graph(g_comm), layout = "fr") +
@@ -1271,6 +1335,20 @@ gn_community_graph <- function(key) {
         gn_top_n, " cluster."
       )
     )
+}
+
+# The pairs of top clusters the graph joins, with the number of citation edges between them.
+gn_community_table <- function(key) {
+  x <- gn_community_data(key)
+  if (nrow(x$edges) == 0) return(knitr::kable(tibble(Result = "No two of these clusters share a citation edge.")))
+  label_of <- setNames(x$nodes$community_label, x$nodes$highlight)
+  size_of <- setNames(x$nodes$size, x$nodes$highlight)
+  x$edges |>
+    arrange(desc(weight), community_source, community_target) |>
+    transmute(`Cluster A` = unname(label_of[community_source]), `Papers in A` = unname(size_of[community_source]),
+              `Cluster B` = unname(label_of[community_target]), `Papers in B` = unname(size_of[community_target]),
+              `Citation edges between them` = weight) |>
+    knitr::kable()
 }
 
 gn_subcluster_text <- function() {
@@ -1339,6 +1417,20 @@ gn_subcluster_overview <- function(key) {
          x = "Papers in the community (log scale)", y = "Largest second piece in any division (papers)") +
     theme_minimal() +
     theme(legend.position = "bottom")
+}
+
+# The same communities as a table, the largest second piece first.
+gn_subcluster_overview_table <- function(key) {
+  s <- gn_subclusters_data(key)$splits
+  lookup <- gn_label_lookup(key)
+  s |>
+    mutate(substantial = largest_second_piece >= gn_substantial_size) |>
+    arrange(desc(largest_second_piece), desc(size)) |>
+    transmute(Community = gn_label_or_id(as.character(community_id), lookup), Papers = size,
+              `Largest second piece in any division` = largest_second_piece,
+              `Substantial divisions` = n_substantial,
+              `Has a substantial division` = if_else(substantial, "Yes", "No")) |>
+    knitr::kable()
 }
 
 # The coded categories of each annotated paper: every topic, method and source column
@@ -1708,6 +1800,28 @@ gn_community_graph("annotated")
 gn_community_graph("seed_filtered")
 ```
 
+##### Table, Annotated
+
+Pairs of the top `r gn_top_n` clusters that share at least one citation edge, with the number of edges. The graph draws the same pairs.
+
+```{r}
+#| label: community-table-annotated
+#| echo: false
+#| eval: !expr gn[["annotated"]]$available
+gn_community_table("annotated")
+```
+
+##### Table, Annotated, seed filtered
+
+Pairs of the top `r gn_top_n` clusters that share at least one citation edge, with the number of edges. The graph draws the same pairs.
+
+```{r}
+#| label: community-table-seed-filtered
+#| echo: false
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_community_table("seed_filtered")
+```
+
 :::
 
 A real edge here means real papers in one cluster actually cite, or
@@ -1808,6 +1922,21 @@ gn_cluster_relation_table <- function(key) {
               p = signif(p, 2), `Adjusted p` = signif(p_adj, 2)) |>
     knitr::kable()
 }
+
+# Every pair the heatmap shades, with the value that sets its colour.
+gn_cluster_relation_all_table <- function(key) {
+  r <- gn_cluster_rel[[key]]
+  lookup <- gn_label_lookup(key)
+  label_of <- setNames(paste0(seq_along(r$top), ". ", gn_label_or_id(r$top, lookup)), seq_along(r$top))
+  r$cells |>
+    arrange(p, desc(observed)) |>
+    transmute(`Citing cluster` = label_of[as.character(i)], `Cited cluster` = label_of[as.character(j)],
+              Citations = observed, `Citing papers` = papers, Expected = round(expected, 2),
+              `Log2 ratio` = round(log2((observed + 0.5) / (expected + 0.5)), 2),
+              p = signif(p, 2), `Adjusted p` = signif(p_adj, 2),
+              `Holds after correction` = if_else(p_adj < 0.05, "Yes", "No")) |>
+    knitr::kable()
+}
 ```
 
 ```{r}
@@ -1850,6 +1979,30 @@ gn_cluster_relation_heatmap("annotated")
 #| fig-height: 8.5
 #| eval: !expr gn_has_cluster_relations("seed_filtered")
 gn_cluster_relation_heatmap("seed_filtered")
+```
+
+###### Table, Annotated
+
+Every pair the heatmap shades, with the smallest p-values first. Pairs with no citations observed or expected are grey in the heatmap and are not listed.
+
+```{r}
+#| label: cluster-relation-all-annotated
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_cluster_relations("annotated")
+gn_cluster_relation_all_table("annotated")
+```
+
+###### Table, Annotated, seed filtered
+
+Every pair the heatmap shades, with the smallest p-values first. Pairs with no citations observed or expected are grey in the heatmap and are not listed.
+
+```{r}
+#| label: cluster-relation-all-seed-filtered
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_cluster_relations("seed_filtered")
+gn_cluster_relation_all_table("seed_filtered")
 ```
 
 :::
@@ -1907,6 +2060,28 @@ gn_subcluster_overview("annotated")
 #| fig-height: 6
 #| eval: !expr gn[["seed_filtered"]]$available
 gn_subcluster_overview("seed_filtered")
+```
+
+##### Table, Annotated
+
+Every community that was replayed, with the largest second piece first. The plot draws one dot for each.
+
+```{r}
+#| label: subcluster-overview-table-annotated
+#| classes: long-table
+#| eval: !expr gn[["annotated"]]$available
+gn_subcluster_overview_table("annotated")
+```
+
+##### Table, Annotated, seed filtered
+
+Every community that was replayed, with the largest second piece first. The plot draws one dot for each.
+
+```{r}
+#| label: subcluster-overview-table-seed-filtered
+#| classes: long-table
+#| eval: !expr gn[["seed_filtered"]]$available
+gn_subcluster_overview_table("seed_filtered")
 ```
 
 :::
@@ -2197,6 +2372,21 @@ gn_group_table <- function(key) {
     knitr::kable()
 }
 
+# The clusters drawn in the graph and the heatmap, with the group each belongs to.
+gn_group_clusters_table <- function(key) {
+  d <- gn_groups[[key]]
+  lookup <- gn_label_lookup(key)
+  sizes <- count(d$clusters, group, name = "n_clusters")
+  d$clusters |>
+    filter(papers >= gn_group_min_papers) |>
+    left_join(sizes, by = "group") |>
+    arrange(group, desc(papers)) |>
+    transmute(Group = group, `Clusters in the group` = n_clusters, Cluster = gn_label_or_id(community_gn, lookup),
+              Papers = papers, `Citation edges to other clusters` = links,
+              `Share of those edges inside the group` = scales::percent(share_links_inside, accuracy = 1)) |>
+    knitr::kable()
+}
+
 gn_group_graph <- function(key) {
   d <- gn_groups[[key]]
   lookup <- gn_label_lookup(key)
@@ -2364,6 +2554,30 @@ gn_group_heatmap("seed_filtered")
 gn_group_variants_table("seed_filtered")
 ```
 
+#### Table, Annotated
+
+The clusters of `r gn_group_min_papers` or more papers that the graph and the heatmap draw, with their groups. A cluster in a group of one forms a group alone.
+
+```{r}
+#| label: groups-clusters-annotated
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_group("annotated")
+gn_group_clusters_table("annotated")
+```
+
+#### Table, Annotated, seed filtered
+
+The clusters of `r gn_group_min_papers` or more papers that the graph and the heatmap draw, with their groups. A cluster in a group of one forms a group alone.
+
+```{r}
+#| label: groups-clusters-seed-filtered
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_group("seed_filtered")
+gn_group_clusters_table("seed_filtered")
+```
+
 :::
 
 The table before each figure lists the groups of two or more clusters, with the three largest clusters in each. In the cluster graph, each dot is a cluster sized by its papers, edges are citation links between clusters, and the legend names each group by its largest cluster, using the same numbers as the table. Grey dots are clusters that form a group alone. In the heatmap, darker cells mean more citation links between two clusters after allowing for how many links each has, and the red lines separate groups. The last table shows how closely each variant agrees with the consensus on the larger clusters, as an adjusted Rand index where 1 is identical. A variant that agrees little finds different structure or none. The consensus is built from all of them regardless, so the share reported for each group is a cautious figure.
@@ -2501,6 +2715,21 @@ gn_relation_table <- function(key) {
               `Adjusted p` = signif(p_adj, 2)) |>
     knitr::kable()
 }
+
+# Every pair of groups the heatmap shades, with the value that sets its colour.
+gn_relation_all_table <- function(key) {
+  r <- gn_relations[[key]]
+  nm <- gn_group_names(key)
+  label_of <- setNames(nm$name, as.character(nm$group))
+  r |>
+    arrange(p, desc(observed)) |>
+    transmute(`Group A` = label_of[as.character(group_a)], `Group B` = label_of[as.character(group_b)],
+              `Linked cluster pairs` = observed, Expected = round(expected, 1),
+              `Log2 ratio` = round(log2((observed + 0.5) / (expected + 0.5)), 2),
+              p = signif(p, 2), `Adjusted p` = signif(p_adj, 2),
+              `Holds after correction` = if_else(p_adj < 0.05, "Yes", "No")) |>
+    knitr::kable()
+}
 ```
 
 ```{r}
@@ -2543,6 +2772,30 @@ gn_relation_heatmap("annotated")
 #| fig-height: 8
 #| eval: !expr gn_has_relations("seed_filtered")
 gn_relation_heatmap("seed_filtered")
+```
+
+##### Table, Annotated
+
+Every pair of groups the heatmap shades, with the smallest p-values first.
+
+```{r}
+#| label: relation-all-annotated
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_relations("annotated")
+gn_relation_all_table("annotated")
+```
+
+##### Table, Annotated, seed filtered
+
+Every pair of groups the heatmap shades, with the smallest p-values first.
+
+```{r}
+#| label: relation-all-seed-filtered
+#| echo: false
+#| classes: long-table
+#| eval: !expr gn_has_relations("seed_filtered")
+gn_relation_all_table("seed_filtered")
 ```
 
 :::
@@ -2656,17 +2909,22 @@ gn_shape_classes <- function(key) {
 
 # Up to four clusters per shape, spread evenly through the sizes of the clusters
 # with enough papers to draw. The panels illustrate the shapes and are not a sample.
+gn_gallery_pick <- function(key) {
+  s <- gn_shapes[[key]]
+  spread <- function(x, k) x[unique(round(seq(1, length(x), length.out = min(k, length(x)))))]
+  big <- filter(s, papers >= gn_gallery_min_papers)
+  unlist(map(gn_shape_order, function(cl) {
+    ids <- big |> filter(shape == cl) |> arrange(papers) |> pull(community_gn)
+    if (length(ids) == 0) character() else spread(ids, 4)
+  }))
+}
+
 gn_shape_gallery <- function(key) {
   s <- gn_shapes[[key]]
   part <- gn[[key]]$partition
   g <- as_undirected(graphs[[key]], mode = "collapse")
   lookup <- gn_label_lookup(key)
-  spread <- function(x, k) x[unique(round(seq(1, length(x), length.out = min(k, length(x)))))]
-  big <- filter(s, papers >= gn_gallery_min_papers)
-  pick <- unlist(map(gn_shape_order, function(cl) {
-    ids <- big |> filter(shape == cl) |> arrange(papers) |> pull(community_gn)
-    if (length(ids) == 0) character() else spread(ids, 4)
-  }))
+  pick <- gn_gallery_pick(key)
   parts <- map(pick, function(cid) {
     set.seed(7)
     members <- part$node_id[part$community_gn == cid]
@@ -2719,6 +2977,21 @@ gn_shape_gallery <- function(key) {
     theme_void() +
     theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
     labs(title = paste0(graph_labels[[key]], ": clusters seen from the inside, ordered by shape"))
+}
+
+# The clusters in the panels, in panel order, with the number of hubs each panel's title gives.
+gn_gallery_table <- function(key) {
+  lookup <- gn_label_lookup(key)
+  hubs <- gn_cluster_edges(key) |>
+    filter(from == to) |>
+    distinct(from, source) |>
+    count(from, name = "hubs")
+  tibble(community_gn = gn_gallery_pick(key)) |>
+    left_join(gn_shapes[[key]], by = "community_gn") |>
+    left_join(hubs, by = c("community_gn" = "from")) |>
+    transmute(Shape = shape, Cluster = gn_label_or_id(community_gn, lookup), Papers = papers,
+              Hubs = replace_na(hubs, 0L)) |>
+    knitr::kable()
 }
 
 gn_shape_boundary <- function(key) {
@@ -2978,6 +3251,28 @@ gn_shape_gallery("annotated")
 #| fig-height: 9
 #| eval: !expr gn_has_shapes("seed_filtered")
 gn_shape_gallery("seed_filtered")
+```
+
+##### Table, Annotated
+
+The clusters in the panels above, in panel order.
+
+```{r}
+#| label: shape-gallery-table-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_gallery_table("annotated")
+```
+
+##### Table, Annotated, seed filtered
+
+The clusters in the panels above, in panel order.
+
+```{r}
+#| label: shape-gallery-table-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_gallery_table("seed_filtered")
 ```
 
 :::
