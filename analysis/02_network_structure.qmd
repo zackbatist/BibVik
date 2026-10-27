@@ -252,6 +252,10 @@ gn_label_lookup <- function(key) {
 gn_label_or_id <- function(ids, lookup) {
   coalesce(lookup$label[match(ids, lookup$community_id)], paste("Community", ids))
 }
+
+# Cluster labels appear in full. A plot that has room for only part of a label wraps it
+# onto a second line at this many characters.
+gn_label_width <- 40
 ```
 
 ```{r}
@@ -1322,7 +1326,7 @@ gn_subcluster_overview <- function(key) {
   lookup <- gn_label_lookup(key)
   s <- s |>
     mutate(substantial = largest_second_piece >= gn_substantial_size,
-           label = if_else(substantial, str_trunc(gn_label_or_id(as.character(community_id), lookup), 34), NA_character_),
+           label = if_else(substantial, str_wrap(gn_label_or_id(as.character(community_id), lookup), gn_label_width), NA_character_),
            kind = if_else(substantial, "Has a substantial division", "Sheds only small pieces"))
   ggplot(s, aes(x = size, y = largest_second_piece, colour = kind)) +
     geom_hline(yintercept = gn_substantial_size, linetype = "dashed", colour = "grey50") +
@@ -1440,7 +1444,7 @@ gn_subcluster_pieces_plot <- function(key) {
     xy <- scale(igraph::layout_with_fr(sg, niter = 600))
     names_in <- igraph::V(sg)$name
     n_sub <- d$splits$n_substantial[as.character(d$splits$community_id) == cid]
-    panel <- paste0(str_trunc(gn_label_or_id(cid, lookup), 32), ": ", length(piece1), " + ", length(piece2), " papers",
+    panel <- paste0(gn_label_or_id(cid, lookup), ": ", length(piece1), " + ", length(piece2), " papers",
                     if (n_sub >= 2) paste0(" (first of ", n_sub, " divisions)") else "")
     el <- igraph::as_edgelist(sg, names = FALSE)
     list(nodes = tibble(x = xy[, 1], y = xy[, 2], panel = panel,
@@ -1456,7 +1460,7 @@ gn_subcluster_pieces_plot <- function(key) {
     geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
     geom_point(data = nodes, aes(x, y, colour = piece), size = 1.8, alpha = 0.9) +
     scale_colour_manual(values = c("Larger piece" = "#4575b4", "Second piece" = "#d73027", "Rest of the community" = "grey70"), name = NULL) +
-    facet_wrap(~ panel, ncol = 4, scales = "free") +
+    facet_wrap(~ panel, ncol = 4, scales = "free", labeller = label_wrap_gen(width = gn_label_width)) +
     theme_void() +
     theme(strip.text = element_text(size = 7), legend.position = "bottom") +
     labs(title = paste0(graph_labels[[key]], ": communities with a substantial division, drawn at the cut"))
@@ -1774,7 +1778,7 @@ gn_cluster_relation_text <- function() {
 gn_cluster_relation_heatmap <- function(key) {
   r <- gn_cluster_rel[[key]]
   lookup <- gn_label_lookup(key)
-  labels <- paste0(seq_along(r$top), ". ", str_trunc(gn_label_or_id(r$top, lookup), 36))
+  labels <- paste0(seq_along(r$top), ". ", gn_label_or_id(r$top, lookup))
   cells <- r$cells |>
     mutate(value = log2((observed + 0.5) / (expected + 0.5)), star = if_else(p_adj < 0.05, "*", ""))
   ggplot(cells, aes(factor(j, levels = seq_along(r$top)), factor(i, levels = rev(seq_along(r$top))), fill = value)) +
@@ -1783,7 +1787,7 @@ gn_cluster_relation_heatmap <- function(key) {
     scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick", midpoint = 0,
                          limits = c(-3, 3), oob = scales::squish, na.value = "grey95",
                          name = "Citations against\nthe shuffle\n(log2 ratio)") +
-    scale_y_discrete(labels = rev(labels)) +
+    scale_y_discrete(labels = str_wrap(rev(labels), gn_label_width)) +
     labs(x = "Cited cluster, numbered as in the rows", y = "Citing cluster",
          title = paste0(graph_labels[[key]], ": where the largest clusters' citations land, against a shuffle"),
          subtitle = "Stars mark pairs that hold after correction.") +
@@ -1794,7 +1798,7 @@ gn_cluster_relation_heatmap <- function(key) {
 gn_cluster_relation_table <- function(key) {
   r <- gn_cluster_rel[[key]]
   lookup <- gn_label_lookup(key)
-  label_of <- setNames(paste0(seq_along(r$top), ". ", str_trunc(gn_label_or_id(r$top, lookup), 40)), seq_along(r$top))
+  label_of <- setNames(paste0(seq_along(r$top), ". ", gn_label_or_id(r$top, lookup)), seq_along(r$top))
   r$cells |>
     arrange(p, desc(observed)) |>
     slice_head(n = 10) |>
@@ -2208,7 +2212,7 @@ gn_group_graph <- function(key) {
     summarise(lead = community_gn[which.max(papers)], .groups = "drop") |>
     semi_join(filter(count(d$clusters, group, name = "n_clusters"), n_clusters >= 2), by = "group") |>
     arrange(group) |>
-    mutate(entry = paste0(group, ". ", str_trunc(gn_label_or_id(lead, lookup), 48)))
+    mutate(entry = paste0(group, ". ", gn_label_or_id(lead, lookup)))
   n_groups <- nrow(groups)
   # Consecutive groups get hues far apart, since neighbours in size are often neighbours on the plot.
   gcd <- function(a, b) if (b == 0) a else gcd(b, a %% b)
@@ -2228,7 +2232,7 @@ gn_group_graph <- function(key) {
     geom_segment(data = filter(segments, weight >= 2), aes(x, y, xend = xend, yend = yend, linewidth = weight), alpha = 0.2, colour = "grey50") +
     scale_linewidth(range = c(0.1, 2), guide = "none") +
     geom_point(data = nodes, aes(x, y, size = papers, colour = entry), alpha = 0.85) +
-    scale_colour_manual(values = c(palette, setNames("grey75", other)), name = "Group",
+    scale_colour_manual(values = c(palette, setNames("grey75", other)), name = "Group", labels = scales::label_wrap(gn_label_width),
                         guide = guide_legend(ncol = 1, override.aes = list(size = 4, alpha = 1))) +
     scale_size_continuous(range = c(1.5, 10), guide = "none") +
     theme_graph() +
@@ -2378,7 +2382,7 @@ gn_group_names <- function(key) {
     group_by(group) |>
     summarise(lead = community_gn[which.max(papers)], n_clusters = n(), .groups = "drop") |>
     filter(n_clusters >= 2) |>
-    mutate(name = paste0(group, ". ", str_trunc(gn_label_or_id(lead, lookup), 40)))
+    mutate(name = paste0(group, ". ", gn_label_or_id(lead, lookup)))
 }
 
 # For every pair of groups, the number of linked cluster pairs against a shuffle in
@@ -2474,7 +2478,7 @@ gn_relation_heatmap <- function(key) {
     scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick", midpoint = 0,
                          limits = c(-2, 2), oob = scales::squish, na.value = "grey95",
                          name = "Linked cluster pairs\nagainst the shuffle\n(log2 ratio)") +
-    scale_y_discrete(labels = label_of) +
+    scale_y_discrete(labels = function(x) str_wrap(label_of[x], gn_label_width)) +
     labs(x = "Group", y = NULL,
          title = paste0(graph_labels[[key]], ": how pairs of groups link against a shuffle"),
          subtitle = "Stars mark pairs that hold after correction. Grey cells are not tested.") +
@@ -2690,7 +2694,7 @@ gn_shape_gallery <- function(key) {
       xy <- scale(igraph::layout_with_fr(sg, coords = start, niter = 600,
                                          minx = lo, maxx = hi, miny = lo_y, maxy = hi_y))
     }
-    panel <- paste0(r$shape, ": ", str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers",
+    panel <- paste0(r$shape, ": ", gn_label_or_id(cid, lookup), " (", r$papers, " papers",
                     if (n_hubs >= 2) paste0(", ", n_hubs, " hubs") else "", ")")
     gen <- node_attrs$generation[match(nm, node_attrs$name)]
     el <- igraph::as_edgelist(sg, names = FALSE)
@@ -2709,7 +2713,7 @@ gn_shape_gallery <- function(key) {
     scale_size_continuous(range = c(0.4, 4), guide = "none") +
     scale_colour_manual(values = c("Hub (citing paper)" = "#d73027", "Cited by one hub" = "#4575b4",
                                    "Cited by two or more hubs" = "#7b3294"), name = NULL) +
-    facet_wrap(~ panel, ncol = 4, scales = "free") +
+    facet_wrap(~ panel, ncol = 4, scales = "free", labeller = label_wrap_gen(width = gn_label_width)) +
     theme_void() +
     theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
     labs(title = paste0(graph_labels[[key]], ": clusters seen from the inside, ordered by shape"))
