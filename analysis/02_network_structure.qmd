@@ -3163,6 +3163,217 @@ gn_shape_years("seed_filtered")
 
 :::
 
+### Self-citation
+
+```{r}
+#| label: self-citation-functions
+#| echo: false
+# Citations and self-citations for each group of papers.
+self_summary <- function(d, ...) {
+  d |>
+    group_by(...) |>
+    summarise(papers = n(), citations = sum(references), any_n = sum(any_author), first_n = sum(first_author), .groups = "drop") |>
+    mutate(any_pct = 100 * any_n / citations, first_pct = 100 * first_n / citations)
+}
+
+self_table <- function(s, group_name) {
+  s |>
+    rename(!!group_name := 1) |>
+    transmute(across(1, as.character), Papers = papers, Citations = citations,
+              `Any shared author` = any_n, `Any shared author (%)` = round(any_pct, 1),
+              `First author` = first_n, `First author (%)` = round(first_pct, 1)) |>
+    knitr::kable()
+}
+
+self_long <- function(s) {
+  s |>
+    pivot_longer(c(any_pct, first_pct), names_to = "measure", values_to = "share") |>
+    mutate(measure = recode(measure, any_pct = "Any shared author", first_pct = "First author"))
+}
+
+self_year_summary <- function() self_summary(self_papers, year) |> arrange(year)
+
+self_year_plot <- function() {
+  self_year_summary() |>
+    filter(!is.na(year), papers >= selfcite_min_papers) |>
+    self_long() |>
+    ggplot(aes(year, share, colour = measure)) +
+    geom_line() +
+    geom_point() +
+    scale_colour_manual(values = self_colours, name = NULL) +
+    scale_y_continuous(labels = function(x) paste0(x, "%"), limits = c(0, NA)) +
+    labs(x = "Year of the citing paper", y = "Share of its citations",
+         title = "Self-citations by year of the citing paper",
+         subtitle = paste0("Years with at least ", selfcite_min_papers, " annotated papers")) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+}
+
+self_year_table <- function() {
+  self_year_summary() |>
+    mutate(year = coalesce(as.character(year), "Unknown")) |>
+    self_table("Year of the citing paper")
+}
+
+self_bar_plot <- function(s, xlab, title) {
+  s |>
+    filter(papers >= selfcite_min_papers) |>
+    self_long() |>
+    ggplot(aes(.data[[names(s)[1]]], share, fill = measure)) +
+    geom_col(position = position_dodge()) +
+    scale_fill_manual(values = self_colours, name = NULL) +
+    scale_x_discrete(labels = scales::label_wrap(16)) +
+    scale_y_continuous(labels = function(x) paste0(x, "%")) +
+    labs(x = xlab, y = "Share of its citations", title = title,
+         subtitle = paste0("Groups with at least ", selfcite_min_papers, " annotated papers")) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+}
+
+self_authors_summary <- function() self_summary(self_papers, author_group)
+self_shape_summary   <- function() self_summary(self_papers, shape)
+
+self_top_table <- function(n = 15) {
+  self_papers |>
+    arrange(desc(any_author), desc(first_author), source) |>
+    head(n) |>
+    transmute(Paper = gn_paper_label(source), Authors = authors, Citations = references,
+              `Any shared author` = any_author, `Any shared author (%)` = round(100 * any_author / references, 1),
+              `First author` = first_author) |>
+    knitr::kable()
+}
+
+self_note <- function() {
+  paste0("Of the ", format(nrow(self_cites), big.mark = ","), " citations from annotated papers to works with a known author list, ",
+         format(sum(self_cites$any_author), big.mark = ","), " (", scales::percent(mean(self_cites$any_author), accuracy = 0.1),
+         ") go to a work that shares an author with the citing paper and ",
+         format(sum(self_cites$first_author), big.mark = ","), " (", scales::percent(mean(self_cites$first_author), accuracy = 0.1),
+         ") go to a work by the citing paper's first author. ",
+         sum(self_papers$any_author > 0), " of the ", nrow(self_papers),
+         " annotated papers cite at least one work they share an author with, and ",
+         sum(self_papers$first_author > 0), " cite at least one work by their first author.")
+}
+
+self_authors_note <- function() {
+  s <- self_authors_summary()
+  paste0("The share by any shared author rises from ", round(s$any_pct[1], 1), "% for single-author papers to ",
+         round(s$any_pct[nrow(s)], 1), "% for papers with six or more authors, because each added author adds a chance of a match. ",
+         "The first-author share stays between ", round(min(s$first_pct), 1), "% and ", round(max(s$first_pct), 1), "%.")
+}
+```
+
+A self-citation is a citation from a paper to a work that shares an author with it. Authors match on family name and first initial, the rule used for the shared authors above. The counts cover the citations from annotated papers, which the seed filter leaves unchanged. "Any shared author" counts a citation when any author of the citing paper also wrote the cited work. "First author" counts it when the citing paper's first author wrote the cited work.
+
+```{r}
+#| label: self-citation-setup
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+selfcite_min_papers <- 8
+self_colours <- c("Any shared author" = "steelblue", "First author" = "firebrick")
+
+# Every citation from an annotated paper to a work whose authors are known. The
+# seed filter leaves these unchanged. A citation is a self-citation when the citing
+# paper and the cited work share an author (any_author) or when the citing paper's
+# first author wrote the cited work (first_author).
+self_cites <- edges_list[["seed_filtered"]] |>
+  distinct(source, target) |>
+  filter(lengths(map(gn_author_keys[source], "key")) > 0,
+         lengths(map(gn_author_keys[target], "key")) > 0) |>
+  mutate(any_author   = map2_lgl(source, target, ~ any(gn_author_keys[[.x]]$key %in% gn_author_keys[[.y]]$key)),
+         first_author = map2_lgl(source, target, ~ gn_author_keys[[.x]]$key[1] %in% gn_author_keys[[.y]]$key))
+
+# One row per annotated paper.
+self_papers <- self_cites |>
+  group_by(source) |>
+  summarise(references = n(), any_author = sum(any_author), first_author = sum(first_author), .groups = "drop") |>
+  left_join(distinct(gn_cluster_edges("seed_filtered"), source, from), by = "source") |>
+  left_join(select(gn_shapes[["seed_filtered"]], community_gn, shape), by = c("from" = "community_gn")) |>
+  mutate(year = suppressWarnings(as.integer(node_attrs$year[match(source, node_attrs$name)])),
+         authors = lengths(map(gn_author_keys[source], "key")),
+         author_group = cut(authors, c(0, 1, 2, 3, 5, Inf), labels = c("1", "2", "3", "4 or 5", "6 or more")),
+         shape = factor(coalesce(shape, "Cluster of fewer than three papers"),
+                        levels = c(gn_shape_order, "Cluster of fewer than three papers")))
+```
+
+`r if (exists("self_papers")) self_note()`
+
+::: {.panel-tabset}
+
+##### By year
+
+```{r}
+#| label: self-citation-year
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_year_plot()
+```
+
+##### Table, by year
+
+The plot's numbers, with every year including the papers whose year is unknown. Papers is the number of annotated papers published that year, and Citations is the number of their citations to works with a known author list.
+
+```{r}
+#| label: self-citation-year-table
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_year_table()
+```
+
+##### By number of authors
+
+`r if (exists("self_papers")) self_authors_note()`
+
+```{r}
+#| label: self-citation-authors
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_bar_plot(self_authors_summary(), "Authors of the citing paper", "Self-citations by length of the citing paper's author list")
+```
+
+##### Table, by number of authors
+
+The plot's numbers.
+
+```{r}
+#| label: self-citation-authors-table
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_table(self_authors_summary(), "Authors of the citing paper")
+```
+
+##### By cluster shape
+
+```{r}
+#| label: self-citation-shape
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_bar_plot(self_shape_summary(), "Shape of the citing paper's cluster", "Self-citations by cluster shape")
+```
+
+##### Table, by cluster shape
+
+The plot's numbers. The cluster of the citing paper decides the shape, and the table includes the groups the plot leaves out.
+
+```{r}
+#| label: self-citation-shape-table
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_table(self_shape_summary(), "Shape of the citing paper's cluster")
+```
+
+##### Most self-citing papers
+
+The fifteen annotated papers with the most citations to works that share an author with them.
+
+```{r}
+#| label: self-citation-top
+#| echo: false
+#| eval: !expr exists("self_papers")
+self_top_table()
+```
+
+:::
+
 ## What the seed filter changes
 
 ```{r}
