@@ -1,6 +1,6 @@
 # Analysis
 
-The Quarto documents in this directory describe the corpus, the annotation data, the citation graph, and the three combined. Two toolsets run outside the render because they take hours or days or need a GPU. `gn_analysis/` runs Girvan-Newman community detection, and `cluster_labelling/` has a language model name the resulting clusters. Their finished outputs stay in their own results folders, and 02 reads each run from `analysis/gn_analysis/results/<run>/`.
+The Quarto documents in this directory describe the corpus, the annotation data, the citation graph, and the three combined. Three toolsets run outside the render because they take hours or days, need a GPU, or call an outside service and write files. `gn_analysis/` runs Girvan-Newman community detection, and `cluster_labelling/` has a language model name the resulting clusters. Their finished outputs stay in their own results folders, and 02 reads each run from `analysis/gn_analysis/results/<run>/`. `region_matching/` matches the Region field of the annotation to Wikidata places and writes `region_lookup.csv` beside its script, which 01 reads. Its README defines the region terms used in 01.
 
 ## Documents
 
@@ -8,7 +8,7 @@ The Quarto documents in this directory describe the corpus, the annotation data,
 |---|---|---|---|
 | `index.qmd` | Shell that includes 00 to 03 in order, then a Future work section | the four documents | none |
 | `00_overview.qmd` | Part 0, corpus overview | `data/bibliography.json`, `data/annotations.csv`, `data/citation_edgelist.csv`, `data/citation_edgelist_annotated.csv`, `CitationAnalysis/corrections.yaml` | none |
-| `01_annotation.qmd` | Part 1, annotation descriptives | `data/annotations.csv`, `data/region_lookup.csv` | `analysis/bibvik_annotation_df.csv` (untracked); `data/region_lookup.csv` and `data/region_lookup_needs_review.csv`, only when the disabled Wikidata chunks are switched on |
+| `01_annotation.qmd` | Part 1, annotation descriptives | `data/references.csv`, `analysis/region_matching/region_lookup.csv`, and the definitions in `analysis/region_matching/match_regions.R` | `analysis/bibvik_annotation_df.csv` (untracked) |
 | `02_network_structure.qmd` | Part 2, structure of the citation graph | `data/bibliography.json`, `data/citation_edgelist_annotated.csv`, `analysis/gn_analysis/edgelist_annotated_no_seed.csv`, `analysis/gn_analysis/results/<run>/` | `analysis/bibvik_node_table.csv` (untracked); layout images, only from disabled chunks |
 | `03_joined_descriptions.qmd` | Part 3, structure joined to annotation | `analysis/bibvik_annotation_df.csv`, `analysis/bibvik_node_table.csv` | none |
 | `open-scholarly-metadata.qmd` | Scratch notes on retrieving references from OpenCitations and Crossref | n/a | n/a |
@@ -17,12 +17,12 @@ The Quarto documents in this directory describe the corpus, the annotation data,
 
 ## Where outputs live
 
-Documents read committed files, so a render never needs a pipeline run. The exported bibliography and edge lists reach `data/` by a copy step, in the commits titled "Sync exported data files". Girvan-Newman runs are committed where they are written, the way the earlier single run was.
+Documents read committed files, so a render never needs a pipeline run. The exported bibliography and edge lists reach `data/` by a copy step, in the commits titled "Sync exported data files". Girvan-Newman runs and the region lookup are committed where they are written, the way the earlier single run was.
 
 | Output | Produced by | Working location | Read from |
 |---|---|---|---|
 | Bibliography, edge lists, graph exports | the BibVik pipeline in `CitationAnalysis/` | `BibVik_output/` on the server | `data/` |
-| Region lookup | the disabled Wikidata chunks in 01 | written straight into `data/` | `data/region_lookup.csv` |
+| Region lookup | `region_matching/match_regions.R`, stages `match` and `nesting` | `analysis/region_matching/`, with `region_lookup_needs_review.csv` beside it | the same folder |
 | Girvan-Newman runs and their labels | `gn_analysis/` and `cluster_labelling/` | `analysis/gn_analysis/results/<run>/`, labels in `<run>/labels/` | the same folder |
 
 ## Girvan-Newman and cluster labelling
