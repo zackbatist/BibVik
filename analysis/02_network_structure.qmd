@@ -2574,7 +2574,6 @@ gn_relation_table("seed_filtered")
 gn_shape_min_papers <- 3
 gn_shape_single_hub <- 0.95
 gn_shape_shared <- 0.2
-gn_twin_overlap <- 0.7
 gn_gallery_min_papers <- 30
 gn_shape_order <- c("Single hub", "Several hubs", "Shared references")
 
@@ -2743,9 +2742,9 @@ gn_shape_largest <- function(key, n = 10) {
     knitr::kable()
 }
 
-# Clusters whose two largest hubs cite nearly the same works. With all = TRUE
-# it returns every cluster that has two hubs, whatever their overlap.
-gn_twin_pairs <- function(key, all = FALSE) {
+# The two largest hubs of every cluster that has two or more hubs, with the share of
+# their references they have in common: the works both cite over the works either cites.
+gn_hub_pairs <- function(key) {
   ce <- gn_cluster_edges(key)
   refs <- ce |> group_by(source) |> summarise(refs = list(target), .groups = "drop")
   refs <- setNames(refs$refs, refs$source)
@@ -2760,33 +2759,7 @@ gn_twin_pairs <- function(key, all = FALSE) {
     mutate(overlap = length(intersect(refs[[paper_1]], refs[[paper_2]])) /
              length(union(refs[[paper_1]], refs[[paper_2]]))) |>
     ungroup() |>
-    filter(all | overlap >= gn_twin_overlap) |>
     arrange(desc(overlap))
-}
-
-gn_twin_note <- function(key) {
-  p <- gn_twin_pairs(key)
-  s <- gn_shapes[[key]]
-  in_shared <- sum(p$from %in% s$community_gn[s$shape == "Shared references"])
-  paste0(nrow(p), if (nrow(p) == 1) " cluster has" else " clusters have", " two largest hubs with at least ",
-         scales::percent(gn_twin_overlap), " of their references in common. ", in_shared,
-         if (in_shared == 1) " of them counts" else " of them count", " as sharing references in the table of shapes.")
-}
-
-gn_twin_table <- function(key) {
-  p <- gn_twin_pairs(key)
-  if (nrow(p) == 0) return(knitr::kable(tibble(Result = "No cluster has two hubs with near-identical reference lists.")))
-  lookup <- gn_label_lookup(key)
-  describe <- function(x) {
-    i <- match(x, node_attrs$name)
-    paste0(x, ": ", str_trunc(node_attrs$title[i], 60), " (", node_attrs$year[i], ")")
-  }
-  pdf_of <- function(x) map_chr(x, function(k) bib[[k]][["_source_pdf"]] %||% "")
-  p |>
-    transmute(Cluster = gn_label_or_id(from, lookup), `Hub A` = describe(paper_1), `Hub B` = describe(paper_2),
-              `References in common` = scales::percent(overlap, accuracy = 1),
-              `Same source PDF` = if_else(nzchar(pdf_of(paper_1)) & pdf_of(paper_1) == pdf_of(paper_2), "yes", "no")) |>
-    knitr::kable()
 }
 
 gn_paper_label <- function(x) {
@@ -2830,7 +2803,7 @@ gn_shared_author_pairs <- function(key) {
   edges <- edges_list[[key]]
   cites <- function(a, b) any(edges$source == a & edges$target == b)
   s <- gn_shapes[[key]] |> filter(shape == "Shared references")
-  gn_twin_pairs(key, all = TRUE) |>
+  gn_hub_pairs(key) |>
     filter(from %in% s$community_gn) |>
     mutate(authors = map2(paper_1, paper_2, gn_common_authors),
            cite_each_other = map2_lgl(paper_1, paper_2, ~ cites(.x, .y) || cites(.y, .x)))
@@ -2865,7 +2838,7 @@ gn_shared_table <- function(key) {
     group_by(from) |> summarise(cited_inside = n(), shared = sum(n_citing >= 2), .groups = "drop")
   s |>
     left_join(cited, by = c("community_gn" = "from")) |>
-    left_join(gn_twin_pairs(key, all = TRUE), by = c("community_gn" = "from")) |>
+    left_join(gn_hub_pairs(key), by = c("community_gn" = "from")) |>
     left_join(authors, by = c("community_gn" = "from")) |>
     arrange(desc(papers)) |>
     transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, Hubs = citing,
@@ -3055,39 +3028,9 @@ gn_shape_largest("seed_filtered")
 
 :::
 
-#### Possible bibliography errors
-
-Two different papers rarely cite nearly the same works. The tables list clusters whose two largest hubs share at least `r scales::percent(gn_twin_overlap)` of their references. When both records point at the same source PDF, one record is probably attached to the wrong file, and the edges from that record are suspect. Pairs like these also move their cluster into the shared references shape, so the count for that shape overstates how often independent papers cite the same works.
-
-::: {.panel-tabset}
-
-##### Annotated
-
-`r if (gn_has_shapes("annotated")) gn_twin_note("annotated")`
-
-```{r}
-#| label: shape-twins-annotated
-#| echo: false
-#| eval: !expr gn_has_shapes("annotated")
-gn_twin_table("annotated")
-```
-
-##### Annotated, seed filtered
-
-`r if (gn_has_shapes("seed_filtered")) gn_twin_note("seed_filtered")`
-
-```{r}
-#| label: shape-twins-seed-filtered
-#| echo: false
-#| eval: !expr gn_has_shapes("seed_filtered")
-gn_twin_table("seed_filtered")
-```
-
-:::
-
 #### The Shared references clusters
 
-In a Shared references cluster, two or more hubs cite some of the same works. The first table lists every cluster in the shape, largest first. "Cited works shared" counts the works inside the cluster that two or more of its papers cite, out of all the works cited inside it. "References in common" is the overlap of the two largest hubs' full reference lists, the same measure the table of possible bibliography errors uses. "Shared author" lists the authors those two hubs have in common, matched on family name and first initial, and "Hubs cite each other" says whether one of the two cites the other.
+In a Shared references cluster, two or more hubs cite some of the same works. The first table lists every cluster in the shape, largest first. "Cited works shared" counts the works inside the cluster that two or more of its papers cite, out of all the works cited inside it. "References in common" is the share of the two largest hubs' full reference lists that both cite, the works both cite over the works either cites. "Shared author" lists the authors those two hubs have in common, matched on family name and first initial, and "Hubs cite each other" says whether one of the two cites the other.
 
 ::: {.panel-tabset}
 
