@@ -2743,8 +2743,9 @@ gn_shape_largest <- function(key, n = 10) {
     knitr::kable()
 }
 
-# Clusters whose two largest hubs cite nearly the same works.
-gn_twin_pairs <- function(key) {
+# Clusters whose two largest hubs cite nearly the same works. With all = TRUE
+# it returns every cluster that has two hubs, whatever their overlap.
+gn_twin_pairs <- function(key, all = FALSE) {
   ce <- gn_cluster_edges(key)
   refs <- ce |> group_by(source) |> summarise(refs = list(target), .groups = "drop")
   refs <- setNames(refs$refs, refs$source)
@@ -2759,7 +2760,7 @@ gn_twin_pairs <- function(key) {
     mutate(overlap = length(intersect(refs[[paper_1]], refs[[paper_2]])) /
              length(union(refs[[paper_1]], refs[[paper_2]]))) |>
     ungroup() |>
-    filter(overlap >= gn_twin_overlap) |>
+    filter(all | overlap >= gn_twin_overlap) |>
     arrange(desc(overlap))
 }
 
@@ -2785,6 +2786,86 @@ gn_twin_table <- function(key) {
     transmute(Cluster = gn_label_or_id(from, lookup), `Hub A` = describe(paper_1), `Hub B` = describe(paper_2),
               `References in common` = scales::percent(overlap, accuracy = 1),
               `Same source PDF` = if_else(nzchar(pdf_of(paper_1)) & pdf_of(paper_1) == pdf_of(paper_2), "yes", "no")) |>
+    knitr::kable()
+}
+
+gn_paper_label <- function(x) {
+  i <- match(x, node_attrs$name)
+  paste0(str_trunc(node_attrs$title[i], 60), if_else(nzchar(node_attrs$year[i]), paste0(" (", node_attrs$year[i], ")"), ""))
+}
+
+# Every cluster in the Shared references shape, largest first.
+gn_shared_table <- function(key) {
+  s <- gn_shapes[[key]] |> filter(shape == "Shared references")
+  if (nrow(s) == 0) return(knitr::kable(tibble(Result = "No cluster has the Shared references shape.")))
+  lookup <- gn_label_lookup(key)
+  cited <- gn_cluster_edges(key) |>
+    filter(from == to) |>
+    group_by(from, target) |> summarise(n_citing = n_distinct(source), .groups = "drop") |>
+    group_by(from) |> summarise(cited_inside = n(), shared = sum(n_citing >= 2), .groups = "drop")
+  s |>
+    left_join(cited, by = c("community_gn" = "from")) |>
+    left_join(gn_twin_pairs(key, all = TRUE), by = c("community_gn" = "from")) |>
+    arrange(desc(papers)) |>
+    transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, Hubs = citing,
+              `Cited works shared` = paste0(shared, " of ", cited_inside, " (",
+                                            scales::percent(shared / cited_inside, accuracy = 1), ")"),
+              `Hub A` = gn_paper_label(paper_1), `Hub B` = gn_paper_label(paper_2),
+              `References in common` = scales::percent(overlap, accuracy = 0.1)) |>
+    knitr::kable()
+}
+
+# The five works cited by the most papers of each Shared references cluster, among
+# the works cited by two or more of them. The rank is the work's place in the Most
+# cited table, which ranks the works in the bibliography by in-degree.
+gn_shared_works <- function(key, per_cluster = 5) {
+  s <- gn_shapes[[key]] |> filter(shape == "Shared references")
+  if (nrow(s) == 0) return(knitr::kable(tibble(Result = "No cluster has the Shared references shape.")))
+  lookup <- gn_label_lookup(key)
+  cited_by <- edges_list[[key]] |>
+    count(target, name = "in_degree") |>
+    filter(target %in% node_attrs$name) |>
+    mutate(rank = min_rank(desc(in_degree)))
+  gn_cluster_edges(key) |>
+    filter(from == to, from %in% s$community_gn) |>
+    group_by(from, target) |> summarise(n_citing = n_distinct(source), .groups = "drop") |>
+    filter(n_citing >= 2) |>
+    left_join(cited_by, by = "target") |>
+    left_join(select(node_attrs, name, title, year), by = c("target" = "name")) |>
+    left_join(select(s, community_gn, papers), by = c("from" = "community_gn")) |>
+    arrange(desc(papers), from, desc(n_citing), desc(in_degree)) |>
+    group_by(from) |> filter(row_number() <= per_cluster) |> ungroup() |>
+    transmute(Cluster = gn_label_or_id(from, lookup), Work = str_trunc(coalesce(na_if(title, ""), target), 70),
+              Year = year, `Cited by` = n_citing, `Citations in the network` = in_degree,
+              `Rank in the network` = rank) |>
+    knitr::kable()
+}
+
+# The years of each shape's hubs and cited works, one row per shape.
+gn_shape_years <- function(key) {
+  s <- gn_shapes[[key]]
+  inside <- gn_cluster_edges(key) |>
+    filter(from == to) |>
+    left_join(select(s, community_gn, shape), by = c("from" = "community_gn")) |>
+    filter(!is.na(shape))
+  year_of <- function(x) suppressWarnings(as.integer(node_attrs$year[match(x, node_attrs$name)]))
+  med <- function(x) if (all(is.na(x))) NA_real_ else median(x, na.rm = TRUE)
+  map(gn_shape_order, function(sh) {
+    e <- filter(inside, shape == sh)
+    hubs <- distinct(e, from, source) |> mutate(year = year_of(source))
+    cited <- distinct(e, from, target) |> mutate(year = year_of(target))
+    shared <- e |> group_by(from, target) |> summarise(n = n_distinct(source), .groups = "drop") |>
+      filter(n >= 2) |> mutate(year = year_of(target))
+    span <- hubs |> group_by(from) |>
+      summarise(span = suppressWarnings(max(year, na.rm = TRUE) - min(year, na.rm = TRUE)), .groups = "drop") |>
+      filter(is.finite(span))
+    tibble(Shape = sh, Clusters = n_distinct(e$from),
+           `Median year of the hubs` = med(hubs$year),
+           `Median year of the cited works` = med(cited$year),
+           `Median year of the works cited by two or more hubs` = med(shared$year),
+           `Median years between a cluster's first and last hub` = med(span$span))
+  }) |>
+    bind_rows() |>
     knitr::kable()
 }
 ```
@@ -2937,6 +3018,80 @@ gn_twin_table("annotated")
 #| echo: false
 #| eval: !expr gn_has_shapes("seed_filtered")
 gn_twin_table("seed_filtered")
+```
+
+:::
+
+#### The Shared references clusters
+
+In a Shared references cluster, two or more hubs cite some of the same works. The first table lists every cluster in the shape, largest first. "Cited works shared" counts the works inside the cluster that two or more of its papers cite, out of all the works cited inside it. "References in common" is the overlap of the two largest hubs' full reference lists, the same measure the table of possible bibliography errors uses.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: shape-shared-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_shared_table("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: shape-shared-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shared_table("seed_filtered")
+```
+
+:::
+
+The second table lists the five works cited by the most papers in each cluster, among the works cited by two or more of them. "Citations in the network" counts every paper that cites the work, and "Rank in the network" is its place in the Most cited table near the top of this page.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: shape-shared-works-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_shared_works("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: shape-shared-works-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shared_works("seed_filtered")
+```
+
+:::
+
+The third table sets the three shapes side by side by year. A hub's year is its publication year, and a cluster's span is the number of years between its first and last hub.
+
+::: {.panel-tabset}
+
+##### Annotated
+
+```{r}
+#| label: shape-years-annotated
+#| echo: false
+#| eval: !expr gn_has_shapes("annotated")
+gn_shape_years("annotated")
+```
+
+##### Annotated, seed filtered
+
+```{r}
+#| label: shape-years-seed-filtered
+#| echo: false
+#| eval: !expr gn_has_shapes("seed_filtered")
+gn_shape_years("seed_filtered")
 ```
 
 :::
