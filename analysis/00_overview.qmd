@@ -63,7 +63,7 @@ No other structured record of exclusion reasons for the remaining works in the s
 
 ## Corpus composition
 
-The following sections describe the corpus by publication year, entry type, authorship, venue, and language. Each has a tab for the 369-paper F1 set and a tab for the full bibliography (`r scales::comma(n_live)` live entries).
+The following sections describe the corpus by publication year, entry type, authorship, venue, and language. Each has a tab for the 369-paper F1 set and a tab for the full bibliography (`r scales::comma(n_live)` live entries). The year, entry type, authorship and venue sections also have a Table tab with the counts behind both charts.
 
 ### Publications by year
 
@@ -114,6 +114,24 @@ peak_n_full <- max(pubyears_full$n)
 
 The full bibliography spans `r min(pubyears_full$year)` to `r max(pubyears_full$year)`, at true year-by-year resolution; `r peak_year_full` is the single busiest year, with `r peak_n_full` entries.
 
+#### Table
+
+Years with no F1 paper show 0 in the F1 column. The full bibliography column counts the entries with a four-digit year from 1900 to 2026.
+
+```{r}
+#| label: overview-pubyears-table
+#| classes: long-table
+full_join(
+  pubyears %>% transmute(year = as.integer(as.character(publication_year)), f1 = n),
+  pubyears_full %>% transmute(year, full = n),
+  by = "year"
+) %>%
+  mutate(across(c(f1, full), ~ replace_na(.x, 0L))) %>%
+  arrange(year) %>%
+  mutate(year = as.character(year)) %>%
+  knitr::kable(col.names = c("Year", "F1 papers", "Full corpus entries"))
+```
+
 :::
 
 ### Entry types
@@ -162,6 +180,20 @@ ggplot(data = entry_type_counts_full, aes(x = fct_reorder(entry_type, n), y = n)
 ```
 
 `r nrow(entry_type_counts_full)` entry types appear across the full bibliography. The most common, `r entry_type_counts_full$entry_type[1]`, accounts for `r entry_type_counts_full$n[1]` of `r sum(entry_type_counts_full$n)` entries (`r scales::percent(entry_type_counts_full$n[1] / sum(entry_type_counts_full$n), accuracy = 1)`).
+
+#### Table
+
+```{r}
+#| label: overview-entry-types-table
+full_join(
+  entry_type_counts %>% rename(f1 = n),
+  entry_type_counts_full %>% rename(full = n),
+  by = "entry_type"
+) %>%
+  mutate(across(c(f1, full), ~ replace_na(.x, 0L))) %>%
+  arrange(desc(full), desc(f1)) %>%
+  knitr::kable(col.names = c("Entry type", "F1 papers", "Full corpus entries"))
+```
 
 :::
 
@@ -223,6 +255,22 @@ max_authors_full <- max(n_authors_full$n_authors)
 ```
 
 This full-corpus count is taken directly from the length of each record's author list, not from the manually coded author-gender columns used for the F1 tab (those columns were only completed for the 369 F1 papers). `r n_single_author_full` of `r nrow(n_authors_full)` entries (`r scales::percent(n_single_author_full / nrow(n_authors_full), accuracy = 1)`) have a single listed author. The chart is capped at `r axis_cap` authors for readability; `r n_over_cap` entries exceed that, including the largest, with `r max_authors_full`.
+
+#### Table
+
+The charts group the full bibliography at `r axis_cap` or more authors. The table gives every author count.
+
+```{r}
+#| label: overview-author-counts-table
+full_join(
+  n_authors %>% count(n_authors, name = "f1"),
+  n_authors_full %>% count(n_authors, name = "full"),
+  by = "n_authors"
+) %>%
+  mutate(across(c(f1, full), ~ replace_na(.x, 0L))) %>%
+  arrange(n_authors) %>%
+  knitr::kable(col.names = c("Authors", "F1 papers", "Full corpus entries"))
+```
 
 :::
 
@@ -297,6 +345,25 @@ venue_counts_full %>%
 ```
 
 `r n_with_venue_full` of `r scales::comma(n_live)` entries are published in an identifiable journal or edited volume; a further `r scales::comma(sum(map_lgl(bib_live, ~ !is.null(.x$publisher) && is.null(.x$journaltitle) && is.null(.x$booktitle))))` have only a publisher recorded, typically standalone books, and are excluded from this chart since a publisher is not a comparable unit to a journal or volume title. The full bibliography draws on `r nrow(venue_counts_full)` distinct journals and volumes, `r n_single_venue_full` of which contribute only a single entry.
+
+#### Table
+
+Venues with `r min_shown` or more F1 papers, or `r min_shown_full` or more entries in the full bibliography: every venue on either chart.
+
+```{r}
+#| label: overview-venues-table
+full_join(
+  venue_counts %>% rename(f1 = n),
+  venue_counts_full %>% rename(full = n),
+  by = c("venue_type", "venue")
+) %>%
+  mutate(across(c(f1, full), ~ replace_na(.x, 0L)),
+         venue = if_else(venue == "", "(blank)", venue)) %>%
+  filter(f1 >= min_shown | full >= min_shown_full) %>%
+  arrange(desc(full), desc(f1), venue) %>%
+  select(venue, venue_type, f1, full) %>%
+  knitr::kable(col.names = c("Venue", "Type", "F1 papers", "Full corpus entries"))
+```
 
 :::
 
@@ -382,6 +449,10 @@ lang_counts_full %>%
 
 ## Citation detection per F1 paper
 
+::: {.panel-tabset}
+
+### Plot
+
 ```{r}
 #| label: overview-citation-counts
 #| fig-cap: "Distribution of outgoing (resolved) citation counts across the F1 corpus."
@@ -401,6 +472,21 @@ ggplot(out_counts_full, aes(x = n_citations)) +
   labs(x = "Resolved outgoing citations", y = "Number of F1 papers",
        title = "Distribution of citation counts per F1 paper")
 ```
+
+### Table
+
+Papers per bin of ten resolved outgoing citations, as in the histogram.
+
+```{r}
+#| label: overview-citation-counts-table
+out_counts_full %>%
+  count(upper = ceiling(n_citations / 10) * 10, name = "n") %>%
+  complete(upper = seq(0, max(upper), by = 10), fill = list(n = 0L)) %>%
+  transmute(bin = if_else(upper == 0, "0", paste(upper - 9, "to", upper)), n) %>%
+  knitr::kable(col.names = c("Resolved outgoing citations", "F1 papers"))
+```
+
+:::
 
 ```{r}
 #| label: overview-citation-zero-check-text
