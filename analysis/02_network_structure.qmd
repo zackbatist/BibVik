@@ -3687,7 +3687,7 @@ plot_membership("annotated", "cluster_kmeans", "Citation graph, K-means clusters
 
 ## Node-table export
 
-`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. The Girvan-Newman columns are left out when a run has not been installed.
+`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. `shape_gn` and `shape_gn_seed_filtered` hold the shape of each paper's cluster, and `cluster_hub_gn` and `cluster_hub_gn_seed_filtered` mark the papers that cite other members of their cluster. The Girvan-Newman columns are left out when a run has not been installed.
 
 ```{r}
 #| label: node-table-export
@@ -3726,6 +3726,22 @@ gn_group_column <- function(key, column) {
 for (spec in list(c("annotated", "group_gn"), c("seed_filtered", "group_gn_seed_filtered"))) {
   group_column <- gn_group_column(spec[1], spec[2])
   if (!is.null(group_column)) node_table <- node_table |> left_join(group_column, by = "name")
+}
+
+# The shape of each paper's cluster, and whether the paper is a hub of it. Clusters
+# of fewer than three papers have no shape.
+gn_shape_column <- function(key, shape_column, hub_column) {
+  hubs <- gn_cluster_edges(key) |> filter(from == to) |> distinct(source) |> pull(source)
+  gn[[key]]$partition |>
+    mutate(community_gn = as.character(community_gn)) |>
+    left_join(select(gn_shapes[[key]], community_gn, shape), by = "community_gn") |>
+    transmute(name = node_id, "{shape_column}" := shape, "{hub_column}" := node_id %in% hubs)
+}
+for (spec in list(c("annotated", "shape_gn", "cluster_hub_gn"),
+                  c("seed_filtered", "shape_gn_seed_filtered", "cluster_hub_gn_seed_filtered"))) {
+  if (gn_has_shapes(spec[1])) {
+    node_table <- node_table |> left_join(gn_shape_column(spec[1], spec[2], spec[3]), by = "name")
+  }
 }
 
 write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
