@@ -2662,17 +2662,43 @@ gn_shape_gallery <- function(key) {
     ids <- big |> filter(shape == cl) |> arrange(papers) |> pull(community_gn)
     if (length(ids) == 0) character() else spread(ids, 4)
   }))
-  set.seed(7)
   parts <- map(pick, function(cid) {
+    set.seed(7)
     members <- part$node_id[part$community_gn == cid]
     sg <- igraph::induced_subgraph(g, members)
-    xy <- scale(igraph::layout_with_fr(sg, niter = 600))
+    nm <- igraph::V(sg)$name
+    cites <- igraph::as_edgelist(igraph::induced_subgraph(graphs[[key]], members))
+    hubs <- unique(cites[, 1])
+    n_hubs <- length(hubs)
+    n_citing <- as.integer(table(factor(cites[, 2], levels = nm)))
     r <- filter(s, community_gn == cid)
-    panel <- paste0(r$shape, ": ", str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers)")
-    gen <- node_attrs$generation[match(igraph::V(sg)$name, node_attrs$name)]
+    if (r$shape == "Single hub" || n_hubs < 2) {
+      xy <- scale(igraph::layout_with_fr(sg, niter = 600))
+    } else {
+      # Hubs are pinned on a circle and each cited work starts at the centre of the hubs that cite it,
+      # so hubs with the same references stay apart and their shared references sit between them.
+      ang <- seq(0, 2 * pi, length.out = n_hubs + 1)[seq_len(n_hubs)]
+      start <- matrix(0, nrow = length(nm), ncol = 2)
+      is_hub <- nm %in% hubs
+      start[match(hubs, nm), ] <- cbind(cos(ang), sin(ang))
+      for (i in which(!is_hub)) {
+        citing <- match(cites[cites[, 2] == nm[i], 1], nm)
+        start[i, ] <- if (length(citing) > 0) colMeans(start[citing, , drop = FALSE]) else c(0, 0)
+      }
+      start[!is_hub, ] <- start[!is_hub, ] + matrix(rnorm(2 * sum(!is_hub), sd = 0.05), ncol = 2)
+      lo <- ifelse(is_hub, start[, 1], -10); hi <- ifelse(is_hub, start[, 1], 10)
+      lo_y <- ifelse(is_hub, start[, 2], -10); hi_y <- ifelse(is_hub, start[, 2], 10)
+      xy <- scale(igraph::layout_with_fr(sg, coords = start, niter = 600,
+                                         minx = lo, maxx = hi, miny = lo_y, maxy = hi_y))
+    }
+    panel <- paste0(r$shape, ": ", str_trunc(gn_label_or_id(cid, lookup), 30), " (", r$papers, " papers",
+                    if (n_hubs >= 2) paste0(", ", n_hubs, " hubs") else "", ")")
+    gen <- node_attrs$generation[match(nm, node_attrs$name)]
     el <- igraph::as_edgelist(sg, names = FALSE)
     list(nodes = tibble(x = xy[, 1], y = xy[, 2], ties = igraph::degree(sg), panel = panel,
-                        role = if_else(gen %in% c("F1", "P"), "Hub (citing paper)", "Cited work")),
+                        role = case_when(gen %in% c("F1", "P") ~ "Hub (citing paper)",
+                                         n_citing >= 2 ~ "Cited by two or more hubs",
+                                         TRUE ~ "Cited by one hub")),
          edges = tibble(x = xy[el[, 1], 1], y = xy[el[, 1], 2], xend = xy[el[, 2], 1], yend = xy[el[, 2], 2], panel = panel))
   })
   levels <- map_chr(parts, ~ .x$nodes$panel[1])
@@ -2682,7 +2708,8 @@ gn_shape_gallery <- function(key) {
     geom_segment(data = edges, aes(x, y, xend = xend, yend = yend), alpha = 0.3, colour = "grey60", linewidth = 0.25) +
     geom_point(data = arrange(nodes, role == "Hub (citing paper)"), aes(x, y, size = sqrt(ties), colour = role), alpha = 0.9) +
     scale_size_continuous(range = c(0.4, 4), guide = "none") +
-    scale_colour_manual(values = c("Hub (citing paper)" = "#d73027", "Cited work" = "#4575b4"), name = NULL) +
+    scale_colour_manual(values = c("Hub (citing paper)" = "#d73027", "Cited by one hub" = "#4575b4",
+                                   "Cited by two or more hubs" = "#7b3294"), name = NULL) +
     facet_wrap(~ panel, ncol = 4, scales = "free") +
     theme_void() +
     theme(strip.text = element_text(size = 6.5), legend.position = "bottom") +
@@ -2804,7 +2831,7 @@ gn_shape_classes("seed_filtered")
 
 #### What the shapes look like
 
-Each panel is one cluster, and its title names the cluster's shape. Red dots are hubs and blue dots are the works they cite. The panels are ordered by shape, with up to four clusters per shape. They come from clusters of `r gn_gallery_min_papers` or more papers, spread evenly across their sizes, so they illustrate the shapes and do not sample them.
+Each panel is one cluster, and its title names the cluster's shape. Red dots are hubs, blue dots are works cited by one hub, and purple dots are works cited by two or more hubs. In panels with several hubs, the hubs sit apart and each cited work sits near the hubs that cite it, so shared references show between them. The panels are ordered by shape, with up to four clusters per shape. They come from clusters of `r gn_gallery_min_papers` or more papers, spread evenly across their sizes, so they illustrate the shapes and do not sample them.
 
 ::: {.panel-tabset}
 
