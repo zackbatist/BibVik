@@ -2256,27 +2256,10 @@ gender_mixed_table(mixed_source_raw, "source")
 
 Region is the one annotation field the coder fills in from the study's own
 keywords, so it is free text and may be blank (see the codebook). The
-sections below turn it into places. They use these terms, each with one
-meaning:
-
-| Term | Means |
-|---|---|
-| **region token** | One entry of the Region field after splitting on commas, trimming, and removing a trailing period. "Birka, Sweden" is two tokens. |
-| **canonical token** | A token after spelling variants are folded (`Danmark` becomes `Denmark`), so one place is one row. Counts and joins use this. |
-| **matched place** | A canonical token matched to one Wikidata item, so it has an identifier, a label and usually a point. |
-| **override** | A manual correction for a token whose automatic match was a different, same-named place elsewhere. |
-| **macro-region** | A token that is not plotted as a point, because one point cannot stand for it. An area name (Scandinavia, Viking world) also has no country and no super-region. A country name (Sweden, Norway) keeps its country and super-region. |
-| **country** | The first ancestor of a matched place, following Wikidata's "located in" chain, that is itself a country. |
-| **super-region** | A hand-authored group of countries: Scandinavia, British Isles, Continental Europe, Eastern Europe, Baltic states, North Atlantic. |
-
-"Scandinavia" is both a token and a super-region. As a token it is what the
-authors wrote, and it is a macro-region, so it has no super-region of its
-own. As a super-region it is derived from a country: a paper tagged only
-"Scandinavia" has none, a paper tagged "Birka" has the super-region
-Scandinavia. Administrative regions (counties, parishes) are not resolved:
-they differ in kind between countries and change over time, so nesting stops
-at country. The columns of the lookup file, the stages that produce it and the
-known issues are in `analysis/region_matching/README.md`.
+sections below turn it into places. The terms they use (region token,
+canonical token, matched place, override, macro-region, country,
+super-region), the columns of the lookup file, the stages that produce it and
+the known issues are defined in `analysis/region_matching/README.md`.
 
 ::: {.panel-tabset}
 
@@ -2323,27 +2306,13 @@ region_counts %>%
 
 ### Matching to Wikidata
 
-Region is free text drawn directly from each paper, not a controlled
-vocabulary: spelling variants and mixed specificity (continent, country,
-named site) count as distinct terms in the word cloud above. Wikidata is
-used to consolidate these to real places with coordinates. Pleiades,
-Pelagios/Peripleo, and iDAI.gazetteer were considered and set aside: all
-three are institutionally anchored in Mediterranean/classical-world
-antiquity, with no confirmed non-trivial coverage of Viking-Age
-Scandinavia. Wikidata was used instead for its dense, well-curated
-coverage of Scandinavian archaeological sites and structured multilingual
-labels/aliases, which handle spelling variants (Danmark/Denmark) close to
-for free.
-
-The matching does not run in this document. It calls Wikidata's SPARQL
-endpoint, takes about ten minutes and writes files, so it is a script in
+The matching does not run in this document. It is a script in
 `analysis/region_matching/`, run by hand when the lookup needs building or
-refreshing (stages `probe`, `match` and `nesting`; see the README there).
-This document does two things with it. It `source()`s the script for its
-definitions, so the override table, the macro-region lists and the
-super-region map are each defined once, there. And it reads
-`analysis/region_matching/region_lookup.csv`, which the script writes, the same way Topic,
-Method, and Source read their own derived data.
+refreshing. This document `source()`s the script for its definitions, so the
+override table, the macro-region lists and the super-region map are each
+defined once, there, and reads `analysis/region_matching/region_lookup.csv`,
+which the script writes, the same way Topic, Method, and Source read their own
+derived data. Why Wikidata, and how to run the stages, are in the README.
 
 ```{r}
 #| label: region-tokens
