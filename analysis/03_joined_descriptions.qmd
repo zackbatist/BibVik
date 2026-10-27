@@ -490,6 +490,7 @@ The numbers behind the heatmap: one row per cluster and category, largest cluste
 
 ```{r}
 #| label: cluster-vs-topic-annotated-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("annotated")
 knitr::kable(category_table("annotated", "topic"))
@@ -501,6 +502,7 @@ Same columns, for the seed-filtered run.
 
 ```{r}
 #| label: cluster-vs-topic-seed-filtered-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("seed_filtered")
 knitr::kable(category_table("seed_filtered", "topic"))
@@ -546,6 +548,7 @@ The numbers behind the heatmap: one row per cluster and category, largest cluste
 
 ```{r}
 #| label: cluster-vs-method-annotated-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("annotated")
 knitr::kable(category_table("annotated", "method"))
@@ -557,6 +560,7 @@ Same columns, for the seed-filtered run.
 
 ```{r}
 #| label: cluster-vs-method-seed-filtered-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("seed_filtered")
 knitr::kable(category_table("seed_filtered", "method"))
@@ -602,6 +606,7 @@ The numbers behind the heatmap: one row per cluster and category, largest cluste
 
 ```{r}
 #| label: cluster-vs-source-annotated-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("annotated")
 knitr::kable(category_table("annotated", "source"))
@@ -613,6 +618,7 @@ Same columns, for the seed-filtered run.
 
 ```{r}
 #| label: cluster-vs-source-seed-filtered-table
+#| classes: long-table
 #| echo: false
 #| eval: !expr has_gn("seed_filtered")
 knitr::kable(category_table("seed_filtered", "source"))
