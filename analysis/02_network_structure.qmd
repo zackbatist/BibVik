@@ -2016,6 +2016,7 @@ Each row is one cluster.
 
 ```{r}
 #| label: cluster-labels-annotated
+#| classes: long-table
 #| echo: false
 #| eval: !expr file.exists(gn_path("annotated", "labels", "cluster_labels.csv"))
 gn_cluster_labels_table("annotated")
@@ -2025,6 +2026,7 @@ gn_cluster_labels_table("annotated")
 
 ```{r}
 #| label: cluster-labels-seed-filtered
+#| classes: long-table
 #| echo: false
 #| eval: !expr file.exists(gn_path("seed_filtered", "labels", "cluster_labels.csv"))
 gn_cluster_labels_table("seed_filtered")
@@ -3070,6 +3072,7 @@ The second table lists the five works cited by the most papers in each cluster, 
 
 ```{r}
 #| label: shape-shared-works-annotated
+#| classes: long-table
 #| echo: false
 #| eval: !expr gn_has_shapes("annotated")
 gn_shared_works("annotated")
@@ -3079,6 +3082,7 @@ gn_shared_works("annotated")
 
 ```{r}
 #| label: shape-shared-works-seed-filtered
+#| classes: long-table
 #| echo: false
 #| eval: !expr gn_has_shapes("seed_filtered")
 gn_shared_works("seed_filtered")
