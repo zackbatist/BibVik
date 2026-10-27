@@ -490,6 +490,178 @@ bind_rows(
 
 :::
 
+### Gender over time
+
+The first-author and all-author charts above count genders per year. This section turns them into shares of each year's papers. Bars are the share for one year, faded when few papers were published that year. The line is a 3-year rolling share and the band is its Wilson 95% interval on the pooled counts. The dashed line is the share across the whole corpus. Early years hold only a handful of papers each, so read the line and the band before any single bar.
+
+```{r}
+#| label: gender-trend-setup
+# One row per paper, from the objects built above.
+paper_traits <- composition_candidates %>%
+  select(citekey, n_authors, composition = composition_singleauthor_split) %>%
+  left_join(df %>% select(citekey, publication_year), by = "citekey")
+
+# Per series and year: papers with the trait, their share of that year's
+# papers and its Wilson interval, and the same on a 3-year pooled window.
+# `counts` has one row per series and year, with every year present.
+share_trend <- function(counts) {
+  counts %>%
+    left_join(n_per_year, by = "publication_year") %>%
+    arrange(series, publication_year) %>%
+    group_by(series) %>%
+    mutate(share = n / n_papers_year,
+           corpus_share = sum(n) / sum(n_papers_year),
+           ci_lower = wilson_lower_bound(n, n_papers_year),
+           ci_upper = wilson_upper_bound(n, n_papers_year),
+           ci_width = ci_upper - ci_lower,
+           roll_n = roll_sum3(n),
+           roll_n_papers_year = roll_sum3(n_papers_year),
+           roll_share = roll_n / roll_n_papers_year,
+           roll_ci_lower = wilson_lower_bound(roll_n, roll_n_papers_year),
+           roll_ci_upper = wilson_upper_bound(roll_n, roll_n_papers_year)) %>%
+    ungroup()
+}
+
+share_trend_plot <- function(d, fill, ylab, ncol = 1, free_y = FALSE) {
+  ggplot(d, aes(x = publication_year)) +
+    geom_col(aes(y = share, alpha = -ci_width), fill = fill) +
+    geom_hline(aes(yintercept = corpus_share), linetype = "dashed", colour = "grey40", linewidth = 0.3) +
+    geom_ribbon(aes(ymin = roll_ci_lower, ymax = roll_ci_upper, group = series),
+                fill = trend_col, alpha = 0.18) +
+    geom_line(aes(y = roll_share, group = series), colour = trend_col, linewidth = 0.8) +
+    facet_wrap(~ series, ncol = ncol, scales = if (free_y) "free_y" else "fixed") +
+    scale_alpha_continuous(range = c(0.25, 1), guide = "none") +
+    scale_y_continuous(labels = scales::percent) +
+    labs(x = "", y = ylab) +
+    theme_bw() +
+    theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1))
+}
+
+# `count_name` heads the column of papers with the trait. `series_name` heads
+# the series column, or drops it when there is only one series.
+share_trend_table <- function(d, count_name, series_name = NULL) {
+  out <- d %>%
+    transmute(series, year = publication_year, papers = n, `papers that year` = n_papers_year,
+              `share (%)` = as_pct(share),
+              `Wilson 95% low (%)` = as_pct(ci_lower), `Wilson 95% high (%)` = as_pct(ci_upper),
+              `papers in window` = roll_n, `all papers in window` = roll_n_papers_year,
+              `smoothed share (%)` = as_pct(roll_share),
+              `smoothed Wilson 95% low (%)` = as_pct(roll_ci_lower),
+              `smoothed Wilson 95% high (%)` = as_pct(roll_ci_upper))
+  names(out)[names(out) == "papers"] <- count_name
+  if (is.null(series_name)) return(select(out, -series))
+  names(out)[names(out) == "series"] <- series_name
+  out
+}
+
+woman_first_trend <- df %>%
+  group_by(publication_year) %>%
+  summarise(n = sum(Authors..Genders..Author.1. %in% "Woman"), .groups = "drop") %>%
+  mutate(series = "Woman first author") %>%
+  share_trend()
+
+composition_levels <- c("solo-female", "solo-male", "all-female (multi-author)",
+                        "all-male (multi-author)", "mixed", "uncertain")
+composition_trend <- paper_traits %>%
+  mutate(series = factor(if_else(composition %in% composition_levels[1:5], composition, "uncertain"),
+                         levels = composition_levels)) %>%
+  count(publication_year, series, name = "n") %>%
+  complete(publication_year, series, fill = list(n = 0)) %>%
+  group_by(series) %>%
+  filter(sum(n) > 0) %>%
+  ungroup() %>%
+  mutate(series = droplevels(series)) %>%
+  share_trend()
+```
+
+::: {.panel-tabset}
+
+#### First author
+
+```{r}
+#| label: gender-trend-first-author
+#| fig-cap: "Share of each year's papers with a woman first author. Faint bars: few papers that year. Line and band: 3-year rolling share with its Wilson 95% interval. Dashed: share across the corpus."
+#| fig-width: 10
+#| fig-height: 3.5
+share_trend_plot(woman_first_trend, gender_colors[["Woman"]], "Papers with a woman first author")
+```
+
+#### Author-list composition
+
+```{r}
+#| label: gender-trend-composition
+#| fig-cap: "Share of each year's papers by author-list composition (the solo split out scheme above). Each panel has its own vertical scale. Faint bars: few papers that year. Line and band: 3-year rolling share with its Wilson 95% interval. Dashed: share across the corpus."
+#| fig-width: 11
+#| fig-height: 6
+share_trend_plot(composition_trend, nord_palettes$victory_bonds[3], "Share of each year's papers",
+                 ncol = 3, free_y = TRUE)
+```
+
+#### Table, first author
+
+The first-author chart's numbers: one row per year. The first Wilson interval is on that year's papers. The smoothed columns pool a year with its neighbours (fewer at the ends of the range) and take the interval on the pooled counts, as plotted.
+
+```{r}
+#| label: gender-trend-first-author-table
+knitr::kable(
+share_trend_table(woman_first_trend, "woman first")
+)
+```
+
+#### Table, author-list composition
+
+The composition chart's numbers: one row per composition and year, read as in Table, first author.
+
+```{r}
+#| label: gender-trend-composition-table
+knitr::kable(
+share_trend_table(composition_trend, "papers", "composition")
+)
+```
+
+:::
+
+### Team size over time
+
+Authors per paper counted from the same author lists. The chart shows the share of each year's papers with two or more authors. The median is 1 in most years, so it would plot flat. The table adds the median and mean authors per paper. Bars, line, band and dashed line are read as in the section above.
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r}
+#| label: team-size-trend
+#| fig-cap: "Share of each year's papers with two or more authors. Faint bars: few papers that year. Line and band: 3-year rolling share with its Wilson 95% interval. Dashed: share across the corpus."
+#| fig-width: 10
+#| fig-height: 3.5
+team_size_trend <- paper_traits %>%
+  group_by(publication_year) %>%
+  summarise(n = sum(n_authors >= 2), .groups = "drop") %>%
+  mutate(series = "Two or more authors") %>%
+  share_trend()
+
+share_trend_plot(team_size_trend, nord_palettes$victory_bonds[1], "Papers with two or more authors")
+```
+
+#### Table
+
+The chart's numbers: one row per year, with the median and mean authors per paper added.
+
+```{r}
+#| label: team-size-trend-table
+knitr::kable(
+share_trend_table(team_size_trend, "two or more authors") %>%
+  left_join(paper_traits %>%
+              group_by(year = publication_year) %>%
+              summarise(`median authors` = median(n_authors),
+                        `mean authors` = round(mean(n_authors), 2),
+                        .groups = "drop"),
+            by = "year")
+)
+```
+
+:::
+
 ## Topic
 
 A paper can carry a Primary-coded topic (the coder's judgment of its main
@@ -3007,3 +3179,218 @@ year_wilson_table(region_year_wilson, "region")
 ```
 
 :::
+
+### Change over time by country and super-region
+
+Most region tokens are too scattered to show a trend. Countries and super-regions (defined above) group them. A paper counts once toward a country however many of its tokens fall there, and toward every country it names, so the counts do not sum to the corpus. A paper with no country, such as one tagged only with an area name like Scandinavia, counts in every year's denominator and toward no country. The bars, enrichment and Wilson intervals are built as for Topic, Method and Source, and the threshold is the same 8 papers as for tokens above. A country or super-region with fewer papers is left out. Enrichment is a year's share of papers divided by the same level's share across the whole corpus.
+
+```{r}
+#| label: region-geo-over-time-setup
+geo_has_data <- exists("region_df") && "country" %in% names(region_df) &&
+  any(!is.na(region_df$country))
+
+# Per country (or super-region) and year, built as topic_year_wilson is. Every
+# year is present for every level, so the 3-year window pools neighbouring
+# years. Levels run from the most papers down.
+geo_year_stats <- function(group) {
+  long <- region_df %>%
+    filter(!is.na(.data[[group]])) %>%
+    distinct(citekey, level = .data[[group]]) %>%
+    left_join(df %>% select(citekey, publication_year), by = "citekey")
+
+  corpus_rate <- long %>%
+    count(level, name = "n_corpus") %>%
+    filter(n_corpus >= region_min_shown_year) %>%
+    arrange(desc(n_corpus)) %>%
+    mutate(corpus_rate = n_corpus / n_total_papers)
+
+  long %>%
+    filter(level %in% corpus_rate$level) %>%
+    mutate(level = factor(level, levels = corpus_rate$level)) %>%
+    count(publication_year, level, name = "n") %>%
+    complete(publication_year = unique(n_per_year$publication_year), level, fill = list(n = 0)) %>%
+    left_join(n_per_year, by = "publication_year") %>%
+    left_join(corpus_rate %>% mutate(level = factor(level, levels = level)), by = "level") %>%
+    mutate(prop = n / n_papers_year,
+           enrichment = prop / corpus_rate,
+           ci_lower = wilson_lower_bound(n, n_papers_year),
+           ci_upper = wilson_upper_bound(n, n_papers_year),
+           ci_width = ci_upper - ci_lower) %>%
+    arrange(level, publication_year) %>%
+    group_by(level) %>%
+    mutate(roll_n = roll_sum3(n),
+           roll_n_papers_year = roll_sum3(n_papers_year),
+           roll_enrichment = (roll_n / roll_n_papers_year) / corpus_rate,
+           roll_ci_lower = wilson_lower_bound(roll_n, roll_n_papers_year) / corpus_rate,
+           roll_ci_upper = wilson_upper_bound(roll_n, roll_n_papers_year) / corpus_rate) %>%
+    ungroup() %>%
+    rename(all_of(setNames("level", group)))
+}
+
+# `type` is "count", "enrichment" or "smoothed", as for the Topic charts.
+geo_plot <- function(d, group, type, fill = "#bf616a", ncol = 4) {
+  p <- ggplot(d, aes(x = publication_year))
+  if (type == "count") {
+    p <- p +
+      geom_col(aes(y = n, alpha = -ci_width), fill = fill) +
+      labs(x = "", y = "Papers published that year", title = "Count")
+  } else {
+    p <- p +
+      geom_col(aes(y = enrichment, alpha = -ci_width), fill = fill) +
+      geom_hline(yintercept = 1, linetype = "dashed", colour = "grey40", linewidth = 0.3) +
+      coord_cartesian(ylim = c(0, 4)) +
+      labs(x = "", y = "Enrichment vs. this level's own corpus-wide rate",
+           title = if (type == "smoothed") "Enrichment, smoothed trend" else "Enrichment, by year")
+    if (type == "smoothed") {
+      p <- p +
+        geom_ribbon(aes(ymin = pmax(roll_ci_lower, 0), ymax = pmin(roll_ci_upper, 4), group = 1),
+                    fill = trend_col, alpha = 0.18) +
+        geom_line(aes(y = roll_enrichment, group = 1), colour = trend_col, linewidth = 0.8)
+    }
+  }
+  p +
+    facet_wrap(group, ncol = ncol) +
+    scale_alpha_continuous(range = c(0.25, 1), guide = "none") +
+    theme_bw() +
+    theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
+          plot.title = element_text(size = 11))
+}
+
+if (geo_has_data) {
+  geo_country <- geo_year_stats("country")
+  geo_superregion <- geo_year_stats("super_region")
+} else {
+  cat("No place in region_lookup.csv has a country yet. Run the nesting",
+      "stage in analysis/region_matching/ (see the README there).\n")
+}
+```
+
+:::: {.panel-tabset}
+
+#### Country
+
+::: {.panel-tabset}
+
+##### Count
+
+```{r}
+#| label: region-country-over-time-count
+#| eval: !expr geo_has_data
+#| fig-cap: "Papers per year. Faint bars: few papers that year."
+#| fig-width: 11
+#| fig-height: 6
+geo_plot(geo_country, "country", "count")
+```
+
+##### Enrichment
+
+```{r}
+#| label: region-country-over-time-enrichment
+#| eval: !expr geo_has_data
+#| fig-cap: "Enrichment per year, as that year's share of papers divided by the level's share across the whole corpus (dashed line = 1.0x). Faint bars: few papers that year."
+#| fig-width: 11
+#| fig-height: 6
+geo_plot(geo_country, "country", "enrichment")
+```
+
+##### Smoothed trend
+
+```{r}
+#| label: region-country-over-time-smoothed
+#| eval: !expr geo_has_data
+#| fig-cap: "Same enrichment bars, with a 3-year rolling average and its own confidence band."
+#| fig-width: 11
+#| fig-height: 6
+geo_plot(geo_country, "country", "smoothed")
+```
+
+##### Table, by year
+
+The numbers behind the Count and Enrichment charts: one row per country and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: region-country-over-time-table
+#| eval: !expr geo_has_data
+knitr::kable(
+year_wilson_table(geo_country, "country")
+)
+```
+
+##### Table, smoothed
+
+The numbers behind the Smoothed trend chart. Counts are pooled over a year and its neighbours (fewer at the ends of the range). The interval is computed on the pooled counts and divided by the level's corpus rate, as plotted.
+
+```{r}
+#| label: region-country-over-time-table-smoothed
+#| eval: !expr geo_has_data
+knitr::kable(
+year_roll_table(geo_country, "country")
+)
+```
+
+:::
+
+#### Super-region
+
+::: {.panel-tabset}
+
+##### Count
+
+```{r}
+#| label: region-superregion-over-time-count
+#| eval: !expr geo_has_data
+#| fig-cap: "Papers per year. Faint bars: few papers that year."
+#| fig-width: 11
+#| fig-height: 3.5
+geo_plot(geo_superregion, "super_region", "count")
+```
+
+##### Enrichment
+
+```{r}
+#| label: region-superregion-over-time-enrichment
+#| eval: !expr geo_has_data
+#| fig-cap: "Enrichment per year, as that year's share of papers divided by the level's share across the whole corpus (dashed line = 1.0x). Faint bars: few papers that year."
+#| fig-width: 11
+#| fig-height: 3.5
+geo_plot(geo_superregion, "super_region", "enrichment")
+```
+
+##### Smoothed trend
+
+```{r}
+#| label: region-superregion-over-time-smoothed
+#| eval: !expr geo_has_data
+#| fig-cap: "Same enrichment bars, with a 3-year rolling average and its own confidence band."
+#| fig-width: 11
+#| fig-height: 3.5
+geo_plot(geo_superregion, "super_region", "smoothed")
+```
+
+##### Table, by year
+
+The numbers behind the Count and Enrichment charts: one row per super-region and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: region-superregion-over-time-table
+#| eval: !expr geo_has_data
+knitr::kable(
+year_wilson_table(geo_superregion, "super_region")
+)
+```
+
+##### Table, smoothed
+
+The numbers behind the Smoothed trend chart. Counts are pooled over a year and its neighbours (fewer at the ends of the range). The interval is computed on the pooled counts and divided by the level's corpus rate, as plotted.
+
+```{r}
+#| label: region-superregion-over-time-table-smoothed
+#| eval: !expr geo_has_data
+knitr::kable(
+year_roll_table(geo_superregion, "super_region")
+)
+```
+
+:::
+
+::::
