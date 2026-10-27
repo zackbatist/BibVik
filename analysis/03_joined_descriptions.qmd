@@ -1048,3 +1048,178 @@ knitr::kable(category_table("seed_filtered", "source", group_data, "Group"))
 ```
 
 :::
+
+## Hubs of Shared references and Single hub clusters
+
+```{r}
+#| label: hub-functions
+#| echo: false
+# The hubs of Shared references clusters beside the hubs of Single hub clusters.
+# Part 2 writes each paper's cluster shape and whether it is a hub of its cluster
+# into the node table. A hub here is a paper that cites other members of its cluster.
+hub_shape_columns <- c(annotated = "shape_gn", seed_filtered = "shape_gn_seed_filtered")
+hub_flag_columns <- c(annotated = "cluster_hub_gn", seed_filtered = "cluster_hub_gn_seed_filtered")
+hub_groups <- c("Shared references", "Single hub")
+hub_colours <- c("Shared references" = "firebrick", "Single hub" = "steelblue")
+hub_families <- c("Topic", "Method", "Source of evidence")
+
+has_hubs <- function(key) {
+  all(c(hub_shape_columns[[key]], hub_flag_columns[[key]]) %in% names(node_table)) &&
+    any(!is.na(node_table[[hub_shape_columns[[key]]]]))
+}
+
+# Wilson score interval (the same method as wilson_lower_bound), both bounds.
+wilson_bounds <- function(x, n, conf = 0.95) {
+  z <- qnorm(1 - (1 - conf) / 2)
+  phat <- x / n
+  denom <- 1 + z^2 / n
+  centre <- phat + z^2 / (2 * n)
+  adj <- z * sqrt(phat * (1 - phat) / n + z^2 / (4 * n^2))
+  tibble(lower = (centre - adj) / denom, upper = (centre + adj) / denom)
+}
+
+# The annotated hubs of the two shapes, one row per hub, with every category column.
+hub_papers <- function(key) {
+  cluster_table_annotated |>
+    filter(as.logical(.data[[hub_flag_columns[[key]]]]) %in% TRUE,
+           .data[[hub_shape_columns[[key]]]] %in% hub_groups,
+           !is.na(publication_year)) |>
+    transmute(name, shape = .data[[hub_shape_columns[[key]]]],
+              across(c(contains("Topics.."), contains("Methods.."), contains("Sources.of.Evidence.."))))
+}
+
+# One row per category and group: the hubs that carry it, their share of the group, and
+# the Wilson interval on that share. A hub carries a category when the column has a value.
+hub_cells <- function(key) {
+  hubs <- hub_papers(key)
+  sizes <- count(hubs, shape, name = "hubs")
+  cells <- hubs |>
+    pivot_longer(-c(name, shape), names_to = "column", values_to = "value") |>
+    mutate(family = case_when(str_detect(column, fixed("Topics..")) ~ "Topic",
+                              str_detect(column, fixed("Methods..")) ~ "Method",
+                              TRUE ~ "Source of evidence"),
+           category = str_squish(str_replace_all(
+             str_remove(column, "^(Topics|Methods|Sources\\.of\\.Evidence)\\.\\."), fixed("."), " "))) |>
+    group_by(family, category, shape) |>
+    summarise(n = sum(!is.na(value)), .groups = "drop") |>
+    left_join(sizes, by = "shape") |>
+    mutate(share = n / hubs)
+  bind_cols(cells, wilson_bounds(cells$n, cells$hubs))
+}
+
+# Shared references against Single hub for every category. The interval on the
+# difference is built from the two Wilson intervals (Newcombe's method), and a
+# category differs when that interval excludes zero.
+hub_comparison <- function(key) {
+  cells <- hub_cells(key)
+  inner_join(filter(cells, shape == "Shared references"), filter(cells, shape == "Single hub"),
+             by = c("family", "category"), suffix = c("_shared", "_single")) |>
+    mutate(difference = share_shared - share_single,
+           diff_lower = difference - sqrt((share_shared - lower_shared)^2 + (upper_single - share_single)^2),
+           diff_upper = difference + sqrt((upper_shared - share_shared)^2 + (share_single - lower_single)^2),
+           differs = diff_lower > 0 | diff_upper < 0,
+           family = factor(family, levels = hub_families)) |>
+    arrange(family, desc(difference), category)
+}
+
+hub_note <- function(key) {
+  d <- hub_comparison(key)
+  sizes <- d |> slice(1) |> transmute(a = hubs_shared, b = hubs_single)
+  flagged <- d |> filter(differs) |> arrange(desc(abs(difference)))
+  paste0("The comparison covers ", sizes$a, " annotated hubs in Shared references clusters and ", sizes$b,
+         " in Single hub clusters. ", nrow(flagged), " of ", nrow(d), " categories differ",
+         if (nrow(flagged) > 0) paste0(": ", paste0(flagged$category, " (", sprintf("%+.0f", 100 * flagged$difference), " points)", collapse = ", ")) else "",
+         ".")
+}
+
+hub_plot <- function(key) {
+  d <- hub_comparison(key) |>
+    mutate(label = if_else(differs, paste0(category, " *"), category),
+           row = fct_rev(fct_inorder(paste(family, category, sep = "||"))))
+  long <- bind_rows(
+    transmute(d, family, row, label, group = "Shared references", share = share_shared, lower = lower_shared, upper = upper_shared),
+    transmute(d, family, row, label, group = "Single hub", share = share_single, lower = lower_single, upper = upper_single))
+  lookup <- distinct(d, row, label) |> deframe()
+  ggplot(long, aes(share, row, colour = group)) +
+    geom_pointrange(aes(xmin = lower, xmax = upper), position = position_dodge(width = 0.6), size = 0.3) +
+    facet_grid(family ~ ., scales = "free_y", space = "free_y") +
+    scale_colour_manual(values = hub_colours, name = NULL, breaks = hub_groups) +
+    scale_y_discrete(labels = lookup) +
+    scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    labs(x = "Share of the group's annotated hubs", y = NULL,
+         title = paste0(graph_labels[[key]], ": categories carried by the hubs of Shared references and Single hub clusters"),
+         subtitle = "Points are shares with Wilson 95% intervals. A star marks a difference whose 95% interval excludes zero.") +
+    theme_minimal() +
+    theme(legend.position = "bottom", strip.text.y = element_text(angle = 0))
+}
+
+hub_table <- function(key) {
+  as_interval <- function(lower, upper) paste0(round(100 * lower, 1), " to ", round(100 * upper, 1))
+  hub_comparison(key) |>
+    transmute(Kind = as.character(family), Category = category,
+              `Hubs, Shared references` = n_shared, `Share (%), Shared references` = round(100 * share_shared, 1),
+              `Interval (%), Shared references` = as_interval(lower_shared, upper_shared),
+              `Hubs, Single hub` = n_single, `Share (%), Single hub` = round(100 * share_single, 1),
+              `Interval (%), Single hub` = as_interval(lower_single, upper_single),
+              `Difference (points)` = round(100 * difference, 1),
+              `Difference interval (points)` = as_interval(diff_lower, diff_upper),
+              `Interval excludes zero` = if_else(differs, "yes", "no")) |>
+    knitr::kable()
+}
+```
+
+A hub is a paper that cites other members of its cluster, and Part 2 sorts every cluster into a shape by how its hubs cite. This section sets the annotated hubs of Shared references clusters beside the annotated hubs of Single hub clusters, to see whether the two kinds of cluster draw on different topics, methods and sources of evidence. A hub carries a category when the annotation marks it as primary or secondary. Each point is the share of a group's hubs that carry a category, with its Wilson 95% interval. The difference between the two shares has an interval built from the two Wilson intervals (Newcombe's method), and a category counts as different when that interval excludes zero. The intervals are not adjusted for the number of categories compared, and the Shared references group is small.
+
+### Topics, methods and sources of evidence
+
+::: {.panel-tabset}
+
+#### Annotated
+
+`r if (has_hubs("annotated")) hub_note("annotated")`
+
+```{r}
+#| label: hub-plot-annotated
+#| echo: false
+#| fig-width: 11
+#| fig-height: 14
+#| eval: !expr has_hubs("annotated")
+hub_plot("annotated")
+```
+
+#### Annotated, seed filtered
+
+`r if (has_hubs("seed_filtered")) hub_note("seed_filtered")`
+
+```{r}
+#| label: hub-plot-seed-filtered
+#| echo: false
+#| fig-width: 11
+#| fig-height: 14
+#| eval: !expr has_hubs("seed_filtered")
+hub_plot("seed_filtered")
+```
+
+#### Table, annotated
+
+The numbers behind the plot: one row per category, topics first, then methods, then sources of evidence, and within each kind the category the Shared references hubs carry most above the Single hub hubs first. The columns headed "Hubs" count the hubs that carry the category.
+
+```{r}
+#| label: hub-table-annotated
+#| echo: false
+#| eval: !expr has_hubs("annotated")
+hub_table("annotated")
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: hub-table-seed-filtered
+#| echo: false
+#| eval: !expr has_hubs("seed_filtered")
+hub_table("seed_filtered")
+```
+
+:::
