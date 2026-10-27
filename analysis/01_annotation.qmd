@@ -100,6 +100,112 @@ roll_sum3 <- function(x) {
   vapply(seq_len(n), function(i) sum(x[max(1, i - 1):min(n, i + 1)]), numeric(1))
 }
 
+# Tables that sit beside the plots, in a Plot / Table tabset. Each takes
+# the object its plot already built, so a table holds exactly the numbers
+# the plot draws. Shares are rounded for reading; the Wilson columns are
+# the same 95% interval the faded bars use. `group` is the name of the
+# grouping column ("topic", "method", "source" or "region").
+as_pct <- function(x, digits = 1) round(100 * x, digits)
+
+# Per group and year: counts, share, enrichment and the Wilson interval.
+# Years with no papers have no share and are dropped.
+year_wilson_table <- function(d, group) {
+  d %>%
+    filter(!is.na(n_papers_year)) %>%
+    arrange(.data[[group]], publication_year) %>%
+    select(all_of(group), year = publication_year, papers = n,
+           `papers that year` = n_papers_year, share = prop, enrichment,
+           low = ci_lower, high = ci_upper) %>%
+    mutate(share = as_pct(share), enrichment = round(enrichment, 2),
+           low = as_pct(low), high = as_pct(high)) %>%
+    rename(`share (%)` = share, `Wilson 95% low (%)` = low,
+           `Wilson 95% high (%)` = high)
+}
+
+# The same, for the 3-year rolling window behind the smoothed trend. The
+# interval is on the pooled counts and is in enrichment units, as plotted.
+year_roll_table <- function(d, group) {
+  d %>%
+    filter(!is.na(n_papers_year)) %>%
+    arrange(.data[[group]], publication_year) %>%
+    select(all_of(group), year = publication_year,
+           `papers in window` = roll_n, `all papers in window` = roll_n_papers_year,
+           `smoothed enrichment` = roll_enrichment,
+           low = roll_ci_lower, high = roll_ci_upper) %>%
+    mutate(across(c(`smoothed enrichment`, low, high), ~ round(., 2))) %>%
+    rename(`Wilson 95% low (enrichment)` = low, `Wilson 95% high (enrichment)` = high)
+}
+
+# First-author gender within each group. Top row = top bar of the plot.
+gender_first_author_table <- function(merged, group) {
+  merged %>%
+    group_by(across(all_of(group))) %>%
+    summarise(papers = sum(n),
+              `woman first` = sum(n[gender_first_author %in% "Woman"]),
+              `man first` = sum(n[gender_first_author %in% "Man"]),
+              .groups = "drop") %>%
+    mutate(`other or missing` = papers - `woman first` - `man first`,
+           `% woman first` = as_pct(`woman first` / papers),
+           `Wilson 95% low (%)` = as_pct(wilson_lower_bound(`woman first`, papers)),
+           `Wilson 95% high (%)` = as_pct(wilson_upper_bound(`woman first`, papers))) %>%
+    arrange(desc(`% woman first`)) %>%
+    select(all_of(group), papers, `woman first`, `man first`, `other or missing`,
+           `% woman first`, `Wilson 95% low (%)`, `Wilson 95% high (%)`)
+}
+
+# Author-list gender composition within each group, as n (share of the
+# group's papers). Rows run from the largest female share down, as the
+# plot's bars run from the top.
+gender_composition_table <- function(comp_summary, female_share, group) {
+  groups5 <- c("solo-female", "all-female (multi-author)", "mixed",
+               "all-male (multi-author)", "solo-male")
+  comp_summary %>%
+    mutate(composition = if_else(composition_singleauthor_split %in% groups5,
+                                 composition_singleauthor_split, "uncertain")) %>%
+    group_by(across(all_of(c(group, "total", "composition")))) %>%
+    summarise(n = sum(n), .groups = "drop") %>%
+    mutate(cell = paste0(n, " (", round(100 * n / total), "%)")) %>%
+    select(-n) %>%
+    pivot_wider(names_from = composition, values_from = cell, values_fill = "0 (0%)") %>%
+    left_join(female_share, by = group) %>%
+    mutate(female_share = replace_na(female_share, 0)) %>%
+    arrange(desc(female_share)) %>%
+    select(all_of(group), papers = total, any_of(c(groups5, "uncertain")))
+}
+
+# Mixed-gender papers only: how many have a woman first author, and how
+# large the author teams are.
+gender_mixed_table <- function(raw, group) {
+  raw %>%
+    group_by(across(all_of(group))) %>%
+    summarise(`mixed papers` = n(), `woman first` = sum(is_woman_first),
+              `median team size` = median(n_authors),
+              `smallest team` = min(n_authors), `largest team` = max(n_authors),
+              .groups = "drop") %>%
+    mutate(`% woman first` = as_pct(`woman first` / `mixed papers`),
+           `Wilson 95% low (%)` = as_pct(wilson_lower_bound(`woman first`, `mixed papers`)),
+           `Wilson 95% high (%)` = as_pct(wilson_upper_bound(`woman first`, `mixed papers`))) %>%
+    arrange(desc(`% woman first`)) %>%
+    select(all_of(group), `mixed papers`, `woman first`, `% woman first`,
+           `Wilson 95% low (%)`, `Wilson 95% high (%)`,
+           `median team size`, `smallest team`, `largest team`)
+}
+
+# Enrichment heatmaps: one row per cell of the heatmap, from the top row of the
+# heatmap down and, within a row, from the most enriched category. `row` and
+# `category` are the heatmap's column names; `row_papers` and `baseline` name
+# the columns holding the row's paper count and the rate enrichment divides by.
+enrichment_cell_table <- function(d, row, row_name, category, row_papers, baseline) {
+  out <- d %>%
+    arrange(desc(as.integer(.data[[row]])), desc(enrichment), .data[[category]]) %>%
+    transmute(c1 = as.character(.data[[row]]), c2 = .data[[category]],
+              papers = n, `papers in row` = .data[[row_papers]],
+              `share (%)` = as_pct(prop), `baseline rate (%)` = as_pct(.data[[baseline]]),
+              enrichment = round(enrichment, 2))
+  names(out)[1:2] <- c(row_name, category)
+  out
+}
+
 n_per_year <- df %>% count(publication_year, name = "n_papers_year")
 n_total_papers <- n_distinct(df$citekey)
 ```
@@ -111,6 +217,10 @@ gender by year, and gender composition across the full author list per
 paper.
 
 ### By year
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: gender-by-year
@@ -182,11 +292,53 @@ ggplot(data = all_authors_gender_year, aes(x = publication_year, y = n, fill = g
 plt1 / plt2
 ```
 
+#### Table, first author
+
+The top panel's numbers. The share and interval use all papers published that year as the denominator.
+
+```{r}
+#| label: gender-by-year-table-first
+knitr::kable(
+gender_pubyears %>%
+  arrange(publication_year, Authors..Genders..Author.1.) %>%
+  select(year = publication_year, `first author gender` = Authors..Genders..Author.1.,
+         papers = n, `papers that year` = n_papers_year, ci_lower, ci_upper) %>%
+  mutate(`share (%)` = as_pct(papers / `papers that year`),
+         `Wilson 95% low (%)` = as_pct(ci_lower),
+         `Wilson 95% high (%)` = as_pct(ci_upper)) %>%
+  select(-ci_lower, -ci_upper)
+)
+```
+
+#### Table, all authors
+
+The bottom panel's numbers. The denominator is the author slots that year, not the papers.
+
+```{r}
+#| label: gender-by-year-table-all
+knitr::kable(
+all_authors_gender_year %>%
+  arrange(publication_year, gender) %>%
+  select(year = publication_year, gender, `author slots` = n,
+         `author slots that year` = n_slots_year, ci_lower, ci_upper) %>%
+  mutate(`share (%)` = as_pct(`author slots` / `author slots that year`),
+         `Wilson 95% low (%)` = as_pct(ci_lower),
+         `Wilson 95% high (%)` = as_pct(ci_upper)) %>%
+  select(-ci_lower, -ci_upper)
+)
+```
+
+:::
+
 ### Composition across the full author list
 
 First-author gender and the order-blind pool above don't capture gender
 **composition per paper** (all-male vs. all-female vs. mixed) or **order**
 within a paper.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: gender-sequence
@@ -230,11 +382,30 @@ gender_sequences |>
   theme_bw()
 ```
 
+#### Table
+
+The plot's numbers.
+
+```{r}
+#| label: gender-sequence-table
+knitr::kable(
+gender_sequences %>%
+  count(`authors per paper` = n_authors, name = "papers") %>%
+  mutate(`% of papers` = as_pct(papers / sum(papers)))
+)
+```
+
+:::
+
 Several ways of collapsing a per-paper gender sequence into a single
 cross-tabbable category are compared below — a strict all-same-vs-mixed
 split, a majority-based split, and a version that separates solo
 authorship out from multi-author teams (since "all-male" means something
 different for n=1 than for a genuinely uniform team).
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: gender-composition-candidates
@@ -296,6 +467,29 @@ bind_rows(
   theme_bw()
 ```
 
+#### Table
+
+The plot's numbers, one block per scheme.
+
+```{r}
+#| label: gender-composition-candidates-table
+knitr::kable(
+bind_rows(
+  composition_candidates |> count(value = composition_strict) |> mutate(scheme = "Strict"),
+  composition_candidates |> count(value = composition_majority) |> mutate(scheme = "Majority"),
+  composition_candidates |> count(value = composition_singleauthor_split) |> mutate(scheme = "Solo split out")
+) %>%
+  mutate(scheme = factor(scheme, levels = c("Strict", "Majority", "Solo split out"))) %>%
+  group_by(scheme) %>%
+  arrange(scheme, desc(n)) %>%
+  mutate(`% of papers` = as_pct(n / sum(n))) %>%
+  ungroup() %>%
+  select(scheme, category = value, papers = n, `% of papers`)
+)
+```
+
+:::
+
 ## Topic
 
 A paper can carry a Primary-coded topic (the coder's judgment of its main
@@ -322,6 +516,10 @@ totals_by_year <- df %>%
 
 ### Totals
 
+::: {.panel-tabset}
+
+#### Plot
+
 ```{r}
 #| label: topics-totals
 #| fig-cap: >
@@ -343,6 +541,21 @@ ggplot(merged_count, aes(x = reorder(str_wrap(topic, width = 25), n), y = n)) +
   coord_flip()
 ggsave("topics_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi = 300)
 ```
+
+#### Table
+
+The plot's numbers, with each count as a share of all papers in the corpus.
+
+```{r}
+#| label: topics-totals-table
+knitr::kable(
+merged_count %>%
+  arrange(desc(n), topic) %>%
+  transmute(topic, papers = n, `% of papers` = as_pct(n / n_total_papers))
+)
+```
+
+:::
 
 ### Over time
 
@@ -458,6 +671,28 @@ ggplot(topic_year_roll, aes(x = publication_year)) +
 ggsave("topics_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11, height = 10, dpi = 300)
 ```
 
+#### Table, by year
+
+The numbers behind the count chart above and the By year chart: one row per topic and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: topics-over-time-table
+knitr::kable(
+year_wilson_table(topic_year_wilson, "topic")
+)
+```
+
+#### Table, smoothed
+
+The numbers behind the Smoothed trend chart. Counts are pooled over a year and its neighbours (fewer at the ends of the range); the interval is computed on the pooled counts and divided by the topic's corpus rate, as plotted.
+
+```{r}
+#| label: topics-over-time-table-smoothed
+knitr::kable(
+year_roll_table(topic_year_roll, "topic")
+)
+```
+
 :::
 
 ### Co-occurrence
@@ -468,6 +703,10 @@ topics <- df %>%
   select(contains("Topics")) %>%
   rename_with(~str_remove(., "Topics.."))
 ```
+
+::: {.panel-tabset}
+
+#### Directional
 
 ```{r}
 #| label: topics-cooccurrence-directional
@@ -502,6 +741,24 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   labs(x = "", y = "")
 ```
 
+#### Table, directional
+
+The directional plot's numbers. One row per primary topic and secondary topic that occur together. A paper with several primaries or secondaries adds one pair for each combination, so pairs can exceed papers. The share is within the primary topic.
+
+```{r}
+#| label: topics-cooccurrence-directional-table
+knitr::kable(
+coocdf %>%
+  ungroup() %>%
+  mutate(Primary = str_squish(Primary), Secondary = str_squish(Secondary)) %>%
+  arrange(Primary, desc(Freq), Secondary) %>%
+  transmute(`Primary topic` = Primary, `Secondary topic` = Secondary, pairs = Freq,
+            `share of the primary's pairs (%)` = as_pct(Prop))
+)
+```
+
+#### Undirected
+
 ```{r}
 #| label: topics-cooccurrence-undirected
 #| fig-cap: "Undirected: which topics appear together at all, regardless of rank — present if either value is carried, pairing symmetric."
@@ -534,7 +791,29 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Topic.A, Prop, Topic.B), y =
   labs(x = "", y = "")
 ```
 
+#### Table, undirected
+
+The undirected plot's numbers. Each pair appears twice, once under each topic as B, because the plot draws a panel for each. Papers is the number of papers carrying both, and the share is within B.
+
+```{r}
+#| label: topics-cooccurrence-undirected-table
+knitr::kable(
+coocdf_merged %>%
+  ungroup() %>%
+  mutate(Topic.A = str_squish(Topic.A), Topic.B = str_squish(Topic.B)) %>%
+  arrange(Topic.B, desc(Freq), Topic.A) %>%
+  transmute(`Topic B` = Topic.B, `Topic A` = Topic.A, papers = Freq,
+            `share of B's pairs (%)` = as_pct(Prop))
+)
+```
+
+:::
+
 ### By first-author gender
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: topic-by-gender
@@ -579,6 +858,19 @@ merged_topic_gender |>
 ggsave("topic_by_gender_merged.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that topic's papers with a woman first author.
+
+```{r}
+#| label: topic-by-gender-table
+knitr::kable(
+gender_first_author_table(merged_topic_gender, "topic")
+)
+```
+
+:::
+
 ### By full-author-list gender composition
 
 Every paper's authors, sorted into one of five groups: solo female
@@ -587,6 +879,10 @@ mixed-gender team. Solo authorship is kept separate from team
 composition — a single female author isn't the same thing as a team
 that happens to be all women, and lumping them together would hide
 that difference.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: composition-by-topic
@@ -642,7 +938,24 @@ comp_topic_summary %>%
 ggsave("composition_by_topic.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. Each cell is the number of papers and its share of that topic's papers. "uncertain" gathers papers whose author list includes an uncertain gender; the plot draws them in grey.
+
+```{r}
+#| label: composition-by-topic-table
+knitr::kable(
+gender_composition_table(comp_topic_summary, comp_topic_female_share, "topic")
+)
+```
+
+:::
+
 ### Mixed-gender authorship only
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: mixed-only-topic
@@ -707,6 +1020,19 @@ ggplot() +
 ggsave("mixed_firstauthor_by_topic.png", plot = last_plot(), width = 11.5, height = 9.5, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that topic's mixed-gender papers with a woman first author. Team size is the number of authors per paper.
+
+```{r}
+#| label: mixed-only-topic-table
+knitr::kable(
+gender_mixed_table(mixed_topic_raw, "topic")
+)
+```
+
+:::
+
 ## Method
 
 ```{r}
@@ -719,6 +1045,10 @@ method_count <- df %>%
 ```
 
 ### Totals
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: methods-totals
@@ -739,6 +1069,21 @@ ggplot(merged_count_method, aes(x = reorder(str_wrap(method, width = 25), n), y 
   coord_flip()
 ggsave("methods_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi = 300)
 ```
+
+#### Table
+
+The plot's numbers, with each count as a share of all papers in the corpus.
+
+```{r}
+#| label: methods-totals-table
+knitr::kable(
+merged_count_method %>%
+  arrange(desc(n), method) %>%
+  transmute(method, papers = n, `% of papers` = as_pct(n / n_total_papers))
+)
+```
+
+:::
 
 ### Over time
 
@@ -844,6 +1189,28 @@ ggplot(method_year_roll, aes(x = publication_year)) +
 ggsave("methods_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11, height = 8, dpi = 300)
 ```
 
+#### Table, by year
+
+The numbers behind the count chart above and the By year chart: one row per method and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: methods-over-time-table
+knitr::kable(
+year_wilson_table(method_year_wilson, "method")
+)
+```
+
+#### Table, smoothed
+
+The numbers behind the Smoothed trend chart. Counts are pooled over a year and its neighbours (fewer at the ends of the range); the interval is computed on the pooled counts and divided by the method's corpus rate, as plotted.
+
+```{r}
+#| label: methods-over-time-table-smoothed
+knitr::kable(
+year_roll_table(method_year_roll, "method")
+)
+```
+
 :::
 
 ### Co-occurrence
@@ -854,6 +1221,10 @@ methods <- df %>%
   select(contains("Methods")) %>%
   rename_with(~str_remove(., "Methods.."))
 ```
+
+::: {.panel-tabset}
+
+#### Directional
 
 ```{r}
 #| label: methods-cooccurrence-directional
@@ -888,6 +1259,24 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   labs(x = "", y = "")
 ```
 
+#### Table, directional
+
+The directional plot's numbers. One row per primary method and secondary method that occur together. A paper with several primaries or secondaries adds one pair for each combination, so pairs can exceed papers. The share is within the primary method.
+
+```{r}
+#| label: methods-cooccurrence-directional-table
+knitr::kable(
+coocdf %>%
+  ungroup() %>%
+  mutate(Primary = str_squish(Primary), Secondary = str_squish(Secondary)) %>%
+  arrange(Primary, desc(Freq), Secondary) %>%
+  transmute(`Primary method` = Primary, `Secondary method` = Secondary, pairs = Freq,
+            `share of the primary's pairs (%)` = as_pct(Prop))
+)
+```
+
+#### Undirected
+
 ```{r}
 #| label: methods-cooccurrence-undirected
 #| fig-cap: "Undirected: which methods appear together at all, regardless of rank — present if either value is carried, pairing symmetric."
@@ -920,7 +1309,29 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Method.A, Prop, Method.B), y
   labs(x = "", y = "")
 ```
 
+#### Table, undirected
+
+The undirected plot's numbers. Each pair appears twice, once under each method as B, because the plot draws a panel for each. Papers is the number of papers carrying both, and the share is within B.
+
+```{r}
+#| label: methods-cooccurrence-undirected-table
+knitr::kable(
+coocdf_merged %>%
+  ungroup() %>%
+  mutate(Method.A = str_squish(Method.A), Method.B = str_squish(Method.B)) %>%
+  arrange(Method.B, desc(Freq), Method.A) %>%
+  transmute(`Method B` = Method.B, `Method A` = Method.A, papers = Freq,
+            `share of B's pairs (%)` = as_pct(Prop))
+)
+```
+
+:::
+
 ### By first-author gender
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: method-by-gender
@@ -965,6 +1376,19 @@ merged_method_gender |>
 ggsave("method_by_gender_merged.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that method's papers with a woman first author.
+
+```{r}
+#| label: method-by-gender-table
+knitr::kable(
+gender_first_author_table(merged_method_gender, "method")
+)
+```
+
+:::
+
 ### By full-author-list gender composition
 
 Every paper's authors, sorted into one of five groups: solo female
@@ -972,6 +1396,10 @@ author, solo male author, an all-female team, an all-male team, or a
 mixed-gender team. Solo authorship is kept separate from team
 composition, so a single author's gender isn't treated as if it were
 a team's composition.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: composition-by-method
@@ -1027,7 +1455,24 @@ comp_method_summary %>%
 ggsave("composition_by_method.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. Each cell is the number of papers and its share of that method's papers. "uncertain" gathers papers whose author list includes an uncertain gender; the plot draws them in grey.
+
+```{r}
+#| label: composition-by-method-table
+knitr::kable(
+gender_composition_table(comp_method_summary, comp_method_female_share, "method")
+)
+```
+
+:::
+
 ### Mixed-gender authorship only
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: mixed-only-method
@@ -1092,6 +1537,19 @@ ggplot() +
 ggsave("mixed_firstauthor_by_method.png", plot = last_plot(), width = 11, height = 7, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that method's mixed-gender papers with a woman first author. Team size is the number of authors per paper.
+
+```{r}
+#| label: mixed-only-method-table
+knitr::kable(
+gender_mixed_table(mixed_method_raw, "method")
+)
+```
+
+:::
+
 ## Source of evidence
 
 ```{r}
@@ -1104,6 +1562,10 @@ source_count <- df %>%
 ```
 
 ### Totals
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: sources-totals
@@ -1124,6 +1586,21 @@ ggplot(merged_source_count, aes(x = reorder(str_wrap(source, width = 25), n), y 
   coord_flip()
 ggsave("sources_aggregate.png", plot = last_plot(), width = 8, height = 7, dpi = 300)
 ```
+
+#### Table
+
+The plot's numbers, with each count as a share of all papers in the corpus.
+
+```{r}
+#| label: sources-totals-table
+knitr::kable(
+merged_source_count %>%
+  arrange(desc(n), source) %>%
+  transmute(source, papers = n, `% of papers` = as_pct(n / n_total_papers))
+)
+```
+
+:::
 
 ### Over time
 
@@ -1229,6 +1706,28 @@ ggplot(source_year_roll, aes(x = publication_year)) +
 ggsave("sources_enrichment_by_year_smoothed.png", plot = last_plot(), width = 11, height = 7, dpi = 300)
 ```
 
+#### Table, by year
+
+The numbers behind the count chart above and the By year chart: one row per source and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: sources-over-time-table
+knitr::kable(
+year_wilson_table(source_year_wilson, "source")
+)
+```
+
+#### Table, smoothed
+
+The numbers behind the Smoothed trend chart. Counts are pooled over a year and its neighbours (fewer at the ends of the range); the interval is computed on the pooled counts and divided by the source's corpus rate, as plotted.
+
+```{r}
+#| label: sources-over-time-table-smoothed
+knitr::kable(
+year_roll_table(source_year_roll, "source")
+)
+```
+
 :::
 
 ### Co-occurrence
@@ -1239,6 +1738,10 @@ sources <- df %>%
   select(contains("Sources.of.Evidence")) %>%
   rename_with(~str_remove(., "Sources.of.Evidence.."))
 ```
+
+::: {.panel-tabset}
+
+#### Directional
 
 ```{r}
 #| label: sources-cooccurrence-directional
@@ -1273,6 +1776,24 @@ ggplot(data = coocdf, aes(x = reorder_within(Secondary, Prop, Primary), y = Prop
   labs(x = "", y = "")
 ```
 
+#### Table, directional
+
+The directional plot's numbers. One row per primary source and secondary source that occur together. A paper with several primaries or secondaries adds one pair for each combination, so pairs can exceed papers. The share is within the primary source.
+
+```{r}
+#| label: sources-cooccurrence-directional-table
+knitr::kable(
+coocdf %>%
+  ungroup() %>%
+  mutate(Primary = str_squish(Primary), Secondary = str_squish(Secondary)) %>%
+  arrange(Primary, desc(Freq), Secondary) %>%
+  transmute(`Primary source` = Primary, `Secondary source` = Secondary, pairs = Freq,
+            `share of the primary's pairs (%)` = as_pct(Prop))
+)
+```
+
+#### Undirected
+
 ```{r}
 #| label: sources-cooccurrence-undirected
 #| fig-cap: "Undirected: which sources appear together at all, regardless of rank — present if either value is carried, pairing symmetric."
@@ -1305,7 +1826,29 @@ ggplot(data = coocdf_merged, aes(x = reorder_within(Source.A, Prop, Source.B), y
   labs(x = "", y = "")
 ```
 
+#### Table, undirected
+
+The undirected plot's numbers. Each pair appears twice, once under each source as B, because the plot draws a panel for each. Papers is the number of papers carrying both, and the share is within B.
+
+```{r}
+#| label: sources-cooccurrence-undirected-table
+knitr::kable(
+coocdf_merged %>%
+  ungroup() %>%
+  mutate(Source.A = str_squish(Source.A), Source.B = str_squish(Source.B)) %>%
+  arrange(Source.B, desc(Freq), Source.A) %>%
+  transmute(`Source B` = Source.B, `Source A` = Source.A, papers = Freq,
+            `share of B's pairs (%)` = as_pct(Prop))
+)
+```
+
+:::
+
 ### By first-author gender
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: source-by-gender
@@ -1350,6 +1893,19 @@ merged_source_gender |>
 ggsave("source_by_gender_merged.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that source's papers with a woman first author.
+
+```{r}
+#| label: source-by-gender-table
+knitr::kable(
+gender_first_author_table(merged_source_gender, "source")
+)
+```
+
+:::
+
 ### By full-author-list gender composition
 
 Every paper's authors, sorted into one of five groups: solo female
@@ -1357,6 +1913,10 @@ author, solo male author, an all-female team, an all-male team, or a
 mixed-gender team. Solo authorship is kept separate from team
 composition, so a single author's gender isn't treated as if it were
 a team's composition.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: composition-by-source
@@ -1412,7 +1972,24 @@ comp_source_summary %>%
 ggsave("composition_by_source.png", plot = last_plot(), width = 10, height = 8, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. Each cell is the number of papers and its share of that source's papers. "uncertain" gathers papers whose author list includes an uncertain gender; the plot draws them in grey.
+
+```{r}
+#| label: composition-by-source-table
+knitr::kable(
+gender_composition_table(comp_source_summary, comp_source_female_share, "source")
+)
+```
+
+:::
+
 ### Mixed-gender authorship only
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: mixed-only-source
@@ -1477,6 +2054,19 @@ ggplot() +
 ggsave("mixed_firstauthor_by_source.png", plot = last_plot(), width = 11, height = 6.5, dpi = 300)
 ```
 
+#### Table
+
+The plot's numbers, top row first. The interval is the Wilson 95% interval on the share of that source's mixed-gender papers with a woman first author. Team size is the number of authors per paper.
+
+```{r}
+#| label: mixed-only-source-table
+knitr::kable(
+gender_mixed_table(mixed_source_raw, "source")
+)
+```
+
+:::
+
 ## Region
 
 Region is the one annotation field the coder fills in from the study's own
@@ -1503,6 +2093,10 @@ they differ in kind between countries and change over time, so nesting stops
 at country. The columns of the lookup file, the stages that produce it and the
 known issues are in `analysis/region_matching/README.md`.
 
+::: {.panel-tabset}
+
+#### Plot
+
 ```{r}
 #| label: region
 library(ggwordcloud)
@@ -1526,6 +2120,20 @@ ggplot(region_counts, aes(label = Region, size = n_scaled, color = n)) +
   scale_color_gradient(low = topic_col, high = "darkred") +
   theme_minimal()
 ```
+
+#### Table
+
+The word cloud's numbers: every entry of the Region field as typed, before spelling variants are folded, with the number of times it appears.
+
+```{r}
+#| label: region-table
+knitr::kable(
+region_counts %>%
+  transmute(`region field entry` = Region, mentions = as.integer(n))
+)
+```
+
+:::
 
 ### Matching to Wikidata
 
@@ -1591,7 +2199,9 @@ coordinate and label shown replace the match.
 
 ```{r}
 #| label: region-override-table
+knitr::kable(
 region_overrides
+)
 ```
 
 #### Macro-regions
@@ -1605,6 +2215,7 @@ views below.
 
 ```{r}
 #| label: region-macro-table
+knitr::kable(
 bind_rows(tibble(kind = "area", token = macro_area_terms),
           tibble(kind = "country name", token = country_name_terms)) %>%
   left_join(region_tokens %>% distinct(citekey, Region_normalized) %>%
@@ -1612,6 +2223,7 @@ bind_rows(tibble(kind = "area", token = macro_area_terms),
             by = c("token" = "Region_normalized")) %>%
   mutate(papers = replace_na(papers, 0L)) %>%
   arrange(kind, desc(papers), token)
+)
 ```
 
 #### Super-regions
@@ -1620,8 +2232,10 @@ Which country belongs to which super-region.
 
 ```{r}
 #| label: region-superregion-table
+knitr::kable(
 tibble(super_region = unname(super_region_map), country = names(super_region_map)) %>%
   arrange(super_region, country)
+)
 ```
 
 :::
@@ -1655,6 +2269,10 @@ papers all tagged "Birka" produce one dot sized 20, not 20 separate
 dots. The map's crop is computed from the real spread of whatever points
 pass all three filters, with a fixed margin, so it always fits what's
 actually shown rather than a hardcoded guess.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: region-map
@@ -1713,6 +2331,27 @@ ggplot() +
   labs(x = NULL, y = NULL)
 ```
 
+#### Table
+
+The map's points. A token marked "no" is a real match that falls outside the plotting box and is not drawn.
+
+```{r}
+#| label: region-map-table
+knitr::kable(
+region_points %>%
+  mutate(`on map` = if_else(lat >= 25 & lat <= 80 & lon >= -60 & lon <= 100, "yes", "no")) %>%
+  arrange(desc(n_papers), region) %>%
+  transmute(region, latitude = round(lat, 3), longitude = round(lon, 3),
+            papers = n_papers, `on map`)
+)
+```
+
+:::
+
+::: {.panel-tabset}
+
+#### Plot
+
 ```{r}
 #| label: region-totals
 #| fig-cap: >
@@ -1733,6 +2372,20 @@ ggplot(region_totals, aes(x = fct_reorder(region, n), y = n)) +
   labs(x = "", y = "Papers")
 ```
 
+#### Table
+
+The plot's numbers.
+
+```{r}
+#| label: region-totals-table
+knitr::kable(
+region_totals %>%
+  rename(papers = n)
+)
+```
+
+:::
+
 **By country (needs the nesting stage).** The chart above
 keeps every region token flat, "Birka" and "Sweden" and "Scandinavia"
 are three separate bars even though Birka is in Sweden — deliberately,
@@ -1746,6 +2399,10 @@ it was never separately tagged "Sweden." Area names (Scandinavia, Viking
 world) have no single country and are excluded from this view. Country
 names (Sweden, Norway) count toward their own country, so a paper tagged
 only "Sweden" is included.
+
+::: {.panel-tabset}
+
+#### Plot
 
 ```{r}
 #| label: region-totals-by-country
@@ -1776,6 +2433,21 @@ if (has_country_data) {
       "stage in analysis/region_matching/ (see the README there).\n")
 }
 ```
+
+#### Table
+
+The plot's numbers.
+
+```{r}
+#| label: region-totals-by-country-table
+#| eval: !expr has_country_data
+knitr::kable(
+region_country_totals %>%
+  rename(papers = n)
+)
+```
+
+:::
 
 ### Topic, method, and source by region
 
@@ -1953,6 +2625,39 @@ region_source_heatmap <- ggplot(region_source_enrichment, aes(x = source, y = re
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(x = "", y = "")
 region_source_heatmap
+```
+
+#### Table, topic
+
+The topic heatmap's numbers: one row per region and topic, from the region with the most papers down and, within a region, from the most enriched topic. Enrichment is the share of the region's papers carrying the topic divided by the topic's rate across the whole corpus (the baseline). The heatmap's colour stops at 3x, the table does not.
+
+```{r}
+#| label: region-topic-enrichment-table
+knitr::kable(
+enrichment_cell_table(region_topic_enrichment, "region", "region", "topic", "n_region_papers", "corpus_rate")
+)
+```
+
+#### Table, method
+
+The method heatmap's numbers, read as in Table, topic.
+
+```{r}
+#| label: region-method-enrichment-table
+knitr::kable(
+enrichment_cell_table(region_method_enrichment, "region", "region", "method", "n_region_papers", "corpus_rate")
+)
+```
+
+#### Table, source of evidence
+
+The source-of-evidence heatmap's numbers, read as in Table, topic.
+
+```{r}
+#| label: region-source-enrichment-table
+knitr::kable(
+enrichment_cell_table(region_source_enrichment, "region", "region", "source", "n_region_papers", "corpus_rate")
+)
 ```
 
 :::
@@ -2139,6 +2844,64 @@ if (!is.null(h)) h$method
 if (!is.null(h)) h$source
 ```
 
+#### Table, by country
+
+The by country heatmaps' numbers, one table each for topic, method and source of evidence. The baseline is the category's rate among the papers that have a value at this level, as described above.
+
+```{r}
+#| label: region-nesting-country-table
+h_country <- make_nesting_heatmaps("country")
+if (!is.null(h_country)) knitr::kable(
+enrichment_cell_table(h_country$topic$data, "group", "country", "topic", "n_group_papers", "subset_corpus_rate"),
+caption = "Topic"
+)
+```
+
+```{r}
+#| label: region-nesting-country-method-table
+if (!is.null(h_country)) knitr::kable(
+enrichment_cell_table(h_country$method$data, "group", "country", "method", "n_group_papers", "subset_corpus_rate"),
+caption = "Method"
+)
+```
+
+```{r}
+#| label: region-nesting-country-source-table
+if (!is.null(h_country)) knitr::kable(
+enrichment_cell_table(h_country$source$data, "group", "country", "source", "n_group_papers", "subset_corpus_rate"),
+caption = "Source of evidence"
+)
+```
+
+#### Table, by super-region
+
+The by super-region heatmaps' numbers, one table each for topic, method and source of evidence. The baseline is the category's rate among the papers that have a value at this level, as described above.
+
+```{r}
+#| label: region-nesting-superregion-table
+h_super <- make_nesting_heatmaps("super_region")
+if (!is.null(h_super)) knitr::kable(
+enrichment_cell_table(h_super$topic$data, "group", "super-region", "topic", "n_group_papers", "subset_corpus_rate"),
+caption = "Topic"
+)
+```
+
+```{r}
+#| label: region-nesting-superregion-method-table
+if (!is.null(h_super)) knitr::kable(
+enrichment_cell_table(h_super$method$data, "group", "super-region", "method", "n_group_papers", "subset_corpus_rate"),
+caption = "Method"
+)
+```
+
+```{r}
+#| label: region-nesting-superregion-source-table
+if (!is.null(h_super)) knitr::kable(
+enrichment_cell_table(h_super$source$data, "group", "super-region", "source", "n_group_papers", "subset_corpus_rate"),
+caption = "Source of evidence"
+)
+```
+
 :::
 
 ### Change over time
@@ -2188,6 +2951,10 @@ region_year_wilson <- region_long_with_key %>%
   arrange(region, publication_year)
 ```
 
+::: {.panel-tabset}
+
+#### Count
+
 ```{r}
 #| label: region-over-time-count
 #| fig-cap: >
@@ -2204,6 +2971,8 @@ ggplot(region_year_wilson, aes(x = publication_year, y = n, alpha = -ci_width)) 
   theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
         plot.title = element_text(size = 11))
 ```
+
+#### Enrichment
 
 ```{r}
 #| label: region-over-time-enrichment
@@ -2225,3 +2994,16 @@ ggplot(region_year_wilson, aes(x = publication_year, y = enrichment, alpha = -ci
   theme(strip.text = element_text(size = 8), axis.text.x = element_text(size = 6, angle = 45, hjust = 1),
         plot.title = element_text(size = 11))
 ```
+
+#### Table
+
+The numbers behind both charts: one row per region and year. The interval is the Wilson 95% interval on the share of that year's papers.
+
+```{r}
+#| label: region-over-time-table
+knitr::kable(
+year_wilson_table(region_year_wilson, "region")
+)
+```
+
+:::

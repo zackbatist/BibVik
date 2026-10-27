@@ -310,6 +310,62 @@ signature_detail <- function(key) {
     theme_minimal() +
     theme(strip.text = element_text(face = "bold", size = 10))
 }
+
+# Tables that sit beside the plots, as extra tabs. Each is built from the
+# same objects as its plot, so a table holds exactly the numbers the plot
+# draws. Shares are rounded for reading.
+
+# One row per cluster (or group) and category: the numbers behind a heatmap.
+# Rows run largest cluster first, as the heatmap's rows do from the top, and
+# strongest enrichment first within a cluster. `peak` marks a category whose
+# Wilson lower bound exceeds the corpus rate, the criterion used throughout.
+category_table <- function(key, kind, data = cluster_data, unit = "Cluster") {
+  ctx <- data[[key]]
+  ctx[[kind]]$enrichment |>
+    left_join(ctx$true_sizes, by = "community_gn") |>
+    arrange(desc(true_size), community_gn, desc(enrichment)) |>
+    transmute(
+      id = community_gn,
+      label = unname(ctx$names[community_gn]),
+      size = true_size,
+      annotated = n_annotated,
+      category,
+      n,
+      share = round(100 * prop, 1),
+      corpus_pct = round(100 * corpus_rate, 1),
+      enrichment = round(enrichment, 2),
+      wilson_lower = round(100 * ci_lower, 1),
+      peak = if_else(ci_lower > corpus_rate, "peak", "")
+    ) |>
+    set_names(c(unit, "label", paste(tolower(unit), "size"), "annotated works", "category",
+                "works with it", "share (%)", "corpus rate (%)", "enrichment",
+                "Wilson 95% lower bound (%)", "peak"))
+}
+
+# The data behind the peak count against peak strength plot.
+signature_table <- function(key) {
+  nm <- cluster_data[[key]]$names_long
+  cluster_signatures(key) |>
+    transmute(Cluster = community_gn, label = unname(nm[community_gn]),
+              peaks = n_peaks, `mean enrichment` = round(mean_peak_enrichment, 2),
+              `peak categories (enrichment)` = peak_categories)
+}
+
+# The data behind the peak categories plot: the same eight clusters, in the
+# plot's order.
+signature_detail_table <- function(key) {
+  nm <- cluster_data[[key]]$names_long
+  top_communities <- cluster_signatures(key) |> slice_max(n_peaks, n = 8, with_ties = FALSE) |> pull(community_gn)
+  cluster_peaks(key) |>
+    filter(community_gn %in% top_communities) |>
+    mutate(cluster_order = match(community_gn, top_communities)) |>
+    arrange(cluster_order, desc(enrichment)) |>
+    transmute(Cluster = community_gn, label = unname(nm[community_gn]), category,
+              type = category_type, `works with it` = n, `annotated works` = n_annotated,
+              `share (%)` = round(100 * prop, 1), `corpus rate (%)` = round(100 * corpus_rate, 1),
+              enrichment = round(enrichment, 2),
+              `Wilson 95% lower bound (%)` = round(100 * ci_lower, 1))
+}
 ```
 
 
@@ -424,6 +480,28 @@ category_note("seed_filtered", "topic")
 category_heatmap("seed_filtered", "topic")
 ```
 
+#### Table, annotated
+
+The numbers behind the heatmap: one row per cluster and category, largest cluster first, strongest enrichment first within a cluster. A peak is a category whose Wilson 95% lower bound on the cluster's share exceeds the corpus rate.
+
+```{r}
+#| label: cluster-vs-topic-annotated-table
+#| echo: false
+#| eval: !expr has_gn("annotated")
+knitr::kable(category_table("annotated", "topic"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: cluster-vs-topic-seed-filtered-table
+#| echo: false
+#| eval: !expr has_gn("seed_filtered")
+knitr::kable(category_table("seed_filtered", "topic"))
+```
+
 :::
 
 ### By method
@@ -458,6 +536,28 @@ category_note("seed_filtered", "method")
 category_heatmap("seed_filtered", "method")
 ```
 
+#### Table, annotated
+
+The numbers behind the heatmap: one row per cluster and category, largest cluster first, strongest enrichment first within a cluster. A peak is a category whose Wilson 95% lower bound on the cluster's share exceeds the corpus rate.
+
+```{r}
+#| label: cluster-vs-method-annotated-table
+#| echo: false
+#| eval: !expr has_gn("annotated")
+knitr::kable(category_table("annotated", "method"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: cluster-vs-method-seed-filtered-table
+#| echo: false
+#| eval: !expr has_gn("seed_filtered")
+knitr::kable(category_table("seed_filtered", "method"))
+```
+
 :::
 
 ### By source of evidence
@@ -490,6 +590,28 @@ category_heatmap("annotated", "source")
 #| eval: !expr has_gn("seed_filtered")
 category_note("seed_filtered", "source")
 category_heatmap("seed_filtered", "source")
+```
+
+#### Table, annotated
+
+The numbers behind the heatmap: one row per cluster and category, largest cluster first, strongest enrichment first within a cluster. A peak is a category whose Wilson 95% lower bound on the cluster's share exceeds the corpus rate.
+
+```{r}
+#| label: cluster-vs-source-annotated-table
+#| echo: false
+#| eval: !expr has_gn("annotated")
+knitr::kable(category_table("annotated", "source"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: cluster-vs-source-seed-filtered-table
+#| echo: false
+#| eval: !expr has_gn("seed_filtered")
+knitr::kable(category_table("seed_filtered", "source"))
 ```
 
 :::
@@ -556,6 +678,28 @@ signature_plot("annotated")
 signature_plot("seed_filtered")
 ```
 
+#### Table, annotated
+
+The plot's points, one row per cluster with at least one peak, most peaks first.
+
+```{r}
+#| label: cluster-signature-annotated-table
+#| echo: false
+#| eval: !expr has_gn("annotated")
+knitr::kable(signature_table("annotated"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: cluster-signature-seed-filtered-table
+#| echo: false
+#| eval: !expr has_gn("seed_filtered")
+knitr::kable(signature_table("seed_filtered"))
+```
+
 :::
 
 ### Peaks behind the clusters with the most peaks
@@ -585,6 +729,28 @@ signature_detail("annotated")
 #| fig-height: 10
 #| eval: !expr has_gn("seed_filtered")
 signature_detail("seed_filtered")
+```
+
+#### Table, annotated
+
+The plot's bars: every peak of the eight clusters with the most peaks, in the plot's order.
+
+```{r}
+#| label: cluster-signature-detail-annotated-table
+#| echo: false
+#| eval: !expr has_gn("annotated")
+knitr::kable(signature_detail_table("annotated"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: cluster-signature-detail-seed-filtered-table
+#| echo: false
+#| eval: !expr has_gn("seed_filtered")
+knitr::kable(signature_detail_table("seed_filtered"))
 ```
 
 :::
@@ -751,6 +917,28 @@ category_note("seed_filtered", "topic", group_data)
 category_heatmap("seed_filtered", "topic", group_data, "group of clusters")
 ```
 
+#### Table, annotated
+
+The numbers behind the heatmap: one row per group and category, largest group first, strongest enrichment first within a group. A peak is a category whose Wilson 95% lower bound on the group's share exceeds the corpus rate.
+
+```{r}
+#| label: group-vs-topic-annotated-table
+#| echo: false
+#| eval: !expr has_groups("annotated")
+knitr::kable(category_table("annotated", "topic", group_data, "Group"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: group-vs-topic-seed-filtered-table
+#| echo: false
+#| eval: !expr has_groups("seed_filtered")
+knitr::kable(category_table("seed_filtered", "topic", group_data, "Group"))
+```
+
 :::
 
 ### Groups by method
@@ -783,6 +971,28 @@ category_note("seed_filtered", "method", group_data)
 category_heatmap("seed_filtered", "method", group_data, "group of clusters")
 ```
 
+#### Table, annotated
+
+The numbers behind the heatmap: one row per group and category, largest group first, strongest enrichment first within a group. A peak is a category whose Wilson 95% lower bound on the group's share exceeds the corpus rate.
+
+```{r}
+#| label: group-vs-method-annotated-table
+#| echo: false
+#| eval: !expr has_groups("annotated")
+knitr::kable(category_table("annotated", "method", group_data, "Group"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: group-vs-method-seed-filtered-table
+#| echo: false
+#| eval: !expr has_groups("seed_filtered")
+knitr::kable(category_table("seed_filtered", "method", group_data, "Group"))
+```
+
 :::
 
 ### Groups by source of evidence
@@ -813,6 +1023,28 @@ category_heatmap("annotated", "source", group_data, "group of clusters")
 #| eval: !expr has_groups("seed_filtered")
 category_note("seed_filtered", "source", group_data)
 category_heatmap("seed_filtered", "source", group_data, "group of clusters")
+```
+
+#### Table, annotated
+
+The numbers behind the heatmap: one row per group and category, largest group first, strongest enrichment first within a group. A peak is a category whose Wilson 95% lower bound on the group's share exceeds the corpus rate.
+
+```{r}
+#| label: group-vs-source-annotated-table
+#| echo: false
+#| eval: !expr has_groups("annotated")
+knitr::kable(category_table("annotated", "source", group_data, "Group"))
+```
+
+#### Table, seed filtered
+
+Same columns, for the seed-filtered run.
+
+```{r}
+#| label: group-vs-source-seed-filtered-table
+#| echo: false
+#| eval: !expr has_groups("seed_filtered")
+knitr::kable(category_table("seed_filtered", "source", group_data, "Group"))
 ```
 
 :::
