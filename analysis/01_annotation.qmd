@@ -614,6 +614,7 @@ The composition chart's numbers: one row per composition and year, read as in Ta
 
 ```{r}
 #| label: gender-trend-composition-table
+#| classes: long-table
 knitr::kable(
 share_trend_table(composition_trend, "papers", "composition")
 )
@@ -849,6 +850,7 @@ The numbers behind the count chart above and the By year chart: one row per topi
 
 ```{r}
 #| label: topics-over-time-table
+#| classes: long-table
 knitr::kable(
 year_wilson_table(topic_year_wilson, "topic")
 )
@@ -860,6 +862,7 @@ The numbers behind the Smoothed trend chart. Counts are pooled over a year and i
 
 ```{r}
 #| label: topics-over-time-table-smoothed
+#| classes: long-table
 knitr::kable(
 year_roll_table(topic_year_roll, "topic")
 )
@@ -919,6 +922,7 @@ The directional plot's numbers. One row per primary topic and secondary topic th
 
 ```{r}
 #| label: topics-cooccurrence-directional-table
+#| classes: long-table
 knitr::kable(
 coocdf %>%
   ungroup() %>%
@@ -969,6 +973,7 @@ The undirected plot's numbers. Each pair appears twice, once under each topic as
 
 ```{r}
 #| label: topics-cooccurrence-undirected-table
+#| classes: long-table
 knitr::kable(
 coocdf_merged %>%
   ungroup() %>%
@@ -1367,6 +1372,7 @@ The numbers behind the count chart above and the By year chart: one row per meth
 
 ```{r}
 #| label: methods-over-time-table
+#| classes: long-table
 knitr::kable(
 year_wilson_table(method_year_wilson, "method")
 )
@@ -1378,6 +1384,7 @@ The numbers behind the Smoothed trend chart. Counts are pooled over a year and i
 
 ```{r}
 #| label: methods-over-time-table-smoothed
+#| classes: long-table
 knitr::kable(
 year_roll_table(method_year_roll, "method")
 )
@@ -1437,6 +1444,7 @@ The directional plot's numbers. One row per primary method and secondary method 
 
 ```{r}
 #| label: methods-cooccurrence-directional-table
+#| classes: long-table
 knitr::kable(
 coocdf %>%
   ungroup() %>%
@@ -1487,6 +1495,7 @@ The undirected plot's numbers. Each pair appears twice, once under each method a
 
 ```{r}
 #| label: methods-cooccurrence-undirected-table
+#| classes: long-table
 knitr::kable(
 coocdf_merged %>%
   ungroup() %>%
@@ -1884,6 +1893,7 @@ The numbers behind the count chart above and the By year chart: one row per sour
 
 ```{r}
 #| label: sources-over-time-table
+#| classes: long-table
 knitr::kable(
 year_wilson_table(source_year_wilson, "source")
 )
@@ -1895,6 +1905,7 @@ The numbers behind the Smoothed trend chart. Counts are pooled over a year and i
 
 ```{r}
 #| label: sources-over-time-table-smoothed
+#| classes: long-table
 knitr::kable(
 year_roll_table(source_year_roll, "source")
 )
@@ -1954,6 +1965,7 @@ The directional plot's numbers. One row per primary source and secondary source 
 
 ```{r}
 #| label: sources-cooccurrence-directional-table
+#| classes: long-table
 knitr::kable(
 coocdf %>%
   ungroup() %>%
@@ -2004,6 +2016,7 @@ The undirected plot's numbers. Each pair appears twice, once under each source a
 
 ```{r}
 #| label: sources-cooccurrence-undirected-table
+#| classes: long-table
 knitr::kable(
 coocdf_merged %>%
   ungroup() %>%
@@ -2299,6 +2312,7 @@ The word cloud's numbers: every entry of the Region field as typed, before spell
 
 ```{r}
 #| label: region-table
+#| classes: long-table
 knitr::kable(
 region_counts %>%
   transmute(`region field entry` = Region, mentions = as.integer(n))
@@ -2509,6 +2523,7 @@ The map's points. A token marked "no" is a real match that falls outside the plo
 
 ```{r}
 #| label: region-map-table
+#| classes: long-table
 knitr::kable(
 region_points %>%
   mutate(`on map` = if_else(lat >= 25 & lat <= 80 & lon >= -60 & lon <= 100, "yes", "no")) %>%
@@ -2805,6 +2820,7 @@ The topic heatmap's numbers: one row per region and topic, from the region with 
 
 ```{r}
 #| label: region-topic-enrichment-table
+#| classes: long-table
 knitr::kable(
 enrichment_cell_table(region_topic_enrichment, "region", "region", "topic", "n_region_papers", "corpus_rate")
 )
@@ -2816,6 +2832,7 @@ The method heatmap's numbers, read as in Table, topic.
 
 ```{r}
 #| label: region-method-enrichment-table
+#| classes: long-table
 knitr::kable(
 enrichment_cell_table(region_method_enrichment, "region", "region", "method", "n_region_papers", "corpus_rate")
 )
@@ -2827,6 +2844,7 @@ The source-of-evidence heatmap's numbers, read as in Table, topic.
 
 ```{r}
 #| label: region-source-enrichment-table
+#| classes: long-table
 knitr::kable(
 enrichment_cell_table(region_source_enrichment, "region", "region", "source", "n_region_papers", "corpus_rate")
 )
@@ -3022,6 +3040,7 @@ The by country heatmaps' numbers, one table each for topic, method and source of
 
 ```{r}
 #| label: region-nesting-country-table
+#| classes: long-table
 h_country <- make_nesting_heatmaps("country")
 if (!is.null(h_country)) knitr::kable(
 enrichment_cell_table(h_country$topic$data, "group", "country", "topic", "n_group_papers", "subset_corpus_rate"),
@@ -3031,6 +3050,7 @@ caption = "Topic"
 
 ```{r}
 #| label: region-nesting-country-method-table
+#| classes: long-table
 if (!is.null(h_country)) knitr::kable(
 enrichment_cell_table(h_country$method$data, "group", "country", "method", "n_group_papers", "subset_corpus_rate"),
 caption = "Method"
@@ -3173,6 +3193,7 @@ The numbers behind both charts: one row per region and year. The interval is the
 
 ```{r}
 #| label: region-over-time-table
+#| classes: long-table
 knitr::kable(
 year_wilson_table(region_year_wilson, "region")
 )
@@ -3310,6 +3331,7 @@ The numbers behind the Count and Enrichment charts: one row per country and year
 
 ```{r}
 #| label: region-country-over-time-table
+#| classes: long-table
 #| eval: !expr geo_has_data
 knitr::kable(
 year_wilson_table(geo_country, "country")
@@ -3322,6 +3344,7 @@ The numbers behind the Smoothed trend chart. Counts are pooled over a year and i
 
 ```{r}
 #| label: region-country-over-time-table-smoothed
+#| classes: long-table
 #| eval: !expr geo_has_data
 knitr::kable(
 year_roll_table(geo_country, "country")
