@@ -1223,3 +1223,161 @@ hub_table("seed_filtered")
 ```
 
 :::
+
+## Self-citation by topic, method and source of evidence
+
+```{r}
+#| label: selfcat-functions
+#| echo: false
+# Self-citation of the annotated papers that carry a category beside the papers that do
+# not. Part 2 writes each annotated paper's citations to works with a known author list,
+# and how many of them are self-citations, into the node table. A paper carries a
+# category when the annotation marks it as primary or secondary.
+selfcat_families <- c("Topic", "Method", "Source of evidence")
+selfcat_reps <- 2000
+
+has_self <- function() {
+  all(c("citations_known_authors", "self_citations_any_author", "self_citations_first_author") %in% names(node_table)) &&
+    any(!is.na(node_table$citations_known_authors))
+}
+
+# Runs `code` with a fixed random seed and puts the random number state back afterwards.
+with_fixed_seed <- function(seed, code) {
+  old <- if (exists(".Random.seed", envir = globalenv())) get(".Random.seed", envir = globalenv())
+  on.exit(if (is.null(old)) rm(".Random.seed", envir = globalenv()) else assign(".Random.seed", old, envir = globalenv()))
+  set.seed(seed)
+  code
+}
+
+# One row per annotated paper with citations, and a 0/1 matrix of the categories it carries.
+selfcat_data <- function() {
+  papers <- cluster_table_annotated |>
+    filter(!is.na(publication_year), !is.na(citations_known_authors)) |>
+    select(name, citations = citations_known_authors, any_author = self_citations_any_author,
+           first_author = self_citations_first_author,
+           contains("Topics.."), contains("Methods.."), contains("Sources.of.Evidence.."))
+  cats <- tibble(column = setdiff(names(papers), c("name", "citations", "any_author", "first_author"))) |>
+    mutate(family = case_when(str_detect(column, fixed("Topics..")) ~ "Topic",
+                              str_detect(column, fixed("Methods..")) ~ "Method",
+                              TRUE ~ "Source of evidence"),
+           category = str_squish(str_replace_all(
+             str_remove(column, "^(Topics|Methods|Sources\\.of\\.Evidence)\\.\\."), fixed("."), " ")))
+  list(papers = papers, cats = cats, carry = 1 * as.matrix(!is.na(papers[cats$column])))
+}
+
+# For every category: the share of citations that are self-citations among the papers that
+# carry it and among the papers that do not, and the difference. A share is the group's
+# self-citations over the group's citations, so a paper with a long reference list weighs
+# more. The interval on the difference comes from resampling the papers, because the
+# citations of one paper are not independent of each other.
+selfcat_comparison <- function() {
+  d <- selfcat_data()
+  n <- nrow(d$papers)
+  weights <- with_fixed_seed(1, replicate(selfcat_reps, tabulate(sample.int(n, n, replace = TRUE), nbins = n)))
+  measure <- function(events) {
+    carry_events <- colSums(d$carry * events)
+    carry_citations <- colSums(d$carry * d$papers$citations)
+    point <- carry_events / carry_citations - (sum(events) - carry_events) / (sum(d$papers$citations) - carry_citations)
+    boot_events <- crossprod(weights * events, d$carry)
+    boot_citations <- crossprod(weights * d$papers$citations, d$carry)
+    boot <- boot_events / boot_citations -
+      (colSums(weights * events) - boot_events) / (colSums(weights * d$papers$citations) - boot_citations)
+    bounds <- apply(boot, 2, quantile, probs = c(0.025, 0.975), na.rm = TRUE)
+    tibble(carrying = 100 * carry_events / carry_citations,
+           not_carrying = 100 * (sum(events) - carry_events) / (sum(d$papers$citations) - carry_citations),
+           difference = 100 * point, lower = 100 * bounds[1, ], upper = 100 * bounds[2, ],
+           excludes_zero = bounds[1, ] > 0 | bounds[2, ] < 0)
+  }
+  first <- measure(d$papers$first_author)
+  any <- measure(d$papers$any_author)
+  bind_cols(select(d$cats, family, category), papers = colSums(d$carry),
+            rename_with(first, ~ paste0("first_", .x)), rename_with(any, ~ paste0("any_", .x))) |>
+    mutate(family = factor(family, levels = selfcat_families)) |>
+    arrange(family, desc(first_difference), category)
+}
+
+selfcat_note <- function() {
+  d <- selfcat_comparison()
+  p <- selfcat_data()$papers
+  flagged <- function(prefix) {
+    f <- d[d[[paste0(prefix, "_excludes_zero")]], ]
+    f <- f[order(-abs(f[[paste0(prefix, "_difference")]])), ]
+    shown <- head(f, 5)
+    paste0(nrow(f), " of ", nrow(d), " categories",
+           if (nrow(f) > 0) paste0(" (", paste0(shown$category, " ", sprintf("%+.1f", shown[[paste0(prefix, "_difference")]]), collapse = ", "),
+                                   if (nrow(f) > 5) paste0(", and ", nrow(f) - 5, " more") else "", ")") else "")
+  }
+  paste0("Across the ", nrow(p), " annotated papers, ", scales::percent(sum(p$first_author) / sum(p$citations), accuracy = 0.1),
+         " of citations go to a work by the citing paper's first author and ",
+         scales::percent(sum(p$any_author) / sum(p$citations), accuracy = 0.1), " to a work that shares an author with it. ",
+         "The first-author rate differs between papers that carry a category and papers that do not for ", flagged("first"),
+         ", and the shared-author rate for ", flagged("any"), ". Differences are in percentage points.")
+}
+
+selfcat_plot <- function() {
+  d <- selfcat_comparison() |>
+    mutate(label = if_else(first_excludes_zero, paste0(category, " *"), category),
+           row = fct_rev(fct_inorder(paste(family, category, sep = "||"))))
+  lookup <- distinct(d, row, label) |> deframe()
+  ggplot(d, aes(first_difference, row, colour = first_excludes_zero)) +
+    geom_vline(xintercept = 0, linetype = "dashed", colour = "grey50") +
+    geom_pointrange(aes(xmin = first_lower, xmax = first_upper), size = 0.3) +
+    facet_grid(family ~ ., scales = "free_y", space = "free_y") +
+    scale_colour_manual(values = c("TRUE" = "firebrick", "FALSE" = "grey40"), guide = "none") +
+    scale_y_discrete(labels = lookup) +
+    labs(x = "Papers that carry the category minus papers that do not, in percentage points", y = NULL,
+         title = "First-author self-citation rate by topic, method and source of evidence",
+         subtitle = "95% intervals from resampling papers. A star marks an interval that excludes zero.") +
+    theme_minimal() +
+    theme(strip.text.y = element_text(angle = 0))
+}
+
+selfcat_table <- function() {
+  as_interval <- function(lower, upper) paste0(round(lower, 1), " to ", round(upper, 1))
+  selfcat_comparison() |>
+    transmute(Kind = as.character(family), Category = category, `Papers carrying` = papers,
+              `First author, carrying (%)` = round(first_carrying, 1),
+              `First author, not carrying (%)` = round(first_not_carrying, 1),
+              `First author, difference (points)` = round(first_difference, 1),
+              `First author, interval (points)` = as_interval(first_lower, first_upper),
+              `First author, interval excludes zero` = if_else(first_excludes_zero, "yes", "no"),
+              `Shared author, carrying (%)` = round(any_carrying, 1),
+              `Shared author, not carrying (%)` = round(any_not_carrying, 1),
+              `Shared author, difference (points)` = round(any_difference, 1),
+              `Shared author, interval (points)` = as_interval(any_lower, any_upper),
+              `Shared author, interval excludes zero` = if_else(any_excludes_zero, "yes", "no")) |>
+    knitr::kable()
+}
+```
+
+The Self-citation section of Part 2 counts the citations from each annotated paper to works that share an author with it. This section asks whether papers that carry a topic, a method or a source of evidence cite their own authors more or less than papers that do not. The first-author rate counts a citation when the citing paper's first author wrote the cited work. The shared-author rate counts it when any author of the citing paper did, and it rises with the length of the author list, so the plot uses the first-author rate and the table carries both. Each paper is a unit in the resampling that gives the 95% intervals, which are not adjusted for the number of categories compared.
+
+### Topics, methods and sources of evidence
+
+::: {.panel-tabset}
+
+#### Plot
+
+`r if (has_self()) selfcat_note()`
+
+```{r}
+#| label: selfcat-plot
+#| echo: false
+#| fig-width: 11
+#| fig-height: 14
+#| eval: !expr has_self()
+selfcat_plot()
+```
+
+#### Table
+
+The numbers behind the plot: one row per category, topics first, then methods, then sources of evidence, and within each kind the category with the largest first-author difference first. "Carrying" is the share of citations that are self-citations among the papers that carry the category, and "not carrying" is the same among all other annotated papers.
+
+```{r}
+#| label: selfcat-table
+#| echo: false
+#| eval: !expr has_self()
+selfcat_table()
+```
+
+:::
