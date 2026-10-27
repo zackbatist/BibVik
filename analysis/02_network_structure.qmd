@@ -2794,11 +2794,71 @@ gn_paper_label <- function(x) {
   paste0(str_trunc(node_attrs$title[i], 60), if_else(nzchar(node_attrs$year[i]), paste0(" (", node_attrs$year[i], ")"), ""))
 }
 
+# The authors of each paper in the bibliography, one row per author. The key is the
+# family name and the first initial of the given name, lower case and without
+# accents, so "Price, Neil" and "Price, N." are the same person. Two papers share
+# an author when they have a key in common. `shown` is the name as printed in tables.
+gn_author_keys <- local({
+  fold <- function(x) {
+    x <- iconv(x, to = "ASCII//TRANSLIT")
+    x[is.na(x)] <- ""
+    tolower(str_squish(str_replace_all(x, "[^A-Za-z ]", "")))
+  }
+  map(bib, function(e) {
+    au <- e$author
+    if (length(au) == 0) return(tibble(key = character(), shown = character()))
+    family <- map_chr(au, ~ .x$family %||% "")
+    given  <- map_chr(au, ~ .x$given %||% "")
+    tibble(key   = if_else(nzchar(fold(given)), paste0(fold(family), "|", substr(fold(given), 1, 1)), fold(family)),
+           shown = if_else(nzchar(str_squish(given)), paste0(family, " ", substr(str_squish(given), 1, 1), "."), family),
+           ok    = nzchar(fold(family))) |>
+      filter(ok) |> select(key, shown) |> distinct(key, .keep_all = TRUE)
+  })
+})
+
+# The authors two papers have in common, as they print in a table.
+gn_common_authors <- function(a, b) {
+  x <- gn_author_keys[[a]]
+  y <- gn_author_keys[[b]]
+  if (is.null(x) || is.null(y)) return(character())
+  x$shown[x$key %in% y$key]
+}
+
+# Whether the two papers share an author and whether one cites the other, for the
+# two largest hubs of every cluster in the Shared references shape.
+gn_shared_author_pairs <- function(key) {
+  edges <- edges_list[[key]]
+  cites <- function(a, b) any(edges$source == a & edges$target == b)
+  s <- gn_shapes[[key]] |> filter(shape == "Shared references")
+  gn_twin_pairs(key, all = TRUE) |>
+    filter(from %in% s$community_gn) |>
+    mutate(authors = map2(paper_1, paper_2, gn_common_authors),
+           cite_each_other = map2_lgl(paper_1, paper_2, ~ cites(.x, .y) || cites(.y, .x)))
+}
+
+# One sentence on how often the two largest hubs share an author, set beside the
+# rate for two annotated papers picked at random (every pair of annotated papers).
+gn_shared_author_note <- function(key) {
+  p <- gn_shared_author_pairs(key)
+  annotated <- node_attrs$name[node_attrs$generation == "F1"]
+  annotated <- annotated[lengths(map(gn_author_keys[annotated], "key")) > 0]
+  keys <- sort(unique(unlist(map(gn_author_keys[annotated], "key"))))
+  m <- matrix(0L, length(annotated), length(keys))
+  for (i in seq_along(annotated)) m[i, match(gn_author_keys[[annotated[i]]]$key, keys)] <- 1L
+  together <- (m %*% t(m)) > 0
+  baseline <- (sum(together) - nrow(m)) / (nrow(m) * (nrow(m) - 1))
+  shared <- lengths(p$authors) > 0
+  paste0("The two largest hubs share an author in ", sum(shared), " of ", nrow(p), " clusters, and in ",
+         sum(shared & p$cite_each_other), " of those one hub cites the other. Two annotated papers picked at random share an author ",
+         scales::percent(baseline, accuracy = 0.1), " of the time.")
+}
+
 # Every cluster in the Shared references shape, largest first.
 gn_shared_table <- function(key) {
   s <- gn_shapes[[key]] |> filter(shape == "Shared references")
   if (nrow(s) == 0) return(knitr::kable(tibble(Result = "No cluster has the Shared references shape.")))
   lookup <- gn_label_lookup(key)
+  authors <- gn_shared_author_pairs(key) |> select(from, authors, cite_each_other)
   cited <- gn_cluster_edges(key) |>
     filter(from == to) |>
     group_by(from, target) |> summarise(n_citing = n_distinct(source), .groups = "drop") |>
@@ -2806,12 +2866,15 @@ gn_shared_table <- function(key) {
   s |>
     left_join(cited, by = c("community_gn" = "from")) |>
     left_join(gn_twin_pairs(key, all = TRUE), by = c("community_gn" = "from")) |>
+    left_join(authors, by = c("community_gn" = "from")) |>
     arrange(desc(papers)) |>
     transmute(Cluster = gn_label_or_id(community_gn, lookup), Papers = papers, Hubs = citing,
               `Cited works shared` = paste0(shared, " of ", cited_inside, " (",
                                             scales::percent(shared / cited_inside, accuracy = 1), ")"),
               `Hub A` = gn_paper_label(paper_1), `Hub B` = gn_paper_label(paper_2),
-              `References in common` = scales::percent(overlap, accuracy = 0.1)) |>
+              `References in common` = scales::percent(overlap, accuracy = 0.1),
+              `Shared author` = map_chr(authors, ~ if (length(.x)) paste(.x, collapse = "; ") else "none"),
+              `Hubs cite each other` = if_else(cite_each_other, "yes", "no")) |>
     knitr::kable()
 }
 
@@ -3024,11 +3087,13 @@ gn_twin_table("seed_filtered")
 
 #### The Shared references clusters
 
-In a Shared references cluster, two or more hubs cite some of the same works. The first table lists every cluster in the shape, largest first. "Cited works shared" counts the works inside the cluster that two or more of its papers cite, out of all the works cited inside it. "References in common" is the overlap of the two largest hubs' full reference lists, the same measure the table of possible bibliography errors uses.
+In a Shared references cluster, two or more hubs cite some of the same works. The first table lists every cluster in the shape, largest first. "Cited works shared" counts the works inside the cluster that two or more of its papers cite, out of all the works cited inside it. "References in common" is the overlap of the two largest hubs' full reference lists, the same measure the table of possible bibliography errors uses. "Shared author" lists the authors those two hubs have in common, matched on family name and first initial, and "Hubs cite each other" says whether one of the two cites the other.
 
 ::: {.panel-tabset}
 
 ##### Annotated
+
+`r if (gn_has_shapes("annotated")) gn_shared_author_note("annotated")`
 
 ```{r}
 #| label: shape-shared-annotated
@@ -3038,6 +3103,8 @@ gn_shared_table("annotated")
 ```
 
 ##### Annotated, seed filtered
+
+`r if (gn_has_shapes("seed_filtered")) gn_shared_author_note("seed_filtered")`
 
 ```{r}
 #| label: shape-shared-seed-filtered
