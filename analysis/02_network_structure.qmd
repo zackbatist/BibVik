@@ -3687,7 +3687,7 @@ plot_membership("annotated", "cluster_kmeans", "Citation graph, K-means clusters
 
 ## Node-table export
 
-`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. `shape_gn` and `shape_gn_seed_filtered` hold the shape of each paper's cluster, and `cluster_hub_gn` and `cluster_hub_gn_seed_filtered` mark the papers that cite other members of their cluster. The Girvan-Newman columns are left out when a run has not been installed.
+`analysis/bibvik_node_table.csv`, which `03_joined_descriptions.qmd` reads, holds the Annotated graph's measures with one row per node, plus `community_gn` from the Annotated run's earliest cut and `community_gn_seed_filtered` from the seed-filtered run. `group_gn` and `group_gn_seed_filtered` hold the consensus group of each paper's cluster. `shape_gn` and `shape_gn_seed_filtered` hold the shape of each paper's cluster, and `cluster_hub_gn` and `cluster_hub_gn_seed_filtered` mark the papers that cite other members of their cluster. `citations_known_authors`, `self_citations_any_author` and `self_citations_first_author` count each annotated paper's citations to works with a known author list, and how many of those go to a work that shares an author with the paper or with its first author. The Girvan-Newman columns are left out when a run has not been installed.
 
 ```{r}
 #| label: node-table-export
@@ -3742,6 +3742,15 @@ for (spec in list(c("annotated", "shape_gn", "cluster_hub_gn"),
   if (gn_has_shapes(spec[1])) {
     node_table <- node_table |> left_join(gn_shape_column(spec[1], spec[2], spec[3]), by = "name")
   }
+}
+
+# Self-citations of each annotated paper, from the Self-citation section.
+if (exists("self_papers")) {
+  node_table <- node_table |>
+    left_join(transmute(self_papers, name = source, citations_known_authors = references,
+                        self_citations_any_author = any_author,
+                        self_citations_first_author = first_author),
+              by = "name")
 }
 
 write_csv(node_table, here("analysis", "bibvik_node_table.csv"))
