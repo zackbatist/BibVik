@@ -10,6 +10,20 @@ of it: it `source()`s the script for its definitions and applies them to the
 file. The script lives in its own directory because it calls Wikidata and
 writes files, which a render should not do.
 
+## Why Wikidata
+
+Region is free text drawn directly from each paper, not a controlled
+vocabulary. Spelling variants and mixed specificity (continent, country, named
+site) count as distinct terms until they are consolidated to real places with
+coordinates.
+
+Pleiades, Pelagios/Peripleo and iDAI.gazetteer were considered and set aside.
+All three are institutionally anchored in Mediterranean and classical-world
+antiquity, with no confirmed non-trivial coverage of Viking Age Scandinavia.
+Wikidata was used instead for its dense, well-curated coverage of Scandinavian
+archaeological sites and its structured multilingual labels and aliases, which
+handle most spelling variants (Danmark and Denmark) without extra work.
+
 ## Running it
 
 From the repository root. All four stages need outbound network access.
