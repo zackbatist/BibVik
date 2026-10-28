@@ -457,6 +457,116 @@ full_join(
 
 :::
 
+### Language by year
+
+::: {.panel-tabset}
+
+#### F1
+
+```{r}
+#| label: overview-langyear
+#| fig-cap: "F1 papers per publication year, by language."
+lang_group_labels <- c("English", "Swedish", "German", "Danish", "Norwegian", "Other languages", "Unknown")
+lang_group_colours <- c(
+  English = "#5e81ac", Swedish = "#ebcb8b", German = "#bf616a", Danish = "#a3be8c",
+  Norwegian = "#b48ead", `Other languages` = "#d08770", Unknown = "#c8ced9"
+)
+lang_group <- function(code) {
+  case_when(
+    code == "en" ~ "English", code == "sv" ~ "Swedish", code == "de" ~ "German",
+    code == "da" ~ "Danish", code %in% c("nb", "nn", "no") ~ "Norwegian",
+    code == "unknown" ~ "Unknown", TRUE ~ "Other languages"
+  )
+}
+
+langyear <- tibble(citekey = names(bib_matched), language = paper_langs) %>%
+  inner_join(df %>% select(citekey, publication_year), by = "citekey") %>%
+  mutate(year = as.integer(as.character(publication_year)),
+         group = factor(lang_group(language), levels = lang_group_labels))
+
+langyear %>%
+  count(year, group) %>%
+  ggplot(aes(x = year, y = n, fill = group)) +
+  geom_col() +
+  scale_fill_manual(values = lang_group_colours, drop = FALSE) +
+  scale_x_continuous(breaks = seq(year_range[1], year_range[2], 2)) +
+  theme_bw() +
+  theme(legend.title = element_blank(), legend.position = "bottom") +
+  labs(x = "", y = "Count", title = "Publications by year and language")
+
+split_f1 <- 2010
+known_early <- langyear %>% filter(year < split_f1, group != "Unknown")
+known_late <- langyear %>% filter(year >= split_f1, group != "Unknown")
+```
+
+Each bar stacks the papers published that year by language. English is `r scales::percent(mean(known_early$group == "English"), accuracy = 1)` of the `r nrow(known_early)` papers with a known language published before `r split_f1` and `r scales::percent(mean(known_late$group == "English"), accuracy = 1)` of the `r nrow(known_late)` published from `r split_f1` on. Norwegian combines `nb`, `nn` and `no`. The Table tab gives the counts for every year, and the Language section above gives every language code.
+
+#### Full corpus
+
+```{r}
+#| label: overview-langyear-full
+#| fig-cap: "Entries per publication year across the full bibliography, by language."
+langyear_full <- tibble(
+  year = map_chr(bib_live, ~ as.character(.x$year %||% NA)),
+  language = map_chr(bib_live, ~ .x$language %||% "unknown")
+) %>%
+  filter(!is.na(year), str_detect(year, "^\\d{4}$")) %>%
+  mutate(year = as.integer(year)) %>%
+  filter(year >= 1900, year <= 2026) %>%
+  mutate(group = factor(lang_group(language), levels = lang_group_labels))
+
+langyear_full %>%
+  count(year, group) %>%
+  ggplot(aes(x = year, y = n, fill = group)) +
+  geom_col(width = 1) +
+  scale_fill_manual(values = lang_group_colours, drop = FALSE) +
+  scale_x_continuous(breaks = scales::breaks_pretty(n = 10)) +
+  theme_bw() +
+  theme(legend.title = element_blank(), legend.position = "bottom") +
+  labs(x = "", y = "Count", title = "Publications by year and language, full bibliography")
+
+split_full <- 2000
+known_early_full <- langyear_full %>% filter(year < split_full, group != "Unknown")
+known_late_full <- langyear_full %>% filter(year >= split_full, group != "Unknown")
+unknown_early_full <- mean(langyear_full$group[langyear_full$year < split_full] == "Unknown")
+unknown_late_full <- mean(langyear_full$group[langyear_full$year >= split_full] == "Unknown")
+```
+
+Years come from the `year` field. `r scales::comma(nrow(langyear_full))` of the `r scales::comma(n_live)` live entries have a four-digit year from 1900 to 2026, and the other `r scales::comma(n_live - nrow(langyear_full))` do not appear in the chart. English is `r scales::percent(mean(known_early_full$group == "English"), accuracy = 1)` of the `r scales::comma(nrow(known_early_full))` entries with a known language published before `r split_full` and `r scales::percent(mean(known_late_full$group == "English"), accuracy = 1)` of the `r scales::comma(nrow(known_late_full))` published from `r split_full` on. Unknown is `r scales::percent(unknown_early_full, accuracy = 1)` of the entries published before `r split_full` and `r scales::percent(unknown_late_full, accuracy = 1)` of those published from `r split_full` on. The language of an F2 entry comes from its title, as in the Language section. Norwegian combines `nb`, `nn` and `no`.
+
+#### Table
+
+**F1 papers**
+
+```{r}
+#| label: overview-langyear-table
+langyear %>%
+  count(year, group) %>%
+  complete(year, group, fill = list(n = 0L)) %>%
+  pivot_wider(names_from = group, values_from = n) %>%
+  select(year, all_of(lang_group_labels)) %>%
+  arrange(year) %>%
+  mutate(Total = rowSums(across(all_of(lang_group_labels))), year = as.character(year)) %>%
+  knitr::kable(col.names = c("Year", lang_group_labels, "Total"))
+```
+
+**Full corpus entries**
+
+```{r}
+#| label: overview-langyear-table-full
+#| classes: long-table
+langyear_full %>%
+  count(year, group) %>%
+  complete(year, group, fill = list(n = 0L)) %>%
+  pivot_wider(names_from = group, values_from = n) %>%
+  select(year, all_of(lang_group_labels)) %>%
+  arrange(year) %>%
+  mutate(Total = rowSums(across(all_of(lang_group_labels))), year = as.character(year)) %>%
+  knitr::kable(col.names = c("Year", lang_group_labels, "Total"))
+```
+
+:::
+
 ## Citation detection per F1 paper
 
 ::: {.panel-tabset}
