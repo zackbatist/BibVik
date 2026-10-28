@@ -150,11 +150,13 @@ GROBID.
 ### Language
 
 Stored under `processed_papers[pdf_name]['language']`. ISO 639-1 code
-(e.g. `"en"`, `"no"`, `"da"`, `"sv"`, `"de"`, `"fr"`) or `"unknown"`.
+(`"en"`, `"nb"` for Norwegian Bokmål, `"nn"` for Norwegian Nynorsk, `"da"`,
+`"sv"`, `"de"`, `"fr"`) or `"unknown"`.
 
 Detected using the `lingua` library (`lingua-language-detector` on PyPI)
 applied to the first ~2000 characters of body text. The detector is restricted
-to the six languages expected in the corpus for accuracy and speed.
+to the seven languages expected in the corpus for accuracy and speed: English,
+Norwegian Bokmål, Norwegian Nynorsk, Danish, Swedish, German and French.
 
 **Why `lingua` over `langdetect`:** `langdetect` (Nakatani Shuyo, 2010; Python
 port by Mimino, 2014) uses character n-gram Naive Bayes trained on Wikipedia

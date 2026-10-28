@@ -129,9 +129,9 @@ def detect_language(paragraphs: list[dict]) -> str:
     the risk of misclassification between closely related Scandinavian
     languages.
 
-    Returns an ISO 639-1 language code (e.g. "en", "no", "da", "sv",
-    "de", "fr"), or "unknown" if detection fails or lingua is not
-    installed.
+    Returns an ISO 639-1 language code ("en", "nb" for Norwegian Bokmål,
+    "nn" for Norwegian Nynorsk, "da", "sv", "de" or "fr"), or "unknown"
+    if detection fails or lingua is not installed.
 
     Note: GROBID's own xml:lang attribute on the <text> element is not
     used because inspection of the TEI output found it to be unreliable
@@ -145,6 +145,7 @@ def detect_language(paragraphs: list[dict]) -> str:
             _lingua_detector = LanguageDetectorBuilder.from_languages(
                 Language.ENGLISH,
                 Language.BOKMAL,
+                Language.NYNORSK,
                 Language.DANISH,
                 Language.SWEDISH,
                 Language.GERMAN,
