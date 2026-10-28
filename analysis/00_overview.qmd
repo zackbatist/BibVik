@@ -63,7 +63,7 @@ No other structured record of exclusion reasons for the remaining works in the s
 
 ## Corpus composition
 
-The following sections describe the corpus by publication year, entry type, authorship, venue, and language. Each has a tab for the 369-paper F1 set and a tab for the full bibliography (`r scales::comma(n_live)` live entries). The year, entry type, authorship and venue sections also have a Table tab with the counts behind both charts.
+The following sections describe the corpus by publication year, entry type, authorship, venue, and language. Each has a tab for the 369-paper F1 set and a tab for the full bibliography (`r scales::comma(n_live)` live entries). The year, entry type, authorship, venue and language sections also have a Table tab with the counts behind both charts.
 
 ### Publications by year
 
@@ -375,30 +375,28 @@ full_join(
 
 ```{r}
 #| label: overview-language
-#| fig-cap: "F1 papers by detected source-PDF language, excluding English."
+#| fig-cap: "F1 papers by language, excluding English."
 lang_labels <- c(
   en = "English", sv = "Swedish", da = "Danish", nb = "Norwegian (Bokmål)",
-  nn = "Norwegian (Nynorsk)", de = "German", fr = "French",
-  ru = "Russian", uk = "Ukrainian", unknown = "Unknown script"
+  nn = "Norwegian (Nynorsk)", no = "Norwegian (Bokmål or Nynorsk)", de = "German",
+  fr = "French", is = "Icelandic", fi = "Finnish", et = "Estonian", pl = "Polish",
+  nl = "Dutch", ru = "Russian", uk = "Ukrainian", unknown = "Unknown"
 )
 
-paper_langs <- map_chr(bib_matched, ~ .x$language %||% NA_character_)
+from_title <- function(x) str_detect(x$`_correction_note` %||% "", "^Language set from the entry's title")
 
-n_missing <- sum(is.na(paper_langs))
-n_unknown <- sum(paper_langs == "unknown", na.rm = TRUE)
-n_classified <- sum(!is.na(paper_langs) & paper_langs != "unknown")
-n_english <- sum(paper_langs == "en", na.rm = TRUE)
+paper_langs <- map_chr(bib_matched, ~ .x$language %||% "unknown")
+
+n_unknown <- sum(paper_langs == "unknown")
+n_classified <- sum(paper_langs != "unknown")
+n_english <- sum(paper_langs == "en")
+n_nb <- sum(paper_langs == "nb")
+n_nn <- sum(paper_langs == "nn")
+n_from_title <- sum(map_lgl(bib_matched, from_title))
 
 lang_counts <- tibble(language = paper_langs) %>%
-  filter(!is.na(language)) %>%
   count(language, sort = TRUE) %>%
   mutate(pct = n / sum(n), language_label = coalesce(lang_labels[language], language))
-
-knitr::kable(
-  lang_counts %>% mutate(pct = scales::percent(pct, accuracy = 0.1)) %>% select(language_label, n, pct),
-  caption = "F1 papers by detected source-PDF language, including 'Unknown script'",
-  col.names = c("Language", "N", "%")
-)
 
 lang_counts %>%
   filter(language != "en") %>%
@@ -410,40 +408,52 @@ lang_counts %>%
   labs(x = "", y = "Count", title = "F1 papers by detected language, excluding English")
 ```
 
-`r n_english` of `r n_classified` classified papers (`r scales::percent(n_english / n_classified, accuracy = 1)`) are English-language, which crowds out every other language on a shared axis, so the chart above excludes English and shows only the remaining `r n_classified - n_english + n_unknown` papers, where the real differences between languages are visible. The table gives exact counts and shares for all languages including English. `r n_unknown` papers are flagged "Unknown script" by the detector and `r n_missing` have no language recorded. The language field is recorded per paper by the extraction pipeline from its actual body text (using the `lingua` language-detection library, restricted to a known set of languages expected in this corpus: English, Norwegian, Swedish, Danish, German) and is persisted directly on each bibliography entry. "Unknown script" reflects papers written in a script the detector does not attempt to classify: confirmed for the two such cases in this corpus (Nosov 2018, Russian; Skorokhod & Blaszczyk 2020, Ukrainian), not a processing failure; both have real, correctly extracted content and citation data.
+`r n_english` of `r n_classified` papers with a known language (`r scales::percent(n_english / n_classified, accuracy = 1)`) are English. The chart leaves English out, since it would crowd out every other language on a shared axis, and the Table tab gives the counts for every language. The language of `r length(bib_matched) - n_from_title` papers comes from the body text of their PDFs, detected with the `lingua` library over seven languages (English, Norwegian Bokmål, Norwegian Nynorsk, Danish, Swedish, German and French), so the two Norwegian varieties are counted apart: `r n_nb` papers are Bokmål and `r n_nn` are Nynorsk. The other `r n_from_title` papers have no PDF in the corpus, so their language comes from the title, detected over thirteen languages (the seven plus Icelandic, Finnish, Estonian, Polish, Dutch and Russian) and kept only at a confidence of 0.7 or higher. `r n_unknown` papers have the language `unknown`. Russian and Ukrainian are not among the body-text detector's languages; the two papers in those languages (Nosov 2018 and Skorokhod & Blaszczyk 2020) were set in `corrections.yaml` from the processing cache.
 
 #### Full corpus
 
 ```{r}
 #| label: overview-language-full
-#| fig-cap: "Full bibliography by detected source-PDF language, excluding English."
-paper_langs_full <- map_chr(bib_live, ~ .x$language %||% NA_character_)
+#| fig-cap: "Full bibliography by language, excluding English and Unknown."
+paper_langs_full <- map_chr(bib_live, ~ .x$language %||% "unknown")
 
-n_classified_full <- sum(!is.na(paper_langs_full) & paper_langs_full != "unknown")
-n_english_full <- sum(paper_langs_full == "en", na.rm = TRUE)
-n_unclassified_full <- sum(is.na(paper_langs_full) | paper_langs_full == "unknown")
+n_classified_full <- sum(paper_langs_full != "unknown")
+n_english_full <- sum(paper_langs_full == "en")
+n_unknown_full <- sum(paper_langs_full == "unknown")
+n_from_title_full <- sum(map_lgl(bib_live, from_title))
+n_no_full <- sum(paper_langs_full == "no")
+n_nb_full <- sum(paper_langs_full == "nb")
 
 lang_counts_full <- tibble(language = paper_langs_full) %>%
-  mutate(language = ifelse(is.na(language) | language == "unknown", "unclassified", language)) %>%
   count(language, sort = TRUE) %>%
-  mutate(pct = n / sum(n), language_label = coalesce(lang_labels[language], str_to_sentence(language)))
-
-knitr::kable(
-  lang_counts_full %>% mutate(pct = scales::percent(pct, accuracy = 0.1)) %>% select(language_label, n, pct),
-  caption = "Full bibliography by detected source-PDF language ('Unclassified' combines entries the detector flagged unknown and entries with no language recorded)",
-  col.names = c("Language", "N", "%")
-)
+  mutate(pct = n / sum(n), language_label = coalesce(lang_labels[language], language))
 
 lang_counts_full %>%
-  filter(language != "en") %>%
+  filter(!language %in% c("en", "unknown")) %>%
   ggplot(aes(x = fct_reorder(language_label, n), y = n)) +
   geom_bar(stat = "identity", fill = "#5e81ac") +
   coord_flip() +
   theme_bw() +
-  labs(x = "", y = "Count", title = "Full bibliography by detected language, excluding English")
+  labs(x = "", y = "Count", title = "Full bibliography by detected language")
 ```
 
-`r n_english_full` of `r n_classified_full` classified entries (`r scales::percent(n_english_full / n_classified_full, accuracy = 1)`) are English-language. `r n_unclassified_full` entries are unclassified, either flagged `unknown` by the detector or carrying no language value at all.
+`r scales::comma(n_english_full)` of `r scales::comma(n_classified_full)` entries with a known language (`r scales::percent(n_english_full / n_classified_full, accuracy = 1)`) are English. `r scales::comma(n_from_title_full)` of the `r scales::comma(n_live)` live entries get their language from the title, which includes every F2 entry; the other `r scales::comma(n_live - n_from_title_full)` get it from the body text of a PDF. A title is short, so the detector leaves `r scales::comma(n_unknown_full)` entries (`r scales::percent(n_unknown_full / n_live, accuracy = 1)`) as `unknown`. The chart leaves out English and Unknown, the two largest groups, and the Table tab gives every count. A title cannot separate Bokmål from Nynorsk, so Norwegian titles are recorded as `no`, "Norwegian (Bokmål or Nynorsk)" (`r n_no_full` entries), and the `r n_nb_full` `nb` entries are F1 papers read from body text. The language of an F2 entry is the language of the work itself, not of the paper that cites it.
+
+#### Table
+
+```{r}
+#| label: overview-language-table
+full_join(
+  lang_counts %>% select(language, f1 = n, f1_pct = pct),
+  lang_counts_full %>% select(language, full = n, full_pct = pct),
+  by = "language"
+) %>%
+  mutate(across(c(f1, full), ~ replace_na(.x, 0L)),
+         across(c(f1_pct, full_pct), ~ scales::percent(replace_na(.x, 0), accuracy = 0.1)),
+         language = coalesce(lang_labels[language], language)) %>%
+  arrange(desc(full), desc(f1)) %>%
+  knitr::kable(col.names = c("Language", "F1 papers", "F1 %", "Full corpus entries", "Full corpus %"))
+```
 
 :::
 
