@@ -2605,6 +2605,113 @@ region_country_totals %>%
 
 :::
 
+**Language by country.** The same countries, split by the language of the
+paper itself. Each bar stacks the F1 papers tagged with that country by
+language, using the language groups of "Language by year" in Part 0.
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r}
+#| label: region-language-by-country
+#| fig-cap: "Papers per country, by language of the paper."
+#| fig-width: 9
+#| fig-height: 6
+if (has_country_data) {
+  # The only place Part 1 reads the bibliography: it keeps the language of
+  # the F1 papers and drops the rest.
+  paper_language <- local({
+    bib <- jsonlite::fromJSON(here("data", "bibliography.json"), simplifyVector = FALSE)
+    tibble(citekey = df$citekey,
+           language = map_chr(df$citekey, ~ bib[[.x]]$language %||% "unknown"))
+  })
+
+  lang_group_labels <- c("English", "Swedish", "German", "Danish", "Norwegian", "Other languages", "Unknown")
+  lang_group_colours <- c(
+    English = "#5e81ac", Swedish = "#ebcb8b", German = "#bf616a", Danish = "#a3be8c",
+    Norwegian = "#b48ead", `Other languages` = "#d08770", Unknown = "#c8ced9"
+  )
+  lang_group <- function(code) {
+    case_when(
+      code == "en" ~ "English", code == "sv" ~ "Swedish", code == "de" ~ "German",
+      code == "da" ~ "Danish", code %in% c("nb", "nn", "no") ~ "Norwegian",
+      code == "unknown" ~ "Unknown", TRUE ~ "Other languages"
+    )
+  }
+
+  region_country_language <- region_df %>%
+    filter(!is.na(country)) %>%
+    distinct(citekey, country) %>%
+    left_join(paper_language, by = "citekey") %>%
+    mutate(group = factor(lang_group(coalesce(language, "unknown")), levels = lang_group_labels))
+
+  country_language_counts <- region_country_language %>%
+    count(country, group)
+  country_order <- region_country_totals %>% arrange(n) %>% pull(country)
+
+  ggplot(country_language_counts, aes(x = factor(country, levels = country_order), y = n, fill = group)) +
+    geom_col() +
+    geom_text(data = region_country_totals,
+              aes(x = factor(country, levels = country_order), y = n, label = n),
+              inherit.aes = FALSE, hjust = -0.3, size = 3.5) +
+    coord_flip() +
+    scale_fill_manual(values = lang_group_colours, drop = FALSE) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+    theme_bw() +
+    theme(legend.title = element_blank(), legend.position = "bottom") +
+    labs(x = "", y = "Papers")
+} else {
+  cat("No place in region_lookup.csv has a country yet. Run the nesting",
+      "stage in analysis/region_matching/ (see the README there).\n")
+}
+```
+
+#### Table
+
+The plot's numbers.
+
+```{r}
+#| label: region-language-by-country-table
+#| eval: !expr has_country_data
+country_language_counts %>%
+  complete(country, group, fill = list(n = 0L)) %>%
+  pivot_wider(names_from = group, values_from = n) %>%
+  select(country, all_of(lang_group_labels)) %>%
+  mutate(papers = rowSums(across(all_of(lang_group_labels)))) %>%
+  arrange(desc(papers), country) %>%
+  knitr::kable(col.names = c("Country", lang_group_labels, "Papers"))
+```
+
+:::
+
+```{r}
+#| label: region-language-by-country-text
+#| results: asis
+#| eval: !expr has_country_data
+n_pairs <- nrow(region_country_language)
+n_countries <- n_distinct(region_country_language$country)
+n_countries_other <- region_country_language %>%
+  filter(!group %in% c("English", "Unknown")) %>%
+  summarise(n = n_distinct(country)) %>%
+  pull(n)
+
+cat(sprintf(
+  paste(
+    "English is %s of the %s pairs of paper and country, and %d of the %d countries",
+    "have at least one paper in a language other than English. The pairs come from",
+    "%d of the %d F1 papers; the other %d have no Region, or none that resolves to a",
+    "country. A paper tagged with several countries appears once under each. The",
+    "language is the paper's own, taken from the body text of its PDF (see the",
+    "Language section in Part 0); the 14 papers without a PDF use their title."
+  ),
+  scales::percent(mean(region_country_language$group == "English"), accuracy = 1),
+  scales::comma(n_pairs), n_countries_other, n_countries,
+  n_distinct(region_country_language$citekey), n_distinct(df$citekey),
+  n_distinct(df$citekey) - n_distinct(region_country_language$citekey)
+), "\n")
+```
+
 ### Topic, method, and source by region
 
 Same problem as gender composition above: most region tokens have too
