@@ -243,45 +243,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <style>
-/* Tables with more rows than the script's limit start collapsed behind a summary line. */
-details.collapsible-table { margin: 1em 0; border: 1px solid #dee2e6; border-radius: 4px; }
-details.collapsible-table > summary { cursor: pointer; padding: 0.4em 0.8em; background: #f8f9fa; color: #495057; font-size: 0.9em; }
-details.collapsible-table[open] > summary { border-bottom: 1px solid #dee2e6; }
-details.collapsible-table > summary .when-open { display: none; }
-details.collapsible-table[open] > summary .when-open { display: inline; }
-details.collapsible-table[open] > summary .when-closed { display: none; }
-details.collapsible-table > .collapsible-table-body { overflow-x: auto; padding: 0.5em; }
-details.collapsible-table table { margin-bottom: 0; }
+/* A table in a cell marked long-table shows the rows that fit in one screen. A button
+   beneath it opens the rest. Every other table shows in full. */
+.table-row-hidden { display: none; }
+button.table-more-toggle { display: block; margin: 0.5em 0 1em; padding: 0.4em 0.8em; border: 1px solid #dee2e6; border-radius: 4px; background: #f8f9fa; color: #495057; font-size: 0.9em; cursor: pointer; }
+button.table-more-toggle:hover { background: #e9ecef; }
 </style>
 <script>
 (function () {
-  var MAX_OPEN_ROWS = 10;  // tables with more body rows than this start collapsed
   var scope = document.querySelector("#quarto-document-content") || document.body;
-  Array.prototype.forEach.call(scope.querySelectorAll("table"), function (table) {
-    if (table.closest("details.collapsible-table")) return;
-    var rows = table.querySelectorAll("tbody tr").length;
-    if (rows <= MAX_OPEN_ROWS) return;
-    var details = document.createElement("details");
-    details.className = "collapsible-table";
-    var summary = document.createElement("summary");
-    summary.innerHTML = '<span class="when-closed">Show table (' + rows + ' rows)</span><span class="when-open">Hide table</span>';
-    var body = document.createElement("div");
-    body.className = "collapsible-table-body";
-    table.parentNode.insertBefore(details, table);
-    details.appendChild(summary);
-    details.appendChild(body);
-    body.appendChild(table);
+  // A table row with its padding is about two and a half lines of body text tall.
+  var fontSize = parseFloat(window.getComputedStyle(document.body).fontSize) || 16;
+  var rowsInScreen = Math.max(1, Math.floor(window.innerHeight / (2.5 * fontSize)));
+  Array.prototype.forEach.call(scope.querySelectorAll(".long-table table"), function (table) {
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody tr"));
+    if (rows.length <= rowsInScreen) return;
+    var rest = rows.slice(rowsInScreen);
+    rest.forEach(function (row) { row.classList.add("table-row-hidden"); });
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "table-more-toggle";
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = "Show the other " + rest.length + " rows";
+    button.addEventListener("click", function () {
+      var opening = button.getAttribute("aria-expanded") === "false";
+      rest.forEach(function (row) { row.classList.toggle("table-row-hidden", !opening); });
+      button.setAttribute("aria-expanded", opening ? "true" : "false");
+      button.textContent = opening ? "Show fewer rows" : "Show the other " + rest.length + " rows";
+    });
+    table.parentNode.insertBefore(button, table.nextSibling);
+    table.dataset.moreRows = "yes";
   });
-  // A printed page shows every table.
+  // A printed page shows every row.
   window.addEventListener("beforeprint", function () {
-    Array.prototype.forEach.call(document.querySelectorAll("details.collapsible-table"), function (d) {
-      d.dataset.closedBeforePrint = d.open ? "no" : "yes";
-      d.open = true;
+    Array.prototype.forEach.call(document.querySelectorAll("table[data-more-rows]"), function (table) {
+      Array.prototype.forEach.call(table.querySelectorAll("tr.table-row-hidden"), function (row) {
+        row.classList.remove("table-row-hidden");
+        row.dataset.hiddenBeforePrint = "yes";
+      });
     });
   });
   window.addEventListener("afterprint", function () {
-    Array.prototype.forEach.call(document.querySelectorAll("details.collapsible-table"), function (d) {
-      if (d.dataset.closedBeforePrint === "yes") d.open = false;
+    Array.prototype.forEach.call(document.querySelectorAll("tr[data-hidden-before-print]"), function (row) {
+      row.classList.add("table-row-hidden");
+      delete row.dataset.hiddenBeforePrint;
     });
   });
 })();
