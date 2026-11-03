@@ -70,149 +70,6 @@ df$publication_year <- factor(df$publication_year,
 # not recompute either" upstream part).
 write_csv(df, here("analysis", "bibvik_annotation_df.csv"))
 ```
-```{r}
-# Select columns by prefixes (Topics, Sources and Methods)
-var_cols <- grep("^(Topics|Sources\\.of\\.Evidence|Methods)\\.\\.",
-                 names(df), value = TRUE)
-
-raw_ma <- as.matrix(df[, var_cols])
-rownames(raw_ma) <- df$cite_key
-
-# Tidy column labels and keep track of which block each belongs to
-col_group <- sub("\\.\\..*$", "", var_cols)
-col_group <- gsub("\\.", " ", col_group)
-col_label <- sub("^(Topics|Sources\\.of\\.Evidence|Methods)\\.\\.", "", var_cols)
-col_label <- sub("\\.$", "", col_label)
-col_label <- gsub("\\.+", " ", col_label)
-colnames(raw_ma) <- col_label
-
-# Recode to numerical presence/absence
-X <- 1 * (!is.na(raw_ma) & raw_ma != "")
-
-# Retrieve genders and date of publications for plotting later 
-# (not used in the actual analysis)
-gen_cols <- grep("^Authors\\.\\.Genders", names(df), value = TRUE)
-G <- as.matrix(df[, gen_cols])
-n_auth <- rowSums(!is.na(G))
-n_women <- rowSums(G == "Woman", na.rm = TRUE)
-n_men <- rowSums(G == "Man", na.rm = TRUE)
-authorship <- rep("Mixed/other", nrow(df))
-authorship[n_women == n_auth] <- "Women only"
-authorship[n_men == n_auth] <- "Men only"
-authorship[n_auth == 0] <- NA
-table(authorship, useNA = "ifany")
- 
-year <- as.numeric(as.character(df$publication_year))
-
-# Correspondence analysis
-fit <- ca(X)
- 
-# Inertia per dimension
-eig <- fit$sv^2
-pct <- 100 * eig / sum(eig)
-round(head(cbind(eigenvalue = eig, percent = pct, cumulative = cumsum(pct)), 10), 2)
- 
-barplot(pct[1:15], names.arg = 1:15, xlab = "Dimension", ylab = "% of inertia")
- 
-# Principal coordinates for the first two dimensions
-row_pc <- sweep(fit$rowcoord[, 1:2], 2, fit$sv[1:2], "*")
-col_pc <- sweep(fit$colcoord[, 1:2], 2, fit$sv[1:2], "*")
- 
-rows <- data.frame(cite_key = rownames(X), dim1 = row_pc[, 1], dim2 = row_pc[, 2],
-                   authorship = authorship, first_author = df[, gen_cols[1]],
-                   year = year, n_auth = n_auth)
-cols <- data.frame(label = colnames(X), group = col_group,
-                   dim1 = col_pc[, 1], dim2 = col_pc[, 2], n = colSums(X),
-                   row.names = NULL)
- 
-# Contribution of each category to each axis (in %, sums to 100 per axis)
-ctr <- 100 * fit$colmass * fit$colcoord[, 1:2]^2
-cols$ctr1 <- ctr[, 1]
-cols$ctr2 <- ctr[, 2]
- 
-# What drives each axis?
-cols[order(-cols$ctr1), c("label", "group", "n", "dim1", "ctr1")][1:10, ]
-cols[order(-cols$ctr2), c("label", "group", "n", "dim2", "ctr2")][1:10, ]
- 
-# Publications at the extremes of each axis
-rows[order(rows$dim1), c("cite_key", "dim1")][c(1:5, (nrow(rows) - 4):nrow(rows)), ]
-rows[order(rows$dim2), c("cite_key", "dim2")][c(1:5, (nrow(rows) - 4):nrow(rows)), ]
-
-## Plots
-xlab <- paste0("Dimension 1 (", round(pct[1], 1), "%)")
-ylab <- paste0("Dimension 2 (", round(pct[2], 1), "%)")
-
-# Categories (column plot)
-cplt <- ggplot(cols, aes(dim1, dim2, colour = group)) +
-  geom_hline(yintercept = 0, colour = "grey80") +
-  geom_vline(xintercept = 0, colour = "grey80") +
-  geom_point(aes(size = n)) +
-  geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, show.legend = FALSE) +
-  coord_equal() +
-  labs(x = xlab, y = ylab, colour = NULL, size = "Publications") +
-  theme_bw()
-
-# Individual publications coloured by gender (row plot)
-rplt1 <- ggplot(rows, aes(dim1, dim2, colour = authorship)) +
-  geom_hline(yintercept = 0, colour = "grey80") +
-  geom_vline(xintercept = 0, colour = "grey80") +
-  geom_point(alpha = 0.6) +
-  coord_equal() +
-  labs(x = xlab, y = ylab, colour = NULL) +
-  theme_bw()
-
-# Individual publications coloured by year of publication (row plot)
-rplt2 <- ggplot(rows, aes(dim1, dim2, colour = year)) +
-  geom_hline(yintercept = 0, colour = "grey80") +
-  geom_vline(xintercept = 0, colour = "grey80") +
-  geom_point(alpha = 0.8) +
-  # scale_colour_viridis_c() +
-  scale_colour_gradient(low = "red", high = "yellow") +
-  coord_equal() +
-  labs(x = xlab, y = ylab, colour = "Year") +
-  theme_bw()
-
-cplt | rplt1
-
-```
-
-
-```{r}
-# Quality of representation in the first two dimensions (0 to 1)
-row_pc_all <- sweep(fit$rowcoord, 2, fit$sv, "*")
-col_pc_all <- sweep(fit$colcoord, 2, fit$sv, "*")
-qlt_rows <- rowSums(row_pc_all[, 1:2]^2) / rowSums(row_pc_all^2)
-qlt_cols <- rowSums(col_pc_all[, 1:2]^2) / rowSums(col_pc_all^2)
-round(sort(qlt_cols, decreasing = TRUE), 2)
-
-```
-
-The above values tell us how much of the departure of each categoryfrom the average is captured by the two first dimensions (that is, how much is captured by the plot above). Values closer to 1 mean that the position on the map is accurate while values closer to 0 means that whatever makes the category distinctive is determined by other axes and that it plotted position can be misleading. 0.3--0.6: Well represented, 0.1--0.25: Partly represented, interpret as tendencies. Less than 0.05: Barely represented, label positions near origin means that this category is not separated along the two first dimensions. 
-
-We can map the quality of representation to the `aes()` of the plot. I've replaced publications counts (which defined the size of the points above) with qualit. I tried using transparency for quality, but it was too difficult to read, and trying to convey everything in one plot might be too much anyway: 
-
-```{r}
-
-cols$qlt <- qlt_cols[cols$label]
-
-cplt <- ggplot(cols, aes(dim1, dim2, colour = group)) +
-  geom_hline(yintercept = 0, colour = "grey80") +
-  geom_vline(xintercept = 0, colour = "grey80") +
-  geom_point(aes(size = qlt)) +
-  geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, show.legend = FALSE) +
-  scale_size(range = c(0.5, 6), limits = c(0, 1), breaks = c(0.1, 0.25, 0.5)) +
-  coord_equal() +
-  labs(x = xlab, y = ylab, colour = NULL, size = "Quality") +
-  theme_bw()
-
-# Might want to change the location to where these are saved
-ggsave(here("correspondence_analysis_gender_rows.png"), plot = cplt / rplt1, width = 12, height = 15, dpi = 300)
-ggsave(here("correspondence_analysis_year_rows.png"), plot = cplt / rplt2, width = 12, height = 15, dpi = 300)
-
-# If publication counts are needed (could for example be included as a table)
-cols[, c("label", "group", "n", "qlt", "ctr1", "ctr2")]
-```
-
 
 ```{r}
 #| label: annotation-shared-helpers
@@ -2392,6 +2249,292 @@ The plot's numbers, top row first. The interval is the Wilson 95% interval on th
 #| label: mixed-only-source-table
 knitr::kable(
 gender_mixed_table(mixed_source_raw, "source")
+)
+```
+
+:::
+
+## Correspondence analysis
+
+Correspondence analysis places the Topic, Method and Source of evidence categories and the individual papers on shared axes. The input holds one row per paper and one column per category, coded 1 when the paper carries a value for the category (Primary or Secondary) and 0 otherwise. Categories that sit close together on the map appear on similar sets of papers, and papers that sit close together carry similar sets of categories. Author gender and publication year take no part in the analysis; they colour the paper points afterwards.
+
+```{r}
+#| label: ca-setup
+# Select columns by prefixes (Topics, Sources and Methods)
+var_cols <- grep("^(Topics|Sources\\.of\\.Evidence|Methods)\\.\\.",
+                 names(df), value = TRUE)
+
+raw_ma <- as.matrix(df[, var_cols])
+rownames(raw_ma) <- df$cite_key
+
+# Tidy column labels and keep track of which block each belongs to
+col_group <- sub("\\.\\..*$", "", var_cols)
+col_group <- gsub("\\.", " ", col_group)
+col_label <- sub("^(Topics|Sources\\.of\\.Evidence|Methods)\\.\\.", "", var_cols)
+col_label <- sub("\\.$", "", col_label)
+col_label <- gsub("\\.+", " ", col_label)
+colnames(raw_ma) <- col_label
+
+# Recode to numerical presence/absence
+X <- 1 * (!is.na(raw_ma) & raw_ma != "")
+
+# Retrieve genders and date of publications for plotting later
+# (not used in the actual analysis)
+gen_cols <- grep("^Authors\\.\\.Genders", names(df), value = TRUE)
+G <- as.matrix(df[, gen_cols])
+n_auth <- rowSums(!is.na(G))
+n_women <- rowSums(G == "Woman", na.rm = TRUE)
+n_men <- rowSums(G == "Man", na.rm = TRUE)
+authorship <- rep("Mixed/other", nrow(df))
+authorship[n_women == n_auth] <- "Women only"
+authorship[n_men == n_auth] <- "Men only"
+authorship[n_auth == 0] <- NA
+
+year <- as.numeric(as.character(df$publication_year))
+
+# Correspondence analysis
+fit <- ca(X)
+
+# Inertia per dimension
+eig <- fit$sv^2
+pct <- 100 * eig / sum(eig)
+
+# Principal coordinates for the first two dimensions
+row_pc <- sweep(fit$rowcoord[, 1:2], 2, fit$sv[1:2], "*")
+col_pc <- sweep(fit$colcoord[, 1:2], 2, fit$sv[1:2], "*")
+
+rows <- data.frame(cite_key = rownames(X), dim1 = row_pc[, 1], dim2 = row_pc[, 2],
+                   authorship = authorship, first_author = df[, gen_cols[1]],
+                   year = year, n_auth = n_auth)
+cols <- data.frame(label = colnames(X), group = col_group,
+                   dim1 = col_pc[, 1], dim2 = col_pc[, 2], n = colSums(X),
+                   row.names = NULL)
+
+# Contribution of each category to each axis (in %, sums to 100 per axis)
+ctr <- 100 * fit$colmass * fit$colcoord[, 1:2]^2
+cols$ctr1 <- ctr[, 1]
+cols$ctr2 <- ctr[, 2]
+```
+
+### Inertia
+
+Each dimension accounts for a share of the total inertia. The plot shows that share for the first 15 dimensions. The table covers the first 10, one row per dimension in order, with the eigenvalue, the percentage of inertia and the cumulative percentage.
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r}
+#| label: ca-inertia
+#| fig-cap: "Percentage of inertia on each of the first 15 dimensions."
+#| fig-width: 7
+#| fig-height: 4
+barplot(pct[1:15], names.arg = 1:15, xlab = "Dimension", ylab = "% of inertia")
+```
+
+#### Table
+
+The plot's numbers for the first 10 dimensions, with the eigenvalue and the cumulative percentage added.
+
+```{r}
+#| label: ca-inertia-table
+knitr::kable(
+round(head(cbind(eigenvalue = eig, percent = pct, cumulative = cumsum(pct)), 10), 2)
+)
+```
+
+:::
+
+### What drives each axis
+
+A category's contribution to a dimension is its share of that dimension's inertia, in percent, and the contributions sum to 100 per dimension. The first two tabs list the ten categories that contribute most to dimension 1 and to dimension 2, with the category's block (group), its number of papers (n), its coordinate (dim) and its contribution (ctr). The last two tabs list the five papers with the lowest and the five with the highest coordinate on each dimension, lowest first.
+
+::: {.panel-tabset}
+
+#### Categories, dimension 1
+
+```{r}
+#| label: ca-axes-categories-dim1
+knitr::kable(
+cols[order(-cols$ctr1), c("label", "group", "n", "dim1", "ctr1")][1:10, ],
+row.names = FALSE, digits = 2
+)
+```
+
+#### Categories, dimension 2
+
+```{r}
+#| label: ca-axes-categories-dim2
+knitr::kable(
+cols[order(-cols$ctr2), c("label", "group", "n", "dim2", "ctr2")][1:10, ],
+row.names = FALSE, digits = 2
+)
+```
+
+#### Papers, dimension 1
+
+```{r}
+#| label: ca-axes-papers-dim1
+knitr::kable(
+rows[order(rows$dim1), c("cite_key", "dim1")][c(1:5, (nrow(rows) - 4):nrow(rows)), ],
+row.names = FALSE, digits = 2
+)
+```
+
+#### Papers, dimension 2
+
+```{r}
+#| label: ca-axes-papers-dim2
+knitr::kable(
+rows[order(rows$dim2), c("cite_key", "dim2")][c(1:5, (nrow(rows) - 4):nrow(rows)), ],
+row.names = FALSE, digits = 2
+)
+```
+
+:::
+
+### Maps
+
+Each map plots the first two dimensions, and each axis label gives the percentage of inertia the dimension holds. The Categories tab sizes each point by its number of papers and colours it by block. The next two tabs plot the papers, coloured by author gender and by publication year. The last tab gives the size of each gender group.
+
+::: {.panel-tabset}
+
+#### Categories
+
+```{r}
+#| label: ca-map-categories
+#| fig-cap: "Categories on the first two dimensions, coloured by block (Topics, Sources of Evidence, Methods) and sized by the number of papers that carry them."
+#| fig-width: 10
+#| fig-height: 8
+xlab <- paste0("Dimension 1 (", round(pct[1], 1), "%)")
+ylab <- paste0("Dimension 2 (", round(pct[2], 1), "%)")
+
+# Categories (column plot)
+cplt <- ggplot(cols, aes(dim1, dim2, colour = group)) +
+  geom_hline(yintercept = 0, colour = "grey80") +
+  geom_vline(xintercept = 0, colour = "grey80") +
+  geom_point(aes(size = n)) +
+  geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, show.legend = FALSE) +
+  coord_equal() +
+  labs(x = xlab, y = ylab, colour = NULL, size = "Publications") +
+  theme_bw()
+cplt
+```
+
+#### Papers by gender
+
+```{r}
+#| label: ca-map-gender
+#| fig-cap: "Papers on the first two dimensions, coloured by author gender: all women, all men, or mixed or other. Papers with no author gender recorded appear in grey."
+#| fig-width: 7
+#| fig-height: 6
+# Individual publications coloured by gender (row plot)
+rplt1 <- ggplot(rows, aes(dim1, dim2, colour = authorship)) +
+  geom_hline(yintercept = 0, colour = "grey80") +
+  geom_vline(xintercept = 0, colour = "grey80") +
+  geom_point(alpha = 0.6) +
+  coord_equal() +
+  labs(x = xlab, y = ylab, colour = NULL) +
+  theme_bw()
+rplt1
+```
+
+#### Papers by year
+
+```{r}
+#| label: ca-map-year
+#| fig-cap: "Papers on the first two dimensions, coloured by publication year, from red (earliest) to yellow (latest)."
+#| fig-width: 7
+#| fig-height: 6
+# Individual publications coloured by year of publication (row plot)
+rplt2 <- ggplot(rows, aes(dim1, dim2, colour = year)) +
+  geom_hline(yintercept = 0, colour = "grey80") +
+  geom_vline(xintercept = 0, colour = "grey80") +
+  geom_point(alpha = 0.8) +
+  # scale_colour_viridis_c() +
+  scale_colour_gradient(low = "red", high = "yellow") +
+  coord_equal() +
+  labs(x = xlab, y = ylab, colour = "Year") +
+  theme_bw()
+rplt2
+```
+
+#### Table, papers by gender
+
+The number of papers in each author gender group on the gender map.
+
+```{r}
+#| label: ca-map-gender-table
+knitr::kable(
+table(authorship, useNA = "ifany"),
+col.names = c("authorship", "papers")
+)
+```
+
+:::
+
+### Quality of representation
+
+Quality of representation measures, for each category, how much of its departure from the average the first two dimensions capture, which is how much of it the maps above show. Values near 1 mean the position on the map is accurate. Values near 0 mean that other dimensions define what makes the category distinctive, so its plotted position can mislead. A value of 0.3--0.6 is well represented. A value of 0.1--0.25 is partly represented; read it as a tendency. A value under 0.05 is barely represented, and a label near the origin then means the category does not separate along the first two dimensions.
+
+```{r}
+#| label: ca-quality
+# Quality of representation in the first two dimensions (0 to 1)
+row_pc_all <- sweep(fit$rowcoord, 2, fit$sv, "*")
+col_pc_all <- sweep(fit$colcoord, 2, fit$sv, "*")
+qlt_rows <- rowSums(row_pc_all[, 1:2]^2) / rowSums(row_pc_all^2)
+qlt_cols <- rowSums(col_pc_all[, 1:2]^2) / rowSums(col_pc_all^2)
+```
+
+Point size on the map below shows quality of representation in place of the paper counts used above. Transparency made quality hard to read, and adding the counts as well would crowd the plot.
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r}
+#| label: ca-quality-map
+#| fig-cap: "Categories on the first two dimensions, coloured by block and sized by quality of representation (0 to 1)."
+#| fig-width: 10
+#| fig-height: 8
+cols$qlt <- qlt_cols[cols$label]
+
+cplt <- ggplot(cols, aes(dim1, dim2, colour = group)) +
+  geom_hline(yintercept = 0, colour = "grey80") +
+  geom_vline(xintercept = 0, colour = "grey80") +
+  geom_point(aes(size = qlt)) +
+  geom_text_repel(aes(label = label), size = 3, max.overlaps = Inf, show.legend = FALSE) +
+  scale_size(range = c(0.5, 6), limits = c(0, 1), breaks = c(0.1, 0.25, 0.5)) +
+  coord_equal() +
+  labs(x = xlab, y = ylab, colour = NULL, size = "Quality") +
+  theme_bw()
+
+ggsave("correspondence_analysis_gender_rows.png", plot = cplt / rplt1, width = 12, height = 15, dpi = 300)
+ggsave("correspondence_analysis_year_rows.png", plot = cplt / rplt2, width = 12, height = 15, dpi = 300)
+cplt
+```
+
+#### Table, quality
+
+Quality of representation for every category, highest first.
+
+```{r}
+#| label: ca-quality-table
+knitr::kable(
+round(sort(qlt_cols, decreasing = TRUE), 2),
+col.names = "quality of representation"
+)
+```
+
+#### Table, categories
+
+Every category with its block, its number of papers, its quality of representation and its contribution to dimension 1 and dimension 2.
+
+```{r}
+#| label: ca-categories-table
+knitr::kable(
+cols[, c("label", "group", "n", "qlt", "ctr1", "ctr2")],
+row.names = FALSE, digits = 2
 )
 ```
 
