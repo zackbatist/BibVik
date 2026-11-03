@@ -2265,7 +2265,7 @@ var_cols <- grep("^(Topics|Sources\\.of\\.Evidence|Methods)\\.\\.",
                  names(df), value = TRUE)
 
 raw_ma <- as.matrix(df[, var_cols])
-rownames(raw_ma) <- df$cite_key
+rownames(raw_ma) <- df$citekey
 
 # Tidy column labels and keep track of which block each belongs to
 col_group <- sub("\\.\\..*$", "", var_cols)
